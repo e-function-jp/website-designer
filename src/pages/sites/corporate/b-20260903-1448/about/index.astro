@@ -1,0 +1,222 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import PageHeaderHero from '../../../../../components/sections/PageHeaderHero.astro';
+import PhilosophyStatementRow from '../../../../../components/sections/PhilosophyStatementRow.astro';
+import RepresentativeSignature from '../../../../../components/sections/RepresentativeSignature.astro';
+import RelatedContent from '../../../../../components/sections/RelatedContent.astro';
+import ContactCtaBand from '../../../../../components/site/ContactCtaBand.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import Timeline from '../../../../../components/data-display/Timeline.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+// ブランド理念（冒険路線 b 案：数字を苔色の明朝大文字、行間 4rem）
+const philosophy = [
+  { number: '01', heading: '存在意義', body: '動く体は、確かな補給を必要とする。' },
+  { number: '02', heading: '使命', body: '旭川の工場から、北海道の素材と国内外の認証原料で、トレーニングの前後を整えます。' },
+  { number: '03', heading: '姿勢', body: '配合検証 480 処方を、現場の声を起点に積み直す。' },
+];
+
+// 沿革（2015〜2026）
+const history = [
+  { year: '2015', body: '旭川市宮下通にて創業、トレーニング向けプロテイン 3 処方で発売開始。' },
+  { year: '2017', body: '直営店舗 1 号店を旭川にオープン。' },
+  { year: '2018', body: 'リカバリー食品ラインを増設、北海道産ホエイの採用を開始。' },
+  { year: '2019', body: '配合検証 100 処方突破、工場ラインを 1.5 倍に拡張。' },
+  { year: '2020', body: '専門店・EC への卸売を開始。' },
+  { year: '2021', body: '直営店舗 2 号店を札幌にオープン。' },
+  { year: '2022', body: '機能性スナックラインを増設、北海道産食材の配合比率を引き上げ。' },
+  { year: '2023', body: '配合検証 300 処方突破、ランナーと連携したリカバリー処方を発売。' },
+  { year: '2024', body: '直営店舗 3 号店を東京・原宿にオープン。' },
+  { year: '2025', body: '配合検証 480 処方突破、国内外の認証原料を採用。' },
+  { year: '2026', body: '年間出荷 128 万食達成、旭川本社ビルを拡張。' },
+];
+
+const profile = [
+  ['商号', '北嶺ニュートリション株式会社'],
+  ['設立', '2015 年 4 月'],
+  ['所在地', '〒070-0030 北海道旭川市宮下通 9-2-14'],
+  ['代表者', '代表取締役 北嶺 拓郎'],
+  ['電話番号', '0166-00-0000'],
+  ['事業内容', 'スポーツ栄養食品・機能性食品の開発、製造および販売、直営ジムの運営。'],
+];
+
+const relatedCards = [
+  { label: '製品ライン', lead: 'プロテイン・リカバリー・スナック。', href: '/service/', chapter: '02' },
+  { label: '採用情報', lead: '旭川の工場と直営店舗で仲間を募集中。', href: '/recruit/', chapter: '04' },
+  { label: 'お問い合わせ', lead: '製品ラインについて、もっと詳しく。', href: '/contact/', chapter: '05' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="会社について"
+  description="北嶺ニュートリション株式会社のブランド理念、代表メッセージ、沿革、会社概要。旭川から動く体に向き合う栄養を届ける、2015 年創業のスポーツ栄養メーカーです。"
+  path="/about/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '会社について' }]}
+>
+  <!-- ページヘッダ -->
+  <PageHeaderHero
+    title="会社について"
+    englishTitle="Philosophy Statement"
+    lead="北嶺ニュートリションは、動く体に向き合う栄養を、旭川から届けます。2015 年の創業から 11 年、トレーニング向けプロテインとリカバリー食品を自社工場で配合し、北海道の素材と国内外の認証原料を組み合わせて、ジムと直営店舗、専門店・EC を通じて、アスリートから健康志向の一般生活者まで、手元に届く形に整えてきました。"
+  />
+
+  <!-- ブランド理念（3 つのステートメント） -->
+  <section id="philosophy" class="bg-base-100 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-32 space-y-16 lg:space-y-20">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">Philosophy</p>
+        <h2
+          class="text-2xl lg:text-[2rem] leading-snug mb-2"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          ブランド理念
+        </h2>
+      </ScrollReveal>
+      {philosophy.map((p) => (
+        <article class="grid gap-6 lg:gap-12 lg:grid-cols-[auto_minmax(0,1fr)] items-start">
+          <p
+            class="text-secondary text-7xl lg:text-[7.5rem] font-bold tabular-nums leading-none"
+            style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+          >
+            {p.number}
+          </p>
+          <div class="space-y-3">
+            <h3
+              class="text-xl lg:text-[1.75rem] leading-snug"
+              style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+            >
+              {p.heading}
+            </h3>
+            <p class="text-base lg:text-lg leading-[1.95] text-base-content/85">
+              {p.body}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- 代表メッセージ -->
+  <section id="message" class="bg-base-200 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-32 grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] items-start">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+        <RepresentativeSignature
+          heading="代表メッセージ。"
+          signature="Takuro Hokurei"
+          title="Representative Director, President."
+        />
+        <figure class="mt-8 rounded-box overflow-hidden bg-base-300 aspect-[2/3] max-w-sm">
+          <img
+            src="/sites/corporate/_shared/20260903-1448/img-b-05.jpg"
+            alt="旭川本社のオフィス窓辺に立つ北嶺 拓郎の肖像"
+            loading="lazy"
+            width="1200"
+            height="1800"
+            class="w-full h-full object-cover"
+          />
+        </figure>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={200}>
+        <div class="space-y-6 text-base lg:text-lg leading-[1.95] text-base-content/85">
+          <p>
+            北嶺ニュートリションは、2015 年に旭川で小さな配合室から始まりました。創業の動機はシンプルで、トレーニング前後の補給が「美味しくない・溶けにくい・高すぎる」ことの連続だったからです。
+          </p>
+          <p>
+            11 年経った今も、私たちは配合検証を 480 処方まで積み、現場の声で処方を組み替えることを止めません。動く体に向き合う栄養を、確かな手元の形で届ける。その約束を、旭川の工場から続けていきます。
+          </p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 沿革（2015〜2026） -->
+  <section id="history" class="bg-base-100 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">History</p>
+        <h2
+          class="text-2xl lg:text-[2rem] leading-snug mb-12"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          沿革
+        </h2>
+      </ScrollReveal>
+      <ul class="relative border-l-2 border-secondary pl-8 space-y-6">
+        {history.map((h, i) => (
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs} delay={i * site.motion!.staggerMs!}>
+            <li class="relative">
+              <span class="absolute -left-[2.35rem] top-2 w-3 h-3 rounded-full bg-secondary" aria-hidden="true"></span>
+              <div class="grid gap-3 lg:grid-cols-[6rem_minmax(0,1fr)] items-start">
+                <p
+                  class="text-primary text-2xl lg:text-3xl font-bold tabular-nums leading-none"
+                  style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+                >
+                  {h.year}
+                </p>
+                <p class="text-base lg:text-lg leading-[1.85]">{h.body}</p>
+              </div>
+            </li>
+          </ScrollReveal>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 会社概要テーブル -->
+  <section class="bg-base-200">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">Company Profile</p>
+        <h2
+          class="text-2xl lg:text-[2rem] leading-snug mb-10"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          会社概要
+        </h2>
+      </ScrollReveal>
+      <div class="overflow-x-auto">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <Table>
+            <tbody>
+              {profile.map(([k, v]) => (
+                <tr class="border-b border-base-300">
+                  <th class="w-44 whitespace-nowrap text-secondary text-xs tracking-[0.16em] uppercase font-normal align-top py-5">
+                    {k}
+                  </th>
+                  <td class="text-base lg:text-lg py-5">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ScrollReveal>
+      </div>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+        <p class="mt-8 text-sm text-base-content/75">
+          会社概要の詳細は <a href={url(site, '/company/')} class="link link-hover underline">こちら</a> をご覧ください。
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 関連ページへの導線（凍土背景） -->
+  <RelatedContent
+    site={site}
+    cards={relatedCards}
+    duration={site.motion!.durationMs}
+    stagger={site.motion!.staggerMs}
+  />
+
+  <!-- お問い合わせ CTA 帯（凍土背景・藍ボタン） -->
+  <ContactCtaBand
+    site={site}
+    heading="会社について、もっと詳しく。"
+    ctaLabel="お問い合わせ"
+    ctaHref="/contact/"
+  />
+
+  <PageTopButton />
+</SiteLayout>

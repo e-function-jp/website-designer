@@ -1,0 +1,148 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import TextInput from '../../../../../components/navigation/TextInput.astro';
+import Textarea from '../../../../../components/navigation/Textarea.astro';
+import Select from '../../../../../components/navigation/Select.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const org = site.organization!;
+
+const flow = [
+  { label: '受付', body: 'フォーム送信後、自動返信メールが届きます。' },
+  { label: '内容確認', body: '担当部門が内容を確認します。' },
+  { label: 'ご返信', body: '2 営業日以内に担当者よりご連絡します。' },
+  { label: 'ご対応', body: '製品ライン・店舗・採用それぞれの担当者へお繋ぎします。' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="お問い合わせ"
+  description="北嶺ニュートリションへのお問い合わせ窓口です。製品ライン、直営店舗、採用についてのお問い合わせを、電話・メール・フォームで受け付けています。"
+  path="/contact/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お問い合わせ' }]}
+>
+  <!-- ページヘッダ -->
+  <section class="bg-base-200 border-y border-base-300">
+    <div class="max-w-7xl mx-auto px-4 py-24 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <h1 class="text-3xl lg:text-6xl font-bold leading-tight mb-6">お問い合わせ</h1>
+        <p class="text-base lg:text-lg leading-loose text-base-content/85 max-w-3xl">
+          製品ラインや直営店舗、採用についてのお問い合わせは、電話・メール・下記のフォームからお気軽にご連絡ください。2 営業日以内にご返信します。
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 連絡先 -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="連絡先" subtitle="Contact" align="left" />
+      </ScrollReveal>
+      <dl class="mt-10 grid gap-6 md:grid-cols-3">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <div class="rounded-box border border-base-300 p-6 h-full">
+            <dt class="text-sm text-base-content/70">電話</dt>
+            <dd class="mt-2 text-xl lg:text-2xl font-bold tabular-nums">
+              <a href={`tel:${org.tel!.replace(/[^\d+]/g, '')}`} class="link link-hover">{org.tel}</a>
+            </dd>
+            <p class="mt-3 text-xs text-base-content/60">受付 平日 9:00〜18:00</p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <div class="rounded-box border border-base-300 p-6 h-full">
+            <dt class="text-sm text-base-content/70">メール</dt>
+            <dd class="mt-2 text-base lg:text-lg font-bold break-all">
+              <a href={`mailto:${org.email}`} class="link link-hover">{org.email}</a>
+            </dd>
+            <p class="mt-3 text-xs text-base-content/60">2 営業日以内にご返信します</p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <div class="rounded-box border border-base-300 p-6 h-full">
+            <dt class="text-sm text-base-content/70">所在地</dt>
+            <dd class="mt-2 text-base lg:text-lg font-bold leading-relaxed">{org.address}</dd>
+            <p class="mt-3 text-xs text-base-content/60">JR 旭川駅より徒歩 8 分</p>
+          </div>
+        </ScrollReveal>
+      </dl>
+    </div>
+  </section>
+
+  <!-- お問い合わせフォーム -->
+  <section class="bg-base-200">
+    <div class="max-w-3xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="お問い合わせフォーム" subtitle="Form" align="left" />
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <div class="mt-8">
+          <Alert variant="info">
+            <span class="text-sm">ご入力いただいた情報は <a href={url(site, '/privacy/')} class="link">プライバシーポリシー</a> に従って取り扱います。</span>
+          </Alert>
+        </div>
+        <form class="mt-8 space-y-6" method="post" action="#thanks">
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="form-control">
+              <label class="label" for="name"><span class="label-text">お名前 <span class="text-error" aria-label="必須">*</span></span></label>
+              <TextInput id="name" name="name" class="mt-2 w-full" placeholder="山田 太郎" />
+            </div>
+            <div class="form-control">
+              <label class="label" for="company"><span class="label-text">会社・店舗名</span></label>
+              <TextInput id="company" name="company" class="mt-2 w-full" placeholder="株式会社◯◯" />
+            </div>
+            <div class="form-control sm:col-span-2">
+              <label class="label" for="email"><span class="label-text">メールアドレス <span class="text-error" aria-label="必須">*</span></span></label>
+              <TextInput id="email" name="email" type="email" class="mt-2 w-full" placeholder="taro@example.com" />
+            </div>
+            <div class="form-control sm:col-span-2">
+              <label class="label" for="subject"><span class="label-text">お問い合わせ種別 <span class="text-error" aria-label="必須">*</span></span></label>
+              <Select id="subject" name="subject" class="mt-2 w-full">
+                <option value="">選択してください</option>
+                <option value="product">製品ラインについて</option>
+                <option value="store">直営店舗について</option>
+                <option value="recruit">採用について</option>
+                <option value="other">その他</option>
+              </Select>
+            </div>
+            <div class="form-control sm:col-span-2">
+              <label class="label" for="body"><span class="label-text">お問い合わせ内容 <span class="text-error" aria-label="必須">*</span></span></label>
+              <Textarea id="body" name="body" class="mt-2 w-full h-40" placeholder="お問い合わせ内容をご記入ください。" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">送信する</button>
+        </form>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- お問い合わせの流れ -->
+  <section class="bg-base-100">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="お問い合わせの流れ" subtitle="Flow" />
+      </ScrollReveal>
+      <div id="thanks" class="mt-10 scroll-mt-20">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <Steps class="w-full">
+            {flow.map((s, i) => (
+              <li class="step step-primary">
+                <span class="block font-bold text-sm">0{i + 1} {s.label}</span>
+                <span class="block text-xs text-base-content/70 mt-1">{s.body}</span>
+              </li>
+            ))}
+          </Steps>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <PageTopButton />
+</SiteLayout>

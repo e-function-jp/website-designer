@@ -1,0 +1,275 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import Tab from '../../../../../components/navigation/Tab.astro';
+import SiteCtaBand from '../../../../../components/site/SiteCtaBand.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const proteinSteps = [
+  { label: '原料選定', body: '北海道産ホエイと国内外の認証原料を調達' },
+  { label: '配合設計', body: '12 処方を 0.1g 単位で設計' },
+  { label: '試作検証', body: '溶け・味・粒度を 80 メッシュで検証' },
+  { label: '工場生産', body: '旭川本社工場で全数検査' },
+];
+
+const recoverySteps = [
+  { label: '食材選定', body: '北海道産食材と認証原料を選定' },
+  { label: '配合設計', body: '6 処方を 0.1g 単位で設計' },
+  { label: '試作検証', body: '電解質バランスと吸収速度を検証' },
+  { label: '工場生産', body: '旭川本社工場で全数検査' },
+];
+
+const snackSteps = [
+  { label: '食材選定', body: '北海道産食材を 8 処方搭配' },
+  { label: '配合設計', body: 'たんぱく質を 10〜20g 含めて設計' },
+  { label: '試作検証', body: '焙煎温度を 1℃ 単位で管理' },
+  { label: '工場生産', body: '旭川本社工場で全数検査' },
+];
+
+const stores = [
+  {
+    name: '旭川本店',
+    address: '〒070-0030 北海道旭川市宮下通 9-2-14',
+    image: '/sites/corporate/_shared/20260903-1448/img-a-07.jpg',
+    alt: '北嶺ニュートリション旭川本店の直営店舗の外観',
+  },
+  {
+    name: '札幌店',
+    address: '北海道札幌市中央区南 1 条',
+    image: null,
+    alt: '',
+  },
+  {
+    name: '原宿店',
+    address: '東京都渋谷区神宮前',
+    image: null,
+    alt: '',
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="製品ライン"
+  description="北嶺ニュートリションの製品ライン：トレーニング向けプロテイン、リカバリー食品、機能性スナックを旭川の自社工場で配合し、配合検証 480 処方を現場で積み直しています。"
+  path="/service/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '製品ライン' }]}
+>
+  <!-- ページヘッダ -->
+  <section class="bg-base-200 border-y border-base-300">
+    <div class="max-w-7xl mx-auto px-4 py-24 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <h1 class="text-3xl lg:text-6xl font-bold leading-tight mb-6">製品ライン</h1>
+        <p class="text-base lg:text-lg leading-loose text-base-content/85 max-w-3xl">
+          北嶺ニュートリションは、トレーニング向けプロテインとリカバリー食品、機能性スナックを、自社工場で配合しています。配合検証 480 処方を現場の声で積み直し、ジムと直営店舗、専門店・EC を通じて、動く体に必要な補給を、手元に届く形に整えました。
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- トレーニング向けプロテイン -->
+  <section id="protein" class="bg-base-100 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24 grid gap-12 lg:grid-cols-2 items-start">
+      <ScrollReveal animation="clip-up" duration={site.motion!.durationMs}>
+        <figure class="rounded-box overflow-hidden bg-base-300 aspect-[4/3]">
+          <img
+            src="/sites/corporate/_shared/20260903-1448/img-a-06.jpg"
+            alt="粉末のプロテインがスプーンですくわれ容器の縁からこぼれ落ちる接写"
+            loading="lazy"
+            width="1600"
+            height="1200"
+            class="w-full h-full object-cover"
+          />
+          <figcaption class="block text-xs text-base-content/60 px-3 py-2 bg-base-200">
+            撮影：2025年11月 ／ 旭川本社工場
+          </figcaption>
+        </figure>
+      </ScrollReveal>
+      <div class="space-y-6">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+          <p class="text-sm tracking-[0.3em] uppercase text-primary font-bold">Training Protein</p>
+          <h2 class="text-2xl lg:text-4xl font-bold leading-snug">トレーニング向けプロテイン</h2>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={200}>
+          <p class="text-base lg:text-lg leading-loose text-base-content/85">
+            旭川の工場で配合する 12 処方は、トレーニング前後の補給を 30 秒で溶ける形に整えました。北海道産ホエイと国内外の認証原料を採用し、配合検証は 480 処方を突破。味のばらつきを抑えるため、粉末の粒度を 80 メッシュに統一しています。
+          </p>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={300}>
+          <Steps class="w-full">
+            {proteinSteps.map((s, i) => (
+              <li class="step step-primary">
+                <span class="block font-bold text-sm">0{i + 1} {s.label}</span>
+                <span class="block text-xs text-base-content/70 mt-1">{s.body}</span>
+              </li>
+            ))}
+          </Steps>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- リカバリー食品（左右反転） -->
+  <section id="recovery" class="bg-base-200 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24 grid gap-12 lg:grid-cols-2 items-start">
+      <div class="space-y-6 lg:order-1 order-2">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+          <p class="text-sm tracking-[0.3em] uppercase text-primary font-bold">Recovery Food</p>
+          <h2 class="text-2xl lg:text-4xl font-bold leading-snug">リカバリー食品</h2>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={200}>
+          <p class="text-base lg:text-lg leading-loose text-base-content/85">
+            トレーニング後の 30 分に、たんぱく質と電解質を同時に摂れる 6 処方を用意しました。北海道産食材と国内外の認証原料を組み合わせ、味のばらつきを抑えるため、1 食あたりの配合を 0.1g 単位で管理しています。
+          </p>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={300}>
+          <Steps class="w-full">
+            {recoverySteps.map((s, i) => (
+              <li class="step step-primary">
+                <span class="block font-bold text-sm">0{i + 1} {s.label}</span>
+                <span class="block text-xs text-base-content/70 mt-1">{s.body}</span>
+              </li>
+            ))}
+          </Steps>
+        </ScrollReveal>
+      </div>
+      <ScrollReveal animation="clip-up" duration={site.motion!.durationMs} class="lg:order-2 order-1">
+        <figure class="rounded-box overflow-hidden bg-base-300 aspect-[4/3] border border-base-300">
+          <div class="w-full h-full flex items-center justify-center bg-base-300 text-base-content/50 text-sm">
+            <span>リカバリー食品 写真準備中</span>
+          </div>
+          <figcaption class="block text-xs text-base-content/60 px-3 py-2 bg-base-100">
+            撮影：未撮影 ／ 旭川本社工場
+          </figcaption>
+        </figure>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 機能性スナック -->
+  <section id="snack" class="bg-base-100 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24 grid gap-12 lg:grid-cols-2 items-start">
+      <ScrollReveal animation="clip-up" duration={site.motion!.durationMs}>
+        <figure class="rounded-box overflow-hidden bg-base-300 aspect-[4/3] border border-base-300">
+          <div class="w-full h-full flex items-center justify-center bg-base-300 text-base-content/50 text-sm">
+            <span>機能性スナック 写真準備中</span>
+          </div>
+          <figcaption class="block text-xs text-base-content/60 px-3 py-2 bg-base-200">
+            撮影：未撮影 ／ 旭川本社工場
+          </figcaption>
+        </figure>
+      </ScrollReveal>
+      <div class="space-y-6">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+          <p class="text-sm tracking-[0.3em] uppercase text-primary font-bold">Functional Snack</p>
+          <h2 class="text-2xl lg:text-4xl font-bold leading-snug">機能性スナック</h2>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={200}>
+          <p class="text-base lg:text-lg leading-loose text-base-content/85">
+            日常使いのための 8 処方は、たんぱく質を 10〜20g 含み、手軽に持ち運べる形に整えました。北海道産食材の配合比率を引き上げ、味のばらつきを抑えるため、焙煎温度を 1℃ 単位で管理しています。
+          </p>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={300}>
+          <Steps class="w-full">
+            {snackSteps.map((s, i) => (
+              <li class="step step-primary">
+                <span class="block font-bold text-sm">0{i + 1} {s.label}</span>
+                <span class="block text-xs text-base-content/70 mt-1">{s.body}</span>
+              </li>
+            ))}
+          </Steps>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 直営店舗と EC -->
+  <section id="store" class="bg-base-200 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-sm tracking-[0.3em] uppercase text-primary font-bold">Stores &amp; Online</p>
+        <h2 class="text-2xl lg:text-4xl font-bold leading-snug mb-3">直営店舗と EC</h2>
+        <p class="text-base lg:text-lg leading-relaxed text-base-content/85 max-w-3xl mb-10">
+          全国 3 拠点の直営店舗と、公式オンラインストアでお買い求めいただけます。
+        </p>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <Tab variant="lifted" class="mb-8">
+          <button type="button" role="tab" class="tab tab-active" aria-selected="true">旭川本店</button>
+          <button type="button" role="tab" class="tab" aria-selected="false">札幌店</button>
+          <button type="button" role="tab" class="tab" aria-selected="false">原宿店</button>
+          <button type="button" role="tab" class="tab" aria-selected="false">EC</button>
+        </Tab>
+      </ScrollReveal>
+      <div class="grid gap-6 md:grid-cols-3">
+        {stores.map((s) => (
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <article class="rounded-box bg-base-100 border border-base-300 overflow-hidden">
+              {s.image ? (
+                <figure class="aspect-[4/3] overflow-hidden bg-base-300">
+                  <img src={s.image} alt={s.alt} loading="lazy" width="1600" height="1200" class="w-full h-full object-cover" />
+                </figure>
+              ) : (
+                <div class="aspect-[4/3] bg-base-300 flex items-center justify-center text-base-content/50 text-sm">
+                  <span>{s.name} 写真準備中</span>
+                </div>
+              )}
+              <div class="p-5 space-y-2">
+                <h3 class="text-lg font-bold">{s.name}</h3>
+                <p class="text-sm text-base-content/75">{s.address}</p>
+              </div>
+            </article>
+          </ScrollReveal>
+        ))}
+      </div>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={200}>
+        <p class="mt-8 text-sm text-base-content/75">
+          EC：<a href="https://example.com/" class="link link-secondary" rel="nofollow external">公式オンラインストア</a>（外部リンク）
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 関連ページへの導線 -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="text-2xl lg:text-3xl font-bold leading-tight mb-10">関連ページ</h2>
+      </ScrollReveal>
+      <ul class="grid gap-6 md:grid-cols-3">
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/about/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-lg font-bold mb-2">会社について</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">動く体に、確かな補給を。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/news/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-lg font-bold mb-2">お知らせ</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">新製品リリース・メディア掲載。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/contact/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-lg font-bold mb-2">お問い合わせ</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">製品ラインについて、もっと詳しく。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <SiteCtaBand site={site} heading="製品ラインについて、もっと詳しく。" ctaLabel="お問い合わせ" ctaHref="/contact/" />
+
+  <PageTopButton />
+</SiteLayout>

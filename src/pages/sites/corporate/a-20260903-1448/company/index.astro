@@ -1,0 +1,124 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import AnimatedCounter from '../../../../../components/ui/AnimatedCounter.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import SiteCtaBand from '../../../../../components/site/SiteCtaBand.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const profile = [
+  ['商号', '北嶺ニュートリション株式会社'],
+  ['設立', '2015 年 4 月'],
+  ['所在地', '〒070-0030 北海道旭川市宮下通 9-2-14'],
+  ['代表者', '代表取締役 北嶺 拓郎'],
+  ['電話番号', '0166-00-0000'],
+  ['事業内容', 'スポーツ栄養食品・機能性食品の開発、製造および販売、直営ジムの運営'],
+  ['資本金', '3,000 万円'],
+  ['取引金融機関', '北海道銀行 旭川支店'],
+];
+
+const numbers = [
+  { label: '年間出荷', value: 128, suffix: '万食' },
+  { label: '配合検証', value: 480, suffix: '処方' },
+  { label: '従業員数', value: 86, suffix: '名' },
+  { label: '直営店舗', value: 3, suffix: '拠点' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="会社概要"
+  description="北嶺ニュートリション株式会社の会社概要（法人情報・資本金・取引金融機関）と、旭川本社のアクセス情報をご案内します。"
+  path="/company/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '会社概要' }]}
+>
+  <!-- ページヘッダ -->
+  <section class="bg-base-200 border-y border-base-300">
+    <div class="max-w-7xl mx-auto px-4 py-24 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <h1 class="text-3xl lg:text-6xl font-bold leading-tight mb-6">会社概要</h1>
+        <p class="text-base lg:text-lg leading-loose text-base-content/85 max-w-3xl">
+          北嶺ニュートリション株式会社の法人情報と、旭川本社の所在地、取引概要をご案内します。
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 法人情報 -->
+  <section class="bg-base-100">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="法人情報" subtitle="Company" align="left" />
+      </ScrollReveal>
+      <div class="mt-10 overflow-x-auto">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <Table zebra>
+            <tbody>
+              {profile.map(([k, v]) => (
+                <tr>
+                  <th class="w-44 whitespace-nowrap text-primary">{k}</th>
+                  <td>{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数字で見る -->
+  <section class="bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="text-2xl lg:text-3xl font-bold leading-tight mb-10">数字で見る北嶺</h2>
+      </ScrollReveal>
+      <dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {numbers.map((n) => (
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <div class="rounded-box bg-base-100 border border-base-300 p-6 text-center">
+              <dd class="text-3xl lg:text-5xl font-bold text-primary tabular-nums">
+                <AnimatedCounter target={n.value} suffix={n.suffix} />
+              </dd>
+              <dt class="mt-3 text-xs lg:text-sm text-base-content/70">{n.label}</dt>
+            </div>
+          </ScrollReveal>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- 旭川本社アクセス -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24 grid gap-12 lg:grid-cols-2 items-start">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="旭川本社アクセス" subtitle="Access" align="left" />
+        <div class="mt-6 space-y-3 text-base lg:text-lg leading-relaxed text-base-content/85">
+          <p>所在地：〒070-0030 北海道旭川市宮下通 9-2-14</p>
+          <p>交通：JR 旭川駅より徒歩 8 分、旭川空港より車で 25 分。</p>
+        </div>
+      </ScrollReveal>
+      <ScrollReveal animation="clip-up" duration={site.motion!.durationMs}>
+        <figure class="rounded-box overflow-hidden bg-base-300 aspect-[16/9]">
+          <img
+            src="/sites/corporate/_shared/20260903-1448/img-a-08.jpg"
+            alt="北嶺ニュートリション旭川本社のビル外観"
+            loading="lazy"
+            width="1920"
+            height="1080"
+            class="w-full h-full object-cover"
+          />
+          <figcaption class="block text-xs text-base-content/60 px-3 py-2 bg-base-200">
+            撮影：2026年7月 ／ 旭川市宮下通
+          </figcaption>
+        </figure>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <SiteCtaBand site={site} heading="会社概要について、もっと詳しく。" ctaLabel="お問い合わせ" ctaHref="/contact/" />
+
+  <PageTopButton />
+</SiteLayout>

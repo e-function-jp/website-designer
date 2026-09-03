@@ -1,0 +1,37 @@
+---
+/**
+ * 代表メッセージの署名ブロック。
+ *
+ * 見出し＋署名（柿色の明朝体）を縦に並べる。
+ */
+interface Props {
+  heading: string;
+  signature: string;
+  title?: string;
+}
+const { heading, signature, title } = Astro.props;
+---
+<div class="rep-signature space-y-6">
+  <h2
+    class="text-3xl lg:text-[3rem] font-medium leading-tight"
+    style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+  >
+    {heading}
+  </h2>
+  <div class="rep-signature__name space-y-1">
+    <p
+      class="text-secondary text-xl"
+      style="font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif; letter-spacing: 0.08em;"
+    >
+      {signature}
+    </p>
+    {title && (
+      <p
+        class="text-base-content/70 text-sm"
+        style="font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif; letter-spacing: 0.04em;"
+      >
+        {title}
+      </p>
+    )}
+  </div>
+</div>

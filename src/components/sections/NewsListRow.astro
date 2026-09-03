@@ -1,0 +1,36 @@
+---
+/**
+ * お知らせ一覧の行（日付＋カテゴリ＋タイトル）。
+ *
+ * year ヘッダは呼び出し側で別出しする想定だが、compact フラグで
+ * 1 行完結の表示にも使える。
+ *
+ * href は site.base を前置した絶対パスで出力する。
+ */
+import Link from '../navigation/Link.astro';
+import { url } from '../../lib/site';
+import type { SiteConfig } from '../../lib/site';
+
+interface Row {
+  date: string;
+  category: string;
+  title: string;
+  href: string;
+}
+interface Props {
+  site: SiteConfig;
+  rows: Row[];
+}
+const { site, rows } = Astro.props;
+---
+<ul class="news-list divide-y divide-base-300 border-y border-base-300">
+  {rows.map((r) => (
+    <li class="news-list__row">
+      <Link href={url(site, r.href)} variant="hover" class="grid gap-x-6 gap-y-2 py-5 md:grid-cols-[7rem_8rem_minmax(0,1fr)] md:items-center">
+        <time class="text-sm text-base-content/70 tabular-nums font-medium">{r.date}</time>
+        <span class="badge badge-secondary badge-sm whitespace-nowrap">{r.category}</span>
+        <span class="text-base lg:text-lg leading-snug">{r.title}</span>
+      </Link>
+    </li>
+  ))}
+</ul>

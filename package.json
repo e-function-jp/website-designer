@@ -15,7 +15,9 @@
     "check:catalog": "node scripts/web-check-component-catalog.mjs",
     "next:run": "python3 scripts/web-learning-next.py",
     "archive:fetch": "python3 site_archive/fetch_site_archive.py",
-    "urls": "python3 scripts/web-preview-urls.py --discover --json"
+    "urls": "python3 scripts/web-preview-urls.py --discover --json",
+    "check:render": "node scripts/web-render-check.mjs",
+    "check:all": "npm run check:web && npm run check:render && npm run check:catalog"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

@@ -1,0 +1,52 @@
+/*
+ * corporate-hokuline — 北嶺ニュートリション向け独自テーマ。
+ * 深い藍（#0E2A47）と乾いた柿色（#B7573E）をベースに、
+ * 生成り（#F5F1E8）を背景にした堅実路線コーポレート。
+ *
+ * DaisyUI v5 の @plugin "daisyui/theme" 書式で書く。
+ * 列挙は src/styles/global.css の @plugin "daisyui" themes に追加する。
+ */
+@plugin "daisyui/theme" {
+  name: "corporate-hokuline";
+  default: false;
+  color-scheme: light;
+
+  /* 深い藍（#0E2A47） */
+  --color-primary: oklch(28% 0.07 252);
+  --color-primary-content: oklch(96% 0.015 88);
+
+  /* 乾いた柿色（#B7573E） */
+  --color-secondary: oklch(56% 0.13 38);
+  --color-secondary-content: oklch(96% 0.015 88);
+
+  /* アクセントも柿色に揃え、写真内と柿色タグのみで色相を立たせる */
+  --color-accent: oklch(56% 0.13 38);
+  --color-accent-content: oklch(96% 0.015 88);
+
+  /* 生成り（#F5F1E8） */
+  --color-base-100: oklch(96% 0.015 88);
+  --color-base-200: oklch(93% 0.018 88);
+  --color-base-300: oklch(86% 0.02 88);
+  --color-base-content: oklch(18% 0 0);
+
+  --color-neutral: oklch(28% 0.07 252);
+  --color-neutral-content: oklch(96% 0.015 88);
+
+  --color-info: oklch(60% 0.10 230);
+  --color-info-content: oklch(98% 0 0);
+  --color-success: oklch(55% 0.12 150);
+  --color-success-content: oklch(98% 0 0);
+  --color-warning: oklch(75% 0.14 80);
+  --color-warning-content: oklch(20% 0.02 80);
+  --color-error: oklch(55% 0.20 25);
+  --color-error-content: oklch(98% 0 0);
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}

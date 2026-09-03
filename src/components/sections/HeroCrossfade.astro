@@ -1,0 +1,111 @@
+---
+/**
+ * ヒーロー（1 枚の写真＋クロスフェード用レイヤー）
+ *
+ * image-manifest-a.json に登録された画像を順に切り替える。
+ * 切り替える画像は props.images で受ける。duration（既定 3000ms）と
+ * fade（既定 1200ms）でアニメーション間隔を指定する。
+ *
+ * reduced-motion が指定された環境ではタイマー・クロスフェードを停止し、
+ * 1 枚目の写真を最初から表示する。
+ */
+interface Image {
+  src: string;
+  alt: string;
+}
+interface Props {
+  images: Image[];
+  /** 次の写真に切り替わるまでの時間（ms） */
+  interval?: number;
+  /** クロスフェードにかける時間（ms） */
+  fade?: number;
+  class?: string;
+}
+const { images, interval = 3000, fade = 1200, class: className = '' } = Astro.props;
+---
+<section class:list={['hero-crossfade relative w-full overflow-hidden bg-base-300', className]} style={`--hc-interval: ${interval}ms; --hc-fade: ${fade}ms;`}>
+  <div class="hero-crossfade__stage relative w-full aspect-[16/9]">
+    {images.map((img, i) => (
+      <img
+        src={img.src}
+        alt={img.alt}
+        loading={i === 0 ? 'eager' : 'lazy'}
+        width="1920"
+        height="1080"
+        class:list={['hero-crossfade__layer absolute inset-0 w-full h-full object-cover', i === 0 ? 'is-active' : '']}
+        data-index={i}
+      />
+    ))}
+    <div class="hero-crossfade__veil absolute inset-0 bg-gradient-to-b from-black/10 via-black/0 to-black/35" aria-hidden="true"></div>
+    <div class="hero-crossfade__content absolute inset-0 flex items-end">
+      <div class="max-w-7xl w-full mx-auto px-4 pb-12 lg:pb-24 text-base-100">
+        <p class="text-xs lg:text-sm tracking-[0.3em] uppercase opacity-80 mb-3">EST. 2015 ／ HOKKAIDO ASAHIKAWA</p>
+        <h1 class="hero-crossfade__title font-bold leading-tight text-4xl md:text-5xl lg:text-6xl">
+          動く体に、確かな補給を。
+        </h1>
+        <p class="hero-crossfade__scroll mt-8 inline-flex items-center gap-2 text-xs tracking-[0.3em] opacity-80" aria-hidden="true">
+          <span>SCROLL</span>
+          <span aria-hidden="true">→</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-crossfade__layer {
+    opacity: 0;
+    transition: opacity var(--hc-fade) ease-in-out;
+    will-change: opacity;
+  }
+  .hero-crossfade__layer.is-active {
+    opacity: 1;
+  }
+  .hero-crossfade__title,
+  .hero-crossfade__scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: hero-rise 700ms 100ms cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  @keyframes hero-rise {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-crossfade__layer {
+      opacity: 1;
+      transition: none;
+    }
+    .hero-crossfade__layer:not(.is-active) {
+      display: none;
+    }
+    .hero-crossfade__title,
+    .hero-crossfade__scroll {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const init = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const root = document.querySelector<HTMLElement>('.hero-crossfade:not([data-hc-ready])');
+    if (!root) return;
+    root.setAttribute('data-hc-ready', '1');
+    const layers = Array.from(root.querySelectorAll<HTMLElement>('.hero-crossfade__layer'));
+    if (layers.length < 2) return;
+    const interval = parseInt(getComputedStyle(root).getPropertyValue('--hc-interval'), 10) || 3000;
+    let i = 0;
+    setInterval(() => {
+      layers[i].classList.remove('is-active');
+      i = (i + 1) % layers.length;
+      layers[i].classList.add('is-active');
+    }, interval);
+  };
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

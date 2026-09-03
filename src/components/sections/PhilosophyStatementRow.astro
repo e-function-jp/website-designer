@@ -1,0 +1,27 @@
+---
+/**
+ * ブランド理念の 3 行ステートメント。
+ *
+ * 左に大きな数字（96px・primary）、右に見出し＋本文。
+ */
+interface Row {
+  number: string;
+  heading: string;
+  body: string;
+}
+interface Props {
+  rows: Row[];
+}
+const { rows } = Astro.props;
+---
+<div class="philosophy-statements space-y-12">
+  {rows.map((row) => (
+    <article class="philosophy-statements__row grid gap-6 lg:gap-10 lg:grid-cols-[auto_minmax(0,1fr)] items-start">
+      <p class="text-7xl lg:text-9xl font-bold text-primary tabular-nums leading-none">{row.number}</p>
+      <div class="space-y-3">
+        <h3 class="text-xl lg:text-2xl font-bold leading-snug">{row.heading}</h3>
+        <p class="text-base lg:text-lg leading-relaxed text-base-content/85">{row.body}</p>
+      </div>
+    </article>
+  ))}
+</div>

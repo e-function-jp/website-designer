@@ -1,0 +1,146 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import PageHeaderHero from '../../../../../components/sections/PageHeaderHero.astro';
+import Tab from '../../../../../components/navigation/Tab.astro';
+import ContactCtaBand from '../../../../../components/site/ContactCtaBand.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const items2025 = [
+  { date: '2025-11-04', category: 'リリース', title: 'リカバリー食品「HOKUREI REPAIR 02」を発売、トレーニング後 30 分の補給に電解質を同時配合' },
+  { date: '2025-09-18', category: 'メディア', title: '北海道新聞 朝刊「旭川のものづくり」特集に当社の配合検証が掲載' },
+  { date: '2025-07-22', category: '店舗', title: '原宿店の営業時間短縮（11:00〜18:00）のお知らせ' },
+  { date: '2025-05-10', category: 'リリース', title: '機能性スナック「HOKUREI SNACK 04」を発売、北海道産えんどう豆を 30% 配合' },
+  { date: '2025-03-02', category: 'メディア', title: '雑誌「Tarzan」最新号に当社のリカバリー処方が掲載' },
+  { date: '2025-01-15', category: 'リリース', title: '配合検証 480 処方突破、国内外の認証原料を採用' },
+];
+
+const items2024 = [
+  { date: '2024-12-01', category: 'リリース', title: '直営 3 号店を東京・原宿にオープン' },
+  { date: '2024-10-12', category: 'メディア', title: 'Web メディア「スポーツ栄養ナビ」に当社代表インタビューが掲載' },
+  { date: '2024-08-08', category: 'リリース', title: '配合検証 300 処方突破、ランナーと連携したリカバリー処方を発売' },
+  { date: '2024-06-20', category: '店舗', title: '札幌店の定休日を日曜日に変更' },
+  { date: '2024-04-04', category: 'メディア', title: '北海道テレビ「まちの工場」に出演' },
+];
+
+const items2023 = [
+  { date: '2023-12-15', category: 'リリース', title: 'リカバリー食品ラインを増設、北海道産ホエイの採用比率を引き上げ' },
+];
+
+const categoryVariant: Record<string, string> = {
+  'リリース': 'badge-secondary',
+  'メディア': 'badge-primary',
+  '店舗': 'badge-accent',
+};
+---
+
+<SiteLayout
+  site={site}
+  title="お知らせ"
+  description="北嶺ニュートリションからのお知らせ一覧。製品リリース・メディア掲載・店舗情報を年別タブでお伝えします。"
+  path="/news/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お知らせ' }]}
+>
+  <!-- ページヘッダ -->
+  <PageHeaderHero
+    title="お知らせ"
+    englishTitle="News"
+    lead="北嶺ニュートリションからの、製品リリース・メディア掲載・店舗情報をお届けします。2024 年以降のアーカイブは 1 年分、2025 年以降の新着は年別タブで切り替えます。"
+  />
+
+  <!-- お知らせ一覧（年別タブ＋日付降順） -->
+  <section class="bg-base-100">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-32 space-y-8">
+
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <Tab variant="lifted" class="mb-8">
+          <button type="button" role="tab" class="tab tab-active" aria-selected="true">2025</button>
+          <button type="button" role="tab" class="tab" aria-selected="false">2024</button>
+          <button type="button" role="tab" class="tab" aria-selected="false">2023</button>
+        </Tab>
+      </ScrollReveal>
+
+      <!-- 2025 年 -->
+      <div>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <h2
+            class="text-xl lg:text-[1.5rem] font-bold text-secondary mb-4 tabular-nums tracking-[0.16em]"
+            style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+          >
+            2025 年
+          </h2>
+        </ScrollReveal>
+        <ul class="divide-y divide-base-300 border-y border-base-300">
+          {items2025.map((r) => (
+            <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+              <li class="grid gap-x-6 gap-y-2 py-5 md:grid-cols-[7rem_8rem_minmax(0,1fr)] md:items-center">
+                <time class="text-base font-bold text-primary tabular-nums">{r.date}</time>
+                <span class={`badge ${categoryVariant[r.category] ?? 'badge-secondary'} badge-sm whitespace-nowrap`}>{r.category}</span>
+                <span class="text-base lg:text-lg leading-snug">{r.title}</span>
+              </li>
+            </ScrollReveal>
+          ))}
+        </ul>
+      </div>
+
+      <!-- 2024 年 -->
+      <div>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <h2
+            class="text-xl lg:text-[1.5rem] font-bold text-secondary mb-4 tabular-nums tracking-[0.16em]"
+            style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+          >
+            2024 年
+          </h2>
+        </ScrollReveal>
+        <ul class="divide-y divide-base-300 border-y border-base-300">
+          {items2024.map((r) => (
+            <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+              <li class="grid gap-x-6 gap-y-2 py-5 md:grid-cols-[7rem_8rem_minmax(0,1fr)] md:items-center">
+                <time class="text-base font-bold text-primary tabular-nums">{r.date}</time>
+                <span class={`badge ${categoryVariant[r.category] ?? 'badge-secondary'} badge-sm whitespace-nowrap`}>{r.category}</span>
+                <span class="text-base lg:text-lg leading-snug">{r.title}</span>
+              </li>
+            </ScrollReveal>
+          ))}
+        </ul>
+      </div>
+
+      <!-- 2023 年 -->
+      <div>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <h2
+            class="text-xl lg:text-[1.5rem] font-bold text-secondary mb-4 tabular-nums tracking-[0.16em]"
+            style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+          >
+            2023 年
+          </h2>
+        </ScrollReveal>
+        <ul class="divide-y divide-base-300 border-y border-base-300">
+          {items2023.map((r) => (
+            <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+              <li class="grid gap-x-6 gap-y-2 py-5 md:grid-cols-[7rem_8rem_minmax(0,1fr)] md:items-center">
+                <time class="text-base font-bold text-primary tabular-nums">{r.date}</time>
+                <span class={`badge ${categoryVariant[r.category] ?? 'badge-secondary'} badge-sm whitespace-nowrap`}>{r.category}</span>
+                <span class="text-base lg:text-lg leading-snug">{r.title}</span>
+              </li>
+            </ScrollReveal>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- お問い合わせ CTA 帯（凍土背景・藍ボタン） -->
+  <ContactCtaBand
+    site={site}
+    heading="取材・パートナーシップのご相談はこちら。"
+    ctaLabel="お問い合わせ"
+    ctaHref="/contact/"
+  />
+
+  <PageTopButton />
+</SiteLayout>

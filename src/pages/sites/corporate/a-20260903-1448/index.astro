@@ -1,0 +1,180 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from './_site';
+import { url } from '../../../../lib/site';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+import AnimatedCounter from '../../../../components/ui/AnimatedCounter.astro';
+import HeroCrossfade from '../../../../components/sections/HeroCrossfade.astro';
+import StickyIndexHubRow from '../../../../components/sections/StickyIndexHubRow.astro';
+import SiteCtaBand from '../../../../components/site/SiteCtaBand.astro';
+import PageTopButton from '../../../../components/ui/PageTopButton.astro';
+
+// ヒーローは image-manifest-a.json の top:hero-main を主役に、
+// 残りの写真は image-manifest に存在しないため再利用しない。
+const heroImages = [
+  { src: '/sites/corporate/_shared/20260903-1448/img-a-01.jpg', alt: '雪のトレーニンググラウンドを走るランナーの足元' },
+];
+
+// 5 領域の索引。画像が用意されている 3 領域のみ中央写真付き、
+// 残りはテキストのみでリンク集として置く（image-manifest-a.json の
+// 配置指定をそのまま反映する）。
+const hubRows = [
+  {
+    number: '01',
+    label: '会社について（About）',
+    image: { src: '/sites/corporate/_shared/20260903-1448/img-a-02.jpg', alt: '旭川の工場ラインで粉末のプロテインを計量する様子' },
+    links: [
+      { label: 'ブランド理念', href: '/about/#philosophy' },
+      { label: '代表メッセージ', href: '/about/#message' },
+      { label: '沿革', href: '/about/#history' },
+      { label: '会社概要', href: '/company/' },
+    ],
+  },
+  {
+    number: '02',
+    label: '製品ライン（Products）',
+    image: { src: '/sites/corporate/_shared/20260903-1448/img-a-03.jpg', alt: '木目調の棚に並ぶ製品ラインアップのプロテイン容器' },
+    links: [
+      { label: 'トレーニング向けプロテイン', href: '/service/#protein' },
+      { label: 'リカバリー食品', href: '/service/#recovery' },
+      { label: '機能性スナック', href: '/service/#snack' },
+      { label: '直営店舗と EC', href: '/service/#store' },
+    ],
+  },
+  {
+    number: '04',
+    label: '直営店舗（Stores）',
+    image: { src: '/sites/corporate/_shared/20260903-1448/img-a-04.jpg', alt: '直営ジムの内部に置かれたダンベルとトレーニングベンチ' },
+    links: [
+      { label: '旭川本店', href: '/service/#store' },
+      { label: '札幌店', href: '/service/#store' },
+      { label: '原宿店', href: '/service/#store' },
+      { label: '公式オンラインストア', href: '/service/#store' },
+    ],
+  },
+];
+
+const numberLinks = [
+  { label: 'お知らせ（Information）', href: '/news/', sub: ['お知らせ一覧'] },
+  { label: '採用情報（Recruit）', href: '/recruit/', sub: ['募集職種', '先輩の声', '選考フロー', '福利厚生'] },
+  { label: 'お問い合わせ（Contact）', href: '/contact/', sub: ['お問い合わせフォーム'] },
+];
+
+const numbers = [
+  { label: '年間出荷', value: 128, suffix: '万食' },
+  { label: '配合検証', value: 480, suffix: '処方' },
+  { label: '従業員数', value: 86, suffix: '名' },
+  { label: '直営店舗', value: 3, suffix: '拠点' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="トップ"
+  description="北嶺ニュートリション株式会社は、北海道旭川市でトレーニング向けプロテイン、リカバリー食品、機能性スナックを自社配合し、ジム併設の直営店舗と専門店・EC で販売するスポーツ栄養メーカーです。"
+  path="/"
+  isHome
+>
+  <HeroCrossfade images={heroImages} />
+
+  <!-- 5 領域の索引（左見出し・中央写真・右リンク） -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-28">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-sm tracking-[0.3em] uppercase text-primary font-bold mb-3">Site Index</p>
+        <h2 class="text-3xl lg:text-5xl font-bold leading-tight mb-4">北嶺の 5 つの領域</h2>
+        <p class="text-base lg:text-lg leading-relaxed text-base-content/80 max-w-3xl">
+          会社について、製品ライン、直営店舗、お知らせ、採用、のお問い合わせ。
+          5 つの領域から、必要な情報へ直接お進みいただけます。
+        </p>
+      </ScrollReveal>
+
+      <div class="mt-16">
+        <ScrollReveal animation="clip-up" duration={site.motion!.durationMs}>
+          <StickyIndexHubRow site={site} rows={hubRows} />
+        </ScrollReveal>
+      </div>
+
+      <!-- 残りの 2 領域（画像なし、テキストリンクのみ） -->
+      <div class="mt-20 grid gap-10 lg:grid-cols-3 border-t border-base-300 pt-16">
+        {numberLinks.map((g) => (
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <div class="space-y-4">
+              <a href={url(site, g.href)} class="text-xl lg:text-2xl font-bold leading-snug link link-hover">
+                → {g.label}
+              </a>
+              <ul class="space-y-2 text-sm lg:text-base text-base-content/75">
+                {g.sub.map((s) => (
+                  <li>・{s}</li>
+                ))}
+              </ul>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 数字で見る -->
+  <section class="bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="text-2xl lg:text-3xl font-bold leading-tight mb-10">数字で見る北嶺</h2>
+      </ScrollReveal>
+      <dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {numbers.map((n, i) => (
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <div class="rounded-box bg-base-100 border border-base-300 p-6 text-center">
+              <dd class="text-3xl lg:text-5xl font-bold text-primary tabular-nums">
+                <AnimatedCounter target={n.value} suffix={n.suffix} />
+              </dd>
+              <dt class="mt-3 text-xs lg:text-sm text-base-content/70">{n.label}</dt>
+            </div>
+          </ScrollReveal>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- 関連ページへの導線（Related Content） -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="text-2xl lg:text-3xl font-bold leading-tight mb-10">関連ページ</h2>
+      </ScrollReveal>
+      <ul class="grid gap-6 md:grid-cols-3">
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/about/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-xs tracking-[0.2em] uppercase text-primary mb-2">About</p>
+              <p class="text-lg font-bold mb-2">会社について</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">動く体に、確かな補給を。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/service/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-xs tracking-[0.2em] uppercase text-primary mb-2">Products</p>
+              <p class="text-lg font-bold mb-2">製品ライン</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">プロテイン・リカバリー・スナック。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/recruit/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-xs tracking-[0.2em] uppercase text-primary mb-2">Recruit</p>
+              <p class="text-lg font-bold mb-2">採用情報</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">旭川の工場と直営店舗で仲間を募集中。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <SiteCtaBand site={site} />
+
+  <PageTopButton />
+</SiteLayout>

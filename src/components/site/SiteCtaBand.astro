@@ -1,0 +1,37 @@
+---
+/**
+ * 全ページ末尾の問い合わせ導線。
+ *
+ * /recruit/ のみラベルを差し替える運用を許容するため、ctaLabel と
+ * ctaHref を props で受ける。指定が無ければ _site.ts の primaryCta を使う。
+ */
+import { url } from '../../lib/site';
+import type { SiteConfig } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+  /** 見出し（既定：「製品ラインについて、もっと詳しく。」） */
+  heading?: string;
+  /** ボタンラベル */
+  ctaLabel?: string;
+  /** ボタンの飛び先（base 相対） */
+  ctaHref?: string;
+  class?: string;
+}
+const {
+  site,
+  heading = '製品ラインについて、もっと詳しく。',
+  ctaLabel,
+  ctaHref,
+  class: className = '',
+} = Astro.props;
+
+const label = ctaLabel ?? site.primaryCta?.label ?? 'お問い合わせ';
+const href = ctaHref ?? site.primaryCta?.href ?? '/contact/';
+---
+<section class:list={['site-cta-band bg-primary text-primary-content', className]}>
+  <div class="max-w-7xl mx-auto px-4 py-16 lg:py-20 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+    <h2 class="text-2xl lg:text-3xl font-bold leading-snug">{heading}</h2>
+    <a href={url(site, href)} class="btn btn-secondary btn-lg self-start lg:self-auto">{label}</a>
+  </div>
+</section>

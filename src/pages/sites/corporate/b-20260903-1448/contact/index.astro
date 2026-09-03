@@ -1,0 +1,176 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import PageHeaderHero from '../../../../../components/sections/PageHeaderHero.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import Fieldset from '../../../../../components/navigation/Fieldset.astro';
+import Select from '../../../../../components/navigation/Select.astro';
+import TextInput from '../../../../../components/navigation/TextInput.astro';
+import Textarea from '../../../../../components/navigation/Textarea.astro';
+import ContactCtaBand from '../../../../../components/site/ContactCtaBand.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const recruitHref = url(site, '/recruit/');
+
+const flow = [
+  { label: '受付', body: 'フォーム送信後、自動返信メールが届きます。' },
+  { label: '内容確認', body: '担当者より内容を確認します。' },
+  { label: 'ご返信', body: '3 営業日以内に担当者からご返信します。' },
+  { label: '採用ご応募', body: `お問い合わせ内容が採用応募の場合は、採用情報ページ（${recruitHref}） からご応募ください。` },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="お問い合わせ"
+  description="北嶺ニュートリションへのお問い合わせ。事業・取材・採用の 3 つのご用件をフォームからお寄せください。"
+  path="/contact/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お問い合わせ' }]}
+>
+  <!-- ページヘッダ -->
+  <PageHeaderHero
+    title="お問い合わせ"
+    englishTitle="Contact"
+    lead="事業・取材・採用の 3 つのご用件を、フォームからお寄せください。内容に応じて 3 営業日以内に担当者からご返信します。"
+  />
+
+  <!-- お問い合わせ情報（電話・メール・所在地） -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-32">
+      <div class="grid gap-10 md:grid-cols-3 md:divide-x md:divide-secondary">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs} delay={0}>
+          <div class="md:pr-6">
+            <p class="text-secondary text-xs tracking-[0.16em] uppercase font-bold mb-3">Tel</p>
+            <p
+              class="text-2xl lg:text-[1.75rem] leading-tight"
+              style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+            >
+              0166-00-0000
+            </p>
+            <p class="mt-2 text-sm text-base-content/70">平日 9:00〜17:30</p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs} delay={90}>
+          <div class="md:px-6">
+            <p class="text-secondary text-xs tracking-[0.16em] uppercase font-bold mb-3">Mail</p>
+            <p
+              class="text-2xl lg:text-[1.75rem] leading-tight"
+              style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+            >
+              info@example.com
+            </p>
+            <p class="mt-2 text-sm text-base-content/70">ご返信まで 3 営業日以内</p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs} delay={180}>
+          <div class="md:pl-6">
+            <p class="text-secondary text-xs tracking-[0.16em] uppercase font-bold mb-3">Address</p>
+            <p
+              class="text-2xl lg:text-[1.75rem] leading-tight"
+              style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+            >
+              〒070-0030
+            </p>
+            <p class="mt-2 text-base lg:text-lg leading-relaxed text-base-content/85">
+              北海道旭川市宮下通 9-2-14<br />ご来社の際は事前予約制
+            </p>
+          </div>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせフォーム -->
+  <section class="bg-base-200">
+    <div class="max-w-3xl mx-auto px-4 py-20 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">Contact Form</p>
+        <h2
+          class="text-2xl lg:text-[2rem] leading-snug mb-10"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          お問い合わせフォーム。
+        </h2>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+        <form class="space-y-6" action="#" method="post" novalidate>
+          <Fieldset legend="ご用件">
+            <div class="space-y-6">
+              <label class="block">
+                <span class="block text-sm font-bold mb-2">ご用件 <span class="text-error">*</span></span>
+                <Select>
+                  <option disabled selected>ご用件を選択</option>
+                  <option>事業に関するお問い合わせ</option>
+                  <option>取材・メディア掲載のご相談</option>
+                  <option>採用ご応募</option>
+                </Select>
+              </label>
+              <label class="block">
+                <span class="block text-sm font-bold mb-2">会社名（任意）</span>
+                <TextInput placeholder="会社名" />
+              </label>
+              <label class="block">
+                <span class="block text-sm font-bold mb-2">お名前 <span class="text-error">*</span></span>
+                <TextInput placeholder="お名前" />
+              </label>
+              <label class="block">
+                <span class="block text-sm font-bold mb-2">メールアドレス <span class="text-error">*</span></span>
+                <TextInput type="email" placeholder="メールアドレス" />
+              </label>
+              <label class="block">
+                <span class="block text-sm font-bold mb-2">電話番号（任意）</span>
+                <TextInput type="tel" placeholder="電話番号（任意）" />
+              </label>
+              <label class="block">
+                <span class="block text-sm font-bold mb-2">お問い合わせ内容 <span class="text-error">*</span></span>
+                <Textarea placeholder="お問い合わせ内容をご記入ください。" rows={6}></Textarea>
+              </label>
+            </div>
+          </Fieldset>
+
+          <div class="pt-2">
+            <button type="submit" class="btn btn-primary btn-lg text-primary-content">送信する</button>
+          </div>
+        </form>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 送信後の流れ（Steps 4 段） -->
+  <section class="bg-base-100">
+    <div class="max-w-3xl mx-auto px-4 py-20 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">Flow</p>
+        <h2
+          class="text-2xl lg:text-[2rem] leading-snug mb-10"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          送信後の流れ。
+        </h2>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <Steps class="w-full">
+          {flow.map((s, i) => (
+            <li class="step step-secondary">
+              <span class="block font-bold text-sm">0{i + 1} {s.label}</span>
+              <span class="block text-xs text-base-content/70 mt-1">{s.body}</span>
+            </li>
+          ))}
+        </Steps>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- お問い合わせ CTA 帯（凍土背景・藍ボタン） -->
+  <ContactCtaBand
+    site={site}
+    heading="お問い合わせについて、もっと詳しく。"
+    ctaLabel="お問い合わせ"
+    ctaHref="/contact/"
+  />
+
+  <PageTopButton />
+</SiteLayout>

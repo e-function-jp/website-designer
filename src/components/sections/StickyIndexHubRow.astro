@@ -1,0 +1,79 @@
+---
+/**
+ * 5 領域の索引（左見出し・中央写真 sticky・右リンク）
+ *
+ * 1 行 = 左：番号＋和文ラベル、中央：縦長写真（sticky）、
+ * 右：下位リンク 2〜3 個（矢印付き）。
+ *
+ * href は site.base を前置した絶対パスで出力する。
+ */
+import Link from '../navigation/Link.astro';
+import { url } from '../../lib/site';
+import type { SiteConfig } from '../../lib/site';
+
+interface SubLink {
+  label: string;
+  href: string;
+}
+interface Row {
+  number: string;
+  label: string;
+  image: { src: string; alt: string };
+  links: SubLink[];
+}
+interface Props {
+  site: SiteConfig;
+  rows: Row[];
+}
+const { site, rows } = Astro.props;
+---
+<div class="sticky-index">
+  {rows.map((row, idx) => (
+    <article class:list={['sticky-index__row grid gap-6 lg:gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,6fr)_minmax(0,3fr)] items-start', idx > 0 && 'border-t border-base-300 pt-16']}>
+      <div class="sticky-index__head space-y-4">
+        <p class="text-5xl lg:text-6xl font-bold text-primary tabular-nums leading-none">{row.number}</p>
+        <p class="text-xl lg:text-2xl font-bold leading-snug">{row.label}</p>
+      </div>
+      <div class="sticky-index__media">
+        <div class="sticky-index__sticky relative w-full aspect-[2/3] overflow-hidden rounded-box bg-base-300">
+          <img
+            src={row.image.src}
+            alt={row.image.alt}
+            loading="lazy"
+            width="1200"
+            height="1800"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </div>
+      <ul class="sticky-index__links space-y-3 lg:pt-4">
+        {row.links.map((l) => (
+          <li>
+            <Link href={url(site, l.href)} variant="hover" class="inline-flex items-baseline gap-2 text-lg lg:text-xl">
+              <span aria-hidden="true" class="text-primary">→</span>
+              <span>{l.label}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </article>
+  ))}
+</div>
+
+<style>
+  .sticky-index__row { padding-top: 4rem; padding-bottom: 4rem; }
+  .sticky-index__row:first-child { padding-top: 0; }
+  /* スクロール中も中央写真を viewport 80% まで保持 */
+  @media (min-width: 1024px) {
+    .sticky-index__sticky {
+      position: sticky;
+      top: 12vh;
+      max-height: 80vh;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sticky-index__sticky {
+      position: static;
+    }
+  }
+</style>

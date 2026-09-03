@@ -11,8 +11,18 @@
  * - blur … opacity + blur。日本のコーポレートサイトで頻出（実測で確認）
  * - clip-up … clip-path のワイプ。見出しの立ち上げに使う
  *
+ * ## 監視対象と演出対象を分けている理由（重要）
+ *
+ * 当初は外側の1要素に IntersectionObserver と演出の両方を載せていた。
+ * すると `clip-up`（`clip-path: inset(100% 0 0 0)`）で**デッドロック**する。
+ * Chromium は交差判定に clip-path を織り込むため、自分を完全にクリップした
+ * 要素は交差率が常に 0 になり、`is-visible` が永遠に付かない。
+ * 実測（corporate-20260903-1448）: 14 個中 13 個が出現しないまま残り、
+ * 中の `loading="lazy"` 画像も読み込まれず、ページの4割が空白になった。
+ *
+ * そこで **外側は監視専用（無変形）** とし、演出は内側の要素に載せる。
+ *
  * `prefers-reduced-motion: reduce` では初期状態から可視にし、一切動かさない。
- * （`a11y-reduced-motion` ルールが未対応を検出する）
  */
 interface Props {
   animation?: 'fade' | 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'zoom' | 'blur' | 'clip-up';
@@ -28,40 +38,45 @@ const {
   animation = 'fade-up',
   delay = 0,
   duration = 700,
-  threshold = 0.12,
+  threshold = 0.05,
   stagger = 0,
   class: className = '',
 } = Astro.props;
 ---
 
 <div
-  class:list={['scroll-reveal', `scroll-reveal--${animation}`, stagger > 0 && 'scroll-reveal--stagger', className]}
+  class:list={['scroll-reveal', className]}
   data-sr-delay={delay}
   data-sr-duration={duration}
   data-sr-threshold={threshold}
   data-sr-stagger={stagger}
 >
-  <slot />
+  <div class:list={['scroll-reveal__inner', `scroll-reveal__inner--${animation}`, stagger > 0 && 'scroll-reveal__inner--stagger']}>
+    <slot />
+  </div>
 </div>
 
 <style>
-  .scroll-reveal {
+  /* 監視対象。ここには一切の変形・クリップを掛けない（交差判定を壊さないため） */
+  .scroll-reveal { display: block; }
+
+  .scroll-reveal__inner {
     opacity: 0;
     transition-property: opacity, transform, filter, clip-path;
     /* 実測で最も多く観測される easing（easeOutQuart 相当） */
     transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
     will-change: opacity, transform;
   }
-  .scroll-reveal--fade { transform: none; }
-  .scroll-reveal--fade-up { transform: translateY(32px); }
-  .scroll-reveal--fade-down { transform: translateY(-32px); }
-  .scroll-reveal--fade-left { transform: translateX(-32px); }
-  .scroll-reveal--fade-right { transform: translateX(32px); }
-  .scroll-reveal--zoom { transform: scale(0.94); }
-  .scroll-reveal--blur { filter: blur(12px); }
-  .scroll-reveal--clip-up { clip-path: inset(100% 0 0 0); transform: none; }
+  .scroll-reveal__inner--fade { transform: none; }
+  .scroll-reveal__inner--fade-up { transform: translateY(32px); }
+  .scroll-reveal__inner--fade-down { transform: translateY(-32px); }
+  .scroll-reveal__inner--fade-left { transform: translateX(-32px); }
+  .scroll-reveal__inner--fade-right { transform: translateX(32px); }
+  .scroll-reveal__inner--zoom { transform: scale(0.94); }
+  .scroll-reveal__inner--blur { filter: blur(12px); }
+  .scroll-reveal__inner--clip-up { clip-path: inset(100% 0 0 0); transform: none; }
 
-  .scroll-reveal.is-visible {
+  .scroll-reveal.is-visible .scroll-reveal__inner {
     opacity: 1;
     transform: none;
     filter: none;
@@ -69,20 +84,20 @@ const {
     will-change: auto;
   }
 
-  /* stagger 時は子要素側を動かす */
-  .scroll-reveal--stagger { opacity: 1; transform: none; filter: none; }
-  .scroll-reveal--stagger > :global(*) {
+  /* stagger 時は孫要素（差し込まれた各要素）を動かす */
+  .scroll-reveal__inner--stagger { opacity: 1; transform: none; filter: none; clip-path: none; }
+  .scroll-reveal__inner--stagger > :global(*) {
     opacity: 0;
     transform: translateY(28px);
     transition-property: opacity, transform;
     transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
   }
-  .scroll-reveal--stagger.is-visible > :global(*) { opacity: 1; transform: none; }
+  .scroll-reveal.is-visible .scroll-reveal__inner--stagger > :global(*) { opacity: 1; transform: none; }
 
   /* モーションを減らす設定では、初期状態から可視にして一切動かさない */
   @media (prefers-reduced-motion: reduce) {
-    .scroll-reveal,
-    .scroll-reveal--stagger > :global(*) {
+    .scroll-reveal__inner,
+    .scroll-reveal__inner--stagger > :global(*) {
       opacity: 1 !important;
       transform: none !important;
       filter: none !important;
@@ -94,37 +109,63 @@ const {
 
 <script>
   const init = () => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const els = document.querySelectorAll<HTMLElement>('.scroll-reveal:not([data-sr-ready])');
+    if (!els.length) return;
     els.forEach((el) => el.setAttribute('data-sr-ready', '1'));
-    if (reduce) {
-      // CSS 側でも無効化しているが、JS 側でも状態を確定させておく
+
+    const reveal = (el: HTMLElement) => {
+      const delay = Number(el.dataset.srDelay || 0);
+      const duration = Number(el.dataset.srDuration || 700);
+      const stagger = Number(el.dataset.srStagger || 0);
+      const inner = el.firstElementChild as HTMLElement | null;
+      if (inner) inner.style.transitionDuration = `${duration}ms`;
+      if (stagger > 0 && inner) {
+        Array.from(inner.children).forEach((child, i) => {
+          const c = child as HTMLElement;
+          c.style.transitionDuration = `${duration}ms`;
+          c.style.transitionDelay = `${delay + i * stagger}ms`;
+        });
+        el.classList.add('is-visible');
+        return;
+      }
+      window.setTimeout(() => el.classList.add('is-visible'), delay);
+    };
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       els.forEach((el) => el.classList.add('is-visible'));
       return;
     }
+
+    // IntersectionObserver が使えない環境では、隠したまま残さず全部出す。
+    // 「出せないなら隠さない」を既定にする（コンテンツが消えるほうが重大なため）。
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          const delay = Number(el.dataset.srDelay || 0);
-          const duration = Number(el.dataset.srDuration || 700);
-          const stagger = Number(el.dataset.srStagger || 0);
-          el.style.transitionDuration = `${duration}ms`;
-          if (stagger > 0) {
-            Array.from(el.children).forEach((child, i) => {
-              const c = child as HTMLElement;
-              c.style.transitionDuration = `${duration}ms`;
-              c.style.transitionDelay = `${delay + i * stagger}ms`;
-            });
-          }
-          window.setTimeout(() => el.classList.add('is-visible'), stagger > 0 ? 0 : delay);
-          observer.unobserve(el);
+          reveal(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
         }
       },
-      { threshold: Number(els[0]?.dataset.srThreshold || 0.12) },
+      // ビューポートより高い要素は交差率が上がりきらない。閾値は低く保ち、
+      // rootMargin で少し手前から出す。
+      { threshold: 0.01, rootMargin: '0px 0px -5% 0px' },
     );
     els.forEach((el) => observer.observe(el));
+
+    // 保険: 監視が働かないまま最下部まで到達した場合に取りこぼしを出す。
+    window.addEventListener('load', () => {
+      window.setTimeout(() => {
+        document.querySelectorAll<HTMLElement>('.scroll-reveal[data-sr-ready]:not(.is-visible)').forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) reveal(el);
+        });
+      }, 1200);
+    });
   };
 
   init();

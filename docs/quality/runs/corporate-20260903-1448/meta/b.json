@@ -1,0 +1,23 @@
+{
+  "site_type": "corporate",
+  "variant": "b",
+  "stamp": "20260903-1448",
+  "route": "/sites/corporate/b-20260903-1448/",
+  "model": "minimax-m3",
+  "provider": "opencode-go",
+  "pages_created": [
+    "about/index.astro",
+    "company/index.astro",
+    "contact/index.astro",
+    "index.astro",
+    "news/index.astro",
+    "privacy/index.astro",
+    "recruit/index.astro",
+    "service/index.astro"
+  ],
+  "has_site_config": true,
+  "tokens": {
+    "note": "hermes -z oneshot; per-session token rows not captured"
+  },
+  "implemented_at": "2026-09-03T17:02:49+09:00"
+}

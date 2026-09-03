@@ -1,0 +1,126 @@
+---
+/**
+ * NumbersFramedGrid — 冒険路線 b 案の数値 4 点セクション。
+ *
+ * 背景 #E5E9E6（凍土）、4 列グリッド（md 以上）。各 Stat は
+ *   - 数字（明朝 56px、tabular-nums、藍）
+ *   - ラベル（和文、12px、tracking 0.16em）
+ * を苔色の 1px 罫線で囲み、四角の額縁を作る。
+ * 左に縦書きの章番号「02」（苔色、20px）。
+ *
+ * 数字は AnimatedCounter で 0 からカウントアップ、ラベルは fade-up で追従。
+ * reduced-motion: reduce では最終値即時表示（AnimatedCounter 側の実装に準拠）。
+ */
+import AnimatedCounter from '../ui/AnimatedCounter.astro';
+
+interface Number {
+  label: string;
+  value: number;
+  suffix: string;
+}
+
+interface Props {
+  chapterNumber: string;
+  numbers: Number[];
+  duration?: number;
+  stagger?: number;
+}
+
+const { chapterNumber, numbers, duration = 700, stagger = 90 } = Astro.props;
+---
+
+<section class="numbers-framed bg-base-200">
+  <div class="max-w-7xl mx-auto px-4 py-20 lg:py-28 relative">
+    <p
+      class="numbers-framed__chapter text-secondary font-bold text-base lg:text-lg mb-6 lg:mb-10 tabular-nums"
+      style="writing-mode: vertical-rl; letter-spacing: 0.16em;"
+      aria-hidden="true"
+    >
+      {chapterNumber}
+    </p>
+
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {numbers.map((n, i) => (
+        <li
+          class="numbers-framed__cell border border-secondary p-6 lg:p-8 text-center bg-base-100"
+          style={`--nf-delay: ${i * stagger}ms;`}
+          data-nf-delay={i * stagger}
+        >
+          <p class="text-4xl lg:text-[3.5rem] font-bold text-primary leading-none tabular-nums">
+            <AnimatedCounter target={n.value} suffix={n.suffix} duration={1500} />
+          </p>
+          <p
+            class="mt-4 text-xs text-base-content/70 tracking-[0.16em] uppercase"
+            style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+          >
+            {n.label}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .numbers-framed__cell {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 700ms cubic-bezier(0.165, 0.84, 0.44, 1) var(--nf-delay, 0ms),
+                transform 700ms cubic-bezier(0.165, 0.84, 0.44, 1) var(--nf-delay, 0ms);
+  }
+  .numbers-framed.is-ready .numbers-framed__cell {
+    opacity: 1;
+    transform: none;
+  }
+  .numbers-framed__chapter {
+    opacity: 0;
+    transition: opacity 700ms ease 100ms;
+  }
+  .numbers-framed.is-ready .numbers-framed__chapter {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .numbers-framed__cell,
+    .numbers-framed__chapter {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  const init = () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const roots = document.querySelectorAll<HTMLElement>('.numbers-framed:not([data-nf-ready])');
+    roots.forEach((root) => {
+      root.setAttribute('data-nf-ready', '1');
+      if (reduce) {
+        root.classList.add('is-ready');
+        // 最終値を即時表示：AnimatedCounter 側に reduced-motion 対応が既にある
+        root.querySelectorAll<HTMLElement>('.animated-counter').forEach((c) => {
+          const target = c.dataset.target || '0';
+          const prefix = c.dataset.prefix || '';
+          const suffix = c.dataset.suffix || '';
+          c.textContent = `${prefix}${parseInt(target, 10).toLocaleString()}${suffix}`;
+        });
+        return;
+      }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              root.classList.add('is-ready');
+              observer.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.2 },
+      );
+      observer.observe(root);
+    });
+  };
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

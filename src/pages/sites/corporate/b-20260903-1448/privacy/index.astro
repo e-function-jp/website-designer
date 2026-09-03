@@ -1,0 +1,102 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import PageHeaderHero from '../../../../../components/sections/PageHeaderHero.astro';
+import ContactCtaBand from '../../../../../components/site/ContactCtaBand.astro';
+import Accordion from '../../../../../components/data-display/Accordion.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const contactHref = url(site, '/contact/');
+
+const sections = [
+  {
+    number: '01',
+    title: '個人情報の定義',
+    body: '本ポリシーにおいて「個人情報」とは、氏名、住所、電話番号、メールアドレスその他の記述等により特定の個人を識別できる情報をいいます。',
+  },
+  {
+    number: '02',
+    title: '収集する情報',
+    body: '当社は、商品のご購入、お問い合わせ、採用応募その他の機会を通じて、お名前、メールアドレス、住所、電話番号その他の必要な情報を収集します。',
+  },
+  {
+    number: '03',
+    title: '利用目的',
+    body: '当社は、収集した個人情報を、商品の発送、お問い合わせへのご返信、採用選考その他の目的のために利用します。',
+  },
+  {
+    number: '04',
+    title: '第三者提供',
+    body: '当社は、法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供することはありません。',
+  },
+  {
+    number: '05',
+    title: '委託',
+    body: '当社は、業務の一部を外部に委託する場合、委託先に対し適切な監督を行います。',
+  },
+  {
+    number: '06',
+    title: '安全管理',
+    body: '当社は、個人情報の漏えい、滅失、き損の防止その他の安全管理のため、必要かつ適切な措置を講じます。',
+  },
+  {
+    number: '07',
+    title: '開示・訂正・削除',
+    body: 'お客様は、当社が保有する自己の個人情報について、開示・訂正・削除をご請求いただけます。',
+  },
+  {
+    number: '08',
+    title: 'お問い合わせ',
+    body: `本ポリシーに関するお問い合わせは、お問い合わせページ（${contactHref}） または 0166-00-0000 までご連絡ください。`,
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="プライバシーポリシー"
+  description="北嶺ニュートリション株式会社のプライバシーポリシー。個人情報の定義、収集する情報、利用目的、第三者提供、委託、安全管理、開示・訂正・削除、お問い合わせについて 8 章で定めています。"
+  path="/privacy/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'プライバシーポリシー' }]}
+>
+  <!-- ページヘッダ -->
+  <PageHeaderHero
+    title="プライバシーポリシー"
+    englishTitle="Privacy Policy"
+    lead="北嶺ニュートリション株式会社（以下「当社」）は、お客様の個人情報を適切に保護し、以下の方針に基づき取り扱います。"
+  />
+
+  <!-- 本文（8 章構成・Accordion） -->
+  <section class="bg-base-100">
+    <div class="max-w-3xl mx-auto px-4 py-20 lg:py-32 space-y-4">
+      {sections.map((s, i) => (
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs} delay={i * site.motion!.staggerMs!}>
+          <Accordion name={`privacy-${i}`}>
+            <span slot="title" class="flex items-baseline gap-4">
+              <span class="text-secondary font-bold tabular-nums">{s.number}</span>
+              <span
+                class="text-lg lg:text-[1.5rem]"
+                style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+              >
+                {s.title}
+              </span>
+            </span>
+            <p class="text-base leading-[1.95]">{s.body}</p>
+          </Accordion>
+        </ScrollReveal>
+      ))}
+    </div>
+  </section>
+
+  <!-- お問い合わせ CTA 帯（凍土背景・藍ボタン） -->
+  <ContactCtaBand
+    site={site}
+    heading="本ポリシーについて、もっと詳しく。"
+    ctaLabel="お問い合わせ"
+    ctaHref="/contact/"
+  />
+
+  <PageTopButton />
+</SiteLayout>

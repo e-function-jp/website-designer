@@ -1,0 +1,62 @@
+---
+/**
+ * ContactCtaBand — 冒険路線 b 案の問い合わせ CTA 帯。
+ *
+ * 既存 SiteCtaBand は藍背景だが、本コンポーネントは b 案仕様で
+ *   - 背景 #E5E9E6（凍土）
+ *   - 文字 #0E2A47（藍）
+ *   - ボタン：藍の塗りつぶし・雪白文字
+ *   - ボタンは苔色のアウトラインを二重に重ねた 2 重枠
+ *   - 上下 6rem のパディング
+ *
+ * 見出しは「製品ラインについて、もっと詳しく。」を既定値とし、
+ * 各ページで文言とリンク先を上書きできる。
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+  heading?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  class?: string;
+}
+
+const {
+  site,
+  heading = '製品ラインについて、もっと詳しく。',
+  ctaLabel,
+  ctaHref,
+  class: className = '',
+} = Astro.props;
+
+const label = ctaLabel ?? site.primaryCta?.label ?? 'お問い合わせ';
+const href = ctaHref ?? site.primaryCta?.href ?? '/contact/';
+---
+
+<section class:list={['contact-cta-band bg-base-200 text-primary', className]}>
+  <div class="max-w-7xl mx-auto px-4 py-20 lg:py-28 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+    <h2
+      class="text-2xl lg:text-[2.25rem] font-bold leading-snug"
+      style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+    >
+      {heading}
+    </h2>
+    <a
+      href={url(site, href)}
+      class="contact-cta-band__btn btn btn-primary btn-lg text-primary-content border-2 border-secondary self-start lg:self-auto"
+    >
+      {label}
+    </a>
+  </div>
+</section>
+
+<style>
+  /* 苔色のアウトラインを二重に重ねた 2 重枠（border + box-shadow で疑似的に表現） */
+  .contact-cta-band__btn {
+    box-shadow:
+      0 0 0 2px var(--color-secondary),
+      0 0 0 4px var(--color-primary);
+  }
+</style>

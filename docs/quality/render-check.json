@@ -1,0 +1,147 @@
+{
+  "checked_at": "2026-09-03T08:12:39.938Z",
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "results": [
+    {
+      "route": "/",
+      "pageHeight": 900,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/",
+      "pageHeight": 5327,
+      "imageCount": 4,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/about/",
+      "pageHeight": 4625,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/company/",
+      "pageHeight": 2601,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/contact/",
+      "pageHeight": 2581,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/news/",
+      "pageHeight": 2032,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/privacy/",
+      "pageHeight": 1913,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/recruit/",
+      "pageHeight": 2982,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260903-1448/service/",
+      "pageHeight": 4245,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/",
+      "pageHeight": 4729,
+      "imageCount": 4,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/about/",
+      "pageHeight": 5438,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/company/",
+      "pageHeight": 3236,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/contact/",
+      "pageHeight": 3176,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/news/",
+      "pageHeight": 2557,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/privacy/",
+      "pageHeight": 2222,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/recruit/",
+      "pageHeight": 3423,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260903-1448/service/",
+      "pageHeight": 4742,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/base-20260903-1400/",
+      "pageHeight": 2281,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/base-20260903-1400/about/",
+      "pageHeight": 2237,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/base-20260903-1400/contact/",
+      "pageHeight": 1702,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/base-20260903-1400/news/",
+      "pageHeight": 1662,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/base-20260903-1400/privacy/",
+      "pageHeight": 1406,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/base-20260903-1400/service/",
+      "pageHeight": 2028,
+      "imageCount": 0,
+      "findings": []
+    }
+  ]
+}

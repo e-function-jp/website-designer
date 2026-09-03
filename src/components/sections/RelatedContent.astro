@@ -1,0 +1,92 @@
+---
+/**
+ * RelatedContent — 冒険路線 b 案の Related Content。
+ *
+ * 3 列グリッド（md 以上）。背景 #E5E9E6（凍土）。
+ * 各カードはラベル（明朝 24px）と 1 行の短いリード（14px、行高 1.85）、
+ * 右下に小さな章番号（苔色、tabular-nums）。
+ *
+ * photo フィールドが指定された場合のみカード上部に写真（aspect 4:3）を表示。
+ * photo フィールドが無い場合はラベル + リードのみのテキストカード。
+ *
+ * 各カードが画面内に入った時点で fade-up 700ms、stagger 90ms。
+ * reduced-motion: reduce では初期表示。
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Card {
+  label: string;
+  lead: string;
+  href: string;
+  /** 任意。指定すればカード上部に表示（aspect 4:3） */
+  image?: { src: string; alt: string };
+  /** 右下の章番号（苔色） */
+  chapter?: string;
+}
+
+interface Props {
+  site: SiteConfig;
+  cards: Card[];
+  duration?: number;
+  stagger?: number;
+}
+
+const { site, cards, duration = 700, stagger = 90 } = Astro.props;
+---
+
+<section class="related-content bg-base-200">
+  <div class="max-w-7xl mx-auto px-4 py-20 lg:py-28">
+    <ScrollReveal animation="fade-up" duration={duration}>
+      <h2
+        class="text-2xl lg:text-[2rem] font-bold leading-snug mb-10"
+        style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+      >
+        関連ページ
+      </h2>
+    </ScrollReveal>
+    <ul class="grid gap-6 md:grid-cols-3">
+      {cards.map((c, i) => (
+        <li>
+          <ScrollReveal animation="fade-up" duration={duration} stagger={stagger} delay={i * stagger}>
+            <a
+              href={url(site, c.href)}
+              class="related-card group block bg-base-100 border border-secondary p-6 hover:border-primary transition-colors relative h-full"
+            >
+              {c.image && (
+                <figure class="mb-5 overflow-hidden bg-base-300 aspect-[4/3]">
+                  <img
+                    src={c.image.src}
+                    alt={c.image.alt}
+                    loading="lazy"
+                    width="1600"
+                    height="1200"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </figure>
+              )}
+              <p
+                class="text-lg lg:text-[1.5rem] leading-snug mb-2"
+                style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+              >
+                {c.label}
+              </p>
+              <p class="text-sm leading-[1.85] text-base-content/75">
+                {c.lead}
+              </p>
+              {c.chapter && (
+                <p
+                  class="absolute right-4 bottom-4 text-secondary text-xs tabular-nums font-bold"
+                  aria-hidden="true"
+                >
+                  {c.chapter}
+                </p>
+              )}
+            </a>
+          </ScrollReveal>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

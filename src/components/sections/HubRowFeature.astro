@@ -1,0 +1,99 @@
+---
+/**
+ * HubRowFeature — 冒険路線 b 案の 5 領域索引。
+ *
+ * 左 3 カラム＝章番号（苔色・64px）と和文ラベル（明朝・28px）、
+ * 中央 6 カラム＝写真（aspect 3:4、sticky で viewport 80% まで保持）、
+ * 右 3 カラム＝下位リンク 2〜3 個（矢印付き、20px）。
+ *
+ * 行間 4rem、行間仕切りに 1px #C9D2CB。
+ * reduced-motion: reduce では sticky を無効化（通常の位置に固定）。
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface SubLink {
+  label: string;
+  href: string;
+}
+
+interface Row {
+  number: string;
+  label: string;
+  /** 任意。中央写真が指定された場合のみ sticky 写真を表示する */
+  image?: { src: string; alt: string };
+  links: SubLink[];
+}
+
+interface Props {
+  site: SiteConfig;
+  rows: Row[];
+}
+
+const { site, rows } = Astro.props;
+---
+
+<div class="hub-feature divide-y divide-base-300 border-t border-base-300">
+  {rows.map((row) => (
+    <article class="hub-feature__row grid gap-8 lg:gap-12 items-start py-16 lg:py-20" class:list={[row.image ? 'lg:grid-cols-[minmax(0,3fr)_minmax(0,6fr)_minmax(0,3fr)]' : 'lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]']}>
+
+      <div class="hub-feature__head space-y-4 lg:pt-2">
+        <p class="text-secondary text-5xl lg:text-6xl font-bold tabular-nums leading-none">
+          {row.number}
+        </p>
+        <p
+          class="text-xl lg:text-2xl leading-snug"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          {row.label}
+        </p>
+      </div>
+
+      {row.image && (
+        <div class="hub-feature__media">
+          <div class="hub-feature__sticky relative w-full aspect-[3/4] overflow-hidden bg-base-300 rounded-box">
+            <img
+              src={row.image.src}
+              alt={row.image.alt}
+              loading="lazy"
+              width="1200"
+              height="1600"
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      )}
+
+      <ul class="hub-feature__links space-y-4 lg:pt-4">
+        {row.links.map((l) => (
+          <li>
+            <a
+              href={url(site, l.href)}
+              class="inline-flex items-baseline gap-2 text-lg lg:text-xl link link-hover"
+            >
+              <span aria-hidden="true" class="text-secondary">→</span>
+              <span>{l.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+    </article>
+  ))}
+</div>
+
+<style>
+  /* スクロール中も中央写真を viewport 80% まで保持 */
+  @media (min-width: 1024px) {
+    .hub-feature__sticky {
+      position: sticky;
+      top: 12vh;
+      max-height: 80vh;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hub-feature__sticky {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import PageHeaderHero from '../../../../../components/sections/PageHeaderHero.astro';
+import NumbersFramedGrid from '../../../../../components/sections/NumbersFramedGrid.astro';
+import ContactCtaBand from '../../../../../components/site/ContactCtaBand.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const profile = [
+  ['商号', '北嶺ニュートリション株式会社'],
+  ['設立', '2015 年 4 月'],
+  ['資本金', '3,000 万円'],
+  ['所在地', '〒070-0030 北海道旭川市宮下通 9-2-14'],
+  ['代表者', '代表取締役 北嶺 拓郎'],
+  ['電話番号', '0166-00-0000'],
+  ['事業内容', 'スポーツ栄養食品・機能性食品の開発、製造および販売、直営ジムの運営'],
+  ['取引銀行', '北海道銀行 旭川支店'],
+];
+
+const numbers = [
+  { label: '年間出荷', value: 128, suffix: '万食' },
+  { label: '配合検証', value: 480, suffix: '処方' },
+  { label: '従業員数', value: 86, suffix: '名' },
+  { label: '直営店舗', value: 3, suffix: '拠点' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="会社概要"
+  description="北嶺ニュートリション株式会社の会社概要。法人情報（商号・設立・資本金・所在地・代表者・事業内容・取引銀行）を 8 項目で掲載しています。"
+  path="/company/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '会社概要' }]}
+>
+  <!-- ページヘッダ -->
+  <PageHeaderHero
+    title="会社概要"
+    englishTitle="Company Outline"
+    lead="北嶺ニュートリション株式会社の法人情報を、8 項目にまとめて掲載しています。"
+  />
+
+  <!-- 会社概要テーブル（8 項目） -->
+  <section class="bg-base-100">
+    <div class="max-w-4xl mx-auto px-4 py-20 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">Company Outline</p>
+        <h2
+          class="text-2xl lg:text-[2rem] leading-snug mb-10"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          会社概要
+        </h2>
+      </ScrollReveal>
+      <div class="overflow-x-auto">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <Table>
+            <tbody>
+              {profile.map(([k, v]) => (
+                <tr class="border-b border-base-300">
+                  <th class="w-44 whitespace-nowrap text-secondary text-xs tracking-[0.16em] uppercase font-normal align-top py-5">
+                    {k}
+                  </th>
+                  <td class="text-base lg:text-lg py-5">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 事業数値（4 項目、凍土背景・苔色額縁） -->
+  <NumbersFramedGrid
+    chapterNumber="02"
+    numbers={numbers}
+    duration={site.motion!.durationMs}
+    stagger={site.motion!.staggerMs}
+  />
+
+  <!-- アクセス（所在地 + 交通 + 旭川本店写真） -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-32 grid gap-12 lg:grid-cols-2 items-start">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={0}>
+        <div class="space-y-8">
+          <div>
+            <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">Access</p>
+            <h2
+              class="text-2xl lg:text-[2rem] leading-snug mb-6"
+              style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+            >
+              アクセス
+            </h2>
+          </div>
+          <dl class="space-y-5">
+            <div class="border-b border-base-300 pb-4">
+              <dt
+                class="text-secondary text-xs tracking-[0.16em] uppercase font-bold mb-1"
+              >
+                所在地
+              </dt>
+              <dd
+                class="text-lg lg:text-xl leading-snug"
+                style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+              >
+                〒070-0030 北海道旭川市宮下通 9-2-14<br />北嶺本社ビル 1F
+              </dd>
+            </div>
+            <div class="border-b border-base-300 pb-4">
+              <dt class="text-secondary text-xs tracking-[0.16em] uppercase font-bold mb-1">交通</dt>
+              <dd class="text-base lg:text-lg leading-relaxed">JR 旭川駅より徒歩 8 分</dd>
+            </div>
+            <div class="border-b border-base-300 pb-4">
+              <dt class="text-secondary text-xs tracking-[0.16em] uppercase font-bold mb-1">駐車場</dt>
+              <dd class="text-base lg:text-lg leading-relaxed">3 台完備</dd>
+            </div>
+            <div>
+              <dt class="text-secondary text-xs tracking-[0.16em] uppercase font-bold mb-1">営業時間</dt>
+              <dd class="text-base lg:text-lg leading-relaxed">平日 9:00〜17:30（ご来社の際は事前予約制）</dd>
+            </div>
+          </dl>
+        </div>
+      </ScrollReveal>
+      <ScrollReveal animation="clip-up" duration={site.motion!.durationMs} delay={90}>
+        <figure class="overflow-hidden bg-base-300 aspect-[4/3]">
+          <img
+            src="/sites/corporate/_shared/20260903-1448/img-b-08.jpg"
+            alt="北嶺本社ビルの外観（朝の光）"
+            loading="lazy"
+            width="1600"
+            height="1200"
+            class="w-full h-full object-cover"
+          />
+        </figure>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- お問い合わせ CTA 帯（凍土背景・藍ボタン） -->
+  <ContactCtaBand
+    site={site}
+    heading="会社概要について、もっと詳しく。"
+    ctaLabel="お問い合わせ"
+    ctaHref="/contact/"
+  />
+
+  <PageTopButton />
+</SiteLayout>

@@ -1,0 +1,162 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import Accordion from '../../../../../components/data-display/Accordion.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import RepresentativeSignature from '../../../../../components/sections/RepresentativeSignature.astro';
+import SiteCtaBand from '../../../../../components/site/SiteCtaBand.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const positions = [
+  {
+    title: '01 工場ラインスタッフ',
+    summary: '旭川本社工場での配合・包装・出荷',
+    detail: '月給 22 万円〜28 万円、社会保険完備、寮完備（旭川市内）。',
+  },
+  {
+    title: '02 直営店舗スタッフ',
+    summary: '旭川・札幌・原宿の直営 3 拠点での接客・販売',
+    detail: '月給 21 万円〜27 万円、賞与年 2 回。',
+  },
+  {
+    title: '03 品質管理・配合設計',
+    summary: '旭川本社工場での配合設計・品質管理',
+    detail: '月給 26 万円〜34 万円、食品・栄養系の資格保持者歓迎。',
+  },
+  {
+    title: '04 EC 運営・カスタマーサポート',
+    summary: '旭川本社での EC サイト運営・カスタマーサポート',
+    detail: '月給 23 万円〜30 万円。',
+  },
+];
+
+const flow = [
+  { label: 'エントリー', body: '応募フォームまたはメールでご連絡ください。' },
+  { label: '書類選考', body: '履歴書・職務経歴書を確認します。' },
+  { label: '一次面接', body: 'オンラインまたは旭川本社で実施します。' },
+  { label: '二次面接・工場見学', body: '旭川本社で面接と工場見学を実施します。' },
+  { label: '内定', body: '入社日をご相談の上で内定となります。' },
+];
+
+const benefits = [
+  ['社会保険', '健康保険・厚生年金・雇用保険・労災保険'],
+  ['休暇制度', '完全週休 2 日制、祝日、夏季休暇、年末年始休暇'],
+  ['寮・社宅', '旭川市内に寮完備（単身者向け）'],
+  ['研修制度', '新入社員研修、配合設計研修、接客研修'],
+  ['社内イベント', '旭川マラソン協賛、工場 BBQ、忘年会'],
+];
+---
+
+<SiteLayout
+  site={site}
+  title="採用情報"
+  description="北嶺ニュートリションの採用情報。旭川の工場、直営 3 拠点、EC 運営で、86 名の仲間を募集しています。"
+  path="/recruit/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '採用情報' }]}
+>
+  <!-- ページヘッダ -->
+  <section class="bg-base-200 border-y border-base-300">
+    <div class="max-w-7xl mx-auto px-4 py-24 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <h1 class="text-3xl lg:text-6xl font-bold leading-tight mb-6">採用情報</h1>
+        <p class="text-base lg:text-lg leading-loose text-base-content/85 max-w-3xl">
+          旭川の工場と直営店舗、EC 運営で、86 名の仲間を募集しています。トレーニング栄養と日常使いの補給を、現場で形にする仕事を、私たちと一緒に。
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 代表からのメッセージ -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24 grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+        <RepresentativeSignature heading="代表からのメッセージ" signature="代表取締役　北嶺 拓郎" />
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={200}>
+        <div class="space-y-6 text-base lg:text-lg leading-loose text-base-content/85">
+          <p>
+            北嶺ニュートリションは、創業から 11 年、86 名の小さな組織で、トレーニング栄養と日常使いの補給を作ってきました。
+          </p>
+          <p>
+            採用で大切にしているのは、現場の声で処方を組み替える姿勢を、最初から持てるかどうかです。旭川の工場、直営 3 拠点、EC 運営、それぞれの現場で、動く体に向き合う栄養を、手元に届く形に整える仲間を待っています。
+          </p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 募集職種 -->
+  <section class="bg-base-200">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="募集職種" subtitle="Positions" align="left" />
+        <p class="mt-3 text-sm text-base-content/75">各職種の給与・勤務地・福利厚生は、詳細を開いてご確認ください。</p>
+      </ScrollReveal>
+      <div class="mt-8 space-y-3">
+        {positions.map((p, i) => (
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <Accordion name={`recruit-${i}`}>
+              <div slot="title" class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span class="text-base lg:text-lg font-bold">{p.title}</span>
+                <span class="badge badge-secondary badge-sm whitespace-nowrap">採用</span>
+                <span class="text-sm text-base-content/70">{p.summary}</span>
+              </div>
+              <p class="leading-relaxed">{p.detail}</p>
+            </Accordion>
+          </ScrollReveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 選考フロー -->
+  <section class="bg-base-100">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="選考フロー" subtitle="Selection Flow" align="left" />
+      </ScrollReveal>
+      <div class="mt-10 overflow-x-auto">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <Steps class="w-full min-w-[40rem]">
+            {flow.map((s, i) => (
+              <li class="step step-primary">
+                <span class="block font-bold text-sm">0{i + 1} {s.label}</span>
+                <span class="block text-xs text-base-content/70 mt-1">{s.body}</span>
+              </li>
+            ))}
+          </Steps>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 福利厚生 -->
+  <section class="bg-base-200">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="福利厚生" subtitle="Benefits" align="left" />
+      </ScrollReveal>
+      <div class="mt-8 overflow-x-auto">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <Table zebra>
+            <tbody>
+              {benefits.map(([k, v]) => (
+                <tr>
+                  <th class="w-44 whitespace-nowrap text-primary">{k}</th>
+                  <td>{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <SiteCtaBand site={site} heading="採用応募はこちらから。" ctaLabel="採用応募" ctaHref="/contact/?subject=recruit" />
+
+  <PageTopButton />
+</SiteLayout>

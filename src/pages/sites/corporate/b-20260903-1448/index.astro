@@ -1,0 +1,158 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from './_site';
+import { url } from '../../../../lib/site';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+import HeroCollage from '../../../../components/sections/HeroCollage.astro';
+import HubRowFeature from '../../../../components/sections/HubRowFeature.astro';
+import NumbersFramedGrid from '../../../../components/sections/NumbersFramedGrid.astro';
+import RelatedContent from '../../../../components/sections/RelatedContent.astro';
+import ContactCtaBand from '../../../../components/site/ContactCtaBand.astro';
+import PageTopButton from '../../../../components/ui/PageTopButton.astro';
+
+// ヒーロー：image-manifest-b.json の top:hero-collage-01〜04 を 4 枚コラージュに使う
+const heroImages = [
+  { src: '/sites/corporate/_shared/20260903-1448/img-b-01.jpg', alt: '北海道旭川の冬の朝、凍った水路を歩くランナーの足元', aspect: 'portrait' as const },
+  { src: '/sites/corporate/_shared/20260903-1448/img-b-02.jpg', alt: '雪が積もったベンチに座る休憩中のアスリートの手元', aspect: 'square' as const },
+  { src: '/sites/corporate/_shared/20260903-1448/img-b-03.jpg', alt: '旭川工場の金属ラインを接写した様子', aspect: 'landscape' as const },
+  { src: '/sites/corporate/_shared/20260903-1448/img-b-04.jpg', alt: 'ラベルを容器に貼る手元のマクロ撮影', aspect: 'portrait' as const },
+];
+
+// 5 領域のうち画像マニフェストに portrait 用写真の登録が無い領域は
+// テキスト番号リンク行として独立に表示する（a 案と同等の構成）。
+// image-manifest-b.json の placement はページ固有（about:portrait 等）で
+// 5 領域索引への汎用配置は無いため、HubRowFeature は画像なし版で実装する。
+const hubRows = [
+  {
+    number: '01',
+    label: '会社について（About）',
+    links: [
+      { label: 'ブランド理念', href: '/about/#philosophy' },
+      { label: '代表メッセージ', href: '/about/#message' },
+      { label: '沿革', href: '/about/#history' },
+      { label: '会社概要', href: '/company/' },
+    ],
+  },
+  {
+    number: '02',
+    label: '製品ライン（Products）',
+    links: [
+      { label: 'トレーニング向けプロテイン', href: '/service/#protein' },
+      { label: 'リカバリー食品', href: '/service/#recovery' },
+      { label: '機能性スナック', href: '/service/#snack' },
+      { label: '直営店舗と EC', href: '/service/#store' },
+    ],
+  },
+  {
+    number: '03',
+    label: 'お知らせ（Information）',
+    links: [
+      { label: 'お知らせ一覧', href: '/news/' },
+    ],
+  },
+  {
+    number: '04',
+    label: '採用情報（Recruit）',
+    links: [
+      { label: '募集職種', href: '/recruit/#recruit-positions' },
+      { label: '選考フロー', href: '/recruit/#recruit-flow' },
+      { label: '福利厚生', href: '/recruit/#recruit-benefits' },
+    ],
+  },
+  {
+    number: '05',
+    label: 'お問い合わせ（Contact）',
+    links: [
+      { label: 'お問い合わせフォーム', href: '/contact/' },
+      { label: '取材・パートナーシップ', href: '/contact/' },
+    ],
+  },
+];
+
+// 5 領域の数字＋中央写真用プレースホルダ：画像マニフェストに領域汎用写真が
+// ないため HubRowFeature ではテキストリンクのみで 5 行を並べ、
+// 中央カラムは省いて 2 カラム（章番号ラベル / 下位リンク）で表示する。
+const hubRowsCompact = hubRows.map((r) => ({
+  number: r.number,
+  label: r.label,
+  links: r.links,
+}));
+
+const numbers = [
+  { label: '年間出荷', value: 128, suffix: '万食' },
+  { label: '配合検証', value: 480, suffix: '処方' },
+  { label: '従業員数', value: 86, suffix: '名' },
+  { label: '直営店舗', value: 3, suffix: '拠点' },
+];
+
+const relatedCards = [
+  { label: '会社について', lead: '動く体に、確かな補給を。', href: '/about/', chapter: '01' },
+  { label: '製品ライン', lead: 'プロテイン・リカバリー・スナック。', href: '/service/', chapter: '02' },
+  { label: '採用情報', lead: '旭川の工場と直営店舗で仲間を募集中。', href: '/recruit/', chapter: '04' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="トップ"
+  description="北嶺ニュートリション株式会社は、北海道旭川市でトレーニング向けプロテイン、リカバリー食品、機能性スナックを自社配合し、直営 3 拠点と専門店・EC で販売するスポーツ栄養メーカーです。"
+  path="/"
+  isHome
+>
+  <!-- ファーストビュー（4 枚コラージュ + 右半分キャッチ） -->
+  <HeroCollage
+    site={site}
+    images={heroImages}
+    catchCopy="動く体に、確かな補給を。"
+    indexLabel="01 / 04"
+  />
+
+  <!-- 5 領域への振り分け（左見出し・右リンク） -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-28">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="text-xs tracking-[0.18em] uppercase text-secondary font-bold mb-3">Site Index</p>
+        <h2
+          class="text-3xl lg:text-[2.75rem] font-medium leading-tight mb-4"
+          style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
+        >
+          北嶺の 5 つの領域
+        </h2>
+        <p class="text-base lg:text-lg leading-[1.95] text-base-content/85 max-w-3xl">
+          会社について、製品ライン、お知らせ、採用、のお問い合わせ。5 つの領域から、必要な情報へ直接お進みいただけます。
+        </p>
+      </ScrollReveal>
+
+      <div class="mt-16 lg:mt-20">
+        <ScrollReveal animation="clip-up" duration={site.motion!.durationMs}>
+          <HubRowFeature site={site} rows={hubRowsCompact.map((r) => ({
+            number: r.number,
+            label: r.label,
+            links: r.links,
+          }))} />
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数字で見る北嶺（苔色額縁 4 列） -->
+  <NumbersFramedGrid
+    chapterNumber="02"
+    numbers={numbers}
+    duration={site.motion!.durationMs}
+    stagger={site.motion!.staggerMs}
+  />
+
+  <!-- 関連ページへの導線（Related Content、凍土背景） -->
+  <RelatedContent
+    site={site}
+    cards={relatedCards}
+    duration={site.motion!.durationMs}
+    stagger={site.motion!.staggerMs}
+  />
+
+  <!-- お問い合わせ CTA 帯（凍土背景・藍ボタン） -->
+  <ContactCtaBand site={site} />
+
+  <PageTopButton />
+</SiteLayout>

@@ -1,0 +1,75 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import NewsListRow from '../../../../../components/sections/NewsListRow.astro';
+import SiteCtaBand from '../../../../../components/site/SiteCtaBand.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const groups = [
+  {
+    year: '2026 年',
+    rows: [
+      { date: '2026.09.01', category: 'お知らせ', title: '旭川本社ビル拡張完了のお知らせ', href: '/news/' },
+      { date: '2026.07.15', category: 'メディア掲載', title: '月刊ランニング誌 8 月号に掲載', href: '/news/' },
+      { date: '2026.06.10', category: '新製品', title: 'リカバリー食品 2 処方発売', href: '/news/' },
+    ],
+  },
+  {
+    year: '2025 年',
+    rows: [
+      { date: '2025.12.20', category: '受賞', title: '配合検証 480 処方突破', href: '/news/' },
+      { date: '2025.11.05', category: '催事', title: '札幌マラソン 2025 出展', href: '/news/' },
+      { date: '2025.09.01', category: 'お知らせ', title: '直営店舗 3 号店オープン', href: '/news/' },
+    ],
+  },
+  {
+    year: '2024 年',
+    rows: [
+      { date: '2024.08.10', category: '新製品', title: '機能性スナック 3 処方発売', href: '/news/' },
+      { date: '2024.06.01', category: 'お知らせ', title: '直営店舗 2 号店オープン', href: '/news/' },
+      { date: '2024.04.15', category: 'メディア掲載', title: '北海道経済新聞に掲載', href: '/news/' },
+    ],
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="お知らせ"
+  description="北嶺ニュートリションからのお知らせ一覧。製品ラインの更新、メディア掲載、受賞、催事などの情報を年別・日付順でお伝えします。"
+  path="/news/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お知らせ' }]}
+>
+  <!-- ページヘッダ -->
+  <section class="bg-base-200 border-y border-base-300">
+    <div class="max-w-7xl mx-auto px-4 py-24 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <h1 class="text-3xl lg:text-6xl font-bold leading-tight mb-6">お知らせ</h1>
+        <p class="text-base lg:text-lg leading-loose text-base-content/85 max-w-3xl">
+          製品ラインの更新、メディア掲載、受賞、催事などの情報を、年別・日付順でお伝えします。
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- お知らせ一覧 -->
+  <section class="bg-base-100">
+    <div class="max-w-4xl mx-auto px-4 py-20 lg:py-24 space-y-12">
+      {groups.map((g) => (
+        <div>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <h2 class="text-xl lg:text-2xl font-bold text-primary mb-4 tabular-nums">{g.year}</h2>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <NewsListRow site={site} rows={g.rows} />
+          </ScrollReveal>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <SiteCtaBand site={site} />
+
+  <PageTopButton />
+</SiteLayout>

@@ -166,7 +166,24 @@ roles = {r: len(re.findall(r'data-role="%s"' % r, html)) for r in
 print(f"  ページ: {len(pages)} 件 {pages}")
 print(f"  セクション: {len(sections)} 件")
 print(f"  role 充足: {roles}")
+# ディレクション内の整合: #pages が参照する画像 placement が
+# #images に全部載っているか。実測(corporate-20260903-1448)では
+# 本文が hub-01〜05 の5枚を指示しているのに #images には3枚しか無く、
+# 実装が3行に落として番号が 01→02→04 と飛んだ。
+import re as _re
+images_sec = _re.search(r'<section id="images">([\s\S]*?)</section>', html)
+declared = set(_re.findall(r'data-placement="([^"]+)"', images_sec.group(1) if images_sec else ''))
+referenced = set()
+# data-role の中身は <code> 等で入れ子になることがある。[^<]* だと空で拾ってしまう
+# （実測でこれに引っかかり、欠落を検出できていなかった）。閉じタグまで取ってから剥がす。
+for body in _re.findall(r'data-role="image"[^>]*>([\s\S]*?)</(?:p|td|li|div|span)>', html):
+    text = _re.sub(r'<[^>]+>', ' ', body)
+    referenced |= set(_re.findall(r'\b([a-z][\w-]*:[\w-]+)\b', text))
+missing_images = sorted(referenced - declared - {'none'})
+
 problems = []
+if missing_images:
+    problems.append(f"本文が参照している画像が #images に無い: {', '.join(missing_images[:8])}")
 if len(pages) < 4:
     problems.append(f"ページが {len(pages)} 件しかない（website として不足）")
 if sections and roles['animation'] < len(sections):

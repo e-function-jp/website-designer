@@ -1,0 +1,192 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Timeline from '../../../../../components/data-display/Timeline.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import PhilosophyStatementRow from '../../../../../components/sections/PhilosophyStatementRow.astro';
+import RepresentativeSignature from '../../../../../components/sections/RepresentativeSignature.astro';
+import SiteCtaBand from '../../../../../components/site/SiteCtaBand.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const philosophy = [
+  { number: '01', heading: '存在意義', body: '動く体は、確かな補給を必要とする。' },
+  { number: '02', heading: '使命', body: '旭川の工場から、北海道の素材と国内外の認証原料で、トレーニングの前後を整えます。' },
+  { number: '03', heading: '姿勢', body: '配合検証 480 処方を、現場の声を起点に積み直す。' },
+];
+
+const history = [
+  { year: '2015', body: '旭川市宮下通にて創業、トレーニング向けプロテイン 3 処方で発売開始。' },
+  { year: '2017', body: '直営店舗 1 号店を旭川にオープン。' },
+  { year: '2018', body: 'リカバリー食品ラインを増設、北海道産ホエイの採用を開始。' },
+  { year: '2019', body: '配合検証 100 処方突破、工場ラインを 1.5 倍に拡張。' },
+  { year: '2020', body: '専門店・EC への卸売を開始。' },
+  { year: '2021', body: '直営店舗 2 号店を札幌にオープン。' },
+  { year: '2022', body: '機能性スナックラインを増設、北海道産食材の配合比率を引き上げ。' },
+  { year: '2023', body: '配合検証 300 処方突破、ランナーと連携したリカバリー処方を発売。' },
+  { year: '2024', body: '直営店舗 3 号店を東京・原宿にオープン。' },
+  { year: '2025', body: '配合検証 480 処方突破、国内外の認証原料を採用。' },
+  { year: '2026', body: '年間出荷 128 万食達成、旭川本社ビルを拡張。' },
+];
+
+const profile = [
+  ['商号', '北嶺ニュートリション株式会社'],
+  ['設立', '2015 年 4 月'],
+  ['所在地', '〒070-0030 北海道旭川市宮下通 9-2-14'],
+  ['代表者', '代表取締役 北嶺 拓郎'],
+  ['電話番号', '0166-00-0000'],
+  ['事業内容', 'スポーツ栄養食品・機能性食品の開発、製造および販売、直営ジムの運営。'],
+];
+---
+
+<SiteLayout
+  site={site}
+  title="会社について"
+  description="北嶺ニュートリション株式会社のブランド理念、代表メッセージ、沿革、会社概要。旭川から動く体に向き合う栄養を届ける、2015 年創業のスポーツ栄養メーカーです。"
+  path="/about/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '会社について' }]}
+>
+  <!-- ページヘッダ -->
+  <section class="bg-base-200 border-y border-base-300">
+    <div class="max-w-7xl mx-auto px-4 py-24 lg:py-32">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+        <h1 class="text-3xl lg:text-6xl font-bold leading-tight mb-6">会社について</h1>
+        <p class="text-base lg:text-lg leading-loose text-base-content/85 max-w-3xl">
+          北嶺ニュートリションは、動く体に向き合う栄養を、旭川から届けます。2015 年の創業から 11 年、トレーニング向けプロテインとリカバリー食品を自社工場で配合し、北海道の素材と国内外の認証原料を組み合わせて、ジムと直営店舗、専門店・EC を通じて、アスリートから健康志向の一般生活者まで、手元に届く形に整えてきました。
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- ブランド理念 -->
+  <section id="philosophy" class="bg-base-100 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="ブランド理念" subtitle="Philosophy" align="left" />
+      </ScrollReveal>
+      <div class="mt-12">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <PhilosophyStatementRow rows={philosophy} />
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 代表メッセージ -->
+  <section id="message" class="bg-base-200 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24 grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={100}>
+        <RepresentativeSignature heading="代表メッセージ" signature="代表取締役　北嶺 拓郎" />
+        <figure class="mt-8 rounded-box overflow-hidden bg-base-300 aspect-[2/3] max-w-sm">
+          <img
+            src="/sites/corporate/_shared/20260903-1448/img-a-05.jpg"
+            alt="旭川本社のオフィス窓辺に立つ北嶺 拓郎の肖像"
+            loading="lazy"
+            width="1200"
+            height="1800"
+            class="w-full h-full object-cover"
+          />
+        </figure>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} delay={200}>
+        <div class="space-y-6 text-base lg:text-lg leading-loose text-base-content/85">
+          <p>
+            北嶺ニュートリションは、2015 年に旭川で小さな配合室から始まりました。創業の動機はシンプルで、トレーニング前後の補給が「美味しくない・溶けにくい・高すぎる」ことの連続だったからです。
+          </p>
+          <p>
+            11 年経った今も、私たちは配合検証を 480 処方まで積み、現場の声で処方を組み替えることを止めません。動く体に向き合う栄養を、確かな手元の形で届ける。その約束を、旭川の工場から続けていきます。
+          </p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 沿革 -->
+  <section id="history" class="bg-base-100 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="沿革" subtitle="History" align="left" />
+      </ScrollReveal>
+      <div class="mt-10">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <Timeline>
+            {history.map((h) => (
+              <li>
+                <div class="timeline-start font-bold tabular-nums text-primary">{h.year}</div>
+                <div class="timeline-middle">
+                  <span class="block w-3 h-3 rounded-full bg-primary" aria-hidden="true"></span>
+                </div>
+                <div class="timeline-end timeline-box text-sm leading-relaxed">{h.body}</div>
+                <hr />
+              </li>
+            ))}
+          </Timeline>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 会社概要 -->
+  <section class="bg-base-200">
+    <div class="max-w-5xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="会社概要" subtitle="Company Profile" align="left" />
+      </ScrollReveal>
+      <div class="mt-10 overflow-x-auto">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <Table zebra>
+            <tbody>
+              {profile.map(([k, v]) => (
+                <tr>
+                  <th class="w-40 whitespace-nowrap text-primary">{k}</th>
+                  <td>{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 関連ページへの導線 -->
+  <section class="bg-base-100">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="text-2xl lg:text-3xl font-bold leading-tight mb-10">関連ページ</h2>
+      </ScrollReveal>
+      <ul class="grid gap-6 md:grid-cols-3">
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/service/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-lg font-bold mb-2">製品ライン</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">プロテイン・リカバリー・スナック。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/recruit/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-lg font-bold mb-2">採用情報</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">旭川の工場と直営店舗で仲間を募集中。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+        <li>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+            <a href={url(site, '/contact/')} class="block rounded-box border border-base-300 p-6 hover:border-primary transition-colors">
+              <p class="text-lg font-bold mb-2">お問い合わせ</p>
+              <p class="text-sm text-base-content/75 leading-relaxed">製品ラインについて、もっと詳しく。</p>
+            </a>
+          </ScrollReveal>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <SiteCtaBand site={site} heading="会社について、もっと詳しく。" />
+
+  <PageTopButton />
+</SiteLayout>
