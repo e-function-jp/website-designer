@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import { site } from '../_site';
 import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
 import TextInput from '../../../../../components/navigation/TextInput.astro';
 import Textarea from '../../../../../components/navigation/Textarea.astro';
 import Alert from '../../../../../components/data-display/Alert.astro';
@@ -28,22 +29,24 @@ const org = site.organization!;
   </section>
 
   <section class="max-w-3xl mx-auto px-4 py-16 space-y-12">
-    <div class="grid gap-4 sm:grid-cols-2">
-      <div class="rounded-2xl border border-base-300 p-6">
-        <p class="text-sm text-base-content/70">お電話</p>
-        <p class="mt-1 text-2xl font-bold tabular-nums">
-          <a href={`tel:${org.tel!.replace(/[^\d+]/g, '')}`} class="link link-hover">{org.tel}</a>
-        </p>
-        <p class="mt-2 text-xs text-base-content/60">平日 8:30–17:30（土日祝を除く）</p>
+    <ScrollReveal animation={site.motion!.reveal} duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl border border-base-300 p-6">
+          <p class="text-sm text-base-content/70">お電話</p>
+          <p class="mt-1 text-2xl font-bold tabular-nums">
+            <a href={`tel:${org.tel!.replace(/[^\d+]/g, '')}`} class="link link-hover">{org.tel}</a>
+          </p>
+          <p class="mt-2 text-xs text-base-content/60">平日 8:30–17:30（土日祝を除く）</p>
+        </div>
+        <div class="rounded-2xl border border-base-300 p-6">
+          <p class="text-sm text-base-content/70">メール</p>
+          <p class="mt-1 text-lg font-bold break-all">
+            <a href={`mailto:${org.email}`} class="link link-hover">{org.email}</a>
+          </p>
+          <p class="mt-2 text-xs text-base-content/60">図面（PDF・STEP）を添付いただけます</p>
+        </div>
       </div>
-      <div class="rounded-2xl border border-base-300 p-6">
-        <p class="text-sm text-base-content/70">メール</p>
-        <p class="mt-1 text-lg font-bold break-all">
-          <a href={`mailto:${org.email}`} class="link link-hover">{org.email}</a>
-        </p>
-        <p class="mt-2 text-xs text-base-content/60">図面（PDF・STEP）を添付いただけます</p>
-      </div>
-    </div>
+    </ScrollReveal>
 
     <div>
       <SectionTitle title="お問い合わせフォーム" align="left" />

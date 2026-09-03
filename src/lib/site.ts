@@ -42,6 +42,29 @@ export interface SiteConfig {
   primaryCta?: { label: string; href: string };
   /** 法務系リンク（プライバシーポリシー等）。フッター最下段に出す */
   legalNav?: NavItem[];
+  /**
+   * サイト全体のモーション方針。
+   *
+   * website のモーションは「ページ間で揃っていること」が品質そのものなので、
+   * ページごとに決めさせず、サイト定義で 1 箇所に持つ。
+   * `scripts/web-analyze-reference-motion.mjs` の `direction_hints` を
+   * そのまま写せる語彙にしてある。
+   */
+  motion?: {
+    /** 既定のリビール種別。ディレクションの dominant_reveal を写す */
+    reveal?: 'fade' | 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'zoom' | 'blur' | 'clip-up';
+    /** 既定の duration(ms)。実測の median を写す */
+    durationMs?: number;
+    /** 並べた要素をずらす間隔(ms)。0 で無効 */
+    staggerMs?: number;
+    /**
+     * スクロール時のヘッダー挙動。
+     * 'none' 固定のまま / 'solid' 背景を付ける / 'shrink' 縮む / 'hide' 隠れる
+     */
+    header?: 'none' | 'solid' | 'shrink' | 'hide';
+    /** ページ遷移に View Transitions を使うか */
+    pageTransition?: boolean;
+  };
 }
 
 export interface Breadcrumb {

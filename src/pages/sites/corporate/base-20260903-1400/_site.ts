@@ -49,6 +49,16 @@ export const site: SiteConfig = {
     founded: '1974-04',
   },
   primaryCta: { label: 'お問い合わせ', href: '/contact/' },
+  // モーション方針はサイト全体で1箇所に持つ。ページごとに決めない。
+  // 参照サイト解析（scripts/web-analyze-reference-motion.mjs）の
+  // direction_hints をそのまま写せる語彙にしてある。
+  motion: {
+    reveal: 'fade-up',
+    durationMs: 700,
+    staggerMs: 90,
+    header: 'solid',
+    pageTransition: false,
+  },
   legalNav: [{ label: 'プライバシーポリシー', href: '/privacy/' }],
 };
 

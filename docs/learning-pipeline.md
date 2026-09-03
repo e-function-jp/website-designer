@@ -30,8 +30,12 @@ docs/quality/
   runs/
     {site_type}-{YYYYMMDD-HHMM}/          # 作業切り出し単位
       job.json
-      direction.html
-      ref-top.jpg / ref-*.jpg             # 参照サイトのキャプチャ
+      direction-{a,b}.html
+      look-analysis.md
+      motion/                             # モーション実測 + 参照キャプチャ
+        summary.json                      #   ディレクターが読む正本
+        {page}.json / {page}-full.jpg
+      image-manifest-{a,b}.json
       shots/{model}-{page}.jpg            # 採点対象の実描画
       design-score-data.json
       design-score-history.jsonl
@@ -50,6 +54,23 @@ docs/quality/
 | stamp | `YYYYMMDD-HHMM`（JST） | `20260903-1400` |
 | run_id | `{site_type}-{stamp}` | `corporate-20260903-1400` |
 
+## 実行体制（2026-09-03 時点）
+
+| 段 | 実行体 | 呼び出し |
+|---|---|---|
+| モーション実測 | Playwright (chromium) | `scripts/web-analyze-reference-motion.mjs` |
+| Look（画像を見る） | **codex** | `codex exec -i {capture}` |
+| Direction ×2 | **grok-4.5** | `hermes -z ... -m grok-4.5 --provider xai-oauth` |
+| 画像生成 | **grok-imagine** | hermes の xai image_gen プラグイン経由 |
+| 実装 ×2 | **minimax-m3** | `hermes -z ... -m minimax-m3 --provider opencode-go` |
+| 採点（独立judge） | **codex** | `codex exec -i {shots}` |
+
+Look を codex にしているのは分担上の制約による。`hermes -z` は画像添付に対応していないため、
+「画像を見て言語化する」役は画像を渡せる codex が担い、grok はそのテキストと
+モーション実測 JSON を読んでディレクションする。
+
+通しで回すには `bash scripts/web-run.sh {run_dir}`。途中から再開するときは `--from direction` 等。
+
 ## 環境依存パラメータ（ハードコード禁止）
 
 ホスト名・repo 絶対パスはソースに書かない。`.env`（雛形: `.env.example`）で渡す。
@@ -64,6 +85,8 @@ docs/quality/
 | `WEB_DESIGNER_MODELS` | 実装案の識別子 CSV（既定 `a,b`） |
 | `WEB_DESIGNER_JUDGE_CMD` | design-score の独立judge CLI（既定 `codex`） |
 | `WEB_DESIGNER_SCORE_PAGES` | 採点対象ページ（既定 `/ /about/ /service/`） |
+| `WEB_DESIGNER_DIRECTOR` / `_MODEL` / `_PROVIDER` | ディレクター（既定 `grok` / `grok-4.5` / `xai-oauth`） |
+| `WEB_DESIGNER_IMPL_MODEL` / `_PROVIDER` | 実装（既定 `minimax-m3` / `opencode-go`） |
 
 ## 全体像
 
@@ -76,8 +99,16 @@ docs/quality/
        → 不足度 = 目標構成比 - 自前の構成比 でサイト種別を選択
        → docs/quality/runs/{site_type}-{stamp}/ + job.json
     ↓
-[C. Look] 参照サイト1件 → トップ + 下層2ページをキャプチャし、実測配色/タイポを取る
+[C0. モーション実測] scripts/web-analyze-reference-motion.mjs
+       → Playwright で参照サイトを開き、**スクロールしてトリガーを踏んでから**計測
+       → リビール種別/duration/easing、ヘッダー挙動、ページ遷移、reduced-motion 対応、
+         ページ間のリビール数の開き を {run_dir}/motion/ に記録
+       → キャプチャ({slug}-full.jpg)もここで保存され、Look と採点で使い回す
+       → 詳細: docs/motion-design.md
+    ↓
+[C. Look] codex（画像を見られる）で言語化
        → ★1ページのLPと違い、**サイトマップと回遊構造の言語化が主目的**
+       → モーション実測 JSON も渡し、数値を含めて言語化させる
        → docs/playbooks/{site_type}.md に観測ログとして蓄積
     ↓
 [D. Direction] direction.html に確定させる（実装段は これを読むだけで作業する）
@@ -86,7 +117,8 @@ docs/quality/
        3. 各ページのセクション構成と、そのページが担う役割
        4. トーン（配色2色・和文/欧文フォント・写真の方向性）
        5. 使う src/components/ の選定と、足りない部品の洗い出し
-       6. 画像プロンプト / 調達方法
+       6. **モーション指示**（全セクションに data-role="animation"。無い場合も none と明記）
+       7. 画像プロンプト（<figure data-placement data-tags data-aspect><figcaption data-prompt>）
        ★ a案（堅実: 参照の構造を素直に踏襲）と b案（冒険: 世界観を保ちつつ構図で踏み込む）を
          **設計段階で分ける**。同一ディレクションを2案で実装しても差分が出ないことは
          lp-designer で実測済み（716行中36行=5%しか違わなかった）
@@ -171,6 +203,9 @@ website では **トップだけ見ても何も分からない**。必ず次を�
 - DaisyUI 既定テーマ（light / dark / cupcake）のまま出荷
 - 英語小見出しの連発（ABOUT / SERVICE / CONTACT を飾りで量産）
 - 事業内容と無関係なストック写真 / emoji を主ビジュアルにする
+- アニメーション指示を出したのに実装しない / import だけして使わない（`arch-animation-missing`）
+- トップだけ演出を盛り、下層を無演出にする（`motion-consistency-drift`）
+- `prefers-reduced-motion` を無視する（参照サイトが非対応でも真似しない）
 - **Extract をせずに出荷**（サンプルだけ増えてライブラリが育たない）
 - グローバルナビに「サービス」「事業」など何の事業か読めない空ラベルを並べる
 
@@ -179,3 +214,4 @@ website では **トップだけ見ても何も分からない**。必ず次を�
 - 静的ループ: [self-improvement-loop.md](./self-improvement-loop.md)
 - 移行整理: [migration-from-lp-designer.md](./migration-from-lp-designer.md)
 - IA定義: [information-architecture.md](./information-architecture.md)
+- モーション設計: [motion-design.md](./motion-design.md)

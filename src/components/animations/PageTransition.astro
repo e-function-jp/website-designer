@@ -1,0 +1,49 @@
+---
+/**
+ * ページ遷移演出。**website 固有のモーション層**（LP には存在しない）。
+ *
+ * 参照サイトの実測では barba.js / swup / View Transitions のいずれかが使われる。
+ * ここでは Astro 標準の View Transitions（ClientRouter）に寄せる。
+ * 外部ライブラリを足さずに、遷移時のちらつきを消して連続性を出すのが目的。
+ *
+ * SiteLayout の <head> スロットに置く。`site.motion.pageTransition` が true のとき有効。
+ * `prefers-reduced-motion: reduce` では遷移アニメーションを無効化する。
+ */
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  /** 遷移の見た目。'fade' は控えめ、'slide-up' は下から持ち上げる */
+  variant?: 'fade' | 'slide-up';
+  durationMs?: number;
+}
+const { variant = 'fade', durationMs = 260 } = Astro.props;
+---
+
+<ClientRouter />
+
+<style define:vars={{ ptDuration: `${durationMs}ms` }} is:global>
+  @view-transition { navigation: auto; }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--ptDuration);
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation: none; }
+  }
+</style>
+
+{variant === 'slide-up' && (
+  <style is:global>
+    @keyframes pt-slide-in { from { opacity: 0; transform: translateY(16px); } }
+    @keyframes pt-slide-out { to { opacity: 0; transform: translateY(-8px); } }
+    ::view-transition-new(root) { animation-name: pt-slide-in; }
+    ::view-transition-old(root) { animation-name: pt-slide-out; }
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-new(root), ::view-transition-old(root) { animation-name: none; }
+    }
+  </style>
+)}

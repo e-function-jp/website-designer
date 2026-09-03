@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import { site } from '../_site';
 import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
 import Badge from '../../../../../components/data-display/Badge.astro';
 import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
 
@@ -49,18 +50,20 @@ const categories = ['すべて', 'お知らせ', '技術', '採用'];
       ))}
     </ul>
 
-    <ol class="mt-10 space-y-8">
-      {entries.map((e) => (
-        <li class="border-b border-base-300 pb-8">
-          <div class="flex flex-wrap items-center gap-3">
-            <time class="text-sm text-base-content/60 tabular-nums" datetime={e.date}>{e.date.replace(/-/g, '.')}</time>
-            <Badge size="sm" outline>{e.category}</Badge>
-          </div>
-          <h2 class="mt-2 text-lg font-bold">{e.title}</h2>
-          <p class="mt-2 text-sm leading-relaxed text-base-content/80">{e.body}</p>
-        </li>
-      ))}
-    </ol>
+    <ScrollReveal animation={site.motion!.reveal} duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+      <ol class="mt-10 space-y-8">
+        {entries.map((e) => (
+          <li class="border-b border-base-300 pb-8">
+            <div class="flex flex-wrap items-center gap-3">
+              <time class="text-sm text-base-content/60 tabular-nums" datetime={e.date}>{e.date.replace(/-/g, '.')}</time>
+              <Badge size="sm" outline>{e.category}</Badge>
+            </div>
+            <h2 class="mt-2 text-lg font-bold">{e.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-base-content/80">{e.body}</p>
+          </li>
+        ))}
+      </ol>
+    </ScrollReveal>
   </section>
 
   <PageTopButton />

@@ -38,6 +38,10 @@ const MIN_COMPONENTS_PER_SITE = 6;
 const MIN_BODY_CHARS = 400;
 // ia-too-few-pages: website として成立する最小ページ数
 const MIN_SITE_PAGES = 4;
+// アニメーション系コンポーネント。motion-* / arch-animation-missing が参照する。
+const ANIM_COMPONENT_RE = /(ScrollReveal|RevealOnScroll|Marquee|GsapScrollSection|AnimatedCounter|PageTransition|ParallaxMedia)/;
+// motion-consistency-drift: 演出のあるページと無いページが混在したら指摘する下限
+const MOTION_RICH_THRESHOLD = 3;
 
 const siteTypes = existsSync(SITE_TYPES_JSON)
   ? JSON.parse(readFileSync(SITE_TYPES_JSON, 'utf8'))
@@ -296,6 +300,81 @@ const PAGE_RULES = [
     },
   },
 
+  // --- Motion ---
+  {
+    id: 'a11y-reduced-motion', category: 'A11y', severity: 'medium',
+    desc: '自前アニメーションが prefers-reduced-motion に対応していない',
+    check: (p) => {
+      if (!p.srcCode) return [];
+      // 共通コンポーネント側は自前で対応済みなので、ページが直接書いた <style> だけを見る
+      const styles = [...p.srcCode.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]);
+      if (!styles.length) return [];
+      const css = styles.join('\n');
+      const animates = /@keyframes|animation\s*:|transition\s*:|transition-property/.test(css);
+      if (!animates) return [];
+      return /prefers-reduced-motion/.test(css)
+        ? []
+        : ['ページ内 <style> でアニメーションを定義しているが @media (prefers-reduced-motion: reduce) の打ち消しが無い'];
+    },
+  },
+  {
+    id: 'arch-animation-missing', category: 'Arch', severity: 'medium',
+    desc: 'ディレクションのアニメーション指示が実装されていない',
+    check: (p) => {
+      if (!p.isSitePage || !p.srcCode || !p.directionHtml) return [];
+      // direction 側: data-role="animation" のうち "none" 以外を数える
+      const directives = [...p.directionHtml.matchAll(/data-role="animation"[^>]*>([\s\S]*?)<\/(?:p|td|li)>/g)]
+        .map((m) => m[1].replace(/<[^>]+>/g, '').trim())
+        .filter((t) => t && !/^none[。.\s]*$/i.test(t));
+      if (!directives.length) return [];
+
+      const imported = [...p.srcCode.matchAll(/^\s*import\s+(\w+)\s+from\s+['"]([^'"]+)['"]/gm)]
+        .filter(([, name, spec]) => ANIM_COMPONENT_RE.test(name) || ANIM_COMPONENT_RE.test(spec))
+        .map(([, name]) => name);
+      const handRolled = /<style[^>]*>[\s\S]*?(@keyframes|animation\s*:|transition\s*:)/.test(p.srcCode);
+
+      if (!imported.length && !handRolled) {
+        return [`direction に animation 指示が ${directives.length} 件あるが、アニメーションコンポーネントの import も自前 CSS も無い`];
+      }
+      // import しただけで使っていないもの（lp-designer で実際に起きた）
+      const unused = imported.filter((name) => !new RegExp(`<${name}[\\s/>]`).test(p.srcCode));
+      if (unused.length) {
+        return [`import しているが一度も使われていないアニメーションコンポーネント: ${unused.join(', ')}（direction の指示は ${directives.length} 件）`];
+      }
+      return [];
+    },
+  },
+  {
+    // Astro の <style is:global> はページ境界を越えて全ビルドに漏れる。
+    // 各サンプルサイトが自分のブランド色で .btn-primary 等を上書きすると、
+    // 別サイトのCSSと衝突し、読み込み順で勝ったものが全ページに適用される。
+    // website-designer は 1 ビルドに複数サイトを載せるため、LP 以上に起きやすい。
+    id: 'arch-global-style-collision', category: 'Arch', severity: 'medium',
+    desc: 'is:global で DaisyUI 共通クラスを上書きしている（他サイトと衝突する）',
+    check: (p) => {
+      if (!p.srcCode) return [];
+      const m = p.srcCode.match(/<style[^>]*\bis:global\b[^>]*>([\s\S]*?)<\/style>/);
+      if (!m) return [];
+      const SHARED = ['btn-primary', 'btn-secondary', 'btn-accent', 'btn', 'card', 'input',
+                      'select', 'textarea', 'collapse-title', 'navbar', 'footer'];
+      const clean = m[1].replace(/\/\*[\s\S]*?\*\//g, '');
+      const hits = new Set();
+      for (const block of clean.split('}')) {
+        const selPart = block.split('{')[0];
+        if (!selPart || !selPart.includes('.')) continue;
+        for (const sel of selPart.split(',')) {
+          const inner = sel.trim().replace(/^:global\(\s*/, '').replace(/\s*\)$/, '').trim();
+          for (const cls of SHARED) {
+            if (new RegExp(`^\\.${cls}(?:[:\\s.[]|$)`).test(inner)) hits.add(cls);
+          }
+        }
+      }
+      return hits.size
+        ? [`is:global で共通クラスを直接上書き: ${[...hits].map((c) => `.${c}`).join(', ')} — 他サイトのグローバルCSSと衝突し、読み込み順で意図しない見た目になります。サイト固有クラスでスコープするか Props で渡してください`]
+        : [];
+    },
+  },
+
   // --- Content ---
   {
     id: 'content-thin-page', category: 'Content', severity: 'medium',
@@ -449,6 +528,29 @@ const SITE_RULES = [
   },
 
   {
+    // 参照サイトの実測でも起きていた崩れ方（aito.co.jp: トップ83件 / 下層13件）。
+    // トップだけ演出を盛って下層が無演出だと、同じサイトに見えなくなる。
+    id: 'motion-consistency-drift', category: 'Consistency', severity: 'medium',
+    desc: 'ページ間でモーションの有無が揃っていない',
+    check: (s) => {
+      const counts = [];
+      for (const p of s.pages) {
+        if (!p.srcCode) continue;
+        const uses = [...p.srcCode.matchAll(/<(\w+)[\s/>]/g)]
+          .map((m) => m[1])
+          .filter((n) => ANIM_COMPONENT_RE.test(n));
+        counts.push({ path: p.relPath, n: new Set(uses).size, total: uses.length });
+      }
+      if (counts.length < 2) return [];
+      const rich = counts.filter((c) => c.total >= MOTION_RICH_THRESHOLD);
+      const none = counts.filter((c) => c.total === 0);
+      if (rich.length && none.length) {
+        return [`演出のあるページ（${rich.map((c) => `${c.path}:${c.total}`).join(', ')}）と、演出ゼロのページ（${none.map((c) => c.path).join(', ')}）が混在している`];
+      }
+      return [];
+    },
+  },
+  {
     id: 'arch-site-config-missing', category: 'Arch', severity: 'high',
     desc: '_site.ts / SiteLayout を使っていない',
     check: (s) => {
@@ -498,6 +600,26 @@ function isRedirectStub(html) {
   return /<meta\s+http-equiv=["']refresh["'][^>]*url=/i.test(html) && html.length < 1200;
 }
 
+/**
+ * そのサンプルサイトを生んだランの direction を探す。
+ * ルート /sites/{type}/{model}-{stamp}/... から
+ * docs/quality/runs/{type}-{stamp}/direction-{model}.html（無ければ direction.html）を引く。
+ *
+ * ディレクションがアニメーション指示を出しているのに実装が無視した事故を検出するために必要
+ * （lp-designer の実測: 12セクション中7つに指示があったが両モデルとも未実装だった）。
+ */
+function resolveDirection(path) {
+  const m = path.match(/^\/sites\/([^/]+)\/(.+?)-(\d{8}-\d{4})\//);
+  if (!m) return { directionHtml: null };
+  const [, type, model, stamp] = m;
+  const dir = join(ROOT, 'docs', 'quality', 'runs', `${type}-${stamp}`);
+  for (const f of [`direction-${model}.html`, 'direction.html']) {
+    const cand = join(dir, f);
+    if (existsSync(cand)) return { directionHtml: readFileSync(cand, 'utf8') };
+  }
+  return { directionHtml: null };
+}
+
 /** dist のルートに対応する Astro ソースを探す。 */
 function resolveSource(path) {
   const rel = path.replace(/^\//, '').replace(/\/$/, '');
@@ -535,6 +657,7 @@ const pages = htmlFiles.map((file) => {
     siteKey: m ? m[0] : null,
     siteType: m ? m[1] : null,
     relPath: m ? path.slice(m[0].length - 1) || '/' : path,
+    ...resolveDirection(path),
     ...resolveSource(path),
   };
 });

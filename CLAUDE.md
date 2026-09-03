@@ -21,14 +21,14 @@ vite 8（rolldown）にすると `@tailwindcss/vite` がビルド不能になる
 - `src/components/site/` — ヘッダー/フッター/パンくず
 - `src/components/{sections,ui,data-display,navigation,layout,actions,animations}/` — 部品
 - `site_archive/` — 参照サイトの収集データ
-- `docs/` — 自己改善ループ / 学習パイプライン / IA定義 / 品質レポート
+- `docs/` — 自己改善ループ / 学習パイプライン / IA定義 / モーション設計 / 品質レポート
 
 ## コマンド
 | 用途 | コマンド |
 |---|---|
 | 開発 | `npm run dev` |
 | ビルド | `npm run build` |
-| 品質チェック（build + 32ルール採点） | `npm run check:web` |
+| 品質チェック（build + 36ルール採点） | `npm run check:web` |
 | 厳格チェック（スコア後退で exit 1） | `npm run check:web:strict` |
 | カタログ検査 | `npm run check:catalog` |
 | 参照サイト収集 | `npm run archive:fetch -- --pages 3` |
@@ -49,6 +49,11 @@ vite 8（rolldown）にすると `@tailwindcss/vite` がビルド不能になる
 
 **Extract ゲート（必須）** — サンプルを作って終わりにしない。両案から再利用ブロックを
 `src/components/` に切り出し、`check:web` の `arch-component-reuse` が消えるまで完了扱いにしない。
+
+**モーションゲート** — 参照サイトの演出は `scripts/web-analyze-reference-motion.mjs` で
+実測してから指示する。「フワッと」ではなく種別・ms・easing を数値で書く。
+ディレクションの `data-role="animation"` と実装は `arch-animation-missing` が突き合わせる。
+詳細: `docs/motion-design.md`
 
 **`_site.ts` ゲート（必須）** — ページを書く前にサイト定義を書く。全ページが `SiteLayout` を使う。
 これを飛ばすとナビが必ずページ間でズレる（`arch-site-config-missing` / `consist-nav-drift`）。

@@ -66,29 +66,29 @@ const styleAttr = [
 
 <Tag
   class:list={[
-    'lp-marquee',
-    `lp-marquee--${direction}`,
-    reverse && 'lp-marquee--reverse',
-    pauseOnHover && 'lp-marquee--pause-hover',
-    mask && 'lp-marquee--mask',
+    'web-marquee',
+    `web-marquee--${direction}`,
+    reverse && 'web-marquee--reverse',
+    pauseOnHover && 'web-marquee--pause-hover',
+    mask && 'web-marquee--mask',
     className,
   ]}
   style={styleAttr}
   id={id}
 >
-  <div class="lp-marquee__track">
-    <div class="lp-marquee__group">
+  <div class="web-marquee__track">
+    <div class="web-marquee__group">
       <slot />
     </div>
     <!-- 重複側は aria-hidden + inert で重複 a11y/タブ順を完全に避ける -->
-    <div class="lp-marquee__group" aria-hidden="true" inert>
+    <div class="web-marquee__group" aria-hidden="true" inert>
       <slot />
     </div>
   </div>
 </Tag>
 
 <style>
-  .lp-marquee {
+  .web-marquee {
     --marquee-duration: 30s;
     --marquee-gap: 48px;
     --marquee-direction: normal;
@@ -97,8 +97,8 @@ const styleAttr = [
   }
 
   /* 両端フェードマスク (横方向デフォルト) */
-  .lp-marquee--mask::before,
-  .lp-marquee--mask::after {
+  .web-marquee--mask::before,
+  .web-marquee--mask::after {
     content: '';
     position: absolute;
     top: 0;
@@ -107,18 +107,18 @@ const styleAttr = [
     pointer-events: none;
     z-index: 1;
   }
-  .lp-marquee--mask::before {
+  .web-marquee--mask::before {
     left: 0;
     background: linear-gradient(to right, var(--color-base-100, white), transparent);
   }
-  .lp-marquee--mask::after {
+  .web-marquee--mask::after {
     right: 0;
     background: linear-gradient(to left, var(--color-base-100, white), transparent);
   }
 
   /* 縦方向用マスク (上下フェード) */
-  .lp-marquee--vertical.lp-marquee--mask::before,
-  .lp-marquee--vertical.lp-marquee--mask::after {
+  .web-marquee--vertical.web-marquee--mask::before,
+  .web-marquee--vertical.web-marquee--mask::after {
     top: 0;
     bottom: auto;
     left: 0;
@@ -126,50 +126,46 @@ const styleAttr = [
     width: 100%;
     height: 80px;
   }
-  .lp-marquee--vertical.lp-marquee--mask::before {
+  .web-marquee--vertical.web-marquee--mask::before {
     top: 0;
     background: linear-gradient(to bottom, var(--color-base-100, white), transparent);
   }
-  .lp-marquee--vertical.lp-marquee--mask::after {
+  .web-marquee--vertical.web-marquee--mask::after {
     bottom: 0;
     top: auto;
     background: linear-gradient(to top, var(--color-base-100, white), transparent);
   }
 
-  .lp-marquee__track {
+  .web-marquee__track {
     display: flex;
     width: max-content;
-    animation: lp-marquee-scroll var(--marquee-duration) linear infinite;
+    animation: web-marquee-scroll var(--marquee-duration) linear infinite;
     animation-direction: var(--marquee-direction);
   }
 
   /* 縦方向: コンテナに明示的高さが必要 (デフォルト 300px) */
-  .lp-marquee--vertical {
+  .web-marquee--vertical {
     height: var(--marquee-height, 300px);
   }
-  .lp-marquee--vertical .lp-marquee__track {
+  .web-marquee--vertical .web-marquee__track {
     flex-direction: column;
     width: 100%;
     height: max-content;
   }
-  @keyframes lp-marquee-scroll {
+  @keyframes web-marquee-scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
-  .lp-marquee--vertical @keyframes lp-marquee-scroll {
+
+  .web-marquee--vertical .web-marquee__track {
+    animation-name: web-marquee-scroll-v;
+  }
+  @keyframes web-marquee-scroll-v {
     from { transform: translateY(0); }
     to { transform: translateY(-50%); }
   }
 
-  .lp-marquee--vertical .lp-marquee__track {
-    animation-name: lp-marquee-scroll-v;
-  }
-  @keyframes lp-marquee-scroll-v {
-    from { transform: translateY(0); }
-    to { transform: translateY(-50%); }
-  }
-
-  .lp-marquee__group {
+  .web-marquee__group {
     display: flex;
     align-items: center;
     gap: var(--marquee-gap);
@@ -177,20 +173,20 @@ const styleAttr = [
     flex-shrink: 0;
   }
 
-  .lp-marquee--vertical .lp-marquee__group {
+  .web-marquee--vertical .web-marquee__group {
     flex-direction: column;
     padding-right: 0;
     padding-bottom: var(--marquee-gap);
   }
 
   /* ホバーで一時停止 */
-  .lp-marquee--pause-hover:hover .lp-marquee__track {
+  .web-marquee--pause-hover:hover .web-marquee__track {
     animation-play-state: paused;
   }
 
   /* reduced-motion: 完全停止 */
   @media (prefers-reduced-motion: reduce) {
-    .lp-marquee__track {
+    .web-marquee__track {
       animation: none !important;
     }
   }

@@ -5,6 +5,7 @@ import { url, breadcrumbJsonLd } from '../lib/site';
 import SiteHeader from '../components/site/SiteHeader.astro';
 import SiteFooter from '../components/site/SiteFooter.astro';
 import Breadcrumbs from '../components/site/SiteBreadcrumbs.astro';
+import PageTransition from '../components/animations/PageTransition.astro';
 
 interface Props {
   site: SiteConfig;
@@ -78,6 +79,7 @@ const jsonLdBlocks = [...autoSchemas, ...extra].map((b) =>
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     {jsonLdBlocks.map((json) => <script type="application/ld+json" set:html={json} />)}
+    {site.motion?.pageTransition && <PageTransition />}
     <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col bg-base-100 text-base-content">

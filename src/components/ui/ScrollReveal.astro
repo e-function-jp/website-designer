@@ -1,48 +1,133 @@
 ---
+/**
+ * スクロールリビール。website のモーションの主役。
+ *
+ * バリアントは参照サイトの実測（`scripts/web-analyze-reference-motion.mjs` の
+ * `direction_hints.reveal_kinds`）で観測される種別に対応させている。
+ * ディレクションは種別名・duration・delay をこの語彙で指示する。
+ *
+ * - fade / fade-up / fade-down / fade-left / fade-right … 定番
+ * - zoom … 拡大縮小
+ * - blur … opacity + blur。日本のコーポレートサイトで頻出（実測で確認）
+ * - clip-up … clip-path のワイプ。見出しの立ち上げに使う
+ *
+ * `prefers-reduced-motion: reduce` では初期状態から可視にし、一切動かさない。
+ * （`a11y-reduced-motion` ルールが未対応を検出する）
+ */
 interface Props {
-  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'fade' | 'zoom';
+  animation?: 'fade' | 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'zoom' | 'blur' | 'clip-up';
+  /** 発火の遅延(ms)。並べた要素をずらす場合は stagger を使うほうが楽 */
   delay?: number;
   duration?: number;
   threshold?: number;
+  /** 直下の子要素を n ms ずつずらして出す */
+  stagger?: number;
   class?: string;
 }
-const { animation = 'fade-up', delay = 0, duration = 600, threshold = 0.1, class: className = '' } = Astro.props;
+const {
+  animation = 'fade-up',
+  delay = 0,
+  duration = 700,
+  threshold = 0.12,
+  stagger = 0,
+  class: className = '',
+} = Astro.props;
 ---
+
 <div
-  class={`scroll-reveal scroll-reveal--${animation} ${className}`}
+  class:list={['scroll-reveal', `scroll-reveal--${animation}`, stagger > 0 && 'scroll-reveal--stagger', className]}
   data-sr-delay={delay}
   data-sr-duration={duration}
   data-sr-threshold={threshold}
+  data-sr-stagger={stagger}
 >
   <slot />
 </div>
 
 <style>
-  .scroll-reveal { opacity: 0; transition-property: opacity, transform; transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
-  .scroll-reveal--fade-up { transform: translateY(30px); }
-  .scroll-reveal--fade-down { transform: translateY(-30px); }
-  .scroll-reveal--fade-left { transform: translateX(-30px); }
-  .scroll-reveal--fade-right { transform: translateX(30px); }
+  .scroll-reveal {
+    opacity: 0;
+    transition-property: opacity, transform, filter, clip-path;
+    /* 実測で最も多く観測される easing（easeOutQuart 相当） */
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: opacity, transform;
+  }
   .scroll-reveal--fade { transform: none; }
-  .scroll-reveal--zoom { transform: scale(0.95); }
-  .scroll-reveal.is-visible { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  .scroll-reveal--fade-up { transform: translateY(32px); }
+  .scroll-reveal--fade-down { transform: translateY(-32px); }
+  .scroll-reveal--fade-left { transform: translateX(-32px); }
+  .scroll-reveal--fade-right { transform: translateX(32px); }
+  .scroll-reveal--zoom { transform: scale(0.94); }
+  .scroll-reveal--blur { filter: blur(12px); }
+  .scroll-reveal--clip-up { clip-path: inset(100% 0 0 0); transform: none; }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    clip-path: inset(0 0 0 0);
+    will-change: auto;
+  }
+
+  /* stagger 時は子要素側を動かす */
+  .scroll-reveal--stagger { opacity: 1; transform: none; filter: none; }
+  .scroll-reveal--stagger > :global(*) {
+    opacity: 0;
+    transform: translateY(28px);
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .scroll-reveal--stagger.is-visible > :global(*) { opacity: 1; transform: none; }
+
+  /* モーションを減らす設定では、初期状態から可視にして一切動かさない */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal,
+    .scroll-reveal--stagger > :global(*) {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      clip-path: none !important;
+      transition: none !important;
+    }
+  }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const els = document.querySelectorAll('.scroll-reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
+  const init = () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = document.querySelectorAll<HTMLElement>('.scroll-reveal:not([data-sr-ready])');
+    els.forEach((el) => el.setAttribute('data-sr-ready', '1'));
+    if (reduce) {
+      // CSS 側でも無効化しているが、JS 側でも状態を確定させておく
+      els.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
           const el = entry.target as HTMLElement;
-          const delay = parseInt(el.dataset.srDelay || '0', 10);
-          const duration = parseInt(el.dataset.srDuration || '600', 10);
+          const delay = Number(el.dataset.srDelay || 0);
+          const duration = Number(el.dataset.srDuration || 700);
+          const stagger = Number(el.dataset.srStagger || 0);
           el.style.transitionDuration = `${duration}ms`;
-          setTimeout(() => el.classList.add('is-visible'), delay);
+          if (stagger > 0) {
+            Array.from(el.children).forEach((child, i) => {
+              const c = child as HTMLElement;
+              c.style.transitionDuration = `${duration}ms`;
+              c.style.transitionDelay = `${delay + i * stagger}ms`;
+            });
+          }
+          window.setTimeout(() => el.classList.add('is-visible'), stagger > 0 ? 0 : delay);
           observer.unobserve(el);
         }
-      });
-    }, { threshold: 0.1 });
-    els.forEach(el => observer.observe(el));
-  });
+      },
+      { threshold: Number(els[0]?.dataset.srThreshold || 0.12) },
+    );
+    els.forEach((el) => observer.observe(el));
+  };
+
+  init();
+  // View Transitions を使うページでも遷移後に再初期化する
+  document.addEventListener('astro:page-load', init);
 </script>

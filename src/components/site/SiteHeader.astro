@@ -16,6 +16,10 @@ interface Props {
 }
 const { site, path = '/' } = Astro.props;
 
+// スクロール時の挙動はサイト定義で 1 箇所に持つ。
+// 参照サイトの実測（web-analyze-reference-motion.mjs の header_behavior）を写す。
+const headerMotion = site.motion?.header ?? 'none';
+
 const norm = (p: string) => ('/' + p.replace(/^\//, '').replace(/\/$/, '')).replace(/^\/$/, '/');
 const current = norm(path);
 const isCurrent = (href: string) => {
@@ -24,7 +28,15 @@ const isCurrent = (href: string) => {
 };
 ---
 
-<header class="sticky top-0 z-40 bg-base-100/95 backdrop-blur border-b border-base-300">
+<header
+  class:list={[
+    'site-header sticky top-0 z-40 border-b border-base-300',
+    headerMotion === 'solid' ? 'site-header--solid' : 'bg-base-100/95 backdrop-blur',
+    headerMotion === 'shrink' && 'site-header--shrink',
+    headerMotion === 'hide' && 'site-header--hide',
+  ]}
+  data-header-motion={headerMotion}
+>
   <div class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
     <a
       href={url(site, '/')}
@@ -76,3 +88,49 @@ const isCurrent = (href: string) => {
     </details>
   </div>
 </header>
+
+<style>
+  .site-header { transition: height .3s ease, background-color .3s ease, transform .3s ease, box-shadow .3s ease; }
+
+  /* solid: 最上部では透過、スクロールすると背景を敷く */
+  .site-header--solid { background-color: transparent; }
+  .site-header--solid.is-scrolled {
+    background-color: color-mix(in oklab, var(--color-base-100) 95%, transparent);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 1px 12px rgb(0 0 0 / 6%);
+  }
+
+  /* shrink: スクロールすると高さを詰める */
+  .site-header--shrink > :global(div) { transition: height .3s ease; }
+  .site-header--shrink.is-scrolled > :global(div) { height: 3.25rem; }
+
+  /* hide: 下方向スクロールで隠し、上方向で戻す */
+  .site-header--hide.is-hidden { transform: translateY(-100%); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header, .site-header > :global(div) { transition: none; }
+    .site-header--hide.is-hidden { transform: none; }
+  }
+</style>
+
+<script>
+  const initHeader = () => {
+    const el = document.querySelector<HTMLElement>('.site-header');
+    if (!el || el.dataset.headerMotion === 'none' || el.dataset.headerReady) return;
+    el.dataset.headerReady = '1';
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      el.classList.toggle('is-scrolled', y > 8);
+      if (el.dataset.headerMotion === 'hide') {
+        // 上方向へのスクロールと、最上部付近では必ず出す
+        el.classList.toggle('is-hidden', y > lastY && y > 160);
+      }
+      lastY = y;
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  };
+  initHeader();
+  document.addEventListener('astro:page-load', initHeader);
+</script>

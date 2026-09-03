@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import { site } from '../_site';
 import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
 import Accordion from '../../../../../components/data-display/Accordion.astro';
 import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
 
@@ -48,17 +49,19 @@ const sections = [
 
   <section class="max-w-3xl mx-auto px-4 py-16">
     <SectionTitle title="個人情報保護方針" align="left" />
-    <div class="mt-8 space-y-4">
-      {sections.map((s, i) => (
-        <Accordion name="privacy">
-          <input type="radio" name="privacy" checked={i === 0} />
-          <h2 class="collapse-title font-bold">{s.heading}</h2>
-          <div class="collapse-content">
-            <p class="text-sm leading-relaxed text-base-content/80">{s.body}</p>
-          </div>
-        </Accordion>
-      ))}
-    </div>
+    <ScrollReveal animation={site.motion!.reveal} duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+      <div class="mt-8 space-y-4">
+        {sections.map((s, i) => (
+          <Accordion name="privacy">
+            <input type="radio" name="privacy" checked={i === 0} />
+            <h2 class="collapse-title font-bold">{s.heading}</h2>
+            <div class="collapse-content">
+              <p class="text-sm leading-relaxed text-base-content/80">{s.body}</p>
+            </div>
+          </Accordion>
+        ))}
+      </div>
+    </ScrollReveal>
 
     <div class="mt-12 rounded-2xl bg-base-200 p-6">
       <h2 class="font-bold">お問い合わせ窓口</h2>

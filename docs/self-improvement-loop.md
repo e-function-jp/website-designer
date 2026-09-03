@@ -39,6 +39,9 @@ website の品質は 1 ページを見ても決まらない。実際に起きる
 |---|---|
 | 下層ページを追加したときナビの項目を足し忘れる | `consist-nav-drift` |
 | ページを増やしたが title を使い回して重複する | `consist-duplicate-title` |
+| トップだけ演出を盛り、下層が無演出で同じサイトに見えない | `motion-consistency-drift` |
+| ディレクションのアニメ指示を実装が無視する / import だけして使わない | `arch-animation-missing` |
+| 複数サイトが 1 ビルドに載るため is:global の CSS が他サイトを壊す | `arch-global-style-collision` |
 | フッターに載せ忘れてどこからも辿れないページができる | `ia-orphan-page` |
 | トップだけ作り込み、下層がナビとフッターだけの空ページになる | `content-thin-page` |
 | リンク先のパスを打ち間違える | `base-broken-internal-link` |
@@ -103,10 +106,12 @@ website の品質は 1 ページを見ても決まらない。実際に起きる
 | 日付 | ループ | 結果 |
 |---|---|---|
 | 2026-09-03 | 初期セットアップ | 基盤移植 + website ルール32件を定義（PAGE 19 + SITE 13）。ベースライン `corporate/base-20260903-1400`（6ページ）で 総合100点 |
+| 2026-09-03 | モーション層の追加 | 参照サイトのモーション実測を導入（`web-analyze-reference-motion.mjs`）。ルールを36件に拡張（`arch-animation-missing` / `motion-consistency-drift` / `a11y-reduced-motion` / `arch-global-style-collision`）。実装側に `blur`/`clip-up`/`stagger`、ヘッダー挙動、View Transitions を追加 |
 
 ## 関連ドキュメント
 
 - [migration-from-lp-designer.md](./migration-from-lp-designer.md) — 移行整理の正本
 - [learning-pipeline.md](./learning-pipeline.md) — 参照学習の作業ロジック
 - [information-architecture.md](./information-architecture.md) — サイト種別ごとのIA定義
+- [motion-design.md](./motion-design.md) — モーションの実測・指示・実装・検査の経路
 - `.claude/skills/frontend-design-web.md` — アンチパターン・実装規約

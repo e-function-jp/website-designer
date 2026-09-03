@@ -15,7 +15,7 @@ website 向けに再定義したもの。
 | 品質の壊れ方 | CTAが弱い・FVが伝わらない | ナビがページ間でズレる・title重複・リンク切れ・孤立ページ |
 
 website の品質は 1 ページを見ても決まらない。だから品質チェッカーは
-**ページ単位ルール（19件）とサイト単位ルール（13件）の2層**を持つ。
+**ページ単位ルール（22件）とサイト単位ルール（14件）の2層**を持つ。
 
 移行の線引きは [docs/migration-from-lp-designer.md](./docs/migration-from-lp-designer.md) に整理。
 
@@ -44,9 +44,10 @@ npm run check:web:strict  # 前回より下がったら exit 1
 ```bash
 npm run archive:fetch -- --pages 3    # 参照サイト収集（muuuuu.org）
 npm run next:run                       # 次のサイト種別を選びランを開く
-# → Look → Direction → a案/b案 実装 → 採点 → Extract
-bash scripts/web-design-score.sh docs/quality/runs/{run_id} {type} {stamp} a b
+bash scripts/web-run.sh docs/quality/runs/{run_id}   # モーション実測→Look→Direction→画像→実装→採点
 ```
+
+実行体制: モーション実測=Playwright / Look=codex / ディレクション・画像=grok / 実装=minimax-m3。
 
 詳細: [docs/learning-pipeline.md](./docs/learning-pipeline.md)
 
@@ -74,6 +75,7 @@ src/pages/sites/corporate/a-20260903-1400/
 |---|---|
 | [docs/migration-from-lp-designer.md](./docs/migration-from-lp-designer.md) | 移行整理（何を移植し、何を作り直したか） |
 | [docs/information-architecture.md](./docs/information-architecture.md) | IA定義。website 固有の中核 |
+| [docs/motion-design.md](./docs/motion-design.md) | モーションの実測・指示・実装・検査の経路 |
 | [docs/self-improvement-loop.md](./docs/self-improvement-loop.md) | 二系統の改善ループ |
 | [docs/learning-pipeline.md](./docs/learning-pipeline.md) | 参照学習の作業ロジック |
 | [AGENTS.md](./AGENTS.md) / [CLAUDE.md](./CLAUDE.md) | AI agent 向け指示 |

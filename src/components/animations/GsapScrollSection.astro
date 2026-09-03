@@ -91,7 +91,7 @@ const styleAttr = [
   data-gsap-pin={pin ? 'true' : 'false'}
   data-gsap-pin-duration={typeof pinDuration === 'number' ? pinDuration + 'px' : pinDuration}
   data-gsap-fallback={fallback}
-  class:list={['lp-gsap-section', `lp-gsap-section--${animation}`, className]}
+  class:list={['web-gsap-section', `web-gsap-section--${animation}`, className]}
   style={styleAttr}
   id={id}
 >
@@ -99,35 +99,35 @@ const styleAttr = [
 </Tag>
 
 <style>
-  .lp-gsap-section {
+  .web-gsap-section {
     --gsap-y: 60px;
     --gsap-x: 60px;
     --gsap-scale: 1.1;
   }
 
   /* フォールバック用 CSS (GSAP 不在時のみ) */
-  .lp-gsap-section:not(.is-gsap-ready):not(.is-gsap-loaded) {
+  .web-gsap-section:not(.is-gsap-ready):not(.is-gsap-loaded) {
     opacity: 0;
   }
-  .lp-gsap-section--fade-up:not(.is-gsap-ready):not(.is-gsap-loaded) {
+  .web-gsap-section--fade-up:not(.is-gsap-ready):not(.is-gsap-loaded) {
     transform: translateY(var(--gsap-y));
   }
-  .lp-gsap-section--slide-left:not(.is-gsap-ready):not(.is-gsap-loaded) {
+  .web-gsap-section--slide-left:not(.is-gsap-ready):not(.is-gsap-loaded) {
     transform: translateX(calc(-1 * var(--gsap-x)));
   }
-  .lp-gsap-section--slide-right:not(.is-gsap-ready):not(.is-gsap-loaded) {
+  .web-gsap-section--slide-right:not(.is-gsap-ready):not(.is-gsap-loaded) {
     transform: translateX(var(--gsap-x));
   }
 
   /* GSAP loaded: 制御を GSAP inline style に委ねる (CSS で上書きしない) */
-  .lp-gsap-section.is-gsap-loaded {
+  .web-gsap-section.is-gsap-loaded {
     /* opacity / transform は GSAP が inline style で制御する。
        ここでは初期状態 (transform: none, opacity: 1) も書かないことで
        GSAP の fromTo で設定した inline style を尊重する。 */
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .lp-gsap-section {
+    .web-gsap-section {
       opacity: 1 !important;
       transform: none !important;
     }

@@ -63,7 +63,7 @@ const styleAttr = [
   data-reveal-variant={variant}
   data-reveal-once={once ? 'true' : 'false'}
   data-reveal-threshold={threshold}
-  class:list={['lp-reveal', `lp-reveal--${variant}`, className]}
+  class:list={['web-reveal', `web-reveal--${variant}`, className]}
   style={styleAttr}
   id={id}
 >
@@ -71,7 +71,7 @@ const styleAttr = [
 </Tag>
 
 <style>
-  .lp-reveal {
+  .web-reveal {
     --reveal-duration: 700ms;
     --reveal-delay: 0ms;
     --reveal-distance: 24px;
@@ -79,32 +79,32 @@ const styleAttr = [
   }
 
   /* 初期状態: 透明 + 移動 (variant 別) */
-  .lp-reveal--fade-up {
+  .web-reveal--fade-up {
     opacity: 0;
     transform: translateY(var(--reveal-distance));
   }
-  .lp-reveal--fade-in {
+  .web-reveal--fade-in {
     opacity: 0;
   }
-  .lp-reveal--slide-in-left {
+  .web-reveal--slide-in-left {
     opacity: 0;
     transform: translateX(calc(-1 * var(--reveal-distance)));
   }
-  .lp-reveal--slide-in-right {
+  .web-reveal--slide-in-right {
     opacity: 0;
     transform: translateX(var(--reveal-distance));
   }
-  .lp-reveal--zoom-in {
+  .web-reveal--zoom-in {
     opacity: 0;
     transform: scale(0.92);
   }
-  .lp-reveal--clip-up {
+  .web-reveal--clip-up {
     opacity: 1;
     clip-path: inset(100% 0 0 0);
   }
 
   /* 出現後 (JS で is-revealed クラスを付与) */
-  .lp-reveal.is-revealed {
+  .web-reveal.is-revealed {
     opacity: 1;
     transform: none;
     clip-path: inset(0 0 0 0);
@@ -116,8 +116,8 @@ const styleAttr = [
 
   /* reduced-motion: 即座に表示 */
   @media (prefers-reduced-motion: reduce) {
-    .lp-reveal,
-    .lp-reveal.is-revealed {
+    .web-reveal,
+    .web-reveal.is-revealed {
       opacity: 1 !important;
       transform: none !important;
       clip-path: none !important;

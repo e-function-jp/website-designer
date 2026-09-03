@@ -44,7 +44,13 @@ src/
     ├── components/            # コンポーネントカタログ（自動収集）
     └── sites/{type}/{model}-{stamp}/   # サンプルサイト（複数ページ）
 scripts/
-├── web-quality-check.mjs      # 静的品質チェック（PAGE_RULES + SITE_RULES）
+├── web-quality-check.mjs      # 静的品質チェック（PAGE_RULES 22 + SITE_RULES 14）
+├── web-analyze-reference-motion.mjs  # 参照サイトのモーション実測（Playwright）
+├── web-run.sh                 # ラン1回を通しで実行
+├── web-look-analyze.sh        # Look（codex）
+├── web-direction.sh           # ディレクション（grok-4.5 / hermes）
+├── web-implement-minimax.sh   # 実装（minimax-m3 / hermes opencode-go）
+├── web-generate-image{,s-from-direction}.mjs  # 画像生成（grok-imagine）
 ├── site_categories.py         # サイト種別・業種の正本
 ├── web-export-site-types.py   # → docs/site-types.json（Node 側が読む）
 ├── web-learning-next.py       # 次のランの選定とディレクトリ作成
@@ -61,6 +67,7 @@ docs/                          # ループ設計 / パイプライン / IA定義
 | 開発 | `npm run dev` |
 | ビルド | `npm run build` |
 | 品質チェック | `npm run check:web` |
+| ラン1回を通しで実行 | `bash scripts/web-run.sh <run_dir>` |
 | 厳格チェック | `npm run check:web:strict` |
 | カタログ検査 | `npm run check:catalog` |
 | 参照サイト収集 | `npm run archive:fetch -- --pages 3` |
@@ -76,6 +83,8 @@ docs/                          # ループ設計 / パイプライン / IA定義
 - DaisyUI 既定テーマ（light / dark / cupcake）のまま完成扱いにしない
 - 各ページで `src/components/` を最低2件、サイト全体で6種類使う（ベタ書き禁止）
 - 下層ページには必ずパンくず。`href="#"` を残さない
+- モーションは `_site.ts` の `motion` で一元管理。トップだけ盛らない
+- `prefers-reduced-motion` を必ず尊重する
 - `check:web` high ゼロ + `arch-component-reuse` ゼロ + `ia-required-page-missing` ゼロ
   + 参照の咀嚼が目視OK + AIテンプレ非該当 = 完成定義
 
@@ -96,6 +105,7 @@ docs/                          # ループ設計 / パイプライン / IA定義
 - [CLAUDE.md](./CLAUDE.md) — Claude Code 固有の追加指示
 - [docs/migration-from-lp-designer.md](./docs/migration-from-lp-designer.md) — 移行整理の正本
 - [docs/information-architecture.md](./docs/information-architecture.md) — IA定義（website固有の中核）
+- [docs/motion-design.md](./docs/motion-design.md) — モーションの実測・指示・実装・検査
 - [docs/self-improvement-loop.md](./docs/self-improvement-loop.md) — 二系統の改善ループ
 - [docs/learning-pipeline.md](./docs/learning-pipeline.md) — 参照学習の作業ロジック
 - [docs/quality/latest.md](./docs/quality/latest.md) — 直近の品質レポート

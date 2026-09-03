@@ -113,13 +113,41 @@ website ではここを **`information_architecture`**（サイトマップの�
 また、採点対象は 1 枚ではなく **トップ + 下層2ページ** を並べて撮る。
 ページ間の作り込みムラとナビの一貫性は 1 枚では見えないため。
 
+### 5.6 モーション層（2026-09-03 追加）
+
+muuuuu.org 掲載サイトはスクロール演出が品質の一部を成しており、静止画の採点では
+この層が丸ごと抜け落ちる。lp-designer は Awwwards 1ページ向けに
+`lp-analyze-external-site.mjs` を持っていたが、website 向けには次を足した。
+
+| 追加 | 内容 |
+|---|---|
+| `scripts/web-analyze-reference-motion.mjs` | **スクロールしてトリガーを踏んでから**計測する。DOM 差分からリビール種別/duration/easing を実測。複数ページを解析してページ間の演出量の開きを数値化。ヘッダーのスクロール挙動、ページ遷移演出、`prefers-reduced-motion` 尊重の有無も測る |
+| 実装側の語彙 | `ScrollReveal` に `blur` / `clip-up` / `stagger` を追加。`SiteHeader` に `none/solid/shrink/hide`。`PageTransition`（View Transitions）を新設。すべて reduced-motion 対応 |
+| `_site.ts` の `motion` | モーション方針をサイト単位で1箇所に持つ（ページごとに決めさせるとズレる） |
+| ルール4件 | `arch-animation-missing` / `motion-consistency-drift` / `a11y-reduced-motion` / `arch-global-style-collision` |
+
+前2つは lp-designer から移植（`arch-animation-missing` は指示と実装の突き合わせ、
+`arch-global-style-collision` は複数サイトを1ビルドに載せる website でより起きやすい）、
+後2つは website 固有の新規。詳細は [motion-design.md](./motion-design.md)。
+
+### 5.7 実行体制（2026-09-03 確定）
+
+| 段 | 実行体 | 経路 |
+|---|---|---|
+| Look（画像を見る） | codex | `codex exec -i` |
+| Direction ×2 | grok-4.5 | `hermes -z --provider xai-oauth` |
+| 画像生成 | grok-imagine | hermes の xai image_gen プラグイン |
+| 実装 ×2 | minimax-m3 | `hermes -z --provider opencode-go` |
+| 採点 | codex | `codex exec -i`（生成に関与していないモデル） |
+
+`hermes -z` が画像添付に対応していないため、Look だけは画像を渡せる codex が担当する。
+grok はその言語化とモーション実測 JSON を読んでディレクションする。
+
 ## 6. まだ無いもの（今後の宿題）
 
 | 項目 | lp-designer の対応物 | 備考 |
 |---|---|---|
 | サイト種別別プレイブック | `docs/playbooks/{業種}.md` | ラン1回目の Look 成果から書き起こす |
-| ディレクション生成の定型 | `scripts/lp-direction.sh` + テンプレート | IA（サイトマップ）を確定する段が website では重い。専用テンプレートが要る |
-| 画像生成パイプライン | `lp-generate-images-from-direction.mjs` | website は必要枚数が LP より多い。再利用ロジックを含めて設計し直す |
 | 全サンプルレポート | `lp-append-samples-index.py` / `all-samples-report.html` | 現状はトップページ（`src/pages/index.astro`）が `_site.ts` を自動収集して代用 |
 | サムネイル生成 | `lp-build-thumbnails.mjs` | 索引にサムネを出す段で必要になる |
 | デプロイ | `release-deploy.sh` + webhook | 本番ドメイン確定後 |

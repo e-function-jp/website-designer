@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import { site } from '../_site';
 import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
 import Timeline from '../../../../../components/data-display/Timeline.astro';
 import Table from '../../../../../components/data-display/Table.astro';
 import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
@@ -66,18 +67,20 @@ const profile = [
     <div class="max-w-4xl mx-auto px-4 py-16">
       <SectionTitle title="沿革" align="left" />
       <div class="mt-8">
-        <Timeline>
-          {history.map((h) => (
-            <li>
-              <div class="timeline-start font-bold tabular-nums">{h.year}</div>
-              <div class="timeline-middle">
-                <span class="block w-3 h-3 rounded-full bg-primary" aria-hidden="true"></span>
-              </div>
-              <div class="timeline-end timeline-box text-sm leading-relaxed">{h.body}</div>
-              <hr />
-            </li>
-          ))}
-        </Timeline>
+        <ScrollReveal animation={site.motion!.reveal} duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
+          <Timeline>
+            {history.map((h) => (
+              <li>
+                <div class="timeline-start font-bold tabular-nums">{h.year}</div>
+                <div class="timeline-middle">
+                  <span class="block w-3 h-3 rounded-full bg-primary" aria-hidden="true"></span>
+                </div>
+                <div class="timeline-end timeline-box text-sm leading-relaxed">{h.body}</div>
+                <hr />
+              </li>
+            ))}
+          </Timeline>
+        </ScrollReveal>
       </div>
     </div>
   </section>
