@@ -68,21 +68,53 @@ function saveDb(db) {
 }
 
 /**
+ * 構図・時間帯・寄り引きを表すだけで、**被写体を特定しない**タグ。
+ * 再利用判定の分母から外す。これらが一致しても「同じ絵でよい」根拠にならない。
+ */
+const NON_SUBJECT_TAGS = new Set([
+  '横位置', '縦位置', '正方', 'ワイド', 'パノラマ',
+  '昼間', '朝', '夕方', '夜', '曇り', '晴れ',
+  '接写', 'マクロ', '寄り', '引き', '俯瞰', 'アップ',
+  '室内', '屋内', '屋外', '外観', '内観',
+  '実写', '写真', '商品写真', '人物',
+]);
+
+/**
  * 同カテゴリでタグの重なりが大きい画像を探す。
- * 全タグ一致でなくてもよい（「パフェ+マンゴー」に対し
- * 「パフェ,マンゴー,商品写真」がヒットするようにする）。
+ *
+ * 単純な「タグの過半数一致」だと**別の被写体まで再利用してしまう**。
+ * 実測（corporate-20260903-1448）:
+ *   「工場,製造,粉末,プロテイン」の工場ライン写真が
+ *   「粉末,プロテイン,接写,容器」の製品接写として再利用され、
+ *   「直営店舗,旭川,外観,昼間」の店舗外観が
+ *   「旭川本社,ビル,外観,昼間」の本社ビルとして再利用された。
+ *   どちらも 2/4 = 0.5 でしきい値に乗っていた。
+ *   これは lp-designer が生成に切り替えて潰したはずの
+ *   「alt と実写真が別物」の再発である。
+ *
+ * そこで判定を2段にする:
+ *   1. **被写体タグ（先頭の非構図タグ）が一致すること** を必須にする
+ *   2. そのうえで、構図タグを除いた重なりが 6 割以上あること
  */
 function findReusable(db, category, tags) {
+  const subjectOf = (list) => list.find((t) => !NON_SUBJECT_TAGS.has(t)) ?? list[0];
+  const meaningful = (list) => list.filter((t) => !NON_SUBJECT_TAGS.has(t));
+
+  const wantSubject = subjectOf(tags);
+  const wantTags = meaningful(tags);
+  if (!wantTags.length) return null;
+
   const cands = db.images
     .filter((im) => im.category === category && existsSync(join(ROOT, im.path)))
+    .filter((im) => subjectOf(im.tags) === wantSubject)
     .map((im) => {
-      const overlap = tags.filter((t) => im.tags.includes(t)).length;
-      return { im, overlap, score: overlap / tags.length };
+      const overlap = wantTags.filter((t) => im.tags.includes(t)).length;
+      return { im, overlap, score: overlap / wantTags.length };
     })
     .filter((c) => c.overlap > 0)
     .sort((a, b) => b.score - a.score || b.overlap - a.overlap);
-  // タグの過半数が一致していれば再利用可とみなす
-  return cands.length && cands[0].score >= 0.5 ? cands[0] : null;
+
+  return cands.length && cands[0].score >= 0.6 ? cands[0] : null;
 }
 
 const db = loadDb();

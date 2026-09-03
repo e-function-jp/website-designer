@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-09-03T07:30:38.123Z",
+  "images": [
+    {
+      "placement": "top:hero-collage-01",
+      "tags": "凍った水路,足元,冬,旭川,縦位置",
+      "prompt": "北海道旭川の冬の朝、凍った水路を歩くランナーの足元を縦位置で接写した写真。氷の表面と運動靴のコントラストがはっきり見える構図。朝の冷たい自然光、彩度を抑えた色温度、被写界深度を浅めにして背景の冬景色をぼかす。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-01.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:hero-collage-02",
+      "tags": "雪,ベンチ,手元,休憩,正方",
+      "prompt": "雪が積もったベンチに座る休憩中のアスリートの手元を正方構図で接写した写真。雪の質感と手元のグローブ、ウェアの質感がはっきり見える構図。曇天の柔らかい自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。",
+      "aspect": "square",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-02.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:hero-collage-03",
+      "tags": "旭川工場,金属ライン,製造,横位置",
+      "prompt": "旭川工場の金属ラインを横位置で接写した写真。粉末のプロテインが流れる金属の表面と、ラインを支える支柱の質感が見える構図。工場の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景にラインをぼかす。AI 写真・ストック写真感を避けること。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-03.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:hero-collage-04",
+      "tags": "ラベル貼り,手元,マクロ,接写,縦位置",
+      "prompt": "ラベルを容器に貼る手元を縦位置でマクロ撮影した写真。指先の作業とラベルの紙の繊維、容器の表面が見える構図。曇天の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-04.jpg",
+      "reused": false
+    },
+    {
+      "placement": "about:portrait",
+      "tags": "代表,肖像,オフィス,窓辺,縦位置",
+      "prompt": "北嶺ニュートリションの代表が旭川本社のオフィス窓辺に立つ姿を縦位置で撮影した肖像写真。スーツではなく清潔なシャツ姿、窓からの朝の冷たい自然光、背景は旭川の街並みをぼかす。彩度を抑えた色温度。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-05.jpg",
+      "reused": true
+    },
+    {
+      "placement": "service:protein",
+      "tags": "粉末,プロテイン,接写,容器,横位置",
+      "prompt": "粉末のプロテインがスプーンですくわれ、容器の縁からこぼれ落ちる瞬間を横位置で接写した写真。粉末の粒度と容器の質感が見える構図。曇天の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-06.jpg",
+      "reused": false
+    },
+    {
+      "placement": "service:store-asahikawa",
+      "tags": "直営店舗,旭川,外観,朝,横位置",
+      "prompt": "北嶺ニュートリション旭川本店の直営店舗の外観を朝の光で横位置撮影した写真。看板と玄関、窓の向こうに店内が見える構図。朝の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景の街路樹をぼかす。AI 写真・ストック写真感を避けること。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-07.jpg",
+      "reused": true
+    },
+    {
+      "placement": "company:office",
+      "tags": "旭川本社,ビル,外観,朝,横位置",
+      "prompt": "北嶺ニュートリション旭川本社のビル外観を朝の光で横位置撮影した写真。ビルの正面と玄関、北海道の冬の空と背景の街路樹が見える構図。朝の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20260903-1448/img-b-08.jpg",
+      "reused": false
+    }
+  ]
+}
