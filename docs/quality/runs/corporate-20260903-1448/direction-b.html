@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>direction-b — corporate / 冒険路線</title>
+<meta name="generator" content="Hermes art-direction (variant=b, corporate)">
+</head>
+<body>
+
+<section id="overview">
+<p>ラン corporate-20260903-1448 の冒険路線（variant=b）。参照 EZOBOLIC の情報設計の骨格（Company / Service / Information / Recruit / Store の 5 領域振り分け、左見出し・中央写真・右リンクの 3 点セット、Related Content、5 列グリッド座標の共有、Philosophy/Profile 系の下層作り込み）は引き継ぐ。崩すのは意匠の主軸：(1) DaisyUI 独自テーマ <code>corporate-hokuline-bold</code> を採用し、深い藍 + 苔色 + 雪白 + 凍土の 4 色構成にする。生成り基調の堅実案（a 案）から雪白基調へ移し、アクセントは柿色ではなく深い苔色（#4A5D3A）に置き換える。(2) トップは写真 1 枚のクロスフェードではなく、aspect の異なる写真 4 枚（横・縦・正方・横）を画面左半分のコラージュとして組み、右半分に大きな和文キャッチを置く「画面二分割コラージュ」構成にする。参照の縦リズムは保ちつつ、写真密度で一段踏み込む。(3) ヒーロー写真のクロスフェードは不採用。初期表示の写真コラージュ + 静止の右半分キャッチに踏みとどまり、a 案のクロスフェード実装コストを持ち込まない。(4) ヘッダーは <code>'solid'</code> へと変更する：スクロール前は透明背景＋白文字、ヒーローを抜けた段階で #0E2A47 の帯に切り替わり、高さ 80px に縮む。参照の無変化挙動を a 案同様に再現しない。(5) 見出し書体を和文明朝（Shippori Mincho）+ 欧字は Neubau/Inter 系トラッキング大見出しへ振り替え、a 案のゴシック基調から離脱する。文字組みは行長 36 文字、行高 1.95、字間で"動く体に"のリズムを作る。(6) 余白は a 案比で 1.4 倍に拡張。セクション間 9rem、上下パディング最低 6rem、トップは 1 画面以上を確保。(7) モーション量は全ページで均等に揃え、参照の「トップだけ演出ゼロ／下層に偏在」状態を再現しない。アニメーションは <code>fade-up 700ms</code> / <code>stagger 90ms</code> を <code>_site.ts.motion</code> の 1 箇所に集約。reduced-motion は包括的に停止（リビール・コラージュのクリップアップ・数値カウント・ヒーロー初期フェード）。</p>
+<p>世界観は a 案と共通の「北嶺ニュートリション株式会社」。写真の翻訳語彙は「凍った水路を歩く足元／雪が積もったベンチに座る休憩中の手元／旭川工場の金属ライン／ラベルを貼る手元のマクロ／朝靄のトレーニンググラウンド」へ拡張し、a 案の語彙に氷と霧の要素を足す。配色変更（生成り → 雪白）に合わせ、写真は朝の冷たい光で揃え、夜景・暖色光は使わない。a 案の柿色アクセントは使わず、苔色は採用情報タグ・写真番号タグ・引用符の 3 用途に限定する。</p>
+</section>
+
+<section id="site-config">
+<h2>_site.ts（実装側はこれを src/pages/sites/corporate/b-20260903-1448/_site.ts にそのまま置く）</h2>
+<pre><code>import type { SiteConfig } from '../../../../lib/site';
+
+export const site: SiteConfig = {
+  name: '北嶺ニュートリション株式会社',
+  tagline: '動く体に、確かな補給を',
+  base: '/sites/corporate/b-20260903-1448/',
+  theme: 'corporate-hokuline-bold',
+  nav: [
+    { label: '会社について', href: '/about/' },
+    { label: '製品ライン', href: '/service/' },
+    { label: 'お知らせ', href: '/news/' },
+    { label: '採用情報', href: '/recruit/' },
+    { label: 'お問い合わせ', href: '/contact/' },
+  ],
+  footerNav: [
+    {
+      heading: '北嶺について',
+      items: [
+        { label: 'ブランド理念', href: '/about/#philosophy' },
+        { label: '代表メッセージ', href: '/about/#message' },
+        { label: '沿革', href: '/about/#history' },
+        { label: '会社概要', href: '/company/' },
+      ],
+    },
+    {
+      heading: '製品ライン',
+      items: [
+        { label: 'トレーニング向けプロテイン', href: '/service/#protein' },
+        { label: 'リカバリー食品', href: '/service/#recovery' },
+        { label: '機能性スナック', href: '/service/#snack' },
+        { label: '直営店舗と EC', href: '/service/#store' },
+      ],
+    },
+    {
+      heading: 'お知らせ・窓口',
+      items: [
+        { label: 'お知らせ一覧', href: '/news/' },
+        { label: '採用情報', href: '/recruit/' },
+        { label: 'お問い合わせ', href: '/contact/' },
+        { label: 'プライバシーポリシー', href: '/privacy/' },
+      ],
+    },
+  ],
+  organization: {
+    legalName: '北嶺ニュートリション株式会社',
+    address: '〒070-0030 北海道旭川市宮下通 9-2-14',
+    tel: '0166-00-0000',
+    email: 'info@example.com',
+    founded: '2015-04',
+    url: 'https://example.com',
+  },
+  primaryCta: { label: '製品ラインを見る', href: '/service/' },
+  legalNav: [{ label: 'プライバシーポリシー', href: '/privacy/' }],
+  motion: {
+    reveal: 'fade-up',
+    durationMs: 700,
+    staggerMs: 90,
+    header: 'solid',
+    pageTransition: false,
+  },
+};
+export default site;</code></pre>
+<p>独自テーマ <code>corporate-hokuline-bold</code> を <code>src/styles/themes/corporate-hokuline-bold.css</code> に新規作成し、<code>src/styles/global.css</code> で import する：<code>--color-primary: #0E2A47</code>（深い藍・コーポレートカラー）／ <code>--color-primary-content: #F4F6F4</code>（雪白・コーポレートカラーの文字）／ <code>--color-secondary: #4A5D3A</code>（深い苔色・アクセント。採用情報タグ・写真番号タグ・引用符など面積を絞って使う）／ <code>--color-base-100: #F4F6F4</code>（雪白・a 案の生成り #F5F1E8 から置き替え）／ <code>--color-base-200: #E5E9E6</code>（凍土・薄い罫線・代替背景）／ <code>--color-base-content: #0E2A47</code>（深い藍で本文・見出し。a 案の #111111 から置き替えし、藍で統一感を出す）／ <code>--color-base-300: #C9D2CB</code>（凍土グレー）／ <code>--color-accent: #4A5D3A</code>。DaisyUI 既定テーマ（light / dark / cupcake）は禁止。</p>
+<p>モーションは参照の実測値ではなく、本実装の均等量を <code>_site.ts.motion</code> の 1 箇所に集約する。ヒーローは初期 <code>fade 700ms</code> のみで、a 案の 1200ms クロスフェード・タイマー切替は不採用。写真コラージュの立ち上げは <code>clip-up 700ms</code> で 4 枚を <code>stagger 90ms</code>。以降のリビールは <code>fade-up 700ms</code> / <code>stagger 90ms</code> を全ページ共通に揃え、参照の不均衡（top 0 / philosophy 11 / profile 3）を作らない。各下層ページにも 4〜6 件、タイムライン／沿革には <code>stagger 90ms</code> で全行リビールする。ヘッダーは <code>'solid'</code>：初期は透明背景＋白文字、ヒーロー末尾を抜けた段階で背景が #0E2A47 に変わり、高さが 121px → 80px に縮小する（参照の無変化挙動を再現しない a 案からの踏み込み）。<code>pageTransition: false</code>。マーキー帯は不採用。参照の <code>prefers-reduced-motion: respected: false</code> は再現せず、リビール・コラージュのクリップアップ・数値カウント・ヒーロー初期フェードを <code>@media (prefers-reduced-motion: reduce)</code> で包括的に停止する。</p>
+</section>
+
+<section id="sitemap">
+<h2>作るページの一覧</h2>
+<table>
+<thead><tr><th>URL</th><th>ページ名</th><th>役割</th><th>想定本文量(文字)</th></tr></thead>
+<tbody>
+<tr><td>/</td><td>ホーム</td><td>5 領域への振り分けと、動く体に向き合う栄養ブランドの第一印象</td><td>1200</td></tr>
+<tr><td>/about/</td><td>会社について</td><td>ブランド理念・代表メッセージ・沿革・会社概要</td><td>3600</td></tr>
+<tr><td>/service/</td><td>製品ライン</td><td>トレーニング向けプロテイン・リカバリー食品・機能性スナック・直営店舗と EC</td><td>3200</td></tr>
+<tr><td>/news/</td><td>お知らせ</td><td>製品リリース・メディア掲載・店舗情報の年別アーカイブ</td><td>1600</td></tr>
+<tr><td>/contact/</td><td>お問い合わせ</td><td>事業・取材・採用の 3 入口と送信フロー</td><td>1200</td></tr>
+<tr><td>/company/</td><td>会社概要</td><td>法人情報の単独ページ（/about/ からの深掘り）</td><td>900</td></tr>
+<tr><td>/recruit/</td><td>採用情報</td><td>募集職種・先輩の声・選考フロー・福利厚生</td><td>2400</td></tr>
+<tr><td>/privacy/</td><td>プライバシーポリシー</td><td>8 章構成の本文</td><td>1800</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="visual">
+<h2>ビジュアルシステム</h2>
+<dl>
+<dt>配色</dt>
+<dd>
+<ul>
+<li><code>#0E2A47</code>：深い藍（コーポレートカラー・見出し本文・ヘッダー帯・CTA 背景）</li>
+<li><code>#F4F6F4</code>：雪白（メイン背景・コーポレートカラー上の文字）</li>
+<li><code>#E5E9E6</code>：凍土（薄い罫線・カード背景・写真キャプション下地）</li>
+<li><code>#4A5D3A</code>：深い苔色（アクセント。採用情報タグ・写真番号タグ・引用符・章番号。色面積は 5% 以下）</li>
+<li><code>#C9D2CB</code>：凍土グレー（罫線・非活性テキスト）</li>
+</ul>
+</dd>
+<dt>見出し書体</dt>
+<dd>和文：Shippori Mincho（明朝）。欧字：Cormorant Garamond または Playfair Display（セリフ・字間 0.04em）。本文との対比で明朝の見出しを大文字 size（75px / 60px / 36px）で打ち、和文の縦組み感を出す。欧字の大見出しは <code>letter-spacing: 0.18em</code>、数字は <code>font-feature-settings: "tnum"</code>。</dd>
+<dt>本文書体</dt>
+<dd>和文：Zen Kaku Gothic New または Noto Sans JP。本文 18px、行高 1.95、行長 36 文字前後、メトリクスで字間を <code>-0.01em</code>。欧字は本文でも Cormorant Garamond を併用し、和欧混植に統一感を持たせる。</dd>
+<dt>写真の方向性</dt>
+<dd>a 案の写真語彙（雪のトレーニンググラウンド／粉末のプロテイン接写／工場ライン／ジムの器具／ランナーの足元）に「氷／霧／凍った水面／金属の反射」を足す。朝または曇天の自然光、彩度を抑えた色温度、暖色光と夜景は不採用。ポートレートは窓辺・外光の柔らかい光、被写界深度を浅めにして背景の街並み・施設をぼかす。AI 写真・ストック写真感は禁則。</dd>
+<dt>余白の方針</dt>
+<dd>a 案比で 1.4 倍に拡張。セクション間 9rem、上下パディング最低 6rem、トップは 1 画面以上（100vh）を確保。写真と本文の間に 3rem〜6rem の空白を必ず置く。文字組みは行長 36 文字、行高 1.95、見出し前は 1 行分の余韻として 1.5rem を取る。フッターは上段に大きな年輪モチーフ、下段にユーティリティ 3 列（著作権・所在地・SNS 3 種）。</dd>
+</dl>
+</section>
+
+<section id="pages">
+
+<article data-page="/">
+<section data-section="hero">
+<h3>ファーストビュー（4 枚コラージュ＋右半分キャッチ）</h3>
+<p data-role="purpose">画面二分割でブランドの世界観とキャッチを一発で見せる。a 案の写真 1 枚クロスフェードではなく、aspect の異なる写真 4 枚を画面左半分にコラージュとして組み、右半分に大きな和文キャッチを置く。参照の「5 領域への振り分け」は <code>index-hubs</code> に譲り、ヒーローは第一印象専用にする。</p>
+<p data-role="layout">画面幅 100% × 高さ 100vh、画面を 12 カラムに分割し、左 7 カラム＝写真 4 枚コラージュ、右 5 カラム＝キャッチ群。コラージュは 2 行 × 2 列のグリッドで、各セルの aspect を意図的に変える：左上 portrait（縦長）、右上 square（正方）、左下 landscape（横長）、右下 portrait。各セル間に 8px の雪白スリットを挟み、写真境界を明瞭にする。右半分は縦中央寄せ、和文キャッチ 75px（明朝・weight 500）、その下に欧字 "EST. 2015 / HOKKAIDO ASAHIKAWA"（Cormorant Garamond、14px、tracking 0.18em）、さらにその下に <code>primaryCta</code>「製品ラインを見る」（ボタン、苔色 #4A5D3A のアウトライン・雪白塗り）。右半分の最下部に縦書きの小さな数字「01 / 04」（苔色、tabular-nums）。</p>
+<p data-role="copy">キャッチ：動く体に、確かな補給を。／ 欧字：EST. 2015 ／ HOKKAIDO ASAHIKAWA。／ ボタン：製品ラインを見る。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="clip-up"</code>、<code>ScrollReveal animation="fade"</code>（キャッチ用）、<code>Button</code>、<code>Badge</code>。新規 <code>HeroCollage</code>（4 枚コラージュ＋右半分キャッチの二分割）を page-head に切り出す。</p>
+<p data-role="animation">初期描画：コラージュ 4 枚を <code>clip-up 700ms</code> で左上→右上→左下→右下の順に <code>stagger 90ms</code> で立ち上げ、キャッチを 400ms 遅延で <code>fade 700ms</code>。3 秒ごとのクロスフェードは行わない（a 案と差別化し、写真を静的に見せる）。reduced-motion: reduce では clip-path を初期 <code>inset(0)</code> に固定、stagger を 0、キャッチは初期表示。</p>
+<p data-role="image"><code>top:hero-collage-01</code>（portrait）／ <code>top:hero-collage-02</code>（square）／ <code>top:hero-collage-03</code>（landscape）／ <code>top:hero-collage-04</code>（portrait）。凍結した水路を歩く足元／雪が積もったベンチに座る休憩中の手元／旭川工場の金属ライン／ラベルを貼る手元のマクロ。a 案の写真語彙に氷と霧を足す 4 枚。</p>
+</section>
+
+<section data-section="index-hubs">
+<h3>5 領域への振り分け（左見出し・中央写真・右リンク）</h3>
+<p data-role="purpose">参照の中央写真＋左見出し＋右リンク型をそのまま踏襲し、Company / Service / Information / Recruit / Store の 5 領域へ振り分ける。冒険路線の踏み込みは、各行の写真を <code>HubRowFeature</code> に統一し、左見出しに章番号（苔色）を置いて参照より情報密度を上げる。</p>
+<p data-role="layout">12 カラム中、左 3 カラム＝章番号 01〜05（苔色、64px、tabular-nums）と和文ラベル（明朝、28px）、中央 6 カラム＝写真（aspect 3:4、object-fit cover、sticky でスクロール中も画面内に保持）、右 3 カラム＝下位リンク 2〜3 個（矢印付き、20px）。5 行で 5 領域。各行は 1.4 viewport の高さを確保し、上下に 4rem の余白。行間仕切りに 1px <code>#C9D2CB</code>（凍土グレー）の罫線。スクロールに応じて行が順次画面内に入る <code>IntersectionObserver</code> 発火。</p>
+<p data-role="copy">5 領域名（左）／下位リンク（右）：01 会社について（会社情報） ／ ブランド理念 ／ 代表メッセージ ／ 沿革 ／ 会社概要 ／ 02 製品ライン（製品と EC） ／ トレーニング向けプロテイン ／ リカバリー食品 ／ 機能性スナック ／ 直営店舗と EC ／ 03 お知らせ（更新情報） ／ お知らせ一覧 ／ 04 採用情報（採用） ／ 募集職種 ／ 先輩の声 ／ 選考フロー ／ 05 お問い合わせ（窓口） ／ お問い合わせフォーム ／ 取材・パートナーシップ。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="clip-up"</code>、<code>ScrollReveal animation="fade-up"</code>、<code>Card</code>、<code>Link</code>。新規 <code>HubRowFeature</code>（章番号＋左ラベル＋中央写真 sticky＋右リンクの 4 点セット）を page-head に切り出す。</p>
+<p data-role="animation">各行は中央写真を <code>clip-up 700ms</code> で立ち上げ、章番号＋ラベルを <code>stagger 90ms</code> で追従、右リンクを 100ms 遅延で <code>fade-up 700ms</code>。中央写真は <code>position: sticky</code> で viewport 80% まで保持。reduced-motion: reduce では clip-path を初期 <code>inset(0)</code> にして即時表示、sticky は無効化（通常の位置に固定）。</p>
+<p data-role="image"><code>top:hub-01</code>（portrait・会社について）／ <code>top:hub-02</code>（portrait・製品ライン）／ <code>top:hub-03</code>（portrait・お知らせ）／ <code>top:hub-04</code>（portrait・採用情報）／ <code>top:hub-05</code>（portrait・お問い合わせ）。5 領域の縦長写真。01＝朝靄の本社ビル、02＝粉末のプロテイン接写、03＝専門店の陳列、04＝直営ジムの器具、05＝旭川工場の外観。</p>
+</section>
+
+<section data-section="numbers">
+<h3>数値 4 点（信頼提示）</h3>
+<p data-role="purpose">定量的な信頼提示。/company/ への導入。冒険路線でも項目数は a 案と同じ 4 項目に絞り、密度で勝負する。数字の周りに苔色の細い罫線を置き、章番号「02」と整合させる。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、コンテナ max 1200px、4 列グリッド（md 以上）、SP 2 列。各 Stat は数字（明朝 56px、tabular-nums、藍）とラベル（和文、12px、tracking 0.16em）。各 Stat を苔色の 1px 罫線で囲い、四角の額縁を作る。左に縦書きの章番号「02」（苔色、20px）。上下 6rem のパディング。</p>
+<p data-role="copy">128万食（年間出荷）／ 480処方（配合検証）／ 86名（従業員数）／ 3拠点（直営店舗）。</p>
+<p data-role="components">既存 <code>Stat</code>×4、<code>AnimatedCounter</code>、<code>Badge</code>（章番号）。新規 <code>NumbersFramedGrid</code>（苔色罫線で囲む 4 列）を page-head に切り出す。</p>
+<p data-role="animation">数字を <code>AnimatedCounter</code> で 0 からカウントアップ、ラベルが <code>fade-up 700ms</code> で追従。<code>stagger 90ms</code>。章番号は左に固定表示で <code>fade 700ms</code>（100ms 遅延）。reduced-motion: reduce では最終値即時表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="related">
+<h3>Related Content（隣接ページ誘導）</h3>
+<p data-role="purpose">隣接ページへ誘導し、回遊をフッターだけに依存させない。a 案と同じ 3 枚構成だが、カード背景を <code>#F4F6F4</code>（雪白）から <code>#E5E9E6</code>（凍土）に変え、写真の額縁を苔色 1px で囲む。</p>
+<p data-role="layout">3 列グリッド（md 以上）。各カードは写真（aspect 4:3）と和文ラベル（明朝 24px）、ラベル下に 1 行の短いリード（14px、行高 1.85）。背景 <code>#E5E9E6</code>（凍土）。カードに苔色 1px の罫線と、右下に小さな章番号（苔色、tabular-nums）。</p>
+<p data-role="copy">カード 1：会社について（動く体に、確かな補給を。） ／ カード 2：製品ライン（プロテイン・リカバリー・スナック） ／ カード 3：採用情報（旭川の工場と直営店舗で仲間を募集中）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Card</code>、<code>Link</code>。</p>
+<p data-role="animation">各カードが画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-cta">
+<h3>ContactCtaBand</h3>
+<p data-role="purpose">全ページ末尾で問い合わせへ必ず到達できる導線。冒険路線では背景を藍のまま残さず、凍土 <code>#E5E9E6</code> の帯に変え、ボタンを藍の塗りつぶしに切り替える。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、文字 <code>#0E2A47</code>（藍）。コンテナ max 1200px、見出し左（明朝 36px）、ボタン右（藍の塗りつぶし・雪白文字・<code>/service/</code> への <code>primaryCta</code>）。上下 6rem のパディング。ボタンは苔色のアウトラインを二重に重ねた 2 重枠。</p>
+<p data-role="copy">見出し：製品ラインについて、もっと詳しく。 ／ ボタン：製品ラインを見る（<code>primaryCta</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Button</code>。</p>
+<p data-role="animation">画面内に入った時点で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/about/">
+<section data-section="page-header">
+<h3>ページヘッダ</h3>
+<p data-role="purpose">下層ページの主題を提示する。冒険路線では H1 を明朝 75px の大見出しで打ち、左右に語を分ける 2 段構成（左「会社について」／右「Philosophy Statement」）の和欧混植を採用する。参照の表現を a 案から一段踏み込んで採る。</p>
+<p data-role="layout">背景 <code>#0E2A47</code>（深い藍）、文字 <code>#F4F6F4</code>（雪白）。コンテナ max 1200px、H1 は 12 カラム中左 6 カラム（明朝、和文 75px）、右 6 カラムに欧字 "Philosophy Statement"（Cormorant Garamond、48px、tracking 0.04em）。直下に 1 段落のリード（18px、行高 1.95）。上下 9rem のパディング。ドットグリッドは <code>#F4F6F4</code> 透明度 0.06 の 6×6px を藍背景に乗せる。</p>
+<p data-role="copy">H1：会社について ／ 欧字：Philosophy Statement。 ／ リード：北嶺ニュートリションは、動く体に向き合う栄養を、旭川から届けます。2015 年の創業から 11 年、トレーニング向けプロテインとリカバリー食品を自社工場で配合し、北海道の素材と国内外の認証原料を組み合わせて、ジムと直営店舗、専門店・EC を通じて、アスリートから健康志向の一般生活者まで、手元に届く形に整えてきました。</p>
+<p data-role="components">既存 <code>SectionTitle</code>（H1 ＋ 欧字 ＋ リードの 3 段構成に拡張）、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">H1 を <code>fade-up 700ms</code>、欧字を 100ms 遅延で <code>fade 700ms</code>、リードを 200ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="philosophy" id="philosophy">
+<h3>ブランド理念（3 つのステートメント）</h3>
+<p data-role="purpose">企業の存在意義と姿勢を、3 つのステートメントで示す。a 案と同じ 3 行構成だが、冒険路線では数字を苔色の明朝大文字に切り替え、行間 4rem に拡張する。</p>
+<p data-role="layout">コンテナ max 1000px、3 行構成。各行は左に大きな数字（明朝 120px、苔色 #4A5D3A、tabular-nums）、右に見出し（明朝 28px）と本文（18px、行高 1.95）。行間 4rem。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。</p>
+<p data-role="copy">01 存在意義：動く体は、確かな補給を必要とする。 ／ 02 使命：旭川の工場から、北海道の素材と国内外の認証原料で、トレーニングの前後を整えます。 ／ 03 姿勢：配合検証 480 処方を、現場の声を起点に積み直す。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Stat</code>（数字部分）。新規 <code>PhilosophyStatementRow</code>（数字＋見出し＋本文の 3 点セット）を page-head に切り出す。</p>
+<p data-role="animation">各行が画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。数字部分は独立して 100ms 遅延で <code>fade 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="message" id="message">
+<h3>代表メッセージ</h3>
+<p data-role="purpose">創業意図と中長期の目標を 1 段落で示す。冒険路線では署名の代わりに、代表名の縦書き欧字を写真下に添える。</p>
+<p data-role="layout">12 カラム中、左 4 カラム＝見出し「代表メッセージ」（明朝 48px）と縦書き欧字 "Takuro Hokurei"（Cormorant Garamond、20px、tracking 0.08em）、右 8 カラム＝本文（18px、行高 1.95、2 段落）。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。</p>
+<p data-role="copy">見出し：代表メッセージ。 ／ 欧字：Takuro Hokurei ／ Representative Director, President. ／ 本文：北嶺ニュートリションは、2015 年に旭川で小さな配合室から始まりました。創業の動機はシンプルで、トレーニング前後の補給が「美味しくない・溶けにくい・高すぎる」ことの連続だったからです。 ／ 11 年経った今も、私たちは配合検証を 480 処方まで積み、現場の声で処方を組み替えることを止めません。動く体に向き合う栄養を、確かな手元の形で届ける。その約束を、旭川の工場から続けていきます。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。新規 <code>RepresentativeSignature</code>（縦書き欧字署名ブロック）を page-head に切り出す。</p>
+<p data-role="animation">見出し＋欧字署名を <code>fade-up 700ms</code>（100ms 遅延）、本文を <code>fade-up 700ms</code>（200ms 遅延）。reduced-motion: reduce では初期表示。</p>
+<p data-role="image"><code>about:portrait</code>（portrait）。代表の写真（旭川本社のオフィス窓辺・スーツなし・朝の冷たい光）。</p>
+</section>
+
+<section data-section="history" id="history">
+<h3>沿革（2015〜2026）</h3>
+<p data-role="purpose">2015 年から 2026 年までの 11 年分を同一書式で示す。冒険路線では年号のフォントを明朝大文字（48px）に切り替え、行の左右に細い苔色罫線を置く。</p>
+<p data-role="layout">コンテナ max 1000px、年を中央列（明朝 48px、tabular-nums、藍）、出来事を右側に置く縦一覧。10〜11 年分を同一書式で掲載。各行は <code>Timeline</code> コンポーネント、行間 1.5rem。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。各行の左右に 1px <code>#4A5D3A</code>（苔色）の細い縦罫。</p>
+<p data-role="copy">2015：旭川市宮下通にて創業、トレーニング向けプロテイン 3 処方で発売開始。 ／ 2017：直営店舗 1 号店を旭川にオープン。 ／ 2018：リカバリー食品ラインを増設、北海道産ホエイの採用を開始。 ／ 2019：配合検証 100 処方突破、工場ラインを 1.5 倍に拡張。 ／ 2020：専門店・EC への卸売を開始。 ／ 2021：直営店舗 2 号店を札幌にオープン。 ／ 2022：機能性スナックラインを増設、北海道産食材の配合比率を引き上げ。 ／ 2023：配合検証 300 処方突破、ランナーと連携したリカバリー処方を発売。 ／ 2024：直営店舗 3 号店を東京・原宿にオープン。 ／ 2025：配合検証 480 処方突破、国内外の認証原料を採用。 ／ 2026：年間出荷 128 万食達成、旭川本社ビルを拡張。</p>
+<p data-role="components">既存 <code>Timeline</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">各行が画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="company-profile">
+<h3>会社概要テーブル</h3>
+<p data-role="purpose">法人情報を 2 列の表形式で示す。冒険路線ではラベルを苔色にして章番号との統一感を出す。</p>
+<p data-role="layout">コンテナ max 800px、ラベルと値の 2 列テーブル。ラベルは <code>#4A5D3A</code>（苔色）12px、tracking 0.16em、値は <code>#0E2A47</code>（藍）18px。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。表の下部にフッターサイトマップへの小さな誘導（「会社概要の詳細は <a href="/company/">こちら</a>」）。</p>
+<p data-role="copy">商号：北嶺ニュートリション株式会社 ／ 設立：2015 年 4 月 ／ 所在地：〒070-0030 北海道旭川市宮下通 9-2-14 ／ 代表者：代表取締役 北嶺 拓郎 ／ 電話番号：0166-00-0000 ／ 事業内容：スポーツ栄養食品・機能性食品の開発、製造および販売、直営ジムの運営。</p>
+<p data-role="components">既存 <code>Table</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">テーブル全体を <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="related">
+<h3>Related Content</h3>
+<p data-role="purpose">隣接ページへ誘導し、回遊をフッターだけに依存させない。トップと同じ凍土背景と苔色 1px 罫線のカード額縁。</p>
+<p data-role="layout">3 列グリッド（md 以上）。各カードは写真（aspect 4:3）と和文ラベル（明朝 24px）、ラベル下に 1 行の短いリード（14px）。</p>
+<p data-role="copy">カード 1：製品ライン（プロテイン・リカバリー・スナック） ／ カード 2：採用情報（旭川の工場と直営店舗で仲間を募集中） ／ カード 3：お問い合わせ（製品ラインについて、もっと詳しく）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Card</code>、<code>Link</code>。</p>
+<p data-role="animation">各カードが画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-cta">
+<h3>ContactCtaBand</h3>
+<p data-role="purpose">問い合わせへ必ず到達できる導線。トップと同じ凍土背景の帯。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、文字 <code>#0E2A47</code>（藍）。コンテナ max 1200px、見出し左（明朝 36px）、ボタン右（藍の塗りつぶし・雪白文字・<code>/contact/</code> への <code>primaryCta</code>）。上下 6rem のパディング。</p>
+<p data-role="copy">見出し：会社について、もっと詳しく。 ／ ボタン：お問い合わせ（<code>/contact/</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Button</code>。</p>
+<p data-role="animation">画面内に入った時点で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/service/">
+<section data-section="page-header">
+<h3>ページヘッダ</h3>
+<p data-role="purpose">下層ページの主題を提示する。冒険路線では製品ライン全体を「3 つの領域に整える」と宣言し、H1 を明朝大文字で置く。</p>
+<p data-role="layout">背景 <code>#0E2A47</code>（深い藍）、文字 <code>#F4F6F4</code>（雪白）。コンテナ max 1200px、H1 は 12 カラム中左 6 カラム（明朝、和文 75px）、右 6 カラムに欧字 "Product Lines"（Cormorant Garamond、48px、tracking 0.04em）。直下に 1 段落のリード（18px、行高 1.95）。上下 9rem のパディング。ドットグリッドは <code>#F4F6F4</code> 透明度 0.06。</p>
+<p data-role="copy">H1：製品ライン ／ 欧字：Product Lines。 ／ リード：北嶺ニュートリションは、トレーニング向けプロテインとリカバリー食品、機能性スナックを、自社工場で配合しています。配合検証 480 処方を現場の声で積み直し、ジムと直営店舗、専門店・EC を通じて、動く体に必要な補給を、手元に届く形に整えました。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">H1 を <code>fade-up 700ms</code>、欧字を 100ms 遅延で <code>fade 700ms</code>、リードを 200ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="protein" id="protein">
+<h3>トレーニング向けプロテイン</h3>
+<p data-role="purpose">主力の製品ライン。配合の意図と使い方を示す。冒険路線では写真と本文のあいだに苔色の細い縦罫を置き、章番号「01」を写真左上に置く。</p>
+<p data-role="layout">12 カラム中、左 6 カラム＝写真（aspect 4:3、object-fit cover）、右 6 カラム＝見出し（明朝 36px）と本文（18px、行高 1.95）と <code>Steps</code>（配合プロセス 4 段）。写真左上に苔色の小さな章番号「01」。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。写真と本文の間に苔色 1px の縦罫。</p>
+<p data-role="copy">見出し：トレーニング向けプロテイン。 ／ 本文：旭川の工場で配合する 12 処方は、トレーニング前後の補給を 30 秒で溶ける形に整えました。北海道産ホエイと国内外の認証原料を採用し、配合検証は 480 処方を突破。味のばらつきを抑えるため、粉末の粒度を 80 メッシュに統一しています。 ／ 配合プロセス：01 原料選定 ／ 02 配合設計 ／ 03 試作検証 ／ 04 工場生産。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Steps</code>、<code>Card</code>。</p>
+<p data-role="animation">写真を <code>clip-up 700ms</code>、章番号を 100ms 遅延で <code>fade 700ms</code>、本文と見出しを <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image"><code>service:protein</code>（landscape）。粉末のプロテイン接写と容器（朝の冷たい光）。</p>
+</section>
+
+<section data-section="recovery" id="recovery">
+<h3>リカバリー食品</h3>
+<p data-role="purpose">リカバリー食品ラインを示す。冒険路線では章番号「02」と左右反転のレイアウト。</p>
+<p data-role="layout">12 カラム中、右 6 カラム＝写真（aspect 4:3）、左 6 カラム＝見出しと本文と <code>Steps</code>（4 段）。写真右上に苔色の章番号「02」。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。<code>protein</code> セクションと左右反転。</p>
+<p data-role="copy">見出し：リカバリー食品。 ／ 本文：トレーニング後の 30 分に、たんぱく質と電解質を同時に摂れる 6 処方を用意しました。北海道産食材と国内外の認証原料を組み合わせ、味のばらつきを抑えるため、1 食あたりの配合を 0.1g 単位で管理しています。 ／ 配合プロセス：01 食材選定 ／ 02 配合設計 ／ 03 試作検証 ／ 04 工場生産。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Steps</code>、<code>Card</code>。</p>
+<p data-role="animation">写真を <code>clip-up 700ms</code>、章番号を 100ms 遅延で <code>fade 700ms</code>、本文と見出しを <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image"><code>service:recovery</code>（landscape）。リカバリー食品の手元・食材カット（凍った食材の表面が見える構図）。</p>
+</section>
+
+<section data-section="snack" id="snack">
+<h3>機能性スナック</h3>
+<p data-role="purpose">日常使いの機能性スナックを示す。章番号「03」と左右反転なし。</p>
+<p data-role="layout">12 カラム中、左 6 カラム＝写真（aspect 4:3）、右 6 カラム＝見出しと本文と <code>Steps</code>（4 段）。写真左上に苔色の章番号「03」。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。</p>
+<p data-role="copy">見出し：機能性スナック。 ／ 本文：日常使いのための 8 処方は、たんぱく質を 10〜20g 含み、手軽に持ち運べる形に整えました。北海道産食材の配合比率を引き上げ、味のばらつきを抑えるため、焙煎温度を 1℃単位で管理しています。 ／ 配合プロセス：01 食材選定 ／ 02 配合設計 ／ 03 試作検証 ／ 04 工場生産。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Steps</code>、<code>Card</code>。</p>
+<p data-role="animation">写真を <code>clip-up 700ms</code>、章番号を 100ms 遅延で <code>fade 700ms</code>、本文と見出しを <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image"><code>service:snack</code>（landscape）。機能性スナックの接写・陳列（朝靄の窓辺）。</p>
+</section>
+
+<section data-section="store" id="store">
+<h3>直営店舗と EC</h3>
+<p data-role="purpose">購入導線（直営 3 拠点＋専門店・EC）を示す。参照の <code>Store</code> 機能を <code>Service</code> 配下に集約した意図を保つ。冒険路線では <code>Tab</code> を <code>StoreSwitcher</code>（3 拠点＋EC）に拡張し、苔色の細いアンダーラインでアクティブ表示する。</p>
+<p data-role="layout">コンテナ max 1200px、3 列グリッド（md 以上）。各拠点カードは写真（aspect 4:3）と拠点名（明朝 24px）と住所（14px）。下に <code>Tab</code>（旭川・札幌・原宿／ EC）。アクティブタブに苔色 1px のアンダーライン。</p>
+<p data-role="copy">旭川本店：〒070-0030 北海道旭川市宮下通 9-2-14 ／ 札幌店：北海道札幌市中央区南 1 条 ／ 原宿店：東京都渋谷区神宮前 ／ EC：公式オンラインストア（<code>external link</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Tab</code>、<code>Card</code>、<code>Badge</code>。</p>
+<p data-role="animation">写真と見出しを <code>fade-up 700ms</code>、<code>stagger 90ms</code>。タブ切替は即時（CSS クラスのみ）、reduced-motion: reduce でも影響なし。reduced-motion: reduce では fade-up を初期表示に固定。</p>
+<p data-role="image"><code>service:store-asahikawa</code>（landscape）。北嶺ニュートリション旭川本店の直営店舗外観（朝の光）。</p>
+</section>
+
+<section data-section="related">
+<h3>Related Content</h3>
+<p data-role="purpose">隣接ページへ誘導し、回遊をフッターだけに依存させない。</p>
+<p data-role="layout">3 列グリッド（md 以上）。各カードは写真（aspect 4:3）と和文ラベル（明朝 24px）、ラベル下に 1 行の短いリード（14px）。</p>
+<p data-role="copy">カード 1：会社について（動く体に、確かな補給を。） ／ カード 2：採用情報（旭川の工場と直営店舗で仲間を募集中） ／ カード 3：お問い合わせ（製品ラインについて、もっと詳しく）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Card</code>、<code>Link</code>。</p>
+<p data-role="animation">各カードが画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-cta">
+<h3>ContactCtaBand</h3>
+<p data-role="purpose">問い合わせへ必ず到達できる導線。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、文字 <code>#0E2A47</code>（藍）。コンテナ max 1200px、見出し左（明朝 36px）、ボタン右（藍の塗りつぶし・雪白文字・<code>/contact/</code> への <code>primaryCta</code>）。上下 6rem のパディング。</p>
+<p data-role="copy">見出し：製品ラインについて、もっと詳しく。 ／ ボタン：製品ラインを見る（<code>primaryCta</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Button</code>。</p>
+<p data-role="animation">画面内に入った時点で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/news/">
+<section data-section="page-header">
+<h3>ページヘッダ</h3>
+<p data-role="purpose">お知らせページ主題を提示する。</p>
+<p data-role="layout">背景 <code>#0E2A47</code>（深い藍）、文字 <code>#F4F6F4</code>（雪白）。コンテナ max 1200px、H1 は 12 カラム中左 6 カラム（明朝、和文 75px）、右 6 カラムに欧字 "News"（Cormorant Garamond、48px）。直下に 1 段落のリード（18px、行高 1.95）。上下 9rem のパディング。</p>
+<p data-role="copy">H1：お知らせ ／ 欧字：News。 ／ リード：北嶺ニュートリションからの、製品リリース・メディア掲載・店舗情報をお届けします。2024 年以降のアーカイブは 1 年分、2025 年以降の新着は年別タブで切り替えます。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">H1 を <code>fade-up 700ms</code>、欧字を 100ms 遅延で <code>fade 700ms</code>、リードを 200ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="news-list">
+<h3>お知らせ一覧（年別タブ＋日付降順）</h3>
+<p data-role="purpose">更新の証明。リリース・掲載・店舗の 3 カテゴリを苔色の小さなバッジで区別する。</p>
+<p data-role="layout">コンテナ max 1000px、上部に <code>Tab</code>（2025 / 2024 / 2023）。各記事は日付（明朝 24px、tabular-nums）＋ カテゴリバッジ（苔色、和文 12px）＋ タイトル（明朝 20px）の 3 列構成。下線 1px <code>#C9D2CB</code>（凍土グレー）。</p>
+<p data-role="copy">2025-11-04 【リリース】リカバリー食品「HOKUREI REPAIR 02」を発売、トレーニング後 30 分の補給に電解質を同時配合 ／ 2025-09-18 【メディア】北海道新聞 朝刊「旭川のものづくり」特集に当社の配合検証が掲載 ／ 2025-07-22 【店舗】原宿店の営業時間短縮（11:00〜18:00）のお知らせ ／ 2025-05-10 【リリース】機能性スナック「HOKUREI SNACK 04」を発売、北海道産えんどう豆を 30% 配合 ／ 2025-03-02 【メディア】雑誌「Tarzan」最新号に当社のリカバリー処方が掲載 ／ 2025-01-15 【リリース】配合検証 480 処方突破、国内外の認証原料を採用 ／ 2024-12-01 【リリース】直営 3 号店を東京・原宿にオープン ／ 2024-10-12 【メディア】Web メディア「スポーツ栄養ナビ」に当社代表インタビューが掲載 ／ 2024-08-08 【リリース】配合検証 300 処方突破、ランナーと連携したリカバリー処方を発売 ／ 2024-06-20 【店舗】札幌店の定休日を日曜日に変更 ／ 2024-04-04 【メディア】北海道テレビ「まちの工場」に出演 ／ 2023-12-15 【リリース】リカバリー食品ラインを増設、北海道産ホエイの採用比率を引き上げ。</p>
+<p data-role="components">既存 <code>Tab</code>、<code>ScrollReveal animation="fade-up"</code>、<code>Badge</code>（カテゴリ）。</p>
+<p data-role="animation">各記事が画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。タブ切替は即時、reduced-motion: reduce でも影響なし。reduced-motion: reduce では fade-up を初期表示に固定。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-cta">
+<h3>ContactCtaBand</h3>
+<p data-role="purpose">問い合わせへ必ず到達できる導線。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、文字 <code>#0E2A47</code>（藍）。コンテナ max 1200px、見出し左（明朝 36px）、ボタン右（藍の塗りつぶし・雪白文字・<code>/contact/</code> への <code>primaryCta</code>）。上下 6rem のパディング。</p>
+<p data-role="copy">見出し：取材・パートナーシップのご相談はこちら。 ／ ボタン：お問い合わせ（<code>/contact/</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Button</code>。</p>
+<p data-role="animation">画面内に入った時点で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/contact/">
+<section data-section="page-header">
+<h3>ページヘッダ</h3>
+<p data-role="purpose">お問い合わせページの主題を提示する。</p>
+<p data-role="layout">背景 <code>#0E2A47</code>（深い藍）、文字 <code>#F4F6F4</code>（雪白）。コンテナ max 1200px、H1 は 12 カラム中左 6 カラム（明朝、和文 75px）、右 6 カラムに欧字 "Contact"（Cormorant Garamond、48px）。直下に 1 段落のリード（18px、行高 1.95）。上下 9rem のパディング。</p>
+<p data-role="copy">H1：お問い合わせ ／ 欧字：Contact。 ／ リード：事業・取材・採用の 3 つのご用件を、フォームからお寄せください。内容に応じて 3 営業日以内に担当者からご返信します。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">H1 を <code>fade-up 700ms</code>、欧字を 100ms 遅延で <code>fade 700ms</code>、リードを 200ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-info">
+<h3>お問い合わせ情報</h3>
+<p data-role="purpose">電話・メール・所在地の 3 系統を苔色の細い罫線で区切って提示する。</p>
+<p data-role="layout">コンテナ max 1000px、3 列グリッド（md 以上）。各列は見出し（明朝 20px、苔色）と値（18px）。列間を苔色 1px の縦罫で区切る。</p>
+<p data-role="copy">電話：0166-00-0000（平日 9:00〜17:30）／ メール：info@example.com ／ 所在地：〒070-0030 北海道旭川市宮下通 9-2-14 ／ ご来社の際は事前予約制。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Divider</code>（縦罫）。</p>
+<p data-role="animation">各列が画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-form">
+<h3>お問い合わせフォーム</h3>
+<p data-role="purpose">事業・取材・採用の 3 ご用件を 1 つのフォームで受ける。</p>
+<p data-role="layout">コンテナ max 720px。フィールド構成：ご用件（事業・取材・採用、必須） ／ 会社名（任意）／ お名前（必須）／ メールアドレス（必須）／ 電話番号（任意）／ お問い合わせ内容（必須、テキストエリア）。各フィールド下に薄い凍土 <code>#E5E9E6</code> の下線、フォーカス時は藍に切り替え。送信ボタンは藍の塗りつぶし・雪白文字・<code>primaryCta</code>。</p>
+<p data-role="copy">見出し：お問い合わせフォーム。 ／ プレースホルダ：ご用件を選択 ／ 会社名（任意）／ お名前 ／ メールアドレス ／ 電話番号（任意）／ お問い合わせ内容をご記入ください。 ／ ボタン：送信する。</p>
+<p data-role="components">既存 <code>Fieldset</code>、<code>Select</code>、<code>TextInput</code>、<code>Textarea</code>、<code>Button</code>。新規 <code>ContactFormShell</code>（フィールドセット群）を page-head に切り出す。</p>
+<p data-role="animation">フォーム全体を <code>fade-up 700ms</code>、各フィールドを <code>stagger 90ms</code> で追従。reduced-motion: reduce では初期表示。バリデーションエラー表示は <code>fade 700ms</code>。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-flow">
+<h3>送信後の流れ</h3>
+<p data-role="purpose">お問い合わせ後の応答時間目安と、返信が来ない場合の連絡先を示す。</p>
+<p data-role="layout">コンテナ max 800px、<code>Steps</code>（4 段）。各ステップは見出し（明朝 20px）と本文（16px、行高 1.85）。ステップ間に苔色 1px の水平罫。</p>
+<p data-role="copy">01 受付：フォーム送信後、自動返信メールが届きます。 ／ 02 内容確認：担当者より内容を確認します。 ／ 03 ご返信：3 営業日以内に担当者からご返信します。 ／ 04 お問い合わせの内容が採用応募の場合は、<a href="/recruit/">採用情報ページ</a> からご応募ください。</p>
+<p data-role="components">既存 <code>Steps</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">各ステップが画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/company/">
+<section data-section="page-header">
+<h3>ページヘッダ</h3>
+<p data-role="purpose">会社概要ページの主題を提示する。</p>
+<p data-role="layout">背景 <code>#0E2A47</code>（深い藍）、文字 <code>#F4F6F4</code>（雪白）。コンテナ max 1200px、H1 は 12 カラム中左 6 カラム（明朝、和文 75px）、右 6 カラムに欧字 "Company Outline"（Cormorant Garamond、48px）。直下に 1 段落のリード（18px、行高 1.95）。上下 9rem のパディング。</p>
+<p data-role="copy">H1：会社概要 ／ 欧字：Company Outline。 ／ リード：北嶺ニュートリション株式会社の法人情報を、8 項目にまとめて掲載しています。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">H1 を <code>fade-up 700ms</code>、欧字を 100ms 遅延で <code>fade 700ms</code>、リードを 200ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="company-table">
+<h3>会社概要テーブル（8 項目）</h3>
+<p data-role="purpose">法人情報を 2 列の表形式で 8 項目示す。/about/ 内のサブテーブルより詳細化する。</p>
+<p data-role="layout">コンテナ max 800px、ラベルと値の 2 列テーブル。ラベルは <code>#4A5D3A</code>（苔色）12px、tracking 0.16em、値は <code>#0E2A47</code>（藍）18px。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。</p>
+<p data-role="copy">商号：北嶺ニュートリション株式会社 ／ 設立：2015 年 4 月 ／ 資本金：3,000 万円 ／ 所在地：〒070-0030 北海道旭川市宮下通 9-2-14 ／ 代表者：代表取締役 北嶺 拓郎 ／ 電話番号：0166-00-0000 ／ 事業内容：スポーツ栄養食品・機能性食品の開発、製造および販売、直営ジムの運営 ／ 取引銀行：北海道銀行 旭川支店。</p>
+<p data-role="components">既存 <code>Table</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">テーブル全体を <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="company-numbers">
+<h3>事業数値（4 項目）</h3>
+<p data-role="purpose">/about/ の Numbers と同じ 4 項目を、会社概要ページでも再掲する。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、コンテナ max 1200px、4 列グリッド（md 以上）。各 Stat は数字（明朝 56px、tabular-nums、藍）とラベル（12px、tracking 0.16em）。苔色 1px の額縁。</p>
+<p data-role="copy">128万食（年間出荷）／ 480処方（配合検証）／ 86名（従業員数）／ 3拠点（直営店舗）。</p>
+<p data-role="components">既存 <code>Stat</code>×4、<code>AnimatedCounter</code>。</p>
+<p data-role="animation">数字を <code>AnimatedCounter</code> で 0 からカウントアップ、ラベルが <code>fade-up 700ms</code> で追従、<code>stagger 90ms</code>。reduced-motion: reduce では最終値即時表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="access">
+<h3>アクセス</h3>
+<p data-role="purpose">旭川本店への交通アクセスを示す。冒険路線では地図の代わりにテキストベースのアクセス記述と、最寄り駅の小さな写真を用いる。</p>
+<p data-role="layout">コンテナ max 1000px、2 列グリッド（md 以上）。左列は所在地と交通（明朝 20px と 16px）、右列は旭川本店の小さな写真（aspect 4:3）。</p>
+<p data-role="copy">所在地：〒070-0030 北海道旭川市宮下通 9-2-14 北嶺本社ビル 1F ／ 交通：JR 旭川駅より徒歩 8 分 ／ 駐車場：3 台完備 ／ 営業時間：平日 9:00〜17:30（ご来社の際は事前予約制）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>List</code>。</p>
+<p data-role="animation">各列が画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image"><code>company:office</code>（landscape）。北嶺本社ビルの外観（朝の光）。</p>
+</section>
+
+<section data-section="contact-cta">
+<h3>ContactCtaBand</h3>
+<p data-role="purpose">問い合わせへ必ず到達できる導線。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、文字 <code>#0E2A47</code>（藍）。コンテナ max 1200px、見出し左（明朝 36px）、ボタン右（藍の塗りつぶし・雪白文字・<code>/contact/</code> への <code>primaryCta</code>）。上下 6rem のパディング。</p>
+<p data-role="copy">見出し：会社概要について、もっと詳しく。 ／ ボタン：お問い合わせ（<code>/contact/</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Button</code>。</p>
+<p data-role="animation">画面内に入った時点で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/recruit/">
+<section data-section="page-header">
+<h3>ページヘッダ</h3>
+<p data-role="purpose">採用情報ページの主題を提示する。</p>
+<p data-role="layout">背景 <code>#0E2A47</code>（深い藍）、文字 <code>#F4F6F4</code>（雪白）。コンテナ max 1200px、H1 は 12 カラム中左 6 カラム（明朝、和文 75px）、右 6 カラムに欧字 "Recruit"（Cormorant Garamond、48px）。直下に 1 段落のリード（18px、行高 1.95）。上下 9rem のパディング。</p>
+<p data-role="copy">H1：採用情報 ／ 欧字：Recruit。 ／ リード：北嶺ニュートリションは、旭川の工場と直営 3 拠点で仲間を募集しています。動く体に向き合う栄養を、現場で作って届けたい方を募集します。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">H1 を <code>fade-up 700ms</code>、欧字を 100ms 遅延で <code>fade 700ms</code>、リードを 200ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="recruit-message">
+<h3>採用メッセージ</h3>
+<p data-role="purpose">採用の方針と、現場で求める人物像を示す。</p>
+<p data-role="layout">12 カラム中、左 4 カラム＝見出し「採用メッセージ」（明朝 48px）、右 8 カラム＝本文（18px、行高 1.95、2 段落）。背景 <code>#F4F6F4</code>（雪白）、上下 9rem のパディング。</p>
+<p data-role="copy">見出し：採用メッセージ。 ／ 本文：私たちは「配合検証 480 処方、現場の声で処方を組み替える」を 11 年続けてきました。これからも、現場で作って、現場で届けることを止めません。 ／ 募集するのは、原料の選定から配合、工場ライン、直営店舗、専門店の販売までを一貫して担える人材です。旭川の工場と直営 3 拠点で、動く体に向き合う栄養を一緒に作っていただける方を募集します。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">見出しを <code>fade-up 700ms</code>、本文を 100ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="recruit-positions">
+<h3>募集職種（3 職種）</h3>
+<p data-role="purpose">配合設計・工場ライン・直営店舗の 3 職種を苔色の小さな数字タグで提示する。</p>
+<p data-role="layout">コンテナ max 1000px、3 列グリッド（md 以上）。各カードは職種名（明朝 24px）、勤務地（14px）、給与レンジ（14px）、<code>Badge</code>「01」「02」「03」（苔色、tabular-nums）。</p>
+<p data-role="copy">01 配合設計スタッフ ／ 勤務地：旭川本社 ／ 給与：年収 380〜560 万円 ／ 02 工場ラインスタッフ ／ 勤務地：旭川本社 ／ 給与：年収 320〜440 万円 ／ 03 直営店舗スタッフ ／ 勤務地：旭川・札幌・原宿のいずれか ／ 給与：年収 300〜420 万円。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Card</code>、<code>Badge</code>。</p>
+<p data-role="animation">各カードが画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="recruit-flow">
+<h3>選考フロー</h3>
+<p data-role="purpose">応募から内定までの 4 段階を示す。</p>
+<p data-role="layout">コンテナ max 800px、<code>Steps</code>（4 段）。各ステップは見出し（明朝 20px）と本文（16px、行高 1.85）。ステップ間に苔色 1px の水平罫。</p>
+<p data-role="copy">01 エントリー：<a href="/contact/">お問い合わせフォーム</a> または recruit@example.com へ履歴書・職務経歴書をご送付ください。 ／ 02 一次面接：オンラインまたは旭川本社で実施します。 ／ 03 二次面接・現場体験：旭川本社または直営店舗で、現場の雰囲気を体感いただきます。 ／ 04 内定：応募から内定まで 3〜4 週間を予定しています。</p>
+<p data-role="components">既存 <code>Steps</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">各ステップが画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="recruit-benefits">
+<h3>福利厚生</h3>
+<p data-role="purpose">社会保険・休暇・社内制度を 6 項目で示す。</p>
+<p data-role="layout">コンテナ max 1000px、3 列 × 2 行グリッド（md 以上）。各項目は <code>Card</code>（見出し明朝 18px と本文 16px）。</p>
+<p data-role="copy">社会保険完備 ／ 退職金制度あり ／ 年間休日 120 日 ／ 産前産後・育児休暇制度 ／ 社員割引（直営店舗の製品を 30% 引）／ 研修制度（配合研修・店舗研修・外部セミナー）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Card</code>。</p>
+<p data-role="animation">各カードが画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-cta">
+<h3>エントリーボタン</h3>
+<p data-role="purpose">採用応募口へ誘導する。/contact/ と同じ凍土帯だが、コピーを「採用応募」に切り替える。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、文字 <code>#0E2A47</code>（藍）。コンテナ max 1200px、見出し左（明朝 36px）、ボタン右（藍の塗りつぶし・雪白文字・<code>/contact/</code> へ）。上下 6rem のパディング。</p>
+<p data-role="copy">見出し：ご応募はこちらから。 ／ ボタン：エントリーフォーム（<code>/contact/</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Button</code>。</p>
+<p data-role="animation">画面内に入った時点で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/privacy/">
+<section data-section="page-header">
+<h3>ページヘッダ</h3>
+<p data-role="purpose">プライバシーポリシーページの主題を提示する。</p>
+<p data-role="layout">背景 <code>#0E2A47</code>（深い藍）、文字 <code>#F4F6F4</code>（雪白）。コンテナ max 1200px、H1 は 12 カラム中左 6 カラム（明朝、和文 75px）、右 6 カラムに欧字 "Privacy Policy"（Cormorant Garamond、48px）。直下に 1 段落のリード（18px、行高 1.95）。上下 9rem のパディング。</p>
+<p data-role="copy">H1：プライバシーポリシー ／ 欧字：Privacy Policy。 ／ リード：北嶺ニュートリション株式会社（以下「当社」）は、お客様の個人情報を適切に保護し、以下の方針に基づき取り扱います。</p>
+<p data-role="components">既存 <code>SectionTitle</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">H1 を <code>fade-up 700ms</code>、欧字を 100ms 遅延で <code>fade 700ms</code>、リードを 200ms 遅延で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="privacy-body">
+<h3>本文（8 章構成）</h3>
+<p data-role="purpose">法令に準拠した 8 章の本文を示す。</p>
+<p data-role="layout">コンテナ max 720px、<code>Accordion</code>（8 章）。各章は見出し（明朝 24px）と本文（16px、行高 1.95）。</p>
+<p data-role="copy">01 個人情報の定義：本ポリシーにおいて「個人情報」とは、氏名、住所、電話番号、メールアドレスその他の記述等により特定の個人を識別できる情報をいいます。 ／ 02 収集する情報：当社は、商品のご購入、お問い合わせ、採用応募その他の機会を通じて、お名前、メールアドレス、住所、電話番号その他の必要な情報を収集します。 ／ 03 利用目的：当社は、収集した個人情報を、商品の発送、お問い合わせへのご返信、採用選考その他の目的のために利用します。 ／ 04 第三者提供：当社は、法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供することはありません。 ／ 05 委託：当社は、業務の一部を外部に委託する場合、委託先に対し適切な監督を行います。 ／ 06 安全管理：当社は、個人情報の漏えい、滅失、き損の防止その他の安全管理のため、必要かつ適切な措置を講じます。 ／ 07 開示・訂正・削除：お客様は、当社が保有する自己の個人情報について、開示・訂正・削除をご請求いただけます。 ／ 08 お問い合わせ：本ポリシーに関するお問い合わせは、<code>/contact/</code> または 0166-00-0000 までご連絡ください。</p>
+<p data-role="components">既存 <code>Accordion</code>、<code>ScrollReveal animation="fade-up"</code>。</p>
+<p data-role="animation">各章が画面内に入った時点で <code>fade-up 700ms</code>、<code>stagger 90ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="contact-cta">
+<h3>ContactCtaBand</h3>
+<p data-role="purpose">問い合わせへ必ず到達できる導線。</p>
+<p data-role="layout">背景 <code>#E5E9E6</code>（凍土）、文字 <code>#0E2A47</code>（藍）。コンテナ max 1200px、見出し左（明朝 36px）、ボタン右（藍の塗りつぶし・雪白文字・<code>/contact/</code> への <code>primaryCta</code>）。上下 6rem のパディング。</p>
+<p data-role="copy">見出し：本ポリシーについて、もっと詳しく。 ／ ボタン：お問い合わせ（<code>/contact/</code>）。</p>
+<p data-role="components">既存 <code>ScrollReveal animation="fade-up"</code>、<code>Button</code>。</p>
+<p data-role="animation">画面内に入った時点で <code>fade-up 700ms</code>。reduced-motion: reduce では初期表示。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+</section>
+
+<section id="images">
+<h2>必要な画像（4〜8 枚）</h2>
+<figure data-placement="top:hero-collage-01" data-tags="凍った水路,足元,冬,旭川,縦位置" data-aspect="portrait">
+<figcaption data-prompt="北海道旭川の冬の朝、凍った水路を歩くランナーの足元を縦位置で接写した写真。氷の表面と運動靴のコントラストがはっきり見える構図。朝の冷たい自然光、彩度を抑えた色温度、被写界深度を浅めにして背景の冬景色をぼかす。AI 写真・ストック写真感を避け、現場の空気感を残すこと。">
+</figure>
+<figure data-placement="top:hero-collage-02" data-tags="雪,ベンチ,手元,休憩,正方" data-aspect="square">
+<figcaption data-prompt="雪が積もったベンチに座る休憩中のアスリートの手元を正方構図で接写した写真。雪の質感と手元のグローブ、ウェアの質感がはっきり見える構図。曇天の柔らかい自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。">
+</figure>
+<figure data-placement="top:hero-collage-03" data-tags="旭川工場,金属ライン,製造,横位置" data-aspect="landscape">
+<figcaption data-prompt="旭川工場の金属ラインを横位置で接写した写真。粉末のプロテインが流れる金属の表面と、ラインを支える支柱の質感が見える構図。工場の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景にラインをぼかす。AI 写真・ストック写真感を避けること。">
+</figure>
+<figure data-placement="top:hero-collage-04" data-tags="ラベル貼り,手元,マクロ,接写,縦位置" data-aspect="portrait">
+<figcaption data-prompt="ラベルを容器に貼る手元を縦位置でマクロ撮影した写真。指先の作業とラベルの紙の繊維、容器の表面が見える構図。曇天の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。">
+</figure>
+<figure data-placement="about:portrait" data-tags="代表,肖像,オフィス,窓辺,縦位置" data-aspect="portrait">
+<figcaption data-prompt="北嶺ニュートリションの代表が旭川本社のオフィス窓辺に立つ姿を縦位置で撮影した肖像写真。スーツではなく清潔なシャツ姿、窓からの朝の冷たい自然光、背景は旭川の街並みをぼかす。彩度を抑えた色温度。AI 写真・ストック写真感を避け、現場の空気感を残すこと。">
+</figure>
+<figure data-placement="service:protein" data-tags="粉末,プロテイン,接写,容器,横位置" data-aspect="landscape">
+<figcaption data-prompt="粉末のプロテインがスプーンですくわれ、容器の縁からこぼれ落ちる瞬間を横位置で接写した写真。粉末の粒度と容器の質感が見える構図。曇天の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。">
+</figure>
+<figure data-placement="service:store-asahikawa" data-tags="直営店舗,旭川,外観,朝,横位置" data-aspect="landscape">
+<figcaption data-prompt="北嶺ニュートリション旭川本店の直営店舗の外観を朝の光で横位置撮影した写真。看板と玄関、窓の向こうに店内が見える構図。朝の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景の街路樹をぼかす。AI 写真・ストック写真感を避けること。">
+</figure>
+<figure data-placement="company:office" data-tags="旭川本社,ビル,外観,朝,横位置" data-aspect="landscape">
+<figcaption data-prompt="北嶺ニュートリション旭川本社のビル外観を朝の光で横位置撮影した写真。ビルの正面と玄関、北海道の冬の空と背景の街路樹が見える構図。朝の自然光、彩度を抑えた色温度、被写界深度を浅めにして背景をぼかす。AI 写真・ストック写真感を避けること。">
+</figure>
+</section>
+
+</body>
+</html>
