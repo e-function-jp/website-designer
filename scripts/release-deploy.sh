@@ -77,6 +77,11 @@ if highs:
 print("high の指摘なし")
 PYEOF
   [[ $? -eq 0 ]] || die "品質ゲートで停止"
+
+  # 描画検証。静的解析では「出るはずの要素が出ていない」を判定できない。
+  # 実測で、静的 100/100 のページがトップの4割空白だった事故がある。
+  echo "--- 描画検証 ---"
+  node "${SCRIPT_DIR}/web-render-check.mjs" || die "描画検証で high の指摘あり"
 fi
 
 # 2) postprocess: 絶対 URL を相対パス化
