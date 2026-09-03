@@ -1,0 +1,29 @@
+---
+/**
+ * パンくず。website の下層ページでは必須（`ia-breadcrumb-missing` が検査する）。
+ * JSON-LD の BreadcrumbList は SiteLayout 側で自動生成するので、ここは表示専用。
+ */
+import type { SiteConfig, Breadcrumb } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+  crumbs: Breadcrumb[];
+}
+const { site, crumbs } = Astro.props;
+---
+
+<nav aria-label="パンくずリスト" class="border-b border-base-200 bg-base-100">
+  <ol class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center gap-2 text-xs text-base-content/70">
+    {crumbs.map((c, i) => (
+      <li class="flex items-center gap-2">
+        {c.href && i < crumbs.length - 1 ? (
+          <a href={url(site, c.href)} class="hover:underline">{c.label}</a>
+        ) : (
+          <span aria-current="page" class="text-base-content font-medium">{c.label}</span>
+        )}
+        {i < crumbs.length - 1 && <span aria-hidden="true" class="opacity-50">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -1,0 +1,75 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Accordion from '../../../../../components/data-display/Accordion.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const sections = [
+  {
+    heading: '1. 取得する個人情報',
+    body: 'お問い合わせフォーム、電子メール、電話、名刺交換を通じて、氏名・会社名・部署名・電話番号・メールアドレス・ご相談内容を取得します。ウェブサイトの閲覧に関しては、アクセス解析のために閲覧ページと参照元を取得しますが、個人を特定する情報とは結び付けません。',
+  },
+  {
+    heading: '2. 利用目的',
+    body: 'お問い合わせへの回答、お見積りの作成と提出、受注後の連絡、および当社の製品・技術に関する情報提供のために利用します。これ以外の目的で利用する場合は、あらためてご本人の同意をいただきます。',
+  },
+  {
+    heading: '3. 第三者提供',
+    body: '法令に基づく場合を除き、ご本人の同意なく第三者へ提供することはありません。加工の一部を協力会社へ委託する場合は、必要最小限の情報のみを、秘密保持契約を締結したうえで提供します。',
+  },
+  {
+    heading: '4. 安全管理措置',
+    body: '個人情報を扱う端末をアクセス制限下に置き、担当者を限定しています。取得した図面データはロット完了後10年間保管し、期間経過後に復元不可能な方法で廃棄します。',
+  },
+  {
+    heading: '5. 開示・訂正・削除のご請求',
+    body: 'ご本人からの開示、訂正、利用停止、削除のご請求には、ご本人であることを確認したうえで速やかに対応します。下記の窓口までご連絡ください。',
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="プライバシーポリシー"
+  description="株式会社ミナモト精機の個人情報保護方針です。取得する情報、利用目的、第三者提供、安全管理措置、開示請求の手続きについて定めています。"
+  path="/privacy/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'プライバシーポリシー' }]}
+>
+  <section class="bg-base-200">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h1 class="text-3xl md:text-4xl font-bold">プライバシーポリシー</h1>
+      <p class="mt-4 text-base-content/80 leading-relaxed">
+        株式会社ミナモト精機（以下「当社」）は、事業活動を通じて取得する個人情報の保護を
+        重要な責務と考え、以下のとおり方針を定めます。
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 py-16">
+    <SectionTitle title="個人情報保護方針" align="left" />
+    <div class="mt-8 space-y-4">
+      {sections.map((s, i) => (
+        <Accordion name="privacy">
+          <input type="radio" name="privacy" checked={i === 0} />
+          <h2 class="collapse-title font-bold">{s.heading}</h2>
+          <div class="collapse-content">
+            <p class="text-sm leading-relaxed text-base-content/80">{s.body}</p>
+          </div>
+        </Accordion>
+      ))}
+    </div>
+
+    <div class="mt-12 rounded-2xl bg-base-200 p-6">
+      <h2 class="font-bold">お問い合わせ窓口</h2>
+      <p class="mt-2 text-sm leading-relaxed text-base-content/80">
+        株式会社ミナモト精機 総務部 個人情報保護担当<br />
+        〒939-8214 富山県富山市黒崎 3-12-8<br />
+        TEL 076-000-0000（平日 8:30–17:30）
+      </p>
+      <p class="mt-4 text-xs text-base-content/60">制定日: 2016年4月1日／最終改定日: 2026年4月1日</p>
+    </div>
+  </section>
+
+  <PageTopButton />
+</SiteLayout>

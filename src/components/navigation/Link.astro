@@ -1,0 +1,6 @@
+---
+interface Props { href: string; variant?: 'primary' | 'secondary' | 'accent' | 'neutral' | 'hover'; class?: string }
+const { href, variant = 'primary', class: className = '' } = Astro.props;
+const variantClass = variant === 'hover' ? 'link-hover' : `link-${variant}`;
+---
+<a href={href} class={`link ${variantClass} ${className}`.trim()}><slot /></a>

@@ -1,0 +1,13 @@
+---
+interface Props { color?: 'primary' | 'secondary' | 'accent'; class?: string }
+const { color, class: className = '' } = Astro.props;
+const colorClass = color ? `border-${color}` : '';
+---
+<div class={`mockup-phone ${colorClass} ${className}`.trim()}>
+  <div class="camera"></div>
+  <div class="display">
+    <div class="artboard artboard-demo phone-1">
+      <slot />
+    </div>
+  </div>
+</div>

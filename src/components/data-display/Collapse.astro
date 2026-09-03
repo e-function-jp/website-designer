@@ -1,0 +1,10 @@
+---
+interface Props { type?: 'arrow' | 'plus' | 'default'; class?: string }
+const { type = 'arrow', class: className = '' } = Astro.props;
+const typeClass = type !== 'default' ? `collapse-${type}` : '';
+---
+<div class={`collapse ${typeClass} bg-base-100 border border-base-300 ${className}`}>
+  <input type="checkbox" />
+  <div class="collapse-title font-semibold"><slot name="title">タイトル</slot></div>
+  <div class="collapse-content text-sm"><slot /></div>
+</div>

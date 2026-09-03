@@ -1,0 +1,33 @@
+---
+interface Props {
+  threshold?: number;
+  class?: string;
+}
+const { threshold = 300, class: className = '' } = Astro.props;
+---
+<button
+  id="page-top-btn"
+  class={`fixed bottom-20 right-4 z-40 btn btn-circle btn-neutral shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 ${className}`}
+  aria-label="ページトップへ戻る"
+  data-threshold={threshold}
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('page-top-btn') as HTMLButtonElement;
+    if (!btn) return;
+    const threshold = parseInt(btn.dataset.threshold || '300', 10);
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > threshold) {
+        btn.classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        btn.classList.add('opacity-0', 'pointer-events-none');
+      }
+    });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>

@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.astro/
+.env
+.DS_Store
+*.log
+
+# 学習ランの中間生成物（キャプチャ・スクショ）は重いので追跡しない。
+# 採点結果 JSON とレポートは追跡する。
+docs/quality/runs/**/shots/
+docs/quality/runs/**/*.jpg
+docs/quality/runs/**/*.png
+site_archive/captures/

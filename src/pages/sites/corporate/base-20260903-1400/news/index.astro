@@ -1,0 +1,67 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Badge from '../../../../../components/data-display/Badge.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const entries = [
+  { date: '2026-08-20', category: 'お知らせ', title: '第3工場に5軸マシニングセンタを2台増設しました',
+    body: '複合形状部品の一工程加工能力を拡張しました。従来2回の段取りが必要だった形状を1回で仕上げられるため、リードタイムを平均で3営業日短縮できます。' },
+  { date: '2026-07-04', category: '技術', title: 'チタン合金の深穴加工事例を公開しました',
+    body: 'Ti-6Al-4V に対し深さ/径比20の穴を、真円度2μm以内で加工した事例です。切削油の供給方法と工具の突き出し量の詰め方について記載しています。' },
+  { date: '2026-06-11', category: '採用', title: '2027年度 新卒採用エントリーの受付を開始しました',
+    body: '機械科・電気科の高専卒／大卒を対象に、加工技術職と品質保証職を募集します。工場見学は毎月第2・第4金曜に実施しています。' },
+  { date: '2026-05-08', category: 'お知らせ', title: 'ISO 13485 の定期審査に適合しました',
+    body: '2026年度の定期審査を受審し、不適合ゼロで適合の判定を受けました。是正処置の要求事項はありません。' },
+  { date: '2026-04-01', category: 'お知らせ', title: '2026年度 事業方針を公開しました',
+    body: '半導体製造装置向けの比率を売上の40%まで引き上げること、および三次元測定の受託事業を本格化することを重点方針としています。' },
+];
+
+const categories = ['すべて', 'お知らせ', '技術', '採用'];
+---
+
+<SiteLayout
+  site={site}
+  title="ニュース"
+  description="ミナモト精機からのお知らせ、加工技術事例、採用情報の一覧です。設備投資や認証、技術資料の公開情報を掲載しています。"
+  path="/news/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'ニュース' }]}
+>
+  <section class="bg-base-200">
+    <div class="max-w-4xl mx-auto px-4 py-16">
+      <h1 class="text-3xl md:text-4xl font-bold">ニュース</h1>
+      <p class="mt-4 text-base-content/80 leading-relaxed">
+        設備投資・技術事例・認証・採用に関するお知らせを掲載しています。
+        技術事例は加工条件まで踏み込んで書いていますので、検討中の案件がありましたらご参照ください。
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 py-16">
+    <SectionTitle title="お知らせ一覧" align="left" />
+
+    <ul class="mt-6 flex flex-wrap gap-2" aria-label="カテゴリ">
+      {categories.map((c, i) => (
+        <li>
+          <Badge variant={i === 0 ? 'primary' : undefined} outline={i !== 0}>{c}</Badge>
+        </li>
+      ))}
+    </ul>
+
+    <ol class="mt-10 space-y-8">
+      {entries.map((e) => (
+        <li class="border-b border-base-300 pb-8">
+          <div class="flex flex-wrap items-center gap-3">
+            <time class="text-sm text-base-content/60 tabular-nums" datetime={e.date}>{e.date.replace(/-/g, '.')}</time>
+            <Badge size="sm" outline>{e.category}</Badge>
+          </div>
+          <h2 class="mt-2 text-lg font-bold">{e.title}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-base-content/80">{e.body}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <PageTopButton />
+</SiteLayout>

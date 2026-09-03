@@ -1,0 +1,22 @@
+---
+interface Props {
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  class?: string;
+}
+const { position = 'bottom-right', class: className = '' } = Astro.props;
+const posMap = {
+  'bottom-right': 'bottom-4 right-4',
+  'bottom-left': 'bottom-4 left-4',
+  'top-right': 'top-4 right-4',
+  'top-left': 'top-4 left-4',
+};
+---
+<div class={`fixed ${posMap[position]} z-50 ${className}`}>
+  <slot>
+    <button class="btn btn-circle btn-primary btn-lg shadow-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+    </button>
+  </slot>
+</div>

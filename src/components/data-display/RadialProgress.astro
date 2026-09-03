@@ -1,0 +1,7 @@
+---
+interface Props { value: number; size?: string; thickness?: string; class?: string }
+const { value, size = '4rem', thickness = '4px', class: className = '' } = Astro.props;
+---
+<div class={`radial-progress ${className}`} style={`--value:${value}; --size:${size}; --thickness:${thickness};`} role="progressbar">
+  <slot>{value}%</slot>
+</div>

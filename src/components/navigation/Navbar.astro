@@ -1,0 +1,9 @@
+---
+interface Props { class?: string }
+const { class: className = '' } = Astro.props;
+---
+<div class={`navbar bg-base-100 shadow-sm ${className}`}>
+  <div class="navbar-start"><slot name="start" /></div>
+  <div class="navbar-center"><slot name="center" /></div>
+  <div class="navbar-end"><slot name="end" /></div>
+</div>

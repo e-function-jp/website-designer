@@ -1,0 +1,7 @@
+---
+interface Props { type?: 'spinner' | 'dots' | 'ring' | 'ball' | 'bars' | 'infinity'; size?: 'xs' | 'sm' | 'md' | 'lg'; variant?: 'primary' | 'secondary' | 'accent' | 'neutral'; class?: string }
+const { type = 'spinner', size = 'md', variant, class: className = '' } = Astro.props;
+const sizeClass = size !== 'md' ? `loading-${size}` : '';
+const variantClass = variant ? `text-${variant}` : '';
+---
+<span class={`loading loading-${type} ${sizeClass} ${variantClass} ${className}`.trim()}></span>

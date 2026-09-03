@@ -1,0 +1,10 @@
+---
+interface Props { title?: string; value?: string; desc?: string; class?: string }
+const { title, value, desc, class: className = '' } = Astro.props;
+---
+<div class={`stat ${className}`}>
+  {title && <div class="stat-title">{title}</div>}
+  {value && <div class="stat-value">{value}</div>}
+  {desc && <div class="stat-desc">{desc}</div>}
+  <slot />
+</div>

@@ -1,0 +1,7 @@
+---
+interface Props { placeholder?: string; variant?: 'primary' | 'secondary' | 'accent' | 'ghost'; size?: 'xs' | 'sm' | 'md' | 'lg'; bordered?: boolean; class?: string }
+const { placeholder = '', variant, size = 'md', bordered = true, class: className = '' } = Astro.props;
+const variantClass = variant ? `textarea-${variant}` : '';
+const sizeClass = size !== 'md' ? `textarea-${size}` : '';
+---
+<textarea placeholder={placeholder} class={`textarea ${variantClass} ${sizeClass} ${bordered ? 'textarea-bordered' : ''} ${className}`.trim()}></textarea>

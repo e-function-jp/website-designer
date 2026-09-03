@@ -1,0 +1,7 @@
+---
+interface Props { vertical?: boolean; class?: string }
+const { vertical = true, class: className = '' } = Astro.props;
+---
+<ul class={`timeline ${vertical ? 'timeline-vertical' : ''} ${className}`.trim()}>
+  <slot />
+</ul>

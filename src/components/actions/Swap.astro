@@ -1,0 +1,13 @@
+---
+interface Props {
+  type?: 'rotate' | 'flip' | 'default';
+  class?: string;
+}
+const { type = 'default', class: className = '' } = Astro.props;
+const effectClass = type !== 'default' ? `swap-${type}` : '';
+---
+<label class={`swap ${effectClass} ${className}`.trim()}>
+  <input type="checkbox" />
+  <div class="swap-on"><slot name="on">ON</slot></div>
+  <div class="swap-off"><slot name="off">OFF</slot></div>
+</label>

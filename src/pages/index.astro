@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { SiteConfig } from '../lib/site';
+
+/**
+ * サンプルサイトの索引。`_site.ts` を自動収集するので手動登録は不要。
+ * lp-designer の samples-index.json 相当の役割を、まずはビルド時収集で持つ。
+ */
+const modules = import.meta.glob<{ site: SiteConfig }>('./sites/*/*/_site.ts', { eager: true });
+
+const sites = Object.entries(modules)
+  .map(([path, mod]) => {
+    const m = path.match(/^\.\/sites\/([^/]+)\/(.+?)-(\d{8}-\d{4})\/_site\.ts$/);
+    return {
+      type: m?.[1] ?? 'unknown',
+      model: m?.[2] ?? 'unknown',
+      stamp: m?.[3] ?? '',
+      site: mod.site,
+    };
+  })
+  .sort((a, b) => (a.stamp < b.stamp ? 1 : -1));
+
+const byType = sites.reduce<Record<string, typeof sites>>((acc, s) => {
+  (acc[s.type] ??= []).push(s);
+  return acc;
+}, {});
+
+const TYPE_LABEL: Record<string, string> = {
+  corporate: 'コーポレートサイト',
+  service: 'サービス・製品サイト',
+  recruit: '採用サイト',
+  media: 'メディア',
+};
+---
+
+<BaseLayout
+  title="Website Designer"
+  description="website のデザインを日々学び、自己進化しながらサンプルサイトを生成するプロジェクト。サンプルサイト一覧とコンポーネントカタログ。"
+>
+  <header class="border-b border-base-300">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center gap-6">
+      <span class="text-lg font-bold">Website Designer</span>
+      <nav class="ml-auto flex gap-4 text-sm" aria-label="サイト内ナビゲーション">
+        <a href="/" class="link link-hover font-bold" aria-current="page">サンプル</a>
+        <a href="/components/" class="link link-hover">コンポーネント</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="max-w-5xl mx-auto px-4 py-16 space-y-16">
+    <section class="space-y-4">
+      <h1 class="text-3xl md:text-4xl font-bold">Website Designer</h1>
+      <p class="text-base-content/80 leading-relaxed max-w-3xl">
+        website（多ページサイト）のデザインを参照学習で取り込み、静的品質チェックと独立採点の
+        二系統で単調改善していくプロジェクトです。LP に特化した
+        <code class="text-sm">lp-designer</code> の姉妹プロジェクトで、
+        評価の主語が「1ページのコンバージョン」ではなく「サイト全体の情報設計」である点が異なります。
+      </p>
+      <p class="text-sm text-base-content/60">
+        現在 {sites.length} サイト / コンポーネントカタログは <a href="/components/" class="link">/components</a>
+      </p>
+    </section>
+
+    {Object.entries(byType).map(([type, list]) => (
+      <section class="space-y-6">
+        <h2 class="text-xl font-bold border-b border-base-300 pb-2">
+          {TYPE_LABEL[type] ?? type}<span class="ml-2 text-sm font-normal text-base-content/60">{list.length}件</span>
+        </h2>
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {list.map((s) => (
+            <li class="rounded-2xl border border-base-300 p-5 hover:border-primary transition-colors">
+              <a href={s.site.base} class="block space-y-2">
+                <p class="font-bold">{s.site.name}</p>
+                {s.site.tagline && <p class="text-sm text-base-content/70">{s.site.tagline}</p>}
+                <p class="text-xs text-base-content/50 tabular-nums">{s.model} / {s.stamp} / theme: {s.site.theme}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    {sites.length === 0 && (
+      <p class="text-base-content/60">
+        サンプルサイトがまだありません。<code class="text-sm">docs/learning-pipeline.md</code> の手順でランを作成してください。
+      </p>
+    )}
+  </main>
+</BaseLayout>

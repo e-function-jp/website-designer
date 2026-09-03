@@ -1,0 +1,70 @@
+{
+  "fetched_at": "2026-09-03T14:05:47+09:00",
+  "source": "muuuuu",
+  "total": 190,
+  "site_type": {
+    "other": 98,
+    "corporate": 65,
+    "recruit": 20,
+    "public": 5,
+    "service": 2
+  },
+  "industry": {
+    "other": 97,
+    "construction": 29,
+    "it": 23,
+    "manufacturing": 22,
+    "education": 7,
+    "food": 6,
+    "professional": 3,
+    "retail": 2,
+    "medical": 1
+  },
+  "gallery_industry": {
+    "": 56,
+    "building": 21,
+    "technology": 18,
+    "company": 18,
+    "art": 16,
+    "school": 7,
+    "interior": 7,
+    "food": 6,
+    "publication": 4,
+    "trip": 4,
+    "music": 4,
+    "restaurant": 4,
+    "finance": 3,
+    "entertainment": 3,
+    "fashionall": 3,
+    "car": 2,
+    "wedding": 2,
+    "eco": 2,
+    "beauty": 2,
+    "fashion": 2,
+    "sports": 1,
+    "hospital": 1,
+    "shopping": 1,
+    "kids": 1,
+    "watch": 1,
+    "electrical": 1
+  },
+  "site_type_labels": {
+    "corporate": "コーポレートサイト",
+    "service": "サービス・製品サイト",
+    "recruit": "採用サイト",
+    "media": "メディア・オウンドメディア",
+    "brand": "ブランドサイト",
+    "ec": "EC・通販",
+    "public": "公共・教育・医療機関"
+  },
+  "industry_labels": {
+    "manufacturing": "製造・工業",
+    "construction": "建設・不動産",
+    "it": "IT・ソフトウェア",
+    "professional": "士業・コンサル",
+    "medical": "医療・福祉",
+    "food": "食品・飲食",
+    "retail": "小売・サービス業",
+    "education": "教育"
+  }
+}

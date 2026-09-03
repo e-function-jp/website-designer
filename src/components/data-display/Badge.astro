@@ -1,0 +1,7 @@
+---
+interface Props { variant?: 'primary' | 'secondary' | 'accent' | 'ghost' | 'info' | 'success' | 'warning' | 'error'; size?: 'xs' | 'sm' | 'md' | 'lg'; outline?: boolean; class?: string }
+const { variant, size = 'md', outline = false, class: className = '' } = Astro.props;
+const sizeClass = size !== 'md' ? `badge-${size}` : '';
+const variantClass = variant ? `badge-${variant}` : '';
+---
+<span class={`badge ${variantClass} ${sizeClass} ${outline ? 'badge-outline' : ''} ${className}`.trim()}><slot /></span>

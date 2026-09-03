@@ -1,0 +1,17 @@
+---
+interface Props {
+  position?: 'bottom' | 'top' | 'left' | 'right';
+  hover?: boolean;
+  class?: string;
+}
+const { position = 'bottom', hover = false, class: className = '' } = Astro.props;
+const posClass = position !== 'bottom' ? `dropdown-${position}` : '';
+---
+<div class={`dropdown ${posClass} ${hover ? 'dropdown-hover' : ''} ${className}`.trim()}>
+  <slot name="trigger">
+    <div tabindex="0" role="button" class="btn m-1">Dropdown</div>
+  </slot>
+  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm">
+    <slot />
+  </ul>
+</div>

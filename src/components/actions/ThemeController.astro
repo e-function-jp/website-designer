@@ -1,0 +1,18 @@
+---
+interface Props {
+  themes?: string[];
+  class?: string;
+}
+const { themes = ['light', 'dark'], class: className = '' } = Astro.props;
+---
+<div class={`flex gap-2 ${className}`}>
+  {themes.map((theme) => (
+    <input
+      type="radio"
+      name="theme-buttons"
+      class="btn theme-controller join-item"
+      aria-label={theme}
+      value={theme}
+    />
+  ))}
+</div>

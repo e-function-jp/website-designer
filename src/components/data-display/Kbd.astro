@@ -1,0 +1,6 @@
+---
+interface Props { size?: 'xs' | 'sm' | 'md' | 'lg'; class?: string }
+const { size = 'md', class: className = '' } = Astro.props;
+const sizeClass = size !== 'md' ? `kbd-${size}` : '';
+---
+<kbd class={`kbd ${sizeClass} ${className}`.trim()}><slot /></kbd>

@@ -1,0 +1,10 @@
+---
+interface Props { imageSrc?: string; imageAlt?: string; compact?: boolean; bordered?: boolean; class?: string }
+const { imageSrc, imageAlt = '', compact = false, bordered = true, class: className = '' } = Astro.props;
+---
+<div class={`card bg-base-100 ${bordered ? 'border border-base-300' : ''} ${compact ? 'card-compact' : ''} shadow-sm ${className}`}>
+  {imageSrc && <figure><img src={imageSrc} alt={imageAlt} loading="lazy" /></figure>}
+  <div class="card-body">
+    <slot />
+  </div>
+</div>

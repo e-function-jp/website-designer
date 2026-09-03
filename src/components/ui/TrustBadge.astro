@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  icon?: string;
+  variant?: 'primary' | 'secondary' | 'accent' | 'neutral';
+  class?: string;
+}
+const { label, icon, variant = 'primary', class: className = '' } = Astro.props;
+---
+<div class={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-${variant}/10 text-${variant} font-semibold text-sm border border-${variant}/20 ${className}`}>
+  {icon ? <img src={icon} alt="" class="h-5 w-5" loading="lazy" /> : (
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+  )}
+  <span>{label}</span>
+</div>

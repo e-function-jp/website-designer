@@ -1,0 +1,9 @@
+---
+interface Props { variant?: 'bordered' | 'lifted' | 'boxed' | 'default'; size?: 'xs' | 'sm' | 'md' | 'lg'; class?: string }
+const { variant = 'default', size = 'md', class: className = '' } = Astro.props;
+const variantClass = variant !== 'default' ? `tabs-${variant}` : '';
+const sizeClass = size !== 'md' ? `tabs-${size}` : '';
+---
+<div role="tablist" class={`tabs ${variantClass} ${sizeClass} ${className}`.trim()}>
+  <slot />
+</div>

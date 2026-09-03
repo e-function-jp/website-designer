@@ -1,0 +1,10 @@
+---
+interface Props { variant?: 'border' | 'background'; class?: string }
+const { variant = 'border', class: className = '' } = Astro.props;
+const variantClass = variant === 'background' ? 'bg-base-200' : 'border border-base-300';
+---
+<div class={`mockup-window ${variantClass} ${className}`}>
+  <div class={`flex justify-center px-4 py-16 ${variant === 'border' ? 'border-t border-base-300' : 'bg-base-200'}`}>
+    <slot />
+  </div>
+</div>

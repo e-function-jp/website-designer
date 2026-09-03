@@ -1,0 +1,7 @@
+---
+interface Props { variant?: 'info' | 'success' | 'warning' | 'error'; class?: string }
+const { variant = 'info', class: className = '' } = Astro.props;
+---
+<div role="alert" class={`alert alert-${variant} ${className}`}>
+  <slot />
+</div>

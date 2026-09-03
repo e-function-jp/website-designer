@@ -1,0 +1,96 @@
+---
+import '../styles/global.css';
+import type { SiteConfig, Breadcrumb } from '../lib/site';
+import { url, breadcrumbJsonLd } from '../lib/site';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import Breadcrumbs from '../components/site/SiteBreadcrumbs.astro';
+
+interface Props {
+  site: SiteConfig;
+  /** ページ固有タイトル。<title> は `{title}｜{site.name}` になる */
+  title: string;
+  description: string;
+  /** 現在ページのパス（base 相対）。ナビの現在地表示に使う */
+  path?: string;
+  ogImage?: string;
+  /** トップページは true。パンくずを出さず、title に site.name を重ねない */
+  isHome?: boolean;
+  breadcrumbs?: Breadcrumb[];
+  /** ページ固有の構造化データ。Organization / WebSite / BreadcrumbList は自動付与 */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  site,
+  title,
+  description,
+  path = '/',
+  ogImage = '/ogp.svg',
+  isHome = false,
+  breadcrumbs = [],
+  jsonLd,
+} = Astro.props;
+
+const pageTitle = isHome ? `${site.name}${site.tagline ? `｜${site.tagline}` : ''}` : `${title}｜${site.name}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+// パンくずは下層ページで必須。呼び出し側が渡さなかった場合はトップだけ補う。
+const crumbs: Breadcrumb[] =
+  isHome ? [] : breadcrumbs.length ? breadcrumbs : [{ label: 'ホーム', href: '/' }, { label: title }];
+
+const autoSchemas: Record<string, unknown>[] = [
+  {
+    '@type': 'Organization',
+    name: site.organization?.legalName ?? site.name,
+    url: new URL(site.base, Astro.site).toString(),
+    ...(site.organization?.tel ? { telephone: site.organization.tel } : {}),
+    ...(site.organization?.address ? { address: site.organization.address } : {}),
+  },
+  ...(isHome
+    ? [{ '@type': 'WebSite', name: site.name, url: new URL(site.base, Astro.site).toString() }]
+    : []),
+  ...(crumbs.length ? [breadcrumbJsonLd(site, crumbs)] : []),
+];
+
+const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const jsonLdBlocks = [...autoSchemas, ...extra].map((b) =>
+  JSON.stringify({ '@context': 'https://schema.org', ...b }),
+);
+---
+
+<!doctype html>
+<html lang="ja" data-theme={site.theme}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={isHome ? 'website' : 'article'} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    {jsonLdBlocks.map((json) => <script type="application/ld+json" set:html={json} />)}
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-base-100 text-base-content">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:btn focus:btn-primary"
+      >本文へスキップ</a
+    >
+    <SiteHeader site={site} path={path} />
+    {crumbs.length > 0 && <Breadcrumbs site={site} crumbs={crumbs} />}
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter site={site} />
+  </body>
+</html>

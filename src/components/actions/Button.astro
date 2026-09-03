@@ -1,0 +1,19 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'accent' | 'neutral' | 'ghost' | 'link';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  outline?: boolean;
+  disabled?: boolean;
+  class?: string;
+  href?: string;
+}
+const { variant = 'primary', size = 'md', outline = false, disabled = false, class: className = '', href } = Astro.props;
+const sizeClass = { xs: 'btn-xs', sm: 'btn-sm', md: '', lg: 'btn-lg' }[size];
+const variantClass = `btn-${variant}`;
+const classes = `btn ${variantClass} ${sizeClass} ${outline ? 'btn-outline' : ''} ${className}`.trim();
+---
+{href ? (
+  <a href={href} class={classes}><slot /></a>
+) : (
+  <button class={classes} disabled={disabled}><slot /></button>
+)}

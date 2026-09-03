@@ -1,0 +1,7 @@
+---
+interface Props { type?: string; placeholder?: string; variant?: 'primary' | 'secondary' | 'accent' | 'ghost'; size?: 'xs' | 'sm' | 'md' | 'lg'; bordered?: boolean; class?: string }
+const { type = 'text', placeholder = '', variant, size = 'md', bordered = true, class: className = '' } = Astro.props;
+const variantClass = variant ? `input-${variant}` : '';
+const sizeClass = size !== 'md' ? `input-${size}` : '';
+---
+<input type={type} placeholder={placeholder} class={`input ${variantClass} ${sizeClass} ${bordered ? 'input-bordered' : ''} ${className}`.trim()} />

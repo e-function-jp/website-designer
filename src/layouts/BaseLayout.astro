@@ -1,0 +1,36 @@
+---
+/**
+ * リポジトリ自身のページ（トップ索引・コンポーネントカタログ）用の素のレイアウト。
+ * サンプルサイトは SiteLayout を使うこと。こちらはサイト定義を必要としない。
+ */
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  theme?: string;
+}
+const { title, description = '', theme = 'corporate' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="ja" data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL('/ogp.svg', Astro.site)} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-base-100 text-base-content">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:btn focus:btn-primary">本文へスキップ</a>
+    <slot />
+  </body>
+</html>

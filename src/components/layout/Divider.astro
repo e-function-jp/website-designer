@@ -1,0 +1,7 @@
+---
+interface Props { direction?: 'horizontal' | 'vertical'; variant?: 'primary' | 'secondary' | 'accent' | 'neutral'; class?: string }
+const { direction = 'horizontal', variant, class: className = '' } = Astro.props;
+const dirClass = direction === 'vertical' ? 'divider-vertical' : '';
+const variantClass = variant ? `divider-${variant}` : '';
+---
+<div class={`divider ${dirClass} ${variantClass} ${className}`.trim()}><slot /></div>

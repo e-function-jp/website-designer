@@ -1,0 +1,122 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from './_site';
+import { url } from '../../../../lib/site';
+import SectionTitle from '../../../../components/ui/SectionTitle.astro';
+import AnimatedCounter from '../../../../components/ui/AnimatedCounter.astro';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+import PageTopButton from '../../../../components/ui/PageTopButton.astro';
+import Card from '../../../../components/data-display/Card.astro';
+
+const strengths = [
+  {
+    title: '公差±2μmの安定量産',
+    body: '恒温工場（20±0.5℃）と自社設計の治具により、試作だけでなく月産1万個規模でも公差を維持します。抜き取りではなく全数を三次元測定機で検査し、測定データはロット単位で10年保管します。',
+  },
+  {
+    title: '設計段階からの同時並行',
+    body: '図面が固まる前に加工方法を提案します。形状をわずかに変えるだけで工程が2つ減る、という指摘を年間120件以上お出ししており、量産開始後のコスト差として効いてきます。',
+  },
+  {
+    title: '多品種少ロットの短納期',
+    body: '段取り替えを前提としたセル生産で、10個から受注します。標準納期は初回2週間、リピート品は5営業日です。',
+  },
+];
+
+const numbers = [
+  { label: '創業からの年数', value: 51, suffix: '年' },
+  { label: '取引社数', value: 284, suffix: '社' },
+  { label: '年間出荷点数', value: 62, suffix: '万点' },
+];
+
+const news = [
+  { date: '2026-08-20', category: 'お知らせ', title: '第3工場に5軸マシニングセンタを2台増設しました', href: '/news/' },
+  { date: '2026-07-04', category: '技術', title: 'チタン合金の深穴加工事例を公開しました', href: '/news/' },
+  { date: '2026-06-11', category: '採用', title: '2027年度 新卒採用エントリーの受付を開始しました', href: '/news/' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="トップ"
+  description="富山県富山市の精密切削加工メーカー、株式会社ミナモト精機。公差±2μmの安定量産と、設計段階からの工法提案で、医療機器・半導体製造装置の部品を手がけています。"
+  path="/"
+  isHome
+>
+  <section class="bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 py-20 lg:py-28 grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-center">
+      <div class="space-y-6">
+        <p class="text-sm tracking-widest text-primary font-bold">PRECISION MACHINING SINCE 1974</p>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight">
+          図面が固まる前から、<br />いちばん安い作り方を考える。
+        </h1>
+        <p class="text-base md:text-lg text-base-content/80 leading-relaxed">
+          ミナモト精機は、医療機器と半導体製造装置の精密部品を専門とする切削加工メーカーです。
+          加工の受け手として図面どおりに作るのではなく、設計段階から工法を提案し、
+          量産に入ってからのコストと歩留まりを一緒に設計します。
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href={url(site, '/contact/')} class="btn btn-primary">加工のご相談・お見積り</a>
+          <a href={url(site, '/service/')} class="btn btn-outline">事業・設備を見る</a>
+        </div>
+      </div>
+      <dl class="grid grid-cols-3 gap-4 lg:gap-6">
+        {numbers.map((n) => (
+          <div class="bg-base-100 rounded-2xl p-5 text-center shadow-sm">
+            <dd class="text-2xl md:text-3xl font-bold text-primary">
+              <AnimatedCounter target={n.value} suffix={n.suffix} />
+            </dd>
+            <dt class="mt-2 text-xs text-base-content/70">{n.label}</dt>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 py-20">
+    <SectionTitle title="選ばれている3つの理由" subtitle="加工精度そのものより、量産に入ってからの安定と、設計段階での提案で評価をいただいています。" />
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {strengths.map((s, i) => (
+        <ScrollReveal delay={i * 120}>
+          <Card class="h-full bg-base-100">
+            <div class="card-body">
+              <h2 class="card-title text-lg">{s.title}</h2>
+              <p class="text-sm leading-relaxed text-base-content/80">{s.body}</p>
+            </div>
+          </Card>
+        </ScrollReveal>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-base-200">
+    <div class="max-w-7xl mx-auto px-4 py-20">
+      <SectionTitle title="ニュース" subtitle="設備投資・技術事例・採用に関するお知らせ" align="left" />
+      <ul class="mt-10 divide-y divide-base-300">
+        {news.map((n) => (
+          <li>
+            <a href={url(site, n.href)} class="flex flex-wrap items-center gap-x-4 gap-y-1 py-4 hover:bg-base-100 rounded-lg px-2 transition-colors">
+              <time class="text-sm text-base-content/60 tabular-nums" datetime={n.date}>{n.date.replace(/-/g, '.')}</time>
+              <span class="badge badge-outline badge-sm">{n.category}</span>
+              <span class="font-medium">{n.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-8">
+        <a href={url(site, '/news/')} class="btn btn-outline btn-sm">ニュース一覧へ</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 py-20 text-center space-y-6">
+    <h2 class="text-2xl md:text-3xl font-bold">図面がまだ無い段階でも、ご相談ください</h2>
+    <p class="text-base-content/80 max-w-2xl mx-auto leading-relaxed">
+      「この形状は削れるのか」「この材質でこの公差は現実的か」といった検討段階のご相談を歓迎しています。
+      concept 図やポンチ絵の写真だけでも、加工可否と概算をお返しします。
+    </p>
+    <a href={url(site, '/contact/')} class="btn btn-primary btn-lg">お問い合わせフォームへ</a>
+  </section>
+
+  <PageTopButton />
+</SiteLayout>

@@ -1,0 +1,6 @@
+---
+interface Props { name: string; variant?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'info' | 'error'; size?: 'xs' | 'sm' | 'md' | 'lg'; checked?: boolean; disabled?: boolean; class?: string }
+const { name, variant = 'primary', size = 'md', checked = false, disabled = false, class: className = '' } = Astro.props;
+const sizeClass = size !== 'md' ? `radio-${size}` : '';
+---
+<input type="radio" name={name} class={`radio radio-${variant} ${sizeClass} ${className}`.trim()} checked={checked} disabled={disabled} />

@@ -1,0 +1,6 @@
+---
+interface Props { variant?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'info' | 'error'; size?: 'xs' | 'sm' | 'md' | 'lg'; checked?: boolean; disabled?: boolean; class?: string }
+const { variant = 'primary', size = 'md', checked = false, disabled = false, class: className = '' } = Astro.props;
+const sizeClass = size !== 'md' ? `checkbox-${size}` : '';
+---
+<input type="checkbox" class={`checkbox checkbox-${variant} ${sizeClass} ${className}`.trim()} checked={checked} disabled={disabled} />

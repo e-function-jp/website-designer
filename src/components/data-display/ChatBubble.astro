@@ -1,0 +1,10 @@
+---
+interface Props { position?: 'start' | 'end'; color?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'; avatar?: string; name?: string; time?: string; class?: string }
+const { position = 'start', color, avatar, name, time, class: className = '' } = Astro.props;
+const colorClass = color ? `chat-bubble-${color}` : '';
+---
+<div class={`chat chat-${position} ${className}`}>
+  {avatar && <div class="chat-image avatar"><div class="w-10 rounded-full"><img alt={name || ''} src={avatar} loading="lazy" /></div></div>}
+  {name && <div class="chat-header">{name} {time && <time class="text-xs opacity-50">{time}</time>}</div>}
+  <div class={`chat-bubble ${colorClass}`}><slot /></div>
+</div>

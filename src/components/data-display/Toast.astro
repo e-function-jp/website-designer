@@ -1,0 +1,9 @@
+---
+interface Props { position?: 'top-start' | 'top-center' | 'top-end' | 'middle-center' | 'bottom-start' | 'bottom-center' | 'bottom-end'; class?: string }
+const { position = 'bottom-end', class: className = '' } = Astro.props;
+const [vertical, horizontal] = position.split('-');
+const posClass = `toast-${vertical} toast-${horizontal}`;
+---
+<div class={`toast ${posClass} ${className}`.trim()}>
+  <slot />
+</div>

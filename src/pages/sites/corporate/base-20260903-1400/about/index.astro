@@ -1,0 +1,102 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Timeline from '../../../../../components/data-display/Timeline.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const history = [
+  { year: '1974', body: '富山市黒崎にて源精機製作所として創業。汎用旋盤3台で農機部品の加工を開始。' },
+  { year: '1991', body: 'NC旋盤を導入し、医療機器メーカーとの取引を開始。品目が農機から精密機器へ移る。' },
+  { year: '2003', body: '第2工場竣工。恒温管理を導入し、公差±5μm帯の量産に対応。' },
+  { year: '2014', body: 'ISO 13485（医療機器品質マネジメント）認証を取得。' },
+  { year: '2022', body: '半導体製造装置向けチタン部品の量産を開始。第3工場を新設。' },
+  { year: '2026', body: '5軸マシニングセンタを2台増設し、複合形状の一工程化を進めている。' },
+];
+
+const profile = [
+  ['商号', '株式会社ミナモト精機'],
+  ['設立', '1974年4月'],
+  ['資本金', '4,800万円'],
+  ['代表者', '代表取締役 源 敬一'],
+  ['従業員数', '112名（2026年4月現在）'],
+  ['所在地', '〒939-8214 富山県富山市黒崎 3-12-8'],
+  ['事業内容', '精密切削加工／治具設計・製作／三次元測定受託'],
+  ['認証', 'ISO 9001:2015、ISO 13485:2016'],
+];
+---
+
+<SiteLayout
+  site={site}
+  title="会社について"
+  description="株式会社ミナモト精機の代表挨拶、沿革、会社概要。1974年の創業から半世紀、農機部品から医療機器・半導体製造装置の精密部品へと領域を広げてきました。"
+  path="/about/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '会社について' }]}
+>
+  <section class="bg-base-200">
+    <div class="max-w-4xl mx-auto px-4 py-16">
+      <h1 class="text-3xl md:text-4xl font-bold">会社について</h1>
+      <p class="mt-4 text-base-content/80 leading-relaxed">
+        創業から半世紀、私たちは「削る」という一点に絞って設備と人を積み上げてきました。
+        扱う品目は農機部品から医療機器、半導体製造装置へと変わりましたが、
+        図面の向こうにある製品の目的を理解してから削る、という姿勢は変えていません。
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 py-16">
+    <SectionTitle title="代表挨拶" align="left" />
+    <div class="mt-8 space-y-4 leading-relaxed text-base-content/80">
+      <p>
+        私が入社した1990年代前半、当社の主力は農業機械の部品でした。図面どおりに削れば仕事が来る時代です。
+        それが変わったのは、ある医療機器メーカーから「この寸法は本当に必要なのか一緒に考えてほしい」と
+        言われたときでした。加工側から設計へ意見を返すという発想が、当社にはまだありませんでした。
+      </p>
+      <p>
+        以来、私たちは受け取った図面をそのまま流さず、必ず一度立ち止まります。
+        公差を1段階緩めても機能に影響しないなら提案しますし、形状を少し変えれば工程が減るなら図を描いて返します。
+        年間120件を超えるこうした提案が、お客様の量産コストとして返っていると考えています。
+      </p>
+      <p class="text-right font-medium text-base-content">代表取締役　源 敬一</p>
+    </div>
+  </section>
+
+  <section class="bg-base-200">
+    <div class="max-w-4xl mx-auto px-4 py-16">
+      <SectionTitle title="沿革" align="left" />
+      <div class="mt-8">
+        <Timeline>
+          {history.map((h) => (
+            <li>
+              <div class="timeline-start font-bold tabular-nums">{h.year}</div>
+              <div class="timeline-middle">
+                <span class="block w-3 h-3 rounded-full bg-primary" aria-hidden="true"></span>
+              </div>
+              <div class="timeline-end timeline-box text-sm leading-relaxed">{h.body}</div>
+              <hr />
+            </li>
+          ))}
+        </Timeline>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 py-16">
+    <SectionTitle title="会社概要" align="left" />
+    <div class="mt-8 overflow-x-auto">
+      <Table zebra>
+        <tbody>
+          {profile.map(([k, v]) => (
+            <tr>
+              <th class="w-40 whitespace-nowrap">{k}</th>
+              <td>{v}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  </section>
+
+  <PageTopButton />
+</SiteLayout>

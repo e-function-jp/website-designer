@@ -1,0 +1,6 @@
+---
+interface Props { min?: number; max?: number; value?: number; step?: number; variant?: 'primary' | 'secondary' | 'accent'; size?: 'xs' | 'sm' | 'md' | 'lg'; class?: string }
+const { min = 0, max = 100, value = 50, step, variant = 'primary', size = 'md', class: className = '' } = Astro.props;
+const sizeClass = size !== 'md' ? `range-${size}` : '';
+---
+<input type="range" min={min} max={max} value={value} step={step} class={`range range-${variant} ${sizeClass} ${className}`.trim()} />

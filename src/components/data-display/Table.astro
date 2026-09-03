@@ -1,0 +1,10 @@
+---
+interface Props { zebra?: boolean; pinRows?: boolean; pinCols?: boolean; size?: 'xs' | 'sm' | 'md' | 'lg'; class?: string }
+const { zebra = false, pinRows = false, pinCols = false, size = 'md', class: className = '' } = Astro.props;
+const sizeClass = size !== 'md' ? `table-${size}` : '';
+---
+<div class="overflow-x-auto">
+  <table class={`table ${sizeClass} ${zebra ? 'table-zebra' : ''} ${pinRows ? 'table-pin-rows' : ''} ${pinCols ? 'table-pin-cols' : ''} ${className}`.trim()}>
+    <slot />
+  </table>
+</div>

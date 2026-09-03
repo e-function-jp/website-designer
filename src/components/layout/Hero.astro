@@ -1,0 +1,10 @@
+---
+interface Props { backgroundImage?: string; overlay?: boolean; class?: string }
+const { backgroundImage, overlay = false, class: className = '' } = Astro.props;
+---
+<div class={`hero min-h-[60vh] ${className}`} style={backgroundImage ? `background-image: url(${backgroundImage});` : undefined}>
+  {overlay && <div class="hero-overlay bg-opacity-60"></div>}
+  <div class="hero-content text-center">
+    <slot />
+  </div>
+</div>

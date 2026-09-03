@@ -1,0 +1,264 @@
+---
+/**
+ * GsapScrollSection.astro
+ *
+ * GSAP + ScrollTrigger を使ったスクロール駆動アニメ。
+ * 業界標準 (Awwwards の 80%+ が採用) の中〜高度演出。
+ *
+ * GSAP が利用できない環境では RevealOnScroll (CSS only) にフォールバック。
+ *
+ * 使用例:
+ *   <GsapScrollSection
+ *     animation="fade-up"
+ *     trigger="self"
+ *     start="top 80%"
+ *     end="bottom 20%"
+ *     scrub
+ *   >
+ *     <div class="parallax">パララックス画像</div>
+ *   </GsapScrollSection>
+ *
+ *   <GsapScrollSection
+ *     animation="pin"
+ *     pinDuration="100%"
+ *   >
+ *     <h2>スクロールで固定される見出し</h2>
+ *   </GsapScrollSection>
+ *
+ * props:
+ *   animation: 'fade-up' | 'fade-in' | 'slide-left' | 'slide-right' | 'parallax' | 'pin' | 'scale'
+ *   trigger: 'self' (default) | 任意のセレクタ
+ *   start: ScrollTrigger start (default: 'top 80%')
+ *   end: ScrollTrigger end (default: 'bottom 20%')
+ *   scrub: true | number (default: false)
+ *   pin: true で固定 (animation='pin' とセット)
+ *   pinDuration: pin する距離 (default: '100%')
+ *   y / x: parallax 量 px (default: 60)
+ *   scale: scale の最終値 (default: 1.1)
+ *   fallback: 'reveal' (CSS) | 'none' (default: 'reveal')
+ *   as: 出力タグ (default: 'div')
+ *   class: 追加クラス
+ */
+
+interface Props {
+  animation?: 'fade-up' | 'fade-in' | 'slide-left' | 'slide-right' | 'parallax' | 'pin' | 'scale';
+  trigger?: string;
+  start?: string;
+  end?: string;
+  scrub?: boolean | number;
+  pin?: boolean;
+  pinDuration?: string | number;
+  y?: number;
+  x?: number;
+  scale?: number;
+  fallback?: 'reveal' | 'none';
+  as?: string;
+  class?: string;
+  id?: string;
+}
+
+const {
+  animation = 'fade-up',
+  trigger = 'self',
+  start = 'top 80%',
+  end = 'bottom 20%',
+  scrub = false,
+  pin = false,
+  pinDuration = '100%',
+  y = 60,
+  x = 60,
+  scale = 1.1,
+  fallback = 'reveal',
+  as: Tag = 'div',
+  class: className = '',
+  id,
+} = Astro.props;
+
+const styleAttr = [
+  '--gsap-y: ' + y + 'px',
+  '--gsap-x: ' + x + 'px',
+  '--gsap-scale: ' + scale,
+].join('; ');
+---
+
+<Tag
+  data-gsap-anim
+  data-gsap-animation={animation}
+  data-gsap-trigger={trigger}
+  data-gsap-start={start}
+  data-gsap-end={end}
+  data-gsap-scrub={scrub === true ? 'true' : scrub === false ? 'false' : String(scrub)}
+  data-gsap-pin={pin ? 'true' : 'false'}
+  data-gsap-pin-duration={typeof pinDuration === 'number' ? pinDuration + 'px' : pinDuration}
+  data-gsap-fallback={fallback}
+  class:list={['lp-gsap-section', `lp-gsap-section--${animation}`, className]}
+  style={styleAttr}
+  id={id}
+>
+  <slot />
+</Tag>
+
+<style>
+  .lp-gsap-section {
+    --gsap-y: 60px;
+    --gsap-x: 60px;
+    --gsap-scale: 1.1;
+  }
+
+  /* フォールバック用 CSS (GSAP 不在時のみ) */
+  .lp-gsap-section:not(.is-gsap-ready):not(.is-gsap-loaded) {
+    opacity: 0;
+  }
+  .lp-gsap-section--fade-up:not(.is-gsap-ready):not(.is-gsap-loaded) {
+    transform: translateY(var(--gsap-y));
+  }
+  .lp-gsap-section--slide-left:not(.is-gsap-ready):not(.is-gsap-loaded) {
+    transform: translateX(calc(-1 * var(--gsap-x)));
+  }
+  .lp-gsap-section--slide-right:not(.is-gsap-ready):not(.is-gsap-loaded) {
+    transform: translateX(var(--gsap-x));
+  }
+
+  /* GSAP loaded: 制御を GSAP inline style に委ねる (CSS で上書きしない) */
+  .lp-gsap-section.is-gsap-loaded {
+    /* opacity / transform は GSAP が inline style で制御する。
+       ここでは初期状態 (transform: none, opacity: 1) も書かないことで
+       GSAP の fromTo で設定した inline style を尊重する。 */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lp-gsap-section {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * GSAP + ScrollTrigger の動的ロード + 適用
+   * GSAP が利用できない場合はフォールバック (CSS only)
+   */
+  async function initGsapSections() {
+    const sections = document.querySelectorAll('[data-gsap-anim]');
+    if (!sections.length) return;
+
+    // prefers-reduced-motion: reduce のユーザーは GSAP をロードせず即表示
+    // (CSS 側の prefers-reduced-motion フォールバックが効く)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      sections.forEach((s) => s.classList.add('is-gsap-ready'));
+      return;
+    }
+
+    // 静的 import: Vite が GSAP + ScrollTrigger を bundle する
+    // (オフライン / 厳格な CSP でも動作)
+    let gsap, ScrollTrigger;
+    try {
+      const gsapMod = await import('gsap');
+      const stMod = await import('gsap/ScrollTrigger');
+      gsap = gsapMod.gsap || gsapMod.default;
+      ScrollTrigger = stMod.ScrollTrigger || stMod.default;
+      gsap.registerPlugin(ScrollTrigger);
+    } catch (err) {
+      console.warn('[GsapScrollSection] GSAP load failed, using CSS fallback', err);
+      // CSS フォールバック: fallback="none" を選んだ要素は即座に表示
+      // (data-gsap-fallback を尊重してフォールバック無効化)
+      for (const section of sections) {
+        const fb = section.getAttribute('data-gsap-fallback') || 'reveal';
+        if (fb === 'none') {
+          section.classList.add('is-gsap-ready'); // opacity:1, transform:none に
+          continue;
+        }
+        // fallback="reveal" (default) の場合のみ IntersectionObserver で表示
+        if ('IntersectionObserver' in window) {
+          const obs = new IntersectionObserver(
+            (entries) => {
+              for (const e of entries) {
+                if (e.isIntersecting) {
+                  e.target.classList.add('is-gsap-ready');
+                  obs.unobserve(e.target);
+                }
+              }
+            },
+            { threshold: 0.15 }
+          );
+          obs.observe(section);
+        } else {
+          section.classList.add('is-gsap-ready');
+        }
+      }
+      return;
+    }
+
+    // GSAP loaded → CSS 制御を解除し、GSAP inline style に委ねる
+    sections.forEach((s) => s.classList.add('is-gsap-loaded'));
+
+    for (const section of sections) {
+      const animType = section.getAttribute('data-gsap-animation');
+      const triggerSel = section.getAttribute('data-gsap-trigger');
+      const start = section.getAttribute('data-gsap-start') || 'top 80%';
+      const end = section.getAttribute('data-gsap-end') || 'bottom 20%';
+      const scrub = section.getAttribute('data-gsap-scrub');
+      const pin = section.getAttribute('data-gsap-pin') === 'true';
+      const pinDur = section.getAttribute('data-gsap-pin-duration') || '100%';
+      const y = parseFloat(getComputedStyle(section).getPropertyValue('--gsap-y')) || 60;
+      const x = parseFloat(getComputedStyle(section).getPropertyValue('--gsap-x')) || 60;
+      const scale = parseFloat(getComputedStyle(section).getPropertyValue('--gsap-scale')) || 1.1;
+
+      const trigger = triggerSel === 'self' ? section : (triggerSel ? document.querySelector(triggerSel) : section);
+      if (!trigger) continue;
+
+      const stConfig = {
+        trigger,
+        start,
+        // end は引数で渡された値を使う (pin のときだけ +pinDur へ上書き)
+        end: pin && pinDur ? `+=${pinDur}` : end,
+        scrub: scrub === 'true' ? true : scrub === 'false' ? false : parseFloat(scrub),
+        pin: pin || false,
+        pinSpacing: pin,
+      };
+
+      switch (animType) {
+        case 'fade-up':
+          gsap.fromTo(section, { opacity: 0, y }, { opacity: 1, y: 0, ease: 'power2.out', scrollTrigger: stConfig });
+          break;
+        case 'fade-in':
+          gsap.fromTo(section, { opacity: 0 }, { opacity: 1, ease: 'power2.out', scrollTrigger: stConfig });
+          break;
+        case 'slide-left':
+          gsap.fromTo(section, { opacity: 0, x: -x }, { opacity: 1, x: 0, ease: 'power2.out', scrollTrigger: stConfig });
+          break;
+        case 'slide-right':
+          gsap.fromTo(section, { opacity: 0, x }, { opacity: 1, x: 0, ease: 'power2.out', scrollTrigger: stConfig });
+          break;
+        case 'parallax':
+          // 子要素を parallax
+          const target = section.querySelector('[data-gsap-parallax-target]') || section;
+          gsap.fromTo(target, { y: -y }, { y: y, ease: 'none', scrollTrigger: stConfig });
+          break;
+        case 'scale':
+          // scale prop: 0.9 → 1 のような default 動作を維持しつつ、
+          // 1.5 を渡したら「0.9 → 1.5」のように start=0.9, end=scale として扱う
+          // (元の fromTo は from 0.9 → 1 固定で scale prop が死んでいた)
+          const fromScaleVal = 0.9;
+          const toScaleVal = scale;
+          gsap.fromTo(section, { scale: fromScaleVal, opacity: 0 }, { scale: toScaleVal, opacity: 1, ease: 'power2.out', scrollTrigger: stConfig });
+          break;
+        case 'pin':
+          // pin は scrollTrigger 側で行う
+          gsap.to(section, { scrollTrigger: { trigger, start, end: `+=${pinDur}`, pin: true, scrub: scrub === 'true' } });
+          break;
+      }
+    }
+
+    // ScrollTrigger の更新
+    ScrollTrigger.refresh();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGsapSections);
+  } else {
+    initGsapSections();
+  }
+</script>

@@ -1,0 +1,9 @@
+---
+interface Props { class?: string }
+const { class: className = '' } = Astro.props;
+---
+<div class={`diff aspect-16/9 ${className}`}>
+  <div class="diff-item-1"><slot name="before" /></div>
+  <div class="diff-item-2"><slot name="after" /></div>
+  <div class="diff-resizer"></div>
+</div>

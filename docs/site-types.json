@@ -1,0 +1,298 @@
+{
+  "site_types": [
+    {
+      "id": "corporate",
+      "label": "コーポレートサイト",
+      "keywords": [
+        "コーポレート",
+        "会社",
+        "企業サイト",
+        "オフィシャル",
+        "corporate",
+        "株式会社",
+        "有限会社",
+        "ホールディングス",
+        "グループ",
+        "Inc.",
+        "INC",
+        "Co., Ltd",
+        "Corporation"
+      ],
+      "url_keywords": [
+        "co.jp",
+        "corp.",
+        "//corp",
+        ".or.jp"
+      ],
+      "required_pages": [
+        "/",
+        "/about/",
+        "/service/",
+        "/news/",
+        "/contact/"
+      ],
+      "recommended_pages": [
+        "/company/",
+        "/recruit/",
+        "/privacy/"
+      ],
+      "tone": "信頼・堅実。彩度を抑えたコーポレートカラー1色＋アクセント1色、写真は事業/人物の実写、数値による実績提示、問い合わせ導線は全ページ到達可能",
+      "rotation": true
+    },
+    {
+      "id": "service",
+      "label": "サービス・製品サイト",
+      "keywords": [
+        "サービス",
+        "SaaS",
+        "プロダクト",
+        "製品",
+        "ツール",
+        "プラットフォーム",
+        "service",
+        "product"
+      ],
+      "url_keywords": [
+        "/service",
+        "/product",
+        ".app",
+        "lp."
+      ],
+      "required_pages": [
+        "/",
+        "/feature/",
+        "/price/",
+        "/case/",
+        "/contact/"
+      ],
+      "recommended_pages": [
+        "/faq/",
+        "/document/",
+        "/about/"
+      ],
+      "tone": "機能価値の言語化。比較表・料金表・導入事例が主役、資料請求と無料トライアルの2系統CTA",
+      "rotation": false
+    },
+    {
+      "id": "recruit",
+      "label": "採用サイト",
+      "keywords": [
+        "採用",
+        "RECRUIT",
+        "リクルート",
+        "新卒",
+        "中途",
+        "キャリア",
+        "求人",
+        "recruit",
+        "careers"
+      ],
+      "url_keywords": [
+        "recruit",
+        "saiyo",
+        "/careers",
+        "career."
+      ],
+      "required_pages": [
+        "/",
+        "/about/",
+        "/people/",
+        "/jobs/",
+        "/entry/"
+      ],
+      "recommended_pages": [
+        "/culture/",
+        "/flow/",
+        "/faq/"
+      ],
+      "tone": "社員写真とストーリー主導。1日の流れ／座談会／数字で見る当社、エントリー導線を全ページ固定",
+      "rotation": false
+    },
+    {
+      "id": "media",
+      "label": "メディア・オウンドメディア",
+      "keywords": [
+        "メディア",
+        "マガジン",
+        "ジャーナル",
+        "コラム",
+        "ブログ",
+        "magazine",
+        "journal"
+      ],
+      "url_keywords": [
+        "/magazine",
+        "/journal",
+        "/media",
+        "/blog"
+      ],
+      "required_pages": [
+        "/",
+        "/articles/",
+        "/category/",
+        "/about/"
+      ],
+      "recommended_pages": [
+        "/tag/",
+        "/search/",
+        "/contact/"
+      ],
+      "tone": "可読性最優先のエディトリアル。一覧→詳細の回遊設計、カテゴリ/タグ/ページネーション/関連記事",
+      "rotation": false
+    },
+    {
+      "id": "brand",
+      "label": "ブランドサイト",
+      "keywords": [
+        "ブランド",
+        "brand",
+        "世界観",
+        "コレクション"
+      ],
+      "required_pages": [],
+      "recommended_pages": [],
+      "tone": null,
+      "rotation": false
+    },
+    {
+      "id": "ec",
+      "label": "EC・通販",
+      "keywords": [
+        "オンラインストア",
+        "通販",
+        "ショップ",
+        "STORE",
+        "EC"
+      ],
+      "required_pages": [],
+      "recommended_pages": [],
+      "tone": null,
+      "rotation": false
+    },
+    {
+      "id": "public",
+      "label": "公共・教育・医療機関",
+      "keywords": [
+        "市",
+        "県",
+        "自治体",
+        "大学",
+        "学校",
+        "病院",
+        "クリニック",
+        "法人"
+      ],
+      "url_keywords": [
+        ".ac.jp",
+        ".go.jp",
+        ".lg.jp",
+        ".ed.jp"
+      ],
+      "required_pages": [],
+      "recommended_pages": [],
+      "tone": null,
+      "rotation": false
+    }
+  ],
+  "industries": [
+    {
+      "id": "manufacturing",
+      "label": "製造・工業",
+      "keywords": [
+        "製作所",
+        "工業",
+        "機械",
+        "精密",
+        "金属",
+        "electronics",
+        "産業"
+      ]
+    },
+    {
+      "id": "construction",
+      "label": "建設・不動産",
+      "keywords": [
+        "建設",
+        "工務店",
+        "住宅",
+        "不動産",
+        "設計",
+        "リフォーム"
+      ]
+    },
+    {
+      "id": "it",
+      "label": "IT・ソフトウェア",
+      "keywords": [
+        "システム",
+        "ソフト",
+        "IT",
+        "テック",
+        "デジタル",
+        "DX",
+        "AI"
+      ]
+    },
+    {
+      "id": "professional",
+      "label": "士業・コンサル",
+      "keywords": [
+        "法律",
+        "会計",
+        "税理士",
+        "社労士",
+        "コンサル",
+        "事務所"
+      ]
+    },
+    {
+      "id": "medical",
+      "label": "医療・福祉",
+      "keywords": [
+        "医療",
+        "クリニック",
+        "病院",
+        "介護",
+        "福祉",
+        "薬"
+      ]
+    },
+    {
+      "id": "food",
+      "label": "食品・飲食",
+      "keywords": [
+        "食品",
+        "飲料",
+        "レストラン",
+        "カフェ",
+        "酒造",
+        "菓子"
+      ]
+    },
+    {
+      "id": "retail",
+      "label": "小売・サービス業",
+      "keywords": [
+        "小売",
+        "店舗",
+        "サロン",
+        "ホテル",
+        "旅館",
+        "物流",
+        "運送"
+      ]
+    },
+    {
+      "id": "education",
+      "label": "教育",
+      "keywords": [
+        "学校",
+        "大学",
+        "スクール",
+        "塾",
+        "教育",
+        "学園"
+      ]
+    }
+  ]
+}

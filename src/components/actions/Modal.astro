@@ -1,0 +1,20 @@
+---
+interface Props {
+  id: string;
+  class?: string;
+}
+const { id, class: className = '' } = Astro.props;
+---
+<dialog id={id} class={`modal ${className}`}>
+  <div class="modal-box">
+    <slot />
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">閉じる</button>
+      </form>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>

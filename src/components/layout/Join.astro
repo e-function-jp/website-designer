@@ -1,0 +1,7 @@
+---
+interface Props { direction?: 'horizontal' | 'vertical'; class?: string }
+const { direction = 'horizontal', class: className = '' } = Astro.props;
+---
+<div class={`join ${direction === 'vertical' ? 'join-vertical' : ''} ${className}`.trim()}>
+  <slot />
+</div>

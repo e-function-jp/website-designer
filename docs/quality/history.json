@@ -1,0 +1,34 @@
+[
+  {
+    "date": "2026-09-03T05:03:54.465Z",
+    "total": 100,
+    "sites": 1,
+    "pages": {
+      "/components/": 100,
+      "/": 100,
+      "/sites/corporate/base-20260903-1400/about/": 100,
+      "/sites/corporate/base-20260903-1400/contact/": 100,
+      "/sites/corporate/base-20260903-1400/": 98,
+      "/sites/corporate/base-20260903-1400/news/": 100,
+      "/sites/corporate/base-20260903-1400/privacy/": 100,
+      "/sites/corporate/base-20260903-1400/service/": 100
+    },
+    "findingsCount": 1
+  },
+  {
+    "date": "2026-09-03T05:13:26.535Z",
+    "total": 100,
+    "sites": 1,
+    "pages": {
+      "/components/": 100,
+      "/": 100,
+      "/sites/corporate/base-20260903-1400/about/": 100,
+      "/sites/corporate/base-20260903-1400/contact/": 100,
+      "/sites/corporate/base-20260903-1400/": 98,
+      "/sites/corporate/base-20260903-1400/news/": 100,
+      "/sites/corporate/base-20260903-1400/privacy/": 100,
+      "/sites/corporate/base-20260903-1400/service/": 100
+    },
+    "findingsCount": 1
+  }
+]

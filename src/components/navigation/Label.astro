@@ -1,0 +1,7 @@
+---
+interface Props { text: string; class?: string }
+const { text, class: className = '' } = Astro.props;
+---
+<label class={`label ${className}`}>
+  <span class="label-text">{text}</span>
+</label>

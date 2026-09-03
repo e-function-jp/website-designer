@@ -1,0 +1,78 @@
+---
+/**
+ * サイト共通ヘッダー。全ページで同一の nav を描画する。
+ *
+ * website の品質は「全ページで同じグローバルナビが出ているか」「現在地が
+ * 分かるか」に強く依存する。ページごとに手書きすると必ずズレるので、
+ * ここ 1 箇所で描画し、現在地は `path` から自動判定する。
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+  /** 現在ページの base 相対パス */
+  path?: string;
+}
+const { site, path = '/' } = Astro.props;
+
+const norm = (p: string) => ('/' + p.replace(/^\//, '').replace(/\/$/, '')).replace(/^\/$/, '/');
+const current = norm(path);
+const isCurrent = (href: string) => {
+  const h = norm(href);
+  return h === '/' ? current === '/' : current === h || current.startsWith(h + '/');
+};
+---
+
+<header class="sticky top-0 z-40 bg-base-100/95 backdrop-blur border-b border-base-300">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
+    <a
+      href={url(site, '/')}
+      class="font-bold text-lg tracking-tight shrink-0"
+      aria-current={current === '/' ? 'page' : undefined}
+    >{site.name}</a>
+
+    <nav class="hidden lg:flex items-center gap-1 ml-auto" aria-label="グローバルナビゲーション">
+      {site.nav.map((item) => (
+        <a
+          href={url(site, item.href)}
+          class:list={['px-3 py-2 text-sm rounded-lg hover:bg-base-200 transition-colors', isCurrent(item.href) && 'font-bold text-primary']}
+          aria-current={isCurrent(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    {site.primaryCta && (
+      <a href={url(site, site.primaryCta.href)} class="btn btn-primary btn-sm hidden lg:inline-flex">
+        {site.primaryCta.label}
+      </a>
+    )}
+
+    <!-- モバイル: details/summary の CSS-only ドロワー。JS を足さない -->
+    <details class="dropdown dropdown-end lg:hidden ml-auto">
+      <summary class="btn btn-ghost btn-square" aria-label="メニューを開く">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </summary>
+      <nav class="dropdown-content mt-2 w-64 bg-base-100 rounded-box shadow-xl border border-base-300 p-2" aria-label="モバイルナビゲーション">
+        {site.nav.map((item) => (
+          <a
+            href={url(site, item.href)}
+            class:list={['block px-3 py-2 rounded-lg hover:bg-base-200', isCurrent(item.href) && 'font-bold text-primary']}
+            aria-current={isCurrent(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+        {site.primaryCta && (
+          <a href={url(site, site.primaryCta.href)} class="btn btn-primary btn-sm w-full mt-2">
+            {site.primaryCta.label}
+          </a>
+        )}
+      </nav>
+    </details>
+  </div>
+</header>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  type?: 'wave' | 'tilt' | 'curve' | 'triangle';
+  position?: 'top' | 'bottom';
+  color?: string;
+  height?: number;
+  class?: string;
+}
+const { type = 'wave', position = 'bottom', color = 'fill-base-200', height = 60, class: className = '' } = Astro.props;
+const flip = position === 'top' ? 'rotate-180' : '';
+const paths: Record<string, string> = {
+  wave: 'M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,42.7C960,43,1056,53,1152,53.3C1248,53,1344,43,1392,37.3L1440,32L1440,64L0,64Z',
+  tilt: 'M0,64L1440,0L1440,64L0,64Z',
+  curve: 'M0,64C480,0,960,0,1440,64L1440,64L0,64Z',
+  triangle: 'M0,64L720,0L1440,64L1440,64L0,64Z',
+};
+---
+<div class={`w-full overflow-hidden leading-none ${flip} ${className}`} style={`height:${height}px;`}>
+  <svg viewBox="0 0 1440 64" preserveAspectRatio="none" class={`w-full h-full ${color}`}>
+    <path d={paths[type]}></path>
+  </svg>
+</div>

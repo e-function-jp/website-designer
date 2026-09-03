@@ -1,0 +1,175 @@
+---
+/**
+ * RevealOnScroll.astro
+ *
+ * IntersectionObserver でスクロール到達時に子要素を reveal する汎用ラッパー。
+ * Awwwards 解析で頻出 (8/10 サイト) の opacity + transform パターンを踏襲。
+ *
+ * 使用例:
+ *   <RevealOnScroll variant="fade-up" delay={0}>
+ *     <h2>セクション見出し</h2>
+ *   </RevealOnScroll>
+ *
+ *   <RevealOnScroll variant="slide-in-left" once>
+ *     <img src="..." />
+ *   </RevealOnScroll>
+ *
+ * props:
+ *   variant: 'fade-up' | 'fade-in' | 'slide-in-left' | 'slide-in-right' | 'zoom-in' | 'clip-up'
+ *           (default: 'fade-up')
+ *   delay:   ms 単位の遅延 (default: 0)
+ *   duration: アニメーション時間 ms (default: 700)
+ *   distance: スライド/移動距離 px (default: 24)
+ *   once: true で出現のみ (default: true)
+ *   threshold: IntersectionObserver の閾値 0-1 (default: 0.15)
+ *   as: 出力タグ (default: 'div')
+ *   class: 追加クラス
+ */
+
+interface Props {
+  variant?: 'fade-up' | 'fade-in' | 'slide-in-left' | 'slide-in-right' | 'zoom-in' | 'clip-up';
+  delay?: number;
+  duration?: number;
+  distance?: number;
+  once?: boolean;
+  threshold?: number;
+  as?: string;
+  class?: string;
+  id?: string;
+}
+
+const {
+  variant = 'fade-up',
+  delay = 0,
+  duration = 700,
+  distance = 24,
+  once = true,
+  threshold = 0.15,
+  as: Tag = 'div',
+  class: className = '',
+  id,
+} = Astro.props;
+
+// CSS 変数で値を子要素へ伝える
+const styleAttr = [
+  '--reveal-duration: ' + duration + 'ms',
+  '--reveal-delay: ' + delay + 'ms',
+  '--reveal-distance: ' + distance + 'px',
+].join('; ');
+---
+
+<Tag
+  data-reveal
+  data-reveal-variant={variant}
+  data-reveal-once={once ? 'true' : 'false'}
+  data-reveal-threshold={threshold}
+  class:list={['lp-reveal', `lp-reveal--${variant}`, className]}
+  style={styleAttr}
+  id={id}
+>
+  <slot />
+</Tag>
+
+<style>
+  .lp-reveal {
+    --reveal-duration: 700ms;
+    --reveal-delay: 0ms;
+    --reveal-distance: 24px;
+    will-change: opacity, transform, clip-path;
+  }
+
+  /* 初期状態: 透明 + 移動 (variant 別) */
+  .lp-reveal--fade-up {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+  .lp-reveal--fade-in {
+    opacity: 0;
+  }
+  .lp-reveal--slide-in-left {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--reveal-distance)));
+  }
+  .lp-reveal--slide-in-right {
+    opacity: 0;
+    transform: translateX(var(--reveal-distance));
+  }
+  .lp-reveal--zoom-in {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  .lp-reveal--clip-up {
+    opacity: 1;
+    clip-path: inset(100% 0 0 0);
+  }
+
+  /* 出現後 (JS で is-revealed クラスを付与) */
+  .lp-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+    transition:
+      opacity var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+      transform var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+      clip-path var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay);
+  }
+
+  /* reduced-motion: 即座に表示 */
+  @media (prefers-reduced-motion: reduce) {
+    .lp-reveal,
+    .lp-reveal.is-revealed {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  // 早期に初期化 (head でも可だが、scroll 前にロード完了している想定で body 末尾)
+  function initReveal() {
+    const els = Array.from(document.querySelectorAll('[data-reveal]:not(.is-revealed)'));
+    if (!els.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      // フォールバック: 即座に表示
+      els.forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+
+    // threshold 値ごとにグループ化し、observer を 1 つずつ作成
+    // (threshold 0 と 1 は特殊な意味なので別グループ)
+    const groups = new Map();
+    for (const el of els) {
+      const t = Number(el.getAttribute('data-reveal-threshold') || 0.15);
+      if (!groups.has(t)) groups.set(t, []);
+      groups.get(t).push(el);
+    }
+
+    for (const [threshold, group] of groups) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              const once = entry.target.getAttribute('data-reveal-once') === 'true';
+              if (once) observer.unobserve(entry.target);
+            } else if (entry.target.getAttribute('data-reveal-once') === 'false') {
+              // 戻ったときにリセット (repeat モード)
+              entry.target.classList.remove('is-revealed');
+            }
+          }
+        },
+        { threshold }
+      );
+      group.forEach((el) => observer.observe(el));
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else {
+    initReveal();
+  }
+</script>

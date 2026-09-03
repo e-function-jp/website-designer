@@ -1,0 +1,48 @@
+---
+interface Props {
+  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'fade' | 'zoom';
+  delay?: number;
+  duration?: number;
+  threshold?: number;
+  class?: string;
+}
+const { animation = 'fade-up', delay = 0, duration = 600, threshold = 0.1, class: className = '' } = Astro.props;
+---
+<div
+  class={`scroll-reveal scroll-reveal--${animation} ${className}`}
+  data-sr-delay={delay}
+  data-sr-duration={duration}
+  data-sr-threshold={threshold}
+>
+  <slot />
+</div>
+
+<style>
+  .scroll-reveal { opacity: 0; transition-property: opacity, transform; transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-reveal--fade-up { transform: translateY(30px); }
+  .scroll-reveal--fade-down { transform: translateY(-30px); }
+  .scroll-reveal--fade-left { transform: translateX(-30px); }
+  .scroll-reveal--fade-right { transform: translateX(30px); }
+  .scroll-reveal--fade { transform: none; }
+  .scroll-reveal--zoom { transform: scale(0.95); }
+  .scroll-reveal.is-visible { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const els = document.querySelectorAll('.scroll-reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const delay = parseInt(el.dataset.srDelay || '0', 10);
+          const duration = parseInt(el.dataset.srDuration || '600', 10);
+          el.style.transitionDuration = `${duration}ms`;
+          setTimeout(() => el.classList.add('is-visible'), delay);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(el => observer.observe(el));
+  });
+</script>

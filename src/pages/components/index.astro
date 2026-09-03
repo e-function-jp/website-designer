@@ -1,0 +1,227 @@
+---
+/**
+ * コンポーネントカタログ (/components)
+ *
+ * src/components/ 配下の .astro を全件、ビルド時に自動収集して並べる。
+ * 手書きの import 一覧は持たない。学習ループの Extract が新しいブロックを
+ * 切り出せば、次のビルドで自動的にこのページへ載る。
+ * （旧 /daisyui は約60件を手書き import していたため sections/ が抜けていた）
+ *
+ * 各コンポーネントに渡すサンプル props は `interface Props` を解析して
+ * 自動生成する。src/lib/component-preview.ts を参照。
+ *
+ * ページ上部のセレクタで data-theme を差し替えると、ページ全体
+ * （＝全コンポーネント）のスタイルが切り替わる。
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildPreviewSpec } from '../../lib/component-preview';
+
+const modules = import.meta.glob('../../components/**/*.astro', { eager: true }) as Record<
+  string,
+  { default: unknown }
+>;
+const sources = import.meta.glob('../../components/**/*.astro', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
+
+const CATEGORY_LABEL: Record<string, string> = {
+  actions: 'Actions',
+  animations: 'Animations',
+  'data-display': 'Data Display',
+  layout: 'Layout',
+  navigation: 'Navigation',
+  sections: 'Sections',
+  ui: 'UI',
+};
+
+type Entry = {
+  name: string;
+  path: string;
+  Component: any;
+  props: Record<string, unknown>;
+  fields: { name: string; optional: boolean; type: string }[];
+  unresolved: string[];
+  hasSlot: boolean;
+};
+
+const entries: Entry[] = Object.keys(modules)
+  .map((key) => {
+    const rel = key.replace('../../components/', '');
+    const [category, file] = [rel.split('/')[0], rel.split('/').pop() as string];
+    const src = sources[key] ?? '';
+    const spec = buildPreviewSpec(src);
+    return {
+      category,
+      name: file.replace(/\.astro$/, ''),
+      path: `src/components/${rel}`,
+      Component: modules[key].default,
+      props: spec.props,
+      fields: spec.fields,
+      unresolved: spec.unresolved,
+      hasSlot: /<slot\b/.test(src),
+    };
+  })
+  .sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name)) as any;
+
+const grouped = new Map<string, Entry[]>();
+for (const e of entries as any[]) {
+  const list = grouped.get(e.category) ?? [];
+  list.push(e);
+  grouped.set(e.category, list);
+}
+const categories = [...grouped.keys()];
+
+const THEMES = [
+  'light', 'dark', 'corporate', 'cupcake', 'luxury', 'business',
+  'emerald', 'retro', 'nord', 'autumn', 'winter', 'lofi',
+];
+
+const total = (entries as any[]).length;
+const unresolvedCount = (entries as any[]).filter((e) => e.unresolved.length > 0).length;
+---
+
+<BaseLayout
+  title="コンポーネントカタログ | Website Designer"
+  description={`src/components/ の ${total} 件を自動収集したカタログ。テーマを切り替えて各コンポーネントの見え方を確認できます。`}
+  theme="light"
+>
+  <div class="sticky top-0 z-50 border-b border-base-300 bg-base-100/95 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 py-3">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <a href="/" class="text-lg font-bold">Website Designer</a>
+        <span class="text-sm text-base-content/60">コンポーネント {total} 件</span>
+
+        <label class="ml-auto flex items-center gap-2 text-sm">
+          <span class="whitespace-nowrap">テーマ</span>
+          <select id="theme-select" class="select select-bordered select-sm">
+            {THEMES.map((t) => <option value={t}>{t}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <nav class="mt-2 flex flex-wrap gap-1">
+        {categories.map((c) => (
+          <a href={`#cat-${c}`} class="btn btn-ghost btn-xs">
+            {CATEGORY_LABEL[c] ?? c}
+            <span class="opacity-50">{grouped.get(c)!.length}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+
+  <main id="main" class="mx-auto max-w-7xl px-4 py-8">
+    <h1 class="text-3xl font-bold">コンポーネントカタログ</h1>
+    <p class="mt-2 max-w-3xl text-base-content/70">
+      <code>src/components/</code> をビルド時に自動収集しています。表示中のサンプル値は
+      各コンポーネントの <code>interface Props</code> から自動生成したものです
+      （必須プロパティのみ。任意プロパティはコンポーネント側の既定値のまま）。
+      上部のテーマを切り替えると、このページ全体のスタイルが切り替わります。
+    </p>
+    {unresolvedCount > 0 && (
+      <div class="alert alert-warning mt-4">
+        <span>{unresolvedCount} 件はサンプル値を自動生成できない必須プロパティを持つため、簡易表示です。</span>
+      </div>
+    )}
+
+    {categories.map((c) => (
+      <section id={`cat-${c}`} class="mt-14 scroll-mt-32">
+        <h2 class="border-b border-base-300 pb-2 text-2xl font-bold">
+          {CATEGORY_LABEL[c] ?? c}
+          <span class="ml-2 text-base font-normal text-base-content/50">
+            {grouped.get(c)!.length} 件
+          </span>
+        </h2>
+
+        <div class="mt-6 space-y-10">
+          {grouped.get(c)!.map((e) => {
+            const C = e.Component;
+            return (
+              <article id={`c-${e.name}`} class="scroll-mt-32 rounded-lg border border-base-300">
+                <header class="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-base-300 bg-base-200 px-4 py-2">
+                  <h3 class="font-mono text-sm font-bold">{e.name}</h3>
+                  <code class="text-xs text-base-content/50">{e.path}</code>
+                  {e.unresolved.length > 0 && (
+                    <span class="badge badge-warning badge-sm">
+                      未解決: {e.unresolved.join(', ')}
+                    </span>
+                  )}
+                </header>
+
+                {/* transform を当てると position:fixed の基準がこの要素になる。
+                    FloatingCTABar や PageTopButton のような固定配置の部品が
+                    ビューポート全体を覆ってしまうのを防ぐ。 */}
+                <div class="preview-frame overflow-x-auto bg-base-100 p-4">
+                  {e.unresolved.length > 0 ? (
+                    <p class="text-sm text-base-content/60">
+                      必須プロパティのサンプル値を生成できないため、プレビューは省略しています。
+                    </p>
+                  ) : e.hasSlot ? (
+                    <C {...e.props}>スロットの内容</C>
+                  ) : (
+                    <C {...e.props} />
+                  )}
+                </div>
+
+                {e.fields.length > 0 && (
+                  <details class="border-t border-base-300 px-4 py-2">
+                    <summary class="cursor-pointer text-xs text-base-content/60">
+                      Props ({e.fields.length})
+                    </summary>
+                    <ul class="mt-2 space-y-1 font-mono text-xs">
+                      {e.fields.map((f) => (
+                        <li>
+                          <span class="font-bold">{f.name}</span>
+                          {f.optional && <span class="text-base-content/40">?</span>}
+                          <span class="text-base-content/50">: {f.type}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </main>
+</BaseLayout>
+
+<style>
+  /* transform は position:fixed の containing block を作る。
+     固定配置のコンポーネントを各プレビュー枠の中に収めるために使う。 */
+  .preview-frame {
+    transform: translateZ(0);
+  }
+</style>
+
+<script>
+  // テーマはページ全体（html[data-theme]）に当てる。
+  // 各コンポーネントは DaisyUI のセマンティックカラーを使うため、
+  // ここを差し替えるとカタログ全体の見え方が一度に切り替わる。
+  const select = document.getElementById('theme-select') as HTMLSelectElement | null;
+  if (select) {
+    const KEY = 'website-designer:components-theme';
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(KEY);
+    } catch {
+      // プライベートウィンドウ等では読めない。既定テーマのままでよい。
+    }
+    const initial = saved ?? document.documentElement.dataset.theme ?? 'light';
+    document.documentElement.dataset.theme = initial;
+    select.value = initial;
+
+    select.addEventListener('change', () => {
+      document.documentElement.dataset.theme = select.value;
+      try {
+        localStorage.setItem(KEY, select.value);
+      } catch {
+        // 保存できなくても表示は切り替わっている。
+      }
+    });
+  }
+</script>

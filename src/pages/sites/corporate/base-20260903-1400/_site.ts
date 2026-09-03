@@ -1,0 +1,55 @@
+import type { SiteConfig } from '../../../../lib/site';
+
+/**
+ * ベースラインのコーポレートサイト定義。
+ *
+ * これは「学習前の基準点」であり、意匠を競う対象ではない。
+ * 参照学習ラン（a案/b案）はこのサイトを上回ることを目標にする。
+ * lp-designer でいう `base-20260328-0000` に相当する。
+ */
+export const site: SiteConfig = {
+  name: 'ミナモト精機',
+  tagline: '精密加工で、ものづくりの前提を変える',
+  base: '/sites/corporate/base-20260903-1400/',
+  theme: 'business',
+  nav: [
+    { label: '会社について', href: '/about/' },
+    { label: '事業・技術', href: '/service/' },
+    { label: 'ニュース', href: '/news/' },
+    { label: 'お問い合わせ', href: '/contact/' },
+  ],
+  footerNav: [
+    {
+      heading: '会社について',
+      items: [
+        { label: '代表挨拶・沿革', href: '/about/' },
+        { label: 'プライバシーポリシー', href: '/privacy/' },
+      ],
+    },
+    {
+      heading: '事業・技術',
+      items: [
+        { label: '事業内容', href: '/service/' },
+        { label: '設備一覧', href: '/service/#facility' },
+      ],
+    },
+    {
+      heading: 'お知らせ・窓口',
+      items: [
+        { label: 'ニュース一覧', href: '/news/' },
+        { label: 'お問い合わせ', href: '/contact/' },
+      ],
+    },
+  ],
+  organization: {
+    legalName: '株式会社ミナモト精機',
+    address: '〒939-8214 富山県富山市黒崎 3-12-8',
+    tel: '076-000-0000',
+    email: 'info@example.com',
+    founded: '1974-04',
+  },
+  primaryCta: { label: 'お問い合わせ', href: '/contact/' },
+  legalNav: [{ label: 'プライバシーポリシー', href: '/privacy/' }],
+};
+
+export default site;

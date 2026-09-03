@@ -1,0 +1,9 @@
+---
+interface Props { name?: string; class?: string }
+const { name = 'accordion', class: className = '' } = Astro.props;
+---
+<div class={`collapse collapse-arrow bg-base-100 border border-base-300 ${className}`}>
+  <input type="radio" name={name} />
+  <div class="collapse-title font-semibold"><slot name="title">タイトル</slot></div>
+  <div class="collapse-content text-sm"><slot /></div>
+</div>

@@ -1,0 +1,20 @@
+---
+interface Props { src?: string; alt?: string; size?: 'xs' | 'sm' | 'md' | 'lg'; placeholder?: string; online?: boolean; class?: string }
+const { src, alt = '', size = 'md', placeholder, online, class: className = '' } = Astro.props;
+const sizeMap = { xs: 'w-8', sm: 'w-12', md: 'w-16', lg: 'w-24' };
+// img の width/height に入れる実寸(px)。指定が無いと CLS の原因になる
+// (perf-img-dimensions)。placeholder の頭文字は flex で中央に寄せないと
+// 縦に見切れることがある (visual-text-clipping)。
+const pxMap = { xs: 32, sm: 48, md: 64, lg: 96 };
+const px = pxMap[size];
+const statusClass = online === true ? 'online' : online === false ? 'offline' : '';
+---
+<div class={`avatar ${statusClass} ${!src ? 'placeholder' : ''} ${className}`.trim()}>
+  <div class={`${sizeMap[size]} rounded-full flex items-center justify-center`}>
+    {src ? (
+      <img src={src} alt={alt} width={px} height={px} loading="lazy" />
+    ) : (
+      <span>{placeholder || alt?.charAt(0) || '?'}</span>
+    )}
+  </div>
+</div>

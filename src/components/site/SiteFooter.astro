@@ -1,0 +1,58 @@
+---
+/**
+ * サイト共通フッター。フッターサイトマップを持つのが website と LP の大きな差。
+ * 下層ページへの導線を footerNav で広く露出させ、回遊の袋小路を作らない。
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+}
+const { site } = Astro.props;
+const org = site.organization;
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-auto bg-base-200 border-t border-base-300">
+  <div class="max-w-7xl mx-auto px-4 py-12 grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+    <div class="space-y-3">
+      <p class="font-bold text-lg">{site.name}</p>
+      {org?.address && <p class="text-sm text-base-content/70">{org.address}</p>}
+      {org?.tel && (
+        <p class="text-sm">
+          <a href={`tel:${org.tel.replace(/[^\d+]/g, '')}`} class="link link-hover">TEL {org.tel}</a>
+        </p>
+      )}
+      {site.primaryCta && (
+        <a href={url(site, site.primaryCta.href)} class="btn btn-primary btn-sm">{site.primaryCta.label}</a>
+      )}
+    </div>
+
+    {site.footerNav && site.footerNav.length > 0 && (
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {site.footerNav.map((group) => (
+          <nav aria-label={group.heading}>
+            <p class="text-sm font-bold mb-3">{group.heading}</p>
+            <ul class="space-y-2">
+              {group.items.map((item) => (
+                <li>
+                  <a href={url(site, item.href)} class="text-sm text-base-content/70 link link-hover">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <div class="border-t border-base-300">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-base-content/60">
+      <p>&copy; {year} {org?.legalName ?? site.name}</p>
+      {site.legalNav?.map((item) => (
+        <a href={url(site, item.href)} class="link link-hover">{item.label}</a>
+      ))}
+    </div>
+  </div>
+</footer>

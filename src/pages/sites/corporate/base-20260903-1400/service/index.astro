@@ -1,0 +1,110 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Card from '../../../../../components/data-display/Card.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const fields = [
+  {
+    title: '医療機器部品',
+    body: '内視鏡の先端部品、手術支援ロボットのアーム関節、インプラント治具など。ISO 13485 の運用下で、ロット単位のトレーサビリティを確保します。ステンレス、チタン、コバルトクロムを主に扱います。',
+  },
+  {
+    title: '半導体製造装置部品',
+    body: '真空チャンバ内で使う高純度アルミ・チタン部品。加工痕からのパーティクル発生を抑えるため、仕上げ条件と洗浄工程を装置メーカーと合わせ込みます。',
+  },
+  {
+    title: '治具設計・製作',
+    body: '量産の歩留まりは治具でほぼ決まります。加工対象の形状に合わせて自社設計・自社製作し、段取り時間を短縮します。他社で加工する部品の治具のみのご依頼も承ります。',
+  },
+];
+
+const facility = [
+  ['5軸マシニングセンタ', 'DMG MORI NMV5000 DCG', '4台', '複合形状の一工程加工'],
+  ['複合旋盤', 'CITIZEN Cincom L20', '12台', 'φ20以下の量産'],
+  ['マシニングセンタ', 'OKUMA MB-46VA', '8台', '角物・治具製作'],
+  ['三次元測定機', 'ZEISS CONTURA', '3台', '全数検査・データ保管'],
+  ['真円度測定機', 'TOKYO SEIMITSU RONDCOM', '1台', '円筒度0.3μm保証'],
+];
+
+const flow = [
+  { label: 'お問い合わせ', body: '図面・ポンチ絵・写真のいずれかをお送りください' },
+  { label: '工法検討', body: '加工可否と、コストが下がる形状変更案を返します' },
+  { label: 'お見積り', body: '初回は3営業日以内、リピート品は当日回答' },
+  { label: '試作', body: '標準2週間。測定成績書を添付します' },
+  { label: '量産', body: '全数検査・ロット管理。標準5営業日出荷' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="事業・技術"
+  description="ミナモト精機の事業領域（医療機器部品・半導体製造装置部品・治具設計）と保有設備の一覧、お問い合わせから量産までの流れをご紹介します。"
+  path="/service/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '事業・技術' }]}
+>
+  <section class="bg-base-200">
+    <div class="max-w-5xl mx-auto px-4 py-16">
+      <h1 class="text-3xl md:text-4xl font-bold">事業・技術</h1>
+      <p class="mt-4 text-base-content/80 leading-relaxed">
+        精密切削加工を軸に、3つの領域で事業を展開しています。
+        いずれも「量産に入ってから崩れないこと」を最優先に、設備・治具・検査を組み立てています。
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-4 py-16">
+    <SectionTitle title="事業領域" />
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {fields.map((f) => (
+        <Card class="h-full bg-base-100">
+          <div class="card-body">
+            <h2 class="card-title text-lg">{f.title}</h2>
+            <p class="text-sm leading-relaxed text-base-content/80">{f.body}</p>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  <section id="facility" class="bg-base-200 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-4 py-16">
+      <SectionTitle title="主要設備" subtitle="2026年8月現在。全設備を恒温工場（20±0.5℃）に設置しています。" />
+      <div class="mt-10 overflow-x-auto">
+        <Table zebra>
+          <thead>
+            <tr><th>区分</th><th>機種</th><th>台数</th><th>主な用途</th></tr>
+          </thead>
+          <tbody>
+            {facility.map(([k, m, n, u]) => (
+              <tr><th class="whitespace-nowrap">{k}</th><td>{m}</td><td class="tabular-nums">{n}</td><td>{u}</td></tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-4 py-16">
+    <SectionTitle title="ご相談から量産までの流れ" />
+    <div class="mt-10 overflow-x-auto">
+      <Steps class="w-full min-w-[40rem]">
+        {flow.map((s) => (
+          <li class="step step-primary">
+            <span class="block font-bold text-sm">{s.label}</span>
+            <span class="block text-xs text-base-content/70 mt-1">{s.body}</span>
+          </li>
+        ))}
+      </Steps>
+    </div>
+    <div class="mt-12 text-center">
+      <a href={url(site, '/contact/')} class="btn btn-primary">加工のご相談・お見積り</a>
+    </div>
+  </section>
+
+  <PageTopButton />
+</SiteLayout>

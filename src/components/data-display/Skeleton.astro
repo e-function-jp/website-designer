@@ -1,0 +1,7 @@
+---
+interface Props { type?: 'text' | 'circle' | 'rect'; width?: string; height?: string; class?: string }
+const { type = 'rect', width, height, class: className = '' } = Astro.props;
+const shapeClass = type === 'circle' ? 'rounded-full' : type === 'text' ? 'h-4' : '';
+const style = [width && `width:${width}`, height && `height:${height}`].filter(Boolean).join(';');
+---
+<div class={`skeleton ${shapeClass} ${className}`.trim()} style={style || undefined}></div>

@@ -1,0 +1,13 @@
+---
+interface Props { url?: string; variant?: 'border' | 'background'; class?: string }
+const { url = 'https://example.com', variant = 'border', class: className = '' } = Astro.props;
+const variantClass = variant === 'background' ? 'bg-base-200' : 'border border-base-300';
+---
+<div class={`mockup-browser ${variantClass} ${className}`}>
+  <div class="mockup-browser-toolbar">
+    <div class="input">{url}</div>
+  </div>
+  <div class={`flex justify-center px-4 py-16 ${variant === 'border' ? 'border-t border-base-300' : 'bg-base-200'}`}>
+    <slot />
+  </div>
+</div>

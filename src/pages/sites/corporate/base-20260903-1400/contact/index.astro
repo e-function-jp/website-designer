@@ -1,0 +1,91 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import TextInput from '../../../../../components/navigation/TextInput.astro';
+import Textarea from '../../../../../components/navigation/Textarea.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const org = site.organization!;
+---
+
+<SiteLayout
+  site={site}
+  title="お問い合わせ"
+  description="株式会社ミナモト精機へのお問い合わせ窓口です。加工のご相談・お見積り、設備見学、採用に関するお問い合わせを受け付けています。"
+  path="/contact/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お問い合わせ' }]}
+>
+  <section class="bg-base-200">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h1 class="text-3xl md:text-4xl font-bold">お問い合わせ</h1>
+      <p class="mt-4 text-base-content/80 leading-relaxed">
+        図面がまだ無い検討段階のご相談も歓迎しています。加工可否と概算を3営業日以内にお返しします。
+        お急ぎの場合はお電話ください。
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 py-16 space-y-12">
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="rounded-2xl border border-base-300 p-6">
+        <p class="text-sm text-base-content/70">お電話</p>
+        <p class="mt-1 text-2xl font-bold tabular-nums">
+          <a href={`tel:${org.tel!.replace(/[^\d+]/g, '')}`} class="link link-hover">{org.tel}</a>
+        </p>
+        <p class="mt-2 text-xs text-base-content/60">平日 8:30–17:30（土日祝を除く）</p>
+      </div>
+      <div class="rounded-2xl border border-base-300 p-6">
+        <p class="text-sm text-base-content/70">メール</p>
+        <p class="mt-1 text-lg font-bold break-all">
+          <a href={`mailto:${org.email}`} class="link link-hover">{org.email}</a>
+        </p>
+        <p class="mt-2 text-xs text-base-content/60">図面（PDF・STEP）を添付いただけます</p>
+      </div>
+    </div>
+
+    <div>
+      <SectionTitle title="お問い合わせフォーム" align="left" />
+      <Alert variant="info" class="mt-6">
+        <span class="text-sm">ご入力いただいた情報は<a href="../privacy/" class="link">プライバシーポリシー</a>に従って取り扱います。</span>
+      </Alert>
+
+      <form class="mt-8 space-y-6" method="post" action="#thanks">
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="form-control">
+            <label class="label" for="company"><span class="label-text">貴社名 <span class="text-error">必須</span></span></label>
+            <TextInput class="mt-2 w-full" placeholder="株式会社◯◯製作所" />
+          </div>
+          <div class="form-control">
+            <label class="label" for="name"><span class="label-text">ご担当者名 <span class="text-error">必須</span></span></label>
+            <TextInput class="mt-2 w-full" placeholder="山田 太郎" />
+          </div>
+          <div class="form-control">
+            <label class="label" for="email"><span class="label-text">メールアドレス <span class="text-error">必須</span></span></label>
+            <TextInput type="email" class="mt-2 w-full" placeholder="taro@example.com" />
+          </div>
+          <div class="form-control">
+            <label class="label" for="tel"><span class="label-text">お電話番号</span></label>
+            <TextInput type="tel" class="mt-2 w-full" placeholder="076-000-0000" />
+          </div>
+        </div>
+        <div class="form-control">
+          <label class="label" for="body"><span class="label-text">ご相談内容 <span class="text-error">必須</span></span></label>
+          <Textarea class="mt-2 w-full h-40" placeholder="材質・数量・希望納期・公差など、分かる範囲でご記入ください。" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">この内容で送信する</button>
+      </form>
+    </div>
+
+    <div id="thanks" class="rounded-2xl bg-base-200 p-6 scroll-mt-20">
+      <h2 class="font-bold">送信後の流れ</h2>
+      <p class="mt-2 text-sm leading-relaxed text-base-content/80">
+        受付確認の自動返信をお送りしたのち、担当者が内容を確認します。加工可否と概算のご回答は3営業日以内、
+        正式なお見積りは図面受領から5営業日以内が目安です。
+      </p>
+    </div>
+  </section>
+
+  <PageTopButton />
+</SiteLayout>
