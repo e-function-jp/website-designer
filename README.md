@@ -76,6 +76,7 @@ src/pages/sites/corporate/a-20260903-1400/
 | [docs/migration-from-lp-designer.md](./docs/migration-from-lp-designer.md) | 移行整理（何を移植し、何を作り直したか） |
 | [docs/information-architecture.md](./docs/information-architecture.md) | IA定義。website 固有の中核 |
 | [docs/motion-design.md](./docs/motion-design.md) | モーションの実測・指示・実装・検査の経路 |
+| [docs/deploy.md](./docs/deploy.md) | 本番デプロイ（release ブランチ + webhook） |
 | [docs/self-improvement-loop.md](./docs/self-improvement-loop.md) | 二系統の改善ループ |
 | [docs/learning-pipeline.md](./docs/learning-pipeline.md) | 参照学習の作業ロジック |
 | [AGENTS.md](./AGENTS.md) / [CLAUDE.md](./CLAUDE.md) | AI agent 向け指示 |

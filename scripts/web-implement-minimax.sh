@@ -64,12 +64,42 @@ PROMPT=$(cat <<EOF
 4. \`src/components/\` の既存コンポーネントを使う。**各ページ最低2件、サイト全体で6種類以上。**
    ベタ書きHTMLで済ませない。既存にない構造はコンポーネントとして
    \`src/components/sections/\` に切り出してから使う（これが本プロジェクトの目的）。
-5. モーションは \`src/components/ui/ScrollReveal.astro\` を使う。
+5. **独自テーマは \`src/styles/global.css\` に DaisyUI v5 の書式で追加する。**
+   既定テーマ（light / dark / cupcake）のままにしない。書式は次のとおり:
+
+   \`\`\`css
+   @plugin "daisyui/theme" {
+     name: "テーマ名";
+     default: false;
+     color-scheme: light;
+     --color-base-100: oklch(98% 0.005 100);
+     --color-base-200: oklch(95% 0.008 100);
+     --color-base-300: oklch(90% 0.01 100);
+     --color-base-content: oklch(22% 0.02 150);
+     --color-primary: oklch(35% 0.06 160);
+     --color-primary-content: oklch(98% 0.005 100);
+     --color-secondary: oklch(60% 0.12 50);
+     --color-secondary-content: oklch(98% 0.005 100);
+     --color-accent: oklch(60% 0.12 50);
+     --color-accent-content: oklch(98% 0.005 100);
+     --color-neutral: oklch(25% 0.02 150);
+     --color-neutral-content: oklch(98% 0.005 100);
+     --radius-box: 0.5rem;
+     --radius-field: 0.375rem;
+   }
+   \`\`\`
+
+   ファイル冒頭の \`@plugin "daisyui" { themes: ... }\` の**列挙にも名前を追加する**
+   （列挙しないテーマは静かに既定へフォールバックする）。
+   ディレクションが指定した16進の配色を oklch に置き換えて入れる。
+   \`_site.ts\` の \`theme\` にこの名前を書く。
+
+6. モーションは \`src/components/ui/ScrollReveal.astro\` を使う。
    animation は fade / fade-up / fade-down / fade-left / fade-right / zoom / blur / clip-up。
    duration(ms) と stagger(ms) を指定できる。ヘッダー挙動とページ遷移は \`_site.ts\` の
    \`motion\` で指定する（SiteHeader / PageTransition が読む）。
-6. \`npm run build\` を通す。
-7. \`node scripts/web-quality-check.mjs\` を実行し、**high の指摘をゼロにする**。
+7. \`npm run build\` を通す。
+8. \`node scripts/web-quality-check.mjs\` を実行し、**high の指摘をゼロにする**。
 
 ## 禁止事項
 

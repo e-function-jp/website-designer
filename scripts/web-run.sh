@@ -33,7 +33,7 @@ STAMP="$(python3 -c "import json;print(json.load(open('$JOB'))['stamp'])")"
 REF_URL="$(python3 -c "import json;print(json.load(open('$JOB'))['reference'].get('url',''))")"
 MODELS="$(python3 -c "import json;print(' '.join(json.load(open('$JOB'))['models']))")"
 
-order=(motion look direction images implement measure)
+order=(motion look brand direction images implement measure)
 started=0
 should() {
   local step="$1"
@@ -45,26 +45,31 @@ should() {
 }
 
 if should motion; then
-  echo "### 1/6 モーション実測 ($REF_URL)"
+  echo "### 1/7 モーション実測 ($REF_URL)"
   [[ -n "$REF_URL" ]] || { echo "参照URLがありません" >&2; exit 1; }
   node scripts/web-analyze-reference-motion.mjs --url="$REF_URL" --out="$RUN_DIR" --follow-nav=2
 fi
 
 if should look; then
-  echo "### 2/6 Look（codex）"
+  echo "### 2/7 Look（codex）"
   bash scripts/web-look-analyze.sh "$RUN_DIR"
+fi
+
+if should brand; then
+  echo "### 3/7 ブランド確定（2案で共有する企業設定）"
+  bash scripts/web-brand.sh "$RUN_DIR"
 fi
 
 if should direction; then
   for v in $MODELS; do
-    echo "### 3/6 Direction: $v"
+    echo "### 4/7 Direction: $v"
     bash scripts/web-direction.sh "$RUN_DIR" "$v" || echo "  (充足チェックに引っかかりました。$RUN_DIR/direction-$v.html を確認してください)"
   done
 fi
 
 if should images && [[ $SKIP_IMAGES -eq 0 ]]; then
   for v in $MODELS; do
-    echo "### 4/6 画像生成: $v"
+    echo "### 5/7 画像生成: $v"
     node scripts/web-generate-images-from-direction.mjs \
       --run-dir "$RUN_DIR" --category "$SITE_TYPE" --stamp "$STAMP" --variant "$v" || true
   done
@@ -72,13 +77,13 @@ fi
 
 if should implement; then
   for v in $MODELS; do
-    echo "### 5/6 実装: $v（minimax-m3）"
+    echo "### 6/7 実装: $v（minimax-m3）"
     bash scripts/web-implement-minimax.sh "$RUN_DIR" "$v"
   done
 fi
 
 if should measure; then
-  echo "### 6/6 計測"
+  echo "### 7/7 計測"
   npm run check:web
   bash scripts/web-design-score.sh "$RUN_DIR" "$SITE_TYPE" "$STAMP" $MODELS || \
     echo "  (採点をスキップしました。撮影は $RUN_DIR/shots/ にあります)"

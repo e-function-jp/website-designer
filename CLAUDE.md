@@ -34,6 +34,7 @@ vite 8（rolldown）にすると `@tailwindcss/vite` がビルド不能になる
 | 参照サイト収集 | `npm run archive:fetch -- --pages 3` |
 | 次のランを開く | `npm run next:run` |
 | プレビューURL | `npm run urls` |
+| 本番デプロイ | `bash scripts/release-deploy.sh`（`docs/deploy.md`） |
 
 ## 自己改善ループ
 `docs/self-improvement-loop.md` に従う。二系統:

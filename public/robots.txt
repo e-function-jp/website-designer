@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://website-designer.example.com/sitemap-index.xml
+Sitemap: https://website.e-function.site/sitemap-index.xml

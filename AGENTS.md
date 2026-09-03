@@ -68,6 +68,7 @@ docs/                          # ループ設計 / パイプライン / IA定義
 | ビルド | `npm run build` |
 | 品質チェック | `npm run check:web` |
 | ラン1回を通しで実行 | `bash scripts/web-run.sh <run_dir>` |
+| 本番デプロイ | `bash scripts/release-deploy.sh` |
 | 厳格チェック | `npm run check:web:strict` |
 | カタログ検査 | `npm run check:catalog` |
 | 参照サイト収集 | `npm run archive:fetch -- --pages 3` |

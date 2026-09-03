@@ -12,7 +12,7 @@ cd "$ROOT"
 
 RUN_DIR="${1:?run_dir required}"
 VARIANT="${2:?variant required (a|b)}"
-BRAND_HINT="${3:-架空企業。参照サイトの固有名詞・実在企業名は使わない。}"
+BRAND_HINT="${3:-}"
 
 DIRECTOR="${WEB_DESIGNER_DIRECTOR:-grok}"
 DIRECTOR_MODEL="${WEB_DESIGNER_DIRECTOR_MODEL:-grok-4.5}"
@@ -40,6 +40,26 @@ case "$VARIANT" in
   b) VARIANT_HINT="この案は**冒険路線**。参照サイトの世界観と情報設計の骨格は保ちつつ、トップの構図・余白の取り方・写真の見せ方・モーションの組み立てで踏み込む。ただし必須ページ・a11y・reduced-motion 対応は崩さない。" ;;
   *) echo "variant は a か b" >&2; exit 2 ;;
 esac
+
+# ブランドはラン単位で1つに固定する。2案が別会社になると設計の比較にならない
+# （ラン1回目で a=商社 / b=酒蔵 になった）。
+if [[ -z "$BRAND_HINT" ]]; then
+  if [[ -f "$RUN_DIR/brand.json" ]]; then
+    BRAND_HINT="$(python3 -c "
+import json
+d = json.load(open('$RUN_DIR/brand.json'))
+lines = [f\"**この企業設定を両案で共有する。変更・創作しない。**\"]
+for k, label in [('name','商号'),('reading','よみ'),('industry','業種'),('business','事業内容'),
+                 ('founded','設立'),('employees','従業員数'),('location','所在地'),
+                 ('tagline','キャッチ'),('target','主な訪問者'),('cta','主要CTA')]:
+    if d.get(k): lines.append(f'- {label}: {d[k]}')
+if d.get('proof_points'): lines.append('- 実績: ' + ' / '.join(d['proof_points']))
+print('\\n'.join(lines))
+")"
+  else
+    BRAND_HINT="架空企業。参照サイトの固有名詞・実在企業名は使わない。"
+  fi
+fi
 
 LOOK_ANALYSIS="(look-analysis.md なし)"
 [[ -f "$RUN_DIR/look-analysis.md" ]] && LOOK_ANALYSIS="$(cat "$RUN_DIR/look-analysis.md")"
@@ -69,12 +89,26 @@ PROMPT="${PROMPT//\{\{MOTION_SUMMARY\}\}/$MOTION_SUMMARY}"
 REF_IMG=""
 [[ -f "$RUN_DIR/motion/top-full.jpg" ]] && REF_IMG="$RUN_DIR/motion/top-full.jpg"
 
+# hermes 経由の grok は「エージェント」であってテキスト補完ではない。
+# 自分でファイルを書けるので、書かせたうえで stdout からの抽出は
+# **フォールバック** に降格する。初回はエージェントが書いたファイルを
+# 後処理が上書きして壊していた（実測: direction-a.html が講評文になった）。
+rm -f "$OUT"
+
 echo "==> [${DIRECTOR}/${VARIANT}] ディレクション生成中"
 case "$DIRECTOR" in
   grok)
     # hermes -z は画像添付に対応していないので、キャプチャのパスを渡して自分で読ませる
-    GROK_PROMPT="$PROMPT"
-    [[ -n "$REF_IMG" ]] && GROK_PROMPT="$PROMPT
+    GROK_PROMPT="$PROMPT
+
+## 出力方法（重要）
+
+チャットに HTML を貼り付けず、**次のファイルに直接書き出すこと**:
+  ${ROOT}/${OUT}
+
+書き終えたら、ページ数・セクション数・各 data-role の件数だけを短く報告する。
+HTML 本文をチャットに再掲しない（長すぎて途中で切れるため）。"
+    [[ -n "$REF_IMG" ]] && GROK_PROMPT="$GROK_PROMPT
 
 ## 参照キャプチャ
 
@@ -90,8 +124,17 @@ case "$DIRECTOR" in
 esac
 
 python3 - "$RAW_LOG" "$OUT" <<'PYEOF'
-import sys, re
+import sys, re, os
 raw_path, out_path = sys.argv[1], sys.argv[2]
+
+# エージェントが自分で書いたファイルが既にあり、機械可読な構造を
+# 持っているなら、それが正。stdout からの抽出で上書きしない。
+if os.path.exists(out_path):
+    existing = open(out_path, encoding='utf-8').read()
+    if 'data-page=' in existing and 'data-role="animation"' in existing:
+        print('  （エージェントが直接書き出したファイルを採用）')
+        sys.exit(0)
+
 text = open(raw_path, encoding='utf-8').read()
 codex_pos = [m.start() for m in re.finditer(r'^codex$', text, re.M)]
 tok_pos = [m.start() for m in re.finditer(r'^tokens used', text, re.M)]

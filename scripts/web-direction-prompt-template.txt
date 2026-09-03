@@ -34,6 +34,35 @@
   ページ遷移は View Transitions の on/off。
 - 足りない部品は「新規コンポーネントとして切り出す」と明記してよい（推奨）
 
+## 出力フォーマット（機械が読む。属性名と構造は厳守）
+
+後段のスクリプトがこの HTML を属性で解析する。**属性名を変えたり省略したりしない。**
+`#site-config` は <pre><code> に TypeScript を書いてよいが、
+`#pages` は必ず下の形にする（<pre> で囲まない）。
+
+```html
+<section id="pages">
+  <article data-page="/">
+    <section data-section="hero">
+      <h3>ファーストビュー</h3>
+      <p data-role="purpose">…</p>
+      <p data-role="layout">…</p>
+      <p data-role="copy">…</p>
+      <p data-role="components">…</p>
+      <p data-role="animation">…（無ければ none）</p>
+      <p data-role="image">…（無ければ none）</p>
+    </section>
+    <!-- セクションを続ける -->
+  </article>
+  <!-- ページごとに article を続ける -->
+</section>
+```
+
+充足条件（満たさないとスクリプトが exit 1 にする）:
+- `<article data-page>` が 4 件以上
+- 全 `<section data-section>` に `data-role="animation"` がある
+- `data-role="copy"` がセクション数の 8 割以上にある
+
 ## 出力（HTML 1枚。前後に説明文を書かない）
 
 `<!doctype html>` から `</html>` まで。次の構造を必ず含める。
