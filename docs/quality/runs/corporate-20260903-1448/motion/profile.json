@@ -1,0 +1,297 @@
+{
+  "url": "https://corp.ezobolic.jp/profile",
+  "slug": "profile",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260903-1448/motion/profile-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260903-1448/motion/profile-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://corp.ezobolic.jp/philosophy",
+      "label": "Philosophy ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/profile",
+      "label": "Profile ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/products",
+      "label": "Products ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/stockist",
+      "label": "Stockist ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/laboratory",
+      "label": "Lab ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/information",
+      "label": "News ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/Contact",
+      "label": "Contact ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/recruit",
+      "label": "Recruitment ↗"
+    },
+    {
+      "href": "https://www.ezobolic.jp/",
+      "label": "Online shopping ↗"
+    },
+    {
+      "href": "https://www.instagram.com/ezobolic/",
+      "label": "Instagram"
+    },
+    {
+      "href": "https://www.youtube.com/channel/UCi2jyedzz_igH8OaX7pdiKw",
+      "label": "Youtube"
+    },
+    {
+      "href": "https://lin.ee/pLwAZ2H",
+      "label": "LINE"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "marquee",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -1525.17, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -2123.75, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ライフトレーニングブランド\n                Life Train"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -51.6601)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 121.831)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": "3.12.2",
+    "ScrollTrigger": "present",
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "Company Profile | EZOBOLIC",
+    "h1": "CompanyProfile",
+    "totalHeight": 8953,
+    "viewportsTall": 9.9,
+    "sectionCount": 11,
+    "imgCount": 7,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": [
+    {
+      "trigger": "div",
+      "triggerClass": "hero-visual visual-01",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "hero-visual visual-02",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "hero-visual visual-03",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "related-visual",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": null,
+      "triggerClass": "",
+      "pin": false,
+      "scrub": true,
+      "start": "top 100%",
+      "end": "top 80%"
+    }
+  ],
+  "scrollYAfter": 8053,
+  "css": {
+    "keyframes": 0,
+    "transitionRules": 4,
+    "animationRules": 0,
+    "keyframeNames": []
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 121,
+      "top": 28,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "pcHeader"
+    },
+    "scrolled": {
+      "height": 121,
+      "top": 28,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "pcHeader"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 198,
+  "revealSummary": {
+    "total": 3,
+    "scrollLinkedCount": 2,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 3,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 3,
+    "durationMs": null,
+    "easings": [
+      "ease"
+    ]
+  }
+}

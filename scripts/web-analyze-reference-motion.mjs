@@ -61,12 +61,14 @@ async function measure(page) {
     for (const el of document.querySelectorAll('body *')) {
       if (i++ > 3000) break;                      // 巨大ページの暴走を防ぐ
       const cs = getComputedStyle(el);
-      // 画面外にある要素だけを候補にする。リビールは「入ってきたら動く」演出なので、
-      // 最初から見えている要素の状態を記録しても意味がない。
       const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight * 1.2) continue;
+      // 画面外の要素だけを見ていると、**スクロール連動で動く画面内の要素**
+      // （pin / parallax / scrub）を丸ごと取り逃す。
+      // 実測: corp.ezobolic.jp のトップは GSAP ScrollTrigger を使っているのに
+      // 画面外限定の計測では 0 件と出た。両方を拾い、後で種別を分ける。
       out.set(el, null);
       el.dataset.__motionProbe = String(i);
+      el.dataset.__motionOffscreen = r.top >= window.innerHeight * 1.2 ? '1' : '0';
       el.dataset.__motionBefore = JSON.stringify({
         cls: el.className && typeof el.className === 'string' ? el.className : '',
         op: cs.opacity,
@@ -76,19 +78,25 @@ async function measure(page) {
         filter: cs.filter,
       });
     }
-    return { probed: out.size };
+    return { probed: out.size, scrollY: window.scrollY };
   });
 
   // --- 2. ゆっくりスクロールしてトリガーを踏む ---
-  await page.evaluate(async () => {
-    const step = window.innerHeight * 0.6;
-    const total = document.body.scrollHeight;
-    for (let y = 0; y < total; y += step) {
-      window.scrollTo(0, y);
-      await new Promise((r) => setTimeout(r, 320));
-    }
-  });
-  await page.waitForTimeout(1200);
+  //
+  // window.scrollTo ではなく **実際のホイールイベント** を送る。
+  // Lenis / locomotive-scroll のような仮想スクロール実装は
+  // window.scrollTo を無視するため、プログラム的なスクロールでは
+  // ScrollTrigger のコールバックが一度も発火しない。
+  // （実測: corp.ezobolic.jp は GSAP+ScrollTrigger+Lenis を使っているのに
+  //   scrollTo 方式では reveal 0 件と出た）
+  const viewport = page.viewportSize()?.height ?? 900;
+  const totalHeight = await page.evaluate(() => document.body.scrollHeight);
+  const steps = Math.min(40, Math.ceil(totalHeight / (viewport * 0.6)));
+  for (let i = 0; i < steps; i++) {
+    await page.mouse.wheel(0, viewport * 0.6);
+    await page.waitForTimeout(320);
+  }
+  await page.waitForTimeout(1500);
 
   // --- 3. スクロール後の差分＋各種検出 ---
   const data = await page.evaluate(() => {
@@ -109,6 +117,8 @@ async function measure(page) {
       const addedCls = nowCls.split(/\s+/).filter((c) => c && !b.cls.split(/\s+/).includes(c));
       if (!changed.length && !addedCls.length) continue;
       reveals.push({
+        // 初期状態で画面外だったか。true=リビール系 / false=スクロール連動系
+        wasOffscreen: el.dataset.__motionOffscreen === '1',
         tag: el.tagName.toLowerCase(),
         baseClass: b.cls.slice(0, 120),
         addedClass: addedCls.slice(0, 4),
@@ -181,6 +191,22 @@ async function measure(page) {
       astroTransitions: has('[data-astro-transition-scope]') ? 'present' : null,
     };
 
+    // 3-3.5. GSAP ScrollTrigger の実数。使っているサイトでは
+    // 「どれだけスクロール連動を仕込んでいるか」が最も端的に出る。
+    let scrollTriggers = null;
+    try {
+      if (window.ScrollTrigger?.getAll) {
+        scrollTriggers = window.ScrollTrigger.getAll().map((t) => ({
+          trigger: t.trigger?.tagName?.toLowerCase() ?? null,
+          triggerClass: typeof t.trigger?.className === 'string' ? t.trigger.className.slice(0, 60) : '',
+          pin: !!t.pin,
+          scrub: t.vars?.scrub ?? false,
+          start: String(t.vars?.start ?? ''),
+          end: String(t.vars?.end ?? ''),
+        })).slice(0, 30);
+      }
+    } catch { /* noop */ }
+
     // 3-4. ページ遷移・ローディング演出の痕跡
     const loaderSel = '[class*="loading"], [class*="loader"], [id*="loading"], [id*="loader"], [class*="splash"], [class*="opening"]';
     const loaders = [...document.querySelectorAll(loaderSel)].slice(0, 5).map((el) => ({
@@ -218,7 +244,8 @@ async function measure(page) {
     };
 
     return {
-      reveals, animations, libs, loaders, meta,
+      reveals, animations, libs, loaders, meta, scrollTriggers,
+      scrollYAfter: window.scrollY,
       css: { keyframes, transitionRules, animationRules, keyframeNames: [...keyframeNames].slice(0, 20) },
     };
   });
@@ -237,7 +264,8 @@ async function measure(page) {
     });
     if (!h) return null;
     window.scrollTo(0, 0);
-    await new Promise((r) => setTimeout(r, 500));
+    // 仮想スクロール実装では scrollTo が効かないことがあるので少し長めに待つ
+    await new Promise((r) => setTimeout(r, 800));
     const a = h.getBoundingClientRect();
     const csA = getComputedStyle(h);
     const snapA = { height: Math.round(a.height), top: Math.round(a.top), bg: csA.backgroundColor, cls: (typeof h.className === 'string' ? h.className : '') };
@@ -314,7 +342,11 @@ async function analyzePage(browser, url, outDir, { reducedMotion = false } = {})
 }
 
 /** リビールを人が読める語彙に丸める。ディレクションで指示できる粒度にするのが目的。 */
-function classifyReveals(reveals) {
+function classifyReveals(all) {
+  // 初期状態で画面外だったものだけを「リビール」として数える。
+  // 画面内から動いたものは pin / parallax / scrub 系として別に数える。
+  const reveals = all.filter((r) => r.wasOffscreen !== false);
+  const scrubbed = all.filter((r) => r.wasOffscreen === false);
   const kinds = { fade: 0, 'fade-up': 0, 'fade-side': 0, zoom: 0, 'clip-wipe': 0, blur: 0, 'lazy-blur-up': 0, other: 0 };
   const durations = [];
   const easings = new Set();
@@ -359,6 +391,7 @@ function classifyReveals(reveals) {
   durations.sort((a, b) => a - b);
   return {
     total: reveals.length,
+    scrollLinkedCount: scrubbed.length,
     kinds,
     // lazy-blur-up は遅延読み込みの副作用であって意図した演出ではないため、
     // 「支配的な演出」の候補からは外す。
@@ -438,6 +471,10 @@ const main = async () => {
       dominantKind: reveal.dominantKind,
       durationMs: reveal.durationMs,
       easings: reveal.easings,
+      scrollLinkedCount: reveal.scrollLinkedCount,
+      scrollTriggerCount: r.scrollTriggers?.length ?? null,
+      pinnedCount: (r.scrollTriggers ?? []).filter((t) => t.pin).length || null,
+      scrubbedCount: (r.scrollTriggers ?? []).filter((t) => t.scrub).length || null,
       runningAnimations: (r.animations ?? []).filter((a) => a.playState === 'running').length,
       keyframes: r.css?.keyframes ?? 0,
       header: r.header,
@@ -480,6 +517,12 @@ const main = async () => {
     // ディレクションにそのまま転記できる語彙
     direction_hints: {
       dominant_reveal: normalReveal.dominantKind,
+      scroll_linked_count: normalReveal.scrollLinkedCount,
+      scroll_trigger_summary: {
+        total: results[0].scrollTriggers?.length ?? null,
+        pinned: (results[0].scrollTriggers ?? []).filter((t) => t.pin).length || null,
+        scrubbed: (results[0].scrollTriggers ?? []).filter((t) => t.scrub).length || null,
+      },
       duration_ms: normalReveal.durationMs,
       easings: normalReveal.easings,
       reveal_kinds: normalReveal.kinds,
@@ -492,9 +535,16 @@ const main = async () => {
   console.log(`\nモーション解析完了 → ${join(OUT_DIR, 'motion')}/`);
   for (const p of pageSummaries) {
     if (p.error) { console.log(`  ${p.slug.padEnd(16)} ERROR: ${p.error}`); continue; }
-    console.log(`  ${p.slug.padEnd(16)} reveal ${String(p.revealCount).padStart(3)}件 (${p.dominantKind}) / ${p.viewportsTall}画面分 / keyframes ${p.keyframes}`);
+    const st = p.scrollTriggerCount != null ? ` / ScrollTrigger ${p.scrollTriggerCount}(pin ${p.pinnedCount ?? 0}/scrub ${p.scrubbedCount ?? 0})` : '';
+    console.log(`  ${p.slug.padEnd(16)} reveal ${String(p.revealCount).padStart(3)}件 (${p.dominantKind}) / スクロール連動 ${String(p.scrollLinkedCount).padStart(3)}件 / ${p.viewportsTall}画面分${st}`);
   }
-  console.log(`  ページ間のリビール数の開き: ${spread}（一貫性: ${summary.cross_page.motion_consistent ? 'OK' : '要注意 — トップだけ演出過多の可能性'}）`);
+  const maxPage = ok.length ? ok.reduce((a, b) => (a.revealCount >= b.revealCount ? a : b)) : null;
+  const minPage = ok.length ? ok.reduce((a, b) => (a.revealCount <= b.revealCount ? a : b)) : null;
+  console.log(
+    `  ページ間のリビール数の開き: ${spread}（一貫性: ${summary.cross_page.motion_consistent
+      ? 'OK'
+      : `要注意 — 最多 ${maxPage.slug}:${maxPage.revealCount} / 最少 ${minPage.slug}:${minPage.revealCount}`}）`,
+  );
   console.log(`  reduced-motion 尊重: ${summary.reduced_motion.respected ? 'あり' : 'なし/不明'} (${normalReveal.total} → ${reducedReveal.total})`);
   console.log(`  検出ライブラリ: ${summary.cross_page.libs_union.join(', ') || '(なし=自前実装)'}`);
 };

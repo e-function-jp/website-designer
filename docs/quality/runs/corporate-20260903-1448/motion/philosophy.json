@@ -1,0 +1,532 @@
+{
+  "url": "https://corp.ezobolic.jp/philosophy",
+  "slug": "philosophy",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260903-1448/motion/philosophy-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260903-1448/motion/philosophy-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://corp.ezobolic.jp/philosophy",
+      "label": "Philosophy ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/profile",
+      "label": "Profile ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/products",
+      "label": "Products ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/stockist",
+      "label": "Stockist ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/laboratory",
+      "label": "Lab ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/information",
+      "label": "News ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/Contact",
+      "label": "Contact ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/recruit",
+      "label": "Recruitment ↗"
+    },
+    {
+      "href": "https://www.ezobolic.jp/",
+      "label": "Online shopping ↗"
+    },
+    {
+      "href": "https://www.instagram.com/ezobolic/",
+      "label": "Instagram"
+    },
+    {
+      "href": "https://www.youtube.com/channel/UCi2jyedzz_igH8OaX7pdiKw",
+      "label": "Youtube"
+    },
+    {
+      "href": "https://lin.ee/pLwAZ2H",
+      "label": "LINE"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "marquee",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -1550.88, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -198.186, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ライフトレーニングブランド\n                Life Train"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -51.6601)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 121.831)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "hero-visual visual-04",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": null,
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -83.5172)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 83.5172)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "page-subtitle-area",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -34.875)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -34.875)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Statement\n                    Train Your"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "video",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -55.0781)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 55.0781)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "parallax-img",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -91.2078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 91.2078)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": "3.12.2",
+    "ScrollTrigger": "present",
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": "present",
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "Philosophy | EZOBOLIC",
+    "h1": "Company\n                    Philosophy",
+    "totalHeight": 13686,
+    "viewportsTall": 15.2,
+    "sectionCount": 13,
+    "imgCount": 12,
+    "videoCount": 1,
+    "canvasCount": 0
+  },
+  "scrollTriggers": [
+    {
+      "trigger": "div",
+      "triggerClass": "hero-visual visual-01",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "hero-visual visual-02",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "hero-visual visual-03",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "hero-visual visual-04",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "concept-visual",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "brand-intro-visual",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "value-visual",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "value-visual-02",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "circulation-visual-02",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "related-visual",
+      "pin": false,
+      "scrub": true,
+      "start": "top bottom",
+      "end": "bottom top"
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "section-title",
+      "pin": false,
+      "scrub": true,
+      "start": "top 100%",
+      "end": "top 80%"
+    }
+  ],
+  "scrollYAfter": 12786,
+  "css": {
+    "keyframes": 0,
+    "transitionRules": 3,
+    "animationRules": 0,
+    "keyframeNames": []
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 121,
+      "top": 28,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "pcHeader"
+    },
+    "scrolled": {
+      "height": 121,
+      "top": 28,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "pcHeader"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 225,
+  "revealSummary": {
+    "total": 11,
+    "scrollLinkedCount": 2,
+    "kinds": {
+      "fade": 1,
+      "fade-up": 9,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 1,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 11,
+    "durationMs": null,
+    "easings": [
+      "ease"
+    ]
+  }
+}

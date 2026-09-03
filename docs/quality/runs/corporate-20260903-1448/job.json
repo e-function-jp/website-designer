@@ -1,0 +1,91 @@
+{
+  "run_id": "corporate-20260903-1448",
+  "site_type": "corporate",
+  "site_type_label": "コーポレートサイト",
+  "stamp": "20260903-1448",
+  "tone_hint": "信頼・堅実。彩度を抑えたコーポレートカラー1色＋アクセント1色、写真は事業/人物の実写、数値による実績提示、問い合わせ導線は全ページ到達可能",
+  "required_pages": [
+    "/",
+    "/about/",
+    "/service/",
+    "/news/",
+    "/contact/"
+  ],
+  "recommended_pages": [
+    "/company/",
+    "/recruit/",
+    "/privacy/"
+  ],
+  "selection": {
+    "method": "deficit = target_share - own_share; target = 0.5*uniform + 0.5*gallery_occupancy; argmax excluding last 2 types",
+    "weights": {
+      "corporate": 0.0
+    },
+    "recent_types": [],
+    "forced": false
+  },
+  "models": [
+    "a",
+    "b"
+  ],
+  "reference": {
+    "id": "muuuuu-24586",
+    "title": "EZOBOLIC",
+    "url": "https://corp.ezobolic.jp/",
+    "detail_url": "https://muuuuu.org/industry/sports/24586.html",
+    "gallery": "muuuuu",
+    "gallery_industry": "sports",
+    "industry": "other",
+    "qualification": {
+      "ok": true,
+      "internal_pages": 9,
+      "paths": [
+        "/Contact",
+        "/contact",
+        "/information",
+        "/laboratory",
+        "/philosophy",
+        "/products",
+        "/profile",
+        "/recruit",
+        "/stockist"
+      ],
+      "reason": ""
+    },
+    "rejected_candidates": [
+      {
+        "id": "muuuuu-24176",
+        "url": "https://j-cat.co.jp/",
+        "reason": "内部ページが 0 件（下限 3）。1ページ構成の可能性"
+      }
+    ]
+  },
+  "paths": {
+    "repo": "/Users/estaff-agent/Workspace/website-designer",
+    "run_dir": "docs/quality/runs/corporate-20260903-1448",
+    "shared_public": "public/sites/corporate/_shared/20260903-1448",
+    "sites": {
+      "a": "src/pages/sites/corporate/a-20260903-1448/",
+      "b": "src/pages/sites/corporate/b-20260903-1448/"
+    },
+    "routes": {
+      "a": "/sites/corporate/a-20260903-1448/",
+      "b": "/sites/corporate/b-20260903-1448/"
+    },
+    "pipeline_doc": "docs/learning-pipeline.md"
+  },
+  "urls": {
+    "preview_base": "http://127.0.0.1:4321",
+    "report_base": "http://127.0.0.1:8766"
+  },
+  "workflow": [
+    "Look: 参照サイトを実際に開き、トップ+下層2ページをキャプチャして構造を言語化する",
+    "Direction: direction.html に IA(サイトマップ)・各ページの構成・トーン・コンポーネント選定を確定",
+    "Fix: 2案を paths.sites に実装。_site.ts を必ず置き、全ページ SiteLayout を使う",
+    "npm run check:web",
+    "bash scripts/web-design-score.sh <run_dir> <site_type> <stamp> <models...>",
+    "Extract: 両案から再利用ブロックを src/components/ に切り出す（arch-component-reuse が消えるまで）",
+    "npm run check:web:strict && npm run check:catalog"
+  ],
+  "started_at": "2026-09-03T14:48:03+09:00"
+}

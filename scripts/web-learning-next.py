@@ -28,6 +28,7 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from env_config import preview_base, report_base, repo_root  # noqa: E402
 from site_categories import rotation_site_types, BY_ID  # noqa: E402
+from web_qualify_reference import qualify  # noqa: E402
 
 ROOT = repo_root()
 STATE = ROOT / "docs/quality/run-state.json"
@@ -102,8 +103,15 @@ def pick_type(archive: list[dict], recent: list[str]) -> dict:
     return ranked[0]
 
 
-def pick_reference(type_id: str, archive: list[dict], used: set[str]) -> dict:
-    """同じサイト種別の参照サイトを1件選ぶ。使用済みは避ける。"""
+def pick_reference(type_id: str, archive: list[dict], used: set[str],
+                   max_probe: int = 12) -> dict:
+    """同じサイト種別の参照サイトを1件選ぶ。使用済みは避ける。
+
+    ギャラリーは「デザイン」で掲載しているのでページ数では絞れず、
+    1ページ構成のサイトが混ざる。多ページの情報設計を学ぶのが目的なので、
+    候補を実際に取得してナビのリンク数を数え、適格なものだけを採用する
+    （ラン1回目で 1ページ構成の hitorigocochi.com が選ばれて判明した）。
+    """
     pool = [r for r in archive if r.get("site_type") == type_id and r["id"] not in used]
     if not pool:
         pool = [r for r in archive if r.get("site_type") == type_id]
@@ -112,10 +120,28 @@ def pick_reference(type_id: str, archive: list[dict], used: set[str]) -> dict:
         pool = [r for r in archive if r["id"] not in used] or archive
     if not pool:
         return {"id": "", "title": "(参照サイト未取得。先に archive:fetch を実行)", "url": "",
-                "detail_url": "", "gallery": "", "industry": ""}
-    r = random.choice(pool[:40])
-    return {k: r.get(k, "") for k in
-            ("id", "title", "url", "detail_url", "gallery", "gallery_industry", "industry")}
+                "detail_url": "", "gallery": "", "industry": "", "qualification": {}}
+
+    candidates = pool[:]
+    random.shuffle(candidates)
+    rejected = []
+    for r in candidates[:max_probe]:
+        q = qualify(r.get("url", ""))
+        if q["ok"]:
+            out = {k: r.get(k, "") for k in
+                   ("id", "title", "url", "detail_url", "gallery", "gallery_industry", "industry")}
+            out["qualification"] = q
+            out["rejected_candidates"] = rejected
+            return out
+        rejected.append({"id": r.get("id"), "url": r.get("url"), "reason": q["reason"]})
+
+    # 全部落ちた場合は先頭を返しつつ、適格でないことを明示する
+    r = candidates[0]
+    out = {k: r.get(k, "") for k in
+           ("id", "title", "url", "detail_url", "gallery", "gallery_industry", "industry")}
+    out["qualification"] = {"ok": False, "reason": f"{max_probe}件を検査したが適格な参照が無かった"}
+    out["rejected_candidates"] = rejected
+    return out
 
 
 def main() -> int:

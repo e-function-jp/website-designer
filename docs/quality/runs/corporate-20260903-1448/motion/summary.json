@@ -1,0 +1,201 @@
+{
+  "reference_url": "https://corp.ezobolic.jp/",
+  "analyzed_at": "2026-09-03T05:52:34.625Z",
+  "pages": [
+    {
+      "url": "https://corp.ezobolic.jp/",
+      "slug": "top",
+      "title": "EZOBOLIC | Corporate Site",
+      "viewportsTall": 10,
+      "revealCount": 0,
+      "dominantKind": "fade",
+      "durationMs": null,
+      "easings": [],
+      "scrollLinkedCount": 4,
+      "scrollTriggerCount": 0,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 0,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 121,
+          "top": 28,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "pcHeader transparent"
+        },
+        "scrolled": {
+          "height": 121,
+          "top": 28,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "pcHeader transparent"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "gsap": "3.12.2",
+        "ScrollTrigger": "present",
+        "lenis": "present",
+        "lottie": "present"
+      }
+    },
+    {
+      "url": "https://corp.ezobolic.jp/philosophy",
+      "slug": "philosophy",
+      "title": "Philosophy | EZOBOLIC",
+      "viewportsTall": 15.2,
+      "revealCount": 11,
+      "dominantKind": "fade-up",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 2,
+      "scrollTriggerCount": 11,
+      "pinnedCount": null,
+      "scrubbedCount": 11,
+      "runningAnimations": 0,
+      "keyframes": 0,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 121,
+          "top": 28,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "pcHeader"
+        },
+        "scrolled": {
+          "height": 121,
+          "top": 28,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "pcHeader"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "gsap": "3.12.2",
+        "ScrollTrigger": "present",
+        "lenis": "present",
+        "lottie": "present"
+      }
+    },
+    {
+      "url": "https://corp.ezobolic.jp/profile",
+      "slug": "profile",
+      "title": "Company Profile | EZOBOLIC",
+      "viewportsTall": 9.9,
+      "revealCount": 3,
+      "dominantKind": "fade-up",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 2,
+      "scrollTriggerCount": 5,
+      "pinnedCount": null,
+      "scrubbedCount": 5,
+      "runningAnimations": 0,
+      "keyframes": 0,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 121,
+          "top": 28,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "pcHeader"
+        },
+        "scrolled": {
+          "height": 121,
+          "top": 28,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "pcHeader"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "gsap": "3.12.2",
+        "ScrollTrigger": "present",
+        "lenis": "present"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 0,
+      "philosophy": 11,
+      "profile": 3
+    },
+    "reveal_count_spread": 11,
+    "motion_consistent": false,
+    "libs_union": [
+      "gsap",
+      "ScrollTrigger",
+      "lenis",
+      "lottie"
+    ],
+    "header_behavior": {
+      "position": "fixed",
+      "atTop": {
+        "height": 121,
+        "top": 28,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "pcHeader transparent"
+      },
+      "scrolled": {
+        "height": 121,
+        "top": 28,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "pcHeader transparent"
+      },
+      "shrinks": false,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": false
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 0,
+    "reveal_count_reduced": 0,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade",
+    "scroll_linked_count": 4,
+    "scroll_trigger_summary": {
+      "total": 0,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": null,
+    "easings": [],
+    "reveal_kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "page_length_viewports": [
+      10,
+      15.2,
+      9.9
+    ]
+  }
+}

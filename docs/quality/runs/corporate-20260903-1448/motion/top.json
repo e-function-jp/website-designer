@@ -1,0 +1,232 @@
+{
+  "url": "https://corp.ezobolic.jp/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260903-1448/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260903-1448/motion/top-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://corp.ezobolic.jp/philosophy",
+      "label": "Philosophy ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/profile",
+      "label": "Profile ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/products",
+      "label": "Products ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/stockist",
+      "label": "Stockist ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/laboratory",
+      "label": "Lab ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/information",
+      "label": "News ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/Contact",
+      "label": "Contact ↗"
+    },
+    {
+      "href": "https://corp.ezobolic.jp/recruit",
+      "label": "Recruitment ↗"
+    },
+    {
+      "href": "https://www.ezobolic.jp/",
+      "label": "Online shopping ↗"
+    },
+    {
+      "href": "https://www.instagram.com/ezobolic/",
+      "label": "Instagram"
+    },
+    {
+      "href": "https://www.youtube.com/channel/UCi2jyedzz_igH8OaX7pdiKw",
+      "label": "Youtube"
+    },
+    {
+      "href": "https://lin.ee/pLwAZ2H",
+      "label": "LINE"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "marquee",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -1547.55, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -2166.88, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ライフトレーニングブランド\n                Life Train"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "hero-bg-layer",
+      "addedClass": [
+        "is-active"
+      ],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1.2s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "hero-bg-layer",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0.251533",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1.2s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "hero-bg-layer is-active",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0.748467",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1.2s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": "3.12.2",
+    "ScrollTrigger": "present",
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": "present",
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "EZOBOLIC | Corporate Site",
+    "h1": null,
+    "totalHeight": 9030,
+    "viewportsTall": 10,
+    "sectionCount": 7,
+    "imgCount": 9,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": [],
+  "scrollYAfter": 8130,
+  "css": {
+    "keyframes": 0,
+    "transitionRules": 4,
+    "animationRules": 0,
+    "keyframeNames": []
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 121,
+      "top": 28,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "pcHeader transparent"
+    },
+    "scrolled": {
+      "height": 121,
+      "top": 28,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "pcHeader transparent"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 164,
+  "revealSummary": {
+    "total": 0,
+    "scrollLinkedCount": 4,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade",
+    "designedRevealCount": 0,
+    "durationMs": null,
+    "easings": []
+  }
+}
