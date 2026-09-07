@@ -42,15 +42,15 @@ const stores = [
   {
     name: '札幌店',
     address: '北海道札幌市中央区南 1 条',
-    image: null,
-    alt: '',
+    image: '/sites/corporate/_shared/20260903-1448/img-b-11.jpg',
+    alt: '北嶺ニュートリション札幌店の外観',
     hours: '営業時間：平日 10:00〜19:00',
   },
   {
     name: '原宿店',
     address: '東京都渋谷区神宮前',
-    image: null,
-    alt: '',
+    image: '/sites/corporate/_shared/20260903-1448/img-b-12.jpg',
+    alt: '北嶺ニュートリション原宿店の外観',
     hours: '営業時間：平日 11:00〜18:00',
   },
 ];
@@ -158,9 +158,14 @@ const relatedCards = [
       </div>
       <ScrollReveal animation="clip-up" duration={site.motion!.durationMs} class="order-1 lg:order-2">
         <figure class="relative overflow-hidden bg-base-300 aspect-[4/3]">
-          <div class="w-full h-full flex items-center justify-center bg-base-300 text-base-content/50 text-sm">
-            <span>リカバリー食品 写真準備中</span>
-          </div>
+          <img
+            src="/sites/corporate/_shared/20260903-1448/img-b-09.jpg"
+            alt="リカバリー食品の材料を扱う手元。凍ったベリーとナッツ、計量スプーン"
+            loading="lazy"
+            width="1600"
+            height="1200"
+            class="w-full h-full object-cover"
+          />
           <span
             class="absolute top-4 right-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary text-primary-content text-lg font-bold tabular-nums"
             style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
@@ -178,9 +183,14 @@ const relatedCards = [
     <div class="max-w-7xl mx-auto px-4 py-20 lg:py-32 grid gap-12 lg:grid-cols-2 items-start">
       <ScrollReveal animation="clip-up" duration={site.motion!.durationMs}>
         <figure class="relative overflow-hidden bg-base-300 aspect-[4/3]">
-          <div class="w-full h-full flex items-center justify-center bg-base-300 text-base-content/50 text-sm">
-            <span>機能性スナック 写真準備中</span>
-          </div>
+          <img
+            src="/sites/corporate/_shared/20260903-1448/img-b-10.jpg"
+            alt="木のトレイに並べた機能性スナックバーの個包装"
+            loading="lazy"
+            width="1600"
+            height="1200"
+            class="w-full h-full object-cover"
+          />
           <span
             class="absolute top-4 left-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary text-primary-content text-lg font-bold tabular-nums"
             style="font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;"
@@ -248,22 +258,9 @@ const relatedCards = [
         {stores.map((s) => (
           <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} stagger={site.motion!.staggerMs}>
             <article class="bg-base-100 border border-base-300 overflow-hidden h-full">
-              {s.image ? (
-                <figure class="aspect-[4/3] overflow-hidden bg-base-300">
-                  <img
-                    src={s.image}
-                    alt={s.alt}
-                    loading="lazy"
-                    width="1600"
-                    height="1200"
-                    class="w-full h-full object-cover"
-                  />
-                </figure>
-              ) : (
-                <div class="aspect-[4/3] bg-base-300 flex items-center justify-center text-base-content/50 text-sm">
-                  <span>{s.name} 写真準備中</span>
-                </div>
-              )}
+              <figure class="aspect-[4/3] overflow-hidden bg-base-300">
+                <img src={s.image} alt={s.alt} loading="lazy" width="1600" height="1200" class="w-full h-full object-cover" />
+              </figure>
               <div class="p-5 space-y-2">
                 <h3
                   class="text-lg lg:text-[1.5rem] leading-snug"

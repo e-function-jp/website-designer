@@ -300,6 +300,28 @@ const PAGE_RULES = [
     },
   },
 
+  {
+    id: 'content-placeholder-text', category: 'Content', severity: 'high',
+    desc: '未完成を示すプレースホルダー文言が残っている',
+    check: (p) => {
+      if (!p.isSitePage) return [];
+      // 実測(corporate-20260903-1448): ディレクションの画像宣言漏れで
+      // 生成されなかった写真の枠に「写真準備中」が入ったまま出荷され、
+      // 独立judge に「完成状態に達していない」と両案とも減点された。
+      // 静的チェックも描画検証も通っていた（要素としては正常に描画されるため）。
+      const PLACEHOLDER = /(準備中|準備中です|coming\s*soon|lorem\s+ipsum|ダミーテキスト|ダミー画像|placeholder|TBD|TODO[:：])/i;
+      const text = bodyText(p.html);
+      const hits = [...new Set(
+        (text.match(new RegExp(PLACEHOLDER.source, 'gi')) ?? []).map((m) => m.trim()),
+      )];
+      if (!hits.length) return [];
+      // 前後の文脈を1件だけ添える（どこにあるか分からないと直せない）
+      const idx = text.search(PLACEHOLDER);
+      const around = text.slice(Math.max(0, idx - 30), idx + 30).replace(/\s+/g, ' ');
+      return [`未完成を示す文言: ${hits.join(', ')} — 「…${around}…」`];
+    },
+  },
+
   // --- Motion ---
   {
     id: 'a11y-reduced-motion', category: 'A11y', severity: 'medium',

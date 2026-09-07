@@ -44,7 +44,7 @@ src/
     ├── components/            # コンポーネントカタログ（自動収集）
     └── sites/{type}/{model}-{stamp}/   # サンプルサイト（複数ページ）
 scripts/
-├── web-quality-check.mjs      # 静的品質チェック（PAGE_RULES 22 + SITE_RULES 14）
+├── web-quality-check.mjs      # 静的品質チェック（PAGE_RULES 23 + SITE_RULES 14）
 ├── web-analyze-reference-motion.mjs  # 参照サイトのモーション実測（Playwright）
 ├── web-run.sh                 # ラン1回を通しで実行
 ├── web-look-analyze.sh        # Look（codex）

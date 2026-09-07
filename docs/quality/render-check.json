@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-07T02:46:03.323Z",
+  "checked_at": "2026-09-07T05:02:04.016Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -13,8 +13,8 @@
     },
     {
       "route": "/sites/corporate/a-20260903-1448/",
-      "pageHeight": 5327,
-      "imageCount": 4,
+      "pageHeight": 7025,
+      "imageCount": 6,
       "findings": []
     },
     {
@@ -56,7 +56,7 @@
     {
       "route": "/sites/corporate/a-20260903-1448/service/",
       "pageHeight": 4245,
-      "imageCount": 2,
+      "imageCount": 6,
       "findings": []
     },
     {
@@ -104,7 +104,7 @@
     {
       "route": "/sites/corporate/b-20260903-1448/service/",
       "pageHeight": 4742,
-      "imageCount": 2,
+      "imageCount": 6,
       "findings": []
     },
     {

@@ -108,6 +108,8 @@ website の品質は 1 ページを見ても決まらない。実際に起きる
 | 2026-09-03 | 初期セットアップ | 基盤移植 + website ルール32件を定義（PAGE 19 + SITE 13）。ベースライン `corporate/base-20260903-1400`（6ページ）で 総合100点 |
 | 2026-09-03 | モーション層の追加 | 参照サイトのモーション実測を導入（`web-analyze-reference-motion.mjs`）。ルールを36件に拡張（`arch-animation-missing` / `motion-consistency-drift` / `a11y-reduced-motion` / `arch-global-style-collision`）。実装側に `blur`/`clip-up`/`stagger`、ヘッダー挙動、View Transitions を追加 |
 
+| 2026-09-07 | ラン1 の是正 | 独立judge(a=70/b=75)の指摘を反映。白地に白文字（比1.00）を `render-low-contrast` で検出し修正。内蔵ダークテーマ `business` を独自テーマへ。ディレクションの画像宣言漏れ10件を補完し、写真7枚を追加生成して「写真準備中」と領域欠番(01→02→04)を解消。ルールを37件へ（`content-placeholder-text` 追加） |
+
 ## 関連ドキュメント
 
 - [migration-from-lp-designer.md](./migration-from-lp-designer.md) — 移行整理の正本

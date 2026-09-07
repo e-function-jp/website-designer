@@ -198,7 +198,103 @@
       "provider": "xai",
       "source_url": "https://files-cdn.x.ai/O93skBBOQgW1m3L8uLj6aA/file_7ca99d33-efc1-496b-adde-c407394f0dba.png",
       "created_at": "2026-09-03T07:30:38.110Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260903-1448/img-a-09.jpg",
+      "category": "corporate",
+      "tags": [
+        "本社ビル",
+        "旭川",
+        "外観",
+        "縦位置"
+      ],
+      "prompt": "北海道旭川市にある中規模メーカーの本社ビルを、冬の午後に見上げる縦位置の外観写真。コンクリートとガラスの実直な建物、屋根と手前の植え込みに雪、曇天の柔らかい光。看板やロゴは写さない。彩度を抑えた色調。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "portrait",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/4zpvLOIlQuS64CW4GRrQRA/file_82709c56-ac09-42d0-b62a-76e71cae8545.png",
+      "created_at": "2026-09-07T04:57:39.040Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260903-1448/img-a-10.jpg",
+      "category": "corporate",
+      "tags": [
+        "受付",
+        "カウンター",
+        "店舗内装",
+        "縦位置"
+      ],
+      "prompt": "直営店舗の受付カウンターを縦位置で撮影した写真。木材と金属を組み合わせた落ち着いた内装、カウンター上に案内カードとサンプル容器、奥に商品棚をぼかす。人物は写さない。窓からの自然光、彩度を抑えた色調。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "portrait",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/CYzPRF0qSrSvl8dkcjEMmQ/file_4649c170-ff55-4aa1-95a9-d192ff95d118.png",
+      "created_at": "2026-09-07T04:58:06.812Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260903-1448/img-a-11.jpg",
+      "category": "corporate",
+      "tags": [
+        "リカバリー食品",
+        "食材",
+        "手元",
+        "横位置"
+      ],
+      "prompt": "リカバリー食品の材料を調理台で扱う手元を横位置で接写した写真。凍ったベリーとナッツ、計量スプーン、ステンレスのバット。冷気で表面がわずかに白く曇っている。窓からの斜光、彩度を抑えた色調。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/XDe4vos5RBmsIrzopipqOw/file_87173a79-c57a-4b9f-9195-8c93df1dfaef.png",
+      "created_at": "2026-09-07T04:58:14.752Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260903-1448/img-a-12.jpg",
+      "category": "corporate",
+      "tags": [
+        "機能性スナック",
+        "個包装",
+        "陳列",
+        "横位置"
+      ],
+      "prompt": "機能性スナックバーの個包装パッケージを木のトレイに並べた横位置の接写写真。無地に近い落ち着いた包装、朝靄の窓辺の柔らかい光、奥をぼかす。文字やロゴは判読させない。彩度を抑えた色調。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/JJ3Yt5kHQAqvz9eBFly-jQ/file_7c5b0190-7a5d-48f4-aefc-a702950940b0.png",
+      "created_at": "2026-09-07T04:58:22.405Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260903-1448/img-a-13.jpg",
+      "category": "corporate",
+      "tags": [
+        "札幌店",
+        "店舗",
+        "外観",
+        "横位置"
+      ],
+      "prompt": "札幌の街なかにある小規模な直営店舗の外観を横位置で撮影した写真。ガラス張りのファサード、歩道の残雪、夕方前の斜光。看板の文字は判読させない。彩度を抑えた色調。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/jpEZBLIqRDerum-NkxaFJQ/file_769b09c4-f3fc-4227-814a-1b51c0fa1a6d.png",
+      "created_at": "2026-09-07T04:58:31.722Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260903-1448/img-a-14.jpg",
+      "category": "corporate",
+      "tags": [
+        "原宿店",
+        "店舗",
+        "外観",
+        "横位置"
+      ],
+      "prompt": "東京・原宿の路地にある小規模な直営店舗の外観を横位置で撮影した写真。コンクリートと木の落ち着いたファサード、周囲に街路樹、曇天の柔らかい光。看板の文字は判読させない。彩度を抑えた色調。AI 写真・ストック写真感を避け、現場の空気感を残すこと。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/wWqekoV5QYGx2XRQ11OkWQ/file_26e28325-ab12-4895-890b-daa21a39c44f.png",
+      "created_at": "2026-09-07T04:59:01.325Z"
     }
   ],
-  "updated_at": "2026-09-03T07:30:38.113Z"
+  "updated_at": "2026-09-07T04:59:01.327Z"
 }
