@@ -1,0 +1,52 @@
+/*
+ * corporate-minamoto — ベースラインサイト（ミナモト精機）向けの独自テーマ。
+ *
+ * 当初は DaisyUI 内蔵の `business` を指定していたが、これは **ダークテーマ**
+ * （base-100 = #202020）で、primary の濃紺 #1C4E80 を小さな文字に当てると
+ * コントラスト比 1.9 になり読めなかった（描画検証で検出）。
+ * 内容は工業系コーポレートの明るい紙面を想定して書いてあるので、
+ * 明るい下地に濃紺という本来の意図どおりのテーマを起こす。
+ *
+ * プロジェクト規約: DaisyUI 内蔵テーマのままサンプルを出荷しない
+ * （`consist-default-theme` が検出する）。
+ */
+@plugin "daisyui/theme" {
+  name: "corporate-minamoto";
+  default: false;
+  color-scheme: light;
+
+  /* 紙のような白（#FBFAF8）と、段差用のグレー */
+  --color-base-100: oklch(98.5% 0.003 90);
+  --color-base-200: oklch(95.5% 0.004 90);
+  --color-base-300: oklch(90% 0.005 90);
+  --color-base-content: oklch(24% 0.015 250);
+
+  /* 濃紺（#1B3A5C 相当）。明るい下地に対して十分な濃さを持たせる */
+  --color-primary: oklch(34% 0.075 251);
+  --color-primary-content: oklch(98.5% 0.003 90);
+
+  /* 精密機械の金属を思わせる鈍い青灰 */
+  --color-secondary: oklch(52% 0.045 245);
+  --color-secondary-content: oklch(98.5% 0.003 90);
+
+  /* 図面の朱書きから取った差し色 */
+  --color-accent: oklch(52% 0.14 38);
+  --color-accent-content: oklch(98.5% 0.003 90);
+
+  --color-neutral: oklch(28% 0.015 250);
+  --color-neutral-content: oklch(98.5% 0.003 90);
+
+  --color-info: oklch(55% 0.09 240);
+  --color-info-content: oklch(98.5% 0.003 90);
+  --color-success: oklch(52% 0.09 155);
+  --color-success-content: oklch(98.5% 0.003 90);
+  --color-warning: oklch(62% 0.12 75);
+  --color-warning-content: oklch(20% 0.02 75);
+  --color-error: oklch(50% 0.16 27);
+  --color-error-content: oklch(98.5% 0.003 90);
+
+  --radius-box: 0.75rem;
+  --radius-field: 0.375rem;
+  --radius-selector: 0.25rem;
+  --border: 1px;
+}

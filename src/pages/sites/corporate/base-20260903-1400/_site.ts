@@ -11,7 +11,7 @@ export const site: SiteConfig = {
   name: 'ミナモト精機',
   tagline: '精密加工で、ものづくりの前提を変える',
   base: '/sites/corporate/base-20260903-1400/',
-  theme: 'business',
+  theme: 'corporate-minamoto',
   nav: [
     { label: '会社について', href: '/about/' },
     { label: '事業・技術', href: '/service/' },

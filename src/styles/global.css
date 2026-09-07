@@ -4,11 +4,12 @@
    列挙しないテーマを data-theme に指定しても静かに既定へフォールバックする。
    実際 cupcake / luxury / corporate を指定したサンプルが無効化されていた。
    /components のテーマ切り替えで使うものもここに含める。 */
+@import "./themes/corporate-minamoto.css";
 @import "./themes/corporate-hokuline.css";
 @import "./themes/corporate-hokuline-bold.css";
 
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, corporate, cupcake, luxury,
           business, emerald, retro, nord, autumn, winter, lofi,
-          corporate-hokuline, corporate-hokuline-bold;
+          corporate-hokuline, corporate-hokuline-bold, corporate-minamoto;
 }

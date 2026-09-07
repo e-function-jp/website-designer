@@ -2,6 +2,12 @@
 /**
  * HeroCollage — 冒険路線 b 案のファーストビュー。
  *
+ * 注意: 右カラムは写真の上ではなく **ページ背景（base-100）の上** に載る。
+ * ここに text-base-100 を当てると白地に白文字になり、キャッチと CTA が
+ * コントラスト比 1.00 で完全に消える（実測で発生し、独立judge に
+ * 「FVに事業内容が無い」と指摘されるまで気づけなかった）。
+ * 文字色は base-content 系を使うこと。
+ *
  * 画面 100% × 100vh、12 カラム分割、左 7 カラム＝写真 4 枚コラージュ、
  * 右 5 カラム＝和文キャッチ + 欧字 + ボタン。
  *
@@ -85,7 +91,7 @@ const layoutOrder: Array<'portrait' | 'square' | 'landscape' | 'portrait'> = [
     </div>
 
     <!-- 右 5 カラム：和文キャッチ + 欧字 + ボタン -->
-    <div class="hero-collage__catch relative flex flex-col justify-center px-2 lg:pl-16 text-base-100">
+    <div class="hero-collage__catch relative flex flex-col justify-center px-2 lg:pl-16 text-base-content">
       <p class="hero-collage__catch-eyebrow text-xs lg:text-sm tracking-[0.18em] uppercase opacity-90 mb-6" style="transition: opacity 700ms ease, transform 700ms ease;">
         EST. 2015 ／ HOKKAIDO ASAHIKAWA
       </p>
@@ -99,7 +105,7 @@ const layoutOrder: Array<'portrait' | 'square' | 'landscape' | 'portrait'> = [
         {site.primaryCta && (
           <a
             href={url(site, site.primaryCta.href)}
-            class="btn btn-outline btn-secondary btn-lg text-base-100 border-secondary hover:bg-secondary hover:text-secondary-content"
+            class="btn btn-primary btn-lg"
           >
             {site.primaryCta.label}
           </a>

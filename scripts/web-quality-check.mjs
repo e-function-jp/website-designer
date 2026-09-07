@@ -518,11 +518,23 @@ const SITE_RULES = [
   },
   {
     id: 'consist-default-theme', category: 'Consistency', severity: 'medium',
-    desc: 'DaisyUI 既定テーマのまま出荷しようとしている',
+    desc: 'DaisyUI 内蔵テーマのまま出荷しようとしている',
     check: (s) => {
+      // 当初は light / dark / cupcake だけを弾いていたが、それでは足りなかった。
+      // ベースラインが内蔵の `business`（ダークテーマ）のまま出荷され、
+      // primary の濃紺が暗い下地に載ってコントラスト比 1.9 になっていた。
+      // 内蔵テーマは全部弾き、サイトごとに独自テーマを起こさせる。
+      const BUILTIN = new Set([
+        'light', 'dark', 'cupcake', 'bumblebee', 'emerald', 'corporate', 'synthwave',
+        'retro', 'cyberpunk', 'valentine', 'halloween', 'garden', 'forest', 'aqua',
+        'lofi', 'pastel', 'fantasy', 'wireframe', 'black', 'luxury', 'dracula',
+        'cmyk', 'autumn', 'business', 'acid', 'lemonade', 'night', 'coffee',
+        'winter', 'dim', 'nord', 'sunset', 'caramellatte', 'abyss', 'silk',
+      ]);
       const theme = s.pages[0]?.html.match(/<html[^>]+data-theme="([^"]*)"/i)?.[1] ?? '';
-      return ['light', 'dark', 'cupcake', ''].includes(theme)
-        ? [`data-theme="${theme || '(未指定)'}" は既定テーマ。サイトごとに独自テーマを定義すること`]
+      if (!theme) return ['data-theme が未指定。サイトごとに独自テーマを定義すること'];
+      return BUILTIN.has(theme)
+        ? [`data-theme="${theme}" は DaisyUI 内蔵テーマ。サイトごとに独自テーマを起こすこと（内蔵テーマは自前の配色設計と噛み合わず、実測でコントラスト比 1.9 の事故が起きている）`]
         : [];
     },
   },

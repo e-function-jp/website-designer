@@ -14,6 +14,7 @@
  *
  * 検査項目
  * --------
+ *   render-low-contrast     背景に対して文字のコントラストが足りない（消えている）
  *   render-hidden-content   スクロールし切っても不可視のままの要素
  *   render-image-broken     読み込まれなかった img
  *   render-blank-region     可視要素が何も無い縦方向の空白帯
@@ -143,6 +144,99 @@ for (const route of routes) {
       });
     }
 
+    // --- 1.5 コントラスト不足（＝文字が見えていない） ---
+    //
+    // 実測: b案のファーストビューは、右カラムに text-base-100（ほぼ白）を当てた
+    // まま背景も base-100 だったため、キャッチコピーと CTA が
+    // コントラスト比 1.00 で完全に消えていた。DOM には h1 が存在するので
+    // 静的チェックの a11y-h1 は通り、独立judge に
+    // 「FVに事業内容が無い」と指摘されて初めて発覚した。
+    //
+    // 色は oklch などで返る。canvas の fillStyle は CSS Color 4 を
+    // 正規化して返してくれない（実測: 'oklch(...)' がそのまま返る）ため、
+    // **実際に 1px 塗って読み取る**。これなら表色系に依存しない。
+    const cvs = document.createElement('canvas');
+    cvs.width = cvs.height = 1;
+    const ctx = cvs.getContext('2d', { willReadFrequently: true });
+    const toRgb = (css) => {
+      try {
+        ctx.clearRect(0, 0, 1, 1);
+        ctx.fillStyle = css;
+        ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
+        return a < 240 ? null : [r, g, b];   // 半透明は判定しない
+      } catch { return null; }
+    };
+    const lum = (rgb) => {
+      const c = rgb.map((v) => {
+        const x = v / 255;
+        return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+    };
+    const ratio = (a, b) => {
+      const [l1, l2] = [lum(a), lum(b)].sort((x, y) => y - x);
+      return (l1 + 0.05) / (l2 + 0.05);
+    };
+
+    const lowContrast = [];
+    for (const el of document.querySelectorAll('body *')) {
+      const own = [...el.childNodes].filter((n) => n.nodeType === 3)
+        .map((n) => n.textContent.trim()).join(' ').trim();
+      if (!own) continue;
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) < 0.05) continue;
+      const r = el.getBoundingClientRect();
+      if (r.width < 8 || r.height < 8) continue;
+      const size = parseFloat(cs.fontSize) || 16;
+      if (size < 8) continue;
+
+      // 写真の上に載る文字は判定できない（写真の明度は場所によって違う）。
+      // CSS の background-image だけでなく、**背後に敷かれた <img>** も見る。
+      // ヒーローは img を absolute で敷く実装が多く、これを見落とすと
+      // 「写真上の白抜き文字」を一律に誤検知する（実測で発生）。
+      const behindMedia = (() => {
+        let a = el;
+        for (let i = 0; a && i < 5; a = a.parentElement, i++) {
+          for (const m of a.querySelectorAll(':scope > img, :scope > video, :scope > canvas, :scope > picture > img')) {
+            const mcs = getComputedStyle(m);
+            if (mcs.position !== 'absolute' && mcs.position !== 'fixed') continue;
+            const mr = m.getBoundingClientRect();
+            if (mr.left <= r.left + 2 && mr.right >= r.right - 2 &&
+                mr.top <= r.top + 2 && mr.bottom >= r.bottom - 2) return true;
+          }
+        }
+        return false;
+      })();
+      if (behindMedia) continue;
+
+      // 背景を祖先方向にたどる。背景画像・グラデーションがあれば判定不能として飛ばす
+      let bgCss = null, node = el, hasImage = false;
+      while (node && node !== document.documentElement) {
+        const ncs = getComputedStyle(node);
+        if (ncs.backgroundImage && ncs.backgroundImage !== 'none') { hasImage = true; break; }
+        const c = toRgb(ncs.backgroundColor);
+        if (c) { bgCss = c; break; }
+        node = node.parentElement;
+      }
+      if (hasImage || !bgCss) continue;
+      const fg = toRgb(cs.color);
+      if (!fg) continue;
+
+      const cr = ratio(fg, bgCss);
+      const isLarge = size >= 24 || (size >= 18.66 && Number(cs.fontWeight) >= 700);
+      const need = isLarge ? 3 : 4.5;
+      if (cr >= need) continue;
+      lowContrast.push({
+        tag: el.tagName.toLowerCase(),
+        cls: (typeof el.className === 'string' ? el.className : '').slice(0, 40),
+        text: own.slice(0, 30),
+        ratio: Math.round(cr * 100) / 100,
+        need,
+        size: Math.round(size),
+      });
+    }
+
     // --- 2. 読み込まれなかった画像 ---
     const brokenImages = [...document.images]
       .filter((i) => !i.complete || i.naturalWidth === 0)
@@ -188,6 +282,9 @@ for (const route of routes) {
     }
 
     return {
+      lowContrast: lowContrast.sort((a, b) => a.ratio - b.ratio).slice(0, 8),
+      lowContrastCount: lowContrast.length,
+      invisibleText: lowContrast.filter((c) => c.ratio < 1.3).length,
       hidden: hidden.slice(0, 8),
       hiddenCount: hidden.length,
       brokenImages,
@@ -200,6 +297,16 @@ for (const route of routes) {
   }, BLANK_MIN_PX);
 
   const findings = [];
+  if (data.lowContrastCount) {
+    // 比 1.3 未満は「同色＝完全に消えている」。読みにくいのではなく存在しないのと同じ。
+    findings.push({
+      id: 'render-low-contrast',
+      severity: data.invisibleText ? 'high' : 'medium',
+      detail: `コントラスト不足 ${data.lowContrastCount} 件` +
+        (data.invisibleText ? `（うち ${data.invisibleText} 件は同色で完全に不可視）` : '') + ': ' +
+        data.lowContrast.map((c) => `${c.tag}"${c.text}"(比${c.ratio}, 要${c.need})`).slice(0, 4).join(' / '),
+    });
+  }
   if (data.hiddenCount) {
     findings.push({
       id: 'render-hidden-content', severity: 'high',
