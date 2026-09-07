@@ -62,8 +62,11 @@ PROMPT="$(cat "$TEMPLATE")"
 PROMPT="${PROMPT//\{\{SITE_META\}\}/$SITE_META}"
 PROMPT="${PROMPT//\{\{MOTION_SUMMARY\}\}/$MOTION_SUMMARY}"
 
-echo "==> codex exec で Look 解析中（画像 $(( ${#IMG_ARGS[@]} / 2 )) 枚）"
-echo "$PROMPT" | codex exec --skip-git-repo-check "${IMG_ARGS[@]}" > "$RAW_LOG" 2>&1 || true
+# モデルは codex 側の設定に従う（env で上書き可）。
+LOOK_MODEL="${WEB_DESIGNER_JUDGE_MODEL:-}"
+MODEL_ARGS=(); [[ -n "$LOOK_MODEL" ]] && MODEL_ARGS=(-m "$LOOK_MODEL")
+echo "==> codex exec${LOOK_MODEL:+ ($LOOK_MODEL)} で Look 解析中（画像 $(( ${#IMG_ARGS[@]} / 2 )) 枚）"
+echo "$PROMPT" | codex exec ${MODEL_ARGS[@]+"${MODEL_ARGS[@]}"} --skip-git-repo-check "${IMG_ARGS[@]}" > "$RAW_LOG" 2>&1 || true
 
 python3 - "$RAW_LOG" "$OUT" <<'PYEOF'
 import sys, re

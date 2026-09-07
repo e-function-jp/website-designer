@@ -37,9 +37,22 @@ SCORE_PAGES="${WEB_DESIGNER_SCORE_PAGES:-/ /about/ /service/}"
 IMG_ARGS=()
 
 # --- 1. 参照サイトのキャプチャ（あれば先頭に置く） ---
-for cand in "$RUN_DIR/ref-top.jpg" "$RUN_DIR/ref-full.jpg" "$RUN_DIR/ref-pc-full.jpg"; do
-  [[ -f "$cand" ]] && IMG_ARGS+=(-i "$cand") && break
+#
+# 保存しているのは web-analyze-reference-motion.mjs で、置き先は
+# {run_dir}/motion/{slug}-full.jpg。当初この探索先が ref-*.jpg のままで、
+# **judge が参照サイトを一度も見ないまま reference_fit を採点していた**。
+REF_IMG=""
+for cand in "$RUN_DIR/motion/top-full.jpg" "$RUN_DIR/motion/top-top.jpg" \
+            "$RUN_DIR/ref-top.jpg" "$RUN_DIR/ref-full.jpg" "$RUN_DIR/ref-pc-full.jpg"; do
+  [[ -f "$cand" ]] && { REF_IMG="$cand"; break; }
 done
+if [[ -n "$REF_IMG" ]]; then
+  IMG_ARGS+=(-i "$REF_IMG")
+  export WEB_DESIGNER_REF_ATTACHED=1
+  echo "==> 参照キャプチャ: $REF_IMG"
+else
+  echo "==> 参照キャプチャが見つからない。reference_fit は文字情報だけの採点になる" >&2
+fi
 
 # --- 2. 生成サイトを実描画で撮影 ---
 for m in "${MODELS[@]}"; do
@@ -113,22 +126,71 @@ EOF
 
 # 採点は生成に使っていない CLI に寄せる。「自分が作ったものを自分で採点しない」が要件。
 JUDGE="${WEB_DESIGNER_JUDGE_CMD:-codex}"
+# モデルは既定では指定せず、codex 側の設定に従う。
+# 一度こちらで固定したことがあるが、それは CLI が古くて既定モデルを
+# 扱えなかった当時の対処であり、固定を残すと今度はこちらが陳腐化する
+# （実測: 固定した gpt-5.4 は ChatGPT アカウントでは非対応だった）。
+# CLI とモデルの不整合は codex 側の更新で直すのが正しい。
+JUDGE_MODEL="${WEB_DESIGNER_JUDGE_MODEL:-}"
+MODEL_ARGS=(); [[ -n "$JUDGE_MODEL" ]] && MODEL_ARGS=(-m "$JUDGE_MODEL")
 if ! command -v "$JUDGE" >/dev/null 2>&1; then
   echo "judge CLI '$JUDGE' が見つかりません。WEB_DESIGNER_JUDGE_CMD で指定してください。" >&2
   echo "撮影は完了しています: $SHOTS" >&2
   exit 3
 fi
 
-echo "==> scoring with independent judge ($JUDGE)"
-RAW="$("$JUDGE" exec "${IMG_ARGS[@]}" --skip-git-repo-check "$PROMPT" 2>/dev/null || true)"
+JUDGE_LOG="$RUN_DIR/design-score-judge.raw.log"
+echo "==> scoring with independent judge ($JUDGE${JUDGE_MODEL:+ / $JUDGE_MODEL}) 画像 $(( ${#IMG_ARGS[@]} / 2 )) 枚"
+# stdin を閉じる。開いたままだと codex が
+# "Reading additional input from stdin..." で待ち続け、
+# バックグラウンド実行では永久に返らない（実測で発生）。
+"$JUDGE" exec ${MODEL_ARGS[@]+"${MODEL_ARGS[@]}"} "${IMG_ARGS[@]}" --skip-git-repo-check "$PROMPT" \
+  < /dev/null > "$JUDGE_LOG" 2>&1 || true
+RAW="$(cat "$JUDGE_LOG")"
 
 python3 - "$RUN_DIR" "$STAMP" "$SITE_TYPE" <<PYEOF
-import json, re, sys, pathlib, datetime
+import json, os, re, sys, pathlib, datetime
 run_dir, stamp, site_type = sys.argv[1], sys.argv[2], sys.argv[3]
 raw = """$RAW"""
-m = re.search(r'\{.*\}', raw, re.S)
+# 生ログにはプロンプトのエコー（ルーブリックの JSON 雛形）や
+# エラー行も混ざる。素朴な \{.*\} の貪欲マッチだと雛形ごと拾って
+# JSONDecodeError になる（実測）。
+# "models" を含む**釣り合いの取れた**オブジェクトを後ろから探す。
+def _find_json(text):
+    cands = []
+    for i, ch in enumerate(text):
+        if ch != '{':
+            continue
+        depth, in_str, esc = 0, False, False
+        for j in range(i, len(text)):
+            c = text[j]
+            if in_str:
+                if esc: esc = False
+                elif c == chr(92): esc = True
+                elif c == '"': in_str = False
+                continue
+            if c == '"': in_str = True
+            elif c == '{': depth += 1
+            elif c == '}':
+                depth -= 1
+                if depth == 0:
+                    cands.append(text[i:j + 1])
+                    break
+    for cand in reversed(cands):
+        if '"models"' not in cand or '<0-100>' in cand:
+            continue          # 雛形（プロンプトのエコー）は捨てる
+        try:
+            json.loads(cand)
+            return cand
+        except json.JSONDecodeError:
+            continue
+    return None
+
+body = _find_json(raw)
+m = type('M', (), {'group': lambda self, n=0: body})() if body else None
 if not m:
     print("WARN: judge output had no JSON; design-score-data.json は更新しない", file=sys.stderr)
+    print(f"    生ログ: {run_dir}/design-score-judge.raw.log の末尾を確認すること", file=sys.stderr)
     sys.exit(1)
 data = json.loads(m.group(0))
 data.update({
@@ -155,11 +217,32 @@ if hist_p.exists():
             for k, v in (json.loads(line).get("totals") or {}).items():
                 best_prev[k] = max(best_prev.get(k, 0), v)
 
+# 計測条件を履歴に残す。条件が違う回どうしのスコアは比較できない。
+setup = {
+    "judge": os.environ.get("WEB_DESIGNER_JUDGE_CMD", "codex"),
+    "judge_model": os.environ.get("WEB_DESIGNER_JUDGE_MODEL", "(codex default)"),
+    "reference_attached": bool(os.environ.get("WEB_DESIGNER_REF_ATTACHED")),
+    "score_pages": os.environ.get("WEB_DESIGNER_SCORE_PAGES", "/ /about/ /service/"),
+}
+data["measurement_setup"] = setup
+
+prev_setup = None
+if hist_p.exists():
+    for line in hist_p.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            prev_setup = json.loads(line).get("setup")
+
 with hist_p.open("a", encoding="utf-8") as f:
     f.write(json.dumps({"attempt": attempt, "scored_at": data["scored_at"],
-                        "totals": totals, "winner": data.get("winner")}, ensure_ascii=False) + "\n")
+                        "totals": totals, "winner": data.get("winner"),
+                        "setup": setup}, ensure_ascii=False) + "\n")
 
-regressions = {k: (best_prev[k], v) for k, v in totals.items() if k in best_prev and v < best_prev[k]}
+# 計測条件が前回と違うなら、後退判定は出さない（比較が成立しないため）
+setup_changed = prev_setup is not None and prev_setup != setup
+data["setup_changed_since_last"] = setup_changed
+regressions = {} if setup_changed else {
+    k: (best_prev[k], v) for k, v in totals.items() if k in best_prev and v < best_prev[k]
+}
 data["best_so_far"] = {k: max(best_prev.get(k, 0), v) for k, v in totals.items()}
 if regressions:
     data["regressed_vs_best"] = {k: {"best": b, "now": n} for k, (b, n) in regressions.items()}
@@ -167,6 +250,11 @@ if regressions:
 (run_dir_p / "design-score-data.json").write_text(
     json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 print(json.dumps(data, ensure_ascii=False, indent=2))
+
+if setup_changed:
+    print("\n*** 計測条件が前回と変わっています。スコアを前回と直接比較しないこと。", file=sys.stderr)
+    print(f"***   前回: {prev_setup}", file=sys.stderr)
+    print(f"***   今回: {setup}", file=sys.stderr)
 
 if regressions:
     detail = ", ".join(f"{k}: best {b} -> now {n}" for k, (b, n) in regressions.items())
