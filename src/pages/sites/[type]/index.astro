@@ -19,7 +19,14 @@ import {
 } from '../../../lib/sample-index';
 
 export function getStaticPaths() {
-  return SITE_TYPES.map((t) => ({ params: { type: t.id } }));
+  // サンプルが 0 件の種別ページは、どこからもリンクされない孤立ページになる
+  // (トップは 0 件種別を表示しないため)。tasks/20260909 の指示に従い
+  // getStaticPaths 側で生成対象から外す。種別が増えたら次のビルドで復活する。
+  const samples = collectSamples();
+  const typesWithSamples = new Set(samples.map((s) => s.type));
+  return SITE_TYPES
+    .filter((t) => typesWithSamples.has(t.id))
+    .map((t) => ({ params: { type: t.id } }));
 }
 
 const { type } = Astro.params as { type: string };

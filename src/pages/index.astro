@@ -26,28 +26,55 @@ interface TypeGroup {
   entries: SampleEntry[];
   /** 種別内の総ページ数（参考値） */
   totalPages: number;
+  /** 代表サンプル（top カードに使う）。選定基準は下参照 */
+  representative: SampleEntry;
 }
 
 const typeGroups: TypeGroup[] = SITE_TYPES
   .map((t) => {
     const entries = samples.filter((s) => s.type === t.id);
+    if (entries.length === 0) return null;
     return {
       meta: t,
       entries,
       totalPages: entries.reduce((sum, s) => sum + s.pageCount, 0),
+      representative: pickRepresentative(entries),
     };
   })
-  .filter((g) => g.entries.length > 0)
+  .filter((g): g is TypeGroup => g !== null)
   .sort((a, b) => b.entries.length - a.entries.length);
 
 const totalSamples = samples.length;
 const totalPages = samples.reduce((sum, s) => sum + s.pageCount, 0);
 
-/** 種別の「代表サムネイル」は最も新しいサンプル（stamp 降順で先頭） */
-const repThumbFor = (g: TypeGroup) => {
-  const head = g.entries[0];
-  return `/thumbs/${head.type}/${head.slug}.jpg`;
-};
+/** 種別の「代表サムネイル」パスを返す */
+const repThumbFor = (g: TypeGroup) =>
+  `/thumbs/${g.representative.type}/${g.representative.slug}.jpg`;
+
+/**
+ * 代表サンプルの選定基準: 「base バリアントを除く最新」。
+ *
+ *   - `model === 'base'` のサンプルは学習ループの基準点であり、最終成果物
+ *     ではないため除外する (lp-designer の samples-index.json でも base は
+ *     「baseline」タブに分けており、主役には据えない)。
+ *   - 残りは stamp 降順、同 stamp は model 昇順 (a→b→c…) で安定ソート。
+ *     corporate-20260903-1448 のように a/b が同 stamp のランで
+ *     ビルドごとに代表がコロコロ変わると視覚比較がしづらくなる。
+ *   - design-score の勝者を代表にする案も検討したが、tasks/20260909 の
+ *     レビューで「独立 judge が主コピー分断で減点した b が勝者になって
+ *     いた」事実が確認されたため、勝者 = 最高品質という前提は崩れている。
+ *     自動選定の基準としては脆く、人手レビューを要するため不採用。
+ *   - base しかない種別では base を代表にする (まだそういうランはないが
+ *     落ちないことが重要なので fallback として残す)。
+ */
+function pickRepresentative(entries: SampleEntry[]): SampleEntry {
+  const nonBase = entries.filter((s) => s.model !== 'base');
+  const pool = nonBase.length > 0 ? nonBase : entries;
+  return [...pool].sort((a, b) =>
+    (b.stamp ?? '').localeCompare(a.stamp ?? '') ||
+    (a.model ?? '').localeCompare(b.model ?? ''),
+  )[0];
+}
 ---
 <BaseLayout
   title="Website Designer"
@@ -81,7 +108,17 @@ const repThumbFor = (g: TypeGroup) => {
 
     <section class="space-y-6">
       <h2 class="sr-only">サイト種別</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/*
+        auto-fit + minmax でカード数に応じて列数を可変に。
+        1 枚のときは 1fr でフル幅、2 枚で 2 列、3 枚で 3 列、4 枚以上で折り返す。
+        旧 `lg:grid-cols-3` はカード 1 枚でも 3 カラムを切るため、
+        右 2/3 が空白に見える問題があった (tasks/20260909 のレビュー指摘)。
+        min(100%, 320px) で極小幅でもオーバーフローさせない。
+      */}
+      <div
+        class="grid gap-6"
+        style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));"
+      >
         {typeGroups.map((g) => (
           <a
             href={`/sites/${g.meta.id}/`}

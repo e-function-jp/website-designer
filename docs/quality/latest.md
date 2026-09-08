@@ -1,14 +1,13 @@
 # website 品質レポート
 
-- 計測日時: 2026/9/9 8:33:12
+- 計測日時: 2026/9/9 8:56:22
 - **総合スコア: 100 / 100**（前回 100、+0）
-- サイト数: 3 / ページ数: 31
+- サイト数: 3 / ページ数: 25
 
 | ページ | スコア | 指摘数 |
 |---|---|---|
 | /components/ | 100 | 0 |
 | / | 100 | 0 |
-| /sites/brand/ | 100 | 0 |
 | /sites/corporate/a-20260903-1448/about/ | 100 | 0 |
 | /sites/corporate/a-20260903-1448/company/ | 100 | 0 |
 | /sites/corporate/a-20260903-1448/contact/ | 100 | 0 |
@@ -32,21 +31,12 @@
 | /sites/corporate/base-20260903-1400/privacy/ | 100 | 0 |
 | /sites/corporate/base-20260903-1400/service/ | 100 | 0 |
 | /sites/corporate/ | 100 | 0 |
-| /sites/ec/ | 100 | 0 |
-| /sites/media/ | 100 | 0 |
-| /sites/public/ | 100 | 0 |
-| /sites/recruit/ | 100 | 0 |
-| /sites/service/ | 100 | 0 |
 
 ## /components/ — 100点
 
 指摘なし 🎉
 
 ## / — 100点
-
-指摘なし 🎉
-
-## /sites/brand/ — 100点
 
 指摘なし 🎉
 
@@ -141,25 +131,5 @@
 指摘なし 🎉
 
 ## /sites/corporate/ — 100点
-
-指摘なし 🎉
-
-## /sites/ec/ — 100点
-
-指摘なし 🎉
-
-## /sites/media/ — 100点
-
-指摘なし 🎉
-
-## /sites/public/ — 100点
-
-指摘なし 🎉
-
-## /sites/recruit/ — 100点
-
-指摘なし 🎉
-
-## /sites/service/ — 100点
 
 指摘なし 🎉

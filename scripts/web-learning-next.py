@@ -54,9 +54,12 @@ UNIFORM_BLEND = 0.5
 RECENT_TYPE_EXCLUDE = 2    # 直近何回分のサイト種別を避けるか
 TARGET_CAP_MULTIPLE = 2.0  # 1種別が目標を独占しないための上限
 
-# 業種（従軸）の足切り閾値。corporate は22業種に散っているが、参照が3件未満は
-# 候補プールが狭すぎて偏る（lp-designer で同じ数値を採用、2026-08 時点で検証済）。
-MIN_INDUSTRY_REFS = 3
+# 業種（従軸）の足切り閾値。tasks/20260909 で 6 業種ちょうど (ad / building /
+# company / art / technology / hospital) が対象となるよう 5 を採用。
+# corporate は22業種に散るが、3 や 4 だと interior (4) / group (4) / healthcare
+# (3) 等が紛れ込んでプールが不安定になる。5 で「ギャラリーに安定して 6件以上
+# 掲載されている業種」だけが残る。
+MIN_INDUSTRY_REFS = 5
 RECENT_INDUSTRY_EXCLUDE = 1  # 種別に比べ対象が少ないので除外幅は小さく
 
 
@@ -167,6 +170,24 @@ def pick_industry(archive: list[dict], type_id: str, recent: list[str],
       - None: 候補が枯れた（call 側で業種条件を落として参照選択を再走する）
       - weights_industry: 重み（job.json に書く）
       - skipped: 足切り除外した業種（reason つき）
+
+    ## 目標構成比の選択: 1/n 一様分布（occupancy を混ぜない）
+
+    サイト種別軸は `compute_weights` で 0.5*uniform + 0.5*gallery_occupancy を
+    使う (lp-designer の `lp-learning-cron-next.py` 由来)。これはギャラリー自体
+    が site_type 単位で偏っているためで、occupancy を入れないと「実体は
+    corporate 一色なのに uniform で 4 種均等に作ってしまう」ことになる。
+
+    一方、業種軸は**単一種別の内側**で選ぶので事情が違う:
+      - corporate の中で ad が 39、hospital が 6 と占有率が 6.5 倍偏っている
+      - ここで occupancy を混ぜると ad ばかり選ばれる
+      - hospital / technology のような少数派が永久に育成されない
+      - 学習ループの目的なら「**6 業種を均等にカバー**」するのが正しい
+      - 自前シェア側は依然 -1/n で効くので、育成が終わった業種は自然に落ち着く
+
+    つまり:
+      - サイト種別軸 = 「ギャラリー全体との分布整合」 → blended
+      - 業種軸       = 「単一種別の均等カバレッジ」 → 一様
     """
     pool = _industry_pool(archive, type_id)
     eligible = {k: v for k, v in pool.items() if v >= MIN_INDUSTRY_REFS}
@@ -175,7 +196,7 @@ def pick_industry(archive: list[dict], type_id: str, recent: list[str],
     if not eligible:
         return None, {}, skipped
 
-    # 目標構成比 = 種別に属する参照での一様分布
+    # 目標構成比 = 種別に属する参照での一様分布 (1/n)。理由の詳細は docstring 参照。
     n = len(eligible)
     target = {k: 1.0 / n for k in eligible}
     total_own = sum(own.get(k, 0) for k in eligible) or 1
