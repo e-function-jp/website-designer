@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T07:47:14.102Z",
+  "checked_at": "2026-09-08T23:34:34.302Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -8,7 +8,19 @@
     {
       "route": "/",
       "pageHeight": 900,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/brand/",
+      "pageHeight": 900,
       "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/",
+      "pageHeight": 900,
+      "imageCount": 3,
       "findings": []
     },
     {
@@ -140,6 +152,36 @@
     {
       "route": "/sites/corporate/base-20260903-1400/service/",
       "pageHeight": 2028,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/ec/",
+      "pageHeight": 900,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/media/",
+      "pageHeight": 900,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/public/",
+      "pageHeight": 900,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/recruit/",
+      "pageHeight": 900,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/service/",
+      "pageHeight": 900,
       "imageCount": 0,
       "findings": []
     }
