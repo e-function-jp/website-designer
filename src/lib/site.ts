@@ -65,6 +65,12 @@ export interface SiteConfig {
     /** ページ遷移に View Transitions を使うか */
     pageTransition?: boolean;
   };
+  /**
+   * 参照サイトの業種（`scripts/site_categories.py` の `INDUSTRIES` の id）。
+   * ローテの従軸と、トップ・/sites/[type]/ のカード表示で使う。
+   * 既存サイト（2026-09-09 以前）にも後付けで記録する。
+   */
+  industry?: string;
 }
 
 export interface Breadcrumb {

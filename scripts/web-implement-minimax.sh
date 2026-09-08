@@ -56,6 +56,9 @@ PROMPT=$(cat <<EOF
 
 1. **最初に \`${OUT_DIR}/_site.ts\` を書く。** ディレクションの #site-config をそのまま写す。
    型は \`src/lib/site.ts\` の \`SiteConfig\`。ここを飛ばすとナビがページ間でズレる。
+   **\`industry\` フィールドも必ず書く**（参照サイトの業種。\`scripts/site_categories.py\`
+   の \`INDUSTRIES\` の id から選ぶ）。コーポレートの学習ローテは業種を従軸に
+   採用したため（2026-09）、industry が無いと次に同業種を避ける判定ができない。
 2. 各ページを \`${OUT_DIR}/{path}/index.astro\` として作る（トップは \`index.astro\`）。
    **全ページが \`src/layouts/SiteLayout.astro\` を使う。** ヘッダー・フッター・パンくず・
    JSON-LD・title は SiteLayout が自動で作るので、手書きしない。

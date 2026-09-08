@@ -58,6 +58,9 @@ export const site: SiteConfig = {
   },
   primaryCta: { label: '製品ラインを見る', href: '/service/' },
   legalNav: [{ label: 'プライバシーポリシー', href: '/privacy/' }],
+  // 参照業種: 北嶺ニュートリションはスポーツ栄養食のメーカー。
+  // tasks/20260909-industry-rotation-and-top-cards.md で 'company' 指定。
+  industry: 'company',
   motion: {
     reveal: 'fade-up',
     durationMs: 700,

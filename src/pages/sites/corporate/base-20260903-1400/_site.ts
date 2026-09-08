@@ -59,6 +59,9 @@ export const site: SiteConfig = {
     header: 'solid',
     pageTransition: false,
   },
+  // 参照業種: ミナモト精機は精密加工のメーカー（暮らし・インフラ・工業・メーカー）。
+  // 学習前の基準点として、tasks/20260909-industry-rotation-and-top-cards.md で指定。
+  industry: 'company',
   legalNav: [{ label: 'プライバシーポリシー', href: '/privacy/' }],
 };
 
