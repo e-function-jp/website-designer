@@ -91,9 +91,12 @@ Look を codex にしているのは分担上の制約による。`hermes -z` �
 ## 全体像
 
 ```
-[A. 収集] muuuuu.org → site_archive/fetch_site_archive.py
-       → site_archive_{date}.csv（site_type / industry 列付き）
-       → site_archive/categories.json（占有率スナップショット）
+[A. 収集] muuuuu.org のタクソノミアーカイブを巡回 → site_archive/fetch_site_archive.py
+       → sitetype(16種) / industry(34種) の archive に載っている事実で分類する
+         （キーワード推測は 52% が未分類だったので廃止）
+       → overseas-site を除外集合として取得し、海外サイトを外す
+       → site_archive_{date}.csv（site_type / industry / gallery_sitetypes 列付き）
+       → site_archive/categories.json（分布スナップショット）
     ↓
 [B. 作業切り出し] scripts/web-learning-next.py
        → 不足度 = 目標構成比 - 自前の構成比 でサイト種別を選択

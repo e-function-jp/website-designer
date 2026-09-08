@@ -42,7 +42,7 @@ npm run check:web:strict  # 前回より下がったら exit 1
 ### ループB — 参照学習 + 2案検証
 
 ```bash
-npm run archive:fetch -- --pages 3    # 参照サイト収集（muuuuu.org）
+npm run archive:fetch -- --pages 5 --all-types    # 参照サイト収集（muuuuu.org）
 npm run next:run                       # 次のサイト種別を選びランを開く
 bash scripts/web-run.sh docs/quality/runs/{run_id}   # モーション実測→Look→Direction→画像→実装→採点
 ```

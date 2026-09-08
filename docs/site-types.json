@@ -37,6 +37,10 @@
         "/privacy/"
       ],
       "tone": "信頼・堅実。彩度を抑えたコーポレートカラー1色＋アクセント1色、写真は事業/人物の実写、数値による実績提示、問い合わせ導線は全ページ到達可能",
+      "gallery_sitetypes": [
+        "co",
+        "b2b-company"
+      ],
       "rotation": true
     },
     {
@@ -71,6 +75,9 @@
         "/about/"
       ],
       "tone": "機能価値の言語化。比較表・料金表・導入事例が主役、資料請求と無料トライアルの2系統CTA",
+      "gallery_sitetypes": [
+        "service"
+      ],
       "rotation": false
     },
     {
@@ -106,6 +113,9 @@
         "/faq/"
       ],
       "tone": "社員写真とストーリー主導。1日の流れ／座談会／数字で見る当社、エントリー導線を全ページ固定",
+      "gallery_sitetypes": [
+        "recruit"
+      ],
       "rotation": false
     },
     {
@@ -138,6 +148,10 @@
         "/contact/"
       ],
       "tone": "可読性最優先のエディトリアル。一覧→詳細の回遊設計、カテゴリ/タグ/ページネーション/関連記事",
+      "gallery_sitetypes": [
+        "owned-media",
+        "webmagazine"
+      ],
       "rotation": false
     },
     {
@@ -152,6 +166,9 @@
       "required_pages": [],
       "recommended_pages": [],
       "tone": null,
+      "gallery_sitetypes": [
+        "brand"
+      ],
       "rotation": false
     },
     {
@@ -167,6 +184,9 @@
       "required_pages": [],
       "recommended_pages": [],
       "tone": null,
+      "gallery_sitetypes": [
+        "ec"
+      ],
       "rotation": false
     },
     {
@@ -191,108 +211,148 @@
       "required_pages": [],
       "recommended_pages": [],
       "tone": null,
+      "gallery_sitetypes": [
+        "portal"
+      ],
       "rotation": false
     }
   ],
   "industries": [
     {
-      "id": "manufacturing",
-      "label": "製造・工業",
-      "keywords": [
-        "製作所",
-        "工業",
-        "機械",
-        "精密",
-        "金属",
-        "electronics",
-        "産業"
-      ]
+      "id": "ad",
+      "label": "制作・開発・企画・マーケティング・コンサル"
     },
     {
-      "id": "construction",
-      "label": "建設・不動産",
-      "keywords": [
-        "建設",
-        "工務店",
-        "住宅",
-        "不動産",
-        "設計",
-        "リフォーム"
-      ]
+      "id": "area",
+      "label": "地域・海外・地方"
     },
     {
-      "id": "it",
-      "label": "IT・ソフトウェア",
-      "keywords": [
-        "システム",
-        "ソフト",
-        "IT",
-        "テック",
-        "デジタル",
-        "DX",
-        "AI"
-      ]
+      "id": "art",
+      "label": "デザイン・アート"
     },
     {
-      "id": "professional",
-      "label": "士業・コンサル",
-      "keywords": [
-        "法律",
-        "会計",
-        "税理士",
-        "社労士",
-        "コンサル",
-        "事務所"
-      ]
+      "id": "beauty",
+      "label": "美容・コスメ・化粧品・ケア用品"
     },
     {
-      "id": "medical",
-      "label": "医療・福祉",
-      "keywords": [
-        "医療",
-        "クリニック",
-        "病院",
-        "介護",
-        "福祉",
-        "薬"
-      ]
+      "id": "building",
+      "label": "建築・建設・不動産・住宅"
+    },
+    {
+      "id": "car",
+      "label": "自動車・バイク・自転車・モビリティ"
+    },
+    {
+      "id": "company",
+      "label": "暮らし・インフラ・工業・メーカー"
+    },
+    {
+      "id": "eco",
+      "label": "エコ・チャリティー"
+    },
+    {
+      "id": "education-service",
+      "label": "教育サービス"
+    },
+    {
+      "id": "electrical",
+      "label": "家電製品・カメラ・携帯電話"
+    },
+    {
+      "id": "entertainment",
+      "label": "エンターテイメント・アニメ・ホビー"
+    },
+    {
+      "id": "fashion",
+      "label": "ファッション（女性）"
+    },
+    {
+      "id": "fashionall",
+      "label": "ファッション（全般）"
+    },
+    {
+      "id": "finance",
+      "label": "金融・投資・保険・士業"
     },
     {
       "id": "food",
-      "label": "食品・飲食",
-      "keywords": [
-        "食品",
-        "飲料",
-        "レストラン",
-        "カフェ",
-        "酒造",
-        "菓子"
-      ]
+      "label": "飲料・食品"
     },
     {
-      "id": "retail",
-      "label": "小売・サービス業",
-      "keywords": [
-        "小売",
-        "店舗",
-        "サロン",
-        "ホテル",
-        "旅館",
-        "物流",
-        "運送"
-      ]
+      "id": "group",
+      "label": "地域活性・行政・公共"
     },
     {
-      "id": "education",
-      "label": "教育",
-      "keywords": [
-        "学校",
-        "大学",
-        "スクール",
-        "塾",
-        "教育",
-        "学園"
-      ]
+      "id": "healthcare",
+      "label": "健康・ヘルスケア・ウェルネス"
+    },
+    {
+      "id": "hospital",
+      "label": "医療・病院"
+    },
+    {
+      "id": "human-resources",
+      "label": "人材・HRサービス"
+    },
+    {
+      "id": "interior",
+      "label": "インテリア・雑貨・家具"
+    },
+    {
+      "id": "kids",
+      "label": "ベビー・キッズ・ファミリー"
+    },
+    {
+      "id": "life",
+      "label": "農業・植物"
+    },
+    {
+      "id": "music",
+      "label": "音楽"
+    },
+    {
+      "id": "publication",
+      "label": "本・出版・印刷"
+    },
+    {
+      "id": "restaurant",
+      "label": "カフェ・レストラン・飲食店・テイクアウト"
+    },
+    {
+      "id": "school",
+      "label": "学校・大学・教育"
+    },
+    {
+      "id": "science-research",
+      "label": "科学・研究機関"
+    },
+    {
+      "id": "shopping",
+      "label": "ショッピング・商業施設"
+    },
+    {
+      "id": "sports",
+      "label": "スポーツ・ジム・スポーツウェア"
+    },
+    {
+      "id": "technology",
+      "label": "Web・IT・AI・SaaS・テクノロジー"
+    },
+    {
+      "id": "trip",
+      "label": "ホテル・旅館・温泉・旅行"
+    },
+    {
+      "id": "watch",
+      "label": "時計・宝石"
+    },
+    {
+      "id": "wedding",
+      "label": "ウェディング"
+    },
+    {
+      "id": "welfare-care",
+      "label": "福祉・介護"
     }
   ]
 }

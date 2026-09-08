@@ -31,7 +31,7 @@ vite 8（rolldown）にすると `@tailwindcss/vite` がビルド不能になる
 | 品質チェック（build + 37ルール採点） | `npm run check:web` |
 | 厳格チェック（スコア後退で exit 1） | `npm run check:web:strict` |
 | カタログ検査 | `npm run check:catalog` |
-| 参照サイト収集 | `npm run archive:fetch -- --pages 3` |
+| 参照サイト収集 | `npm run archive:fetch -- --pages 5 --all-types` |
 | 次のランを開く | `npm run next:run` |
 | プレビューURL | `npm run urls` |
 | 本番デプロイ | `bash scripts/release-deploy.sh`（`docs/deploy.md`） |

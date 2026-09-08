@@ -20,6 +20,11 @@ Node 側（品質チェック）へは `python3 scripts/web-export-site-types.py
 `brand` / `ec` / `public` は収集時の分類にのみ使う観察カテゴリ。
 ローテ対象にするときは `required_pages` と `tone` を埋め、`rotation: True` にする。
 
+各種別に対応する muuuuu.org の sitetype スラッグは `gallery_sitetypes` に持たせてある
+（`corporate` = `co` + `b2b-company` など）。収集はこのスラッグの
+アーカイブページを巡回し、**そこに載っているという事実**で分類する。
+参照サイトの保有数は `site_archive/categories.json` を見ること。
+
 ## 2. グローバルナビの設計基準
 
 | 基準 | 理由 |

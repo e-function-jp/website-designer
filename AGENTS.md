@@ -71,7 +71,7 @@ docs/                          # ループ設計 / パイプライン / IA定義
 | 本番デプロイ | `bash scripts/release-deploy.sh` |
 | 厳格チェック | `npm run check:web:strict` |
 | カタログ検査 | `npm run check:catalog` |
-| 参照サイト収集 | `npm run archive:fetch -- --pages 3` |
+| 参照サイト収集 | `npm run archive:fetch -- --pages 5 --all-types` |
 | 次のラン | `npm run next:run` |
 
 ## 規約（website-designer 固有）
