@@ -73,6 +73,25 @@ ssh -p 10022 efunction02@efunction02.xsrv.jp 'bash -s' \
 ドキュメントルートを自動検出できない場合は候補を列挙して止まるので、
 `WEB_DEPLOY_DOCROOT=<絶対パス>` を付けて再実行する。
 
+## 検索エンジンへの露出（α版まで noindex）
+
+α版になるまで、本番は検索エンジンにインデックスさせない。
+本番 URL は疎通確認のために公開しているが、中身は学習ループの生成物であり、
+架空企業のサイトが検索結果に出ると実在企業と誤認されうるため。
+
+| 場所 | 内容 |
+|---|---|
+| `src/lib/seo.ts` の `NOINDEX` | `true` の間、全ページに `<meta name="robots" content="noindex, nofollow, noarchive">` を出す |
+| `public/robots.txt` | `Disallow: /` |
+
+**この2つは連動していない。** α版で解除するときは両方直すこと。
+
+1. `src/lib/seo.ts` の `NOINDEX` を `false` に
+2. `public/robots.txt` を `Allow: /` に戻し、`Sitemap:` 行を復活
+3. `npm run check:web` と `npm run check:render` を通してからデプロイ
+4. 反映後に `curl -s https://website.e-function.site/robots.txt` と
+   トップの `<meta name="robots">` が消えたことを確認
+
 ## 通常デプロイ
 
 ```bash

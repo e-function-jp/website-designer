@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import type { SiteConfig, Breadcrumb } from '../lib/site';
 import { url, breadcrumbJsonLd } from '../lib/site';
+import { ROBOTS_CONTENT } from '../lib/seo';
 import SiteHeader from '../components/site/SiteHeader.astro';
 import SiteFooter from '../components/site/SiteFooter.astro';
 import Breadcrumbs from '../components/site/SiteBreadcrumbs.astro';
@@ -68,6 +69,7 @@ const jsonLdBlocks = [...autoSchemas, ...extra].map((b) =>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {ROBOTS_CONTENT && <meta name="robots" content={ROBOTS_CONTENT} />}
     <link rel="canonical" href={canonicalURL} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />

@@ -1,4 +1,4 @@
+# α版になるまで検索エンジンにインデックスさせない。
+# 解除するときは src/lib/seo.ts の NOINDEX も false にすること（両方必要）。
 User-agent: *
-Allow: /
-
-Sitemap: https://website.e-function.site/sitemap-index.xml
+Disallow: /
