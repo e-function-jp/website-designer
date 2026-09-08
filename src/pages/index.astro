@@ -1,44 +1,61 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import type { SiteConfig } from '../lib/site';
+import {
+  collectSamples,
+  SITE_TYPES,
+  type SampleEntry,
+  type SiteTypeMeta,
+} from '../lib/sample-index';
 
 /**
- * サンプルサイトの索引。`_site.ts` を自動収集するので手動登録は不要。
- * lp-designer の samples-index.json 相当の役割を、まずはビルド時収集で持つ。
+ * サンプルサイトの索引トップ。
+ *
+ * サイト種別ごとに1枚のカードを出す。クリック先は `/sites/{type}/`
+ * （個別サンプル一覧）。`src/pages/sites/[type]/index.astro` を新設した
+ * のでカードから直接サンプルへ飛ばない。
+ *
+ * 種別ラベル / 説明は docs/site-types.json（正本: scripts/site_categories.py）
+ * から取る。ハードコードしない。
+ *
+ * 1 サイト = 複数ページ。種別カードのメタには合計ページ数も添える。
  */
-const modules = import.meta.glob<{ site: SiteConfig }>('./sites/*/*/_site.ts', { eager: true });
+const samples = collectSamples();
 
-const sites = Object.entries(modules)
-  .map(([path, mod]) => {
-    const m = path.match(/^\.\/sites\/([^/]+)\/(.+?)-(\d{8}-\d{4})\/_site\.ts$/);
+interface TypeGroup {
+  meta: SiteTypeMeta;
+  entries: SampleEntry[];
+  /** 種別内の総ページ数（参考値） */
+  totalPages: number;
+}
+
+const typeGroups: TypeGroup[] = SITE_TYPES
+  .map((t) => {
+    const entries = samples.filter((s) => s.type === t.id);
     return {
-      type: m?.[1] ?? 'unknown',
-      model: m?.[2] ?? 'unknown',
-      stamp: m?.[3] ?? '',
-      site: mod.site,
+      meta: t,
+      entries,
+      totalPages: entries.reduce((sum, s) => sum + s.pageCount, 0),
     };
   })
-  .sort((a, b) => (a.stamp < b.stamp ? 1 : -1));
+  .filter((g) => g.entries.length > 0)
+  .sort((a, b) => b.entries.length - a.entries.length);
 
-const byType = sites.reduce<Record<string, typeof sites>>((acc, s) => {
-  (acc[s.type] ??= []).push(s);
-  return acc;
-}, {});
+const totalSamples = samples.length;
+const totalPages = samples.reduce((sum, s) => sum + s.pageCount, 0);
 
-const TYPE_LABEL: Record<string, string> = {
-  corporate: 'コーポレートサイト',
-  service: 'サービス・製品サイト',
-  recruit: '採用サイト',
-  media: 'メディア',
+/** 種別の「代表サムネイル」は最も新しいサンプル（stamp 降順で先頭） */
+const repThumbFor = (g: TypeGroup) => {
+  const head = g.entries[0];
+  return `/thumbs/${head.type}/${head.slug}.jpg`;
 };
 ---
-
 <BaseLayout
   title="Website Designer"
-  description="website のデザインを日々学び、自己進化しながらサンプルサイトを生成するプロジェクト。サンプルサイト一覧とコンポーネントカタログ。"
+  description="website（多ページサイト）のデザインを参照学習で取り込み、静的品質チェックと独立採点の二系統で単調改善していくプロジェクト。サンプルサイト一覧とコンポーネントカタログ。"
+  theme="corporate"
 >
-  <header class="border-b border-base-300">
-    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center gap-6">
+  <header class="border-b border-base-300 bg-base-100">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-6">
       <span class="text-lg font-bold">Website Designer</span>
       <nav class="ml-auto flex gap-4 text-sm" aria-label="サイト内ナビゲーション">
         <a href="/" class="link link-hover font-bold" aria-current="page">サンプル</a>
@@ -47,7 +64,7 @@ const TYPE_LABEL: Record<string, string> = {
     </div>
   </header>
 
-  <main id="main" class="max-w-5xl mx-auto px-4 py-16 space-y-16">
+  <main id="main" class="max-w-6xl mx-auto px-4 py-12 md:py-16 space-y-16">
     <section class="space-y-4">
       <h1 class="text-3xl md:text-4xl font-bold">Website Designer</h1>
       <p class="text-base-content/80 leading-relaxed max-w-3xl">
@@ -56,34 +73,57 @@ const TYPE_LABEL: Record<string, string> = {
         <code class="text-sm">lp-designer</code> の姉妹プロジェクトで、
         評価の主語が「1ページのコンバージョン」ではなく「サイト全体の情報設計」である点が異なります。
       </p>
-      <p class="text-sm text-base-content/60">
-        現在 {sites.length} サイト / コンポーネントカタログは <a href="/components/" class="link">/components</a>
+      <p class="text-sm text-base-content/60 tabular-nums">
+        現在 {totalSamples} サイト / {totalPages} ページ / {typeGroups.length} 種別 /
+        コンポーネントカタログは <a href="/components/" class="link">/components</a>
       </p>
     </section>
 
-    {Object.entries(byType).map(([type, list]) => (
-      <section class="space-y-6">
-        <h2 class="text-xl font-bold border-b border-base-300 pb-2">
-          {TYPE_LABEL[type] ?? type}<span class="ml-2 text-sm font-normal text-base-content/60">{list.length}件</span>
-        </h2>
-        <ul class="grid gap-4 sm:grid-cols-2">
-          {list.map((s) => (
-            <li class="rounded-2xl border border-base-300 p-5 hover:border-primary transition-colors">
-              <a href={s.site.base} class="block space-y-2">
-                <p class="font-bold">{s.site.name}</p>
-                {s.site.tagline && <p class="text-sm text-base-content/70">{s.site.tagline}</p>}
-                <p class="text-xs text-base-content/50 tabular-nums">{s.model} / {s.stamp} / theme: {s.site.theme}</p>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
+    <section class="space-y-6">
+      <h2 class="sr-only">サイト種別</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {typeGroups.map((g) => (
+          <a
+            href={`/sites/${g.meta.id}/`}
+            class="card bg-base-100 border border-base-300 shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
+          >
+            <figure class="aspect-[16/10] overflow-hidden bg-base-200">
+              <img
+                src={repThumbFor(g)}
+                alt={`${g.meta.label}の最新サンプルのファーストビュー`}
+                width="1280"
+                height="800"
+                loading="lazy"
+                class="h-full w-full object-cover object-top"
+              />
+            </figure>
+            <div class="card-body p-5 space-y-2">
+              <h3 class="card-title text-base leading-snug">{g.meta.label}</h3>
+              <p class="text-sm text-base-content/70 line-clamp-3">{g.meta.description}</p>
+              <p class="text-xs text-base-content/50 tabular-nums pt-1">
+                {g.entries.length} サイト / {g.totalPages} ページ
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
 
-    {sites.length === 0 && (
-      <p class="text-base-content/60">
-        サンプルサイトがまだありません。<code class="text-sm">docs/learning-pipeline.md</code> の手順でランを作成してください。
-      </p>
-    )}
+      {typeGroups.length === 0 && (
+        <p class="text-base-content/60">
+          サンプルサイトがまだありません。<code class="text-sm">docs/learning-pipeline.md</code> の手順でランを作成してください。
+        </p>
+      )}
+    </section>
   </main>
+
+  <footer class="border-t border-base-300 mt-8">
+    <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-base-content/60 flex flex-wrap gap-4">
+      <span>計 {totalSamples} サイト</span>
+      <span aria-hidden="true">/</span>
+      <span>計 {totalPages} ページ</span>
+      <span aria-hidden="true">/</span>
+      <a href="/components/" class="link link-hover">コンポーネントカタログ</a>
+      <span class="ml-auto">種別: {typeGroups.map((g) => `${g.meta.label}(${g.entries.length})`).join(' / ')}</span>
+    </div>
+  </footer>
 </BaseLayout>

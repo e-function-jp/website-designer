@@ -1,0 +1,122 @@
+---
+/**
+ * サイト種別ごとのサンプル一覧: /sites/{type}/
+ *
+ * トップのカードを踏み台にして、その種別のサンプルだけを一覧する。
+ * lp-designer の /samples/{category}/index.astro 相当だが、website は
+ * 1 サンプルが複数ページなので、カードにページ数も添える。
+ *
+ * パンくずは /sites/corporate/ のような repo 自身のページにも置く
+ * （`ia-breadcrumb-missing` はサイト配下のみ検査するが、回遊と
+ * アクセシビリティのため）。
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  collectSamples,
+  SITE_TYPES,
+  industryLabel,
+  type SampleEntry,
+} from '../../../lib/sample-index';
+
+export function getStaticPaths() {
+  return SITE_TYPES.map((t) => ({ params: { type: t.id } }));
+}
+
+const { type } = Astro.params as { type: string };
+const meta = SITE_TYPES.find((t) => t.id === type);
+if (!meta) {
+  // getStaticPaths で弾かれているが、型ガードのため
+  return Astro.redirect('/404/');
+}
+
+// 新しい順（stamp 降順）。同一 stamp は model 名で安定ソート
+const items = collectSamples()
+  .filter((s) => s.type === type)
+  .sort((a, b) =>
+    (b.stamp ?? '').localeCompare(a.stamp ?? '') ||
+    (a.model ?? '').localeCompare(b.model ?? ''),
+  );
+
+const thumbFor = (s: SampleEntry) => `/thumbs/${s.type}/${s.slug}.jpg`;
+
+// 説明文は SEO meta description (40文字以上) と og:description に使い回す。
+// site-types.json の tone 抜粋では brand / ec / public 等の観察専用種別が
+// 空文字になり、seo-meta-description (medium) で落とされる。
+// `Website Designer` で始めることでブランドを明記しつつ 40文字以上を保証する。
+const description = meta.description && meta.description.length >= 20
+  ? `${meta.label}カテゴリで生成した website サンプル ${items.length}件。${meta.description}`
+  : `${meta.label}カテゴリの website サンプル一覧。Website Designer の参照学習ランによる成果物（${items.length}件）。`;
+---
+<BaseLayout
+  title={`${meta.label}のサンプル一覧 | Website Designer`}
+  description={description}
+  theme="corporate"
+>
+  <header class="border-b border-base-300 bg-base-100">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-6">
+      <a href="/" class="text-lg font-bold link link-hover">Website Designer</a>
+      <nav class="ml-auto flex gap-4 text-sm" aria-label="サイト内ナビゲーション">
+        <a href="/" class="link link-hover">サンプル</a>
+        <a href="/components/" class="link link-hover">コンポーネント</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="max-w-6xl mx-auto px-4 py-10 space-y-8">
+    <nav aria-label="パンくずリスト" class="text-sm breadcrumbs">
+      <ol class="flex flex-wrap items-center gap-2 text-base-content/70">
+        <li class="flex items-center gap-2">
+          <a href="/" class="hover:underline">ホーム</a>
+          <span aria-hidden="true" class="opacity-50">/</span>
+        </li>
+        <li>
+          <span aria-current="page" class="text-base-content font-medium">{meta.label}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <header class="space-y-2">
+      <h1 class="text-3xl md:text-4xl font-bold">{meta.label}のサンプル</h1>
+      {meta.description && <p class="text-base-content/70 max-w-3xl">{meta.description}</p>}
+      <p class="text-sm text-base-content/60 tabular-nums">{items.length} 件</p>
+    </header>
+
+    {items.length === 0 ? (
+      <p class="text-base-content/60">
+        この種別のサンプルはまだありません。<code class="text-sm">docs/learning-pipeline.md</code> の手順でランを作成してください。
+      </p>
+    ) : (
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((s) => (
+          <a
+            href={s.base}
+            class="card bg-base-100 border border-base-300 shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
+          >
+            <figure class="aspect-[16/10] overflow-hidden bg-base-200">
+              <img
+                src={thumbFor(s)}
+                alt={`${s.name} のファーストビュー`}
+                width="1280"
+                height="800"
+                loading="lazy"
+                class="h-full w-full object-cover object-top"
+              />
+            </figure>
+            <div class="card-body p-5 space-y-2">
+              <h2 class="card-title text-base leading-snug">{s.name}</h2>
+              {s.tagline && <p class="text-sm text-base-content/70 line-clamp-2">{s.tagline}</p>}
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                <span class="badge badge-sm badge-outline">{s.model}</span>
+                <span class="text-xs text-base-content/50 tabular-nums">{s.stamp}</span>
+                <span class="text-xs text-base-content/50 tabular-nums">{s.pageCount} ページ</span>
+                {s.industry && (
+                  <span class="badge badge-sm badge-ghost">{industryLabel(s.industry)}</span>
+                )}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </main>
+</BaseLayout>
