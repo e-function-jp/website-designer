@@ -84,6 +84,15 @@ const routes = (ONLY_ROUTE ? [ONLY_ROUTE] : collectRoutes(DIST))
   .filter((r) => ONLY_ROUTE || !CATALOG_ROUTES.has(r))
   .sort();
 const browser = await chromium.launch();
+// 例外や強制終了でブラウザが残ると、ランを重ねるたびに Chromium が積み上がって
+// OOM でタスクごと落ちる（実測 2026-09-09: 20 プロセス残留してメモリ枯渇）。
+// 異常終了経路でも必ず閉じる。
+const shutdown = async () => { try { await browser.close(); } catch {} try { server.close(); } catch {} };
+for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) {
+  process.once(sig, async () => { await shutdown(); process.exit(130); });
+}
+process.once('uncaughtException', async (e) => { console.error(e); await shutdown(); process.exit(1); });
+
 const results = [];
 
 for (const route of routes) {
@@ -344,8 +353,7 @@ for (const route of routes) {
   await ctx.close();
 }
 
-await browser.close();
-server.close();
+await shutdown();
 
 mkdirSync(OUT_DIR, { recursive: true });
 writeFileSync(join(OUT_DIR, 'render-check.json'),

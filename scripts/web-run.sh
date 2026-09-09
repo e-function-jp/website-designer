@@ -69,15 +69,21 @@ if should direction; then
     echo "### 4/7 Direction: ${v}"
     # ディレクションが空のまま次段へ進むと、画像生成も実装も無意味に走って
     # 時間と API を捨てる（実測 2026-09-09: 3ラン全部がこれで無駄になった）。
-    # 一時的なプロバイダ失敗は起きるので1回だけ再試行し、駄目ならランを止める。
-    if ! bash scripts/web-direction.sh "$RUN_DIR" "${v}"; then
-      echo "  ディレクション生成に失敗。60秒待って1回だけ再試行します。" >&2
-      sleep 60
-      if ! bash scripts/web-direction.sh "$RUN_DIR" "${v}"; then
-        echo "  x ディレクション(${v})が2回とも失敗しました。ランを中止します。" >&2
-        echo "    $RUN_DIR/direction-${v}.raw.log を確認してください。" >&2
-        exit 1
-      fi
+    #
+    # primary(grok/xai-oauth) のレート制限は数分続くことがあり、60秒の
+    # 一度きりの再試行では足りなかった（実測: 2回とも同じフォールバック失敗）。
+    # 待ち時間を伸ばしながら3回まで試し、それでも駄目ならランを止める。
+    ok=0
+    for wait in 0 90 240; do
+      [ "$wait" -gt 0 ] && { echo "  ${wait}秒待って再試行します。" >&2; sleep "$wait"; }
+      if bash scripts/web-direction.sh "$RUN_DIR" "${v}"; then ok=1; break; fi
+    done
+    if [ "$ok" -ne 1 ]; then
+      echo "  x ディレクション(${v})が3回とも失敗しました。ランを中止します。" >&2
+      echo "    $RUN_DIR/direction-${v}.raw.log を確認してください。" >&2
+      echo "    primary が落ちて hermes のフォールバック(opencode-go)へ流れている場合、" >&2
+      echo "    そちらは -z ワンショットでは使えないため必ず失敗します。" >&2
+      exit 1
     fi
   done
 fi

@@ -412,7 +412,15 @@ const main = async () => {
   mkdirSync(outDir, { recursive: true });
 
   const browser = await chromium.launch();
+  // 例外時もブラウザを閉じる。閉じ忘れると Chromium が積み上がり、
+  // ランを重ねたところで OOM に至る（実測 2026-09-09）。
+  const closeBrowser = async () => { try { await browser.close(); } catch {} };
+  for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) {
+    process.once(sig, async () => { await closeBrowser(); process.exit(130); });
+  }
+
   const results = [];
+  try {
 
   console.log(`==> analyze ${URL_ARG}`);
   const top = await analyzePage(browser, URL_ARG, outDir);
@@ -445,8 +453,6 @@ const main = async () => {
   // prefers-reduced-motion 尊重の検証（トップのみ）
   console.log('==> analyze (prefers-reduced-motion: reduce)');
   const reduced = await analyzePage(browser, URL_ARG, outDir, { reducedMotion: true });
-  await browser.close();
-
   // --- ページごとの保存 ---
   const pageSummaries = [];
   for (const r of results) {
@@ -547,6 +553,9 @@ const main = async () => {
   );
   console.log(`  reduced-motion 尊重: ${summary.reduced_motion.respected ? 'あり' : 'なし/不明'} (${normalReveal.total} → ${reducedReveal.total})`);
   console.log(`  検出ライブラリ: ${summary.cross_page.libs_union.join(', ') || '(なし=自前実装)'}`);
+  } finally {
+    await closeBrowser();
+  }
 };
 
 main().catch((e) => { console.error(e); process.exit(1); });
