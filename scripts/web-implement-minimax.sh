@@ -52,6 +52,12 @@ PROMPT=$(cat <<EOF
   → data-role="animation" の指示を必ず実装する（none なら何もしない）
 - ${MANIFEST_LINE}
 
+## 先に読むもの
+
+\`.claude/skills/web-implementation-tips/SKILL.md\` を**必ず先に読む**こと。
+実装前チェックリストと、過去ランで独立judgeに指摘された内容が蓄積されている。
+同じ指摘を繰り返さないために存在する。
+
 ## 必ず守る手順
 
 1. **最初に \`${OUT_DIR}/_site.ts\` を書く。** ディレクションの #site-config をそのまま写す。

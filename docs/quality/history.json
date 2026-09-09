@@ -977,5 +977,38 @@
       "/sites/corporate/": 100
     },
     "findingsCount": 1
+  },
+  {
+    "date": "2026-09-09T00:39:49.565Z",
+    "total": 100,
+    "sites": 3,
+    "pages": {
+      "/components/": 100,
+      "/": 100,
+      "/sites/corporate/a-20260903-1448/about/": 100,
+      "/sites/corporate/a-20260903-1448/company/": 100,
+      "/sites/corporate/a-20260903-1448/contact/": 100,
+      "/sites/corporate/a-20260903-1448/": 100,
+      "/sites/corporate/a-20260903-1448/news/": 100,
+      "/sites/corporate/a-20260903-1448/privacy/": 100,
+      "/sites/corporate/a-20260903-1448/recruit/": 100,
+      "/sites/corporate/a-20260903-1448/service/": 100,
+      "/sites/corporate/b-20260903-1448/about/": 100,
+      "/sites/corporate/b-20260903-1448/company/": 100,
+      "/sites/corporate/b-20260903-1448/contact/": 100,
+      "/sites/corporate/b-20260903-1448/": 100,
+      "/sites/corporate/b-20260903-1448/news/": 100,
+      "/sites/corporate/b-20260903-1448/privacy/": 100,
+      "/sites/corporate/b-20260903-1448/recruit/": 100,
+      "/sites/corporate/b-20260903-1448/service/": 100,
+      "/sites/corporate/base-20260903-1400/about/": 100,
+      "/sites/corporate/base-20260903-1400/contact/": 100,
+      "/sites/corporate/base-20260903-1400/": 98,
+      "/sites/corporate/base-20260903-1400/news/": 100,
+      "/sites/corporate/base-20260903-1400/privacy/": 100,
+      "/sites/corporate/base-20260903-1400/service/": 100,
+      "/sites/corporate/": 100
+    },
+    "findingsCount": 1
   }
 ]

@@ -12,6 +12,7 @@ vite 8（rolldown）にすると `@tailwindcss/vite` がビルド不能になる
 
 ## Skills
 - `.claude/skills/frontend-design-web/SKILL.md` — website 特化デザインスキル + 品質ルール実装の鉄則10箇条
+- `.claude/skills/web-implementation-tips/SKILL.md` — 実装時の注意点（独立judgeの採点から自動蓄積）
 
 ## 主要ディレクトリ
 - `src/pages/sites/{type}/{model}-{stamp}/` — サンプルサイト（複数ページ束）

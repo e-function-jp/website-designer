@@ -53,6 +53,10 @@ fi
 if should look; then
   echo "### 2/7 Look（codex）"
   bash scripts/web-look-analyze.sh "$RUN_DIR"
+  # Look の成果をサイト種別プレイブックへ蓄積する。
+  # ここを飛ばすと解析がラン限りで使い捨てられ、次の Direction に効かない。
+  python3 scripts/web-update-playbook.py "$RUN_DIR" "$SITE_TYPE" || \
+    echo "  (プレイブック更新に失敗。ラン自体は続行)" >&2
 fi
 
 if should brand; then
@@ -87,6 +91,9 @@ if should measure; then
   npm run check:web
   bash scripts/web-design-score.sh "$RUN_DIR" "$SITE_TYPE" "$STAMP" $MODELS || \
     echo "  (採点をスキップしました。撮影は $RUN_DIR/shots/ にあります)"
+  # 採点の指摘を実装 SKILL へ書き戻す。これが無いと同じ指摘が毎回繰り返される。
+  python3 scripts/web-update-skill-from-score.py "$RUN_DIR" || \
+    echo "  (SKILL 更新に失敗。採点結果は $RUN_DIR/design-score-data.json にあります)" >&2
 fi
 
 echo
