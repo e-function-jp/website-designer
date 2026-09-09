@@ -123,6 +123,17 @@ HTML 本文をチャットに再掲しない（長すぎて途中で切れるた
   *) echo "未知のディレクター: $DIRECTOR (grok|codex)" >&2; exit 2 ;;
 esac
 
+# hermes は primary(grok/xai-oauth) が失敗するとフォールバック
+# (minimax-m3/opencode-go) へ落ちる。そのフォールバックは -z ワンショットでは
+# 使えず 400 を返すため、ディレクションが空のまま次段へ流れる。
+# 実測(2026-09-09): 3ラン連続で走らせて grok 側が失敗し、これで全滅した。
+# 生ログにその痕跡があれば、静かに空を返さず明示的に落とす。
+if grep -q "x-opencode-session\|Error from provider (Console Go)" "$RAW_LOG" 2>/dev/null; then
+  echo "  ✗ プロバイダのフォールバックが失敗しています（primary が落ちて opencode-go へ落ちた）" >&2
+  echo "    生ログ: $RAW_LOG" >&2
+  exit 3
+fi
+
 python3 - "$RAW_LOG" "$OUT" <<'PYEOF'
 import sys, re, os
 raw_path, out_path = sys.argv[1], sys.argv[2]
