@@ -52,7 +52,16 @@ fi
 
 if should look; then
   echo "### 2/7 Look（codex）"
-  bash scripts/web-look-analyze.sh "$RUN_DIR"
+  # Look が空のまま進むと、中身の無いディレクションが生成される。
+  # 一時的なレート制限が起きるので1回だけ再試行し、駄目ならランを止める。
+  if ! bash scripts/web-look-analyze.sh "$RUN_DIR"; then
+    echo "  Look に失敗。120秒待って1回だけ再試行します。" >&2
+    sleep 120
+    if ! bash scripts/web-look-analyze.sh "$RUN_DIR"; then
+      echo "  x Look が2回とも失敗しました。ランを中止します。" >&2
+      exit 1
+    fi
+  fi
   # Look の成果をサイト種別プレイブックへ蓄積する。
   # ここを飛ばすと解析がラン限りで使い捨てられ、次の Direction に効かない。
   python3 scripts/web-update-playbook.py "$RUN_DIR" "$SITE_TYPE" || \

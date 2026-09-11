@@ -85,4 +85,20 @@ else:
 open(out_path, 'w', encoding='utf-8').write(body + '\n')
 PYEOF
 
-echo "==> 出力: $OUT ($(wc -l < "$OUT") 行)"
+# 出力の検証。Look が空でも次段（Direction）は走ってしまい、
+# 中身の無いディレクションが生成される。実測(2026-09-10/11 の cron):
+# codex が node の警告だけ出して終わり、look-analysis.md が 508 文字の
+# 警告文になったまま Direction へ流れた。
+LINES="$(wc -l < "$OUT" | tr -d ' ')"
+CHARS="$(wc -m < "$OUT" | tr -d ' ')"
+# 参照サイトの言語化は最低でも数十行になる。見出しが1つも無いのも異常。
+if [ "${CHARS:-0}" -lt 800 ] || ! grep -q '^#\{1,4\} ' "$OUT"; then
+  echo "  x Look の出力が不十分です（${LINES}行 / ${CHARS}文字、見出しなし）" >&2
+  echo "    生ログ: $RAW_LOG" >&2
+  if grep -qi "rate.limit\|429\|quota\|unauthorized\|401" "$RAW_LOG" 2>/dev/null; then
+    echo "    レート制限か認証エラーの可能性があります。" >&2
+  fi
+  exit 1
+fi
+
+echo "==> 出力: $OUT (${LINES} 行)"
