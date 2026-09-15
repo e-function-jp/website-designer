@@ -69,6 +69,17 @@ for m in "${MODELS[@]}"; do
   done
 done
 
+# 撮影が1枚も成立していないなら採点しない。
+# 存在しないURLを撮ると "not found" の白紙画像になり、judge はそれに
+# 0点を付ける。その講評が SKILL の自動更新ログへ流れ込み、学習を汚す
+# （実測 2026-09-14: 実装0件のまま採点まで進み、無意味な指摘を5件蓄積した）。
+SHOT_COUNT="$(find "$SHOTS" -name '*.jpg' 2>/dev/null | wc -l | tr -d ' ')"
+if [ "${SHOT_COUNT:-0}" -eq 0 ]; then
+  echo "  x 採点対象の撮影が0枚です。実装が出来ていない可能性があります。" >&2
+  echo "    採点をスキップします（不正な0点で SKILL を汚さないため）。" >&2
+  exit 4
+fi
+
 REF_JSON="$RUN_DIR/job.json"
 REF_CONTEXT="(job.json なし)"
 [[ -f "$REF_JSON" ]] && REF_CONTEXT="$(cat "$REF_JSON")"

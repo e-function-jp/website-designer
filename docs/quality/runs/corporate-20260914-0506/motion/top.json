@@ -1,0 +1,971 @@
+{
+  "url": "https://www.firstdigital.co.jp/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260914-0506/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260914-0506/motion/top-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://www.firstdigital.co.jp/service/",
+      "label": "Consulting Service"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/strategy/",
+      "label": "戦略検討支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/digital/",
+      "label": "デジタル施策導入支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/execution/",
+      "label": "施策実行／運用支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/pmo/",
+      "label": "PM／PMO支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/inhouse/",
+      "label": "内製化支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/partnership/",
+      "label": "パートナーシップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/",
+      "label": "サービストップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/",
+      "label": "Case"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/strategy/",
+      "label": "戦略検討支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/digital/",
+      "label": "デジタル施策導入支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/execution/",
+      "label": "施策実行／運用支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/pmo/",
+      "label": "PM／PMO支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/inhouse/",
+      "label": "内製化支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/%e6%8f%90%e6%a1%88%ef%bc%8f%e5%96%b6%e6%a5%ad%e6%94%af%e6%8f%b4/",
+      "label": "提案／営業支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/",
+      "label": "ケーストップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/ai/",
+      "label": "AI Service"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/",
+      "label": "Magazine"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/category/%e4%ba%8b%e4%be%8b%e3%83%bb%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9%e7%b4%b9%e4%bb%8b/",
+      "label": "事例・サービス紹介"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/category/column/",
+      "label": "コラム"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/category/book/",
+      "label": "書籍紹介"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/",
+      "label": "マガジントップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/about/",
+      "label": "About"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/people/",
+      "label": "People"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/recruit/",
+      "label": "Recruit"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/contact/",
+      "label": "Contact"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "slide is-play",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "slide",
+      "addedClass": [
+        "is-play"
+      ],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "slide is-play",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "slide",
+      "addedClass": [
+        "is-play"
+      ],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "bar",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "section",
+      "baseClass": "p-home-section p-home-whatWeProvide",
+      "addedClass": [
+        "is-visible"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "What we provide\n\t\t\t\n\t\t\t\n\t\t\t\tファーストデジタルでは、"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "h2",
+      "baseClass": "p-home-section__title en js-maskTitle",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "clip-path, translate, -webkit-clip-path",
+        "duration": "1.6s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "What we provide"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "section",
+      "baseClass": "p-home-section p-home-service",
+      "addedClass": [
+        "is-visible"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Service\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h2",
+      "baseClass": "p-home-section__title en js-maskTitle",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "clip-path, translate, -webkit-clip-path",
+        "duration": "1.6s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Service"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "戦略検討支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "戦略検討支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "デジタル施策導入支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "デジタル施策導入支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "施策実行／運用支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "施策実行／運用支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "PM／PMO支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "PM／PMO支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "内製化支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "内製化支援"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "パートナーシップ"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "パートナーシップ"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "section",
+      "baseClass": "p-home-section p-home-case",
+      "addedClass": [
+        "is-visible"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Case\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h2",
+      "baseClass": "p-home-section__title en js-maskTitle",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "clip-path, translate, -webkit-clip-path",
+        "duration": "1.6s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Case"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__img c-zoomimg",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "大手通信企業\n\t\t\t\t\t\t\t\t地域共創プラットフォーム構築"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__img c-zoomimg",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "大手ITソリューション企業\n\t\t\t\t\t\t\t\t新規サービス企画・構想立案"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__img c-zoomimg",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__body",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.8s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "大手通信企業\n\t\t\t\t\t\t\t\t社内データ活用における営業力強化戦略策定"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "item__img c-zoomimg",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, clip-path, -webkit-clip-path",
+        "duration": "0.8s",
+        "delay": "0.4s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "text"
+      },
+      "timing": {
+        "duration": 23200,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "translate",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "text"
+      },
+      "timing": {
+        "duration": 23200,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "translate",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "text"
+      },
+      "timing": {
+        "duration": 23200,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "translate",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": null,
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": "present",
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "FirstDigital | Offering the Best DX Solutions",
+    "h1": null,
+    "totalHeight": 9750,
+    "viewportsTall": 10.8,
+    "sectionCount": 18,
+    "imgCount": 135,
+    "videoCount": 8,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 8850,
+  "css": {
+    "keyframes": 4,
+    "transitionRules": 58,
+    "animationRules": 1,
+    "keyframeNames": [
+      "arw_r",
+      "scrollText"
+    ]
+  },
+  "header": null,
+  "probedBefore": 2033,
+  "revealSummary": {
+    "total": 86,
+    "scrollLinkedCount": 7,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 1,
+      "zoom": 1,
+      "clip-wipe": 65,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 19
+    },
+    "dominantKind": "clip-wipe",
+    "designedRevealCount": 86,
+    "durationMs": {
+      "min": 300,
+      "median": 800,
+      "max": 1600
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.33, 0, 0.2, 1)"
+    ]
+  }
+}

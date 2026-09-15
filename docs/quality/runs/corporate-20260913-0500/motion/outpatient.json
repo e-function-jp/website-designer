@@ -1,0 +1,446 @@
+{
+  "url": "https://www.saiseikai.gr.jp/outpatient/#reserve",
+  "slug": "outpatient",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260913-0500/motion/outpatient-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260913-0500/motion/outpatient-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://www.saiseikai.gr.jp/outpatient/#reserve",
+      "label": "予約について"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/outpatient/#lead",
+      "label": "初診紹介予約"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/outpatient/attending/",
+      "label": "外来担当医表"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/about/floormap/#access",
+      "label": "交通アクセス"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/news/",
+      "label": "お知らせ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/outpatient/#emergency",
+      "label": "救急受診"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/",
+      "label": "診療科・部門"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/syoukaki_naika/",
+      "label": "消化器内科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/junkanki_naika/",
+      "label": "循環器内科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/jinzou_naika/",
+      "label": "腎臓内科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/kokyuuki_naika/",
+      "label": "呼吸器内科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/shinkei_naika/",
+      "label": "神経内科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/tounyoubyou-naibunpitsu_naika/",
+      "label": "糖尿病・内分泌内科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/syuyou_naika/",
+      "label": "腫瘍内科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/syounika/",
+      "label": "小児科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/geka/",
+      "label": "外科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/kekkan_geka/",
+      "label": "血管外科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/kokyuuki_geka/",
+      "label": "呼吸器外科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/ganka/",
+      "label": "眼科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/jibiinkouka/",
+      "label": "耳鼻咽喉科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/sanhujinka/",
+      "label": "産婦人科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/seikei_geka/",
+      "label": "整形外科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/nousinkei_geka/",
+      "label": "脳神経外科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/hinyoukika/",
+      "label": "泌尿器科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/hihuka/",
+      "label": "皮膚科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/masuika/",
+      "label": "麻酔科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/housyasenka_chiryo/",
+      "label": "放射線治療科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/housyasenka_shindan/",
+      "label": "放射線診断科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/byourisindan/",
+      "label": "病理診断科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/shinzou_geka/",
+      "label": "心臓外科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/ds/",
+      "label": "日帰り手術センター"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/dialysis/",
+      "label": "透析センター"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/outpatient_chemotherapy/",
+      "label": "外来化学療法室"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/icu/",
+      "label": "ICU"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/nicu/",
+      "label": "新生児集中治療室"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/maternity/",
+      "label": "マタニティ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/pharmacy/",
+      "label": "薬剤部"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/radiologic_technology/",
+      "label": "放射線技術科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/clinical_laboratory/",
+      "label": "臨床検査科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/rehabilitation/",
+      "label": "リハビリテーション科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/nutrition/",
+      "label": "栄養科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/clinical_engineering/",
+      "label": "臨床工学科"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/cancer-support/",
+      "label": "がん相談支援センター"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/iryoufukushijigyouka/",
+      "label": "医療福祉事業課"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/zaitaku-houkan/",
+      "label": "在宅支援室・訪問看護ステーション"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/medical_safety_management/",
+      "label": "医療安全管理室"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/infection_control/",
+      "label": "感染管理室"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/acp/",
+      "label": "アドバンス・ケア・プランニング"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/department/volunteer/",
+      "label": "ボランティア"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/outpatient/",
+      "label": "外来受診の方"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/outpatient/attending/",
+      "label": "外来担当医表"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/hospitalization/",
+      "label": "入院・面会の方"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/about/",
+      "label": "当院について"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/about/philosophy/",
+      "label": "理念・済生会について・病院概要"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/about/feature/",
+      "label": "当院の特徴"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/about/activities/",
+      "label": "当院の取り組み"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/about/numeral/",
+      "label": "数字で見る済生会川口"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/about/floormap/",
+      "label": "交通アクセス・フロアマップ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/community/",
+      "label": "地域医療連携"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/community/#medical",
+      "label": "医療関係の方へ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/community/people/",
+      "label": "地域の皆さんへ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/community/pharmacy/",
+      "label": "保険薬局の方へ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/community/paper/",
+      "label": "広報誌「済生かわぐち」"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/community/trials/",
+      "label": "治験について"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/kenshin/",
+      "label": "健診センター"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/kenshin/course/",
+      "label": "コース紹介"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/kenshin/reserve/",
+      "label": "ご予約・健診の流れ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/contact/",
+      "label": "お問い合わせ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/",
+      "label": ""
+    },
+    {
+      "href": "https://www.instagram.com/saiseikai.kawaguchi/",
+      "label": ""
+    },
+    {
+      "href": "https://lin.ee/inyKb7J",
+      "label": ""
+    },
+    {
+      "href": "https://www.youtube.com/@saiseikai-kawaguchi",
+      "label": ""
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/tender/",
+      "label": "入札公告"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/contact/",
+      "label": "お問い合わせ"
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/recruit/",
+      "label": ""
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/recruit/doctor/",
+      "label": ""
+    },
+    {
+      "href": "https://www.saiseikai.gr.jp/recruit/nurse/",
+      "label": ""
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "",
+      "addedClass": [
+        "header--scroll"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "box-shadow, -webkit-box-shadow",
+        "duration": "0.25s, 0.25s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "ご利用案内\n              \n                \n  "
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": "3.12.5",
+    "ScrollTrigger": "present",
+    "lenis": null,
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "外来受診の方 | 埼玉県済生会川口総合病院",
+    "h1": "外来受診の方",
+    "totalHeight": 15817,
+    "viewportsTall": 17.6,
+    "sectionCount": 10,
+    "imgCount": 25,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": [
+    {
+      "trigger": "div",
+      "triggerClass": "",
+      "pin": false,
+      "scrub": false,
+      "start": "() => `${$win.height() / 2} top`",
+      "end": ""
+    },
+    {
+      "trigger": "div",
+      "triggerClass": "",
+      "pin": false,
+      "scrub": false,
+      "start": "top top-=200",
+      "end": ""
+    },
+    {
+      "trigger": "footer",
+      "triggerClass": "",
+      "pin": false,
+      "scrub": false,
+      "start": "() => {\n          const vw = $win.innerWidth();\n          const fz = is_pc ? Math.max(Math.min(floor((vw / 1300) * 10, 3), floor((1600 / 1300) * 10, 3)), 10) : (vw / 375) * 10;\n\n          return `top+=${$pagetopA.height() / 2} bottom-=${fz * pagetopBottom}`;\n        }",
+      "end": ""
+    }
+  ],
+  "scrollYAfter": 14917,
+  "css": {
+    "keyframes": 4,
+    "transitionRules": 72,
+    "animationRules": 2,
+    "keyframeNames": [
+      "splide-loading",
+      "swipe-ani"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 110,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": ""
+    },
+    "scrolled": {
+      "height": 110,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "header--scroll"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": true
+  },
+  "probedBefore": 2050,
+  "revealSummary": {
+    "total": 0,
+    "scrollLinkedCount": 1,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade",
+    "designedRevealCount": 0,
+    "durationMs": null,
+    "easings": []
+  }
+}

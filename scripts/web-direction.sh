@@ -73,6 +73,22 @@ print(json.dumps({k: d.get(k) for k in ('direction_hints','cross_page','reduced_
 ")"
 fi
 
+# 部品カタログ（pattern_archive）。サイト全体の参照とは別テーブルで、
+# ローテ対象ではなく Direction が設計時に引く実例集。
+PATTERN_CATALOG="(部品カタログ未収集。python3 pattern_archive/fetch_pattern_archive.py で収集)"
+if [[ -f "pattern_archive/summary.json" ]]; then
+  PATTERN_CATALOG="$(python3 -c "
+import json
+d = json.load(open('pattern_archive/summary.json'))
+lab = {'cta': 'CTA', 'navbar': 'グローバルナビ', 'mobile': 'モバイル表現'}
+for k, items in (d.get('samples') or {}).items():
+    print(f\"### {lab.get(k, k)}（{d['counts'][k]} 件収集）\")
+    for it in items[:10]:
+        print(f\"- {it['title']}  {it['url']}\")
+    print()
+")"
+fi
+
 PROMPT="$(cat "$TEMPLATE")"
 PROMPT="${PROMPT//\{\{VARIANT_HINT\}\}/$VARIANT_HINT}"
 PROMPT="${PROMPT//\{\{SITE_TYPE\}\}/$SITE_TYPE}"
@@ -84,6 +100,7 @@ PROMPT="${PROMPT//\{\{REQUIRED_PAGES\}\}/$REQUIRED}"
 PROMPT="${PROMPT//\{\{RECOMMENDED_PAGES\}\}/$RECOMMENDED}"
 PROMPT="${PROMPT//\{\{SITE_BASE\}\}/$SITE_BASE}"
 PROMPT="${PROMPT//\{\{LOOK_ANALYSIS\}\}/$LOOK_ANALYSIS}"
+PROMPT="${PROMPT//\{\{PATTERN_CATALOG\}\}/$PATTERN_CATALOG}"
 PROMPT="${PROMPT//\{\{MOTION_SUMMARY\}\}/$MOTION_SUMMARY}"
 
 REF_IMG=""
@@ -115,6 +132,19 @@ HTML 本文をチャットに再掲しない（長すぎて途中で切れるた
 次のファイルを読んで実際の見た目を確認すること（リポジトリ ${ROOT} 内）:
 - ${REF_IMG}"
     hermes -z "$GROK_PROMPT" -m "$DIRECTOR_MODEL" --provider "$DIRECTOR_PROVIDER" > "$RAW_LOG" 2>&1 || true
+
+    # grok(xai-oauth) は大きいプロンプトで失敗し、hermes が壊れたフォールバック
+    # (opencode-go) へ落ちる。実測(2026-09-10〜14): 7,935文字までは通るが、
+    # ディレクションの実プロンプト(約15,000文字)では毎回 400 になった。
+    # ここで諦めるとランが止まるので、画像も大きいプロンプトも扱える codex へ
+    # 自動的に切り替える。ディレクターの指定より「ランが進むこと」を優先する。
+    if grep -q "x-opencode-session\|Error from provider (Console Go)" "$RAW_LOG" 2>/dev/null \
+       || [ ! -s "$OUT" ]; then
+      echo "  grok が失敗したため codex へ切り替えて再生成します" >&2
+      IMG_ARGS=(); [[ -n "$REF_IMG" ]] && IMG_ARGS+=(-i "$REF_IMG")
+      echo "$PROMPT" | codex exec --skip-git-repo-check ${IMG_ARGS[@]+"${IMG_ARGS[@]}"} > "$RAW_LOG" 2>&1 || true
+      echo "  (codex で再生成しました)" >&2
+    fi
     ;;
   codex)
     IMG_ARGS=(); [[ -n "$REF_IMG" ]] && IMG_ARGS+=(-i "$REF_IMG")
@@ -185,11 +215,22 @@ import re as _re
 images_sec = _re.search(r'<section id="images">([\s\S]*?)</section>', html)
 declared = set(_re.findall(r'data-placement="([^"]+)"', images_sec.group(1) if images_sec else ''))
 referenced = set()
+# placement は「{ページ}:{用途}」の形。左辺が CSS プロパティ名でも同じ形に
+# なるので、素朴に word:word を拾うと font-size:11px や
+# grid-template-columns:1fr まで「未宣言の画像」と誤検出する（実測）。
+# ページ側の接頭辞を direction 自身の data-page から作って限定する。
+page_slugs = {'top'}
+for pg in _re.findall(r'data-page="/([^/"]*)', html):
+    page_slugs.add(pg or 'top')
+# 右辺は ASCII の英数字とハイフンのみ。日本語が続く場合（「top:hero を再利用」）は
+# そこで切れるように \w ではなく明示的な文字集合を使う。
+placement_re = _re.compile(r'\b(' + '|'.join(_re.escape(x) for x in sorted(page_slugs)) + r'):([a-z0-9][a-z0-9-]*)')
+
 # data-role の中身は <code> 等で入れ子になることがある。[^<]* だと空で拾ってしまう
 # （実測でこれに引っかかり、欠落を検出できていなかった）。閉じタグまで取ってから剥がす。
 for body in _re.findall(r'data-role="image"[^>]*>([\s\S]*?)</(?:p|td|li|div|span)>', html):
     text = _re.sub(r'<[^>]+>', ' ', body)
-    referenced |= set(_re.findall(r'\b([a-z][\w-]*:[\w-]+)\b', text))
+    referenced |= {f'{a}:{b}' for a, b in placement_re.findall(text)}
 missing_images = sorted(referenced - declared - {'none'})
 
 problems = []

@@ -294,7 +294,109 @@
       "provider": "xai",
       "source_url": "https://files-cdn.x.ai/wWqekoV5QYGx2XRQ11OkWQ/file_26e28325-ab12-4895-890b-daa21a39c44f.png",
       "created_at": "2026-09-07T04:59:01.325Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260914-0653/img-a-01.jpg",
+      "category": "corporate",
+      "tags": [
+        "歯科",
+        "受付",
+        "院内",
+        "自然光",
+        "横位置"
+      ],
+      "prompt": "架空の日本の地域歯科医院の受付を写した高品質な実写調建築写真。淡いオーク材の受付カウンター、オフホワイトの塗り壁、奥に柔らかい自然光が入る通路。受付を中央やや左、奥行きを右側に配置。水平垂直を整え、広角の歪みを抑える。白と木の自然な色調、くすんだ青を小物に少量。人物なし、ロゴなし、読める文字なし。横長2.3対1で使える余白と、中央を4対3で切り出せる構図。参照画像の院内配置を複製しない。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/41K8fm2DQDey6LmhMQv3wA/file_e3aa78fa-b80f-4fad-9116-03159e01930b.png",
+      "created_at": "2026-09-14T04:16:49.319Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260914-0653/img-a-02.jpg",
+      "category": "corporate",
+      "tags": [
+        "歯科",
+        "相談",
+        "成人",
+        "対話",
+        "人物"
+      ],
+      "prompt": "架空の日本の歯科相談風景を写した実写調写真。成人の相談者と歯科スタッフが明るい相談机を挟み、穏やかに話をしている。人物は架空の成人で、上半身と自然な手元を含む中距離。青灰色の清潔な診療着、相談者は落ち着いた日常着。背景は白壁と淡い木部、左から自然光。カメラ目線や誇張した笑顔を避ける。肩書きや名札の文字なし、処置なし、歯の接写なし。縦3対4、中央を横4対3に切り出しても対話が伝わる構図。",
+      "aspect": "portrait",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/iYeB76TTTKGq39fjrrflGQ/file_a64c079c-c063-4fd3-ae68-3abe9bd4c6ee.png",
+      "created_at": "2026-09-14T04:16:57.298Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260914-0653/img-a-03.jpg",
+      "category": "corporate",
+      "tags": [
+        "歯科",
+        "小児",
+        "保護者",
+        "相談",
+        "横位置"
+      ],
+      "prompt": "架空の日本の歯科医院で、保護者と小学生程度の子どもがスタッフの説明を聞いている実写調写真。全員着衣、日常の相談場面、治療行為なし。親子を中央左、スタッフを右に配置した中距離、目線の高さから撮影。子どもに誇張した笑顔を要求しない自然な表情。白い壁、淡い木製テーブル、くすんだ青の診療着。柔らかい昼光、低彩度で清潔な色。読める資料や文字、医療ブランド、ロゴなし。横4対3、顔や手が切れない構図。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/WMWQl9j3SJqKVQWfTON__A/file_2f0fb47a-7c37-4737-be15-169f422358d3.png",
+      "created_at": "2026-09-14T04:17:09.353Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260914-0653/img-a-04.jpg",
+      "category": "corporate",
+      "tags": [
+        "歯科",
+        "診療室",
+        "空間",
+        "白",
+        "横位置"
+      ],
+      "prompt": "架空の日本の歯科診療室を写した実写調の室内写真。白から薄いグレーの歯科用チェアを左寄り、右に整頓された一般的な診療用ワゴン、背景に淡い木部と白壁。柔らかな日中の光で、清潔だが無機質すぎない印象。人物なし、特定メーカーの製品形状やロゴを強調しない。特殊な検査設備を置かない。水平垂直の整った横長構図。横2.8対1と横4対3の双方で使用できるよう主役を中央寄りにまとめる。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/5wBKoP-tR5-VGg0Ju3fzBw/file_10f3bdc9-72c9-4e2f-827e-a517bd2441fb.png",
+      "created_at": "2026-09-14T04:17:18.065Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260914-0653/img-a-05.jpg",
+      "category": "corporate",
+      "tags": [
+        "歯科",
+        "待合",
+        "木材",
+        "院内",
+        "横位置"
+      ],
+      "prompt": "架空の小規模な日本の歯科医院の待合を写した実写調写真。淡い木のベンチ、控えめな青灰色のクッション、白い壁、窓から入る柔らかな自然光。右奥へ自然な奥行き、室内の水平垂直を保つ。整いすぎた高級ホテル風にしない。人、受付看板、院名、文字、ブランドなし。低彩度で自然な白と木の色。横4対3、中央に主要なベンチが収まる構図。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/gestvC2aQMWjZjKZ7EVZQw/file_3a082573-f599-4d7e-9a89-914d633f4e11.png",
+      "created_at": "2026-09-14T04:17:25.799Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260914-0653/img-a-06.jpg",
+      "category": "corporate",
+      "tags": [
+        "歯科",
+        "予防",
+        "歯ブラシ",
+        "ケア用品",
+        "静物"
+      ],
+      "prompt": "歯科の予防メインテナンスを連想させる実写調静物写真。白い清潔なトレーに無地の歯ブラシ2本と無地のフロス容器を自然に配置。背景は淡いベージュ、青灰色の小さなタオルを端に置く。左上からの柔らかな自然光、控えめな影、過度な光沢なし。ブランド、読める文字、パッケージ、薬剤、医療効果の表現なし。正方形、中央を主役とし、周囲に15パーセント程度の余白。",
+      "aspect": "square",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "https://files-cdn.x.ai/4KAXzHygSw2iKI8FsxjU4Q/file_f433ac4d-90c8-4f80-9dc5-2701256b3ba7.png",
+      "created_at": "2026-09-14T04:17:32.829Z"
     }
   ],
-  "updated_at": "2026-09-07T04:59:01.327Z"
+  "updated_at": "2026-09-14T04:17:32.831Z"
 }

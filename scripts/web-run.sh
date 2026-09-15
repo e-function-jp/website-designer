@@ -108,7 +108,12 @@ fi
 if should implement; then
   for v in $MODELS; do
     echo "### 6/7 実装: ${v}（minimax-m3）"
-    bash scripts/web-implement-minimax.sh "$RUN_DIR" "$v"
+    # 実装が空のまま採点へ進むと "not found" 画像に 0 点が付き、
+    # その講評が SKILL へ蓄積されて学習を汚す（実測 2026-09-14）。
+    if ! bash scripts/web-implement-minimax.sh "$RUN_DIR" "${v}"; then
+      echo "  x 実装(${v})に失敗しました。ランを中止します。" >&2
+      exit 1
+    fi
   done
 fi
 

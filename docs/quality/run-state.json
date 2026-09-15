@@ -7,6 +7,46 @@
       "reference_title": "EZOBOLIC",
       "weight": 0.0,
       "at": "2026-09-03T14:48:03+09:00"
+    },
+    {
+      "run_id": "corporate-20260912-0500",
+      "site_type": "corporate",
+      "industry": "ad",
+      "reference_id": "muuuuu-23508",
+      "reference_title": "OASIZ",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-12T05:00:15+09:00"
+    },
+    {
+      "run_id": "corporate-20260913-0500",
+      "site_type": "corporate",
+      "industry": "hospital",
+      "reference_id": "muuuuu-22458",
+      "reference_title": "埼玉県済生会川口総合病院",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-13T05:00:09+09:00"
+    },
+    {
+      "run_id": "corporate-20260914-0506",
+      "site_type": "corporate",
+      "industry": "ad",
+      "reference_id": "muuuuu-22872",
+      "reference_title": "FirstDigital",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-14T05:06:42+09:00"
+    },
+    {
+      "run_id": "corporate-20260915-0500",
+      "site_type": "corporate",
+      "industry": "ad",
+      "reference_id": "muuuuu-23252",
+      "reference_title": "GENEROSITY inc.",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-15T05:00:33+09:00"
     }
   ]
 }

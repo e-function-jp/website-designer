@@ -1,0 +1,129 @@
+{
+  "reference_url": "https://oasiz.org/",
+  "analyzed_at": "2026-09-11T20:01:29.784Z",
+  "pages": [
+    {
+      "url": "https://oasiz.org/",
+      "slug": "top",
+      "title": "OASIZ",
+      "viewportsTall": 14.4,
+      "revealCount": 43,
+      "dominantKind": "fade-up",
+      "durationMs": {
+        "min": 500,
+        "median": 2500,
+        "max": 2500
+      },
+      "easings": [
+        "ease",
+        "cubic-bezier(0.23, 1, 0.32, 1)",
+        "cubic-bezier(0.075, 0.82, 0.165, 1)"
+      ],
+      "scrollLinkedCount": 11,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 2,
+      "keyframes": 16,
+      "header": {
+        "position": "static",
+        "atTop": {
+          "height": 58,
+          "top": 40,
+          "bg": "rgba(218, 218, 218, 0.5)",
+          "cls": "flex bg-[#DADADA80] px-32 py-14 text-14 font-bold items-center rounded-[4rem] header-menu transition-opacity duration-300 max-md:hidden text-black opacity-0"
+        },
+        "scrolled": {
+          "height": 58,
+          "top": 40,
+          "bg": "rgba(218, 218, 218, 0.5)",
+          "cls": "flex bg-[#DADADA80] px-32 py-14 text-14 font-bold items-center rounded-[4rem] header-menu transition-opacity duration-300 max-md:hidden text-black"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": true
+      },
+      "libs": {
+        "lenis": "present"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 43
+    },
+    "reveal_count_spread": 0,
+    "motion_consistent": true,
+    "libs_union": [
+      "lenis"
+    ],
+    "header_behavior": {
+      "position": "static",
+      "atTop": {
+        "height": 58,
+        "top": 40,
+        "bg": "rgba(218, 218, 218, 0.5)",
+        "cls": "flex bg-[#DADADA80] px-32 py-14 text-14 font-bold items-center rounded-[4rem] header-menu transition-opacity duration-300 max-md:hidden text-black opacity-0"
+      },
+      "scrolled": {
+        "height": 58,
+        "top": 40,
+        "bg": "rgba(218, 218, 218, 0.5)",
+        "cls": "flex bg-[#DADADA80] px-32 py-14 text-14 font-bold items-center rounded-[4rem] header-menu transition-opacity duration-300 max-md:hidden text-black"
+      },
+      "shrinks": false,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": true
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 43,
+    "reveal_count_reduced": 43,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": [
+      {
+        "tag": "script",
+        "className": "",
+        "displayNow": "none",
+        "opacityNow": "1"
+      }
+    ]
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade-up",
+    "scroll_linked_count": 11,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": {
+      "min": 500,
+      "median": 2500,
+      "max": 2500
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.23, 1, 0.32, 1)",
+      "cubic-bezier(0.075, 0.82, 0.165, 1)"
+    ],
+    "reveal_kinds": {
+      "fade": 11,
+      "fade-up": 19,
+      "fade-side": 0,
+      "zoom": 2,
+      "clip-wipe": 1,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 10
+    },
+    "page_length_viewports": [
+      14.4
+    ]
+  }
+}

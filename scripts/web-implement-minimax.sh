@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-# 実装（Fix段）を minimax-m3（hermes / opencode-go）の実セッションで行う。
+# 実装（Fix段）を minimax-m3 の実セッションで行う。
+#
+# 呼び出しは opencode CLI を**直接**使う。hermes 経由にしていたが、
+# hermes の opencode-go プロバイダは x-opencode-session ヘッダを送らず、
+# 必ず HTTP 400 になる（実測 2026-09-15。--pass-session-id でも解消しない）。
+# opencode CLI 自体は正常で、直接叩けば応答もファイル作成もできる。
+# hermes はモデルルーティングのために挟んでいただけなので、外して直接呼ぶ。
 #
 # オーケストレータ自身が別モデルの成果物を書いてしまうと 2 案比較が成立しない
 # （lp-designer で meta の session_id が同一になっていた実績がある）ため、
@@ -18,8 +24,9 @@ cd "$ROOT"
 RUN_DIR="${1:?run_dir required}"
 VARIANT="${2:?variant required (a|b)}"
 
-MODEL="${WEB_DESIGNER_IMPL_MODEL:-minimax-m3}"
-PROVIDER="${WEB_DESIGNER_IMPL_PROVIDER:-opencode-go}"
+# opencode の -m は "provider/model" 形式
+MODEL="${WEB_DESIGNER_IMPL_MODEL:-opencode-go/minimax-m3}"
+IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-opencode}"
 
 JOB="$RUN_DIR/job.json"
 [[ -f "$JOB" ]] || { echo "job.json がありません: $JOB" >&2; exit 1; }
@@ -129,8 +136,9 @@ PROMPT=$(cat <<EOF
 EOF
 )
 
-echo "==> hermes (${MODEL}/${PROVIDER}) で実装中（時間がかかります）"
-hermes -z "$PROMPT" -m "$MODEL" --provider "$PROVIDER" > "$LOG" 2>&1 || true
+echo "==> ${IMPL_CMD} (${MODEL}) で実装中（時間がかかります）"
+# --agent build … ファイル作成・編集ができるエージェント
+"$IMPL_CMD" run --agent build -m "$MODEL" "$PROMPT" > "$LOG" 2>&1 || true
 
 python3 - "$META_OUT" "$SITE_TYPE" "$VARIANT" "$STAMP" "$MODEL" "$PROVIDER" "$OUT_DIR" <<'PYEOF'
 import json, sys, pathlib, datetime
@@ -143,7 +151,7 @@ pathlib.Path(meta_out).write_text(json.dumps({
     "stamp": stamp,
     "route": f"/sites/{site_type}/{variant}-{stamp}/",
     "model": model,
-    "provider": provider,
+    "provider": "opencode-cli",
     "pages_created": pages,
     "has_site_config": (d / "_site.ts").exists(),
     "tokens": {"note": "hermes -z oneshot; per-session token rows not captured"},
@@ -152,6 +160,19 @@ pathlib.Path(meta_out).write_text(json.dumps({
 print(f"  作成ページ: {len(pages)} 件 {pages}")
 print(f"  _site.ts: {'あり' if (d / '_site.ts').exists() else '**なし（要修正）**'}")
 PYEOF
+
+# 成果物の検証。ここを飛ばすと、ページが 1 枚も出来ていないのに採点段へ進み、
+# 存在しないURLを撮影した "not found" 画像を judge に渡して 0 点が返る。
+# さらにその無意味な講評が SKILL の自動更新ログへ蓄積される（実測 2026-09-14）。
+PAGES="$(find "$OUT_DIR" -name '*.astro' 2>/dev/null | wc -l | tr -d ' ')"
+if [ ! -f "$OUT_DIR/_site.ts" ] || [ "${PAGES:-0}" -lt 3 ]; then
+  echo "  x 実装が不十分です（_site.ts=$([ -f "$OUT_DIR/_site.ts" ] && echo あり || echo なし) / ページ ${PAGES} 枚）" >&2
+  echo "    生ログ: $LOG" >&2
+  if grep -q "x-opencode-session\|Error from provider" "$LOG" 2>/dev/null; then
+    echo "    プロバイダ経路のエラーが出ています。" >&2
+  fi
+  exit 1
+fi
 
 echo "==> 生ログ: $LOG"
 echo "==> meta: $META_OUT"

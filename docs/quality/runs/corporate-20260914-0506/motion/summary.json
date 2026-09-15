@@ -1,0 +1,138 @@
+{
+  "reference_url": "https://www.firstdigital.co.jp/",
+  "analyzed_at": "2026-09-13T20:07:30.231Z",
+  "pages": [
+    {
+      "url": "https://www.firstdigital.co.jp/",
+      "slug": "top",
+      "title": "FirstDigital | Offering the Best DX Solutions",
+      "viewportsTall": 10.8,
+      "revealCount": 86,
+      "dominantKind": "clip-wipe",
+      "durationMs": {
+        "min": 300,
+        "median": 800,
+        "max": 1600
+      },
+      "easings": [
+        "ease",
+        "cubic-bezier(0.33, 0, 0.2, 1)"
+      ],
+      "scrollLinkedCount": 7,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 3,
+      "keyframes": 4,
+      "header": null,
+      "libs": {
+        "swiper": "present"
+      }
+    },
+    {
+      "url": "https://www.firstdigital.co.jp/service/",
+      "slug": "service",
+      "title": "Consulting Service | FirstDigital",
+      "viewportsTall": 4.7,
+      "revealCount": 2,
+      "dominantKind": "clip-wipe",
+      "durationMs": {
+        "min": 800,
+        "median": 800,
+        "max": 800
+      },
+      "easings": [
+        "ease",
+        "cubic-bezier(0.33, 0, 0.2, 1)"
+      ],
+      "scrollLinkedCount": 35,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 4,
+      "header": null,
+      "libs": {}
+    },
+    {
+      "url": "https://www.firstdigital.co.jp/service/strategy/",
+      "slug": "service-strategy",
+      "title": "戦略検討支援 | Consulting Service | FirstDigital",
+      "viewportsTall": 4.4,
+      "revealCount": 2,
+      "dominantKind": "clip-wipe",
+      "durationMs": {
+        "min": 800,
+        "median": 800,
+        "max": 800
+      },
+      "easings": [
+        "ease",
+        "cubic-bezier(0.33, 0, 0.2, 1)"
+      ],
+      "scrollLinkedCount": 35,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 4,
+      "header": null,
+      "libs": {}
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 86,
+      "service": 2,
+      "service-strategy": 2
+    },
+    "reveal_count_spread": 84,
+    "motion_consistent": false,
+    "libs_union": [
+      "swiper"
+    ],
+    "header_behavior": null
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 86,
+    "reveal_count_reduced": 86,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "clip-wipe",
+    "scroll_linked_count": 7,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": {
+      "min": 300,
+      "median": 800,
+      "max": 1600
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.33, 0, 0.2, 1)"
+    ],
+    "reveal_kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 1,
+      "zoom": 1,
+      "clip-wipe": 65,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 19
+    },
+    "page_length_viewports": [
+      10.8,
+      4.7,
+      4.4
+    ]
+  }
+}

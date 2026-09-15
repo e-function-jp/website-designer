@@ -1,0 +1,118 @@
+{
+  "run_id": "corporate-20260915-0500",
+  "site_type": "corporate",
+  "site_type_label": "コーポレートサイト",
+  "industry": "ad",
+  "industry_label": "制作・開発・企画・マーケティング・コンサル",
+  "stamp": "20260915-0500",
+  "tone_hint": "信頼・堅実。彩度を抑えたコーポレートカラー1色＋アクセント1色、写真は事業/人物の実写、数値による実績提示、問い合わせ導線は全ページ到達可能",
+  "required_pages": [
+    "/",
+    "/about/",
+    "/service/",
+    "/news/",
+    "/contact/"
+  ],
+  "recommended_pages": [
+    "/company/",
+    "/recruit/",
+    "/privacy/"
+  ],
+  "selection": {
+    "method": "deficit = target_share - own_share; target = 0.5*uniform + 0.5*gallery_occupancy; argmax excluding last 2 types; industry axis: deficit = uniform - own_share (min_refs=5, recent_exclude=1)",
+    "weights": {
+      "corporate": 0.0
+    },
+    "industry_weights": {
+      "ad": 0.1667,
+      "company": -0.8333,
+      "hospital": 0.1667,
+      "building": 0.1667,
+      "art": 0.1667,
+      "technology": 0.1667
+    },
+    "industry_skipped": {
+      "finance": 2,
+      "healthcare": 3,
+      "welfare-care": 2,
+      "education-service": 1,
+      "car": 1,
+      "food": 2,
+      "interior": 4,
+      "group": 4,
+      "restaurant": 2,
+      "human-resources": 1,
+      "fashion": 1,
+      "fashionall": 1,
+      "watch": 1,
+      "publication": 2,
+      "wedding": 1
+    },
+    "industry_fallback": false,
+    "recent_types": [
+      "corporate",
+      "corporate"
+    ],
+    "recent_industries": [
+      {
+        "site_type": "corporate",
+        "industry": "hospital"
+      }
+    ],
+    "forced": false
+  },
+  "models": [
+    "a",
+    "b"
+  ],
+  "reference": {
+    "id": "muuuuu-23252",
+    "title": "GENEROSITY inc.",
+    "url": "https://generosity.co.jp/",
+    "detail_url": "",
+    "gallery": "muuuuu",
+    "gallery_industry": "ad",
+    "industry": "ad",
+    "qualification": {
+      "ok": true,
+      "internal_pages": 5,
+      "paths": [
+        "/business",
+        "/company",
+        "/contact",
+        "/news",
+        "/works-top"
+      ],
+      "reason": ""
+    },
+    "rejected_candidates": []
+  },
+  "paths": {
+    "repo": "/Users/estaff-agent/Workspace/website-designer",
+    "run_dir": "docs/quality/runs/corporate-20260915-0500",
+    "shared_public": "public/sites/corporate/_shared/20260915-0500",
+    "sites": {
+      "a": "src/pages/sites/corporate/a-20260915-0500/",
+      "b": "src/pages/sites/corporate/b-20260915-0500/"
+    },
+    "routes": {
+      "a": "/sites/corporate/a-20260915-0500/",
+      "b": "/sites/corporate/b-20260915-0500/"
+    },
+    "pipeline_doc": "docs/learning-pipeline.md"
+  },
+  "urls": {
+    "preview_base": "http://127.0.0.1:4321",
+    "report_base": "http://127.0.0.1:8766"
+  },
+  "workflow": [
+    "Look: 参照サイトを実際に開き、トップ+下層2ページをキャプチャして構造を言語化する",
+    "Direction: direction.html に IA(サイトマップ)・各ページの構成・トーン・コンポーネント選定を確定",
+    "Fix: 2案を paths.sites に実装。_site.ts を必ず置き、`industry` も書く（全ページ SiteLayout を使う）",
+    "npm run check:web",
+    "bash scripts/web-design-score.sh <run_dir> <site_type> <stamp> <models...>",
+    "Extract: 両案から再利用ブロックを src/components/ に切り出す（arch-component-reuse が消えるまで）",
+    "npm run check:web:strict && npm run check:catalog"
+  ],
+  "started_at": "2026-09-15T05:00:33+09:00"
+}

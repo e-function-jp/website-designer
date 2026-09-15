@@ -1,0 +1,161 @@
+{
+  "fetched_at": "2026-09-14T12:12:12+09:00",
+  "counts": {
+    "mobile": 30,
+    "navbar": 13,
+    "cta": 36
+  },
+  "note": "Direction 段が部品カタログとして参照する。ローテ対象ではない。",
+  "samples": {
+    "mobile": [
+      {
+        "title": "Water Works Project",
+        "url": "https://loadmo.re/posts/water-works-project"
+      },
+      {
+        "title": "Too Busy Foundation",
+        "url": "https://loadmo.re/posts/we-are-too-busy-foundation"
+      },
+      {
+        "title": "Sabrina Zeltner",
+        "url": "https://loadmo.re/posts/sabrina-zeltner"
+      },
+      {
+        "title": "Ntgent",
+        "url": "https://loadmo.re/posts/ntgent"
+      },
+      {
+        "title": "Fast Cash Money",
+        "url": "https://loadmo.re/posts/fast-cash-money"
+      },
+      {
+        "title": "Christie Wu",
+        "url": "https://loadmo.re/posts/christie-wu"
+      },
+      {
+        "title": "Kris Ludi",
+        "url": "https://loadmo.re/posts/kris-ludi"
+      },
+      {
+        "title": "In Common With",
+        "url": "https://loadmo.re/posts/in-common-with"
+      },
+      {
+        "title": "Glitch Mcconnell",
+        "url": "https://loadmo.re/posts/glitch-mcconnell"
+      },
+      {
+        "title": "Fuck Investments",
+        "url": "https://loadmo.re/posts/fuck-investments"
+      },
+      {
+        "title": "Blink",
+        "url": "https://loadmo.re/posts/blink"
+      },
+      {
+        "title": "Axis Mundi",
+        "url": "https://loadmo.re/posts/axis-mundi"
+      }
+    ],
+    "navbar": [
+      {
+        "title": "supaste.com",
+        "url": "https://www.supaste.com/"
+      },
+      {
+        "title": "chesapeakeplywood.com",
+        "url": "https://chesapeakeplywood.com/"
+      },
+      {
+        "title": "velt.dev",
+        "url": "https://velt.dev/"
+      },
+      {
+        "title": "clonix.framer.website",
+        "url": "https://clonix.framer.website/"
+      },
+      {
+        "title": "aveon.framer.website",
+        "url": "https://aveon.framer.website/"
+      },
+      {
+        "title": "orchid.ai",
+        "url": "https://orchid.ai/"
+      },
+      {
+        "title": "cloudflare.com",
+        "url": "https://www.cloudflare.com/"
+      },
+      {
+        "title": "consensys.io",
+        "url": "https://consensys.io/"
+      },
+      {
+        "title": "bigdirty.agency",
+        "url": "https://www.bigdirty.agency/"
+      },
+      {
+        "title": "hosierbrown.framer.website",
+        "url": "https://hosierbrown.framer.website/"
+      },
+      {
+        "title": "browserbase.com",
+        "url": "https://www.browserbase.com/"
+      },
+      {
+        "title": "escape.cafe",
+        "url": "https://escape.cafe/fr?ref=navbar.gallery"
+      }
+    ],
+    "cta": [
+      {
+        "title": "iconstica.com",
+        "url": "https://www.iconstica.com/"
+      },
+      {
+        "title": "webestica.com",
+        "url": "https://www.webestica.com/bootstrap-templates"
+      },
+      {
+        "title": "hello-world.studio",
+        "url": "https://www.hello-world.studio/"
+      },
+      {
+        "title": "svz.io",
+        "url": "https://www.svz.io/"
+      },
+      {
+        "title": "hiartem.com",
+        "url": "https://hiartem.com/"
+      },
+      {
+        "title": "counterpublic.org",
+        "url": "https://counterpublic.org/"
+      },
+      {
+        "title": "mojostudio.co",
+        "url": "https://mojostudio.co/"
+      },
+      {
+        "title": "greenboard.com",
+        "url": "https://www.greenboard.com/"
+      },
+      {
+        "title": "andreigorskikh.digital",
+        "url": "https://andreigorskikh.digital/"
+      },
+      {
+        "title": "ally.co",
+        "url": "https://ally.co/"
+      },
+      {
+        "title": "fora.so",
+        "url": "https://fora.so/"
+      },
+      {
+        "title": "withbobbin.com",
+        "url": "https://withbobbin.com/"
+      }
+    ]
+  }
+}

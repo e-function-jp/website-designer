@@ -1,0 +1,190 @@
+{
+  "reference_url": "https://www.saiseikai.gr.jp/",
+  "analyzed_at": "2026-09-12T20:01:09.285Z",
+  "pages": [
+    {
+      "url": "https://www.saiseikai.gr.jp/",
+      "slug": "top",
+      "title": "埼玉県済生会川口総合病院",
+      "viewportsTall": 7.6,
+      "revealCount": 0,
+      "dominantKind": "fade",
+      "durationMs": null,
+      "easings": [],
+      "scrollLinkedCount": 6,
+      "scrollTriggerCount": 3,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 1,
+      "keyframes": 6,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 110,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": ""
+        },
+        "scrolled": {
+          "height": 110,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header--scroll"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": true
+      },
+      "libs": {
+        "gsap": "3.12.5",
+        "ScrollTrigger": "present"
+      }
+    },
+    {
+      "url": "https://www.saiseikai.gr.jp/outpatient/#reserve",
+      "slug": "outpatient",
+      "title": "外来受診の方 | 埼玉県済生会川口総合病院",
+      "viewportsTall": 17.6,
+      "revealCount": 0,
+      "dominantKind": "fade",
+      "durationMs": null,
+      "easings": [],
+      "scrollLinkedCount": 1,
+      "scrollTriggerCount": 3,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 4,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 110,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": ""
+        },
+        "scrolled": {
+          "height": 110,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header--scroll"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": true
+      },
+      "libs": {
+        "gsap": "3.12.5",
+        "ScrollTrigger": "present"
+      }
+    },
+    {
+      "url": "https://www.saiseikai.gr.jp/outpatient/attending/",
+      "slug": "outpatient-attending",
+      "title": "外来担当医表 | 埼玉県済生会川口総合病院",
+      "viewportsTall": 5.1,
+      "revealCount": 0,
+      "dominantKind": "fade",
+      "durationMs": null,
+      "easings": [],
+      "scrollLinkedCount": 1,
+      "scrollTriggerCount": 3,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 6,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 110,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": ""
+        },
+        "scrolled": {
+          "height": 110,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header--scroll"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": true
+      },
+      "libs": {
+        "gsap": "3.12.5",
+        "ScrollTrigger": "present"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 0,
+      "outpatient": 0,
+      "outpatient-attending": 0
+    },
+    "reveal_count_spread": 0,
+    "motion_consistent": true,
+    "libs_union": [
+      "gsap",
+      "ScrollTrigger"
+    ],
+    "header_behavior": {
+      "position": "fixed",
+      "atTop": {
+        "height": 110,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": ""
+      },
+      "scrolled": {
+        "height": 110,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "header--scroll"
+      },
+      "shrinks": false,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": true
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 0,
+    "reveal_count_reduced": 0,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade",
+    "scroll_linked_count": 6,
+    "scroll_trigger_summary": {
+      "total": 3,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": null,
+    "easings": [],
+    "reveal_kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "page_length_viewports": [
+      7.6,
+      17.6,
+      5.1
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "reference_url": "https://generosity.co.jp/",
+  "analyzed_at": "2026-09-14T20:01:35.628Z",
+  "pages": [
+    {
+      "url": "https://generosity.co.jp/",
+      "slug": "top",
+      "title": "GENEROSITY | Brand Experience Studio",
+      "viewportsTall": 11,
+      "revealCount": 186,
+      "dominantKind": "fade-up",
+      "durationMs": {
+        "min": 100,
+        "median": 1000,
+        "max": 1000
+      },
+      "easings": [
+        "ease",
+        "ease-in-out",
+        "ease-out"
+      ],
+      "scrollLinkedCount": 1,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 8,
+      "keyframes": 587,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 140,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "main-header"
+        },
+        "scrolled": {
+          "height": 140,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "main-header"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {}
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 186
+    },
+    "reveal_count_spread": 0,
+    "motion_consistent": true,
+    "libs_union": [],
+    "header_behavior": {
+      "position": "fixed",
+      "atTop": {
+        "height": 140,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "main-header"
+      },
+      "scrolled": {
+        "height": 140,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "main-header"
+      },
+      "shrinks": false,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": false
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 186,
+    "reveal_count_reduced": 186,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade-up",
+    "scroll_linked_count": 1,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": {
+      "min": 100,
+      "median": 1000,
+      "max": 1000
+    },
+    "easings": [
+      "ease",
+      "ease-in-out",
+      "ease-out"
+    ],
+    "reveal_kinds": {
+      "fade": 17,
+      "fade-up": 155,
+      "fade-side": 10,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 2,
+      "other": 2
+    },
+    "page_length_viewports": [
+      11
+    ]
+  }
+}

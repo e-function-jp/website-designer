@@ -1,0 +1,886 @@
+{
+  "url": "https://oasiz.org/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260912-0500/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260912-0500/motion/top-full.jpg"
+  },
+  "navLinks": [],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "flex bg-[#DADADA80] px-32 py-14 text-14 font-bold items-center rounded-[4rem] opacity-0 header-menu transition-opacity d",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.3s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "textSnippet": "ABOUTABOUT\n        \n        \n        \n  "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "w-40 h-40 bg-black rounded-full items-center justify-center max-md:flex hidden opacity-0 transition-opacity duration-300",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.3s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "w-93 header-logo invisible fixed left-60 top-55 z-[100] text-white max-md:left-20 max-md:top-30",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "svg",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "hover-circle rounded-full fixed top-0 left-0 text-16 font-medium scale-0 w-120 h-120 bg-green text-black flex items-cent",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 0, 647.483, 382.177)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 0, 659.962, 389.976)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "w-[1236rem] mx-auto \n        pt-[50vh]\n        mt-[20vh]\n         bg-[#00000000] text-white grid grid-cols-[auto_1fr] ga",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "SNS×縦型動画を起点に\n              爆発的な認知と\n     "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js-num-inview block -mb-5 max-md:-mb-4 will-change-transform",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "75"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js-num-inview block -mb-5 max-md:-mb-4 will-change-transform",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "55"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "mx-auto w-[90%] aspect-square rounded-full relative about-illust",
+      "addedClass": [
+        "inview"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "売上から逆算した戦略設計\n                           "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "opacity-0 about-illust-circle about-illust-circle-3 abs-cover border aspect-square border-gray6 rounded-full",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "opacity-0 about-illust-circle about-illust-circle-2 absolute bottom-[4.7%] left-[4.7%] w-[69%] aspect-square border bord",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "abs-cover opacity-0 about-illust-circle about-illust-circle-1 border border-gray6 rounded-full",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "w-[51%] mx-auto about-illust-logo opacity-0 ",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "text-15 lh12 mt-20 about-illust-desc opacity-0 max-md:text-12 lh11 max-md:mt-14",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "売上から逆算した戦略設計\n                           "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "absolute left-[20%] top-[35%] about-illust-item opacity-0 ",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "各SNS媒体\n                                 "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "absolute left-[69%] top-[45%] about-illust-item opacity-0 ",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "コマース\n                                   "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "absolute left-[26%] top-[11%] about-illust-item opacity-0 ",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "屋外広告 / イベント\n                            "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "absolute left-[62%] top-[21%] about-illust-item opacity-0 ",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "TVCM\n                          \n        "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "absolute left-[78%] top-[67%] about-illust-item opacity-0 ",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "リテール\n                                   "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h2",
+      "baseClass": "text-180 text-center lh1 text-green font-semibold top-pj-head js-watch-switch maskIn max-md:text-62",
+      "addedClass": [
+        "inview"
+      ],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 72)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.23, 1, 0.32, 1)"
+      },
+      "textSnippet": "PROJECTS"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 198)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.23, 1, 0.32, 1)"
+      },
+      "textSnippet": "PROJECTS"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "a",
+      "baseClass": "aspect-[1400/800]  relative flex items-end top-pj js-hover-circle max-md:aspect-auto max-md:flex-col",
+      "addedClass": [],
+      "changedProps": [
+        "transform",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ネスレ日本株式会社                \n              "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "relative z-[1] top-pj-video max-md:hidden",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "relative top-pj-video z-[2] max-md:h-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-[20%] ml-[2%]"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 500,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.075, 0.82, 0.165, 1)"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-[20%] ml-[2%]"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 500,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.075, 0.82, 0.165, 1)"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [
+    {
+      "tag": "script",
+      "className": "",
+      "displayNow": "none",
+      "opacityNow": "1"
+    }
+  ],
+  "meta": {
+    "title": "OASIZ",
+    "h1": null,
+    "totalHeight": 12977,
+    "viewportsTall": 14.4,
+    "sectionCount": 0,
+    "imgCount": 52,
+    "videoCount": 15,
+    "canvasCount": 1
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 12077,
+  "css": {
+    "keyframes": 16,
+    "transitionRules": 24,
+    "animationRules": 4,
+    "keyframeNames": [
+      "maniStamp",
+      "prdTextAnimation",
+      "clipTpRight",
+      "clipTpLeft",
+      "clipToBottom",
+      "clipTpRightScale",
+      "arrowBottom",
+      "scaleUp",
+      "scaleUpLg",
+      "shineAnimation",
+      "shineAnimationSmall",
+      "maniStampRev",
+      "storeBound",
+      "flowX",
+      "splide-loading"
+    ]
+  },
+  "header": {
+    "position": "static",
+    "atTop": {
+      "height": 58,
+      "top": 40,
+      "bg": "rgba(218, 218, 218, 0.5)",
+      "cls": "flex bg-[#DADADA80] px-32 py-14 text-14 font-bold items-center rounded-[4rem] header-menu transition-opacity duration-300 max-md:hidden text-black opacity-0"
+    },
+    "scrolled": {
+      "height": 58,
+      "top": 40,
+      "bg": "rgba(218, 218, 218, 0.5)",
+      "cls": "flex bg-[#DADADA80] px-32 py-14 text-14 font-bold items-center rounded-[4rem] header-menu transition-opacity duration-300 max-md:hidden text-black"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": true
+  },
+  "probedBefore": 1259,
+  "revealSummary": {
+    "total": 43,
+    "scrollLinkedCount": 11,
+    "kinds": {
+      "fade": 11,
+      "fade-up": 19,
+      "fade-side": 0,
+      "zoom": 2,
+      "clip-wipe": 1,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 10
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 43,
+    "durationMs": {
+      "min": 500,
+      "median": 2500,
+      "max": 2500
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.23, 1, 0.32, 1)",
+      "cubic-bezier(0.075, 0.82, 0.165, 1)"
+    ]
+  }
+}

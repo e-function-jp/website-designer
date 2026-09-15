@@ -1,21 +1,21 @@
 {
-  "fetched_at": "2026-09-08T17:00:31+09:00",
+  "fetched_at": "2026-09-14T05:00:13+09:00",
   "source": "muuuuu",
   "method": "sitetype taxonomy crawl",
-  "total": 981,
+  "total": 985,
   "site_type": {
     "media": 241,
     "recruit": 159,
+    "corporate": 137,
     "ec": 136,
-    "corporate": 135,
     "public": 122,
     "brand": 107,
-    "service": 81
+    "service": 83
   },
   "industry": {
     "art": 73,
-    "technology": 72,
-    "ad": 69,
+    "technology": 73,
+    "ad": 71,
     "food": 59,
     "building": 58,
     "area": 55,
@@ -27,9 +27,9 @@
     "group": 32,
     "life": 31,
     "education-service": 30,
+    "trip": 29,
     "entertainment": 29,
     "finance": 29,
-    "trip": 28,
     "fashion": 21,
     "sports": 20,
     "publication": 18,

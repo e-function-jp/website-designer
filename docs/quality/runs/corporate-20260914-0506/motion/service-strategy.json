@@ -1,0 +1,903 @@
+{
+  "url": "https://www.firstdigital.co.jp/service/strategy/",
+  "slug": "service-strategy",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260914-0506/motion/service-strategy-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260914-0506/motion/service-strategy-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://www.firstdigital.co.jp/service/",
+      "label": "Consulting Service"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/strategy/",
+      "label": "戦略検討支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/digital/",
+      "label": "デジタル施策導入支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/execution/",
+      "label": "施策実行／運用支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/pmo/",
+      "label": "PM／PMO支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/inhouse/",
+      "label": "内製化支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/partnership/",
+      "label": "パートナーシップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/service/",
+      "label": "サービストップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/",
+      "label": "Case"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/strategy/",
+      "label": "戦略検討支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/digital/",
+      "label": "デジタル施策導入支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/execution/",
+      "label": "施策実行／運用支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/pmo/",
+      "label": "PM／PMO支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/inhouse/",
+      "label": "内製化支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/category/%e6%8f%90%e6%a1%88%ef%bc%8f%e5%96%b6%e6%a5%ad%e6%94%af%e6%8f%b4/",
+      "label": "提案／営業支援"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/case/",
+      "label": "ケーストップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/ai/",
+      "label": "AI Service"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/",
+      "label": "Magazine"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/category/%e4%ba%8b%e4%be%8b%e3%83%bb%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9%e7%b4%b9%e4%bb%8b/",
+      "label": "事例・サービス紹介"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/category/column/",
+      "label": "コラム"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/category/book/",
+      "label": "書籍紹介"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/magazine/",
+      "label": "マガジントップ"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/about/",
+      "label": "About"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/people/",
+      "label": "People"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/recruit/",
+      "label": "Recruit"
+    },
+    {
+      "href": "https://www.firstdigital.co.jp/contact/",
+      "label": "Contact"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "header",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-color, box-shadow, opacity, visibility",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Consulting Service\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t戦略検討"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "header__logo",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "img",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "nav",
+      "baseClass": "header__nav",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Consulting Service\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t戦略検討"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "ul",
+      "baseClass": "header__nav__list",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Consulting Service\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t戦略検討"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "is-current",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Consulting Service\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t戦略検討"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Consulting Service"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "c-lineText",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-size",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Consulting Service"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "icon",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Case\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t戦略検討支援\n\t\t\t\t\t\tデジタル施"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Case"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "c-lineText",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-size",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Case"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "icon",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "AI Service"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "AI Service"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "c-lineText",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-size",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "AI Service"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Magazine\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t事例・サービス紹介\n\t\t\t\t"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Magazine"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "c-lineText",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-size",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Magazine"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "icon",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "About"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "About"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "c-lineText",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-size",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "About"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "People"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "People"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "c-lineText",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-size",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "People"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "li",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Recruit"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "color, border-color, background-color, opacity",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Recruit"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "c-lineText",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-size",
+        "duration": "0.4s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.33, 0, 0.2, 1)"
+      },
+      "textSnippet": "Recruit"
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": null,
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "戦略検討支援 | Consulting Service | FirstDigital",
+    "h1": "戦略検討支援",
+    "totalHeight": 3981,
+    "viewportsTall": 4.4,
+    "sectionCount": 0,
+    "imgCount": 12,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 3081,
+  "css": {
+    "keyframes": 4,
+    "transitionRules": 58,
+    "animationRules": 1,
+    "keyframeNames": [
+      "arw_r",
+      "scrollText"
+    ]
+  },
+  "header": null,
+  "probedBefore": 455,
+  "revealSummary": {
+    "total": 2,
+    "scrollLinkedCount": 35,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 1,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 1
+    },
+    "dominantKind": "clip-wipe",
+    "designedRevealCount": 2,
+    "durationMs": {
+      "min": 800,
+      "median": 800,
+      "max": 800
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.33, 0, 0.2, 1)"
+    ]
+  }
+}
