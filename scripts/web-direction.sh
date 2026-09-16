@@ -185,6 +185,8 @@ if codex_pos:
     body = text[last + len('codex'):end].strip()
 else:
     body = text.strip()
+# codex のフック（SessionStart/Stop 等）の進行行が回答の直後に挟まるので除く。
+body = re.sub(r'^hook: .*\n?', '', body, flags=re.M).strip()
 m = re.search(r'```html\s*\n(.*?)\n```', body, re.S)
 if m:
     body = m.group(1).strip()

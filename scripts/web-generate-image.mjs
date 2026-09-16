@@ -25,7 +25,7 @@
  *   --force          DBに一致があっても生成する
  */
 import { execFileSync } from 'node:child_process';
-import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, statSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
@@ -151,7 +151,9 @@ p = mod.XAIImageGenProvider()
 if not p.is_available():
     print(json.dumps({"success": False, "error": "xai image gen not available"})); sys.exit(1)
 r = p.generate(${JSON.stringify(prompt)}, aspect_ratio=${JSON.stringify(aspect)}${quality ? ', model="grok-imagine-image-quality"' : ''})
-print(json.dumps({k: v for k, v in r.items() if k not in ("image", "image_base64")}))
+# image は public_url か、公開URLが取れなかったときのローカル保存パスのどちらか。
+# base64 本体だけは巨大なので落とす。
+print(json.dumps({k: v for k, v in r.items() if k != "image_base64"}))
 `;
 
 let genRes;
@@ -165,15 +167,32 @@ try {
   process.exit(1);
 }
 
-if (!genRes.success || !genRes.public_url) {
+if (!genRes.success) {
   console.error('生成失敗:', JSON.stringify(genRes));
   process.exit(1);
 }
 
-// CDN URL で返るのでローカルへ保存する（外部依存を残さない）
+// 取り出し口は2つある。public_url が最優先だが、これは xai 側のチーム上限
+// （active public URL 1000件）に当たると発行されず public_url_error だけが返る。
+// 実測 2026-09-15/16: 生成自体は成功しているのに、この分岐だけで 20枚全滅した。
+// プラグインは公開URLが無いとき b64 をローカルへ保存して image にパスを返すので、
+// そちらを第二の入口として使う。どちらも無いときだけ失敗とする。
 const outAbs = join(ROOT, out);
 mkdirSync(dirname(outAbs), { recursive: true });
-execFileSync('curl', ['-sL', genRes.public_url, '-o', outAbs]);
+const localSrc = typeof genRes.image === 'string' && !/^https?:\/\//.test(genRes.image)
+  ? genRes.image : null;
+if (genRes.public_url) {
+  execFileSync('curl', ['-sL', genRes.public_url, '-o', outAbs]);
+} else if (localSrc && existsSync(localSrc)) {
+  copyFileSync(localSrc, outAbs);
+} else {
+  console.error('生成失敗（画像の取り出し口が無い）:', JSON.stringify(genRes));
+  process.exit(1);
+}
+if (!existsSync(outAbs) || statSync(outAbs).size < 1024) {
+  console.error('保存に失敗（サイズ異常）:', out, JSON.stringify(genRes));
+  process.exit(1);
+}
 
 db.images.push({
   path: relative(ROOT, outAbs),
@@ -183,7 +202,7 @@ db.images.push({
   aspect,
   model: genRes.model ?? 'grok-imagine-image',
   provider: 'xai',
-  source_url: genRes.public_url,
+  source_url: genRes.public_url ?? genRes.image ?? null,
   created_at: new Date().toISOString(),
 });
 saveDb(db);

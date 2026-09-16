@@ -140,9 +140,9 @@ echo "==> ${IMPL_CMD} (${MODEL}) で実装中（時間がかかります）"
 # --agent build … ファイル作成・編集ができるエージェント
 "$IMPL_CMD" run --agent build -m "$MODEL" "$PROMPT" > "$LOG" 2>&1 || true
 
-python3 - "$META_OUT" "$SITE_TYPE" "$VARIANT" "$STAMP" "$MODEL" "$PROVIDER" "$OUT_DIR" <<'PYEOF'
+python3 - "$META_OUT" "$SITE_TYPE" "$VARIANT" "$STAMP" "$MODEL" "$OUT_DIR" <<'PYEOF'
 import json, sys, pathlib, datetime
-meta_out, site_type, variant, stamp, model, provider, out_dir = sys.argv[1:8]
+meta_out, site_type, variant, stamp, model, out_dir = sys.argv[1:7]
 d = pathlib.Path(out_dir)
 pages = sorted(str(p.relative_to(d)) for p in d.rglob('*.astro')) if d.exists() else []
 pathlib.Path(meta_out).write_text(json.dumps({
@@ -154,7 +154,7 @@ pathlib.Path(meta_out).write_text(json.dumps({
     "provider": "opencode-cli",
     "pages_created": pages,
     "has_site_config": (d / "_site.ts").exists(),
-    "tokens": {"note": "hermes -z oneshot; per-session token rows not captured"},
+    "tokens": {"note": "opencode run; per-session token rows not captured"},
     "implemented_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
 }, ensure_ascii=False, indent=2), encoding="utf-8")
 print(f"  作成ページ: {len(pages)} 件 {pages}")

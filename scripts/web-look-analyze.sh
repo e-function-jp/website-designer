@@ -82,6 +82,8 @@ if codex_pos:
     body = text[last + len('codex'):end].strip()
 else:
     body = text.strip()
+# codex のフック（SessionStart/Stop 等）の進行行が回答の直後に挟まるので除く。
+body = re.sub(r'^hook: .*\n?', '', body, flags=re.M).strip()
 open(out_path, 'w', encoding='utf-8').write(body + '\n')
 PYEOF
 
