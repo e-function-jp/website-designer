@@ -1,0 +1,211 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Card from '../../../../../components/data-display/Card.astro';
+import Stat from '../../../../../components/data-display/Stat.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import ClinicPageIntro from '../../../../../components/sections/ClinicPageIntro.astro';
+import ClinicRelatedLinks from '../../../../../components/sections/ClinicRelatedLinks.astro';
+import ClinicPageEnd from '../../../../../components/sections/ClinicPageEnd.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const SHARED = '/sites/corporate/_shared/20260915-1151';
+
+const intro = {
+  heading: '当院について',
+  description: '歯並びと噛み合わせの相談から、治療中・治療後のフォローまで。あおば矯正歯科クリニックの診療姿勢と、地域の通院を支える医院の体制についてご紹介します。',
+  image: { src: `${SHARED}/img-a-08.jpg`, alt: '矯正歯科クリニックの入口。明るいオーク材の扉枠とガラスの入口' },
+};
+
+const philosophyImage = { src: `${SHARED}/img-a-02.jpg`, alt: '初診相談でスタッフが相談者の話を聞いている' };
+
+const stats = [
+  { title: '矯正相談 累計', value: '4,800件' },
+  { title: '小児矯正 年間', value: '320症例' },
+  { title: '通院継続率', value: '92%' },
+];
+
+const space = [
+  { src: `${SHARED}/img-a-04.jpg`, alt: '診療の場面', caption: '診療の場面' },
+  { src: `${SHARED}/img-a-01.jpg`, alt: '受付の場面', caption: '受付の場面' },
+  { src: `${SHARED}/img-a-08.jpg`, alt: '来院の場面', caption: '来院の場面' },
+];
+
+const profile = [
+  { k: '商号', v: 'あおば矯正歯科クリニック' },
+  { k: 'よみ', v: 'あおばきょうせいしかくりにっく' },
+  { k: '所在地', v: '静岡県藤枝市' },
+  { k: '設立', v: '2011年' },
+  { k: '従業員数', v: '14名' },
+  { k: '事業内容', v: '小児から成人までの歯列矯正と噛み合わせ治療を中心に、マウスピース矯正・ワイヤー矯正・保定管理を提供する地域密着型の矯正専門医院。初診相談から治療計画・経過フォローまで一貫して行う。' },
+];
+
+const relatedLinks = [
+  { label: '初診相談の流れ', href: '/new-patients/', description: '相談から治療計画までの進み方を確認できます。' },
+  { label: '大人の矯正', href: '/service/#adult', description: '見た目や噛み合わせが気になる方へ。' },
+];
+---
+<SiteLayout
+  site={site}
+  title="当院について"
+  description="あおば矯正歯科クリニックの診療姿勢と医院の体制。静岡県藤枝市の矯正専門医院として、初診相談から治療計画・保定管理まで一貫して地域の通院を支えています。"
+  path="/about/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '当院について' }]}
+>
+  <ClinicPageIntro heading={intro.heading} description={intro.description} image={intro.image} />
+
+  <!-- 1. 対話から始める診療姿勢 -->
+  <section class="bg-base-100">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-[45%_55%] gap-8 lg:gap-20 items-start">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <figure>
+          <img
+            src={philosophyImage.src}
+            alt={philosophyImage.alt}
+            width="1200"
+            height="1500"
+            loading="lazy"
+            class="w-full aspect-[4/5] object-cover rounded-lg"
+          />
+        </figure>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="気になることを、治療計画の出発点に。" align="left" />
+        <div class="space-y-5 text-sm lg:text-base leading-loose text-base-content/85">
+          <p>矯正を考える理由は、年齢や生活の中で変わります。お子様の様の歯並びを心配する保護者の方も、見た目や噛み合わせを改善したい成人の方も、まずは気になっていることをお聞かせください。</p>
+          <p>当院は歯列矯正と噛み合わせ治療を中心に、初診相談から治療計画・経過フォローまで一貫して行います。</p>
+        </div>
+        <div class="mt-10 border-t border-base-300">
+          <Steps>
+            <li class="step step-primary">相談</li>
+            <li class="step step-primary">計画</li>
+            <li class="step step-primary">フォロー</li>
+          </Steps>
+          <dl class="mt-6 space-y-5">
+            <div class="grid lg:grid-cols-[120px_1fr] gap-3 lg:gap-6 border-b border-base-300 pb-5">
+              <dt class="font-bold text-primary">相談</dt>
+              <dd class="text-sm lg:text-base leading-loose">治療への希望や疑問を、最初の対話で整理します。</dd>
+            </div>
+            <div class="grid lg:grid-cols-[120px_1fr] gap-3 lg:gap-6 border-b border-base-300 pb-5">
+              <dt class="font-bold text-primary">計画</dt>
+              <dd class="text-sm lg:text-base leading-loose">相談した内容を踏まえ、治療について確認していきます。</dd>
+            </div>
+            <div class="grid lg:grid-cols-[120px_1fr] gap-3 lg:gap-6">
+              <dt class="font-bold text-primary">フォロー</dt>
+              <dd class="text-sm lg:text-base leading-loose">治療中の経過と、保定管理までを継続して見ていきます。</dd>
+            </div>
+          </dl>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 2. 支援体制と数値 -->
+  <section class="bg-primary text-primary-content">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-[55%_45%] gap-8 lg:gap-16 items-center">
+        <div>
+          <SectionTitle title="地域の矯正相談を、14名の体制で。" align="left" />
+          <div class="space-y-5 text-sm lg:text-base leading-loose text-primary-content/90">
+            <p>2011年の設立以来、静岡県藤枝市で、小児から成人までの歯列矯正と噛み合わせ治療を中心に取り組む矯正専門医院です。相談の入口から治療後の管理までを一つの医院で継続して支えることを、診療の軸にしています。</p>
+            <p>マウスピース矯正・ワイヤー矯正・保定管理を提供し、治療計画と経過の確認を一貫して行います。</p>
+          </div>
+        </div>
+        <figure>
+          <img
+            src={`${SHARED}/img-a-03.jpg`}
+            alt="矯正歯科クリニックのスタッフ"
+            width="1200"
+            height="800"
+            loading="lazy"
+            class="w-full aspect-[3/2] object-cover rounded-lg opacity-95"
+          />
+          <figcaption class="mt-3 text-xs text-primary-content/80">スタッフのイメージ</figcaption>
+        </figure>
+      </div>
+
+      <dl class="mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 border-t border-primary-content/20 pt-12">
+        {stats.map((s) => (
+          <Stat title={s.title} value={s.value} desc="" class="text-center sm:text-left text-primary-content" />
+        ))}
+      </dl>
+      <p class="mt-6 text-xs lg:text-sm leading-loose text-primary-content/80">
+        架空の医院設定に基づく数値です。集計期間・算出条件は設定されていません。治療結果を保証する数値ではありません。
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. 通院の場面を写真で伝える -->
+  <section class="bg-base-100">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="相談から通院までを、身近に感じられるように。" align="left" />
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <div class="space-y-5 text-sm lg:text-base leading-loose text-base-content/85 mb-10 lg:mb-14 max-w-[760px]">
+          <p>初めて矯正を相談するときは、治療のことだけでなく、どのような場所で話をするのかも気になるものです。このページでは、相談・診療・来院の場面をイメージ写真で紹介しています。</p>
+          <p>実際の設備や院内仕様を示す写真ではありません。診療の進み方は『はじめての方へ』、当院で扱う治療は『矯正治療のご案内』から確認できます。</p>
+        </div>
+      </ScrollReveal>
+      <figure class="mb-8 lg:mb-12">
+        <img
+          src={`${SHARED}/img-a-04.jpg`}
+          alt="診療の場面"
+          width="1500"
+          height="1000"
+          loading="lazy"
+          class="w-full aspect-[3/2] object-cover rounded-lg"
+        />
+      </figure>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+        {space.slice(1).map((p) => (
+          <li>
+            <figure>
+              <img
+                src={p.src}
+                alt={p.alt}
+                width="800"
+                height="600"
+                loading="lazy"
+                class="w-full aspect-[3/2] object-cover rounded-lg"
+              />
+              <figcaption class="mt-3 text-sm font-medium text-base-content/85">{p.caption}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. 医院概要（id="profile"） -->
+  <section id="profile" class="bg-secondary scroll-mt-[100px]">
+    <div class="max-w-[900px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <SectionTitle title="医院概要" align="left" />
+      <Table>
+        <tbody>
+          {profile.map((row) => (
+            <tr>
+              <th class="w-32 lg:w-44 whitespace-nowrap align-top text-primary font-bold text-sm">{row.k}</th>
+              <td class="text-sm lg:text-base leading-relaxed">{row.v}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  </section>
+
+  <!-- 5. 次に確認すること -->
+  <section class="bg-base-100">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <SectionTitle title="次に確認すること" align="left" />
+      <ClinicRelatedLinks site={site} links={relatedLinks} />
+    </div>
+  </section>
+
+  <ClinicPageEnd site={site} />
+  <PageTopButton />
+</SiteLayout>

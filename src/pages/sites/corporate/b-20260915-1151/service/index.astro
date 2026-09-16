@@ -1,0 +1,296 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import ClinicPageIntro from '../../../../../components/sections/ClinicPageIntro.astro';
+import AobaConsultationBand from "../../../../../components/sections/AobaConsultationBand.astro";
+import AobaClinicInfo from "../../../../../components/sections/AobaClinicInfo.astro";
+import ClinicRelatedLinks from '../../../../../components/sections/ClinicRelatedLinks.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260915-1151';
+
+const introImage = { src: `${SHARED}/img-b-03.jpg`, alt: '診療室のイメージ' };
+
+const childrenImage = { src: `${SHARED}/img-b-05.jpg`, alt: '待合のイメージ' };
+const adultsImage = { src: `${SHARED}/img-b-01.jpg`, alt: '相談風景のイメージ' };
+const modelImage = { src: `${SHARED}/img-b-04.jpg`, alt: '歯列模型のイメージ' };
+
+const methods = [
+  {
+    title: 'マウスピース矯正',
+    body: '当院が扱う矯正治療の一つです。方法について知りたいことは、初診相談でお聞かせください。',
+  },
+  {
+    title: 'ワイヤー矯正',
+    body: '歯列矯正と噛み合わせ治療の選択肢として扱っています。治療計画と合わせて、進め方を確認します。',
+  },
+  {
+    title: '保定管理',
+    body: '矯正治療後の保定管理にも対応しています。治療からその後の経過確認まで、一貫して行います。',
+  },
+];
+
+const flowSteps = [
+  {
+    number: '01',
+    title: '初診相談',
+    body: '歯並びや噛み合わせの気がかり、治療について知りたいことをお聞かせください。',
+  },
+  {
+    number: '02',
+    title: '治療計画',
+    body: '相談内容を踏まえ、治療の進め方を確認します。',
+  },
+];
+
+const flowBranchA = {
+  heading: '子どもの矯正',
+  body: '保護者の方と、子どもの歯並びや噛み合わせについて確認しながら治療につなげます。',
+};
+
+const flowBranchB = {
+  heading: '大人の矯正',
+  body: '見た目や噛み合わせに関する希望を共有し、治療の進め方を確認します。',
+};
+
+const flowMerge = {
+  heading: '経過のフォロー・保定管理',
+  body: '治療中の経過確認から保定管理まで、継続して対応します。',
+};
+
+const relatedLinks = [
+  { label: '当院の診療姿勢を見る', href: '/about/', description: '相談から経過のフォローまで、一貫した診療について紹介します。' },
+  { label: '初診相談・来院案内を見る', href: '/contact/', description: '相談前の確認事項と予約入力デモをご案内します。' },
+];
+---
+<SiteLayout
+  site={site}
+  title="矯正治療について"
+  description="子どもから大人まで、歯並びと噛み合わせの気がかりに対応するあおば矯正歯科クリニック。対象別の相談内容、当院が扱う治療、相談から治療までの流れをご確認いただけます。"
+  path="/service/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '矯正治療について' }]}
+>
+  <!-- 01 治療案内の導入 (animation: none) -->
+  <ClinicPageIntro
+    heading="矯正治療について"
+    description="子どもから大人まで、歯並びと噛み合わせの気がかりに対応します。対象別の相談内容、当院が扱う治療、相談から治療までの流れをご確認いただけます。"
+    image={introImage}
+  />
+
+  <!-- ページ内リンク (下層導入直下) -->
+  <section class="bg-base-100">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-8 lg:py-10">
+      <ul class="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-5 border-t border-base-300 pt-6">
+        <li>
+          <a href={url(site, '/service/#children')} class="block py-3 border-b border-base-300 hover:text-primary text-sm lg:text-base font-medium">
+            子どもの矯正
+            <span aria-hidden="true" class="ml-2 text-primary">→</span>
+          </a>
+        </li>
+        <li>
+          <a href={url(site, '/service/#adults')} class="block py-3 border-b border-base-300 hover:text-primary text-sm lg:text-base font-medium">
+            大人の矯正
+            <span aria-hidden="true" class="ml-2 text-primary">→</span>
+          </a>
+        </li>
+        <li>
+          <a href={url(site, '/service/#flow')} class="block py-3 border-b border-base-300 hover:text-primary text-sm lg:text-base font-medium">
+            相談から治療まで
+            <span aria-hidden="true" class="ml-2 text-primary">→</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 02 子どもの矯正 (待合写真のみ fade-up) -->
+  <section id="children" class="bg-base-100 scroll-mt-[104px]">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs} class="lg:col-span-5">
+          <figure class="overflow-hidden">
+            <img
+              src={childrenImage.src}
+              alt={childrenImage.alt}
+              width="1000"
+              height="1250"
+              loading="lazy"
+              class="w-full aspect-[4/5] object-cover"
+            />
+            <figcaption class="mt-3 text-xs lg:text-sm text-base-content/65">
+              院内イメージ
+            </figcaption>
+          </figure>
+        </ScrollReveal>
+        <div class="lg:col-span-6 lg:col-start-7 lg:pt-16">
+          <SectionTitle title="子どもの歯並びが気になる方へ" align="left" />
+          <div class="space-y-5 text-sm lg:text-base leading-[1.9] text-base-content/85 max-w-[36em]">
+            <p>歯の並び方や噛み合わせが気になったときは、保護者の方が気づいたことをお聞かせください。当院では、小児の歯列矯正と噛み合わせ治療に対応しています。相談から治療計画、経過のフォローまで、一貫して行います。</p>
+          </div>
+          <div class="mt-6">
+            <Alert variant="info">
+              <p class="text-sm lg:text-base">
+                <span class="font-bold mr-2 text-primary">相談前に整理したいこと：</span>気になっている歯並び／噛み合わせについて気づいたこと／治療や通院について聞きたいこと
+              </p>
+            </Alert>
+          </div>
+          <div class="mt-8">
+            <a href={url(site, '/contact/')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content">
+              初診相談の案内を見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 大人の矯正 (相談写真のみ fade-left) -->
+  <section id="adults" class="bg-base-100 border-t border-base-300 scroll-mt-[104px]">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div class="lg:col-span-6 lg:pt-16">
+          <SectionTitle title="見た目と噛み合わせ、どちらも相談したい方へ" align="left" />
+          <div class="space-y-5 text-sm lg:text-base leading-[1.9] text-base-content/85 max-w-[36em]">
+            <p>歯並びの印象を整えたい方も、噛み合わせが気になる方も、ご相談いただけます。当院では成人の矯正治療として、マウスピース矯正やワイヤー矯正を扱っています。希望する方法がある場合も、まだ決まっていない場合も、初診相談で気になっていることをお伝えください。</p>
+          </div>
+          <div class="mt-6">
+            <Alert variant="info">
+              <p class="text-sm lg:text-base">
+                <span class="font-bold mr-2 text-primary">相談前に整理したいこと：</span>歯並びで気になる部分／噛み合わせの気がかり／装置や通院について確認したいこと
+              </p>
+            </Alert>
+          </div>
+        </div>
+        <ScrollReveal animation="fade-left" duration={site.motion!.durationMs} class="lg:col-span-5 lg:col-start-8">
+          <figure class="overflow-hidden">
+            <img
+              src={adultsImage.src}
+              alt={adultsImage.alt}
+              width="1000"
+              height="1250"
+              loading="lazy"
+              class="w-full aspect-[4/5] object-cover aoba-rounded-br"
+            />
+            <figcaption class="mt-3 text-xs lg:text-sm text-base-content/65">
+              院内イメージ
+            </figcaption>
+          </figure>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 当院で扱う治療 (砂色背景、animation: none) -->
+  <section class="aoba-methods bg-secondary">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <figure class="lg:col-span-4">
+          <img
+            src={modelImage.src}
+            alt={modelImage.alt}
+            width="800"
+            height="800"
+            loading="lazy"
+            class="w-1/2 lg:w-full aspect-square object-cover"
+          />
+        </figure>
+        <div class="lg:col-span-8">
+          <SectionTitle title="治療と、その後の管理。" align="left" />
+          <Table class="mt-2">
+            <tbody>
+              {methods.map((m) => (
+                <tr>
+                  <th class="w-32 lg:w-44 whitespace-nowrap align-top text-primary font-bold text-sm lg:text-base pt-6 lg:pt-8 pb-6 lg:pb-8">{m.title}</th>
+                  <td class="text-sm lg:text-base leading-[1.9] pt-6 lg:pt-8 pb-6 lg:pb-8">{m.body}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <p class="mt-6 text-xs lg:text-sm text-base-content/65">
+            個別の治療方法や進め方は、相談と治療計画の中で確認します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 相談から治療まで (フロー、節見出しのみ fade-up) -->
+  <section id="flow" class="bg-base-100 scroll-mt-[104px]">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="相談から治療まで" align="left" />
+      </ScrollReveal>
+
+      <!-- 共通の縦並び 01→02 を青面で -->
+      <div class="bg-primary text-primary-content mt-10 lg:mt-12 px-6 lg:px-10 py-10 lg:py-14">
+        <ol class="grid lg:grid-cols-2 gap-8 lg:gap-10">
+          {flowSteps.map((s) => (
+            <li class="flex items-start gap-5 lg:gap-6">
+              <span class="text-3xl lg:text-[2.5rem] font-medium leading-none tabular-nums shrink-0" aria-hidden="true">{s.number}</span>
+              <div>
+                <h3 class="text-lg lg:text-xl font-bold mb-2 lg:mb-3">{s.title}</h3>
+                <p class="text-sm lg:text-base leading-[1.9] text-primary-content/90">{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <!-- 子ども・大人の分岐 -->
+      <div class="mt-10 grid lg:grid-cols-2 gap-8 lg:gap-10">
+        <section class="bg-base-100 border border-base-300 p-6 lg:p-8">
+          <p class="text-base lg:text-lg font-bold text-primary mb-3">{flowBranchA.heading}</p>
+          <p class="text-sm lg:text-base leading-[1.9] text-base-content/85">{flowBranchA.body}</p>
+        </section>
+        <section class="bg-base-100 border border-base-300 p-6 lg:p-8">
+          <p class="text-base lg:text-lg font-bold text-primary mb-3">{flowBranchB.heading}</p>
+          <p class="text-sm lg:text-base leading-[1.9] text-base-content/85">{flowBranchB.body}</p>
+        </section>
+      </div>
+
+      <!-- 合流: 経過のフォロー・保定管理 -->
+      <div class="mt-10 bg-secondary text-base-content p-6 lg:p-8 border-t-4 border-primary">
+        <p class="text-base lg:text-lg font-bold mb-3">{flowMerge.heading}</p>
+        <p class="text-sm lg:text-base leading-[1.9]">{flowMerge.body}</p>
+      </div>
+
+      <p class="mt-6 text-xs lg:text-sm text-base-content/65 max-w-[38em]">
+        ここでは診療の大きな流れを示しています。個別の工程は治療計画の中で確認します。
+      </p>
+    </div>
+  </section>
+
+  <!-- 06 医院と相談窓口へ (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="次に確認すること" align="left" />
+      </ScrollReveal>
+      <div class="mt-2">
+        <ClinicRelatedLinks site={site} links={relatedLinks} />
+      </div>
+    </div>
+  </section>
+
+  <PageTopButton />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .aoba-rounded-br {
+    border-bottom-right-radius: 56px;
+  }
+  @media (min-width: 1024px) {
+    section[class*="bg-base-100"], section[class*="bg-secondary"] {
+      padding-left: 72px;
+      padding-right: 72px;
+    }
+  }
+</style>

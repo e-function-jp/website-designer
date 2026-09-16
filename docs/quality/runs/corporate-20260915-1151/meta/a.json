@@ -1,0 +1,22 @@
+{
+  "site_type": "corporate",
+  "variant": "a",
+  "stamp": "20260915-1151",
+  "route": "/sites/corporate/a-20260915-1151/",
+  "model": "opencode-go/minimax-m3",
+  "provider": "opencode-cli",
+  "pages_created": [
+    "about/index.astro",
+    "contact/index.astro",
+    "index.astro",
+    "new-patients/index.astro",
+    "news/index.astro",
+    "privacy/index.astro",
+    "service/index.astro"
+  ],
+  "has_site_config": true,
+  "tokens": {
+    "note": "opencode run; per-session token rows not captured"
+  },
+  "implemented_at": "2026-09-15T12:51:00+09:00"
+}

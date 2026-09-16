@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>あおば矯正歯科クリニック｜冒険路線ディレクション</title>
+  <style>
+    :root{--blue:#365F78;--sand:#D9C7A3;--paper:#F5F4EF;--ink:#23333C;--line:#CBCFCB}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;font-size:16px;line-height:1.9}
+    header,main{max-width:1200px;margin:auto;padding:48px 28px}
+    header{padding-top:80px;border-bottom:1px solid var(--blue)}
+    h1{font-size:clamp(30px,5vw,60px);line-height:1.4;letter-spacing:.03em}
+    h2{margin:0 0 32px;font-size:30px;color:var(--blue)}
+    h3{font-size:21px;line-height:1.6}
+    h4{font-size:18px}
+    main>section{padding:56px 0;border-bottom:1px solid var(--line)}
+    article{margin:48px 0;padding:32px;background:white;border-top:6px solid var(--blue)}
+    article>section{padding:24px 0;border-bottom:1px solid var(--line)}
+    article>section:last-child{border:0}
+    dl{display:grid;grid-template-columns:180px 1fr;gap:18px 24px}
+    dt{font-weight:700;color:var(--blue)}
+    dd{margin:0}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{text-align:left;vertical-align:top;padding:14px;border-bottom:1px solid var(--line)}
+    th{background:#E7EBE9}
+    pre{padding:24px;background:#23333C;color:#F5F4EF;overflow:auto;font-size:13px;line-height:1.7}
+    code{font-family:ui-monospace,monospace}
+    a{color:var(--blue);text-underline-offset:4px}
+    p[data-role]{padding-left:104px;position:relative}
+    p[data-role]::before{position:absolute;left:0;top:3px;font-size:12px;font-weight:700;color:var(--blue)}
+    [data-role="purpose"]::before{content:"役割"}
+    [data-role="layout"]::before{content:"構図・寸法"}
+    [data-role="copy"]::before{content:"掲載コピー"}
+    [data-role="components"]::before{content:"部品"}
+    [data-role="animation"]::before{content:"動き"}
+    [data-role="image"]::before{content:"写真"}
+    figure{margin:24px 0;padding:24px;border-left:5px solid var(--sand);background:white}
+    .label{letter-spacing:.15em;font-size:13px;color:var(--blue)}
+    .lead{max-width:760px;font-size:20px}
+    .note{padding:24px;background:#E8E9E2}
+    .swatches{display:flex;flex-wrap:wrap;gap:12px}
+    .swatches span{padding:14px 20px;border:1px solid var(--line)}
+    @media(max-width:700px){
+      header,main{padding:32px 20px}
+      dl{grid-template-columns:1fr;gap:8px}
+      dd{margin-bottom:20px}
+      article{padding:20px 16px}
+      table{font-size:12px}
+      th,td{padding:8px;overflow-wrap:anywhere}
+      p[data-role]{padding:24px 0 0}
+      p[data-role]::before{top:0}
+    }
+    @media print{article{break-before:page}pre{white-space:pre-wrap}body{font-size:11px}}
+  </style>
+</head>
+<body>
+<header>
+  <p class="label">CORPORATE / B / corporate-20260915-1151</p>
+  <h1>噛み合わせから整える矯正</h1>
+  <p class="lead">あおば矯正歯科クリニック<br>冒険路線：「対話の余白を、大きく取る。」</p>
+  <p>青い面、温かな院内写真、相談から治療へ進む情報構造を継承する。トップは大きな日本語と縦長の相談写真を組み合わせ、受付の横長写真を段差でつなぐ。下層にも同じ写真の存在感と余白の規則を通す。</p>
+  <p>本書は実装仕様。寸法はサイト本体に対する指定であり、このディレクション文書の表示寸法とは別。記載した文章を掲載し、企業情報・実績・医師の経歴・診療条件を追加創作しない。</p>
+</header>
+
+<main>
+<section id="site-config">
+  <h2>01　サイト定義</h2>
+  <p>最初に出力先の <code>_site.ts</code> を作る。全ページは <code>SiteLayout</code> を使用。下記hrefはbase相対であり、実リンクは既存の <code>url(site, href)</code> で解決する。</p>
+  <dl>
+    <dt>name</dt><dd>あおば矯正歯科クリニック</dd>
+    <dt>tagline</dt><dd>噛み合わせから整える矯正</dd>
+    <dt>theme</dt><dd>business。DaisyUIのテーマを基底とし、このサイトのdata-themeスコープ内で本書の色・角丸トークンに上書きする。</dd>
+    <dt>nav</dt><dd>当院について → /about/；矯正治療について → /service/；お知らせ → /news/；初診相談・来院案内 → /contact/</dd>
+    <dt>footerNav</dt><dd>医院を知る：トップページ /、当院について /about/、医院概要 /about/#overview、お知らせ /news/。矯正を知る：子どもの矯正 /service/#children、大人の矯正 /service/#adults、相談から治療まで /service/#flow。相談する：初診相談・来院案内 /contact/。</dd>
+    <dt>organization</dt><dd>商号：あおば矯正歯科クリニック。所在地：静岡県藤枝市。設立：2011年。電話・メール・番地・外部予約URLは未提供のため設定しない。</dd>
+    <dt>primaryCta</dt><dd>初診相談を予約する → /contact/#consultation。遷移先は初診相談の説明と予約入力デモ。各CTAの近くに「架空医院のサンプルです。実際の予約は受け付けていません。」を添える。</dd>
+    <dt>legalNav</dt><dd>個人情報の取り扱い → /privacy/</dd>
+    <dt>motion</dt><dd>reveal: fade-up / durationMs: 900 / staggerMs: 0 / header: hide / pageTransition: false</dd>
+  </dl>
+  <pre><code>import type { SiteConfig } from '../../../../lib/site';
+
+export const site: SiteConfig = {
+  name: 'あおば矯正歯科クリニック',
+  tagline: '噛み合わせから整える矯正',
+  base: '/sites/corporate/b-20260915-1151/',
+  theme: 'business',
+  nav: [
+    { label: '当院について', href: '/about/' },
+    { label: '矯正治療について', href: '/service/' },
+    { label: 'お知らせ', href: '/news/' },
+    { label: '初診相談・来院案内', href: '/contact/' },
+  ],
+  footerNav: [
+    {
+      heading: '医院を知る',
+      items: [
+        { label: 'トップページ', href: '/' },
+        { label: '当院について', href: '/about/' },
+        { label: '医院概要', href: '/about/#overview' },
+        { label: 'お知らせ', href: '/news/' },
+      ],
+    },
+    {
+      heading: '矯正を知る',
+      items: [
+        { label: '子どもの矯正', href: '/service/#children' },
+        { label: '大人の矯正', href: '/service/#adults' },
+        { label: '相談から治療まで', href: '/service/#flow' },
+      ],
+    },
+    {
+      heading: '相談する',
+      items: [
+        { label: '初診相談・来院案内', href: '/contact/' },
+      ],
+    },
+  ],
+  organization: {
+    legalName: 'あおば矯正歯科クリニック',
+    address: '静岡県藤枝市',
+    founded: '2011',
+  },
+  primaryCta: {
+    label: '初診相談を予約する',
+    href: '/contact/#consultation',
+  },
+  legalNav: [
+    { label: '個人情報の取り扱い', href: '/privacy/' },
+  ],
+  motion: {
+    reveal: 'fade-up',
+    durationMs: 900,
+    staggerMs: 0,
+    header: 'hide',
+    pageTransition: false,
+  },
+};
+export default site;</code></pre>
+  <p>医院のよみは「あおばきょうせいしかくりにっく」、従業員数は14名。これらは医院概要の表示データに保持する。型にないプロパティをSiteConfigへ追加しない。</p>
+</section>
+
+<section id="sitemap">
+  <h2>02　ページ構成</h2>
+  <table>
+    <thead><tr><th>URL</th><th>ページ名</th><th>役割</th><th>想定本文量(文字)</th></tr></thead>
+    <tbody>
+      <tr><td>/</td><td>トップページ</td><td>相談・医院・治療への振り分け。実績を要約。</td><td>700〜1,000</td></tr>
+      <tr><td>/about/</td><td>当院について</td><td>診療姿勢、診療のつながり、医院概要を確認。</td><td>850〜1,150</td></tr>
+      <tr><td>/service/</td><td>矯正治療について</td><td>小児・成人の入口、治療内容、相談から保定までを理解。</td><td>1,100〜1,500</td></tr>
+      <tr><td>/news/</td><td>お知らせ</td><td>診療告知の有無を確認し、必要な案内へ進む。</td><td>450〜650</td></tr>
+      <tr><td>/contact/</td><td>初診相談・来院案内</td><td>相談内容を整理し、予約入力デモと来院情報を確認。</td><td>850〜1,150</td></tr>
+      <tr><td>/privacy/</td><td>個人情報の取り扱い</td><td>入力デモの情報処理範囲を明示。</td><td>600〜850</td></tr>
+    </tbody>
+  </table>
+  <p>URLはすべて出力先ルート配下。本文量は共通シェルを除く目安で、文字数を満たすための加筆は禁止。企業概要は /about/#overview に統合する。採用条件が未提供のため /recruit/ は作らない。初診案内は /service/#flow と /contact/ に分担し、独立した空ページを増やさない。</p>
+</section>
+
+<section id="visual">
+  <h2>03　視覚設計</h2>
+  <dl>
+    <dt>配色</dt>
+    <dd>主色 #365F78（彩度を抑えた青）。アクセント #D9C7A3（砂色）。背景 #F5F4EF、本文 #23333C、白 #FFFFFF、罫線 #CBCFCB。青い面の文字は白、砂色の面の文字は本文色。砂色の文字を白地に置かない。</dd>
+    <dt>見出し書体</dt>
+    <dd>Zen Kaku Gothic New、500。代替はHiragino Kaku Gothic ProN、Yu Gothic、sans-serif。日本語を主役とする。トップ見出しはPC 80px／行高1.24／字間.02em、モバイル36px／1.45。下層h1はPC 52px／モバイル32px。h2はPC 38px／モバイル28px。装飾数字のみGeorgiaを使用。</dd>
+    <dt>本文書体</dt>
+    <dd>Zen Kaku Gothic New、400。PC・モバイルとも16px、行高1.9。注釈14px、行高1.7。本文幅は最大38em。見出しを画像にしない。</dd>
+    <dt>写真の方向性</dt>
+    <dd>実写調の相談風景、受付、診療室、歯列模型、待合の5枚。自然光、白木、オフホワイト、控えめな青で統一する。人物は架空のモデルであり、院長・実在患者として紹介しない。実際の医院を撮影した写真とは表示しない。各写真のキャプションは「院内イメージ」「相談風景のイメージ」「歯列模型のイメージ」のいずれか。</dd>
+    <dt>余白の方針</dt>
+    <dd>モバイル幅390pxを基準に左右20px、セクション間80px。PC幅1440pxを基準に左右72px、通常本文最大1160px、読み物760px、セクション間144px。写真は幅と開始位置をずらし、段差はPC 96px、モバイル24pxまで。本文に固定高を設定しない。</dd>
+    <dt>グリッド</dt>
+    <dd>1024px以上は12列・列間24px、768〜1023pxは2列・列間24px、767px以下は1列。ヒーローだけPCでは左7列／右5列。下層導入は左5列／右7列。同じ比率のカード列を連続させない。</dd>
+    <dt>形状</dt>
+    <dd>通常写真は角丸6px。主写真の外側一角だけPC 112px／モバイル56pxの丸みを持たせる。CTAは高さ56px、左右24px、カプセル型。色面の境界は水平を基本に、一角だけ大きく丸める。参照固有の波形・鳥・斜め曲線は使わない。</dd>
+    <dt>青い面の割当</dt>
+    <dd>トップの診療姿勢、下層の主要な説明区画、共通相談帯。ページ全体を青くせず、オフホワイトの面と写真の間に明確な切り替えを作る。ニュースの空状態、フォーム、長文ポリシーはオフホワイト。</dd>
+  </dl>
+  <div class="swatches" aria-label="配色見本">
+    <span style="background:#365F78;color:white">#365F78</span>
+    <span style="background:#D9C7A3;color:#23333C">#D9C7A3</span>
+    <span style="background:#F5F4EF;color:#23333C">#F5F4EF</span>
+    <span style="background:#23333C;color:white">#23333C</span>
+  </div>
+  <p>冒険性は「巨大な見出し」「非対称の写真」「写真と色面の段差」「余白の長短」で固定する。文字を写真に重ねない。横スクロール、スクロール固定、背景動画、文字単位の出現、自動カルーセルは採用しない。</p>
+</section>
+
+<section id="shell">
+  <h2>04　全ページ共通のシェル</h2>
+  <dl>
+    <dt>ヘッダー</dt>
+    <dd>SiteLayout内のSiteHeaderを利用。PC高さ80px、モバイル72px。背景は常にオフホワイト。左に文字ロゴ、右に4項目と青いCTA。ロゴはPC20px、モバイル16pxで医院名を読めるサイズにする。1024〜1199pxはモバイルメニューへ切り替え、横幅不足を避ける。</dd>
+    <dt>モバイルメニュー</dt>
+    <dd>既存のdetails/summaryを基礎に、開くとヘッダー直下へ幅100%のメニューパネルを表示する。高さは最大calc(100dvh - 72px)、内部スクロール可。リンク行高56px、CTA高さ56px。「メニュー」「閉じる」を状態に合わせ表示。Escapeで閉じてsummaryへフォーカスを戻す。モーダルにはしない。展開中とヘッダー内のフォーカス中は退避を止める。</dd>
+    <dt>モバイル追従CTA</dt>
+    <dd>画面下部に単独の「初診相談を予約する」。白背景、上罫線、左右16px、上下12pxとsafe-area。注意文を14pxで併記。本文末尾に実測した追従帯高以上の余白を確保する。/contact/ では追従帯を出さず、入力領域を優先する。</dd>
+    <dt>パンくず</dt>
+    <dd>下層すべて「トップページ — 現在のページ名」。SiteLayoutの自動パンくずを使用し、ヘッダー直後の本文幅内に置く。独自の二重パンくずを作らない。リンク文字14px以上、タップ領域44px以上。</dd>
+    <dt>下層ページヘッダ</dt>
+    <dd>新規AobaPageIntroとして切り出す。PCは左5列に見出しと導入、右7列に写真、最小高520px。モバイルは見出し→導入→4:3写真、上下48px。写真の左下のみ大きい角丸。写真を省略する下層を作らない。ニュース・個人情報ページでは同じ写真を再利用する。</dd>
+    <dt>共通相談帯</dt>
+    <dd>既存SiteFooterの冒頭を拡張し、新規AobaConsultationBandを組み込む。青背景、PC左7列に「気になることから、お聞かせください。」、右5列に白いCTA。本文「子どもの歯並びから、大人の噛み合わせまで。初診相談から治療計画、経過のフォローへつなぎます。」。CTA下に架空医院・予約非受付の注意文。PC上下72px、モバイル48px。/contact/ のみCTAを「相談内容の入力へ戻る」に変え、同ページ#consultationへ戻す。</dd>
+    <dt>共通医院情報</dt>
+    <dd>相談帯の次にオフホワイトで「静岡県藤枝市の矯正専門医院」「あおば矯正歯科クリニック」「2011年設立」を表示。リンク「医院概要を見る」→/about/#overview、「初診相談・来院案内を見る」→/contact/。電話、番地、診療時間、地図、診療カレンダー、SNSは未提供のため捏造しない。空の埋め込み枠も作らない。</dd>
+    <dt>最終フッター</dt>
+    <dd>砂色背景。PCは文字ロゴ4列＋サイトマップ8列。モバイルは縦積み、リンク間12px以上。footerNavとlegalNavを自動描画。「このサイトは架空の医院を用いた制作サンプルです。」を最後に掲載。共通末尾はPC約560px、モバイル約900pxを目安とし、内容で伸長させる。</dd>
+  </dl>
+  <p>シェルの変更はこのサイトに限定したテーマスコープまたはオプトイン部品として実装する。他サイトの見た目と挙動を変えない。ページごとのヘッダー・フッターの手書きは禁止。</p>
+</section>
+
+<section id="motion">
+  <h2>05　モーションと操作</h2>
+  <p>参照実測はfade-up 9件、fade-side 1件、duration最小・中央値・最大すべて900ms、ease。トップ10件／医院紹介0件／初診案内2件で偏りがある。本案では6ページすべて本文内4組に統一する。初期表示の見出し・写真・主要CTAは最初から見せる。</p>
+  <dl>
+    <dt>本文リビール</dt>
+    <dd>ScrollReveal、duration 900ms、stagger 0ms、delay 0ms、ease。fade-upはtranslateY(30px)から0、opacity 0から1。fade-leftはtranslateX(30px)から0、opacity 0から1。初回のみ。4組の内訳は各ページのanimation欄を正本とする。</dd>
+    <dt>発火</dt>
+    <dd>IntersectionObserver、rootMargin "0% 0% -100px 0%"、threshold 0。監視対象は無変形の外側。リビール対象は写真・見出しと短文に限定し、長大なセクション全体や入力欄を隠さない。</dd>
+    <dt>既存部品との差分</dt>
+    <dd>既存ScrollRevealは移動32px、独自easing、rootMargin -5%のためそのままでは一致しない。新規AobaRevealをScrollRevealのラッパーとして切り出し、既存部品に移動量・easing・rootMarginの任意設定を追加する。既定値は変えず、本サイトだけ本書の値を渡す。durationとstaggerは_site.tsから渡す。</dd>
+    <dt>ヘッダー</dt>
+    <dd>hide、transformの遷移480ms／ease。現行の退避開始条件y&gt;160pxを保持し、下方向で退避、上方向で再表示。開始条件160pxは既存実装値であり参照の実測値ではない。PC退避量80px、モバイル72px。ページ上端、メニュー展開中、ヘッダー内フォーカス中は表示。縮小演出は追加しない。</dd>
+    <dt>低減・JS失敗</dt>
+    <dd>prefers-reduced-motion: reduceでは初期状態からopacity:1、transform:none、clip-path:none、transition:none。ヘッダーは表示固定、スクロールは即時。設定変更をページ表示中にも反映する。JS無効・初期化失敗でも本文を読めるよう、初期CSSは可視とし、監視開始成功後の画面外対象だけを準備状態にする。</dd>
+    <dt>ページ遷移</dt>
+    <dd>View Transitionsはoff。ローダーなし。スクロール連動1件は対象と移動量が未確定のため再現しない。stagger 0msは実測で間隔が確定していないための無効化指定。</dd>
+    <dt>操作状態</dt>
+    <dd>リンクは下線、ボタンは青／白の反転でhoverを示す。装飾の移動は追加しない。focus-visibleは3pxの青い輪郭と3pxの間隔、青背景では白い輪郭。全操作領域44×44px以上。アンカー位置はscroll-margin-top:104px。</dd>
+  </dl>
+</section>
+
+<section id="pages">
+  <h2>06　ページ別実装仕様</h2>
+
+  <article data-page="/">
+    <h2>トップページ</h2>
+    <p>PC総長約5,200〜5,800px。モバイルは自然長。四つの本文リビールを、情報の切り替わりに配置する。</p>
+
+    <section data-section="hero">
+      <h3>01　大きな言葉と、対話の写真</h3>
+      <p data-role="purpose">矯正専門医院であることと、相談から始められることを最初の画面で伝える。</p>
+      <p data-role="layout">PCは12列。左7列の上端120pxからh1を2行「噛み合わせから／整える矯正」。右5列に4:5写真を上端48pxから置き、左上112pxの角丸。左本文とCTAをh1の40px下に置く。下段に受付写真を左8列へ幅864px・高さ340pxで配置し、上の写真と縦方向64px重ねるが横方向は重ねない。下写真の右4列は空白。全体約1,000px。モバイルはコピー→本文→CTA→4:5写真→受付16:9写真。2枚目は左右20px内側へ寄せ、24pxの間隔。h1は同じ2行、画面幅320pxでは32pxまで縮小。</p>
+      <p data-role="copy">見出し「噛み合わせから整える矯正」。本文「あおば矯正歯科クリニックは、静岡県藤枝市の矯正専門医院です。子どもから大人まで、歯並びと噛み合わせの相談をお受けしています。」。CTA「初診相談を予約する」→/contact/#consultation。補助リンク「矯正治療について知る」→/service/。注記「架空医院のサンプルです。実際の予約は受け付けていません。」</p>
+      <p data-role="components">新規AobaSplitHero。SectionTitleを見出しとして利用できるようh1対応を確認し、非対応なら新規部品内にh1を置く。CTAは共通の新規AobaCtaへ切り出す。</p>
+      <p data-role="animation">none。見出し・2枚の写真・CTAを初期表示。LCP画像を隠さない。</p>
+      <p data-role="image">top:heroを右縦位置、object-position:55% 45%。about:receptionを左下、object-position:50% 55%。それぞれ「相談風景のイメージ」「院内イメージ」を写真外に表示。</p>
+    </section>
+
+    <section data-section="news">
+      <h3>02　お知らせの現在地</h3>
+      <p data-role="purpose">診療に関する更新の有無を短く確認できるようにする。</p>
+      <p data-role="layout">PC左3列に見出し、右9列に上下一本ずつの罫線で囲んだ1行。上下72px、想定高240px。モバイルは見出し→状態文→一覧リンク、上下48px。架空の日付や3件の埋め草を作らない。</p>
+      <p data-role="copy">見出し「お知らせ」。本文「現在、掲載しているお知らせはありません。」。リンク「お知らせ一覧を見る」→/news/。</p>
+      <p data-role="components">SectionTitle、Alert。Alertはアイコン・影なしの静かな表示にする。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しと状態文を1組。本文リビール1。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="first-consultation">
+      <h3>03　相談の入口</h3>
+      <p data-role="purpose">保護者と成人患者の疑問を言葉にして、治療フローへ送る。</p>
+      <p data-role="layout">PC左5列に受付写真4:5、右5列に見出しと本文、間2列。右の文章は写真上端より96px下げる。高さ約760px。モバイルは見出し→本文→写真4:3→リンク。写真を説明より先に置かない。</p>
+      <p data-role="copy">見出し「何から聞けばよいか、迷っていても。」。本文「子どもの歯並びが気になる。自分の見た目や噛み合わせを見直したい。相談のきっかけは、一人ひとり異なります。初診相談では、気になっていることをお聞かせください。治療計画から経過のフォローまで、一貫して対応します。」。リンク「相談から治療までを見る」→/service/#flow。</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoText。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。写真のみ1組。文章とリンクは常時可視。本文リビール2。</p>
+      <p data-role="image">about:reception。人物を切り出さず、受付カウンターと通路が分かる範囲を使用。</p>
+    </section>
+
+    <section data-section="approach">
+      <h3>04　青い面で診療姿勢と実績を伝える</h3>
+      <p data-role="purpose">医院を選ぶための根拠を短く示し、詳しい説明を医院紹介へ分ける。</p>
+      <p data-role="layout">青い全幅面。左上角丸112px。PC上段左7列に見出し、右5列に本文。下段にStatを3列、罫線だけで区切る。上下112px、高さ約620px。モバイルは縦積み、Statは1列3行、数値48px、ラベル16px。数値の大小で意味を誇張しない。</p>
+      <p data-role="copy">見出し「相談から、その先の通院まで。」。本文「初診相談、治療計画、経過のフォロー。あおば矯正歯科クリニックは、小児から成人までの歯列矯正と噛み合わせ治療に一貫して取り組みます。」。実績「矯正相談 累計4,800件」「小児矯正 年間320症例」「通院継続率 92%」。注記「架空の企業設定に基づく数値です。集計期間・算出条件は設定されていません。」。リンク「当院の診療姿勢を見る」→/about/。</p>
+      <p data-role="components">SectionTitle、Stat。AnimatedCounterは使わず数値を常時表示。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。上段の見出しと本文のみ1組。Statとリンクは常時可視。本文リビール3。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="treatment-entrances">
+      <h3>05　年齢と相談内容から選ぶ</h3>
+      <p data-role="purpose">治療装置を先に選ばせず、子ども・大人の入口を提示する。</p>
+      <p data-role="layout">PCは左4列に歯列模型の正方形写真、右8列に上下2本の横長リンク。各行は番号・見出し・説明・矢印。カードの箱は使わず罫線で区切る。高さ約640px。モバイルは見出し→2リンク→写真、リンクは各160px以上で内容に追従。</p>
+      <p data-role="copy">見出し「自分に近い入口から。」。項目1「子どもの歯並びが気になる方へ」「成長に伴う歯並びや噛み合わせの気がかりを、保護者の方と一緒に整理します。」→/service/#children。項目2「大人の矯正を考えている方へ」「見た目と噛み合わせ、治療方法への疑問をまとめて確認できます。」→/service/#adults。補足「マウスピース矯正・ワイヤー矯正・保定管理についてもご案内しています。」</p>
+      <p data-role="components">SectionTitle、新規AobaTreatmentLinks、Cardをリンク行の基礎として影と外枠を解除。</p>
+      <p data-role="animation">fade-left／900ms／stagger 0ms／ease。模型写真のみ1組。リンクは常時可視。本文リビール4。</p>
+      <p data-role="image">service:model。歯列模型全体を正方形に収める。</p>
+    </section>
+
+    <section data-section="clinic-preview">
+      <h3>06　通院する場所を知る</h3>
+      <p data-role="purpose">空間の印象を伝えて医院紹介へ送る。設備性能や実在性の根拠として写真を使わない。</p>
+      <p data-role="layout">PCは診療室写真を左8列・16:9、右4列に待合写真4:5を96px下げて配置。見出しは主写真の上、短文とリンクは主写真の下。高さ約780px。モバイルは主写真→本文→待合写真、待合は幅72%で右寄せ。</p>
+      <p data-role="copy">見出し「通う場所のことも、相談の前に。」。本文「相談から治療、その後の経過確認まで。通院の場面を思い描きながら、当院の診療のつながりをご覧ください。」。リンク「当院について詳しく見る」→/about/。写真注記「掲載写真は院内のイメージです。」</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoPair。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">service:facility、contact:waiting。両写真に院内イメージのキャプションを付ける。</p>
+    </section>
+  </article>
+
+  <article data-page="/about/">
+    <h2>当院について</h2>
+    <p>PC総長約4,500〜5,100px。写真による導入から、具体的な説明、医院概要へ進む。</p>
+
+    <section data-section="hero">
+      <h3>01　医院紹介の導入</h3>
+      <p data-role="purpose">医院の専門領域と、このページで確認できる内容を示す。</p>
+      <p data-role="layout">共通AobaPageIntro。PC左5列のタイトルを下寄せ、右7列の受付写真は520px高。モバイルはタイトル→本文→写真。パンくずは共通シェルの位置。</p>
+      <p data-role="copy">見出し「当院について」。本文「静岡県藤枝市で、小児から成人までの歯列矯正と噛み合わせ治療を行う矯正専門医院です。初診相談から治療計画、経過のフォローまで、一貫して対応しています。」</p>
+      <p data-role="components">新規AobaPageIntro、SiteLayoutのBreadcrumbs。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">about:reception。object-position:50% 55%。</p>
+    </section>
+
+    <section data-section="philosophy">
+      <h3>02　診療姿勢</h3>
+      <p data-role="purpose">見た目だけでなく噛み合わせも扱うことを、誇張せず説明する。</p>
+      <p data-role="layout">PC左4列に見出し、右7列に本文、間1列。本文下に相談写真を横長3:2で配置し、写真右端を本文幅から1列分広げる。高さ約850px。モバイルは見出し→本文→写真、段差をなくす。</p>
+      <p data-role="copy">見出し「歯並びと、噛み合わせを一緒に考える。」。本文「歯並びの見た目を整えたい。噛み合わせが気になる。子どもの歯の成長について相談したい。そうした気がかりを出発点に、初診相談から治療計画につなげます。あおば矯正歯科クリニックが中心に据えるのは、歯列矯正と噛み合わせ治療です。マウスピース矯正、ワイヤー矯正、保定管理を通じて、小児から成人までの通院を支えます。」</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoText。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。写真のみ1組。本文リビール1。</p>
+      <p data-role="image">top:heroを3:2にトリミング。相談者と説明する手元を両方残す。</p>
+    </section>
+
+    <section data-section="continuity">
+      <h3>03　一貫した診療のつながり</h3>
+      <p data-role="purpose">トップの実績を繰り返さず、一貫対応の意味を3段階で説明する。</p>
+      <p data-role="layout">青い全幅面、右下のみ角丸112px。PC左4列に見出し、右8列に番号付き3行。番号48px、本文は最大32em。行間48px、全体約680px。モバイルは1列、番号と見出しを横並び、本文をその下へ。</p>
+      <p data-role="copy">見出し「相談で終わらない、診療のつながり。」。01「初診相談」「歯並びや噛み合わせについて、気になっていることをお聞きします。治療方法が決まっていなくても、ご相談いただけます。」。02「治療計画」「相談内容を踏まえ、治療の進め方を確認します。方法について知りたいこと、通院について気になることもお伝えください。」。03「経過のフォロー」「治療中の経過確認から保定管理まで、継続して対応します。」。リンク「相談から治療までを見る」→/service/#flow。</p>
+      <p data-role="components">SectionTitle、Steps。番号は順序のあるリストとして実装する。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。3段階の説明は常時可視。本文リビール2。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="spaces">
+      <h3>04　診療の場面を知る</h3>
+      <p data-role="purpose">来院から相談、診療へ進む場面を視覚的に整理する。</p>
+      <p data-role="layout">PC上段は左8列に診療室の16:9写真、右4列に文章。下段は右6列に待合の4:3写真を配置し、左6列に余白。写真間96px。全体約1,000px。モバイルは写真→対応する文章を2組縦積み、間64px。</p>
+      <p data-role="copy">見出し「相談する時間、通院する時間。」。本文1「初診相談では、歯並びや噛み合わせについて気になることをお聞かせください。子どもの矯正については、保護者の方の気がかりも相談の入口になります。」。本文2「治療計画を確認した後も、経過を見ながら通院が続きます。当院では、治療から保定管理まで一貫して対応しています。」。注記「写真は院内のイメージであり、実際の施設・設備を示すものではありません。」</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoPair。</p>
+      <p data-role="animation">fade-left／900ms／stagger 0ms／ease。上段の診療室写真のみ1組。本文リビール3。</p>
+      <p data-role="image">service:facility、contact:waiting。</p>
+    </section>
+
+    <section data-section="overview">
+      <h3>05　医院概要</h3>
+      <p data-role="purpose">提供された企業設定を正確に確認できるようにする。</p>
+      <p data-role="layout">実装時id="overview"。PC左4列に見出し、右8列にTable。モバイルは各行のラベルと値を縦積みし、横スクロールを作らない。上下96px、内容による自然高。</p>
+      <p data-role="copy">見出し「医院概要」。商号「あおば矯正歯科クリニック」。よみ「あおばきょうせいしかくりにっく」。所在地「静岡県藤枝市」。設立「2011年」。従業員数「14名」。業種「矯正歯科医院」。事業内容「小児から成人までの歯列矯正と噛み合わせ治療を中心に、マウスピース矯正・ワイヤー矯正・保定管理を提供する地域密着型の矯正専門医院。初診相談から治療計画・経過フォローまで一貫して行う。」</p>
+      <p data-role="components">SectionTitle、Table。</p>
+      <p data-role="animation">none。概要表は常時可視。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="related">
+      <h3>06　次に確認すること</h3>
+      <p data-role="purpose">治療内容と初診相談へ横断する。</p>
+      <p data-role="layout">PC2列、モバイル1列。上罫線と下線リンクを持つCard、各最小高180px。白背景、影なし。</p>
+      <p data-role="copy">見出し「次に確認すること」。リンク1「矯正治療について」「子どもと大人の矯正、治療方法、保定管理をご案内します。」→/service/。リンク2「初診相談・来院案内」「相談前に整理したいことと、予約入力デモを確認できます。」→/contact/。</p>
+      <p data-role="components">SectionTitle、Card、新規AobaRelatedLinks。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。リンクは常時可視。本文リビール4。</p>
+      <p data-role="image">none</p>
+    </section>
+  </article>
+
+  <article data-page="/service/">
+    <h2>矯正治療について</h2>
+    <p>PC総長約4,600〜5,300px。対象別の説明、方法の一覧、分岐フローで構成する。料金、期間、適応、効果を創作しない。</p>
+
+    <section data-section="hero">
+      <h3>01　治療案内の導入</h3>
+      <p data-role="purpose">扱う治療領域と、ページ内で確認できることを示す。</p>
+      <p data-role="layout">共通AobaPageIntro。右に診療室写真。本文の下に「子どもの矯正」「大人の矯正」「相談から治療まで」の3つの下線リンク。モバイルはリンクを1行ずつ。</p>
+      <p data-role="copy">見出し「矯正治療について」。本文「子どもから大人まで、歯並びと噛み合わせの気がかりに対応します。対象別の相談内容、当院が扱う治療、相談から治療までの流れをご確認いただけます。」。ページ内リンク「子どもの矯正」→/service/#children、「大人の矯正」→/service/#adults、「相談から治療まで」→/service/#flow。</p>
+      <p data-role="components">新規AobaPageIntro、SiteLayoutのBreadcrumbs。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">service:facility。診療椅子全体を残す。</p>
+    </section>
+
+    <section data-section="children">
+      <h3>02　子どもの矯正</h3>
+      <p data-role="purpose">保護者が相談したい内容を整理する。</p>
+      <p data-role="layout">実装時id="children"。PC左5列に待合写真4:5、右6列に文章、間1列。右本文を64px下げる。下端に砂色の相談メモ。約760px。モバイルは見出し→本文→メモ→写真4:3。</p>
+      <p data-role="copy">見出し「子どもの歯並びが気になる方へ」。本文「歯の並び方や噛み合わせが気になったときは、保護者の方が気づいたことをお聞かせください。当院では、小児の歯列矯正と噛み合わせ治療に対応しています。相談から治療計画、経過のフォローまで、一貫して行います。」。相談メモ「相談前に整理したいこと：気になっている歯並び／噛み合わせについて気づいたこと／治療や通院について聞きたいこと」。リンク「初診相談の案内を見る」→/contact/。</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoText、Alert。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。待合写真のみ1組。本文リビール1。</p>
+      <p data-role="image">contact:waiting。子どもの患者写真や治療前後の写真は追加しない。</p>
+    </section>
+
+    <section data-section="adults">
+      <h3>03　大人の矯正</h3>
+      <p data-role="purpose">成人患者が見た目と噛み合わせの両方を相談できることを伝える。</p>
+      <p data-role="layout">PC左6列に本文、右5列に相談写真4:5、間1列。前節と左右を反転する。約760px。モバイルは見出し→本文→相談メモ→写真。写真の角丸は右下のみ56px。</p>
+      <p data-role="copy">見出し「見た目と噛み合わせ、どちらも相談したい方へ」。本文「歯並びの印象を整えたい方も、噛み合わせが気になる方も、ご相談いただけます。当院では成人の矯正治療として、マウスピース矯正やワイヤー矯正を扱っています。希望する方法がある場合も、まだ決まっていない場合も、初診相談で気になっていることをお伝えください。」。相談メモ「相談前に整理したいこと：歯並びで気になる部分／噛み合わせの気がかり／装置や通院について確認したいこと」。</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoText、Alert。</p>
+      <p data-role="animation">fade-left／900ms／stagger 0ms／ease。相談写真のみ1組。本文リビール2。</p>
+      <p data-role="image">top:hero。人物の顔を別人に見せる加工はしない。</p>
+    </section>
+
+    <section data-section="methods">
+      <h3>04　当院で扱う治療</h3>
+      <p data-role="purpose">提供範囲を示し、装置の優劣や適応をサイト上で断定しない。</p>
+      <p data-role="layout">砂色背景。PC左4列に模型写真1:1、右8列に3行の説明。行ごとに見出し20pxと本文、上下32px。約640px。モバイルは見出し→写真→3行、写真は幅70%で左寄せ。</p>
+      <p data-role="copy">見出し「治療と、その後の管理。」。項目1「マウスピース矯正」「当院が扱う矯正治療の一つです。方法について知りたいことは、初診相談でお聞かせください。」。項目2「ワイヤー矯正」「歯列矯正と噛み合わせ治療の選択肢として扱っています。治療計画と合わせて、進め方を確認します。」。項目3「保定管理」「矯正治療後の保定管理にも対応しています。治療からその後の経過確認まで、一貫して行います。」。補足「個別の治療方法や進め方は、相談と治療計画の中で確認します。」</p>
+      <p data-role="components">SectionTitle、Table、新規AobaPhotoText。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">service:model。マウスピースやワイヤーの細部を生成画像で医療説明しない。</p>
+    </section>
+
+    <section data-section="flow">
+      <h3>05　相談から治療まで</h3>
+      <p data-role="purpose">共通の進み方と、対象別に確認する内容を説明する。</p>
+      <p data-role="layout">実装時id="flow"。青い面に共通01〜02を縦並び。その下のオフホワイト面で「子どもの矯正」「大人の矯正」の2列に分け、最後に「経過のフォロー・保定管理」へ合流させる。矢印は補助で、DOMもこの順序。約900px。モバイルは共通→子ども→大人→共通の縦順。成人側の説明を水増しして高さを揃えない。</p>
+      <p data-role="copy">見出し「相談から治療まで」。01「初診相談」「歯並びや噛み合わせの気がかり、治療について知りたいことをお聞かせください。」。02「治療計画」「相談内容を踏まえ、治療の進め方を確認します。」。分岐A「子どもの矯正」「保護者の方と、子どもの歯並びや噛み合わせについて確認しながら治療につなげます。」。分岐B「大人の矯正」「見た目や噛み合わせに関する希望を共有し、治療の進め方を確認します。」。合流「経過のフォロー・保定管理」「治療中の経過確認から保定管理まで、継続して対応します。」。補足「ここでは診療の大きな流れを示しています。個別の工程は治療計画の中で確認します。」</p>
+      <p data-role="components">SectionTitle、Steps、新規AobaConsultationFlow。分岐は見出し付きの意味的なリストで切り出す。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。節見出しのみ1組。フローは全体を常時可視。本文リビール3。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="related">
+      <h3>06　医院と相談窓口へ</h3>
+      <p data-role="purpose">説明を読み終えた後の選択肢を2件に絞る。</p>
+      <p data-role="layout">共通AobaRelatedLinks、PC2列／モバイル1列。</p>
+      <p data-role="copy">見出し「次に確認すること」。リンク1「当院の診療姿勢を見る」「相談から経過のフォローまで、一貫した診療について紹介します。」→/about/。リンク2「初診相談・来院案内を見る」「相談前の確認事項と予約入力デモをご案内します。」→/contact/。</p>
+      <p data-role="components">SectionTitle、Card、新規AobaRelatedLinks。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文リビール4。</p>
+      <p data-role="image">none</p>
+    </section>
+  </article>
+
+  <article data-page="/news/">
+    <h2>お知らせ</h2>
+    <p>PC総長約2,300〜2,700px。お知らせがない状態を完成形として設計する。告知日・休診予定・開院情報を創作しない。</p>
+
+    <section data-section="hero">
+      <h3>01　お知らせの導入</h3>
+      <p data-role="purpose">医院からの更新を確認するページであることを示す。</p>
+      <p data-role="layout">共通AobaPageIntro。受付写真を再利用。タイトルと本文の量が少なくても、写真付き導入の比率は保つ。</p>
+      <p data-role="copy">見出し「お知らせ」。本文「医院からのお知らせを掲載するページです。初診相談や治療内容については、各案内ページからも確認できます。」</p>
+      <p data-role="components">新規AobaPageIntro、SiteLayoutのBreadcrumbs。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">about:reception。</p>
+    </section>
+
+    <section data-section="announcements">
+      <h3>02　掲載状況</h3>
+      <p data-role="purpose">更新がないことを明確に示す。</p>
+      <p data-role="layout">最大760px、左寄せ。上罫線、見出し、Alert、下罫線。上下64px、約260px。空状態にイラストや架空の記事カードを追加しない。</p>
+      <p data-role="copy">見出し「掲載中のお知らせ」。本文「現在、掲載しているお知らせはありません。」。補足「このサイトは架空の医院を用いた制作サンプルです。実際の診療日や休診予定の案内は行っていません。」</p>
+      <p data-role="components">SectionTitle、Alert。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。状態文は常時可視。本文リビール1。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="consultation-guide">
+      <h3>03　初診相談を探している方へ</h3>
+      <p data-role="purpose">更新一覧で行き止まりにならず、相談案内へ到達できるようにする。</p>
+      <p data-role="layout">青背景の横長帯。PC左4列に見出し、右8列に短文とリンク。上下56px。モバイル縦積み、約300px。</p>
+      <p data-role="copy">見出し「初診相談について知りたい方へ」。本文「気になっている歯並びや噛み合わせについて、相談前に整理したいことをご案内しています。予約入力デモも、初診相談のページから確認できます。」。リンク「初診相談・来院案内を見る」→/contact/。</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoTextの写真なし表示。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文リビール2。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="treatment-guide">
+      <h3>04　治療内容を探している方へ</h3>
+      <p data-role="purpose">告知と常設の治療説明を混同させない。</p>
+      <p data-role="layout">PC左4列に模型写真1:1、右8列に短文。最大幅960px、上下80px。モバイルは本文→幅60%の模型写真、左寄せ。</p>
+      <p data-role="copy">見出し「矯正治療の内容を確認する」。本文「子どもと大人、それぞれの相談の入口から、マウスピース矯正・ワイヤー矯正・保定管理まで。治療案内のページにまとめています。」。リンク「矯正治療について見る」→/service/。</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoText。</p>
+      <p data-role="animation">fade-left／900ms／stagger 0ms／ease。模型写真のみ1組。本文リビール3。</p>
+      <p data-role="image">service:model。</p>
+    </section>
+
+    <section data-section="related">
+      <h3>05　関連する案内</h3>
+      <p data-role="purpose">医院情報と情報の取り扱いを確認できるようにする。</p>
+      <p data-role="layout">共通AobaRelatedLinks、PC2列／モバイル1列。</p>
+      <p data-role="copy">見出し「関連する案内」。リンク1「医院概要を見る」「所在地、設立、診療内容など、医院の基本情報を掲載しています。」→/about/#overview。リンク2「個人情報の取り扱いを見る」「予約入力デモでの情報の扱いを確認できます。」→/privacy/。</p>
+      <p data-role="components">SectionTitle、Card、新規AobaRelatedLinks。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文リビール4。</p>
+      <p data-role="image">none</p>
+    </section>
+  </article>
+
+  <article data-page="/contact/">
+    <h2>初診相談・来院案内</h2>
+    <p>PC総長約3,600〜4,200px。説明→相談準備→入力→来院情報の順。入力欄を動かさず、実予約とデモを混同させない。</p>
+
+    <section data-section="hero">
+      <h3>01　相談窓口の導入</h3>
+      <p data-role="purpose">相談対象と予約受付の状態を最初に伝える。</p>
+      <p data-role="layout">共通AobaPageIntro。右写真は待合。左の導入本文直下に砂色のAlert。モバイルではAlertを写真より先に表示する。</p>
+      <p data-role="copy">見出し「初診相談・来院案内」。本文「子どもの歯並びが気になる方も、大人の矯正を考えている方も。まずは、気になっていることを整理するところから始めましょう。」。注意「このページは予約入力のデモです。実際の予約は受け付けていません。氏名や連絡先など、実際の個人情報は入力しないでください。」</p>
+      <p data-role="components">新規AobaPageIntro、Alert、SiteLayoutのBreadcrumbs。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">contact:waiting。</p>
+    </section>
+
+    <section data-section="preparation">
+      <h3>02　相談前に整理すること</h3>
+      <p data-role="purpose">入力の前に、相談したい内容を選びやすくする。</p>
+      <p data-role="layout">PC左4列に見出し、右8列に3行のリスト。各行は小さな番号と見出し・説明。モバイル縦積み。上下80px、約430px。</p>
+      <p data-role="copy">見出し「話したいことを、三つの視点で。」。01「誰の相談か」「お子さまの歯並びについてか、ご自身の矯正についてかを整理します。」。02「何が気になっているか」「歯並びの見た目、噛み合わせなど、気がかりを言葉にしてみてください。」。03「何を確認したいか」「治療方法や通院など、初診相談で聞いておきたいことをまとめます。」</p>
+      <p data-role="components">SectionTitle、Steps。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文リビール1。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="consultation">
+      <h3>03　予約入力デモ</h3>
+      <p data-role="purpose">入力・確認・修正の一連の操作を具体化する。予約が成立した表示は出さない。</p>
+      <p data-role="layout">実装時id="consultation"。最大760px。白い面、内側PC48px／モバイル24px。フォームは1列。ラベルを入力欄の上に常時表示。必須・任意を文字で示す。PCでも氏名と連絡先の横並びを作らない。入力欄高48px、textarea最小高144px。フォームの上下に同じデモ注意文を表示。高さは入力・確認状態で自然に変わる。</p>
+      <p data-role="copy">見出し「初診相談の予約入力デモ」。説明「入力内容を確認するまでの操作をお試しいただけます。内容は送信・保存されず、予約は成立しません。」。項目「相談の対象（必須）」：選択肢「子どもの矯正」「大人の矯正」「まだ決めていない」。「お名前（必須・架空の名前）」、補助「実在する方の氏名は入力しないでください。」。「メールアドレス（必須・デモ用）」、補助「example.comのアドレスを入力してください。例：sample@example.com」。「相談したいこと（任意）」、補助「個人を特定できる情報や詳しい診療情報は入力しないでください。」。チェック「個人情報の取り扱いを確認しました（必須）」、別リンク「個人情報の取り扱い」→/privacy/。ボタン「入力内容を確認する」。未入力エラー「入力内容を確認してください。」、各項目「相談の対象を選択してください。」「架空のお名前を入力してください。」「example.comのメールアドレスを入力してください。」「個人情報の取り扱いを確認してください。」。確認見出し「入力内容の確認」。確認本文「以下は入力内容のプレビューです。医院には送信されません。」。確認操作「入力内容を修正する」「デモを終了する」。終了見出し「入力デモを終了しました」。終了本文「入力内容は破棄しました。予約は成立していません。」。終了リンク「矯正治療について見る」→/service/。</p>
+      <p data-role="components">SectionTitle、TextInput、Textarea、Alert、新規AobaConsultationDemo。相談対象はfieldsetとlegend内のネイティブラジオ、同意はネイティブcheckbox。状態を切り出し、静的HTMLからJSで操作可能にする。</p>
+      <p data-role="animation">none。入力・エラー・確認・終了状態をアニメーションさせない。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="consultation-process">
+      <h3>04　初診相談から先の案内</h3>
+      <p data-role="purpose">予約操作の説明と、診療の説明を分ける。</p>
+      <p data-role="layout">青い背景。PC左4列に見出し、右8列に短文と下線リンク。上下72px。モバイルは1列、上下48px。</p>
+      <p data-role="copy">見出し「相談から、治療計画へ。」。本文「初診相談では、歯並びや噛み合わせについて気になっていることをお聞きします。治療計画から経過のフォローまで、当院が一貫して対応します。」。リンク「相談から治療までを見る」→/service/#flow。</p>
+      <p data-role="components">SectionTitle、新規AobaPhotoTextの写真なし表示。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文リビール2。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="access">
+      <h3>05　来院情報</h3>
+      <p data-role="purpose">所在地として分かっている範囲と、未提供の情報を明確にする。</p>
+      <p data-role="layout">PC左7列に受付写真16:9、右5列に見出し・所在地・状態文。約480px。モバイルは情報→写真。地図の代替として偽の位置ピンを描かない。</p>
+      <p data-role="copy">見出し「来院情報」。医院名「あおば矯正歯科クリニック」。所在地「静岡県藤枝市」。本文「この制作サンプルでは、所在地は市までの設定です。番地、電話番号、診療時間、交通手段は掲載していません。」。リンク「医院概要を見る」→/about/#overview。</p>
+      <p data-role="components">SectionTitle、Table、新規AobaPhotoText。</p>
+      <p data-role="animation">fade-left／900ms／stagger 0ms／ease。受付写真のみ1組。本文リビール3。</p>
+      <p data-role="image">about:reception。</p>
+    </section>
+
+    <section data-section="related">
+      <h3>06　相談前の確認先</h3>
+      <p data-role="purpose">医院の方針と入力情報の扱いを読み返せるようにする。</p>
+      <p data-role="layout">共通AobaRelatedLinks、PC2列／モバイル1列。</p>
+      <p data-role="copy">見出し「相談前に確認する」。リンク1「当院について」「診療姿勢と医院概要をご覧いただけます。」→/about/。リンク2「個人情報の取り扱い」「入力デモの送信・保存の扱いを確認できます。」→/privacy/。</p>
+      <p data-role="components">SectionTitle、Card、新規AobaRelatedLinks。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文リビール4。</p>
+      <p data-role="image">none</p>
+    </section>
+  </article>
+
+  <article data-page="/privacy/">
+    <h2>個人情報の取り扱い</h2>
+    <p>PC総長約2,600〜3,000px。本サイトの入力デモに限定した説明。実在医院の規程や法的な認証を創作しない。</p>
+
+    <section data-section="hero">
+      <h3>01　取り扱いの対象</h3>
+      <p data-role="purpose">このページが説明する範囲を明示する。</p>
+      <p data-role="layout">共通AobaPageIntro。右に待合写真。PC見出しは「個人情報の／取り扱い」の2行、モバイルも同じ改行。</p>
+      <p data-role="copy">見出し「個人情報の取り扱い」。本文「このページでは、架空の医院を用いた制作サンプルの予約入力デモについて、入力内容の扱いを説明します。実際の診療や予約受付における個人情報の取り扱いを定めるものではありません。」</p>
+      <p data-role="components">新規AobaPageIntro、SiteLayoutのBreadcrumbs。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">contact:waiting。</p>
+    </section>
+
+    <section data-section="input-scope">
+      <h3>02　入力する内容</h3>
+      <p data-role="purpose">実際の個人情報を入力しないことを明確に伝える。</p>
+      <p data-role="layout">最大760pxの読み物幅。左に青い短い罫線、h2と本文を縦積み。上下64px。文字の固定高・段組みは使わない。</p>
+      <p data-role="copy">見出し「実際の個人情報は入力しないでください」。本文「予約入力デモは、入力内容の確認操作を体験するためのものです。お名前には架空の名前を、メールアドレスにはexample.comのアドレスを入力してください。相談内容には、個人を特定できる情報や詳しい診療情報を記載しないでください。」</p>
+      <p data-role="components">SectionTitle、Alert。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文は常時可視。本文リビール1。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="transmission">
+      <h3>03　送信と保存</h3>
+      <p data-role="purpose">確認ボタンを押した際の動作と、保存範囲を説明する。</p>
+      <p data-role="layout">最大760px。2項目のTableを使用し、見出し列30%／本文70%。モバイルは各項目を縦積み。上下64px。</p>
+      <p data-role="copy">見出し「入力内容は送信・保存しません」。項目「送信」「『入力内容を確認する』を押すと、このページ内に入力内容のプレビューを表示します。入力内容を医院や外部サービスへ送信する処理は行いません。」。項目「保存」「入力内容をサーバー、Cookie、localStorage、sessionStorageへ保存する処理は行いません。入力中と確認中は、ページ内で一時的に扱います。」</p>
+      <p data-role="components">SectionTitle、Table。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。表は常時可視。本文リビール2。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="end-demo">
+      <h3>04　デモの終了と適用範囲</h3>
+      <p data-role="purpose">入力の破棄と、予約非成立を説明する。</p>
+      <p data-role="layout">最大760pxの本文。砂色の補足枠を本文の32px下へ配置。上下64px。文章は折りたたまない。</p>
+      <p data-role="copy">見出し「終了すると、入力内容を破棄します」。本文「『デモを終了する』を押すと、フォームと確認画面の入力内容を消去します。画面を読み込み直した場合も、入力を引き継ぐ処理は行いません。このデモでは予約は成立せず、確認メールも送信されません。」。補足「この説明は、本サイトの予約入力デモに関するものです。ブラウザーが独自に提供する入力補完や、配信環境のアクセス記録について説明するものではありません。」</p>
+      <p data-role="components">SectionTitle、Alert。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。本文リビール3。</p>
+      <p data-role="image">none</p>
+    </section>
+
+    <section data-section="related">
+      <h3>05　案内に戻る</h3>
+      <p data-role="purpose">情報の扱いを読んだ後、相談案内に戻れるようにする。</p>
+      <p data-role="layout">共通AobaRelatedLinks、PC2列／モバイル1列。</p>
+      <p data-role="copy">見出し「案内に戻る」。リンク1「初診相談・来院案内へ」「相談前の確認事項と予約入力デモに戻ります。」→/contact/。リンク2「当院について見る」「診療姿勢と医院の基本情報をご案内します。」→/about/。</p>
+      <p data-role="components">SectionTitle、Card、新規AobaRelatedLinks。</p>
+      <p data-role="animation">fade-up／900ms／stagger 0ms／ease。見出しのみ1組。リンクは常時可視。本文リビール4。</p>
+      <p data-role="image">none</p>
+    </section>
+  </article>
+</section>
+
+<section id="images">
+  <h2>07　画像制作指示・5枚</h2>
+  <p>同一の架空医院として、白木・温かな白・控えめな青を共通にする。写真内に文字を生成しない。各figureのplacementを生成キーとし、他ページでは同じ画像を再利用する。新たな院長肖像、症例写真、実在スタッフ写真は不要。</p>
+
+  <figure data-placement="top:hero" data-tags="矯正歯科,相談,成人,人物,縦位置" data-aspect="portrait">
+    <figcaption data-prompt="日本の地域密着型の矯正歯科医院を想定した実写調の広告写真。架空の成人相談者と成人の歯科スタッフが、白木のテーブルを挟んで穏やかに対話している。実在人物を模倣しない。縦4対5の構図、人物は中央から右に寄せ、二人の上半身と自然な手元、テーブルを含める。左側にオフホワイトの壁と余白。窓から柔らかな自然光、落ち着いた青の制服、白木と温かな白の室内。笑顔を誇張せず、カメラ目線にしない。歯列や器具の接写は不要。文字、ロゴ、名札の文字、透かしなし。">
+      相談風景。トップの主写真と、医院紹介・大人の矯正の説明に再利用。alt「相談者とスタッフがテーブルを挟んで話すイメージ」。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="about:reception" data-tags="矯正歯科,受付,院内,白木,横位置" data-aspect="landscape">
+    <figcaption data-prompt="日本の小規模な矯正歯科医院を想定した実写調の室内写真。横3対2。白木の受付カウンター、オフホワイトの壁、奥へ続く清潔な通路を同時に写す。カウンターは画面左から中央、通路は右奥。昼の自然光、青みを少し抑えた中立色、生活感を消しすぎない。小さな観葉植物を一点だけ置く。極端な広角や豪華ホテルのような空間は避ける。看板、医院名、ロゴ、文字、人物、透かしなし。">
+      受付。トップの横長写真、下層導入、来院情報に使用。alt「白木の受付カウンターと奥へ続く通路のイメージ」。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="service:facility" data-tags="矯正歯科,診療室,医療機器,横位置" data-aspect="landscape">
+    <figcaption data-prompt="日本の矯正歯科医院を想定した実写調の診療室写真。横3対2。一般的な白い歯科診療椅子一台を中央より右、窓と白木の収納を左に配置し、椅子全体と周囲の空間が分かる引きの構図。窓から柔らかい昼光、オフホワイトと抑えた青、温かい木材。特定メーカーの機器を再現しない。機器の性能を誇張する演出なし。患者、処置中の口腔、血液、ブランド名、読める画面、文字、透かしなし。">
+      診療室。治療ページ導入、医院紹介、トップの空間紹介に使用。alt「診療椅子と周囲の空間を見渡す院内イメージ」。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="service:model" data-tags="矯正歯科,歯列模型,説明,静物,正方形" data-aspect="square">
+    <figcaption data-prompt="矯正歯科で説明に用いる一般的な歯列模型一つを、白木の机の上に置いた実写調の静物写真。正方形。模型全体を中央より少し下に配置、周囲には十分な余白。自然な白い歯と淡い歯肉色、背景はオフホワイト、左上から柔らかい自然光。模型を解剖図や診断資料のように使わない。ワイヤー、矯正装置、治療前後比較、強い赤、過度な光沢、文字、ロゴ、透かしなし。">
+      歯列模型。治療入口と提供内容の補助写真。alt「白木の机に置かれた歯列模型のイメージ」。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="contact:waiting" data-tags="矯正歯科,待合,院内,自然光,横位置" data-aspect="landscape">
+    <figcaption data-prompt="日本の地域密着型の矯正歯科医院を想定した実写調の待合室写真。横3対2。画面左から中央に落ち着いた青灰色の椅子を二脚、右に白木の小さな本棚。窓から柔らかい昼光が入り、オフホワイトの壁と白木の床が見える。人のいない静かな室内。小さな本を数冊置くが背表紙に読める文字を入れない。過剰な高級感、カフェ風の小物、ロゴ、看板、文字、透かしなし。">
+      待合。相談ページ・個人情報ページの導入、小児矯正、空間紹介に使用。alt「椅子と小さな本棚がある待合のイメージ」。
+    </figcaption>
+  </figure>
+</section>
+
+<section id="implementation">
+  <h2>08　実装の固定事項</h2>
+  <dl>
+    <dt>部品の還元</dt>
+    <dd>AobaSplitHero、AobaPageIntro、AobaPhotoText、AobaPhotoPair、AobaTreatmentLinks、AobaRelatedLinks、AobaConsultationBand、AobaConsultationFlow、AobaConsultationDemo、AobaCta、AobaRevealを必要な粒度でsrc/components/sections/またはui/へ切り出す。既存部品を内包し、ページファイルへ複製しない。各ページで最低2件、サイト全体で最低6種類の既存コンポーネントを利用する。</dd>
+    <dt>予約デモの状態</dt>
+    <dd>入力→確認→終了の3状態。入力不備は先頭にrole="alert"の要約と項目リンク、入力にはaria-invalidとaria-describedby。エラー発生時は要約へ、確認時・終了時は各見出しへフォーカス移動。修正時は値を保持し、最初の項目へ戻す。終了時はフォームとメモリー上の値を消す。入力値はHTMLとして挿入せずtextContent相当で表示する。</dd>
+    <dt>デモの通信</dt>
+    <dd>送信先を作らず、入力内容をURL・ログ・アクセス解析へ入れない。外部フォーム、fetch、メール送信、永続ストレージは使わない。JS初期化前はfieldsetをdisabledにし、noscriptで「入力デモを使うにはJavaScriptを有効にしてください。治療案内はそのままご覧いただけます。」を表示。pageshow時に古い入力を復元しない。アクセス解析を追加しない。</dd>
+    <dt>画像配信</dt>
+    <dd>画像寸法とaspect-ratioを予約してレイアウト移動を防ぐ。トップ主写真はeager、fetchpriority high。各下層の導入写真はeager。画面外の写真はlazy。390／768／1440pxを想定したsrcsetを用意。写真を背景画像だけで実装しない。画像読込失敗時もキャプションと説明文が残る。</dd>
+    <dt>文字と順序</dt>
+    <dd>各ページh1は1件、以降h2→h3の順。CSSによる見た目の配置とDOMの読順を一致させる。装飾数字と矢印はaria-hiddenにし、必要な順序はリスト構造で表す。長いラベルは折り返し、320px幅でも横スクロールを発生させない。</dd>
+    <dt>リンク</dt>
+    <dd>全リンクをサイトのbase配下へ解決。ページ内リンクの対象idを必ず作る。href="#"、未作成ページ、架空の電話リンクは禁止。カード全体をリンクにする場合は中に別リンクやボタンを入れない。全ページの共通シェルから初診相談へ到達可能にする。</dd>
+    <dt>情報の制約</dt>
+    <dd>院長氏名、資格、学会、経歴、料金、治療期間、診療時間、休診日、交通、番地、支払方法、治療効果、患者の声は追加しない。実績3件は指定値のまま扱う。白い空白を地図・カレンダーの未実装領域として残さない。</dd>
+    <dt>確認条件</dt>
+    <dd>npm run build、npm run check:web、npm run check:catalogを実施。highゼロ、arch-component-reuseゼロ、ia-required-page-missingゼロを確認。320／390／768／1440pxで全6ページを確認し、見出しの欠け、写真の主題切れ、追従CTAによる遮蔽を修正。キーボードだけでメニュー・全リンク・入力・確認・修正・終了へ到達できることを確認する。</dd>
+    <dt>モーションの確認</dt>
+    <dd>通常時は各ページ4組、すべて900ms／stagger 0ms。下層を含む全ページを同条件で確認。低減設定とJS無効時に本文・リンクが初期表示されること、メニュー展開中とフォーカス中にヘッダーが退避しないことを確認する。</dd>
+  </dl>
+</section>
+
+<section id="reference-notes">
+  <h2>09　参照の扱い</h2>
+  <p>主資料は提供されたトップ画像とLook解析。青い面、院内・人物の写真、医院紹介と治療案内の役割分担、写真付き下層導入、読了後の関連2件を継承する。参照の固有図案と、トップに偏ったモーションは継承しない。</p>
+  <p>部品カタログは、<a href="https://loadmo.re/posts/water-works-project">モバイル実例</a>、<a href="https://www.supaste.com/">グローバルナビ実例</a>、<a href="https://www.hello-world.studio/">CTA実例</a>を確認した。本案での採用判断は、モバイルで目的地を選べる文字ラベル、事業内容が読めるナビ、遷移先の動作が分かるCTAとする。これらのリンクはディレクションの確認記録であり、制作する医院サイトには掲載しない。</p>
+</section>
+</main>
+</body>
+</html>

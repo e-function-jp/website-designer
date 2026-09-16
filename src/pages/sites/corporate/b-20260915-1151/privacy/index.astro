@@ -1,0 +1,117 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import ClinicPageIntro from '../../../../../components/sections/ClinicPageIntro.astro';
+import AobaConsultationBand from "../../../../../components/sections/AobaConsultationBand.astro";
+import AobaClinicInfo from "../../../../../components/sections/AobaClinicInfo.astro";
+import ClinicRelatedLinks from '../../../../../components/sections/ClinicRelatedLinks.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260915-1151';
+
+const introImage = { src: `${SHARED}/img-b-05.jpg`, alt: '待合のイメージ' };
+
+const transmissionRows = [
+  { k: '送信', v: '『入力内容を確認する』を押すと、このページ内に入力内容のプレビューを表示します。入力内容を医院や外部サービスへ送信する処理は行いません。' },
+  { k: '保存', v: '入力内容をサーバー、Cookie、localStorage、sessionStorageへ保存する処理は行いません。入力中と確認中は、ページ内で一時的に扱います。' },
+];
+
+const relatedLinks = [
+  { label: '初診相談・来院案内へ', href: '/contact/', description: '相談前の確認事項と予約入力デモに戻ります。' },
+  { label: '当院について見る', href: '/about/', description: '診療姿勢と医院の基本情報をご案内します。' },
+];
+---
+<SiteLayout
+  site={site}
+  title="個人情報の取り扱い"
+  description="あおば矯正歯科クリニックの予約入力デモにおける個人情報の取り扱い。架空の医院を用いた制作サンプルの予約入力デモについて、入力内容の扱いを説明します。"
+  path="/privacy/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '個人情報の取り扱い' }]}
+>
+  <!-- 01 取り扱いの対象 (animation: none) -->
+  <ClinicPageIntro
+    heading="個人情報の取り扱い"
+    description="このページでは、架空の医院を用いた制作サンプルの予約入力デモについて、入力内容の扱いを説明します。実際の診療や予約受付における個人情報の取り扱いを定めるものではありません。"
+    image={introImage}
+  />
+
+  <!-- 02 入力する内容 (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-14 lg:py-16">
+      <div class="border-l-4 border-primary pl-5 lg:pl-8">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <SectionTitle title="実際の個人情報は入力しないでください" align="left" />
+        </ScrollReveal>
+        <div class="mt-6 text-sm lg:text-base leading-[1.9] text-base-content/85">
+          <p>予約入力デモは、入力内容の確認操作を体験するためのものです。お名前には架空の名前を、メールアドレスにはexample.comのアドレスを入力してください。相談内容には、個人を特定できる情報や詳しい診療情報を記載しないでください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 送信と保存 (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-14 lg:py-16">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="入力内容は送信・保存しません" align="left" />
+      </ScrollReveal>
+      <Table class="mt-4">
+        <tbody>
+          {transmissionRows.map((row) => (
+            <tr>
+              <th class="w-[30%] whitespace-nowrap align-top text-primary font-bold text-sm lg:text-base pt-4 pb-4">{row.k}</th>
+              <td class="text-sm lg:text-base leading-[1.9] pt-4 pb-4">{row.v}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  </section>
+
+  <!-- 04 デモの終了と適用範囲 (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-14 lg:py-16">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="終了すると、入力内容を破棄します" align="left" />
+      </ScrollReveal>
+      <div class="mt-6 text-sm lg:text-base leading-[1.9] text-base-content/85">
+        <p>『デモを終了する』を押すと、フォームと確認画面の入力内容を消去します。画面を読み込み直した場合も、入力を引き継ぐ処理は行いません。このデモでは予約は成立せず、確認メールも送信されません。</p>
+      </div>
+      <Alert variant="info" class="mt-8">
+        <p class="text-sm lg:text-base leading-relaxed">
+          この説明は、本サイトの予約入力デモに関するものです。ブラウザーが独自に提供する入力補完や、配信環境のアクセス記録について説明するものではありません。
+        </p>
+      </Alert>
+    </div>
+  </section>
+
+  <!-- 05 案内に戻る (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="案内に戻る" align="left" />
+      </ScrollReveal>
+      <div class="mt-2">
+        <ClinicRelatedLinks site={site} links={relatedLinks} />
+      </div>
+    </div>
+  </section>
+
+  <PageTopButton />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  @media (min-width: 1024px) {
+    section[class*="bg-base-100"] {
+      padding-left: 72px;
+      padding-right: 72px;
+    }
+  }
+</style>

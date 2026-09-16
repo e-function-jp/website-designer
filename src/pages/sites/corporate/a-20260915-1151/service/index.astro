@@ -1,0 +1,216 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Card from '../../../../../components/data-display/Card.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import ClinicPageIntro from '../../../../../components/sections/ClinicPageIntro.astro';
+import ClinicRelatedLinks from '../../../../../components/sections/ClinicRelatedLinks.astro';
+import ClinicPageEnd from '../../../../../components/sections/ClinicPageEnd.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+
+const SHARED = '/sites/corporate/_shared/20260915-1151';
+
+const intro = {
+  heading: '矯正治療のご案内',
+  description: '小児から成人までの歯列矯正と噛み合わせ治療を中心に、マウスピース矯正・ワイヤー矯正・保定管理を提供しています。対象別の相談内容と、当院で扱う治療についてご案内します。',
+  image: { src: `${SHARED}/img-a-04.jpg`, alt: '矯正歯科クリニックの診療室' },
+};
+
+const anchors = [
+  { label: '大人の矯正', href: url(site, '/service/#adult') },
+  { label: '子どもの矯正', href: url(site, '/service/#child') },
+  { label: '治療方法', href: url(site, '/service/#methods') },
+  { label: '保定管理', href: url(site, '/service/#retention') },
+];
+
+const adultImage = { src: `${SHARED}/img-a-02.jpg`, alt: '大人の矯正の相談場面' };
+const childImage = { src: `${SHARED}/img-a-07.jpg`, alt: '子どもと保護者の矯正相談' };
+
+const methodsCards = [
+  {
+    id: 'aligner',
+    title: 'マウスピース矯正',
+    body: 'マウスピース型の装置を用いる矯正治療です。当院で扱う治療方法の一つとしてご案内しています。具体的な治療内容や日常生活で確認したいことは、初診相談でお聞かせください。',
+    image: { src: `${SHARED}/img-a-05.jpg`, alt: 'マウスピース矯正装置のイメージ' },
+  },
+  {
+    id: 'wire',
+    title: 'ワイヤー矯正',
+    body: 'ワイヤーを用いる矯正治療です。当院では歯並びと噛み合わせの相談を受け、治療計画と経過のフォローを一貫して行います。方法ごとの詳しい説明は、相談の中で確認します。',
+    image: { src: `${SHARED}/img-a-06.jpg`, alt: 'ワイヤー矯正装置のイメージ' },
+  },
+];
+
+const relatedLinks = [
+  { label: 'はじめての方へ', href: '/new-patients/', description: '相談から治療までの流れを確認できます。' },
+  { label: '当院について', href: '/about/', description: '診療姿勢と医院の体制についてご紹介します。' },
+];
+---
+<SiteLayout
+  site={site}
+  title="矯正治療のご案内"
+  description="あおば矯正歯科クリニックの矯正治療のご案内。大人と子どもの矯正、マウスピース矯正・ワイヤー矯正・保定管理について、対象別の相談内容と当院で扱う治療をご紹介します。"
+  path="/service/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '矯正治療のご案内' }]}
+>
+  <ClinicPageIntro heading={intro.heading} description={intro.description} image={intro.image} />
+
+  <section class="bg-base-100">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-10 lg:py-14">
+      <ul class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+        {anchors.map((a) => (
+          <li>
+            <a
+              href={a.href}
+              class="flex items-center justify-center text-center bg-base-100 border border-base-300 hover:border-primary text-sm lg:text-base font-medium py-4 lg:py-5 px-3 lg:px-4 transition-colors min-h-[48px]"
+            >
+              {a.label}
+              <span aria-hidden="true" class="ml-2 text-primary">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 1. 大人の矯正 -->
+  <section id="adult" class="bg-base-100 scroll-mt-[100px]">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-[45%_55%] gap-8 lg:gap-20 items-start">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <figure>
+          <img
+            src={adultImage.src}
+            alt={adultImage.alt}
+            width="1200"
+            height="1500"
+            loading="lazy"
+            class="w-full aspect-[4/5] object-cover rounded-lg"
+          />
+        </figure>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="大人の歯並びと、噛み合わせの相談。" align="left" />
+        <div class="space-y-5 text-sm lg:text-base leading-loose text-base-content/85">
+          <p>歯並びの見た目を整えたい。噛み合わせが気になっている。あおば矯正歯科クリニックでは、成人の方の歯列矯正と噛み合わせ治療について相談を受けています。</p>
+          <p>治療を考えるときは、改善したいことに加え、日常生活や通院について気になることも整理しておくと、確認したい内容が明確になります。マウスピース矯正・ワイヤー矯正を扱っていますが、具体的な治療方法は相談と治療計画の中で検討します。</p>
+        </div>
+        <ul class="mt-8 border-t border-base-300 pt-6 space-y-3 text-sm lg:text-base">
+          <li class="border-b border-base-300 pb-3 flex gap-3"><span aria-hidden="true" class="text-primary">・</span>見た目や噛み合わせで気になっていること</li>
+          <li class="border-b border-base-300 pb-3 flex gap-3"><span aria-hidden="true" class="text-primary">・</span>治療方法について知りたいこと</li>
+          <li class="flex gap-3"><span aria-hidden="true" class="text-primary">・</span>通院を考えるうえで気になること</li>
+        </ul>
+        <a
+          href={url(site, '/new-patients/')}
+          class="inline-flex items-center gap-2 mt-8 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content"
+        >
+          初診相談の流れを見る
+          <span aria-hidden="true">→</span>
+        </a>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 2. 子どもの矯正 -->
+  <section id="child" class="bg-secondary scroll-mt-[100px]">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-[55%_45%] gap-8 lg:gap-20 items-start">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="お子さまの歯並びを、一緒に考える。" align="left" />
+        <div class="space-y-5 text-sm lg:text-base leading-loose text-base-content/85">
+          <p>子どもの歯並びや噛み合わせが気になったとき、何を相談すればよいか迷うこともあるかもしれません。まずは保護者の方が気になっていることを、言葉にできる範囲で整理してみてください。</p>
+          <p>当院は小児の歯列矯正と噛み合わせ治療に対応しています。初診相談から治療計画、経過のフォローまで一貫して行います。治療の進め方について知りたいことも、相談内容として確認していきます。</p>
+        </div>
+        <p class="mt-6 text-sm lg:text-base text-base-content/85 bg-base-100 border border-base-300 p-5 rounded">
+          <span class="font-bold mr-2 text-primary">相談前の整理：</span>気になり始めたきっかけ／歯並びや噛み合わせについて知りたいこと／通院について確認したいこと。
+        </p>
+        <a
+          href={url(site, '/new-patients/')}
+          class="inline-flex items-center gap-2 mt-6 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content"
+        >
+          保護者の方も、先もして案内から
+          <span aria-hidden="true">→</span>
+        </a>
+      </ScrollReveal>
+      <figure>
+        <img
+          src={childImage.src}
+          alt={childImage.alt}
+          width="1000"
+          height="1250"
+          loading="lazy"
+          class="w-full aspect-[4/5] object-cover rounded-lg"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3. 取り扱う治療方法 -->
+  <section id="methods" class="bg-base-100 scroll-mt-[100px]">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <SectionTitle title="治療方法を知る" align="left" />
+      <p class="text-sm lg:text-base leading-loose text-base-content/85 mb-10 lg:mb-12 max-w-[760px]">
+        当院では、マウスピース矯正とワイヤー矯正を提供しています。装置の見た目だけで方法を決めず、気になることや希望を相談し、治療計画の中で確認していきます。
+      </p>
+      <ul class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        {methodsCards.map((card) => (
+          <li id={card.id} class="scroll-mt-[100px]">
+            <Card class="bg-base-100 border border-base-300 p-6 lg:p-8 h-full">
+              <figure class="mb-5 aspect-[3/2] overflow-hidden rounded-lg bg-base-200 -mx-2">
+                <img
+                  src={card.image.src}
+                  alt={card.image.alt}
+                  width="1200"
+                  height="800"
+                  loading="lazy"
+                  class="w-full h-full object-cover"
+                />
+              </figure>
+              <p class="text-lg lg:text-xl font-bold mb-3 text-primary">{card.title}</p>
+              <p class="text-sm lg:text-base leading-relaxed text-base-content/85">{card.body}</p>
+            </Card>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-10">
+        <Alert variant="info">
+          <p class="text-sm lg:text-base leading-loose">
+            このページには、個別の適応・費用・期間・リスクの詳細は掲載していません。写真だけで、ご自身に合う治療方法を判断することはできません。
+          </p>
+        </Alert>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 保定管理と継続したフォロー -->
+  <section id="retention" class="bg-base-200 scroll-mt-[100px]">
+    <div class="max-w-[850px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-[35%_65%] gap-8 lg:gap-16 items-start">
+      <SectionTitle title="治療の先まで、経過を見ていく。" align="left" />
+      <div>
+        <div class="space-y-5 text-sm lg:text-base leading-loose text-base-content/85">
+          <p>当院では、矯正治療に加えて保定管理を行っています。初診相談と治療計画だけで完結せず、治療中の経過確認から治療後の管理まで、継続して対応することを大切にしています。</p>
+          <p>通院や管理について疑問がある場合は、相談時に確認したい項目として整理しておきましょう。</p>
+        </div>
+        <div class="mt-8">
+          <Alert variant="info">
+            <p class="text-sm leading-loose">
+              費用、治療期間、通院間隔、治療に伴う注意点の具体的な設定は、このサンプルサイトにはありません。
+            </p>
+          </Alert>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 治療を検討する次の一歩 -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <SectionTitle title="治療を検討する次の一歩" align="left" />
+      <ClinicRelatedLinks site={site} links={relatedLinks} />
+    </div>
+  </section>
+
+  <ClinicPageEnd site={site} />
+  <PageTopButton />
+</SiteLayout>

@@ -1,0 +1,61 @@
+---
+/**
+ * ClinicPageIntro — 下層ページの写真付き導入。
+ *
+ * ディレクションの指示:
+ *   - 共通シェル。PC 38:62、高さ 550px。PC は左 38% がタイトル、右 62% が写真
+ *   - 左に h1・導入 80〜120 文字、下にパンくず
+ *   - 右写真の左下だけ 40px 角丸。背景はオフホワイト
+ *   - モバイル: タイトル・導入→写真→パンくず。写真は横 4:3
+ *
+ * パンくずは SiteLayout 側で <Breadcrumbs /> を出しているので、
+ * このコンポーネントはパンくずの上に重ならないよう、
+ * SiteLayout 側のパンくずを「写真の後ろ」CSS 順序で挿し替える実装を併用する。
+ */
+interface Props {
+  heading: string;
+  description: string;
+  image: { src: string; alt: string };
+}
+
+const { heading, description, image } = Astro.props;
+---
+<section class="clinic-page-intro bg-base-100">
+  <div class="clinic-page-intro__inner max-w-[1100px] mx-auto">
+    <div class="clinic-page-intro__grid grid lg:grid-cols-[38%_62%]">
+      <div class="clinic-page-intro__copy px-5 lg:px-0 lg:pr-10 py-10 lg:py-14 flex flex-col justify-end">
+        <h1 class="text-2xl lg:text-[2.625rem] font-medium leading-snug tracking-[0.06em] mb-4 lg:mb-6">
+          {heading}
+        </h1>
+        <p class="text-sm lg:text-base leading-loose text-base-content/85 max-w-[36em]">
+          {description}
+        </p>
+      </div>
+      <div class="clinic-page-intro__photo">
+        <img
+          src={image.src}
+          alt={image.alt}
+          width="1200"
+          height="900"
+          loading="eager"
+          fetchpriority="high"
+          class="clinic-page-intro__img w-full h-full object-cover aspect-[4/3] lg:aspect-auto lg:h-[550px]"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clinic-page-intro__inner { padding: 0; }
+  .clinic-page-intro__copy { background: var(--color-base-200); }
+  .clinic-page-intro__img {
+    border-bottom-left-radius: 40px;
+  }
+  /* モバイルでは写真の角丸なし */
+  @media (max-width: 1023px) {
+    .clinic-page-intro__img { border-bottom-left-radius: 0; }
+  }
+  /* アンカー着地用スクロール余白 */
+  :global([id]) { scroll-margin-top: 100px; }
+</style>

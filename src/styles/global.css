@@ -7,9 +7,12 @@
 @import "./themes/corporate-minamoto.css";
 @import "./themes/corporate-hokuline.css";
 @import "./themes/corporate-hokuline-bold.css";
+@import "./themes/aoba-corporate.css";
+@import "./themes/aoba-corporate-b.css";
 
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, corporate, cupcake, luxury,
           business, emerald, retro, nord, autumn, winter, lofi,
-          corporate-hokuline, corporate-hokuline-bold, corporate-minamoto;
+          corporate-hokuline, corporate-hokuline-bold, corporate-minamoto,
+          aoba-corporate, aoba-corporate-b;
 }

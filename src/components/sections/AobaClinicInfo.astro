@@ -1,0 +1,49 @@
+---
+/**
+ * AobaClinicInfo — 共通医院情報。
+ *
+ * direction-b.html #shell の指示に基づく。
+ *   - 相談帯の次にオフホワイトで「静岡県藤枝市の矯正専門医院」
+ *     「あおば矯正歯科クリニック」「2011年設立」を表示。
+ *   - リンク「医院概要を見る」→/about/#overview、
+ *     「初診相談・来院案内を見る」→/contact/。
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+}
+
+const { site } = Astro.props;
+---
+<section class="aoba-info bg-base-100 border-t border-base-300">
+  <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-12 lg:py-16">
+    <p class="text-sm lg:text-base text-base-content/85 leading-relaxed">
+      静岡県藤枝市の矯正専門医院「あおば矯正歯科クリニック」。2011年設立。
+    </p>
+    <ul class="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm lg:text-base font-medium">
+      <li>
+        <a href={url(site, '/about/#overview')} class="inline-flex items-center gap-2 border-b border-base-content/40 pb-1 hover:border-base-content">
+          医院概要を見る
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a href={url(site, '/contact/')} class="inline-flex items-center gap-2 border-b border-base-content/40 pb-1 hover:border-base-content">
+          初診相談・来院案内を見る
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 1024px) {
+    .aoba-info > div {
+      padding-left: 72px;
+      padding-right: 72px;
+    }
+  }
+</style>

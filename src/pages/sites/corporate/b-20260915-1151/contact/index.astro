@@ -1,0 +1,592 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import ClinicPageIntro from '../../../../../components/sections/ClinicPageIntro.astro';
+import AobaConsultationBand from "../../../../../components/sections/AobaConsultationBand.astro";
+import AobaClinicInfo from "../../../../../components/sections/AobaClinicInfo.astro";
+import ClinicRelatedLinks from '../../../../../components/sections/ClinicRelatedLinks.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260915-1151';
+
+const introImage = { src: `${SHARED}/img-b-05.jpg`, alt: '待合のイメージ' };
+const accessImage = { src: `${SHARED}/img-b-02.jpg`, alt: '院内イメージ' };
+
+const preparation = [
+  {
+    number: '01',
+    title: '誰の相談か',
+    body: 'お子さまの歯並びについてか、ご自身の矯正についてかを整理します。',
+  },
+  {
+    number: '02',
+    title: '何が気になっているか',
+    body: '歯並びの見た目、噛み合わせなど、気がかりを言葉にしてみてください。',
+  },
+  {
+    number: '03',
+    title: '何を確認したいか',
+    body: '治療方法や通院など、初診相談で聞いておきたいことをまとめます。',
+  },
+];
+
+const relatedLinks = [
+  { label: '当院について', href: '/about/', description: '診療姿勢と医院概要をご覧いただけます。' },
+  { label: '個人情報の取り扱い', href: '/privacy/', description: '入力デモの送信・保存の扱いを確認できます。' },
+];
+---
+<SiteLayout
+  site={site}
+  title="初診相談・来院案内"
+  description="あおば矯正歯科クリニックの初診相談と来院案内。子どもの歯並びが気になる方も、大人の矯正を考えている方も、まずは気になっていることを整理するところから始めましょう。"
+  path="/contact/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '初診相談・来院案内' }]}
+>
+  <!-- 01 相談窓口の導入 (animation: none) -->
+  <ClinicPageIntro
+    heading="初診相談・来院案内"
+    description="子どもの歯並びが気になる方も、大人の矯正を考えている方も。まずは、気になっていることを整理するところから始めましょう。"
+    image={introImage}
+  />
+
+  <!-- 砂色Alert (導入直下、モバイルでは写真より先) -->
+  <section class="bg-base-100">
+    <div class="max-w-[1100px] mx-auto px-5 lg:px-10 pt-6 lg:pt-10 pb-0">
+      <Alert variant="info">
+        <p class="text-sm lg:text-base leading-relaxed">
+          このページは予約入力のデモです。実際の予約は受け付けていません。氏名や連絡先など、実際の個人情報は入力しないでください。
+        </p>
+      </Alert>
+    </div>
+  </section>
+
+  <!-- 02 相談前に整理すること (見出しのみ fade-up) -->
+  <section class="bg-base-100">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div class="lg:col-span-4">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <SectionTitle title="話したいことを、三つの視点で。" align="left" />
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-8">
+          <ol class="border-t border-base-300">
+            {preparation.map((p) => (
+              <li class="border-b border-base-300 py-6 lg:py-8 grid lg:grid-cols-[120px_1fr] gap-4 lg:gap-12">
+                <span class="text-base-content font-bold text-sm lg:text-base tabular-nums" aria-hidden="true">{p.number}</span>
+                <div>
+                  <h3 class="text-base lg:text-lg font-bold mb-2 lg:mb-3">{p.title}</h3>
+                  <p class="text-sm lg:text-base leading-[1.9] text-base-content/85">{p.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 予約入力デモ (animation: none) -->
+  <section id="consultation" class="bg-base-100 border-t border-base-300 scroll-mt-[104px]">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="bg-base-100 border border-base-300 p-6 lg:p-12">
+
+        <!-- 入力ステート -->
+        <div data-state="input">
+          <SectionTitle title="初診相談の予約入力デモ" align="left" />
+          <p class="mt-4 mb-8 text-sm lg:text-base leading-relaxed text-base-content/85">
+            入力内容を確認するまでの操作をお試しいただけます。内容は送信・保存されず、予約は成立しません。
+          </p>
+
+          <!-- エラーサマリ -->
+          <div
+            role="alert"
+            class="aoba-demo__error hidden mb-8 p-4 lg:p-6 bg-secondary border-l-4 border-error text-base-content"
+            data-error-summary
+          >
+            <p class="font-bold mb-3">入力内容を確認してください。</p>
+            <ul class="space-y-1 text-sm lg:text-base">
+              <li><a href="#error-subject" class="underline" data-error-link="subject">相談の対象を選択してください。</a></li>
+              <li><a href="#error-name" class="underline" data-error-link="name">架空のお名前を入力してください。</a></li>
+              <li><a href="#error-email" class="underline" data-error-link="email">example.comのメールアドレスを入力してください。</a></li>
+              <li><a href="#error-privacy" class="underline" data-error-link="privacy">個人情報の取り扱いを確認してください。</a></li>
+            </ul>
+          </div>
+
+          <Alert variant="info" class="mb-8">
+            <p class="text-sm lg:text-base leading-relaxed">
+              入力内容は、医院や外部サービスへ送信されません。サーバー・Cookie・localStorage・sessionStorageへの保存も行いません。
+            </p>
+          </Alert>
+
+          <form novalidate class="space-y-8" data-form>
+            <fieldset disabled data-fieldset>
+              <legend class="font-bold text-sm lg:text-base mb-3">相談の対象（必須）</legend>
+              <div class="space-y-2">
+                <label class="flex items-center gap-3 text-sm lg:text-base cursor-pointer min-h-[44px] py-2">
+                  <input type="radio" name="subject" value="child" class="radio radio-primary" data-field="subject" />
+                  <span>子どもの矯正</span>
+                </label>
+                <label class="flex items-center gap-3 text-sm lg:text-base cursor-pointer min-h-[44px] py-2">
+                  <input type="radio" name="subject" value="adult" class="radio radio-primary" data-field="subject" />
+                  <span>大人の矯正</span>
+                </label>
+                <label class="flex items-center gap-3 text-sm lg:text-base cursor-pointer min-h-[44px] py-2">
+                  <input type="radio" name="subject" value="undecided" class="radio radio-primary" data-field="subject" />
+                  <span>まだ決めていない</span>
+                </label>
+              </div>
+              <p id="error-subject" class="aoba-demo__field-error hidden mt-2 text-sm text-error" data-field-error="subject"></p>
+
+              <div class="mt-8">
+                <label for="demo-name" class="block font-bold text-sm lg:text-base mb-3">お名前（必須・架空の名前）</label>
+                <input
+                  id="demo-name"
+                  name="name"
+                  type="text"
+                  autocomplete="off"
+                  class="input input-bordered w-full h-12"
+                  data-field="name"
+                  aria-describedby="demo-name-help error-name"
+                />
+                <p id="demo-name-help" class="mt-2 text-xs lg:text-sm text-base-content/65">
+                  実在する方の氏名は入力しないでください。
+                </p>
+                <p id="error-name" class="aoba-demo__field-error hidden mt-2 text-sm text-error" data-field-error="name"></p>
+              </div>
+
+              <div class="mt-8">
+                <label for="demo-email" class="block font-bold text-sm lg:text-base mb-3">メールアドレス（必須・デモ用）</label>
+                <input
+                  id="demo-email"
+                  name="email"
+                  type="email"
+                  autocomplete="off"
+                  class="input input-bordered w-full h-12"
+                  data-field="email"
+                  aria-describedby="demo-email-help error-email"
+                />
+                <p id="demo-email-help" class="mt-2 text-xs lg:text-sm text-base-content/65">
+                  example.comのアドレスを入力してください。例：sample@example.com
+                </p>
+                <p id="error-email" class="aoba-demo__field-error hidden mt-2 text-sm text-error" data-field-error="email"></p>
+              </div>
+
+              <div class="mt-8">
+                <label for="demo-message" class="block font-bold text-sm lg:text-base mb-3">相談したいこと（任意）</label>
+                <textarea
+                  id="demo-message"
+                  name="message"
+                  rows="6"
+                  class="textarea textarea-bordered w-full min-h-[144px]"
+                  data-field="message"
+                  aria-describedby="demo-message-help"
+                ></textarea>
+                <p id="demo-message-help" class="mt-2 text-xs lg:text-sm text-base-content/65">
+                  個人を特定できる情報や詳しい診療情報は入力しないでください。
+                </p>
+              </div>
+
+              <div class="mt-8">
+                <label class="flex items-start gap-3 cursor-pointer min-h-[44px] py-2">
+                  <input type="checkbox" name="privacy" class="checkbox checkbox-primary mt-1" data-field="privacy" aria-describedby="error-privacy" />
+                  <span class="text-sm lg:text-base leading-relaxed">
+                    <a href={url(site, '/privacy/')} class="underline">個人情報の取り扱い</a>を確認しました（必須）
+                  </span>
+                </label>
+                <p id="error-privacy" class="aoba-demo__field-error hidden mt-2 text-sm text-error" data-field-error="privacy"></p>
+              </div>
+
+              <div class="mt-10">
+                <button
+                  type="submit"
+                  class="aoba-cta"
+                  data-submit
+                >
+                  入力内容を確認する
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
+        <!-- 確認ステート -->
+        <div data-state="confirm" class="hidden">
+          <SectionTitle title="入力内容の確認" align="left" />
+          <p class="mt-4 mb-8 text-sm lg:text-base leading-relaxed text-base-content/85">
+            以下は入力内容のプレビューです。医院には送信されません。
+          </p>
+          <dl class="space-y-6 border-t border-base-300 pt-6">
+            <div class="grid lg:grid-cols-[140px_1fr] gap-2 lg:gap-6 border-b border-base-300 pb-5">
+              <dt class="font-bold text-primary text-sm lg:text-base">相談の対象</dt>
+              <dd class="text-sm lg:text-base" data-confirm="subject"></dd>
+            </div>
+            <div class="grid lg:grid-cols-[140px_1fr] gap-2 lg:gap-6 border-b border-base-300 pb-5">
+              <dt class="font-bold text-primary text-sm lg:text-base">お名前</dt>
+              <dd class="text-sm lg:text-base break-words" data-confirm="name"></dd>
+            </div>
+            <div class="grid lg:grid-cols-[140px_1fr] gap-2 lg:gap-6 border-b border-base-300 pb-5">
+              <dt class="font-bold text-primary text-sm lg:text-base">メールアドレス</dt>
+              <dd class="text-sm lg:text-base break-words" data-confirm="email"></dd>
+            </div>
+            <div class="grid lg:grid-cols-[140px_1fr] gap-2 lg:gap-6 border-b border-base-300 pb-5">
+              <dt class="font-bold text-primary text-sm lg:text-base">相談したいこと</dt>
+              <dd class="text-sm lg:text-base whitespace-pre-wrap" data-confirm="message"></dd>
+            </div>
+          </dl>
+          <div class="mt-10 flex flex-col sm:flex-row gap-4">
+            <button type="button" class="aoba-cta aoba-cta--outline" data-action="edit">
+              入力内容を修正する
+            </button>
+            <button type="button" class="aoba-cta" data-action="finish">
+              デモを終了する
+            </button>
+          </div>
+        </div>
+
+        <!-- 終了ステート -->
+        <div data-state="done" class="hidden">
+          <SectionTitle title="入力デモを終了しました" align="left" />
+          <p class="mt-4 mb-8 text-sm lg:text-base leading-relaxed text-base-content/85">
+            入力内容は破棄しました。予約は成立していません。
+          </p>
+          <div class="mt-6">
+            <a href={url(site, '/service/')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content">
+              矯正治療について見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <noscript>
+    <div class="bg-secondary text-base-content border-l-4 border-primary">
+      <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-6 text-sm lg:text-base">
+        入力デモを使うにはJavaScriptを有効にしてください。治療案内はそのままご覧いただけます。
+      </div>
+    </div>
+  </noscript>
+
+  <!-- 04 初診相談から先の案内 (青背景、見出しのみ fade-up) -->
+  <section class="bg-primary text-primary-content">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-14 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-6 lg:gap-12 items-start">
+        <div class="lg:col-span-4">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <h2 class="text-xl lg:text-2xl font-medium leading-snug tracking-[0.02em]">
+              相談から、治療計画へ。
+            </h2>
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-8">
+          <p class="text-sm lg:text-base leading-[1.9] text-primary-content/90 mb-4 lg:mb-6">
+            初診相談では、歯並びや噛み合わせについて気になっていることをお聞きします。治療計画から経過のフォローまで、当院が一貫して対応します。
+          </p>
+          <a href={url(site, '/service/#flow')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-primary-content/40 pb-1 hover:border-primary-content text-primary-content">
+            相談から治療までを見る
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 来院情報 (受付写真のみ fade-left) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <ScrollReveal animation="fade-left" duration={site.motion!.durationMs} class="lg:col-span-7">
+          <figure class="overflow-hidden">
+            <img
+              src={accessImage.src}
+              alt={accessImage.alt}
+              width="1500"
+              height="844"
+              loading="lazy"
+              class="w-full aspect-[16/9] object-cover"
+            />
+            <figcaption class="mt-3 text-xs lg:text-sm text-base-content/65">
+              院内イメージ
+            </figcaption>
+          </figure>
+        </ScrollReveal>
+        <div class="lg:col-span-5">
+          <SectionTitle title="来院情報" align="left" />
+          <Table class="mt-4">
+            <tbody>
+              <tr>
+                <th class="w-28 whitespace-nowrap align-top text-primary font-bold text-sm lg:text-base pt-3 pb-3">医院名</th>
+                <td class="text-sm lg:text-base pt-3 pb-3">あおば矯正歯科クリニック</td>
+              </tr>
+              <tr>
+                <th class="w-28 whitespace-nowrap align-top text-primary font-bold text-sm lg:text-base pt-3 pb-3">所在地</th>
+                <td class="text-sm lg:text-base pt-3 pb-3">静岡県藤枝市</td>
+              </tr>
+            </tbody>
+          </Table>
+          <p class="mt-4 text-sm lg:text-base leading-relaxed text-base-content/85">
+            この制作サンプルでは、所在地は市までの設定です。番地、電話番号、診療時間、交通手段は掲載していません。
+          </p>
+          <div class="mt-6">
+            <a href={url(site, '/about/#overview')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content">
+              医院概要を見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 相談前の確認先 (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="相談前に確認する" align="left" />
+      </ScrollReveal>
+      <div class="mt-2">
+        <ClinicRelatedLinks site={site} links={relatedLinks} />
+      </div>
+    </div>
+  </section>
+
+  <AobaConsultationBand site={site} isContactPage />
+  <AobaClinicInfo site={site} />
+  <PageTopButton />
+  <FloatingCta site={site} hidden={true} />
+</SiteLayout>
+
+<style>
+  .aoba-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 24px;
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+  .aoba-cta:hover {
+    opacity: 0.92;
+  }
+  .aoba-cta:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+  .aoba-cta--outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+  .aoba-cta--outline:hover {
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+    opacity: 1;
+  }
+  .aoba-demo__field-error {
+    color: var(--color-error);
+  }
+  [data-field].is-invalid {
+    border-color: var(--color-error);
+  }
+  .aoba-demo__error {
+    border-radius: 0;
+  }
+  @media (min-width: 1024px) {
+    section[class*="bg-base-100"], section[class*="bg-primary"] {
+      padding-left: 72px;
+      padding-right: 72px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aoba-cta { transition: none !important; }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.querySelector<HTMLElement>('[id="consultation"]');
+    if (!root) return;
+    const form = root.querySelector<HTMLFormElement>('[data-form]');
+    const fieldset = root.querySelector<HTMLFieldSetElement>('[data-fieldset]');
+    if (!form || !fieldset) return;
+
+    const inputState = root.querySelector<HTMLElement>('[data-state="input"]');
+    const confirmState = root.querySelector<HTMLElement>('[data-state="confirm"]');
+    const doneState = root.querySelector<HTMLElement>('[data-state="done"]');
+    const errorSummary = root.querySelector<HTMLElement>('[data-error-summary]');
+
+    const fieldErrors: Record<string, string> = {
+      subject: '相談の対象を選択してください。',
+      name: '架空のお名前を入力してください。',
+      email: 'example.comのメールアドレスを入力してください。',
+      privacy: '個人情報の取り扱いを確認してください。',
+    };
+
+    const subjectLabels: Record<string, string> = {
+      child: '子どもの矯正',
+      adult: '大人の矯正',
+      undecided: 'まだ決めていない',
+    };
+
+    let savedValues: Record<string, string> = {};
+
+    const showState = (name: 'input' | 'confirm' | 'done', options: { focusHeading?: boolean } = {}) => {
+      inputState?.classList.toggle('hidden', name !== 'input');
+      confirmState?.classList.toggle('hidden', name !== 'confirm');
+      doneState?.classList.toggle('hidden', name !== 'done');
+      if (options.focusHeading) {
+        const heading = root.querySelector<HTMLElement>(`[data-state="${name}"] h2, [data-state="${name}"] .section-title`);
+        heading?.setAttribute('tabindex', '-1');
+        (heading as HTMLElement | null)?.focus?.();
+      }
+    };
+
+    const clearErrors = () => {
+      errorSummary?.classList.add('hidden');
+      root.querySelectorAll<HTMLElement>('[data-field-error]').forEach((el) => {
+        el.classList.add('hidden');
+        el.textContent = '';
+      });
+      root.querySelectorAll<HTMLElement>('[data-field]').forEach((el) => {
+        el.classList.remove('is-invalid');
+        el.removeAttribute('aria-invalid');
+      });
+    };
+
+    const validate = (): Record<string, string> => {
+      const errors: Record<string, string> = {};
+      const subjectEl = form.querySelector<HTMLInputElement>('input[name="subject"]:checked');
+      if (!subjectEl) errors.subject = fieldErrors.subject;
+
+      const nameEl = form.querySelector<HTMLInputElement>('input[name="name"]');
+      if (!nameEl?.value.trim()) errors.name = fieldErrors.name;
+
+      const emailEl = form.querySelector<HTMLInputElement>('input[name="email"]');
+      const emailVal = emailEl?.value.trim() ?? '';
+      if (!emailVal || !/@example\.com$/i.test(emailVal)) errors.email = fieldErrors.email;
+
+      const privacyEl = form.querySelector<HTMLInputElement>('input[name="privacy"]');
+      if (!privacyEl?.checked) errors.privacy = fieldErrors.privacy;
+      return errors;
+    };
+
+    const renderErrors = (errors: Record<string, string>) => {
+      clearErrors();
+      const keys = Object.keys(errors);
+      if (!keys.length) return;
+
+      errorSummary?.classList.remove('hidden');
+      keys.forEach((k) => {
+        const errEl = root.querySelector<HTMLElement>(`[data-field-error="${k}"]`);
+        if (errEl) {
+          errEl.textContent = errors[k];
+          errEl.classList.remove('hidden');
+        }
+        const fieldEl = form.querySelector<HTMLElement>(`[data-field="${k}"]`);
+        if (fieldEl) {
+          fieldEl.classList.add('is-invalid');
+          fieldEl.setAttribute('aria-invalid', 'true');
+        }
+      });
+
+      root.querySelectorAll<HTMLElement>('[data-error-link]').forEach((a) => {
+        const key = a.getAttribute('data-error-link');
+        if (key && !(key in errors)) (a.parentElement as HTMLElement | null)?.style?.setProperty('display', 'none');
+        else (a.parentElement as HTMLElement | null)?.style?.removeProperty('display');
+      });
+
+      errorSummary?.setAttribute('tabindex', '-1');
+      (errorSummary as HTMLElement | null)?.focus?.();
+    };
+
+    const captureValues = (): Record<string, string> => {
+      const out: Record<string, string> = {};
+      out.subject = (form.querySelector<HTMLInputElement>('input[name="subject"]:checked')?.value) ?? '';
+      out.name = form.querySelector<HTMLInputElement>('input[name="name"]')?.value ?? '';
+      out.email = form.querySelector<HTMLInputElement>('input[name="email"]')?.value ?? '';
+      out.message = form.querySelector<HTMLTextAreaElement>('textarea[name="message"]')?.value ?? '';
+      return out;
+    };
+
+    const restoreValues = (values: Record<string, string>) => {
+      if (values.subject) {
+        const r = form.querySelector<HTMLInputElement>(`input[name="subject"][value="${values.subject}"]`);
+        if (r) r.checked = true;
+      }
+      const nameEl = form.querySelector<HTMLInputElement>('input[name="name"]');
+      if (nameEl) nameEl.value = values.name ?? '';
+      const emailEl = form.querySelector<HTMLInputElement>('input[name="email"]');
+      if (emailEl) emailEl.value = values.email ?? '';
+      const msgEl = form.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
+      if (msgEl) msgEl.value = values.message ?? '';
+    };
+
+    const clearValues = () => {
+      form.reset();
+    };
+
+    const init = () => {
+      if (fieldset.hasAttribute('data-init')) return;
+      fieldset.setAttribute('data-init', '1');
+      fieldset.disabled = false;
+      showState('input', { focusHeading: false });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const errors = validate();
+        if (Object.keys(errors).length) {
+          renderErrors(errors);
+          return;
+        }
+        clearErrors();
+        savedValues = captureValues();
+        const subject = subjectLabels[savedValues.subject] ?? '';
+        confirmState?.querySelector<HTMLElement>('[data-confirm="subject"]')?.setTextContent?.(subject);
+        confirmState?.querySelector<HTMLElement>('[data-confirm="name"]')?.setTextContent?.(savedValues.name ?? '');
+        confirmState?.querySelector<HTMLElement>('[data-confirm="email"]')?.setTextContent?.(savedValues.email ?? '');
+        confirmState?.querySelector<HTMLElement>('[data-confirm="message"]')?.setTextContent?.(savedValues.message ?? '');
+        showState('confirm');
+      });
+
+      confirmState?.querySelector<HTMLButtonElement>('[data-action="edit"]')?.addEventListener('click', () => {
+        restoreValues(savedValues);
+        showState('input', { focusHeading: true });
+      });
+
+      confirmState?.querySelector<HTMLButtonElement>('[data-action="finish"]')?.addEventListener('click', () => {
+        savedValues = {};
+        clearValues();
+        showState('done', { focusHeading: true });
+      });
+    };
+
+    init();
+
+    // pageshow (bfcache) でも古い入力を復元しない
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        clearValues();
+        savedValues = {};
+        showState('input', { focusHeading: false });
+      }
+    });
+  })();
+</script>

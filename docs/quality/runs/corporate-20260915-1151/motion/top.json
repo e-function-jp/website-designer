@@ -1,0 +1,418 @@
+{
+  "url": "https://yaizu-ortho.com/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260915-1151/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260915-1151/motion/top-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://yaizu-ortho.com/",
+      "label": "top\n\t\t\t\t\t\tトップページ"
+    },
+    {
+      "href": "https://yaizu-ortho.com/about/",
+      "label": "about us\n\t\t\t\t\t\t当院について"
+    },
+    {
+      "href": "https://yaizu-ortho.com/new-patients/",
+      "label": "new patients guide\n\t\t\t\t\t\tはじめての"
+    },
+    {
+      "href": "https://yaizu-ortho.com/adult_orthodontics/",
+      "label": "大人の矯正"
+    },
+    {
+      "href": "https://yaizu-ortho.com/child_orthodontics/",
+      "label": "子どもの矯正"
+    },
+    {
+      "href": "https://yaizu-ortho.com/whitening/",
+      "label": "ホワイトニング"
+    },
+    {
+      "href": "https://yaizu-ortho.com/#news",
+      "label": "news\n\t\t\t\t\t\tお知らせ"
+    },
+    {
+      "href": "https://reserva.be/yaizu/aikotoba",
+      "label": "24時間Web予約"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "js-header l-header is-shown is-mv",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.48s, 0.48s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "静岡県焼津市の矯正歯科｜2025年10月open\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem home-news__elem",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "news\n\t\t\t\tお知らせ\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem home-message__elem",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "まずはお話からはじめませんか？\n\t\t\t\t\t矯正に興味はあっても、最初の一歩ってな"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem c-about01__elem",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "about us\n\t\t\t\t当院について\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem home-menu__elem",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "menu\n\t\t\t\t\t診療案内\n\t\t\t\t\n\t\t\t\tワイヤー矯正と、マウスピース型矯"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem home-greeting__elem",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "greeting\n\t\t\t\tごあいさつ\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "equipment\n\t\t\t\t院内紹介\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "ul",
+      "baseClass": "home-equipment-slider__list splide__list",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -2641.25, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -2728.86, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "equipment 03\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem c-contact01__head-in u-wide-inner u-py-lg",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "contact\n\t\t\t\tまずは、相談だけでも大丈夫です。\n\t\t\t\n\t\t\t\n\t\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "js-c-anime-elem c-contact01__content",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "やいづ原崎矯正歯科\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t大人の矯正\n\t\t\t\t\t\t\t\t"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "footer",
+      "baseClass": "js-footer js-c-anime-elem l-footer",
+      "addedClass": [
+        "is-animated"
+      ],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 30)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform, opacity",
+        "duration": "0.9s, 0.9s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "トップページ\n\t\t\t\t\t\t当院について\n\t\t\t\t\t\tはじめての方へ\n\t\t\t\t\t\t"
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": null,
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "焼津市の矯正専門歯科【やいづ原崎矯正歯科】｜子どもの矯正・ワイヤー矯正・マウスピース矯正",
+    "h1": "静岡県焼津市の矯正歯科｜2025年10月open\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\n\t\tやいづ原崎矯正歯科",
+    "totalHeight": 10933,
+    "viewportsTall": 12.1,
+    "sectionCount": 12,
+    "imgCount": 58,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 10033,
+  "css": {
+    "keyframes": 1,
+    "transitionRules": 45,
+    "animationRules": 1,
+    "keyframeNames": [
+      "splide-loading"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 81,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "js-header l-header is-shown is-mv"
+    },
+    "scrolled": {
+      "height": 80,
+      "top": -80,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "js-header l-header"
+    },
+    "shrinks": true,
+    "hides": true,
+    "changesBackground": false,
+    "togglesClass": true
+  },
+  "probedBefore": 747,
+  "revealSummary": {
+    "total": 10,
+    "scrollLinkedCount": 1,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 9,
+      "fade-side": 1,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 10,
+    "durationMs": {
+      "min": 900,
+      "median": 900,
+      "max": 900
+    },
+    "easings": [
+      "ease"
+    ]
+  }
+}
