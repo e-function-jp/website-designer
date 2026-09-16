@@ -1,0 +1,134 @@
+---
+/**
+ * SalesProcessDiagram — 「現場の経験」と「共有できる型」を2円で結ぶ理念ページ用図解。
+ *
+ * ディレクションの指示:
+ *   - 白背景、中央最大 760px、PC 720px / モバイル 680px
+ *   - 見出し・本文の下に左右同径 240px の 2円
+ *   - 「現場の経験」「共有できる型」を中央の線で接続
+ *   - 線の下に「組織に残る受注プロセス」
+ *   - モバイルの円は各 140px、横並びを維持
+ *   - 装飾。同じ内容を通常テキストでも読めるようにする
+ */
+import type { SiteConfig } from '../../lib/site';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Props {
+  site: SiteConfig;
+  heading: string;
+  body: string[];
+  /** 円のラベル */
+  leftLabel: string;
+  rightLabel: string;
+  centerLabel: string;
+}
+
+const { site, heading, body, leftLabel, rightLabel, centerLabel } = Astro.props;
+---
+
+<section class="spd bg-base-100">
+  <div class="max-w-[760px] mx-auto px-5 lg:px-0 py-16 lg:py-24">
+    <ScrollReveal animation="fade-up" duration={site.motion?.durationMs ?? 600}>
+      <SectionTitle title={heading} align="left" class="spd__title" />
+      <div class="spd__body">
+        {body.map((p) => <p>{p}</p>)}
+      </div>
+    </ScrollReveal>
+
+    <div class="spd__diagram" aria-label={`${leftLabel}と${rightLabel}が${centerLabel}をつくる`}>
+      <div class="spd__circles">
+        <div class="spd__circle spd__circle--left">
+          <span class="spd__circle-label">{leftLabel}</span>
+        </div>
+        <div class="spd__line" aria-hidden="true"></div>
+        <div class="spd__circle spd__circle--right">
+          <span class="spd__circle-label">{rightLabel}</span>
+        </div>
+      </div>
+      <p class="spd__center-label">{centerLabel}</p>
+    </div>
+
+    <p class="spd__plain">現場の経験と共有できる型を結び、再現性のある受注プロセスを構築します。</p>
+  </div>
+</section>
+
+<style>
+  .spd__title { margin-bottom: 24px; }
+  .spd__body { margin-bottom: 56px; }
+  .spd__body p {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 24px;
+  }
+  .spd__body p:last-child { margin-bottom: 0; }
+
+  .spd__diagram {
+    margin-bottom: 32px;
+  }
+  .spd__circles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+  }
+  .spd__circle {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: var(--color-base-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+    border: 2px solid var(--color-primary);
+  }
+  .spd__circle--right {
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+    border-color: var(--color-primary);
+  }
+  .spd__circle-label {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .spd__line {
+    flex: 0 1 120px;
+    height: 2px;
+    background: var(--color-primary);
+  }
+  .spd__center-label {
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-primary);
+    font-weight: 700;
+    margin: 0 0 32px;
+    letter-spacing: 0.05em;
+  }
+  .spd__plain {
+    border-top: 1px solid var(--color-base-300);
+    padding-top: 24px;
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    text-align: center;
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .spd__circle {
+      width: 140px;
+      height: 140px;
+    }
+    .spd__circle-label { font-size: 14px; }
+    .spd__line { flex: 0 1 40px; }
+    .spd__circles { gap: 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spd__circle, .spd__line { transition: none; }
+  }
+</style>

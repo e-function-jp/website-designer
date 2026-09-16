@@ -1,0 +1,124 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import CorporatePageHeader from '../../../../../components/sections/CorporatePageHeader.astro';
+import SalesMetricRow from '../../../../../components/sections/SalesMetricRow.astro';
+import SiteEndLinks from '../../../../../components/site/SiteEndLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const metrics = [
+  {
+    value: '1.6倍',
+    title: '平均受注率の改善',
+    period: '期間：14か月',
+    body: '支援企業の平均受注率を14か月で1.6倍に改善しました。',
+  },
+  {
+    value: '92%',
+    title: '導入後の定着率',
+    period: '時点：導入後12か月',
+    body: '導入後12か月の定着率は92%です。',
+  },
+  {
+    value: '210以上',
+    title: '累計支援チーム数',
+    period: '2026年8月時点',
+    body: '累計で210以上のチームを支援しています。',
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="支援実績"
+  description="受注率、定着率、支援チーム数。軌道セールス設計の営業変革の実績を三つの指標でご紹介します。"
+  path="/case/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '支援実績' }]}
+>
+  <CorporatePageHeader
+    title="支援実績"
+    intro="受注率、定着率、支援チーム数。営業変革の実績を三つの指標でご紹介します。"
+  />
+
+  <SalesMetricRow
+    site={site}
+    heading="営業変革を示す三つの指標"
+    metrics={metrics}
+  />
+
+  <!-- context: 支援内容への接続 -->
+  <section class="case-context bg-base-200">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="case-context__heading">数字の背景にある、支援の全体像。</h2>
+        <div class="case-context__body">
+          <p>軌道セールス設計は、伴走型の組織診断とプレイブック整備を軸に、商談設計・パイプライン可視化・現場定着を一体で支援しています。</p>
+          <p>掲載値は支援実績であり、個別の成果を保証するものではありません。</p>
+        </div>
+        <ul class="case-context__links">
+          <li>
+            <a href={url(site, '/service/')} class="case-context__link">
+              営業変革プログラムを見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href={url(site, '/contact/')} class="case-context__link">
+              無料で組織診断を申し込む
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <SiteEndLinks site={site} currentPath="/case/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .case-context__heading {
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 32px;
+    letter-spacing: 0.025em;
+    text-align: left;
+  }
+  .case-context__body p {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 24px;
+  }
+  .case-context__body p:last-child {
+    margin-bottom: 32px;
+  }
+  .case-context__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .case-context__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .case-context__link:hover { color: var(--color-secondary); border-bottom-color: var(--color-secondary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-context__link { transition: none; }
+  }
+</style>

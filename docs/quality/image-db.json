@@ -396,7 +396,279 @@
       "provider": "xai",
       "source_url": "https://files-cdn.x.ai/4KAXzHygSw2iKI8FsxjU4Q/file_f433ac4d-90c8-4f80-9dc5-2701256b3ba7.png",
       "created_at": "2026-09-14T04:17:32.829Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260916-0500/img-a-01.jpg",
+      "category": "corporate",
+      "tags": [
+        "営業支援",
+        "商談設計",
+        "会議",
+        "人物",
+        "横位置"
+      ],
+      "prompt": "日本のBtoB企業の静かな会議室、営業責任者と組織支援担当者を含む成人3名が紙の商談資料を囲んで話し合う実写調写真。腰から上の中景、人物を画面中央60パーセントに収め、縦トリミングにも耐える構図。自然な横向きの視線と手の動き。窓から柔らかい日中光、紺とグレーのビジネスカジュアル、低彩度、白い壁、誇張しない表情。握手やカメラ目線なし。ロゴ、読める文字、透かしなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_173120_fc410e73.jpg",
+      "created_at": "2026-09-16T08:31:20.134Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260916-0500/img-a-02.jpg",
+      "category": "corporate",
+      "tags": [
+        "組織診断",
+        "製造業",
+        "対話",
+        "人物",
+        "横位置"
+      ],
+      "prompt": "製造業の事務室に併設された打ち合わせ空間で、成人の営業担当者と業務担当者と支援担当者が業務フローの紙を見ながら対話する実写調写真。3人を中央に置く横長の引きの構図、机と手元が見える。背景のガラス越しに整然とした作業場の気配がわずかに見えるが、機械を主役にしない。柔らかな自然光、低彩度、紺、白、淡いグレー。清潔で実務的、笑顔を強要しない。読める文字、会社名、ロゴ、透かしなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_173129_f23ea6eb.jpg",
+      "created_at": "2026-09-16T08:31:29.789Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260916-0500/img-a-03.jpg",
+      "category": "corporate",
+      "tags": [
+        "営業設計",
+        "プレイブック",
+        "資料",
+        "手元",
+        "横位置"
+      ],
+      "prompt": "日本の企業の会議テーブルで、2名の成人が営業プロセスを整理する資料とノートを並べて検討している実写調写真。斜め上から机と手元を中心に撮影、紙には判読不能な細い罫線と単純な枠のみ、ペンと閉じた濃紺のノート。画面端に人物の肩が入り、仕事の文脈が分かる。窓の自然光、白と淡いグレー、紺の小物、低彩度。派手な小道具、ブランドロゴ、読める文字、透かしなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_173136_ba87174c.jpg",
+      "created_at": "2026-09-16T08:31:36.966Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260916-0500/img-a-04.jpg",
+      "category": "corporate",
+      "tags": [
+        "営業組織",
+        "チーム",
+        "対話",
+        "人物",
+        "横位置"
+      ],
+      "prompt": "日本の落ち着いたオフィスで、年齢の異なる成人3名が小さな丸テーブルを囲み、ノートを見ながら真剣に意見交換する実写調写真。目線の高さからの横長中景、全員の顔は自然な斜め向き、相手の話を聞く瞬間。窓から柔らかな日中光、紺とグレーのビジネスカジュアル、低彩度、余計な装飾のない背景。採用広告風の集合ポーズやカメラ目線なし。会社名、ロゴ、読める文字、透かしなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_173146_16b531cc.jpg",
+      "created_at": "2026-09-16T08:31:46.198Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260916-0500/img-b-02.jpg",
+      "category": "corporate",
+      "tags": [
+        "営業組織",
+        "プレイブック",
+        "資料",
+        "手元",
+        "仕事場"
+      ],
+      "prompt": "営業の進め方を検討する仕事場の実写調写真。複数の人物の手元、開かれた無地のノート、整理された紙資料、ペン、閉じたノートパソコンを写す。斜め上から撮影し、画面中央に資料と指し示す手を置く。人物の全顔は画面に入れない。横位置、机の端と背景の会議スペースまで少し見せる。午前の自然光、低彩度の青灰色と生成り。紙上の文字や図は判読できない。ロゴ、スマートフォン画面、広告的な小物なし。中央を縦4対5で切り取っても手元が残る構図。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_173153_de223bd8.jpg",
+      "created_at": "2026-09-16T08:31:53.522Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260916-0500/img-b-03.jpg",
+      "category": "corporate",
+      "tags": [
+        "製造業",
+        "営業",
+        "打ち合わせ",
+        "現場",
+        "縦位置"
+      ],
+      "prompt": "中堅製造業の営業担当者と支援担当者が資料を確認する実写調写真。工場に隣接する安全な打ち合わせスペース。男女2人が机の資料を見ており、背景のガラス越しに製造設備がぼけて見える。人物の上半身と机、背景の現場の関係が分かる縦構図。主役は中央に配置。拡散した自然光、濃紺とグレーを基調に自然な肌色。機械操作中の演出はしない。握手、カメラ目線、企業ロゴ、読める文字、危険な作業描写なし。",
+      "aspect": "portrait",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_173202_acae6a5b.jpg",
+      "created_at": "2026-09-16T08:32:02.233Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-01.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "受付",
+        "院内",
+        "木材",
+        "横位置"
+      ],
+      "prompt": "架空の日本の矯正歯科クリニックの受付を写した実写調の建築写真。明るいオーク材の受付カウンター、白い壁、淡いグレーの床、奥へ続く廊下。カメラは人の目線で水平、広角の歪みは弱く、受付を中央からやや左に配置。窓からの柔らかい自然光。低彩度、自然な白、落ち着いた色調。横長16:9で、中央を4:3にも切り取れる構図。人、文字、ロゴ、看板、製品名なし。豪華なホテルのようにしない。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181045_16466679.jpg",
+      "created_at": "2026-09-16T09:10:45.885Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-02.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "初診相談",
+        "成人",
+        "対話",
+        "横位置"
+      ],
+      "prompt": "架空の日本の矯正歯科の相談場面を写した実写調写真。落ち着いた青のスクラブを着た成人スタッフと、普段着の成人相談者が、明るいオーク材の机を挟んで自然に対話している。二人とも落ち着いた表情。白い壁と淡いグレーの床、柔らかい窓光。腰から上と自然な手元を収める。中央に二人を寄せ、横3:2から縦4:5にも切り取れる構図。カメラ目線なし。文字、資格証、名札の文字、ロゴ、患者記録、画面の個人情報なし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181053_78fdc025.jpg",
+      "created_at": "2026-09-16T09:10:53.624Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-04.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "診療室",
+        "チェア",
+        "院内",
+        "横位置"
+      ],
+      "prompt": "架空の日本の矯正歯科クリニックの診療室を写した実写調建築写真。淡いグレーの診療チェアを中央より右に置き、白い壁、明るいオーク材の収納、清潔で整理された室内、広すぎない落ち着いた空間。窓からの柔らかい自然光。カメラは水平、人の目線、空間の奥行きが分かる構図。横16:9で上下を切って横長の帯にも使える。人物、血液、処置中の場面、機器ブランド、機器の型番、文字、ロゴなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181059_07ce58ac.jpg",
+      "created_at": "2026-09-16T09:11:00.003Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-05.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "マウスピース",
+        "歯列模型",
+        "装置",
+        "横位置"
+      ],
+      "prompt": "矯正治療を説明するための歯列模型と透明なマウスピース型装置を、白い清潔なトレーの上に置いた実写調の静物写真。形状は自然で医学模型として破綻させない。背景は淡いグレーと明るいオーク材のぼけ。斜め45度から少し寄って撮影、柔らかな自然光、低彩度、強い反射なし。横3:2、装置を中央に置き4:3でも切り取れる構図。口腔内、症例比較、治療効果を示す要素、製品名、文字、ロゴなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181107_74beb1bf.jpg",
+      "created_at": "2026-09-16T09:11:08.042Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-07.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "小児",
+        "保護者",
+        "相談",
+        "横位置"
+      ],
+      "prompt": "架空の日本の矯正歯科で、小学生くらいの子どもと成人の保護者が、青いスクラブを着た成人スタッフの説明を穏やかに聞いている実写調写真。明るいオーク材の机と白い壁。子どもを中央、保護者とスタッフを左右に置き、自然な表情と手元を収める。柔らかな窓光、落ち着いた低彩度。横3:2、三人を中央にまとめ4:3にも切り取れる。治療中ではなく相談の場面。口腔内接写、痛み、文字、患者名、ロゴなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181116_fd47c1b9.jpg",
+      "created_at": "2026-09-16T09:11:16.251Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-08.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "入口",
+        "建築",
+        "外観",
+        "横位置"
+      ],
+      "prompt": "架空の日本の小規模な矯正歯科クリニックの入口を写した実写調建築写真。明るいオーク材の扉枠、ガラスの入口、白い外壁、淡いグレーの床。入口の奥に受付の気配が見える。正面からやや斜め、人の目線、自然な遠近感。曇天の柔らかい昼光、低彩度で落ち着いた色調。横3:2、入口は中央。実在の建物に似せない。住所、医院名、ロゴ、看板、車の番号、通行人、交通標識なし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181122_de3e279b.jpg",
+      "created_at": "2026-09-16T09:11:22.815Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-b-04.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "歯列模型",
+        "説明",
+        "静物",
+        "正方形"
+      ],
+      "prompt": "矯正歯科で説明に用いる一般的な歯列模型一つを、白木の机の上に置いた実写調の静物写真。正方形。模型全体を中央より少し下に配置、周囲には十分な余白。自然な白い歯と淡い歯肉色、背景はオフホワイト、左上から柔らかい自然光。模型を解剖図や診断資料のように使わない。ワイヤー、矯正装置、治療前後比較、強い赤、過度な光沢、文字、ロゴ、透かしなし。",
+      "aspect": "square",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181130_1d583e62.jpg",
+      "created_at": "2026-09-16T09:11:30.282Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-b-05.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "待合",
+        "院内",
+        "自然光",
+        "横位置"
+      ],
+      "prompt": "日本の地域密着型の矯正歯科医院を想定した実写調の待合室写真。横3対2。画面左から中央に落ち着いた青灰色の椅子を二脚、右に白木の小さな本棚。窓から柔らかい昼光が入り、オフホワイトの壁と白木の床が見える。人のいない静かな室内。小さな本を数冊置くが背表紙に読める文字を入れない。過剰な高級感、カフェ風の小物、ロゴ、看板、文字、透かしなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181137_0cde8d71.jpg",
+      "created_at": "2026-09-16T09:11:37.129Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-03.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "スタッフ",
+        "対話",
+        "人物",
+        "横位置"
+      ],
+      "prompt": "架空の日本の矯正歯科クリニックで、青と淡いグレーのスクラブを着た成人スタッフ3人が診療準備について静かに話し合っている実写調写真。実在人物に似せない。明るいオーク材と白い壁の院内。特定の役職や資格を示さず、自然な上半身と手元。窓からの柔らかい昼光、低彩度、誠実で穏やかな雰囲気。横3:2、全員の顔を中央80パーセントに収める。誇張した笑顔、握手、腕組み、文字、ロゴ、個人情報なし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181203_7eca41b1.jpg",
+      "created_at": "2026-09-16T09:12:03.505Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260915-1151/img-a-06.jpg",
+      "category": "corporate",
+      "tags": [
+        "矯正歯科",
+        "ワイヤー矯正",
+        "歯列模型",
+        "装置",
+        "横位置"
+      ],
+      "prompt": "ワイヤー矯正の説明用として、ブラケットと一本の連続した矯正用ワイヤーが装着された歯列模型を写した実写調の静物写真。白いトレー、淡いグレーの背景、明るいオーク材のわずかなぼけ。斜め45度から撮影。歯列と装置の形状は自然で整理されている。柔らかい自然光、低彩度、清潔感。横3:2、模型は中央。実際の患者の口、ビフォーアフター、血液、製品名、文字、ロゴなし。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260916_181211_2612f64e.jpg",
+      "created_at": "2026-09-16T09:12:11.083Z"
     }
   ],
-  "updated_at": "2026-09-14T04:17:32.831Z"
+  "updated_at": "2026-09-16T09:12:11.084Z"
 }

@@ -1,0 +1,178 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import CorporatePageHeader from '../../../../../components/sections/CorporatePageHeader.astro';
+import SiteEndLinks from '../../../../../components/site/SiteEndLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const profile: [string, string][] = [
+  ['商号', '軌道セールス設計株式会社'],
+  ['よみ', 'きどうせーるすせっけい'],
+  ['設立', '2016年'],
+  ['従業員数', '48名'],
+  ['所在地', '東京都港区'],
+  ['業種', 'BtoB営業支援・営業組織コンサルティング'],
+  ['事業内容', '中堅製造業とSaaS企業向けに、商談設計・パイプライン可視化・現場定着までを一体で支援する営業変革プログラムを提供する。伴走型の組織診断とプレイブック整備を軸に、再現性のある受注プロセスを構築する。'],
+];
+---
+
+<SiteLayout
+  site={site}
+  title="会社概要"
+  description="軌道セールス設計株式会社の基本情報と事業内容をご案内します。2016年設立、48名、東京都港区でBtoB営業支援・営業組織コンサルティングを提供しています。"
+  path="/company/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '会社概要' }]}
+>
+  <CorporatePageHeader
+    title="会社概要"
+    intro="軌道セールス設計株式会社の基本情報と事業内容をご案内します。"
+  />
+
+  <!-- profile -->
+  <section class="company-profile bg-base-100">
+    <div class="max-w-[900px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="会社情報" align="left" />
+        <div class="company-profile__table-wrap">
+          <Table>
+            <tbody>
+              {profile.map(([k, v]) => (
+                <tr>
+                  <th scope="row" class="company-profile__th">{k}</th>
+                  <td class="company-profile__td">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- business: 事業理解への導線 -->
+  <section class="company-business bg-base-200">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="company-business__heading">事業と支援方針を知る</h2>
+        <ul class="company-business__list">
+          <li class="company-business__item">
+            <a href={url(site, '/service/')} class="company-business__link">
+              <div>
+                <p class="company-business__item-title">営業変革プログラム</p>
+                <p class="company-business__item-body">組織診断から現場定着まで、支援する領域と進め方をご紹介します。</p>
+              </div>
+              <span class="company-business__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="company-business__item">
+            <a href={url(site, '/about/')} class="company-business__link">
+              <div>
+                <p class="company-business__item-title">私たちの支援方針</p>
+                <p class="company-business__item-body">受注の型を現場に残すために重視する考え方をご紹介します。</p>
+              </div>
+              <span class="company-business__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <SiteEndLinks site={site} currentPath="/company/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .company-profile__table-wrap {
+    margin-top: 32px;
+  }
+  .company-profile__th {
+    width: 200px;
+    background: var(--color-base-200);
+    font-weight: 700;
+    color: var(--color-primary);
+    vertical-align: top;
+    white-space: nowrap;
+  }
+  .company-profile__td {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    vertical-align: top;
+  }
+
+  .company-business__heading {
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 32px;
+    letter-spacing: 0.025em;
+  }
+  .company-business__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .company-business__item {
+    border-bottom: 1px solid var(--color-base-300);
+  }
+  .company-business__item:first-child {
+    border-top: 1px solid var(--color-base-300);
+  }
+  .company-business__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 8px;
+    text-decoration: none;
+    color: var(--color-base-content);
+  }
+  .company-business__link:hover { color: var(--color-secondary); }
+  .company-business__item-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .company-business__item-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-base-content);
+    opacity: 0.8;
+    margin: 0;
+  }
+  .company-business__arrow {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .company-business__link:hover .company-business__arrow {
+    color: var(--color-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .company-business__list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 32px;
+    }
+    .company-business__item {
+      border-bottom: none;
+      border-top: 1px solid var(--color-base-300);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .company-profile__th { width: 120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .company-business__link, .company-business__arrow { transition: none; }
+  }
+</style>

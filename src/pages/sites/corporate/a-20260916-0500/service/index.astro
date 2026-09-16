@@ -1,0 +1,248 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import Timeline from '../../../../../components/data-display/Timeline.astro';
+import Accordion from '../../../../../components/data-display/Accordion.astro';
+import CorporatePageHeader from '../../../../../components/sections/CorporatePageHeader.astro';
+import BusinessPhotoText from '../../../../../components/sections/BusinessPhotoText.astro';
+import SiteEndLinks from '../../../../../components/site/SiteEndLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+const planningImage = {
+  src: `${SHARED}/img-a-03.jpg`,
+  alt: '資料を使って営業プロセスを整理する手元のイメージ',
+};
+
+const scopes = [
+  {
+    title: '商談設計',
+    problem: '商談で確かめることや、次に進む判断を揃えたい。',
+    support: '顧客理解と商談の進め方を整理し、共有できる受注プロセスを設計します。',
+  },
+  {
+    title: 'パイプライン可視化',
+    problem: '案件がどの段階にあり、何を確認すべきかを把握したい。',
+    support: '案件の状況と次の行動を捉えるための視点を整えます。',
+  },
+  {
+    title: '現場定着',
+    problem: '整えた進め方を、現場で継続して使えるようにしたい。',
+    support: 'プレイブック整備を軸に、日々の営業活動への定着を支援します。',
+  },
+];
+
+const process = [
+  {
+    label: '01 組織診断',
+    body: '営業組織の状況と課題を捉え、受注プロセスのどこを整えるべきかを考えます。',
+  },
+  {
+    label: '02 商談設計・プレイブック整備',
+    body: '商談の進め方と判断の視点を整理し、チームで共有できる形にします。パイプラインの見え方もあわせて整えます。',
+  },
+  {
+    label: '03 現場定着',
+    body: '設計した型を現場の営業活動につなげます。使われる受注プロセスとして定着することを目指します。',
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="営業変革プログラム"
+  description="中堅製造業とSaaS企業に向けて、商談設計・パイプライン可視化・現場定着を一体で支援する軌道セールス設計の営業変革プログラムをご紹介します。"
+  path="/service/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '営業変革プログラム' }]}
+>
+  <CorporatePageHeader
+    title="営業変革プログラム"
+    intro="中堅製造業とSaaS企業に向けて、商談設計・パイプライン可視化・現場定着を一体で支援します。"
+  />
+
+  <!-- scope: 支援する領域 -->
+  <BusinessPhotoText
+    site={site}
+    image={planningImage}
+    photoPosition="right"
+    background="white"
+    showCaption={true}
+  >
+    <SectionTitle title="営業活動を、三つの視点から整える。" align="left" class="svc__section-title" />
+    <p class="svc__intro">商談の質と案件の見通し、そして日々の運用を、つながった課題として捉えます。</p>
+    <Table class="svc__scope-table">
+      <tbody>
+        {scopes.map((s) => (
+          <tr>
+            <th scope="row" class="svc__scope-rowhead">{s.title}</th>
+            <td class="svc__scope-cell">
+              <p class="svc__scope-label">課題</p>
+              <p class="svc__scope-text">{s.problem}</p>
+              <p class="svc__scope-label">支援内容</p>
+              <p class="svc__scope-text">{s.support}</p>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  </BusinessPhotoText>
+
+  <!-- process: 診断から定着まで -->
+  <section class="svc-process bg-base-200">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-12 gap-10 lg:gap-16">
+      <div class="lg:col-span-4">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <SectionTitle title="型をつくり、現場に残すまで。" align="left" />
+        </ScrollReveal>
+      </div>
+      <div class="lg:col-span-8">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <Timeline class="svc-process__timeline">
+            {process.map((p) => (
+              <li>
+                <div class="timeline-start svc-process__label">{p.label.split(' ')[0]}</div>
+                <div class="timeline-middle">
+                  <span class="block w-3 h-3 rounded-full bg-secondary" aria-hidden="true"></span>
+                </div>
+                <div class="timeline-end timeline-box svc-process__box">
+                  <p class="svc-process__stage">{p.label}</p>
+                  <p class="svc-process__body">{p.body}</p>
+                </div>
+                <hr />
+              </li>
+            ))}
+          </Timeline>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- questions: Accordion -->
+  <section class="svc-qa bg-base-100">
+    <div class="max-w-[900px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="ご検討にあたって" align="left" />
+        <div class="svc-qa__list">
+          <Accordion name="svc-qa" class="svc-qa__item">
+            <div slot="title">Q. どのような企業が対象ですか。</div>
+            <p>中堅製造業とSaaS企業を対象としています。営業責任者、経営企画、事業責任者の方に向けた営業変革の支援です。</p>
+          </Accordion>
+          <Accordion name="svc-qa" class="svc-qa__item">
+            <div slot="title">Q. 支援範囲はどこまでですか。</div>
+            <p>伴走型の組織診断とプレイブック整備を軸に、商談設計・パイプライン可視化・現場定着までを一体で支援します。</p>
+          </Accordion>
+          <Accordion name="svc-qa" class="svc-qa__item">
+            <div slot="title">Q. 申し込み時には何を伝えればよいですか。</div>
+            <p>現在の営業活動で課題に感じていることをお聞かせください。商談の進め方、案件の見え方、現場での運用など、分かる範囲でご記入ください。</p>
+          </Accordion>
+        </div>
+        <p class="svc-qa__cta-row">
+          <a href={url(site, '/contact/')} class="svc-qa__cta">
+            無料で組織診断を申し込む
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <SiteEndLinks site={site} currentPath="/service/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .svc__section-title { margin-bottom: 24px; }
+  .svc__intro {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+
+  .svc__scope-table {
+    width: 100%;
+  }
+  .svc__scope-rowhead {
+    width: 30%;
+    background: var(--color-base-200);
+    font-weight: 700;
+    vertical-align: top;
+    color: var(--color-primary);
+  }
+  .svc__scope-cell {
+    vertical-align: top;
+  }
+  .svc__scope-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin: 0 0 4px;
+  }
+  .svc__scope-label:nth-of-type(2) {
+    margin-top: 12px;
+  }
+  .svc__scope-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-base-content);
+    margin: 0;
+  }
+
+  .svc-process__label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+  }
+  .svc-process__stage {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 8px;
+  }
+  .svc-process__body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    margin: 0;
+  }
+  .svc-process__box {
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+  }
+
+  .svc-qa__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 0 32px;
+  }
+  .svc-qa__item {
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+  }
+  .svc-qa__cta-row { text-align: right; }
+  .svc-qa__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .svc-qa__cta:hover {
+    color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .svc-qa__cta { transition: none; }
+  }
+</style>

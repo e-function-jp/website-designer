@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T23:56:20.627Z",
+  "checked_at": "2026-09-16T09:30:13.023Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -13,8 +13,8 @@
     },
     {
       "route": "/sites/corporate/",
-      "pageHeight": 900,
-      "imageCount": 3,
+      "pageHeight": 1563,
+      "imageCount": 7,
       "findings": []
     },
     {
@@ -66,6 +66,156 @@
       "findings": []
     },
     {
+      "route": "/sites/corporate/a-20260915-1151/",
+      "pageHeight": 7959,
+      "imageCount": 14,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260915-1151/about/",
+      "pageHeight": 5928,
+      "imageCount": 6,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260915-1151/contact/",
+      "pageHeight": 4145,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260915-1151/new-patients/",
+      "pageHeight": 4517,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260915-1151/news/",
+      "pageHeight": 3548,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260915-1151/privacy/",
+      "pageHeight": 3808,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260915-1151/service/",
+      "pageHeight": 5437,
+      "imageCount": 5,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/",
+      "pageHeight": 7779,
+      "imageCount": 2,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/about/",
+      "pageHeight": 3902,
+      "imageCount": 1,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/case/",
+      "pageHeight": 2947,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/company/",
+      "pageHeight": 2407,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/contact/",
+      "pageHeight": 2677,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/news/",
+      "pageHeight": 2099,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/privacy/",
+      "pageHeight": 2251,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/recruit/",
+      "pageHeight": 6175,
+      "imageCount": 1,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/a-20260916-0500/service/",
+      "pageHeight": 6675,
+      "imageCount": 1,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
+        }
+      ]
+    },
+    {
       "route": "/sites/corporate/b-20260903-1448/",
       "pageHeight": 4729,
       "imageCount": 4,
@@ -111,6 +261,90 @@
       "route": "/sites/corporate/b-20260903-1448/service/",
       "pageHeight": 4742,
       "imageCount": 6,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260915-1151/",
+      "pageHeight": 4737,
+      "imageCount": 6,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260915-1151/about/",
+      "pageHeight": 5151,
+      "imageCount": 4,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260915-1151/contact/",
+      "pageHeight": 4830,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260915-1151/news/",
+      "pageHeight": 2360,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260915-1151/privacy/",
+      "pageHeight": 2579,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260915-1151/service/",
+      "pageHeight": 4581,
+      "imageCount": 4,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260916-0500/",
+      "pageHeight": 4639,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260916-0500/about/",
+      "pageHeight": 3325,
+      "imageCount": 1,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 3 件: div\"01\"(比2.08, 要4.5) / div\"02\"(比2.08, 要4.5) / div\"03\"(比2.08, 要4.5)"
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20260916-0500/company/",
+      "pageHeight": 2500,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260916-0500/contact/",
+      "pageHeight": 3676,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260916-0500/news/",
+      "pageHeight": 2478,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260916-0500/privacy/",
+      "pageHeight": 2393,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260916-0500/service/",
+      "pageHeight": 3960,
+      "imageCount": 1,
       "findings": []
     },
     {

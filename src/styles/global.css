@@ -9,10 +9,24 @@
 @import "./themes/corporate-hokuline-bold.css";
 @import "./themes/aoba-corporate.css";
 @import "./themes/aoba-corporate-b.css";
+@import "./themes/kido-corporate.css";
+@import "./themes/kido-corporate-b.css";
 
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, corporate, cupcake, luxury,
           business, emerald, retro, nord, autumn, winter, lofi,
           corporate-hokuline, corporate-hokuline-bold, corporate-minamoto,
-          aoba-corporate, aoba-corporate-b;
+          aoba-corporate, aoba-corporate-b, kido-corporate, kido-corporate-b;
+}
+
+/* 中央固定カプセルヘッダーを使うテーマでは、パンくずの上に余白を確保して
+   カプセル（top:16px・高さ64px ≒ 80px）と重ならないようにする。
+   SiteBreadcrumbs に padding-top を足す。 */
+[data-theme="kido-corporate"] body nav[aria-label="パンくずリスト"] {
+  padding-top: 32px;
+}
+@media (min-width: 768px) {
+  [data-theme="kido-corporate"] body nav[aria-label="パンくずリスト"] {
+    padding-top: 32px;
+  }
 }

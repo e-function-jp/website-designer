@@ -1,0 +1,259 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import CorporatePageHeader from '../../../../../components/sections/CorporatePageHeader.astro';
+import SalesProcessDiagram from '../../../../../components/sections/SalesProcessDiagram.astro';
+import BusinessPhotoText from '../../../../../components/sections/BusinessPhotoText.astro';
+import SiteEndLinks from '../../../../../components/site/SiteEndLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+const workshopImage = {
+  src: `${SHARED}/img-a-02.jpg`,
+  alt: '現場の状況について話し合う担当者たちのイメージ',
+};
+
+const principles = [
+  {
+    number: '01',
+    title: '現場の状況から考える',
+    body: '組織診断を通じて、営業活動の進め方と課題を捉えます。チームの状況を起点に、整えるべき受注プロセスを考えます。',
+  },
+  {
+    number: '02',
+    title: '判断を共有できる形にする',
+    body: '商談設計とパイプライン可視化をつなげ、何を確認し、次に何をするかをチームで捉えられる状態を目指します。',
+  },
+  {
+    number: '03',
+    title: '使い続けられる形に整える',
+    body: 'プレイブック整備と現場定着を一体で支援します。設計した内容を日々の営業活動で使うことを重視します。',
+  },
+];
+
+const steps = [
+  { label: '組織診断', body: '営業組織の状況と課題を捉えます。' },
+  { label: 'プレイブック整備', body: '商談の進め方と判断の視点を整理します。' },
+  { label: '現場定着', body: '日々の営業活動への定着を支援します。' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="私たちの支援方針"
+  description="伴走型の組織診断とプレイブック整備を通じて、診断から現場定着まで受注の型を組織に残すための、軌道セールス設計の考え方をご紹介します。"
+  path="/about/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '私たちの支援方針' }]}
+>
+  <CorporatePageHeader
+    title="私たちの支援方針"
+    intro="診断から現場定着まで。受注の型を組織に残すための、私たちの考え方をご紹介します。"
+  />
+
+  <!-- mission: 支援の目的 -->
+  <SalesProcessDiagram
+    site={site}
+    heading="経験を、次の受注につながる型へ。"
+    body={[
+      '一つひとつの商談には、顧客への理解と現場の判断が積み重なっています。その経験をチームで共有し、次の行動に使える形へ整理すること。私たちは、そこに営業変革の土台があると考えています。',
+      '現場の経験と共有できる型を結び、再現性のある受注プロセスを構築します。',
+    ]}
+    leftLabel="現場の経験"
+    rightLabel="共有できる型"
+    centerLabel="組織に残る受注プロセス"
+  />
+
+  <!-- principles: 支援で重視すること -->
+  <section class="corp-principles bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <figure class="corp-principles__photo">
+        <img
+          src={workshopImage.src}
+          alt={workshopImage.alt}
+          width="1800"
+          height="787"
+          loading="lazy"
+          class="corp-principles__img aspect-[16/7]"
+        />
+      </figure>
+      <h2 class="corp-principles__heading">現場と設計を、切り離さない。</h2>
+      <ul class="corp-principles__list">
+        {principles.map((p) => (
+          <li class="corp-principles__item">
+            <div class="corp-principles__num">{p.number}</div>
+            <div class="corp-principles__detail">
+              <h3 class="corp-principles__item-title">{p.title}</h3>
+              <p class="corp-principles__item-body">{p.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- strength: 一体で支援する強み（濃紺） -->
+  <section class="corp-strength bg-primary text-primary-content">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <div class="lg:col-span-6">
+        <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+          <h2 class="corp-strength__heading">診断と実行を、一つの支援に。</h2>
+          <div class="corp-strength__body">
+            <p>組織の課題を捉えることと、現場で使える型を整えること。その間を分断せず、商談設計から現場定着までを一体で支援します。</p>
+            <p>中堅製造業とSaaS企業の営業責任者、経営企画、事業責任者の皆さまと、再現性のある受注プロセスに向き合います。</p>
+          </div>
+          <p class="corp-strength__link-row">
+            <a href={url(site, '/service/')} class="corp-strength__link">
+              営業変革プログラムを確認する
+              <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        </ScrollReveal>
+      </div>
+      <div class="lg:col-span-6">
+        <ol class="corp-strength__steps" aria-label="診断から現場定着までの3段階">
+          {steps.map((s, i) => (
+            <li class="corp-strength__step">
+              <div class="corp-strength__step-num">{String(i + 1).padStart(2, '0')}</div>
+              <div>
+                <p class="corp-strength__step-title">{s.label}</p>
+                <p class="corp-strength__step-body">{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <SiteEndLinks site={site} currentPath="/about/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .corp-principles__photo {
+    margin: 0 0 56px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .corp-principles__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: 50% 45%;
+    display: block;
+  }
+  .corp-principles__heading {
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 48px;
+    letter-spacing: 0.025em;
+    text-align: left;
+  }
+  .corp-principles__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .corp-principles__item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .corp-principles__num {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 0.05em;
+  }
+  .corp-principles__item-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    margin: 0 0 12px;
+  }
+  .corp-principles__item-body {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .corp-principles__item {
+      grid-template-columns: 4fr 8fr;
+      gap: 24px;
+    }
+  }
+
+  .corp-strength__heading {
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 32px;
+    letter-spacing: 0.025em;
+  }
+  .corp-strength__body p {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 24px;
+    opacity: 0.92;
+  }
+  .corp-strength__link-row { margin-top: 32px; }
+  .corp-strength__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary-content);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .corp-strength__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .corp-strength__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--color-primary-content) 30%, transparent);
+  }
+  .corp-strength__step-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary-content);
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+    flex: 0 0 auto;
+  }
+  .corp-strength__step-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .corp-strength__step-body {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .corp-strength__link { transition: none; }
+  }
+</style>

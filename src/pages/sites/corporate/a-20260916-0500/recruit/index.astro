@@ -1,0 +1,128 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import CorporatePageHeader from '../../../../../components/sections/CorporatePageHeader.astro';
+import BusinessPhotoText from '../../../../../components/sections/BusinessPhotoText.astro';
+import SiteEndLinks from '../../../../../components/site/SiteEndLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+const discussionImage = {
+  src: `${SHARED}/img-a-04.jpg`,
+  alt: '意見を交わすチームの業務イメージ',
+};
+---
+
+<SiteLayout
+  site={site}
+  title="採用について"
+  description="営業組織の変革を支える、軌道セールス設計の仕事をご紹介します。組織診断・商談設計・プレイブック整備を軸に、現場での活用まで支援する仕事です。"
+  path="/recruit/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '採用について' }]}
+>
+  <CorporatePageHeader
+    title="採用について"
+    intro="営業組織の変革を支える、私たちの仕事をご紹介します。"
+  />
+
+  <!-- work: 仕事の対象 -->
+  <BusinessPhotoText
+    site={site}
+    image={discussionImage}
+    photoPosition="right"
+    background="white"
+    showCaption={true}
+  >
+    <SectionTitle title="顧客の現場と、受注プロセスに向き合う。" align="left" class="recruit__section-title" />
+    <div class="recruit__text">
+      <p>私たちが支援するのは、中堅製造業とSaaS企業の営業組織です。組織診断を通じて課題を捉え、商談設計とプレイブック整備を進め、現場での活用につなげます。</p>
+      <p>営業活動を構造で捉えることと、現場の状況を理解すること。その両方に向き合う仕事です。</p>
+      <p class="recruit__link-row">
+        <a href={url(site, '/about/')} class="recruit__link">
+          私たちの支援方針を読む
+          <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </BusinessPhotoText>
+
+  <!-- recruitment-info: 募集情報の掲載状態 -->
+  <section class="recruit-info bg-base-200">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <h2 class="recruit-info__heading">募集に関する情報</h2>
+        <Alert variant="info">
+          <p>現在、このサイトには募集職種・勤務条件・選考方法を掲載していません。</p>
+        </Alert>
+        <p class="recruit-info__note">会社の基本情報は、会社概要ページでご確認いただけます。</p>
+        <p class="recruit-info__link-row">
+          <a href={url(site, '/company/')} class="recruit-info__link">
+            会社概要を見る
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <SiteEndLinks site={site} currentPath="/recruit/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .recruit__section-title { margin-bottom: 24px; }
+  .recruit__text p {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+  .recruit__link-row { margin-top: 32px; }
+  .recruit__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .recruit__link:hover { color: var(--color-secondary); border-bottom-color: var(--color-secondary); }
+
+  .recruit-info__heading {
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 24px;
+    letter-spacing: 0.025em;
+  }
+  .recruit-info__note {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    margin: 24px 0 0;
+  }
+  .recruit-info__link-row { margin-top: 32px; }
+  .recruit-info__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .recruit-info__link:hover { color: var(--color-secondary); border-bottom-color: var(--color-secondary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .recruit__link, .recruit-info__link { transition: none; }
+  }
+</style>

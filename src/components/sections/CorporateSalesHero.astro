@@ -1,0 +1,182 @@
+---
+/**
+ * CorporateSalesHero — 軌道セールス設計のトップヒーロー。
+ *
+ * ディレクションの指示:
+ *   - 濃紺の全幅領域、PC 目安 900px
+ *   - PC: 左7列に見出し、右5列に縦寄りの写真（上180px、幅500px）
+ *   - モバイル: 縦積み、上136pxから開始、写真は4:3
+ *   - 写真下に「写真は業務イメージです。」のキャプション
+ *   - アニメーション: none（初期表示）
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+  heroImage: { src: string; alt: string };
+}
+const { site, heroImage } = Astro.props;
+---
+
+<section class="corp-hero">
+  <div class="corp-hero__inner">
+    <div class="corp-hero__grid">
+      <div class="corp-hero__copy">
+        <h1 class="corp-hero__title">
+          <span>受注の型を、</span>
+          <span>現場に残す</span>
+        </h1>
+        <p class="corp-hero__lede">
+          中堅製造業とSaaS企業の営業変革を、商談設計から現場定着まで。軌道セールス設計は、伴走型の組織診断とプレイブック整備を通じて、再現性のある受注プロセスを構築します。
+        </p>
+        <div class="corp-hero__cta-row">
+          <a href={url(site, '/contact/')} class="corp-hero__cta">
+            無料で組織診断を申し込む
+            <span aria-hidden="true" class="corp-hero__cta-arrow">→</span>
+          </a>
+        </div>
+        <p class="corp-hero__audience">対象：中堅製造業・SaaS企業</p>
+      </div>
+      <figure class="corp-hero__photo">
+        <img
+          src={heroImage.src}
+          alt={heroImage.alt}
+          width="1600"
+          height="1200"
+          fetchpriority="high"
+          loading="eager"
+          class="corp-hero__img"
+        />
+        <figcaption class="corp-hero__caption">写真は業務イメージです。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .corp-hero {
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+    width: 100%;
+  }
+  .corp-hero__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 180px 32px 80px;
+  }
+  .corp-hero__grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .corp-hero__copy {
+    padding-bottom: 8px;
+  }
+  .corp-hero__title {
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.025em;
+    margin: 0 0 32px;
+    color: var(--color-primary-content);
+  }
+  .corp-hero__title span {
+    display: block;
+  }
+  .corp-hero__lede {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 32px;
+    max-width: 36em;
+    color: var(--color-primary-content);
+    opacity: 0.92;
+  }
+  .corp-hero__cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .corp-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 56px;
+    padding: 0 28px;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: opacity 0.15s ease;
+  }
+  .corp-hero__cta:hover { opacity: 0.92; }
+  .corp-hero__cta-arrow {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+  .corp-hero__cta:hover .corp-hero__cta-arrow {
+    transform: translateX(4px);
+  }
+  .corp-hero__audience {
+    margin: 32px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid color-mix(in oklab, var(--color-primary-content) 30%, transparent);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--color-primary-content);
+    opacity: 0.85;
+  }
+  .corp-hero__photo {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .corp-hero__img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    display: block;
+    background: var(--color-base-300);
+  }
+  .corp-hero__caption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-primary-content);
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1023px) {
+    .corp-hero__inner {
+      padding: 136px 20px 64px;
+    }
+    .corp-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .corp-hero__title {
+      font-size: 40px;
+      margin-bottom: 24px;
+    }
+    .corp-hero__img {
+      height: auto;
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .corp-hero__title { font-size: 34px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .corp-hero__cta, .corp-hero__cta-arrow {
+      transition: none;
+    }
+  }
+</style>

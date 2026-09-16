@@ -1,0 +1,128 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import NextPageLinks from '../../../../../components/site/NextPageLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+---
+
+<SiteLayout
+  site={site}
+  title="個人情報の取り扱い"
+  description="軌道セールス設計株式会社のサンプルサイトにおける、フォーム入力情報の扱いをご案内します。実在する個人情報・機密情報は入力しないでください。"
+  path="/privacy/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '個人情報の取り扱い' }]}
+>
+  <!-- 01 このサイトについて（共通PageIntro） -->
+  <PageIntro
+    title="個人情報の取り扱い。"
+    description="このサイトは、架空企業「軌道セールス設計株式会社」の紹介サンプルです。組織診断のフォームは、入力内容の確認操作を体験するために設けています。実際の申し込みは受け付けていません。実在する氏名、連絡先、顧客情報、社内の機密情報は入力しないでください。"
+  >
+    <Alert variant="info" class="privacy-alert">
+      <p>フォームでは入力内容の確認までお試しいただけます。実際の申し込みや外部への送信は行われません。</p>
+    </Alert>
+  </PageIntro>
+
+  <!-- 02 フォームの入力情報（白背景・見出しと本文） -->
+  <section class="handling bg-base-100">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-0 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="handling__num" aria-hidden="true">02</p>
+        <h2 class="handling__heading">入力内容は外部へ送信しません。</h2>
+        <div class="handling__body">
+          <p>フォームに入力した内容は、入力内容を確認する画面の表示にのみ使用します。企業への送信、メールの配信、申し込みの登録は行いません。入力内容を保存して、後から呼び出す機能もありません。</p>
+          <p>確認画面の「入力内容を修正する」では、同じ画面内で入力を見直せます。「確認を終了して入力を消去する」を選ぶと、フォームと確認画面の入力内容を消去します。確認操作が終わった後に、担当者から連絡が届くことはありません。</p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- 03 入力時のお願い（紙色背景） -->
+  <section class="scope bg-base-200">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-0 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="scope__num" aria-hidden="true">03</p>
+        <h2 class="scope__heading">架空の情報でお試しください。</h2>
+        <div class="scope__body">
+          <p>会社名やお名前には架空の情報を使用し、メールアドレスには example@example.com などのサンプルを入力してください。自由記入欄にも、実在する個人や取引先を特定できる情報は記入しないでください。</p>
+          <p>この説明は、この紹介サンプルのフォームについてのものです。実際の契約、業務上の情報管理、正式な相談受付の条件を定めるものではありません。営業変プログラムの内容は、入力操作を行わずに閲覧できます。</p>
+        </div>
+        <Alert variant="info" class="scope__alert">
+          <p>フォームでは架空のサンプル情報で動作をご確認ください。</p>
+        </Alert>
+        <p class="scope__link-row">
+          <a href={url(site, '/service/')} class="scope__link">
+            営業変革プログラムを見る
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href={url(site, '/contact/')} class="scope__link">
+            フォームへ戻る
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <NextPageLinks site={site} currentPath="/privacy/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .privacy-alert { margin-top: 16px; }
+
+  .handling__num,
+  .scope__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+  }
+  .handling__heading,
+  .scope__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 32px;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .handling__body p,
+  .scope__body p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+  .handling__body p:last-child,
+  .scope__body p:last-child { margin-bottom: 0; }
+
+  .scope__alert { margin: 24px 0; }
+  .scope__link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 0;
+  }
+  .scope__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .scope__link:hover { color: var(--color-secondary); border-color: var(--color-secondary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scope__link { transition: none; }
+  }
+</style>

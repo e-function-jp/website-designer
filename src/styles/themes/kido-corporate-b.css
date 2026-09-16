@@ -1,0 +1,58 @@
+/*
+ * kido-corporate-b — 軌道セールス設計株式会社・冒険路線 b 案 独自テーマ。
+ *
+ * docs/quality/runs/corporate-20260916-0500/direction-b.html の配色指定に従う。
+ *   主色 #26394B（濃紺）/ アクセント #E7B86D（金）/ 紙色 #F5F4EF /
+ *   白 #FFFFFF / 本文 #172532 / 罫線 #CCD1D3
+ *
+ * DaisyUI 内蔵テーマ名は "business" を流用できない
+ * （scripts/web-quality-check.mjs の consist-default-theme が内蔵名を一律
+ * ブロックするため）。`kido-corporate-b` を独自名として登録する。
+ *
+ * 列挙は src/styles/global.css の @plugin "daisyui" themes に追加する。
+ */
+@plugin "daisyui/theme" {
+  name: "kido-corporate-b";
+  default: false;
+  color-scheme: light;
+
+  /* 主色 #26394B（濃紺） */
+  --color-primary: oklch(31% 0.045 245);
+  --color-primary-content: oklch(100% 0 0);
+
+  /* アクセント #E7B86D（金）。CTA・図の接続点 */
+  --color-secondary: oklch(74% 0.13 80);
+  --color-secondary-content: oklch(20% 0.025 240);
+  --color-accent: oklch(74% 0.13 80);
+  --color-accent-content: oklch(20% 0.025 240);
+
+  /* 背景: 紙色 #F5F4EF / 白 / 罫線 #CCD1D3 */
+  --color-base-100: oklch(96% 0.005 90);
+  --color-base-200: oklch(92% 0.008 90);
+  --color-base-300: oklch(83% 0.012 220);
+
+  /* 本文 #172532 */
+  --color-base-content: oklch(22% 0.03 240);
+
+  --color-neutral: oklch(31% 0.045 245);
+  --color-neutral-content: oklch(100% 0 0);
+
+  --color-info: oklch(55% 0.10 230);
+  --color-info-content: oklch(100% 0 0);
+  --color-success: oklch(55% 0.12 160);
+  --color-success-content: oklch(100% 0 0);
+  --color-warning: oklch(70% 0.14 80);
+  --color-warning-content: oklch(22% 0.02 80);
+  --color-error: oklch(55% 0.20 25);
+  --color-error-content: oklch(100% 0 0);
+
+  /* ボタンは角丸 4px。ヘッダーカプセルは SiteHeader 側で参照 */
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}

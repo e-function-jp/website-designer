@@ -47,6 +47,26 @@
       "weight": 0.0,
       "industry_weight": 0.1667,
       "at": "2026-09-15T05:00:33+09:00"
+    },
+    {
+      "run_id": "corporate-20260915-1151",
+      "site_type": "corporate",
+      "industry": "hospital",
+      "reference_id": "muuuuu-22232",
+      "reference_title": "焼津市の矯正専門歯科【やいづ原崎矯正歯科】",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-15T11:51:33+09:00"
+    },
+    {
+      "run_id": "corporate-20260916-0500",
+      "site_type": "corporate",
+      "industry": "ad",
+      "reference_id": "muuuuu-22368",
+      "reference_title": "株式会社SalesDex",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-16T05:00:14+09:00"
     }
   ]
 }

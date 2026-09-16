@@ -1,0 +1,147 @@
+---
+/**
+ * NextPageLinks — サイト共通の末尾大型リンクと主要CTA。
+ *
+ * ディレクション指示 (direction-b):
+ *   - 上段: 「営業変プログラムを見る」→/service/、「会社概要を見る」→/company/ の 2列
+ *   - 下段: 主要CTAの全幅
+ *   - モバイル: 縦積み
+ *   - 各リンクは PC高さ 144px / モバイル 104px
+ *   - 現在ページへの枠は省略（リダイレクトしない）
+ *   - /contact/ の下段は「営業変プログラムを確認する」→/service/ に置換
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Tile {
+  label: string;
+  href: string;
+  /** 現在のパスと一致する場合このタイルは表示しない */
+  current?: boolean;
+}
+
+interface Props {
+  site: SiteConfig;
+  /** 現在のパス。current と一致するタイルは省略 */
+  currentPath?: string;
+  /** /contact/ のとき下段CTAは営業変プログラムに置換 */
+  onContact?: boolean;
+}
+
+const { site, currentPath = '/', onContact = false } = Astro.props;
+
+const tiles: Tile[] = [
+  { label: '営業変プログラムを見る', href: '/service/' },
+  { label: '会社概要を見る', href: '/company/' },
+  { label: '私たちの営業設計を見る', href: '/about/' },
+];
+
+const visibleTiles = tiles.filter(
+  (t) => !(currentPath === t.href || (currentPath === '/' && t.href === '/')),
+);
+
+// 下段 CTA は contact の場合 /service/ へ誘導
+const ctaLabel = onContact
+  ? '営業変プログラムを確認する'
+  : site.primaryCta?.label ?? 'お問い合わせ';
+const ctaHref = onContact ? url(site, '/service/') : (site.primaryCta?.href ? url(site, site.primaryCta.href) : url(site, '/contact/'));
+---
+
+<aside class="npl bg-base-200" aria-label="次のページとお問い合わせ">
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+    <ul class="npl__tiles">
+      {visibleTiles.map((t) => (
+        <li class="npl__tile-cell">
+          <a href={url(site, t.href)} class="npl__tile">
+            <span class="npl__tile-label">{t.label}</span>
+            <span class="npl__tile-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a href={ctaHref} class="npl__cta">
+      <span class="npl__cta-label">{ctaLabel}</span>
+      <span class="npl__cta-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</aside>
+
+<style>
+  .npl__tiles {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .npl__tile-cell { width: 100%; }
+  .npl__tile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+    color: var(--color-primary);
+    text-decoration: none;
+    height: 104px;
+    padding: 0 24px;
+    transition: border-color 0.15s ease;
+  }
+  .npl__tile:hover { border-color: var(--color-primary); }
+  .npl__tile-label {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .npl__tile-arrow {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .npl__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+    text-decoration: none;
+    height: 88px;
+    font-size: 17px;
+    font-weight: 700;
+    transition: opacity 0.15s ease;
+  }
+  .npl__cta:hover { opacity: 0.92; }
+  .npl__cta-arrow {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    .npl__tiles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .npl__tile {
+      height: 144px;
+      padding: 0 32px;
+    }
+    .npl__tile-label { font-size: 19px; }
+    .npl__cta {
+      height: 88px;
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .npl__tile-label { font-size: 15px; }
+    .npl__cta { font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .npl__tile, .npl__cta { transition: none; }
+  }
+</style>
