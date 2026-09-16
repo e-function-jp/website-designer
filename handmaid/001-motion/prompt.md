@@ -1559,3 +1559,230 @@ canvas は実ピクセルサイズを持つ必要がある。CSS で `width:100%
 
 なし (フォントは Google Fonts からロード、ディザリングテクスチャはエンジン内で手続き的に生成、
 モデル / 画像 / 動画なし)。
+
+---
+
+# Phase 2 — 日本語プロダクトLP「Flowstate」への拡張
+
+> ここから下は **Phase 1（上記・コミット `d6a33da`）の成果物を土台に、1画面の英語ヒーローを
+> 日本語の架空プロダクトLPへ仕上げる** ための追加仕様。上の仕様と矛盾する場合はこちらを優先する。
+> 実装対象は同じ `handmaid/001-motion/index.html`（単一ファイルのまま）。
+
+## 2-0. コンセプト — 「スクロール＝潜水」
+
+Phase 1 の核は「雑音のように暴れる流体インク」。LP ではこれを**物語の軸**にする。
+
+- ページを下へスクロールする行為を **集中へ潜っていくこと** に見立てる。
+- 上（ヒーロー）: マゼンタ〜シアンが激しく渦巻く = 散らかった世界。
+- 中盤: 深く潜るほど流体は **遅く・暗く・青く** なり、文字が読める静けさになる = フロー状態。
+- 最後（CTA）: もう一度 **バースト** して色が戻る = 浮上し、成果を持ち帰る。
+- 画面右端に細い **深度メーター**（`0m → 40m`）を常設し、スクロール量と連動させる。
+
+世界観を壊さないためのルール:
+1. **流体キャンバスは最後まで背景に居続ける**（ヒーローだけで終わらせない）。白背景・ベタ塗り
+   セクションは作らない。全セクションはガラス面（`--glass-fill` + `backdrop-filter`）か素の文字で構成。
+2. 使ってよい色は Phase 1 の CSS 変数のみ + 下記で追加する2色だけ。画像・写真・動画は使わない。
+   プロダクト画面はすべて HTML/CSS/インラインSVG で描く。
+3. 動きは「ゆっくり・柔らかい」側に統一。`--ease-entrance`（`cubic-bezier(0.2,0,0,1)`）を基本とし、
+   バウンス・弾むイージングは使わない。
+4. 外部依存は Phase 1 と同じ（Google Fonts / Lenis）。GSAP 等は追加しない。
+
+## 2-1. プロダクト設定（架空）
+
+- **名称:** Flowstate（フローステート）
+- **カテゴリ:** 集中のためのデスクトップ／モバイルアプリ（ディープワーク OS）
+- **一言:** 通知・タブ・雑音を静かに遠ざけ、深い集中に「潜る」時間を設計する。
+- **ターゲット:** 開発者・デザイナー・研究者・書き手など、まとまった集中時間が成果を左右する人。
+- **状態:** 正式リリース前の先行登録（ウェイトリスト）受付中。
+- 数値・利用者の声はすべて**架空**。実在の統計・研究・企業名を引用しない。
+  フッターに「※本ページは架空のプロダクトのデザインサンプルです。」を明記する。
+
+## 2-2. シェル変更（Phase 1 からの差分）
+
+- `<html lang="ja">`、`<title>Flowstate — 散らかった世界で、深く潜る。</title>`、description も日本語化。
+- **フォント:** Onest に加えて `Zen Kaku Gothic New`（400 / 500 / 700）を同じ Google Fonts リンクで読み込む。
+  `font-family: "Onest", "Zen Kaku Gothic New", system-ui, sans-serif;`（英数字は Onest、和文は Zen Kaku）。
+  和文には `font-feature-settings: "palt" 1;` を当てる。
+- **和文組版:** 見出し `line-height:1.3; letter-spacing:0.02em; word-break:keep-all; overflow-wrap:anywhere;`
+  本文 `line-height:1.9; letter-spacing:0.04em;`。見出しの改行位置は `<br class="sm-only">` や文節 span で**手で制御**し、
+  1文字だけの行（孤立文字）を作らない。
+- **流体キャンバスを `position:fixed; inset:0; z-index:0` に変更**し、`<body>` 直下へ移す（ヒーロー内ではなくページ全体の背景）。
+  ヒーローの radial scrim はヒーロー内に残す。加えてページ全体用の固定スクリム `.depth-scrim`
+  （`position:fixed; inset:0; z-index:1; background:rgba(4,5,12,var(--depth-dim)); pointer-events:none`）を置き、
+  `--depth-dim` を後述のムードで `0 → 0.55` の範囲で動かす。
+- ヒーロー `<section>` は `min-height:100lvh` のまま。footer はヒーローから外し、ページ末尾に移す。
+  ヒーロー下端（旧 footer 位置）には **スクロールキュー** を置く（2-4 参照）。
+- ナビ `<header>` は `position:fixed` にし、ヒーローを抜けたら（`scrollY > 80vh`）背景に
+  `rgba(4,5,12,0.35)` + `backdrop-filter:blur(16px)` + 下線 `1px solid var(--glass-border)` を 300ms でフェードイン。
+- 追加 CSS 変数（これ以外の色は増やさない）:
+  ```css
+  --accent-cyan:   #6ee7f2;  /* 深度メーター・数字・アクティブ状態 */
+  --accent-violet: #a78bfa;  /* グラデーション文字の終点 */
+  ```
+  グラデーション文字: `background:linear-gradient(90deg,var(--accent-cyan),var(--accent-violet)); -webkit-background-clip:text; color:transparent;`
+  — 使うのは各セクションで**1語だけ**（多用しない）。
+
+## 2-3. 流体エンジンへの「ムード」API 追加
+
+エンジン本体（シェーダー・ソルバー）は触らない。`fluidSimulation(canvas)` の末尾で**制御オブジェクトを return** し、
+`window.flow` に入れる。追加するのは以下だけ:
+
+```js
+// ムード = 流体の "深さ"。現在値は毎フレーム target へ lerp（係数 0.04/frame ≒ 約1.2秒で追従）
+const mood = {
+  hueMin: 0.5,  hueRange: 0.42,   // generateColor の色相帯（Phase 1 と同値が初期値）
+  intensity: 1.0,                 // 自動カーソルの色倍率（Phase 1 の *3.2 に掛ける）
+  orbitSpeed: 0.026,              // rad/frame
+  orbitScale: 1.0,                // ORBIT_RADIUS に掛ける
+  density: 0.958,                 // config.DENSITY_DISSIPATION
+  dim: 0.0                        // CSS の --depth-dim に書き戻す
+};
+return {
+  setMood(partial) { Object.assign(moodTarget, partial); },
+  burst(n = 24, waves = 4) { multipleSplats(n); for (let i=0;i<waves;i++) splatStack.push(8 + (Math.random()*8|0)); },
+  pause() { config.PAUSED = true; }, resume() { config.PAUSED = false; }
+};
+```
+
+- `generateColor()` は `mood.hueMin + Math.random()*mood.hueRange` を使う。
+- `driveVirtualPointer()` は `ORBIT_SPEED`/`ORBIT_RADIUS`/`3.2` をムード値で置き換える。
+- `document.visibilitychange` で hidden のとき pause、visible で resume。
+- `mood.dim` は毎フレーム `document.documentElement.style.setProperty('--depth-dim', mood.dim.toFixed(3))`。
+
+### ムードプリセット（セクションに入った瞬間 `flow.setMood()`）
+
+| id | 使う場所 | hueMin | hueRange | intensity | orbitSpeed | orbitScale | density | dim |
+|---|---|---|---|---|---|---|---|---|
+| `surface` | ヒーロー | 0.50 | 0.42 | 1.00 | 0.026 | 1.00 | 0.958 | 0.00 |
+| `shallow` | 問題提起 | 0.62 | 0.30 | 0.70 | 0.018 | 1.10 | 0.965 | 0.20 |
+| `dive`    | 仕組み | 0.55 | 0.14 | 0.45 | 0.011 | 1.30 | 0.975 | 0.38 |
+| `deep`    | 機能 / 画面 / 声 / 料金 / FAQ | 0.58 | 0.08 | 0.28 | 0.006 | 1.45 | 0.982 | 0.55 |
+| `rise`    | 最終CTA | 0.50 | 0.42 | 1.10 | 0.030 | 0.90 | 0.955 | 0.10 |
+
+- 切替判定は `IntersectionObserver`（`rootMargin: "-45% 0px -45% 0px"`、つまり画面中央ラインを跨いだセクション）で、
+  各 `<section data-mood="dive">` を監視する。
+- `rise` に入った**初回だけ** `flow.burst(28, 6)` を呼ぶ（浮上のバースト）。
+- `prefers-reduced-motion: reduce` のときは常に `deep` 相当 + `orbitSpeed:0.002` に固定し、burst しない。
+
+## 2-4. セクション構成（上から順に）
+
+全セクション共通: `position:relative; z-index:10;` 内側コンテナ `max-width:72rem; margin-inline:auto; padding-inline:1.25rem`（≥640px `2.5rem`）。
+セクション間の縦余白 `padding-block: 8rem`（<640px `5rem`）。見出し前に**セクションラベル**
+（`font-family:Onest; font-size:0.75rem; letter-spacing:0.2em; color:var(--accent-cyan)` 例: `01 — PROBLEM` + 右に深度 `-08m`）。
+
+### S0. ヒーロー `#top` `data-mood="surface"`
+Phase 1 のレイアウト・リビール遅延・サイズをそのまま維持し、コピーだけ差し替える。
+- ナビリンク: `仕組み`(#how) / `機能`(#features) / `料金`(#pricing) / `FAQ`(#faq)。右CTA: `先行登録`（#join へスムーススクロール）。
+- バッジ: `先行登録 10,000人突破`
+- H1: `散らかった世界で、` / `深く潜る。`（2行固定。**文節単位リビール** — 下記）
+- サブ: `通知も、タブも、雑音も。Flowstate は気を散らすものを静かに遠ざけ、本当に大切な仕事へ没入する時間をつくります。`
+- フォーム: placeholder `メールアドレス` / ボタン `先行登録する`
+- 下端（旧footer位置, delay 1650ms）: **スクロールキュー** — `スクロールして潜る` の小さい文字 + 下に 1px×3rem の縦線。
+  縦線の中を 0.4rem の光点が上→下へ `1800ms cubic-bezier(0.2,0,0,1) infinite` で流れる。
+- **和文の単語リビール:** 英語のように空白で split できないので、テキストを `data-phrases="散らかった|世界で、|/|深く|潜る。"`
+  のように `|` 区切り（`/` は改行）で持たせて span 化する。stagger/duration/from は Phase 1 と同値（H1 85ms/720ms/26px、サブ 22ms/600ms/14px）。
+  サブ行は読点・句点の後ろで区切った句単位で 40ms stagger にする（22ms × 文字数ぶんの長さにしない）。
+
+### S1. 問題提起（マニフェスト） `#problem` `data-mood="shallow"`
+- ラベル `01 — NOISE` / 深度 `-08m`
+- **スクロール連動の文字点灯**: 高さ `220vh` のセクション内で、`position:sticky; top:0; height:100svh` のステージに
+  大きな文章を置く（`font-size: clamp(1.6rem, 3.6vw, 3.4rem); font-weight:500; line-height:1.6; max-width:52rem`）。
+  1文字ずつ span 化し、初期 `opacity:0.16`。セクション内のスクロール進捗 `p (0→1)` に対して、
+  `i/文字数 < p*1.1` の文字を `opacity:1` にする（`transition: opacity 240ms linear`）。
+  文章:
+  > 開いたままのタブ。鳴りやまない通知。「ちょっといい？」のひと声。
+  > 私たちの集中は、一日に何度も水面へ引き戻されている。
+  > 必要なのは、もっと頑張ることではない。**深く潜れる環境**をつくることだ。
+  （「深く潜れる環境」のみグラデーション文字）
+- Lenis の `lenis.on('scroll', ...)` で進捗を計算（`scroll` イベント直読みは不可）。
+
+### S2. 仕組み（3ステップ） `#how` `data-mood="dive"`
+- ラベル `02 — HOW IT WORKS` / 深度 `-16m`。見出し `3つのステップで、フローへ。`
+- **スティッキー・ステップ**: セクション高さ `300vh`。左カラム（≥1024px 5/12）は sticky で
+  巨大数字 `01` `02` `03`（Onest 500, `font-size:12rem`, `-webkit-text-stroke:1px var(--glass-border); color:transparent`、
+  アクティブ時は `color:var(--heading)` に 500ms でフィル）。右カラムに3枚のガラスカードが縦に並び、
+  中央ラインに来たカードが `opacity:1; scale:1`、それ以外 `opacity:0.35; scale:0.96`（600ms `--ease-entrance`）。
+  <1024px は sticky を解除し、カードを普通に縦積み + 通常のフェードアップ。
+- カード内容:
+  1. **整える** — `作業を始める前に、通知・アプリ・サイトを「潮止め」。今日やることを1つだけ選びます。`
+  2. **潜る** — `タイマーが静かに回り始め、周囲の雑音はアンビエントサウンドに置き換わります。途中の通知はすべて水面に保留。`
+  3. **浮上する** — `セッションが終わると、保留していた通知をまとめて受け取り、潜った時間と深さを記録します。`
+  各カードにインラインSVGの線画アイコン（stroke 1.5, 2.25rem）。
+
+### S3. 機能（ベントグリッド） `#features` `data-mood="deep"`
+- ラベル `03 — FEATURES` / 深度 `-24m`。見出し `静けさを、設計する機能。`
+- グリッド: ≥1024px `grid-template-columns:repeat(6,1fr)`、カード span は `4/2/2/2/2/4`（2行目以降も合計6）、<640px 1カラム。
+- 各カード（ガラス, `border-radius:1.5rem; padding:2rem; min-height:14rem`）:
+  **スポットライト境界** — `pointermove` でカード内座標を `--mx/--my` に入れ、
+  `background: radial-gradient(28rem circle at var(--mx) var(--my), rgba(110,231,242,0.10), transparent 40%), var(--glass-fill)`。
+  ボーダーも同じ中心で `rgba(110,231,242,0.35)` に光る（`::before` の mask で1px枠を作る）。タッチ端末では無効。
+- 6機能: `通知の潮止め` / `フォーカス・セッション` / `アンビエントサウンド` / `深度ログ` / `チームの静寂時間` / `オフラインでも潜れる`
+  — それぞれ1〜2文の説明（30〜50字）。大きい2枚（span 4）には小さなUIの断片をCSSで描く
+  （潮止め: ON/OFF トグル3つ、深度ログ: 7本の棒グラフ — 棒は in-view で下から 900ms、80ms stagger で伸びる）。
+
+### S4. プロダクト画面 `#product` `data-mood="deep"`
+- ラベル `04 — PRODUCT` / 深度 `-30m`。見出し `潜っているあいだ、画面はこれだけ。`
+- 中央に **HTML/CSS 製のアプリ画面モック**（ガラス, `width:min(38rem,100%)`, `aspect-ratio:4/3`, `border-radius:1.75rem`）:
+  上部に信号ドット3つ、中央に円形プログレスリング（SVG `stroke-dasharray`、`--accent-cyan`→`--accent-violet` のグラデ）と
+  残り時間 `24:18`（Onest, tabular-nums, 4rem）、下に今日のタスク名 `新機能の設計ドキュメントを書く`、`深度 42m` のチップ。
+  in-view 中は秒が本当に1秒ずつ減り、リングも追従する（25:00 開始でループ）。
+- **ポインター追従チルト**: モック全体を `perspective(1200px) rotateX/rotateY` で最大 ±6deg、lerp 0.08。reduced-motion / タッチでは無効。
+- モックの左右に浮遊する小さなガラスチップ2つ（`通知 12件を保留中` / `アンビエント：深海`）が
+  `translateY` ±0.5rem を 6s / 7.5s の sin で漂う。
+
+### S5. 数字と声 `#voices` `data-mood="deep"`
+- 3つのカウンター（in-view で 1600ms easeOutCubic カウントアップ, Onest tabular-nums, `font-size:4.5rem`）:
+  `2.4時間`（1日あたりの平均集中時間の増加）/ `68%`（通知による中断の減少）/ `10,000+`（先行登録者）。
+  注記 `※ベータ版利用者アンケート（架空）` を小さく。
+- 利用者の声: ガラスカードの **横方向無限マーキー** 2段（上段 左へ 60s、下段 右へ 72s、`linear infinite`、hover で `animation-play-state:paused`）。
+  カード6枚: 引用文（40〜70字）+ `頭文字アバター（円, グラデ）` + `職種 / 地域`（例: `プロダクトデザイナー / 東京`）。実名は使わない。
+  両端は `mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)` でフェード。
+
+### S6. 料金 `#pricing` `data-mood="deep"`
+- ラベル `05 — PRICING` / 深度 `-36m`。見出し `潜る深さで、選べるプラン。`
+- 月額／年額トグル（ガラスのセグメント、選択側に白ピルが 300ms でスライド）。年額は `2ヶ月分おトク` バッジ。
+- 3プラン（ガラスカード、中央 `Pro` は枠を `--accent-cyan` 40% にして `おすすめ` ラベル）:
+  - **Free** ¥0 — 1日3セッション / 基本の潮止め / 深度ログ7日
+  - **Pro** ¥980/月（年額 ¥9,800）— 無制限セッション / アンビエントサウンド全種 / 深度ログ無制限 / 全デバイス同期
+  - **Team** ¥1,480/人・月（年額 ¥14,800）— Pro の全機能 / チームの静寂時間 / 管理ダッシュボード
+- 金額切替時は数字が縦に 300ms スライドして入れ替わる。CTA はすべて `#join` へ。
+
+### S7. FAQ `#faq` `data-mood="deep"`
+- 見出し `よくある質問`。`<details>` 5件。開閉は高さを `grid-template-rows: 0fr → 1fr` で 400ms アニメーション、
+  右の `+` が 45deg 回転して `×` に。質問例: 対応OS / 通知は本当に消える？ / 無料でどこまで使える？ / チーム導入 / データの扱い。
+
+### S8. 最終CTA `#join` `data-mood="rise"`
+- `min-height:100svh`、中央寄せ。ここで流体がバーストして色が戻る（2-3）。
+- ラベル `06 — SURFACE` / 深度 `0m`（メーターがここで 0m へ巻き戻る）。
+- H1 と同スタイルの見出し `さあ、深く。`（文節リビールを in-view で再生）
+- サブ `先行登録いただいた方には、正式リリース時に Pro プラン3ヶ月分をお届けします。`
+- ヒーローと同じガラスのメールフォーム。送信時: `preventDefault()`、ボタン文言を `登録しました` に変え、
+  フォームの位置で `flow.burst(12, 2)`（小さな祝福）。バックエンドなし。
+
+### Footer
+- ブランド + 簡易リンク（プライバシー / 利用規約 / お問い合わせ、いずれも `#`）+
+  `© 2026 Flowstate — 深く潜るためのツール。` + `※本ページは架空のプロダクトのデザインサンプルです。`
+
+## 2-5. 常設 UI
+
+- **深度メーター**（≥1024px のみ）: 右端 `right:1.75rem; top:50%; translateY(-50%)`、高さ `40vh` の 1px 縦線（`--glass-border`）。
+  スクロール進捗に比例して光点（0.5rem, `--accent-cyan`, `box-shadow:0 0 12px`）が下降し、横に `-00m` 表示（Onest tabular-nums 0.75rem）。
+  深度 = `round(進捗 * 40)`。ただし `#join` に入ったら 900ms かけて 0m へ戻る。
+- **スクロール進捗の読み取りは Lenis の scroll コールバック1本に集約**し、S1 文字点灯 / S2 ステップ / 深度メーター / ナビ背景を
+  そこからまとめて更新する（rAF 内で layout thrash を起こさない：`getBoundingClientRect` はリサイズ時にキャッシュ）。
+
+## 2-6. 汎用リビール
+
+見出し・カード等の汎用フェードアップは `IntersectionObserver`（threshold 0.2）で1回だけ:
+`opacity 0→1, translateY(1.5rem)→0, 800ms var(--ease-entrance)`、同一グループ内 90ms stagger。
+
+## 2-7. 受け入れ条件（実装側で自己確認してからコミット）
+
+1. ヒーローの見た目・リビールのタイミングが Phase 1 と同一（差分はコピーの日本語化と、footer→スクロールキューのみ）。
+2. 1440×900 / 390×844 でページ末尾までスクロールしても **横スクロールが発生しない**。
+3. コンソールエラー 0。`http://127.0.0.1:<port>/001-motion/` で確認（`npm run preview:handmaid`）。
+4. ナビ・CTA のアンカーがすべて存在するセクションに飛ぶ（Lenis の `scrollTo` でスムーズに）。
+5. `prefers-reduced-motion: reduce` で、リビールは即表示・マーキー停止・チルト無効・流体はほぼ静止。
+6. 390px 幅で和文見出しに1文字だけの行が出ない。本文は 15px 相当以上。
+7. スクロールで流体の色と速さが段階的に落ち着き、`#join` で再び色が戻ることが目視で分かる。
+8. 単一 `index.html` のまま。画像ファイルを追加しない。
