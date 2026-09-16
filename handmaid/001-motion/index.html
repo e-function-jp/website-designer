@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Flowstate — Deep Work in a Distracted World</title>
-<meta name="description" content="Cut through the noise, reclaim your attention, and do work that truly matters. Join the Flowstate waitlist." />
+<title>Flowstate — 散らかった世界で、深く潜る。</title>
+<meta name="description" content="通知も、タブも、雑音も。Flowstate は気を散らすものを静かに遠ざけ、本当に大切な仕事へ没入する時間をつくります。先行登録受付中。" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { margin: 0; box-sizing: border-box; }
   html { font-size: 16px; }
@@ -28,6 +28,9 @@
     --scrim:                rgba(4,5,12,0.46);
     --scrim-strong:         rgba(4,5,12,0.68);
     --scrim-soft:           rgba(4,5,12,0.12);
+    --accent-cyan:          #6ee7f2;
+    --accent-violet:        #a78bfa;
+    --depth-dim:            0;
     --duration-fast:        150ms;
     --ease-entrance:        cubic-bezier(0.2, 0, 0, 1);
   }
@@ -36,14 +39,40 @@
     background: var(--hero-base);
     color: var(--heading);
     overflow-x: hidden;
-    font-family: "Onest", sans-serif;
+    font-family: "Onest", "Zen Kaku Gothic New", system-ui, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "palt" 1;
   }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: 0; background: transparent; padding: 0; color: inherit; }
   input { font-family: inherit; }
+
+  /* Phase 2: page-wide fluid canvas (fixed background) + depth scrim */
+  .page-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .depth-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: rgba(4, 5, 12, var(--depth-dim));
+    transition: background 80ms linear;
+  }
+  .gradient-text {
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 
   .hero {
     position: relative;
@@ -60,15 +89,6 @@
   }
   @media (min-width: 640px) { .hero { padding: 0 2.5rem; } }
 
-  .hero__canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
-
   .hero__scrim {
     position: absolute;
     inset: 0;
@@ -79,16 +99,25 @@
   }
 
   .nav {
-    position: absolute;
+    position: fixed;
     inset-inline: 0;
     top: 0;
-    z-index: 20;
+    z-index: 30;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1.25rem;
+    background: transparent;
+    transition: background 300ms var(--ease-entrance), border-color 300ms var(--ease-entrance);
+    border-bottom: 1px solid transparent;
   }
   @media (min-width: 640px) { .nav { padding: 1.75rem 2.5rem; } }
+  .nav.is-scrolled {
+    background: rgba(4, 5, 12, 0.35);
+    -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+    border-bottom-color: var(--glass-border);
+  }
 
   .nav__brand {
     display: flex;
@@ -274,18 +303,760 @@
   .reveal--word.is-visible { opacity: 1; transform: none; will-change: auto; }
   .reveal--word.subline-word { transform: translateY(14px); transition-duration: 600ms; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .reveal--word { opacity: 1 !important; transform: none !important; transition: none !important; }
+  /* 和文 フレーズ単位リビール (文節ごとに1 span、改行は <br>) */
+  .reveal--phrase {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 720ms cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 720ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    will-change: opacity, transform;
   }
+  .reveal--phrase.is-visible { opacity: 1; transform: none; will-change: auto; }
+
+  /* Hero scroll queue (footer 差し替え) */
+  .scroll-queue {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 1.5rem;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--body-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+  @media (min-width: 640px) { .scroll-queue { font-size: 0.8rem; } }
+  .scroll-queue__rail {
+    position: relative;
+    width: 1px;
+    height: 3rem;
+    background: rgba(255,255,255,0.18);
+    overflow: hidden;
+  }
+  .scroll-queue__dot {
+    position: absolute;
+    top: 0;
+    left: -1.5px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 10px var(--accent-cyan);
+    animation: scroll-queue-flow 1800ms cubic-bezier(0.2, 0, 0, 1) infinite;
+  }
+  @keyframes scroll-queue-flow {
+    0%   { transform: translateY(-4px); opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(44px); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal--word, .reveal--phrase { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .scroll-queue__dot { animation: none; transform: translateY(20px); }
+  }
+
+  /* ──────── Phase 2: 全セクション共通 ──────── */
+  .section {
+    position: relative;
+    z-index: 10;
+    padding-block: 5rem;
+  }
+  @media (min-width: 640px) { .section { padding-block: 8rem; } }
+  .section__inner {
+    max-width: 72rem;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) { .section__inner { padding-inline: 2.5rem; } }
+
+  /* final-cta は grid + place-items: center。子要素が shrink-to-fit で
+     min-content まで縮まないように明示幅を入れる（モバイルで form 37rem が
+     section を押し広げないため）*/
+  .final-cta__inner {
+    width: 100%;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Onest", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--accent-cyan);
+    margin-bottom: 2rem;
+  }
+  .section-label__bar {
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+  }
+  .section-label__depth {
+    font-variant-numeric: tabular-nums;
+    color: var(--body-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .section-heading {
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    color: var(--heading);
+    margin: 0 0 1rem;
+  }
+  .section-sub {
+    color: var(--body-muted);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    margin: 0 0 3rem;
+    max-width: 44rem;
+  }
+  .section-sub--wider { max-width: 56rem; }
+
+  /* ──────── 汎用フェードアップ (2-6) ──────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 800ms var(--ease-entrance), transform 800ms var(--ease-entrance);
+    will-change: opacity, transform;
+  }
+  .fade-up.is-visible { opacity: 1; transform: none; will-change: auto; }
+
+  /* ──────── S1: 問題提起（マニフェスト） ──────── */
+  .manifest { min-height: 220vh; }
+  .manifest__stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 6rem;
+  }
+  .manifest__text {
+    font-size: clamp(1.4rem, 3.2vw, 2.6rem);
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    max-width: 52rem;
+    color: var(--heading);
+  }
+  .manifest__text .char { opacity: 0.16; transition: opacity 240ms linear; display: inline-block; }
+  .manifest__text .char.is-on { opacity: 1; }
+  .manifest__text .brk { display: block; }
+
+  /* ──────── S2: 仕組み（3ステップ） ──────── */
+  .how { min-height: 300vh; }
+  .how__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) {
+    .how__grid { grid-template-columns: 5fr 7fr; gap: 4rem; }
+  }
+  .how__sticky {
+    position: sticky;
+    top: 12vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  @media (max-width: 1023.98px) { .how__sticky { position: static; } }
+  .how__number {
+    font-family: "Onest", sans-serif;
+    font-size: clamp(6rem, 14vw, 12rem);
+    line-height: 0.9;
+    font-weight: 500;
+    -webkit-text-stroke: 1px var(--glass-border);
+            text-stroke: 1px var(--glass-border);
+    color: transparent;
+    transition: color 500ms var(--ease-entrance);
+    letter-spacing: -0.04em;
+  }
+  .how__number.is-on { color: var(--heading); -webkit-text-stroke-color: transparent; }
+  .how__steps { display: flex; flex-direction: column; gap: 6rem; }
+  @media (max-width: 1023.98px) { .how__steps { gap: 2rem; } }
+  .how-card {
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.75rem;
+    opacity: 0.35;
+    transform: scale(0.96);
+    transition: opacity 600ms var(--ease-entrance), transform 600ms var(--ease-entrance);
+  }
+  @media (min-width: 640px) { .how-card { padding: 2.25rem; } }
+  .how-card.is-on { opacity: 1; transform: scale(1); }
+  .how-card__icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--accent-cyan);
+    margin-bottom: 1rem;
+    stroke: currentColor;
+  }
+  .how-card__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--heading);
+  }
+  .how-card__body {
+    color: var(--body-muted);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+
+  /* ──────── S3: 機能（ベントグリッド） ──────── */
+  .features-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) {
+    .features-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .feature {
+    position: relative;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-fill);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    min-height: 14rem;
+    overflow: hidden;
+    --mx: 50%;
+    --my: 50%;
+    background-image: radial-gradient(28rem circle at var(--mx) var(--my),
+      rgba(110,231,242,0.10), transparent 40%);
+    background-color: var(--glass-fill);
+    transition: border-color 200ms var(--ease-entrance);
+  }
+  .feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(28rem circle at var(--mx) var(--my),
+      rgba(110,231,242,0.35), transparent 40%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0) border-box;
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) {
+    .feature--wide { grid-column: span 4; }
+    .feature--narrow { grid-column: span 2; }
+  }
+  .feature__title { font-size: 1.1rem; font-weight: 500; color: var(--heading); margin-bottom: 0.4rem; }
+  .feature__body { color: var(--body-muted); font-size: 0.92rem; line-height: 1.8; letter-spacing: 0.03em; }
+  .feature__chip {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  .feature__chip span {
+    flex: 1;
+    height: 1.5rem;
+    border-radius: 9999px;
+    background: rgba(110,231,242,0.18);
+    border: 1px solid rgba(110,231,242,0.25);
+  }
+  .feature__chip span:nth-child(2) { background: rgba(167,139,250,0.16); border-color: rgba(167,139,250,0.25); }
+  .feature__chip span:nth-child(3) { background: rgba(255,255,255,0.08); border-color: var(--glass-border); }
+  .feature__chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.3rem;
+    margin-top: 1.25rem;
+    height: 4.5rem;
+  }
+  .feature__chart span {
+    flex: 1;
+    height: 0;
+    background: linear-gradient(180deg, var(--accent-cyan), rgba(110,231,242,0.25));
+    border-radius: 4px 4px 1px 1px;
+    transition: height 900ms var(--ease-entrance);
+  }
+
+  /* ──────── S4: プロダクト画面 ──────── */
+  .product-mock-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    perspective: 1200px;
+    margin-block: 4rem;
+  }
+  .product-mock {
+    position: relative;
+    width: min(38rem, 100%);
+    aspect-ratio: 4 / 3;
+    border-radius: 1.75rem;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transform-style: preserve-3d;
+    transition: transform 120ms linear;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .product-mock__chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .product-mock__chrome span {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+  }
+  .product-mock__chrome span:nth-child(1) { background: #ff6058; }
+  .product-mock__chrome span:nth-child(2) { background: #ffbd2e; }
+  .product-mock__chrome span:nth-child(3) { background: #28c840; }
+  .product-mock__body {
+    position: relative;
+    height: calc(100% - 2.35rem);
+    display: grid;
+    place-items: center;
+  }
+  .product-ring {
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+  }
+  @media (min-width: 640px) { .product-ring { width: 14rem; height: 14rem; } }
+  .product-ring__time {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: "Onest", sans-serif;
+    font-size: 3rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    color: var(--heading);
+  }
+  @media (min-width: 640px) { .product-ring__time { font-size: 4rem; } }
+  .product-task {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .product-task__name {
+    color: var(--body-muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+  }
+  .product-task__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    margin-top: 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-fill);
+    font-family: "Onest", sans-serif;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-cyan);
+  }
+  .product-task__chip::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 8px var(--accent-cyan);
+  }
+  .product-chip {
+    position: absolute;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.8rem;
+    color: var(--body-muted);
+    white-space: nowrap;
+    animation: product-chip-float 6s ease-in-out infinite;
+  }
+  .product-chip--right { right: -1rem; top: 30%; animation-delay: -1.5s; animation-duration: 7.5s; }
+  .product-chip--left  { left: -1rem; bottom: 28%; animation-delay: -3s; }
+  @keyframes product-chip-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-0.5rem); }
+  }
+  @media (max-width: 640px) {
+    .product-chip { font-size: 0.72rem; padding: 0.4rem 0.7rem; }
+    .product-chip--right { right: -0.4rem; }
+    .product-chip--left  { left: -0.4rem; }
+  }
+
+  /* ──────── S5: 数字と声 ──────── */
+  .numbers {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: 640px) { .numbers { grid-template-columns: repeat(3, 1fr); } }
+  .number__value {
+    font-family: "Onest", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, var(--heading), var(--body-muted));
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  .number__label { color: var(--body-muted); font-size: 0.92rem; margin-top: 0.4rem; }
+  .numbers-note { font-size: 0.78rem; color: var(--body-muted); opacity: 0.7; margin-top: 0.5rem; }
+  .marquee { position: relative; overflow: hidden; }
+  .marquee__track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: marquee 60s linear infinite;
+  }
+  .marquee--right .marquee__track { animation: marquee-rev 72s linear infinite; }
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  .marquee::before, .marquee::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 3rem;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .marquee::before { left: 0;
+    background: linear-gradient(90deg, var(--hero-base), transparent);
+  }
+  .marquee::after { right: 0;
+    background: linear-gradient(270deg, var(--hero-base), transparent);
+  }
+  .marquee + .marquee { margin-top: 1rem; }
+  .voice {
+    flex: 0 0 22rem;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .voice__quote { color: var(--heading); line-height: 1.8; letter-spacing: 0.03em; }
+  .voice__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .voice__avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+    color: var(--hero-base);
+    display: grid;
+    place-items: center;
+    font-family: "Onest", sans-serif;
+    font-weight: 500;
+  }
+  .voice__role { font-size: 0.78rem; color: var(--body-muted); }
+
+  /* ──────── S6: 料金 ──────── */
+  .pricing-toggle {
+    display: inline-flex;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    padding: 0.35rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .pricing-toggle__pill {
+    position: absolute;
+    top: 0.35rem;
+    bottom: 0.35rem;
+    left: 0.35rem;
+    width: calc(50% - 0.35rem);
+    background: var(--action-inverse);
+    border-radius: 9999px;
+    transition: transform 300ms var(--ease-entrance);
+  }
+  .pricing-toggle.is-year .pricing-toggle__pill { transform: translateX(100%); }
+  .pricing-toggle__btn {
+    position: relative;
+    z-index: 1;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.92rem;
+    color: var(--body-muted);
+    transition: color 200ms var(--ease-entrance);
+    border-radius: 9999px;
+  }
+  .pricing-toggle__btn.is-active { color: var(--action-inverse-fg); font-weight: 500; }
+  .pricing-toggle__badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.15rem 0.45rem;
+    background: rgba(110,231,242,0.15);
+    color: var(--accent-cyan);
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-family: "Onest", sans-serif;
+    letter-spacing: 0;
+  }
+  .plans {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) { .plans { grid-template-columns: repeat(3, 1fr); } }
+  .plan {
+    position: relative;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    padding: 2rem 1.75rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  @media (min-width: 640px) { .plan { padding: 2.5rem 2rem; } }
+  .plan--pro {
+    border-color: rgba(110,231,242,0.4);
+  }
+  .plan__badge {
+    position: absolute;
+    top: -0.7rem;
+    left: 1.75rem;
+    padding: 0.2rem 0.7rem;
+    background: var(--accent-cyan);
+    color: var(--hero-base);
+    font-family: "Onest", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border-radius: 9999px;
+  }
+  .plan__name { font-size: 1.05rem; color: var(--body-muted); }
+  .plan__price {
+    font-family: "Onest", sans-serif;
+    font-size: 2.4rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 1rem 0 0.25rem;
+    color: var(--heading);
+    overflow: hidden;
+    height: 2.6rem;
+  }
+  .plan__price-inner { display: block; transition: transform 300ms var(--ease-entrance); }
+  .pricing-toggle.is-year .plan__price-inner { transform: translateY(-2.6rem); }
+  .plan__unit { font-size: 0.85rem; color: var(--body-muted); font-weight: 400; }
+  .plan__features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 2rem;
+    color: var(--body-muted);
+    font-size: 0.92rem;
+    line-height: 1.9;
+  }
+  .plan__features li::before { content: "・"; color: var(--accent-cyan); margin-right: 0.4rem; }
+
+  /* ──────── S7: FAQ ──────── */
+  .faq-list {
+    max-width: 56rem;
+    border-top: 1px solid var(--glass-border);
+  }
+  .faq-item { border-bottom: 1px solid var(--glass-border); }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    font-size: 1.05rem;
+    color: var(--heading);
+    transition: color var(--duration-fast) var(--ease-entrance);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:hover { color: var(--accent-cyan); }
+  .faq-item__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    position: relative;
+    transition: transform 400ms var(--ease-entrance);
+  }
+  .faq-item__icon::before, .faq-item__icon::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+  }
+  .faq-item__icon::after { transform: translateY(-50%) rotate(90deg); }
+  .faq-item[open] .faq-item__icon::after { transform: translateY(-50%) rotate(0deg); }
+  .faq-item__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 400ms var(--ease-entrance);
+    color: var(--body-muted);
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+  }
+  .faq-item[open] .faq-item__body { grid-template-rows: 1fr; }
+  .faq-item__body > div { overflow: hidden; padding-bottom: 1.5rem; }
+
+  /* ──────── S8: 最終CTA ──────── */
+  /* minmax(0, 1fr) で track を 0 まで縮められるようにし、
+     内側 form__inner (width: 37rem) が track を押し広げないようにする。*/
+  .final-cta {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    text-align: center;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) { .final-cta { padding-inline: 2.5rem; } }
+  .final-cta__inner { max-width: 40rem; width: 100%; padding-inline: 1.25rem; }
+
+  /* ──────── 共通ボタン ──────── */
+  .section__cta { display: flex; justify-content: center; margin-top: 3rem; }
+
+  /* ──────── Footer ──────── */
+  .lp-footer {
+    position: relative;
+    z-index: 10;
+    padding: 3rem 1.25rem 4rem;
+    text-align: center;
+    color: var(--body-muted);
+    font-size: 0.82rem;
+    line-height: 1.9;
+  }
+  .lp-footer__links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
+  .lp-footer__links a { transition: color var(--duration-fast) var(--ease-entrance); }
+  .lp-footer__links a:hover { color: var(--heading); }
+  .lp-footer__disclaimer { font-size: 0.72rem; opacity: 0.7; margin-top: 0.5rem; }
+
+  /* ──────── 深度メーター (≥1024px のみ) ──────── */
+  .depth-meter {
+    position: fixed;
+    right: 1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 25;
+    height: 40vh;
+    display: none;
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) { .depth-meter { display: flex; align-items: center; gap: 0.6rem; } }
+  .depth-meter__rail {
+    position: relative;
+    width: 1px;
+    height: 100%;
+    background: var(--glass-border);
+  }
+  .depth-meter__dot {
+    position: absolute;
+    left: -2px;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 12px var(--accent-cyan);
+    transform: translateY(-50%);
+    transition: top 200ms linear, left 200ms linear, opacity 200ms linear;
+  }
+  .depth-meter__label {
+    font-family: "Onest", sans-serif;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--body-muted);
+    letter-spacing: 0.05em;
+    width: 3rem;
+    text-align: right;
+  }
+
+  /* ──────── and文専用の調整 ──────── */
+  .heading-jp,
+  .final-cta__heading {
+    font-feature-settings: "palt" 1;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  .subline-jp,
+  .lp-footer {
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+  /* 1文字だけの孤立行を防ぐ (改行可能位置を制限) */
+  .heading-jp br + .reveal--phrase:only-child,
+  .final-cta__heading br + .reveal--phrase:only-child { margin-left: 0.3em; }
+
+  /* Phase 1 で見えていた canvas は body 直下に移動済みなので、hero 内に重複して置かない */
+  .hero__canvas { display: none; }
+
+  /* prefers-reduced-motion: reduce — すべての連続アニメ / 視差を停止 */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-queue__dot, .product-chip, .marquee__track { animation: none !important; }
+    .product-chip { transform: none !important; }
+    .product-mock { transition: none !important; transform: none !important; }
+    .fade-up { transition: none !important; opacity: 1 !important; transform: none !important; }
+    .how-card { transition: none !important; opacity: 1 !important; transform: none !important; }
+    .how__number { transition: none !important; }
+    .feature__chart span { transition: none !important; }
+    .faq-item summary, .faq-item__body, .faq-item__icon { transition: none !important; }
+    .pricing-toggle__pill, .plan__price-inner { transition: none !important; }
+  }
+</style>
 </style>
 </head>
 <body>
-  <section class="hero">
-    <canvas class="hero__canvas" aria-hidden="true"></canvas>
+  <canvas class="page-canvas" aria-hidden="true"></canvas>
+  <div class="depth-scrim" aria-hidden="true"></div>
+
+  <section class="hero" id="top" data-mood="surface">
     <div class="hero__scrim" aria-hidden="true"></div>
 
     <header class="nav reveal reveal--nav" data-reveal-delay="150">
-      <a class="nav__brand" href="/">
+      <a class="nav__brand" href="#top">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M2.5 9c2.5 0 2.5 4.2 5 4.2S10 9 12 9s2.5 4.2 5 4.2S19.5 9 21.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           <path d="M2.5 15c2.5 0 2.5 4.2 5 4.2S10 15 12 15s2.5 4.2 5 4.2S19.5 15 21.5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.5"/>
@@ -293,72 +1064,678 @@
         <span>Flowstate</span>
       </a>
       <nav class="nav__pill" aria-label="Primary">
-        <a href="#how-it-works">How it works?</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#products">Products</a>
-        <a href="#blog">Blog</a>
+        <a href="#how">仕組み</a>
+        <a href="#features">機能</a>
+        <a href="#pricing">料金</a>
+        <a href="#faq">FAQ</a>
       </nav>
-      <a class="pill" href="#get-started">Get Started</a>
+      <a class="pill" href="#join">先行登録</a>
     </header>
 
     <div class="column">
-      <p class="badge reveal" data-reveal-delay="320">10K+ already in flow</p>
-      <h1 class="heading" data-word-reveal='{"base":480,"stagger":85,"duration":720,"from":26}'>Deep Work in a Distracted World</h1>
-      <p class="subline" data-word-reveal='{"base":1150,"stagger":22,"duration":600,"from":14}'>Cut through the noise, reclaim your attention, and do work that truly matters.</p>
+      <p class="badge reveal" data-reveal-delay="320">先行登録 10,000人突破</p>
+      <h1 class="heading heading-jp" data-phrases="散らかった|世界で、|/|深く|潜る。" data-reveal-delay="480"></h1>
+      <p class="subline subline-jp" data-phrases="通知も、タブも、雑音も。|Flowstate は気を散らすものを|静かに遠ざけ、|本当に大切な仕事へ没入する時間をつくります。" data-reveal-delay="1150"></p>
       <form class="form reveal" data-reveal-delay="1450" id="waitlist" novalidate>
         <div class="form__inner">
-          <input type="email" name="email" required placeholder="Enter your email" autocomplete="email" />
-          <button type="submit" class="pill">Join Waitlist</button>
+          <input type="email" name="email" required placeholder="メールアドレス" autocomplete="email" />
+          <button type="submit" class="pill">先行登録する</button>
         </div>
       </form>
     </div>
 
-    <footer class="footer reveal" data-reveal-delay="1650">© 2026 Flowstate — engineered for deep work.</footer>
+    <div class="scroll-queue reveal" data-reveal-delay="1650" aria-hidden="true">
+      <span>スクロールして潜る</span>
+      <span class="scroll-queue__rail"><span class="scroll-queue__dot"></span></span>
+    </div>
   </section>
+
+  <!-- S1 問題提起（マニフェスト） -->
+  <section id="problem" class="section manifest" data-mood="shallow" aria-label="問題提起">
+    <div class="manifest__stage">
+      <div class="section__inner">
+        <div class="section-label fade-up"><span>01 — NOISE</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−08m</span></div>
+        <p class="manifest__text" data-char-light>
+          <span class="char" data-c>開</span><span class="char" data-c>い</span><span class="char" data-c>た</span><span class="char" data-c>ま</span><span class="char" data-c>ま</span><span class="char" data-c>の</span><span class="char" data-c>タ</span><span class="char" data-c>ブ</span><span class="char" data-c>。</span><span class="char" data-c>鳴</span><span class="char" data-c>り</span><span class="char" data-c>や</span><span class="char" data-c>ま</span><span class="char" data-c>な</span><span class="char" data-c>い</span><span class="char" data-c>通</span><span class="char" data-c>知</span><span class="char" data-c>。</span><span class="char" data-c>「</span><span class="char" data-c>ち</span><span class="char" data-c>ょ</span><span class="char" data-c>っ</span><span class="char" data-c>と</span><span class="char" data-c>い</span><span class="char" data-c>い</span><span class="char" data-c>？」</span><span class="char" data-c>の</span><span class="char" data-c>ひ</span><span class="char" data-c>と</span><span class="char" data-c>声</span><span class="char" data-c>。</span><br>
+          <span class="char" data-c>私</span><span class="char" data-c>た</span><span class="char" data-c>ち</span><span class="char" data-c>の</span><span class="char" data-c>集</span><span class="char" data-c>中</span><span class="char" data-c>は</span><span class="char" data-c>、</span><span class="char" data-c>一</span><span class="char" data-c>日</span><span class="char" data-c>に</span><span class="char" data-c>何</span><span class="char" data-c>度</span><span class="char" data-c>も</span><span class="char" data-c>水</span><span class="char" data-c>面</span><span class="char" data-c>へ</span><span class="char" data-c>引</span><span class="char" data-c>き</span><span class="char" data-c>戻</span><span class="char" data-c>さ</span><span class="char" data-c>れ</span><span class="char" data-c>て</span><span class="char" data-c>い</span><span class="char" data-c>る</span><span class="char" data-c>。</span><br>
+          <span class="char" data-c>必</span><span class="char" data-c>要</span><span class="char" data-c>な</span><span class="char" data-c>の</span><span class="char" data-c>は</span><span class="char" data-c>、</span><span class="char" data-c>も</span><span class="char" data-c>っ</span><span class="char" data-c>と</span><span class="char" data-c>頑</span><span class="char" data-c>張</span><span class="char" data-c>る</span><span class="char" data-c>こ</span><span class="char" data-c>と</span><span class="char" data-c>で</span><span class="char" data-c>は</span><span class="char" data-c>な</span><span class="char" data-c>い</span><span class="char" data-c>。</span><span class="gradient-text"><span class="char" data-c>深</span><span class="char" data-c>く</span><span class="char" data-c>潜</span><span class="char" data-c>れ</span><span class="char" data-c>る</span><span class="char" data-c>環</span><span class="char" data-c>境</span></span><span class="char" data-c>を</span><span class="char" data-c>つ</span><span class="char" data-c>く</span><span class="char" data-c>る</span><span class="char" data-c>こ</span><span class="char" data-c>と</span><span class="char" data-c>だ</span><span class="char" data-c>。</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- S2 仕組み（3ステップ） -->
+  <section id="how" class="section how" data-mood="dive" aria-label="仕組み">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>02 — HOW IT WORKS</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−16m</span></div>
+      <h2 class="section-heading heading-jp fade-up"><span class="reveal--phrase">3つの</span><span class="reveal--phrase">ステップで、</span><span class="reveal--phrase">フローへ。</span></h2>
+
+      <div class="how__grid">
+        <div class="how__sticky">
+          <div class="how__number" data-step-number="1">01</div>
+        </div>
+        <div class="how__steps">
+          <article class="how-card fade-up" data-step-card="1">
+            <svg class="how-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <h3 class="how-card__title">整える</h3>
+            <p class="how-card__body">作業を始める前に、通知・アプリ・サイトを「潮止め」。今日やることを1つだけ選びます。</p>
+          </article>
+          <article class="how-card fade-up" data-step-card="2">
+            <svg class="how-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <h3 class="how-card__title">潜る</h3>
+            <p class="how-card__body">タイマーが静かに回り始め、周囲の雑音はアンビエントサウンドに置き換わります。途中の通知はすべて水面に保留。</p>
+          </article>
+          <article class="how-card fade-up" data-step-card="3">
+            <svg class="how-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 15c2.5 0 2.5 4.2 5 4.2S12 15 14 15s2.5 4.2 5 4.2" stroke-width="1.5" stroke-linecap="round"/><path d="M3 19h18" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <h3 class="how-card__title">浮上する</h3>
+            <p class="how-card__body">セッションが終わると、保留していた通知をまとめて受け取り、潜った時間と深さを記録します。</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 機能（ベントグリッド） -->
+  <section id="features" class="section" data-mood="deep" aria-label="機能">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>03 — FEATURES</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−24m</span></div>
+      <h2 class="section-heading heading-jp fade-up">静けさを、設計する機能。</h2>
+      <p class="section-sub fade-up">散らかった世界を、6つの視点で静かに整えます。</p>
+
+      <div class="features-grid">
+        <article class="feature feature--wide fade-up" data-spotlight>
+          <h3 class="feature__title">通知の潮止め</h3>
+          <p class="feature__body">セッション開始と同時に、通知とアプリを水面下に沈めます。緊急連絡だけ緊急着陸。</p>
+          <div class="feature__chip" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">フォーカス・セッション</h3>
+          <p class="feature__body">25分から2時間まで、自分にあった深さで潜れます。</p>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">アンビエントサウンド</h3>
+          <p class="feature__body">雨音、潮騒、深海の静寂。雑音を心地よい音で置き換えます。</p>
+        </article>
+        <article class="feature feature--wide fade-up" data-spotlight>
+          <h3 class="feature__title">深度ログ</h3>
+          <p class="feature__body">今週どれだけ深く潜れたかを、棒グラフで静かに振り返ります。</p>
+          <div class="feature__chart" data-chart>
+            <span data-h="42"></span><span data-h="68"></span><span data-h="35"></span><span data-h="81"></span><span data-h="55"></span><span data-h="72"></span><span data-h="48"></span>
+          </div>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">チームの静寂時間</h3>
+          <p class="feature__body">同じチームの「今は潜っている」を可視化し、不要な連絡を控えます。</p>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">オフラインでも潜れる</h3>
+          <p class="feature__body">ネットが切れても集中は止まりません。ログはあとから同期。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4 プロダクト画面 -->
+  <section id="product" class="section" data-mood="deep" aria-label="プロダクト画面">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>04 — PRODUCT</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−30m</span></div>
+      <h2 class="section-heading heading-jp fade-up">潜っているあいだ、<br class="sm-only">画面はこれだけ。</h2>
+
+      <div class="product-mock-wrap fade-up">
+        <span class="product-chip product-chip--right" aria-hidden="true">通知 12件を保留中</span>
+        <span class="product-chip product-chip--left" aria-hidden="true">アンビエント：深海</span>
+        <div class="product-mock" data-tilt>
+          <div class="product-mock__chrome">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="product-mock__body">
+            <div class="product-ring">
+              <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="var(--accent-cyan)"/>
+                    <stop offset="1" stop-color="var(--accent-violet)"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
+                <circle data-ring cx="60" cy="60" r="54" fill="none" stroke="url(#ringGrad)" stroke-width="3" stroke-linecap="round" transform="rotate(-90 60 60)" stroke-dasharray="339.29" stroke-dashoffset="0"/>
+              </svg>
+              <div class="product-ring__time" data-countdown>25:00</div>
+            </div>
+          </div>
+          <div style="position:absolute; bottom: 1.5rem; left: 0; right: 0; display:flex; justify-content:center;">
+            <div class="product-task">
+              <p class="product-task__name">新機能の設計ドキュメントを書く</p>
+              <span class="product-task__chip">深度 42m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S5 数字と声 -->
+  <section id="voices" class="section" data-mood="deep" aria-label="数字と声">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>— IMPACT</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−34m</span></div>
+
+      <div class="numbers">
+        <div class="fade-up">
+          <div class="number__value" data-counter="2.4" data-suffix="時間">0.0時間</div>
+          <p class="number__label">1日あたりの平均集中時間の増加</p>
+        </div>
+        <div class="fade-up">
+          <div class="number__value" data-counter="68" data-suffix="%">0%</div>
+          <p class="number__label">通知による中断の減少</p>
+        </div>
+        <div class="fade-up">
+          <div class="number__value" data-counter="10000" data-suffix="+">0+</div>
+          <p class="number__label">先行登録者</p>
+        </div>
+      </div>
+      <p class="numbers-note fade-up">※ベータ版利用者アンケート（架空）</p>
+
+      <div class="marquee fade-up" aria-hidden="true">
+        <div class="marquee__track">
+          <div class="voice"><p class="voice__quote">「25分タイマーが静かに終わったとき、初めて自分の呼吸に気づきました。」</p><div class="voice__meta"><div class="voice__avatar">K</div><div><div class="voice__role">プロダクトデザイナー / 東京</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「通知を全部保留にしたら、午後に3時間ぶっ通しで論文が書けました。」</p><div class="voice__meta"><div class="voice__avatar">S</div><div><div class="voice__role">研究者 / 京都</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深海のアンビエント、最高。チームの"潜ってる"バッジで遠慮が要らなくなりました。」</p><div class="voice__meta"><div class="voice__avatar">M</div><div><div class="voice__role">エンジニア / 大阪</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「週末の執筆時間が、1ヶ月前から3倍に。無理なく続いています。」</p><div class="voice__meta"><div class="voice__avatar">A</div><div><div class="voice__role">ライター / 福岡</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「静かな午後が戻ってきた、というのが正直な感想です。」</p><div class="voice__meta"><div class="voice__avatar">T</div><div><div class="voice__role">翻訳家 / 横浜</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"あと5分"の連続にさよなら。今日は1つだけ、に集中できます。」</p><div class="voice__meta"><div class="voice__avatar">Y</div><div><div class="voice__role">マーケター / 名古屋</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「25分タイマーが静かに終わったとき、初めて自分の呼吸に気づきました。」</p><div class="voice__meta"><div class="voice__avatar">K</div><div><div class="voice__role">プロダクトデザイナー / 東京</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「通知を全部保留にしたら、午後に3時間ぶっ通しで論文が書けました。」</p><div class="voice__meta"><div class="voice__avatar">S</div><div><div class="voice__role">研究者 / 京都</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深海のアンビエント、最高。チームの"潜ってる"バッジで遠慮が要らなくなりました。」</p><div class="voice__meta"><div class="voice__avatar">M</div><div><div class="voice__role">エンジニア / 大阪</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「週末の執筆時間が、1ヶ月前から3倍に。無理なく続いています。」</p><div class="voice__meta"><div class="voice__avatar">A</div><div><div class="voice__role">ライター / 福岡</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「静かな午後が戻ってきた、というのが正直な感想です。」</p><div class="voice__meta"><div class="voice__avatar">T</div><div><div class="voice__role">翻訳家 / 横浜</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"あと5分"の連続にさよなら。今日は1つだけ、に集中できます。」</p><div class="voice__meta"><div class="voice__avatar">Y</div><div><div class="voice__role">マーケター / 名古屋</div></div></div></div>
+        </div>
+      </div>
+      <div class="marquee marquee--right fade-up" aria-hidden="true">
+        <div class="marquee__track">
+          <div class="voice"><p class="voice__quote">「深い夜の静けさを、昼間にも再現できるツール。」</p><div class="voice__meta"><div class="voice__avatar">R</div><div><div class="voice__role">写真家 / 札幌</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"今潜ってます"が一目で伝わると、社内Slackが静かになりました。」</p><div class="voice__meta"><div class="voice__avatar">H</div><div><div class="voice__role">PM / 神戸</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「集中の質を、数字じゃなくてグラフで見せてくれるのが優しい。」</p><div class="voice__meta"><div class="voice__avatar">N</div><div><div class="voice__role">データアナリスト / 仙台</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深呼吸する癖が戻りました。Flowstateのおかげかも。」</p><div class="voice__meta"><div class="voice__avatar">I</div><div><div class="voice__role">編集者 / 長崎</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「オフラインでもログが残るのが、現場仕事には助かります。」</p><div class="voice__meta"><div class="voice__avatar">O</div><div><div class="voice__role">研究者 / つくば</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「夜中に書いたコード、朝まで集中してたことに驚いた。」</p><div class="voice__meta"><div class="voice__avatar">E</div><div><div class="voice__role">バックエンドエンジニア / リモート</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深い夜の静けさを、昼間にも再現できるツール。」</p><div class="voice__meta"><div class="voice__avatar">R</div><div><div class="voice__role">写真家 / 札幌</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"今潜ってます"が一目で伝わると、社内Slackが静かになりました。」</p><div class="voice__meta"><div class="voice__avatar">H</div><div><div class="voice__role">PM / 神戸</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「集中の質を、数字じゃなくてグラフで見せてくれるのが優しい。」</p><div class="voice__meta"><div class="voice__avatar">N</div><div><div class="voice__role">データアナリスト / 仙台</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深呼吸する癖が戻りました。Flowstateのおかげかも。」</p><div class="voice__meta"><div class="voice__avatar">I</div><div><div class="voice__role">編集者 / 長崎</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「オフラインでもログが残るのが、現場仕事には助かります。」</p><div class="voice__meta"><div class="voice__avatar">O</div><div><div class="voice__role">研究者 / つくば</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「夜中に書いたコード、朝まで集中してたことに驚いた。」</p><div class="voice__meta"><div class="voice__avatar">E</div><div><div class="voice__role">バックエンドエンジニア / リモート</div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 料金 -->
+  <section id="pricing" class="section" data-mood="deep" aria-label="料金">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>05 — PRICING</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−36m</span></div>
+      <h2 class="section-heading heading-jp fade-up">潜る深さで、<br class="sm-only">選べるプラン。</h2>
+
+      <div class="pricing-toggle fade-up" data-pricing>
+        <span class="pricing-toggle__pill"></span>
+        <button class="pricing-toggle__btn is-active" data-period="monthly" type="button">月額</button>
+        <button class="pricing-toggle__btn" data-period="yearly" type="button">年額<span class="pricing-toggle__badge">2ヶ月分おトク</span></button>
+      </div>
+
+      <div class="plans">
+        <article class="plan fade-up">
+          <h3 class="plan__name">Free</h3>
+          <div class="plan__price"><span class="plan__price-inner"><span data-monthly>¥0</span><span data-yearly>¥0</span></span><span class="plan__unit">永久無料</span></div>
+          <ul class="plan__features">
+            <li>1日3セッション</li>
+            <li>基本の潮止め</li>
+            <li>深度ログ7日分</li>
+          </ul>
+          <a class="pill" href="#join">無料で始める</a>
+        </article>
+        <article class="plan plan--pro fade-up">
+          <span class="plan__badge">おすすめ</span>
+          <h3 class="plan__name">Pro</h3>
+          <div class="plan__price">
+            <span class="plan__price-inner">
+              <span data-monthly><span class="plan__num">¥980</span><span class="plan__unit">/月</span></span>
+              <span data-yearly><span class="plan__num">¥9,800</span><span class="plan__unit">/年</span></span>
+            </span>
+          </div>
+          <ul class="plan__features">
+            <li>無制限セッション</li>
+            <li>アンビエントサウンド全種</li>
+            <li>深度ログ無制限</li>
+            <li>全デバイス同期</li>
+          </ul>
+          <a class="pill" href="#join">Proで先行登録</a>
+        </article>
+        <article class="plan fade-up">
+          <h3 class="plan__name">Team</h3>
+          <div class="plan__price">
+            <span class="plan__price-inner">
+              <span data-monthly><span class="plan__num">¥1,480</span><span class="plan__unit">/人・月</span></span>
+              <span data-yearly><span class="plan__num">¥14,800</span><span class="plan__unit">/人・年</span></span>
+            </span>
+          </div>
+          <ul class="plan__features">
+            <li>Proの全機能</li>
+            <li>チームの静寂時間</li>
+            <li>管理ダッシュボード</li>
+            <li>優先サポート</li>
+          </ul>
+          <a class="pill" href="#join">Teamで先行登録</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7 FAQ -->
+  <section id="faq" class="section" data-mood="deep" aria-label="よくある質問">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>— FAQ</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−38m</span></div>
+      <h2 class="section-heading heading-jp fade-up">よくある質問</h2>
+
+      <div class="faq-list fade-up">
+        <details class="faq-item">
+          <summary>対応OSを教えてください<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>macOS 12以降、Windows 11、iOS 17以降、Android 14以降に対応しています。Linux対応は2026年内の予定です。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>通知は本当に消えるのでしょうか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>セッション中はすべての通知が保留され、画面に表示されません。緊急連絡だけ「緊急着陸」として即時通知する設定があります。セッション終了後にまとめて届きます。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>無料でどこまで使えますか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>Free プランは1日3セッション、基本の潮止め、深度ログ7日分を永久無料でご利用いただけます。クレジットカード登録は不要です。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>チームへの導入は大変ですか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>Team プランは管理ダッシュボードからメンバーを招待するだけです。SSO（Google / Microsoft）に対応しており、配下に専用のポリシーも設定できます。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>データの扱いはどうなっていますか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>深度ログとセッション履歴はエンドツーエンドで暗号化されます。端末間の同期もゼロ知識設計で、Flowstate自身にも内容は見えません。</div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- S8 最終CTA -->
+  <section id="join" class="section final-cta" data-mood="rise" aria-label="先行登録">
+    <div class="final-cta__inner">
+      <div class="section-label fade-up"><span>06 — SURFACE</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>0m</span></div>
+      <h2 class="section-heading heading-jp fade-up">さあ、深く。</h2>
+      <p class="section-sub section-sub--wider final-cta__sub fade-up">先行登録いただいた方には、正式リリース時に Pro プラン3ヶ月分をお届けします。</p>
+      <form class="form fade-up" id="join-form" novalidate>
+        <div class="form__inner">
+          <input type="email" name="email" required placeholder="メールアドレス" autocomplete="email" />
+          <button type="submit" class="pill">先行登録する</button>
+        </div>
+      </form>
+      <p class="numbers-note" style="margin-top: 1rem;">※本ページは架空のプロダクトのデザインサンプルです。</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="lp-footer">
+    <div class="lp-footer__links">
+      <a href="#">プライバシー</a>
+      <a href="#">利用規約</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <div>© 2026 Flowstate — 深く潜るためのツール。</div>
+    <div class="lp-footer__disclaimer">※本ページは架空のプロダクトのデザインサンプルです。</div>
+  </footer>
+
+  <!-- 深度メーター (≥1024px のみ) -->
+  <aside class="depth-meter" aria-hidden="true">
+    <span class="depth-meter__label" data-depth-label>0m</span>
+    <span class="depth-meter__rail"><span class="depth-meter__dot" data-depth-dot></span></span>
+  </aside>
 
 <script type="importmap">{ "imports": { "lenis": "https://unpkg.com/lenis@1.3.19/dist/lenis.mjs" } }</script>
 <script type="module">
   import Lenis from "lenis";
 
+  /* ────────── 初期化 ────────── */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = matchMedia('(hover: none)').matches;
   const lenis = new Lenis({ smoothWheel: true });
   function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
 
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  document.querySelectorAll('.reveal').forEach((el) => {
-    if (reduce) { el.classList.add('is-visible'); return; }
-    const delay = Number(el.dataset.revealDelay || 0);
-    setTimeout(() => el.classList.add('is-visible'), delay);
-  });
-
-  document.querySelectorAll('[data-word-reveal]').forEach((el) => {
-    const opts = JSON.parse(el.getAttribute('data-word-reveal'));
-    const text = el.textContent || '';
+  /* ────────── Phase 1 のヒーローリビール ──────────
+     旧: data-word-reveal（英語空白 split）
+     新: data-phrases（"散らかった|世界で、|/|深く|潜る。" のように手動区切り、`/` は改行）
+     - 単語単位リビール: stagger 85ms / dur 720ms / from y+26px (Phase 1 と同値)
+     - サブ行: 句単位で 40ms stagger（22ms × 文字数ぶんにしない） */
+  function splitPhrases(el) {
+    if (el.dataset.phrasesReady === '1') return;
+    el.dataset.phrasesReady = '1';
+    const raw = el.getAttribute('data-phrases') || '';
+    const tokens = raw.split(/\|/);
     el.textContent = '';
-    const tokens = text.split(/(\s+)/);
+    const isSubline = el.classList.contains('subline');
+    const base = Number(el.dataset.revealDelay || 0);
+    const stagger = isSubline ? 40 : 85;
+    const dur = isSubline ? 600 : 720;
+    const from = isSubline ? 14 : 26;
     tokens.forEach((tok) => {
+      if (tok === '/') { el.appendChild(document.createElement('br')); return; }
       if (!tok) return;
-      if (/^\s+$/.test(tok)) { el.appendChild(document.createTextNode(tok)); return; }
       const span = document.createElement('span');
-      span.className = 'reveal--word' + (el.classList.contains('subline') ? ' subline-word' : '');
+      span.className = 'reveal--phrase';
       span.textContent = tok;
+      span.style.transitionDuration = `${dur}ms`;
+      span.style.transform = `translateY(${from}px)`;
       el.appendChild(span);
     });
     if (reduce) {
-      el.querySelectorAll('.reveal--word').forEach((w) => w.classList.add('is-visible'));
+      el.querySelectorAll('.reveal--phrase').forEach((s) => s.classList.add('is-visible'));
       return;
     }
-    const words = el.querySelectorAll('.reveal--word');
-    words.forEach((w, i) => {
-      const delay = opts.base + i * opts.stagger;
-      setTimeout(() => w.classList.add('is-visible'), delay);
+    const phrases = el.querySelectorAll('.reveal--phrase');
+    phrases.forEach((p, i) => {
+      setTimeout(() => p.classList.add('is-visible'), base + i * stagger);
+    });
+  }
+
+  /* ヒーロー内のフェード (Phase 1 と同じ delay) */
+  function initHero() {
+    document.querySelectorAll('.hero .reveal').forEach((el) => {
+      if (reduce) { el.classList.add('is-visible'); return; }
+      const delay = Number(el.dataset.revealDelay || 0);
+      setTimeout(() => el.classList.add('is-visible'), delay);
+    });
+    document.querySelectorAll('.hero [data-phrases]').forEach(splitPhrases);
+  }
+  initHero();
+
+  /* ヒーロー外の .reveal--phrase は遅延付きで逐次再生 */
+  document.querySelectorAll('.heading-jp:not(.hero .heading-jp)[data-phrases], .final-cta__heading[data-phrases]').forEach(splitPhrases);
+
+  /* 汎用フェードアップ (2-6) — IntersectionObserver 0.2、1回だけ */
+  const fadeUpObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const el = entry.target;
+      // 同一グループ内の stagger
+      const group = el.dataset.fadeGroup;
+      if (group) {
+        const siblings = document.querySelectorAll(`[data-fade-group="${group}"]`);
+        const idx = Array.from(siblings).indexOf(el);
+        el.style.transitionDelay = `${idx * 90}ms`;
+      }
+      el.classList.add('is-visible');
+      fadeUpObserver.unobserve(el);
+    }
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.fade-up').forEach((el) => {
+    if (reduce) { el.classList.add('is-visible'); return; }
+    fadeUpObserver.observe(el);
+  });
+
+  /* フォーム no-op */
+  document.getElementById('waitlist')?.addEventListener('submit', (e) => e.preventDefault());
+  document.getElementById('join-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.textContent = '登録しました';
+      btn.disabled = true;
+    }
+    // 2-3 仕様: rise mood の初回バースト（小さな祝福）
+    if (window.flow) window.flow.burst(12, 2);
+  });
+
+  /* ────────── ムード切替 (2-3) ────────── */
+  const MOOD_PRESETS = {
+    surface: { hueMin: 0.50, hueRange: 0.42, intensity: 1.00, orbitSpeed: 0.026, orbitScale: 1.00, density: 0.958, dim: 0.00 },
+    shallow: { hueMin: 0.62, hueRange: 0.30, intensity: 0.70, orbitSpeed: 0.018, orbitScale: 1.10, density: 0.965, dim: 0.20 },
+    dive:    { hueMin: 0.55, hueRange: 0.14, intensity: 0.45, orbitSpeed: 0.011, orbitScale: 1.30, density: 0.975, dim: 0.38 },
+    deep:    { hueMin: 0.58, hueRange: 0.08, intensity: 0.28, orbitSpeed: 0.006, orbitScale: 1.45, density: 0.982, dim: 0.55 },
+    rise:    { hueMin: 0.50, hueRange: 0.42, intensity: 1.10, orbitSpeed: 0.030, orbitScale: 0.90, density: 0.955, dim: 0.10 },
+  };
+
+  // reduced-motion: deep 相当 + ほぼ停止に固定
+  if (reduce) {
+    if (window.flow) {
+      window.flow.setMood({ ...MOOD_PRESETS.deep, orbitSpeed: 0.002 });
+    }
+  } else {
+    // 画面中央ラインを跨いだセクションで mood 切替
+    const moodObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const mood = entry.target.getAttribute('data-mood');
+        if (mood && MOOD_PRESETS[mood] && window.flow) {
+          window.flow.setMood(MOOD_PRESETS[mood]);
+          if (mood === 'rise') window.flow.triggerRiseBurst();
+        }
+      }
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    document.querySelectorAll('[data-mood]').forEach((s) => moodObserver.observe(s));
+  }
+
+  /* ────────── Lenis scroll コールバック 1本集約 (2-5) ────────── */
+  const nav = document.querySelector('.nav');
+  const depthDot = document.querySelector('[data-depth-dot]');
+  const depthLabel = document.querySelector('.depth-meter [data-depth-label]');
+  const depthMax = 40;
+  let lastScrollY = 0;
+  let depthTarget = 0;
+  let lastMood = null;
+
+  // ナビのスムーススクロール（アンカー）
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -20 });
     });
   });
 
-  document.getElementById('waitlist').addEventListener('submit', (e) => {
-    e.preventDefault();
+  // S1 文字点灯用
+  const manifest = document.querySelector('[data-char-light]');
+  const manifestChars = manifest ? Array.from(manifest.querySelectorAll('.char')) : [];
+
+  // S2 ステップ
+  const stepCards = Array.from(document.querySelectorAll('[data-step-card]'));
+  const stepNumber = document.querySelector('[data-step-number]');
+
+  // 深度メーター専用: rise mood 復帰時に 900ms で 0m へ巻き戻る
+  let depthWrap = 0;
+  let depthOverrideTo = null;
+
+  lenis.on('scroll', ({ scroll, limit, progress }) => {
+    // ナビ背景フェード
+    const heroH = window.innerHeight * 0.8;
+    nav?.classList.toggle('is-scrolled', scroll > heroH);
+
+    // 深度メーター: 進捗 0→1 を 0m→40m に
+    depthTarget = Math.min(depthMax, Math.round(progress * depthMax));
+    if (depthDot) {
+      // rise に居る場合は 0m へ戻る
+      if (depthOverrideTo !== null) {
+        depthWrap += (depthOverrideTo - depthWrap) * 0.06;
+      } else {
+        depthWrap += (depthTarget - depthWrap) * 0.18;
+      }
+      depthDot.style.top = `${depthWrap / depthMax * 100}%`;
+      if (depthLabel) {
+        const showM = depthOverrideTo !== null ? depthWrap : depthTarget;
+        depthLabel.textContent = `-${String(Math.round(showM)).padStart(2, '0')}m`;
+      }
+    }
+
+    // S1 文字点灯 (section 内 0→1 で 文字数分まで点灯)
+    if (manifest && manifestChars.length) {
+      const r = manifest.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // 文字が viewport 下端に到達したら点き始めるイメージ
+      // 0 = セクション上端が viewport 上 / 1 = セクション上端が viewport 下 (1vh 過ぎ)
+      const p = Math.max(0, Math.min(1, 1 - (r.top / vh) / 1.2));
+      const lit = Math.floor(p * manifestChars.length * 1.1);
+      for (let i = 0; i < manifestChars.length; i++) {
+        manifestChars[i].classList.toggle('is-on', i < lit);
+      }
+    }
+
+    // S2: カードのアクティブ判定 (中央ラインとの距離)
+    if (stepCards.length) {
+      const vh = window.innerHeight;
+      let activeIdx = -1;
+      stepCards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const dist = Math.abs(center - vh / 2);
+        const on = dist < vh * 0.35;
+        card.classList.toggle('is-on', on);
+        if (on) activeIdx = i;
+      });
+      // 数字は on のものに合わせる（1..3）
+      if (stepNumber) {
+        const next = activeIdx >= 0 ? String(activeIdx + 1).padStart(2, '0') : '01';
+        if (stepNumber.textContent !== next) {
+          stepNumber.textContent = next;
+          stepNumber.classList.toggle('is-on', activeIdx >= 0);
+        }
+      }
+    }
+
+    // rise mood を検出したら深度メーターを 0m に巻き戻す
+    const join = document.getElementById('join');
+    if (join) {
+      const r = join.getBoundingClientRect();
+      const inJoin = r.top < window.innerHeight * 0.5 && r.bottom > 0;
+      if (inJoin) {
+        if (depthOverrideTo !== 0) { depthOverrideTo = 0; }
+      } else if (depthOverrideTo !== null) {
+        depthOverrideTo = null;
+      }
+    }
   });
+
+  /* ────────── S3 スポットライト境界 ────────── */
+  if (!isTouch && !reduce) {
+    document.querySelectorAll('[data-spotlight]').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        card.style.setProperty('--mx', `${x}px`);
+        card.style.setProperty('--my', `${y}px`);
+      });
+    });
+  }
+
+  /* ────────── S4 プロダクトモック: カウントダウン + チルト ────────── */
+  const ring = document.querySelector('[data-ring]');
+  const countdownEl = document.querySelector('[data-countdown]');
+  const mock = document.querySelector('[data-tilt]');
+  if (ring && countdownEl) {
+    const TOTAL = 25 * 60;
+    const circumference = 2 * Math.PI * 54;
+    ring.style.strokeDasharray = `${circumference}`;
+    let remaining = TOTAL;
+    if (reduce) { remaining = TOTAL; countdownEl.textContent = '25:00'; ring.style.strokeDashoffset = '0'; }
+    else {
+      const tick = () => {
+        remaining -= 1;
+        if (remaining < 0) remaining = TOTAL;
+        const mm = String(Math.floor(remaining / 60)).padStart(2, '0');
+        const ss = String(remaining % 60).padStart(2, '0');
+        countdownEl.textContent = `${mm}:${ss}`;
+        const ratio = remaining / TOTAL;
+        ring.style.strokeDashoffset = `${(1 - ratio) * circumference}`;
+      };
+      setInterval(tick, 1000);
+    }
+  }
+  if (mock && !isTouch && !reduce) {
+    let rx = 0, ry = 0;
+    let curX = 0, curY = 0;
+    const onMove = (e) => {
+      const r = mock.getBoundingClientRect();
+      rx = ((e.clientX - r.left) / r.width  - 0.5) * 12; // max ±6deg
+      ry = ((e.clientY - r.top)  / r.height - 0.5) * -12;
+    };
+    const apply = () => {
+      curX += (rx - curX) * 0.08;
+      curY += (ry - curY) * 0.08;
+      mock.style.transform = `rotateX(${curY.toFixed(2)}deg) rotateY(${curX.toFixed(2)}deg)`;
+      requestAnimationFrame(apply);
+    };
+    window.addEventListener('pointermove', onMove);
+    requestAnimationFrame(apply);
+  }
+
+  /* ────────── S3 棒グラフ（in-view で下から伸びる） ────────── */
+  const chartObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const chart = entry.target;
+      const bars = chart.querySelectorAll('span[data-h]');
+      bars.forEach((bar, i) => {
+        const h = Number(bar.dataset.h || 0);
+        setTimeout(() => { bar.style.height = `${h}%`; }, i * 80);
+      });
+      chartObserver.unobserve(chart);
+    }
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[data-chart]').forEach((c) => chartObserver.observe(c));
+
+  /* ────────── S5 カウンター (in-view カウントアップ) ────────── */
+  const counterObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const el = entry.target;
+      const target = Number(el.dataset.counter || 0);
+      const suffix = el.dataset.suffix || '';
+      const dur = 1600;
+      const t0 = performance.now();
+      if (reduce) {
+        el.textContent = `${target}${suffix}`;
+      } else {
+        const tick = (now) => {
+          const t = Math.min(1, (now - t0) / dur);
+          // easeOutCubic
+          const eased = 1 - Math.pow(1 - t, 3);
+          const v = target * (target % 1 === 0 ? Math.floor(eased * target) : eased * target);
+          const formatted = target % 1 === 0 ? String(Math.round(v)) : v.toFixed(1);
+          el.textContent = `${formatted}${suffix}`;
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = `${target}${suffix}`;
+        };
+        requestAnimationFrame(tick);
+      }
+      counterObserver.unobserve(el);
+    }
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-counter]').forEach((c) => counterObserver.observe(c));
+
+  /* ────────── S6 料金トグル ────────── */
+  const toggle = document.querySelector('[data-pricing]');
+  if (toggle) {
+    const btns = toggle.querySelectorAll('[data-period]');
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const period = btn.dataset.period;
+        btns.forEach((b) => b.classList.toggle('is-active', b === btn));
+        toggle.classList.toggle('is-year', period === 'yearly');
+      });
+    });
+  }
+
+  /* ────────── スムーススクロールで入る前はディープ測定を "0m" ────────── */
+  // 初期状態: 0m
+  if (depthLabel) depthLabel.textContent = '-00m';
 
   function fluidSimulation(canvas) {
     canvas.width = canvas.clientWidth;
@@ -400,6 +1777,22 @@
     let pointers = [];
     let splatStack = [];
     pointers.push(new pointerPrototype());
+
+    /* Phase 2: ムード（流体深度）。
+       mood 値は毎フレーム moodTarget へ lerp（係数 0.04/frame ≒ 約1.2秒で追従）。
+       generateColor / driveVirtualPointer / config.DENSITY_DISSIPATION は
+       すべて mood を参照する。*/
+    const mood = {
+      hueMin: 0.5,
+      hueRange: 0.42,
+      intensity: 1.0,
+      orbitSpeed: 0.026,
+      orbitScale: 1.0,
+      density: 0.958,
+      dim: 0.0,
+    };
+    const moodTarget = { ...mood };
+    let riseBurstDone = false;
 
     const { gl, ext } = getWebGLContext(canvas);
 
@@ -972,6 +2365,14 @@
     function update() {
       if (destroyed) return;
       resizeCanvas();
+      // mood を target へ lerp（各キー独立、係数 0.04/frame）
+      for (const k of Object.keys(mood)) {
+        mood[k] += (moodTarget[k] - mood[k]) * 0.04;
+      }
+      // config.DENSITY_DISSIPATION は mood.density と毎フレーム同期
+      config.DENSITY_DISSIPATION = mood.density;
+      // --depth-dim を root に書き戻し、ページ全体の暗さとして反映
+      document.documentElement.style.setProperty('--depth-dim', mood.dim.toFixed(3));
       driveVirtualPointer();
       input();
       if (!config.PAUSED) step(0.016);
@@ -983,9 +2384,9 @@
       if (Date.now() - engineStart < ORBIT_START_DELAY) return;
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
-      const base = Math.min(ORBIT_RADIUS, canvas.width * 0.35, canvas.height * 0.35);
+      const base = Math.min(ORBIT_RADIUS * mood.orbitScale, canvas.width * 0.35, canvas.height * 0.35);
       const r = base * (0.72 + 0.28 * Math.sin(orbitAngle * 0.37));
-      orbitAngle += ORBIT_SPEED;
+      orbitAngle += mood.orbitSpeed;
       const x = cx + Math.cos(orbitAngle) * r;
       const y = cy + Math.sin(orbitAngle) * r;
       if (!virtualSeeded) {
@@ -995,7 +2396,8 @@
       }
       if (!virtualColor || Date.now() - lastVColorTime > 120) {
         virtualColor = generateColor();
-        virtualColor.r *= 3.2; virtualColor.g *= 3.2; virtualColor.b *= 3.2;
+        const k = 3.2 * mood.intensity;
+        virtualColor.r *= k; virtualColor.g *= k; virtualColor.b *= k;
         lastVColorTime = Date.now();
       }
       const dx = (x - vPrevX) * 9.0;
@@ -1218,14 +2620,40 @@
       const rect = canvas.getBoundingClientRect();
       return { x: clientX - rect.left, y: clientY - rect.top };
     }
-
     function generateColor() {
-      const h = 0.5 + Math.random() * 0.42;
+      const h = mood.hueMin + Math.random() * mood.hueRange;
       let c = HSVtoRGB(h, 0.95, 1.0);
-      c.r *= 0.92; c.g *= 0.92; c.b *= 0.92;
+      c.r *= 0.92;
+      c.g *= 0.92;
+      c.b *= 0.92;
       return c;
     }
 
+    /* Phase 2: 制御オブジェクト。
+       2-3 仕様: setMood(partial) / burst(n, waves) / pause() / resume()。*/
+    const control = {
+      setMood(partial) { Object.assign(moodTarget, partial); },
+      burst(n = 24, waves = 4) {
+        multipleSplats(n);
+        for (let i = 0; i < waves; i++) splatStack.push(8 + (Math.random() * 8 | 0));
+      },
+      pause()  { config.PAUSED = true; },
+      resume() { config.PAUSED = false; },
+      // 内部用: 浮上バーストを「初回だけ」発火する
+      triggerRiseBurst() {
+        if (riseBurstDone) return;
+        riseBurstDone = true;
+        this.burst(28, 6);
+      },
+    };
+
+    // 2-3 仕様: document.visibilitychange で hidden→pause / visible→resume
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) control.pause();
+      else control.resume();
+    });
+
+    return control;
     function HSVtoRGB(h, s, v) {
       let r, g, b, i, f, p, q, t;
       i = Math.floor(h * 6);
@@ -1255,7 +2683,8 @@
   }
 
   const canvas = document.querySelector('canvas');
-  if (canvas) fluidSimulation(canvas);
+  // Phase 2: window.flow にムード制御を露出（2-3 仕様）
+  window.flow = canvas ? fluidSimulation(canvas) : null;
 </script>
 </body>
 </html>
