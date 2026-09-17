@@ -1,0 +1,2896 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Flowstate — 散らかった世界で、深く潜る。</title>
+<meta name="description" content="通知も、タブも、雑音も。Flowstate は気を散らすものを静かに遠ざけ、本当に大切な仕事へ没入する時間をつくります。先行登録受付中。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; box-sizing: border-box; }
+  html { font-size: 16px; }
+  @media (max-width: 1920px) { html { font-size: 0.833333vw; } }
+  @media (max-width: 1440px) { html { font-size: 1.111111vw; } }
+  @media (max-width: 1024px) { html { font-size: 1.5625vw;   } }
+  @media (max-width: 640px)  { html { font-size: 4.444444vw; } }
+
+  :root {
+    --hero-base:            #04050c;
+    --heading:              #eef0f6;
+    --body-muted:           #b9becf;
+    --on-media:             #ffffff;
+    --action-inverse:       #ffffff;
+    --action-inverse-fg:    #2f2f33;
+    --glass-fill:           rgba(255,255,255,0.08);
+    --glass-border:         rgba(255,255,255,0.16);
+    --scrim:                rgba(4,5,12,0.46);
+    --scrim-strong:         rgba(4,5,12,0.68);
+    --scrim-soft:           rgba(4,5,12,0.12);
+    --accent-cyan:          #6ee7f2;
+    --accent-violet:        #a78bfa;
+    --depth-dim:            0;
+    --duration-fast:        150ms;
+    --ease-entrance:        cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  body {
+    background: var(--hero-base);
+    color: var(--heading);
+    overflow-x: hidden;
+    font-family: "Onest", "Zen Kaku Gothic New", system-ui, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "palt" 1;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: 0; background: transparent; padding: 0; color: inherit; }
+  input { font-family: inherit; }
+
+  /* Phase 2: page-wide fluid canvas (fixed background) + depth scrim */
+  .page-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .depth-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: rgba(4, 5, 12, var(--depth-dim));
+    transition: background 80ms linear;
+  }
+  .gradient-text {
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100lvh;
+    width: 100vw;
+    overflow: hidden;
+    /* 背景色は入れない。キャンバスは body 直下にあり fixed なので、
+       ヒーローの不透明背景が上書きすると流体が見えなくなる（P0 #1 修正）。*/
+    background: transparent;
+    text-align: center;
+    padding: 0 1.25rem;
+  }
+  @media (min-width: 640px) { .hero { padding: 0 2.5rem; } }
+
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(115% 95% at 50% 46%,
+      var(--scrim-strong) 0%, var(--scrim-strong) 24%, var(--scrim) 52%, var(--scrim-soft) 100%);
+  }
+
+  .nav {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    background: transparent;
+    transition: background 300ms var(--ease-entrance), border-color 300ms var(--ease-entrance);
+    border-bottom: 1px solid transparent;
+  }
+  @media (min-width: 640px) { .nav { padding: 1.75rem 2.5rem; } }
+  .nav.is-scrolled {
+    background: rgba(4, 5, 12, 0.35);
+    -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+    border-bottom-color: var(--glass-border);
+  }
+
+  .nav__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--on-media);
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 640px) { .nav__brand { font-size: 1.375rem; } }
+  .nav__brand svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    stroke: currentColor;
+  }
+  @media (min-width: 640px) {
+    .nav__brand svg { width: 1.5rem; height: 1.5rem; }
+  }
+
+  .nav__pill {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3rem;
+    align-items: center;
+    gap: 2.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-fill);
+    padding: 0 1.75rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  @media (min-width: 640px) { .nav__pill { display: flex; } }
+  .nav__pill a {
+    font-size: 0.95rem;
+    color: var(--body-muted);
+    white-space: nowrap;
+    transition: color var(--duration-fast) var(--ease-entrance);
+  }
+  .nav__pill a:hover { color: var(--heading); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background: var(--action-inverse);
+    padding: 0 1.125rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--action-inverse-fg);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    transition: background var(--duration-fast) var(--ease-entrance);
+  }
+  .pill:hover { background: rgba(255,255,255,0.85); }
+  .pill:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,.7); }
+  @media (min-width: 640px) {
+    .pill { height: 2.75rem; padding: 0 1.375rem; font-size: 0.95rem; }
+  }
+
+  .column {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 22rem;
+  }
+  @media (min-width: 640px)  { .column { max-width: 40rem; } }
+  @media (min-width: 1024px) { .column { max-width: 52rem; } }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-fill);
+    padding: 0.4rem 0.875rem;
+    font-size: 0.72rem;
+    color: var(--body-muted);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  @media (min-width: 640px) { .badge { font-size: 0.8rem; } }
+
+  .heading {
+    margin-top: 1.25rem;
+    max-width: 20rem;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--heading);
+    text-align: center;
+  }
+  @media (min-width: 640px)  { .heading { margin-top: 1.75rem; max-width: 34rem; font-size: 3.5rem; } }
+  @media (min-width: 1024px) { .heading { max-width: 46rem; font-size: 5rem; } }
+
+  .subline {
+    margin-top: 1rem;
+    max-width: 20rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--body-muted);
+  }
+  @media (min-width: 640px)  { .subline { margin-top: 1.25rem; max-width: 34rem; font-size: 1.1rem; } }
+  @media (min-width: 1024px) { .subline { max-width: none; font-size: 1.2rem; } }
+
+  .form {
+    margin-top: 1.75rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  @media (min-width: 640px) { .form { margin-top: 2.5rem; } }
+  .form__inner {
+    display: flex;
+    align-items: center;
+    width: 37rem;
+    max-width: 100%;
+    height: 3.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-fill);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    padding-left: 1.25rem;
+    padding-right: 0.35rem;
+  }
+  @media (min-width: 640px) {
+    .form__inner { height: 4rem; padding-left: 1.5rem; padding-right: 0.4rem; }
+  }
+  .form__inner input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    background: transparent;
+    color: var(--heading);
+    font-size: 0.95rem;
+    border: 0;
+    outline: none;
+  }
+  .form__inner input::placeholder { color: var(--body-muted); }
+  @media (min-width: 640px) { .form__inner input { font-size: 1.15rem; } }
+
+  .footer {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem;
+    font-size: 0.72rem;
+    color: var(--body-muted);
+  }
+  @media (min-width: 640px) { .footer { padding: 1.5rem 2.5rem; font-size: 0.8rem; } }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: opacity 700ms var(--ease-entrance), transform 700ms var(--ease-entrance);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible { opacity: 1; transform: none; will-change: auto; }
+
+  .reveal--nav { transform: translateY(-0.75rem); }
+
+  .reveal--word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 720ms cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 720ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    will-change: opacity, transform;
+  }
+  .reveal--word.is-visible { opacity: 1; transform: none; will-change: auto; }
+  .reveal--word.subline-word { transform: translateY(14px); transition-duration: 600ms; }
+
+  /* 和文 フレーズ単位リビール (文節ごとに1 span、改行は <br>) */
+  .reveal--phrase {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 720ms cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 720ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    will-change: opacity, transform;
+  }
+  .reveal--phrase.is-visible { opacity: 1; transform: none; will-change: auto; }
+
+  /* Hero scroll queue (footer 差し替え) */
+  .scroll-queue {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 1.5rem;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--body-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+  @media (min-width: 640px) { .scroll-queue { font-size: 0.8rem; } }
+  .scroll-queue__rail {
+    position: relative;
+    width: 1px;
+    height: 3rem;
+    background: rgba(255,255,255,0.18);
+    overflow: hidden;
+  }
+  .scroll-queue__dot {
+    position: absolute;
+    top: 0;
+    left: -1.5px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 10px var(--accent-cyan);
+    animation: scroll-queue-flow 1800ms cubic-bezier(0.2, 0, 0, 1) infinite;
+  }
+  @keyframes scroll-queue-flow {
+    0%   { transform: translateY(-4px); opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(44px); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal--word, .reveal--phrase { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .scroll-queue__dot { animation: none; transform: translateY(20px); }
+  }
+
+  /* ──────── Phase 2: 全セクション共通 ──────── */
+  .section {
+    position: relative;
+    z-index: 10;
+    padding-block: 5rem;
+  }
+  @media (min-width: 640px) { .section { padding-block: 8rem; } }
+  .section__inner {
+    max-width: 72rem;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) { .section__inner { padding-inline: 2.5rem; } }
+
+  /* final-cta は grid + place-items: center。子要素が shrink-to-fit で
+     min-content まで縮まないように明示幅を入れる（モバイルで form 37rem が
+     section を押し広げないため）*/
+  .final-cta__inner {
+    width: 100%;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Onest", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--accent-cyan);
+    margin-bottom: 2rem;
+  }
+  .section-label__bar {
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+  }
+  .section-label__depth {
+    font-variant-numeric: tabular-nums;
+    color: var(--body-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .section-heading {
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    color: var(--heading);
+    margin: 0 0 1rem;
+  }
+  .section-sub {
+    color: var(--body-muted);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    margin: 0 0 3rem;
+    max-width: 44rem;
+  }
+  .section-sub--wider { max-width: 56rem; }
+
+  /* ──────── 汎用フェードアップ (2-6) ──────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 800ms var(--ease-entrance), transform 800ms var(--ease-entrance);
+    will-change: opacity, transform;
+  }
+  .fade-up.is-visible { opacity: 1; transform: none; will-change: auto; }
+
+  /* ──────── S1: 問題提起（マニフェスト） ──────── */
+  .manifest { min-height: 220vh; }
+  .manifest__stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 6rem;
+  }
+  /* P0 #3: 局所放射状スクリム。中央カラムの背後だけ暗くして本文可読性を確保。*/
+  .manifest__stage::before,
+  .final-cta__inner::before {
+    content: "";
+    position: absolute;
+    inset: -10% -15%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(70% 60% at 50% 50%,
+      rgba(4,5,12,0.62) 0%, rgba(4,5,12,0.35) 55%, transparent 100%);
+  }
+  .final-cta__inner { position: relative; }
+  /* スクリムの ::before が左右にはみ出して横スクロールを生むので、セクション側で横だけ切る（clip は sticky を壊さない）。*/
+  #problem, #join { overflow-x: clip; }
+  .manifest__text {
+    font-size: clamp(1.4rem, 3.2vw, 2.6rem);
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    max-width: 52rem;
+    color: var(--heading);
+  }
+  /* P2 #9: 文字 span 単体だと禁則が効かず "「" "で" などが行末に。
+     文節を inline-block ラッパーで包むことで wrap ポイントが制御される。*/
+  .manifest__text .phrase {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .manifest__text .char { opacity: 0.16; transition: opacity 240ms linear; }
+  .manifest__text .char.is-on { opacity: 1; }
+  .manifest__text .brk { display: block; }
+
+  /* ──────── S2: 仕組み（3ステップ） ──────── */
+  /* 尺は section の min-height ではなくカード間の余白で作る（300vh 固定だと末尾に空の画面が出る）。*/
+  .how__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) {
+    .how__grid { grid-template-columns: 5fr 7fr; gap: 4rem; }
+  }
+  /* P1 #6: sticky 数字を画面縦中央付近に置き、固定ヘッダーの下に潜らないようにする。*/
+  .how__sticky {
+    position: sticky;
+    top: calc(50svh - 6rem);
+    align-self: start;   /* grid item が行の高さに伸びると sticky が動かない */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  @media (max-width: 1023.98px) { .how__sticky { position: static; } }
+  .how__number {
+    font-family: "Onest", sans-serif;
+    font-size: clamp(6rem, 14vw, 12rem);
+    line-height: 0.9;
+    font-weight: 500;
+    -webkit-text-stroke: 1px var(--glass-border);
+            text-stroke: 1px var(--glass-border);
+    color: transparent;
+    transition: color 500ms var(--ease-entrance);
+    letter-spacing: -0.04em;
+  }
+  .how__number.is-on { color: var(--heading); -webkit-text-stroke-color: transparent; }
+  .how__steps { display: flex; flex-direction: column; gap: 6rem; }
+  @media (min-width: 1024px) { .how__steps { gap: 32svh; padding-block: 8svh 30svh; } }
+  @media (max-width: 1023.98px) { .how__steps { gap: 2rem; } }
+  .how-card {
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.75rem;
+    scroll-margin-top: 6rem;
+    opacity: 0.35;
+    transform: scale(0.96);
+    transition: opacity 600ms var(--ease-entrance), transform 600ms var(--ease-entrance);
+  }
+  @media (min-width: 640px) { .how-card { padding: 2.25rem; } }
+  .how-card.is-on { opacity: 1; transform: scale(1); }
+  .how-card__icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--accent-cyan);
+    margin-bottom: 1rem;
+    stroke: currentColor;
+  }
+  .how-card__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--heading);
+  }
+  .how-card__body {
+    color: var(--body-muted);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+
+  /* ──────── S3: 機能（ベントグリッド） ──────── */
+  .features-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) {
+    .features-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .feature {
+    position: relative;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-fill);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    min-height: 14rem;
+    overflow: hidden;
+    --mx: 50%;
+    --my: 50%;
+    background-image: radial-gradient(28rem circle at var(--mx) var(--my),
+      rgba(110,231,242,0.10), transparent 40%);
+    background-color: var(--glass-fill);
+    transition: border-color 200ms var(--ease-entrance);
+  }
+  .feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(28rem circle at var(--mx) var(--my),
+      rgba(110,231,242,0.35), transparent 40%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0) border-box;
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) {
+    .feature--wide { grid-column: span 4; }
+    .feature--narrow { grid-column: span 2; }
+  }
+  .feature__title { font-size: 1.1rem; font-weight: 500; color: var(--heading); margin-bottom: 0.4rem; }
+  .feature__body { color: var(--body-muted); font-size: 0.92rem; line-height: 1.8; letter-spacing: 0.03em; }
+  /* P2 #12: 通知の潮止め — ラベル付きトグル 3 行（Slack / メール / カレンダー）。*/
+  .feature__toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+  .feature__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.85rem;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--heading);
+  }
+  .feature__toggle-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    color: var(--accent-cyan);
+    stroke: currentColor;
+  }
+  .feature__switch {
+    position: relative;
+    width: 2.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid var(--glass-border);
+    transition: background 300ms var(--ease-entrance);
+    flex-shrink: 0;
+  }
+  .feature__switch::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: calc(1.25rem - 4px);
+    height: calc(1.25rem - 4px);
+    background: var(--heading);
+    border-radius: 50%;
+    transition: transform 300ms var(--ease-entrance);
+  }
+  .feature__toggle.is-on .feature__switch { background: var(--accent-cyan); border-color: var(--accent-cyan); }
+  .feature__toggle.is-on .feature__switch::after { transform: translateX(1rem); background: var(--hero-base); }
+  /* in-view で 200ms stagger をかけて OFF に切り替わる初期アニメ */
+  .feature--wide .feature__toggle { opacity: 0.6; transition: opacity 200ms var(--ease-entrance); }
+  .feature--wide.in-view .feature__toggle.is-on { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .feature--wide .feature__toggle { opacity: 1; }
+  }
+  .feature__chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.3rem;
+    margin-top: 1.25rem;
+    height: 4.5rem;
+  }
+  .feature__chart span {
+    flex: 1;
+    height: 0;
+    background: linear-gradient(180deg, var(--accent-cyan), rgba(110,231,242,0.25));
+    border-radius: 4px 4px 1px 1px;
+    transition: height 900ms var(--ease-entrance);
+  }
+
+  /* ──────── S4: プロダクト画面 ──────── */
+  .product-mock-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    perspective: 1200px;
+    margin-block: 4rem;
+  }
+  .product-mock {
+    position: relative;
+    width: min(38rem, 100%);
+    aspect-ratio: 4 / 3;
+    border-radius: 1.75rem;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transform-style: preserve-3d;
+    transition: transform 120ms linear;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .product-mock__chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .product-mock__chrome span {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+  }
+  .product-mock__chrome span:nth-child(1) { background: #ff6058; }
+  .product-mock__chrome span:nth-child(2) { background: #ffbd2e; }
+  .product-mock__chrome span:nth-child(3) { background: #28c840; }
+  .product-mock__body {
+    position: relative;
+    min-height: calc(100% - 2.35rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 2rem 1rem;
+  }
+  @media (max-width: 639.98px) {
+    .product-mock { aspect-ratio: auto; }
+    .product-mock-wrap { flex-direction: column; align-items: center; gap: 1rem; margin-block: 2.5rem; }
+    .product-chips-mobile { order: 2; margin-top: 0; }
+    .product-ring { width: 10rem; height: 10rem; }
+    .product-ring__time { font-size: 2.5rem; }
+  }
+  .product-ring {
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+  }
+  @media (min-width: 640px) { .product-ring { width: 14rem; height: 14rem; } }
+  .product-ring__time {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: "Onest", sans-serif;
+    font-size: 3rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    color: var(--heading);
+  }
+  @media (min-width: 640px) { .product-ring__time { font-size: 4rem; } }
+  .product-task {
+    margin-top: 0;
+    text-align: center;
+  }
+  .product-task__name {
+    color: var(--body-muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+  }
+  .product-task__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    margin-top: 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-fill);
+    font-family: "Onest", sans-serif;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-cyan);
+  }
+  .product-task__chip::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 8px var(--accent-cyan);
+  }
+  .product-chip {
+    border-radius: 9999px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.8rem;
+    color: var(--body-muted);
+    white-space: nowrap;
+    animation: product-chip-float 6s ease-in-out infinite;
+  }
+  /* 浮遊チップは「デスクトップでモックに重ねる」1セットと、
+     「モバイルでモック下に表示する」別セットの2系統。片方ずつ表示。*/
+  .product-chip--desktop { display: none; }
+  .product-chip--mobile { display: inline-flex; }
+  .product-chips-mobile {
+    display: none;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-top: 0.6rem;
+  }
+  @media (min-width: 640px) {
+    .product-chip--desktop { display: inline-flex; position: absolute; }
+    .product-chip--mobile  { display: none; }
+    .product-chip--right--desktop { right: -1rem; top: 30%; animation-delay: -1.5s; animation-duration: 7.5s; }
+    .product-chip--left--desktop  { left: -1rem; bottom: 28%; animation-delay: -3s; }
+  }
+  /* タブレット幅では縮小して被りを軽減 */
+  @media (min-width: 640px) and (max-width: 1023.98px) {
+    .product-chip--desktop { font-size: 0.74rem; padding: 0.45rem 0.75rem; }
+    .product-chip--right--desktop { right: -0.4rem; }
+    .product-chip--left--desktop  { left: -0.4rem; }
+  }
+  /* SP ではモバイル用コンテナ + モバイル用チップを表示 */
+  @media (max-width: 639.98px) {
+    .product-chips-mobile { display: flex; }
+    .product-chip--mobile { font-size: 0.78rem; padding: 0.5rem 0.8rem; }
+  }
+  @keyframes product-chip-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-0.5rem); }
+  }
+
+  /* ──────── S5: 数字と声 ──────── */
+  .numbers {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: 640px) { .numbers { grid-template-columns: repeat(3, 1fr); } }
+  .number__value {
+    font-family: "Onest", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, var(--heading), var(--body-muted));
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  .number__label { color: var(--body-muted); font-size: 0.92rem; margin-top: 0.4rem; }
+  .numbers-note { font-size: 0.78rem; color: var(--body-muted); opacity: 0.7; margin-top: 0.5rem; }
+  .marquee { position: relative; overflow: hidden; }
+  .marquee__track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: marquee 60s linear infinite;
+  }
+  .marquee--right .marquee__track { animation: marquee-rev 72s linear infinite; }
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  .marquee::before, .marquee::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 3rem;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .marquee::before { left: 0;
+    background: linear-gradient(90deg, var(--hero-base), transparent);
+  }
+  .marquee::after { right: 0;
+    background: linear-gradient(270deg, var(--hero-base), transparent);
+  }
+  .marquee + .marquee { margin-top: 1rem; }
+  .voice {
+    flex: 0 0 22rem;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .voice__quote { color: var(--heading); line-height: 1.8; letter-spacing: 0.03em; }
+  .voice__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .voice__avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+    color: var(--hero-base);
+    display: grid;
+    place-items: center;
+    font-family: "Onest", sans-serif;
+    font-weight: 500;
+  }
+  .voice__role { font-size: 0.78rem; color: var(--body-muted); }
+
+  /* ──────── S6: 料金 ──────── */
+  .pricing-toggle {
+    display: inline-flex;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    padding: 0.35rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  /* P1 #5: ピルは z-index:0（背面）、ボタンは z-index:1（前面）。位置・幅は
+     選択中ボタンの offsetLeft/offsetWidth から JS で算出するため CSS は 0,0。*/
+  .pricing-toggle__pill {
+    position: absolute;
+    top: 0.35rem;
+    bottom: 0.35rem;
+    left: 0;
+    width: 0;
+    background: var(--action-inverse);
+    border-radius: 9999px;
+    transition: transform 300ms var(--ease-entrance), width 300ms var(--ease-entrance);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .pricing-toggle__btn {
+    position: relative;
+    z-index: 1;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.92rem;
+    color: var(--body-muted);
+    transition: color 200ms var(--ease-entrance);
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+  .pricing-toggle__btn.is-active { color: var(--action-inverse-fg); font-weight: 500; }
+  .pricing-toggle__badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.15rem 0.45rem;
+    background: rgba(110,231,242,0.15);
+    color: var(--accent-cyan);
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-family: "Onest", sans-serif;
+    letter-spacing: 0;
+  }
+  .plans {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) { .plans { grid-template-columns: repeat(3, 1fr); } }
+  .plan {
+    position: relative;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    padding: 2rem 1.75rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  @media (min-width: 640px) { .plan { padding: 2.5rem 2rem; } }
+  .plan--pro {
+    border-color: rgba(110,231,242,0.4);
+  }
+  .plan__badge {
+    position: absolute;
+    top: -0.7rem;
+    left: 1.75rem;
+    padding: 0.2rem 0.7rem;
+    background: var(--accent-cyan);
+    color: var(--hero-base);
+    font-family: "Onest", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border-radius: 9999px;
+  }
+  .plan__name { font-size: 1.05rem; color: var(--body-muted); }
+  /* P1 #4: 金額・単位を inline-grid で重ねて、選択中のみ表示。
+     高さは 1lh で行を揃え、translateY で縦スライドする。*/
+  .plan__price {
+    font-family: "Onest", sans-serif;
+    font-size: 2.4rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 1rem 0 0.25rem;
+    color: var(--heading);
+    overflow: hidden;
+    height: 1lh;
+    line-height: 1.1;
+  }
+  .plan__price-inner {
+    display: inline-grid;
+    transition: transform 300ms var(--ease-entrance);
+  }
+  .plan__price-inner > * {
+    grid-area: 1 / 1;
+    transition: opacity 300ms var(--ease-entrance), transform 300ms var(--ease-entrance);
+  }
+  .plan__price-inner .plan__monthly { transform: translateY(0); opacity: 1; }
+  .plan__price-inner .plan__yearly { transform: translateY(100%); opacity: 0; }
+  /* is-year 切替時: トグルとプランカードは兄弟要素なので、共通の祖先
+     (#pricing) にクラスを伝播させる (JS 側で対応)。*/
+  #pricing.is-year .plan__price-inner .plan__monthly { transform: translateY(-100%); opacity: 0; }
+  #pricing.is-year .plan__price-inner .plan__yearly { transform: translateY(0); opacity: 1; }
+  .plan__unit { font-size: 0.85rem; color: var(--body-muted); font-weight: 400; }
+  .plan__features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 2rem;
+    color: var(--body-muted);
+    font-size: 0.92rem;
+    line-height: 1.9;
+  }
+  .plan__features li::before { content: "・"; color: var(--accent-cyan); margin-right: 0.4rem; }
+
+  /* ──────── S7: FAQ ──────── */
+  .faq-list {
+    max-width: 56rem;
+    border-top: 1px solid var(--glass-border);
+  }
+  .faq-item { border-bottom: 1px solid var(--glass-border); }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    font-size: 1.05rem;
+    color: var(--heading);
+    transition: color var(--duration-fast) var(--ease-entrance);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:hover { color: var(--accent-cyan); }
+  .faq-item__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    position: relative;
+    transition: transform 400ms var(--ease-entrance);
+  }
+  .faq-item__icon::before, .faq-item__icon::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+  }
+  .faq-item__icon::after { transform: translateY(-50%) rotate(90deg); }
+  .faq-item[open] .faq-item__icon::after { transform: translateY(-50%) rotate(0deg); }
+  .faq-item__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 400ms var(--ease-entrance);
+    color: var(--body-muted);
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+  }
+  .faq-item[open] .faq-item__body { grid-template-rows: 1fr; }
+  .faq-item__body > div { overflow: hidden; padding-bottom: 1.5rem; }
+
+  /* ──────── S8: 最終CTA ──────── */
+  /* minmax(0, 1fr) で track を 0 まで縮められるようにし、
+     内側 form__inner (width: 37rem) が track を押し広げないようにする。*/
+  .final-cta {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    text-align: center;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) { .final-cta { padding-inline: 2.5rem; } }
+  .final-cta__inner { max-width: 40rem; width: 100%; padding-inline: 1.25rem; }
+
+  /* ──────── 共通ボタン ──────── */
+  .section__cta { display: flex; justify-content: center; margin-top: 3rem; }
+
+  /* ──────── Footer ──────── */
+  .lp-footer {
+    position: relative;
+    z-index: 10;
+    padding: 3rem 1.25rem 4rem;
+    text-align: center;
+    color: var(--body-muted);
+    font-size: 0.82rem;
+    line-height: 1.9;
+  }
+  .lp-footer__links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
+  .lp-footer__links a { transition: color var(--duration-fast) var(--ease-entrance); }
+  .lp-footer__links a:hover { color: var(--heading); }
+  .lp-footer__disclaimer { font-size: 0.72rem; opacity: 0.7; margin-top: 0.5rem; }
+
+  /* ──────── 深度メーター (≥1024px のみ) ──────── */
+  .depth-meter {
+    position: fixed;
+    right: 1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 25;
+    height: 40vh;
+    display: none;
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) { .depth-meter { display: flex; align-items: center; gap: 0.6rem; } }
+  .depth-meter__rail {
+    position: relative;
+    width: 1px;
+    height: 100%;
+    background: var(--glass-border);
+  }
+  .depth-meter__dot {
+    position: absolute;
+    left: -2px;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 12px var(--accent-cyan);
+    transform: translateY(-50%);
+    transition: top 200ms linear, left 200ms linear, opacity 200ms linear;
+  }
+  .depth-meter__label {
+    font-family: "Onest", sans-serif;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--body-muted);
+    letter-spacing: 0.05em;
+    width: 3rem;
+    text-align: right;
+  }
+
+  /* ──────── and文専用の調整 ──────── */
+  .heading-jp,
+  .final-cta__heading {
+    font-feature-settings: "palt" 1;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  .subline-jp,
+  .lp-footer {
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+  /* 1文字だけの孤立行を防ぐ (改行可能位置を制限) */
+  .heading-jp br + .reveal--phrase:only-child,
+  .final-cta__heading br + .reveal--phrase:only-child { margin-left: 0.3em; }
+
+  /* Phase 1 で見えていた canvas は body 直下に移動済みなので、hero 内に重複して置かない */
+  .hero__canvas { display: none; }
+
+  /* prefers-reduced-motion: reduce — すべての連続アニメ / 視差を停止 */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-queue__dot, .product-chip, .marquee__track { animation: none !important; }
+    .product-chip { transform: none !important; }
+    .product-mock { transition: none !important; transform: none !important; }
+    .fade-up { transition: none !important; opacity: 1 !important; transform: none !important; }
+    .how-card { transition: none !important; opacity: 1 !important; transform: none !important; }
+    .how__number { transition: none !important; }
+    .feature__chart span { transition: none !important; }
+    .faq-item summary, .faq-item__body, .faq-item__icon { transition: none !important; }
+    .pricing-toggle__pill, .plan__price-inner { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <canvas class="page-canvas" aria-hidden="true"></canvas>
+  <div class="depth-scrim" aria-hidden="true"></div>
+
+  <section class="hero" id="top" data-mood="surface">
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <header class="nav reveal reveal--nav" data-reveal-delay="150">
+      <a class="nav__brand" href="#top">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M2.5 9c2.5 0 2.5 4.2 5 4.2S10 9 12 9s2.5 4.2 5 4.2S19.5 9 21.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M2.5 15c2.5 0 2.5 4.2 5 4.2S10 15 12 15s2.5 4.2 5 4.2S19.5 15 21.5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+        <span>Flowstate</span>
+      </a>
+      <nav class="nav__pill" aria-label="Primary">
+        <a href="#how">仕組み</a>
+        <a href="#features">機能</a>
+        <a href="#pricing">料金</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="pill" href="#join">先行登録</a>
+    </header>
+
+    <div class="column">
+      <p class="badge reveal" data-reveal-delay="320">先行登録 10,000人突破</p>
+      <h1 class="heading heading-jp" data-phrases="散らかった|世界で、|/|深く|潜る。" data-reveal-delay="480"></h1>
+      <p class="subline subline-jp" data-phrases="通知も、タブも、雑音も。|Flowstate は気を散らすものを|静かに遠ざけ、|本当に大切な仕事へ没入する時間をつくります。" data-reveal-delay="1150"></p>
+      <form class="form reveal" data-reveal-delay="1450" id="waitlist" novalidate>
+        <div class="form__inner">
+          <input type="email" name="email" required placeholder="メールアドレス" autocomplete="email" />
+          <button type="submit" class="pill">先行登録する</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="scroll-queue reveal" data-reveal-delay="1650" aria-hidden="true">
+      <span>スクロールして潜る</span>
+      <span class="scroll-queue__rail"><span class="scroll-queue__dot"></span></span>
+    </div>
+  </section>
+
+  <!-- S1 問題提起（マニフェスト） -->
+  <section id="problem" class="section manifest" data-mood="shallow" aria-label="問題提起">
+    <div class="manifest__stage">
+      <div class="section__inner">
+        <div class="section-label fade-up"><span>01 — NOISE</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−08m</span></div>
+        <p class="manifest__text" data-char-light>
+          <span class="phrase"><span class="char" data-c>開</span><span class="char" data-c>い</span><span class="char" data-c>た</span><span class="char" data-c>ま</span><span class="char" data-c>ま</span><span class="char" data-c>の</span></span><span class="phrase"><span class="char" data-c>タ</span><span class="char" data-c>ブ</span><span class="char" data-c>。</span></span><span class="phrase"><span class="char" data-c>鳴</span><span class="char" data-c>り</span><span class="char" data-c>や</span><span class="char" data-c>ま</span><span class="char" data-c>な</span><span class="char" data-c>い</span></span><span class="phrase"><span class="char" data-c>通</span><span class="char" data-c>知</span><span class="char" data-c>。</span></span><span class="phrase"><span class="char" data-c>「</span><span class="char" data-c>ち</span><span class="char" data-c>ょ</span><span class="char" data-c>っ</span><span class="char" data-c>と</span></span><span class="phrase"><span class="char" data-c>い</span><span class="char" data-c>い</span><span class="char" data-c>？</span><span class="char" data-c>」</span><span class="char" data-c>の</span></span><span class="phrase"><span class="char" data-c>ひ</span><span class="char" data-c>と</span><span class="char" data-c>声</span><span class="char" data-c>。</span></span><br>
+          <span class="phrase"><span class="char" data-c>私</span><span class="char" data-c>た</span><span class="char" data-c>ち</span><span class="char" data-c>の</span></span><span class="phrase"><span class="char" data-c>集</span><span class="char" data-c>中</span><span class="char" data-c>は</span><span class="char" data-c>、</span></span><span class="phrase"><span class="char" data-c>一</span><span class="char" data-c>日</span><span class="char" data-c>に</span></span><span class="phrase"><span class="char" data-c>何</span><span class="char" data-c>度</span><span class="char" data-c>も</span></span><span class="phrase"><span class="char" data-c>水</span><span class="char" data-c>面</span><span class="char" data-c>へ</span></span><span class="phrase"><span class="char" data-c>引</span><span class="char" data-c>き</span><span class="char" data-c>戻</span><span class="char" data-c>さ</span><span class="char" data-c>れ</span><span class="char" data-c>て</span></span><span class="phrase"><span class="char" data-c>い</span><span class="char" data-c>る</span><span class="char" data-c>。</span></span><br>
+          <span class="phrase"><span class="char" data-c>必</span><span class="char" data-c>要</span><span class="char" data-c>な</span><span class="char" data-c>の</span><span class="char" data-c>は</span><span class="char" data-c>、</span></span><span class="phrase"><span class="char" data-c>も</span><span class="char" data-c>っ</span><span class="char" data-c>と</span></span><span class="phrase"><span class="char" data-c>頑</span><span class="char" data-c>張</span><span class="char" data-c>る</span></span><span class="phrase"><span class="char" data-c>こ</span><span class="char" data-c>と</span><span class="char" data-c>で</span><span class="char" data-c>は</span></span><span class="phrase"><span class="char" data-c>な</span><span class="char" data-c>い</span><span class="char" data-c>。</span></span><span class="phrase"><span class="gradient-text"><span class="char" data-c>深</span><span class="char" data-c>く</span><span class="char" data-c>潜</span><span class="char" data-c>れ</span><span class="char" data-c>る</span><span class="char" data-c>環</span><span class="char" data-c>境</span></span><span class="char" data-c>を</span></span><span class="phrase"><span class="char" data-c>つ</span><span class="char" data-c>く</span><span class="char" data-c>る</span></span><span class="phrase"><span class="char" data-c>こ</span><span class="char" data-c>と</span><span class="char" data-c>だ</span><span class="char" data-c>。</span></span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- S2 仕組み（3ステップ） -->
+  <section id="how" class="section how" data-mood="dive" aria-label="仕組み">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>02 — HOW IT WORKS</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−16m</span></div>
+      <h2 class="section-heading heading-jp fade-up"><span class="reveal--phrase">3つの</span><span class="reveal--phrase">ステップで、</span><span class="reveal--phrase">フローへ。</span></h2>
+
+      <div class="how__grid">
+        <div class="how__sticky">
+          <div class="how__number" data-step-number="1">01</div>
+        </div>
+        <div class="how__steps">
+          <article class="how-card fade-up" data-step-card="1">
+            <svg class="how-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <h3 class="how-card__title">整える</h3>
+            <p class="how-card__body">作業を始める前に、通知・アプリ・サイトを「潮止め」。今日やることを1つだけ選びます。</p>
+          </article>
+          <article class="how-card fade-up" data-step-card="2">
+            <svg class="how-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <h3 class="how-card__title">潜る</h3>
+            <p class="how-card__body">タイマーが静かに回り始め、周囲の雑音はアンビエントサウンドに置き換わります。途中の通知はすべて水面に保留。</p>
+          </article>
+          <article class="how-card fade-up" data-step-card="3">
+            <svg class="how-card__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 15c2.5 0 2.5 4.2 5 4.2S12 15 14 15s2.5 4.2 5 4.2" stroke-width="1.5" stroke-linecap="round"/><path d="M3 19h18" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <h3 class="how-card__title">浮上する</h3>
+            <p class="how-card__body">セッションが終わると、保留していた通知をまとめて受け取り、潜った時間と深さを記録します。</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 機能（ベントグリッド） -->
+  <section id="features" class="section" data-mood="deep" aria-label="機能">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>03 — FEATURES</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−24m</span></div>
+      <h2 class="section-heading heading-jp fade-up">静けさを、設計する機能。</h2>
+      <p class="section-sub fade-up">散らかった世界を、6つの視点で静かに整えます。</p>
+
+      <div class="features-grid">
+        <article class="feature feature--wide fade-up" data-spotlight data-toggles>
+          <h3 class="feature__title">通知の潮止め</h3>
+          <p class="feature__body">セッション開始と同時に、通知とアプリを水面下に沈めます。緊急連絡だけ緊急着陸。</p>
+          <div class="feature__toggles" aria-hidden="true">
+            <div class="feature__toggle is-on" data-toggle-label="Slack">
+              <span style="display:flex;align-items:center;">
+                <svg class="feature__toggle-icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="9" width="16" height="11" rx="2" stroke-width="1.5"/><path d="M8 9V6a4 4 0 0 1 8 0v3" stroke-width="1.5"/></svg>
+                Slack
+              </span>
+              <span class="feature__switch"></span>
+            </div>
+            <div class="feature__toggle is-on" data-toggle-label="メール">
+              <span style="display:flex;align-items:center;">
+                <svg class="feature__toggle-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.5"/><path d="m3 7 9 7 9-7" stroke-width="1.5"/></svg>
+                メール
+              </span>
+              <span class="feature__switch"></span>
+            </div>
+            <div class="feature__toggle is-on" data-toggle-label="カレンダー">
+              <span style="display:flex;align-items:center;">
+                <svg class="feature__toggle-icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="15" rx="2" stroke-width="1.5"/><path d="M4 10h16M9 3v4M15 3v4" stroke-width="1.5" stroke-linecap="round"/></svg>
+                カレンダー
+              </span>
+              <span class="feature__switch"></span>
+            </div>
+          </div>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">フォーカス・セッション</h3>
+          <p class="feature__body">25分から2時間まで、自分にあった深さで潜れます。</p>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">アンビエントサウンド</h3>
+          <p class="feature__body">雨音、潮騒、深海の静寂。雑音を心地よい音で置き換えます。</p>
+        </article>
+        <article class="feature feature--wide fade-up" data-spotlight>
+          <h3 class="feature__title">深度ログ</h3>
+          <p class="feature__body">今週どれだけ深く潜れたかを、棒グラフで静かに振り返ります。</p>
+          <div class="feature__chart" data-chart>
+            <span data-h="42"></span><span data-h="68"></span><span data-h="35"></span><span data-h="81"></span><span data-h="55"></span><span data-h="72"></span><span data-h="48"></span>
+          </div>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">チームの静寂時間</h3>
+          <p class="feature__body">同じチームの「今は潜っている」を可視化し、不要な連絡を控えます。</p>
+        </article>
+        <article class="feature feature--narrow fade-up" data-spotlight>
+          <h3 class="feature__title">オフラインでも潜れる</h3>
+          <p class="feature__body">ネットが切れても集中は止まりません。ログはあとから同期。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4 プロダクト画面 -->
+  <section id="product" class="section" data-mood="deep" aria-label="プロダクト画面">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>04 — PRODUCT</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−30m</span></div>
+      <h2 class="section-heading heading-jp fade-up">潜っているあいだ、<br class="sm-only">画面はこれだけ。</h2>
+
+      <div class="product-mock-wrap fade-up">
+        <span class="product-chip product-chip--desktop product-chip--right--desktop" aria-hidden="true">通知 12件を保留中</span>
+        <span class="product-chip product-chip--desktop product-chip--left--desktop" aria-hidden="true">アンビエント：深海</span>
+        <div class="product-chips-mobile" aria-hidden="true">
+          <span class="product-chip product-chip--mobile" data-toggle-label="通知">通知 12件を保留中</span>
+          <span class="product-chip product-chip--mobile" data-toggle-label="アンビエント">アンビエント：深海</span>
+        </div>
+        <div class="product-mock" data-tilt>
+          <div class="product-mock__chrome">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="product-mock__body">
+            <div class="product-ring">
+              <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="var(--accent-cyan)"/>
+                    <stop offset="1" stop-color="var(--accent-violet)"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
+                <circle data-ring cx="60" cy="60" r="54" fill="none" stroke="url(#ringGrad)" stroke-width="3" stroke-linecap="round" transform="rotate(-90 60 60)" stroke-dasharray="339.29" stroke-dashoffset="0"/>
+              </svg>
+              <div class="product-ring__time" data-countdown>25:00</div>
+            </div>
+            <div class="product-task">
+              <p class="product-task__name">新機能の設計ドキュメントを書く</p>
+              <span class="product-task__chip">深度 42m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S5 数字と声 -->
+  <section id="voices" class="section" data-mood="deep" aria-label="数字と声">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>05 — VOICES</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−34m</span></div>
+
+      <div class="numbers">
+        <div class="fade-up">
+          <div class="number__value" data-counter="2.4" data-suffix="時間">0.0時間</div>
+          <p class="number__label">1日あたりの平均集中時間の増加</p>
+        </div>
+        <div class="fade-up">
+          <div class="number__value" data-counter="68" data-suffix="%">0%</div>
+          <p class="number__label">通知による中断の減少</p>
+        </div>
+        <div class="fade-up">
+          <div class="number__value" data-counter="10000" data-counter-format="int" data-suffix="+">0+</div>
+          <p class="number__label">先行登録者</p>
+        </div>
+      </div>
+      <p class="numbers-note fade-up">※ベータ版利用者アンケート（架空）</p>
+
+      <div class="marquee fade-up" aria-hidden="true">
+        <div class="marquee__track">
+          <div class="voice"><p class="voice__quote">「25分タイマーが静かに終わったとき、初めて自分の呼吸に気づきました。」</p><div class="voice__meta"><div class="voice__avatar">K</div><div><div class="voice__role">プロダクトデザイナー / 東京</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「通知を全部保留にしたら、午後に3時間ぶっ通しで論文が書けました。」</p><div class="voice__meta"><div class="voice__avatar">S</div><div><div class="voice__role">研究者 / 京都</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深海のアンビエント、最高。チームの"潜ってる"バッジで遠慮が要らなくなりました。」</p><div class="voice__meta"><div class="voice__avatar">M</div><div><div class="voice__role">エンジニア / 大阪</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「週末の執筆時間が、1ヶ月前から3倍に。無理なく続いています。」</p><div class="voice__meta"><div class="voice__avatar">A</div><div><div class="voice__role">ライター / 福岡</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「静かな午後が戻ってきた、というのが正直な感想です。」</p><div class="voice__meta"><div class="voice__avatar">T</div><div><div class="voice__role">翻訳家 / 横浜</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"あと5分"の連続にさよなら。今日は1つだけ、に集中できます。」</p><div class="voice__meta"><div class="voice__avatar">Y</div><div><div class="voice__role">マーケター / 名古屋</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「25分タイマーが静かに終わったとき、初めて自分の呼吸に気づきました。」</p><div class="voice__meta"><div class="voice__avatar">K</div><div><div class="voice__role">プロダクトデザイナー / 東京</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「通知を全部保留にしたら、午後に3時間ぶっ通しで論文が書けました。」</p><div class="voice__meta"><div class="voice__avatar">S</div><div><div class="voice__role">研究者 / 京都</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深海のアンビエント、最高。チームの"潜ってる"バッジで遠慮が要らなくなりました。」</p><div class="voice__meta"><div class="voice__avatar">M</div><div><div class="voice__role">エンジニア / 大阪</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「週末の執筆時間が、1ヶ月前から3倍に。無理なく続いています。」</p><div class="voice__meta"><div class="voice__avatar">A</div><div><div class="voice__role">ライター / 福岡</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「静かな午後が戻ってきた、というのが正直な感想です。」</p><div class="voice__meta"><div class="voice__avatar">T</div><div><div class="voice__role">翻訳家 / 横浜</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"あと5分"の連続にさよなら。今日は1つだけ、に集中できます。」</p><div class="voice__meta"><div class="voice__avatar">Y</div><div><div class="voice__role">マーケター / 名古屋</div></div></div></div>
+        </div>
+      </div>
+      <div class="marquee marquee--right fade-up" aria-hidden="true">
+        <div class="marquee__track">
+          <div class="voice"><p class="voice__quote">「深い夜の静けさを、昼間にも再現できるツール。」</p><div class="voice__meta"><div class="voice__avatar">R</div><div><div class="voice__role">写真家 / 札幌</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"今潜ってます"が一目で伝わると、社内Slackが静かになりました。」</p><div class="voice__meta"><div class="voice__avatar">H</div><div><div class="voice__role">PM / 神戸</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「集中の質を、数字じゃなくてグラフで見せてくれるのが優しい。」</p><div class="voice__meta"><div class="voice__avatar">N</div><div><div class="voice__role">データアナリスト / 仙台</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深呼吸する癖が戻りました。Flowstateのおかげかも。」</p><div class="voice__meta"><div class="voice__avatar">I</div><div><div class="voice__role">編集者 / 長崎</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「オフラインでもログが残るのが、現場仕事には助かります。」</p><div class="voice__meta"><div class="voice__avatar">O</div><div><div class="voice__role">研究者 / つくば</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「夜中に書いたコード、朝まで集中してたことに驚いた。」</p><div class="voice__meta"><div class="voice__avatar">E</div><div><div class="voice__role">バックエンドエンジニア / リモート</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深い夜の静けさを、昼間にも再現できるツール。」</p><div class="voice__meta"><div class="voice__avatar">R</div><div><div class="voice__role">写真家 / 札幌</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「"今潜ってます"が一目で伝わると、社内Slackが静かになりました。」</p><div class="voice__meta"><div class="voice__avatar">H</div><div><div class="voice__role">PM / 神戸</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「集中の質を、数字じゃなくてグラフで見せてくれるのが優しい。」</p><div class="voice__meta"><div class="voice__avatar">N</div><div><div class="voice__role">データアナリスト / 仙台</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「深呼吸する癖が戻りました。Flowstateのおかげかも。」</p><div class="voice__meta"><div class="voice__avatar">I</div><div><div class="voice__role">編集者 / 長崎</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「オフラインでもログが残るのが、現場仕事には助かります。」</p><div class="voice__meta"><div class="voice__avatar">O</div><div><div class="voice__role">研究者 / つくば</div></div></div></div>
+          <div class="voice"><p class="voice__quote">「夜中に書いたコード、朝まで集中してたことに驚いた。」</p><div class="voice__meta"><div class="voice__avatar">E</div><div><div class="voice__role">バックエンドエンジニア / リモート</div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 料金 -->
+  <section id="pricing" class="section" data-mood="deep" aria-label="料金">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>06 — PRICING</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−36m</span></div>
+      <h2 class="section-heading heading-jp fade-up">潜る深さで、<br class="sm-only">選べるプラン。</h2>
+
+      <div class="pricing-toggle fade-up" data-pricing>
+        <span class="pricing-toggle__pill"></span>
+        <button class="pricing-toggle__btn is-active" data-period="monthly" type="button">月額</button>
+        <button class="pricing-toggle__btn" data-period="yearly" type="button">年額<span class="pricing-toggle__badge">2ヶ月分おトク</span></button>
+      </div>
+
+      <div class="plans">
+        <article class="plan fade-up">
+          <h3 class="plan__name">Free</h3>
+          <div class="plan__price">
+            <span class="plan__price-inner">
+              <span class="plan__monthly">¥0</span>
+              <span class="plan__yearly">¥0</span>
+            </span>
+          </div>
+          <p class="plan__unit">永久無料</p>
+          <ul class="plan__features">
+            <li>1日3セッション</li>
+            <li>基本の潮止め</li>
+            <li>深度ログ7日分</li>
+          </ul>
+          <a class="pill" href="#join">無料で始める</a>
+        </article>
+        <article class="plan plan--pro fade-up">
+          <span class="plan__badge">おすすめ</span>
+          <h3 class="plan__name">Pro</h3>
+          <div class="plan__price">
+            <span class="plan__price-inner">
+              <span class="plan__monthly"><span class="plan__num">¥980</span><span class="plan__unit">/月</span></span>
+              <span class="plan__yearly"><span class="plan__num">¥9,800</span><span class="plan__unit">/年</span></span>
+            </span>
+          </div>
+          <p class="plan__unit">&nbsp;</p>
+          <ul class="plan__features">
+            <li>無制限セッション</li>
+            <li>アンビエントサウンド全種</li>
+            <li>深度ログ無制限</li>
+            <li>全デバイス同期</li>
+          </ul>
+          <a class="pill" href="#join">Proで先行登録</a>
+        </article>
+        <article class="plan fade-up">
+          <h3 class="plan__name">Team</h3>
+          <div class="plan__price">
+            <span class="plan__price-inner">
+              <span class="plan__monthly"><span class="plan__num">¥1,480</span><span class="plan__unit">/人・月</span></span>
+              <span class="plan__yearly"><span class="plan__num">¥14,800</span><span class="plan__unit">/人・年</span></span>
+            </span>
+          </div>
+          <p class="plan__unit">&nbsp;</p>
+          <ul class="plan__features">
+            <li>Proの全機能</li>
+            <li>チームの静寂時間</li>
+            <li>管理ダッシュボード</li>
+            <li>優先サポート</li>
+          </ul>
+          <a class="pill" href="#join">Teamで先行登録</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7 FAQ -->
+  <section id="faq" class="section" data-mood="deep" aria-label="よくある質問">
+    <div class="section__inner">
+      <div class="section-label fade-up"><span>07 — FAQ</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>−38m</span></div>
+      <h2 class="section-heading heading-jp fade-up">よくある質問</h2>
+
+      <div class="faq-list fade-up">
+        <details class="faq-item">
+          <summary>対応OSを教えてください<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>macOS 12以降、Windows 11、iOS 17以降、Android 14以降に対応しています。Linux対応は2026年内の予定です。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>通知は本当に消えるのでしょうか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>セッション中はすべての通知が保留され、画面に表示されません。緊急連絡だけ「緊急着陸」として即時通知する設定があります。セッション終了後にまとめて届きます。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>無料でどこまで使えますか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>Free プランは1日3セッション、基本の潮止め、深度ログ7日分を永久無料でご利用いただけます。クレジットカード登録は不要です。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>チームへの導入は大変ですか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>Team プランは管理ダッシュボードからメンバーを招待するだけです。SSO（Google / Microsoft）に対応しており、配下に専用のポリシーも設定できます。</div></div>
+        </details>
+        <details class="faq-item">
+          <summary>データの扱いはどうなっていますか？<span class="faq-item__icon" aria-hidden="true"></span></summary>
+          <div class="faq-item__body"><div>深度ログとセッション履歴はエンドツーエンドで暗号化されます。端末間の同期もゼロ知識設計で、Flowstate自身にも内容は見えません。</div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- S8 最終CTA -->
+  <section id="join" class="section final-cta" data-mood="rise" aria-label="先行登録">
+    <div class="final-cta__inner">
+      <div class="section-label fade-up"><span>08 — SURFACE</span><span class="section-label__bar"></span><span class="section-label__depth" data-depth-label>0m</span></div>
+      <h2 class="section-heading heading-jp fade-up">さあ、深く。</h2>
+      <p class="section-sub section-sub--wider final-cta__sub fade-up">先行登録いただいた方には、正式リリース時に Pro プラン3ヶ月分をお届けします。</p>
+      <form class="form fade-up" id="join-form" novalidate>
+        <div class="form__inner">
+          <input type="email" name="email" required placeholder="メールアドレス" autocomplete="email" />
+          <button type="submit" class="pill">先行登録する</button>
+        </div>
+      </form>
+      <p class="numbers-note" style="margin-top: 1rem;">※本ページは架空のプロダクトのデザインサンプルです。</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="lp-footer">
+    <div class="lp-footer__links">
+      <a href="#">プライバシー</a>
+      <a href="#">利用規約</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <div>© 2026 Flowstate — 深く潜るためのツール。</div>
+    <div class="lp-footer__disclaimer">※本ページは架空のプロダクトのデザインサンプルです。</div>
+  </footer>
+
+  <!-- 深度メーター (≥1024px のみ) -->
+  <aside class="depth-meter" aria-hidden="true">
+    <span class="depth-meter__label" data-depth-label>0m</span>
+    <span class="depth-meter__rail"><span class="depth-meter__dot" data-depth-dot></span></span>
+  </aside>
+
+<script type="importmap">{ "imports": { "lenis": "https://unpkg.com/lenis@1.3.19/dist/lenis.mjs" } }</script>
+<script type="module">
+  import Lenis from "lenis";
+
+  /* ────────── 初期化 ────────── */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = matchMedia('(hover: none)').matches;
+  const lenis = new Lenis({ smoothWheel: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  /* ────────── Phase 1 のヒーローリビール ──────────
+     旧: data-word-reveal（英語空白 split）
+     新: data-phrases（"散らかった|世界で、|/|深く|潜る。" のように手動区切り、`/` は改行）
+     - 単語単位リビール: stagger 85ms / dur 720ms / from y+26px (Phase 1 と同値)
+     - サブ行: 句単位で 40ms stagger（22ms × 文字数ぶんにしない） */
+  function splitPhrases(el) {
+    if (el.dataset.phrasesReady === '1') return;
+    el.dataset.phrasesReady = '1';
+    const raw = el.getAttribute('data-phrases') || '';
+    const tokens = raw.split(/\|/);
+    el.textContent = '';
+    const isSubline = el.classList.contains('subline');
+    const base = Number(el.dataset.revealDelay || 0);
+    const stagger = isSubline ? 40 : 85;
+    const dur = isSubline ? 600 : 720;
+    const from = isSubline ? 14 : 26;
+    tokens.forEach((tok) => {
+      if (tok === '/') { el.appendChild(document.createElement('br')); return; }
+      if (!tok) return;
+      const span = document.createElement('span');
+      span.className = 'reveal--phrase';
+      span.textContent = tok;
+      span.style.transitionDuration = `${dur}ms`;
+      span.style.transform = `translateY(${from}px)`;
+      el.appendChild(span);
+    });
+    if (reduce) {
+      el.querySelectorAll('.reveal--phrase').forEach((s) => s.classList.add('is-visible'));
+      return;
+    }
+    const phrases = el.querySelectorAll('.reveal--phrase');
+    phrases.forEach((p, i) => {
+      setTimeout(() => p.classList.add('is-visible'), base + i * stagger);
+    });
+  }
+
+  /* ヒーロー内のフェード (Phase 1 と同じ delay) */
+  function initHero() {
+    document.querySelectorAll('.hero .reveal').forEach((el) => {
+      if (reduce) { el.classList.add('is-visible'); return; }
+      const delay = Number(el.dataset.revealDelay || 0);
+      setTimeout(() => el.classList.add('is-visible'), delay);
+    });
+    document.querySelectorAll('.hero [data-phrases]').forEach(splitPhrases);
+  }
+  initHero();
+
+  /* ヒーロー外の .reveal--phrase は遅延付きで逐次再生 */
+  document.querySelectorAll('.heading-jp:not(.hero .heading-jp)[data-phrases], .final-cta__heading[data-phrases]').forEach(splitPhrases);
+
+  /* 汎用フェードアップ (2-6) — IntersectionObserver 0.2、1回だけ */
+  const fadeUpObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const el = entry.target;
+      // 同一グループ内の stagger
+      const group = el.dataset.fadeGroup;
+      if (group) {
+        const siblings = document.querySelectorAll(`[data-fade-group="${group}"]`);
+        const idx = Array.from(siblings).indexOf(el);
+        el.style.transitionDelay = `${idx * 90}ms`;
+      }
+      el.classList.add('is-visible');
+      fadeUpObserver.unobserve(el);
+    }
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.fade-up').forEach((el) => {
+    if (reduce) { el.classList.add('is-visible'); return; }
+    fadeUpObserver.observe(el);
+  });
+
+  /* フォーム no-op */
+  document.getElementById('waitlist')?.addEventListener('submit', (e) => e.preventDefault());
+  document.getElementById('join-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.textContent = '登録しました';
+      btn.disabled = true;
+    }
+    // 2-3 仕様: rise mood の初回バースト（小さな祝福）
+    if (window.flow) window.flow.burst(12, 2);
+  });
+
+  /* ────────── ムード切替 (2-3) ────────── */
+  const MOOD_PRESETS = {
+    surface: { hueMin: 0.50, hueRange: 0.42, intensity: 1.00, orbitSpeed: 0.026, orbitScale: 1.00, density: 0.958, dim: 0.00 },
+    shallow: { hueMin: 0.62, hueRange: 0.30, intensity: 0.70, orbitSpeed: 0.018, orbitScale: 1.10, density: 0.965, dim: 0.20 },
+    dive:    { hueMin: 0.55, hueRange: 0.14, intensity: 0.45, orbitSpeed: 0.011, orbitScale: 1.30, density: 0.975, dim: 0.38 },
+    deep:    { hueMin: 0.58, hueRange: 0.08, intensity: 0.28, orbitSpeed: 0.006, orbitScale: 1.45, density: 0.982, dim: 0.55 },
+    rise:    { hueMin: 0.50, hueRange: 0.42, intensity: 0.85, orbitSpeed: 0.030, orbitScale: 0.90, density: 0.955, dim: 0.10 },
+  };
+
+  // reduced-motion: deep 相当 + ほぼ停止に固定
+  if (reduce) {
+    if (window.flow) {
+      window.flow.setMood({ ...MOOD_PRESETS.deep, orbitSpeed: 0.002 });
+    }
+  } else {
+    // 画面中央ラインを跨いだセクションで mood 切替
+    const moodObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const mood = entry.target.getAttribute('data-mood');
+        if (mood && MOOD_PRESETS[mood] && window.flow) {
+          window.flow.setMood(MOOD_PRESETS[mood]);
+          if (mood === 'rise') window.flow.triggerRiseBurst();
+        }
+      }
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    document.querySelectorAll('[data-mood]').forEach((s) => moodObserver.observe(s));
+  }
+
+  /* ────────── Lenis scroll コールバック 1本集約 (2-5) ────────── */
+  const nav = document.querySelector('.nav');
+  const depthDot = document.querySelector('[data-depth-dot]');
+  const depthLabel = document.querySelector('.depth-meter [data-depth-label]');
+  const depthMax = 40;
+  let lastScrollY = 0;
+  let depthTarget = 0;
+  let lastMood = null;
+
+  // ナビのスムーススクロール（アンカー）
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -20 });
+    });
+  });
+
+  // S1 文字点灯用
+  const manifest = document.querySelector('[data-char-light]');
+  const manifestChars = manifest ? Array.from(manifest.querySelectorAll('.char')) : [];
+
+  // S2 ステップ
+  const stepCards = Array.from(document.querySelectorAll('[data-step-card]'));
+  const stepNumber = document.querySelector('[data-step-number]');
+
+  // 深度メーター専用: rise mood 復帰時に 900ms で 0m へ巻き戻る
+  let depthWrap = 0;
+  let depthOverrideTo = null;
+
+  lenis.on('scroll', ({ scroll, limit, progress }) => {
+    // ナビ背景フェード
+    const heroH = window.innerHeight * 0.8;
+    nav?.classList.toggle('is-scrolled', scroll > heroH);
+
+    // 深度メーター: 進捗 0→1 を 0m→40m に
+    depthTarget = Math.min(depthMax, Math.round(progress * depthMax));
+    if (depthDot) {
+      // rise に居る場合は 0m へ戻る
+      if (depthOverrideTo !== null) {
+        depthWrap += (depthOverrideTo - depthWrap) * 0.06;
+      } else {
+        depthWrap += (depthTarget - depthWrap) * 0.18;
+      }
+      depthDot.style.top = `${depthWrap / depthMax * 100}%`;
+      if (depthLabel) {
+        const showM = depthOverrideTo !== null ? depthWrap : depthTarget;
+        depthLabel.textContent = `-${String(Math.round(showM)).padStart(2, '0')}m`;
+      }
+    }
+
+    // S1 文字点灯 (section 内 0→1 で 文字数分まで点灯)
+    if (manifest && manifestChars.length) {
+      const r = manifest.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // P1 #7: 進捗 0.75 で全文字点灯完了。係数 1.33 (=1/0.75) で配分。
+      const p = Math.max(0, Math.min(1, 1 - (r.top / vh) / 1.6));
+      const lit = Math.floor(p * manifestChars.length * 1.33);
+      for (let i = 0; i < manifestChars.length; i++) {
+        manifestChars[i].classList.toggle('is-on', i < lit);
+      }
+    }
+
+    // S2: カードのアクティブ判定 (中央ラインとの距離)
+    if (stepCards.length) {
+      const vh = window.innerHeight;
+      let activeIdx = -1;
+      stepCards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const dist = Math.abs(center - vh / 2);
+        const on = dist < vh * 0.35;
+        card.classList.toggle('is-on', on);
+        if (on) activeIdx = i;
+      });
+      // 数字は on のものに合わせる（1..3）
+      if (stepNumber) {
+        const next = activeIdx >= 0 ? String(activeIdx + 1).padStart(2, '0') : '01';
+        if (stepNumber.textContent !== next) {
+          stepNumber.textContent = next;
+          stepNumber.classList.toggle('is-on', activeIdx >= 0);
+        }
+      }
+    }
+
+    // rise mood を検出したら深度メーターを 0m に巻き戻す
+    const join = document.getElementById('join');
+    if (join) {
+      const r = join.getBoundingClientRect();
+      const inJoin = r.top < window.innerHeight * 0.5 && r.bottom > 0;
+      if (inJoin) {
+        if (depthOverrideTo !== 0) { depthOverrideTo = 0; }
+      } else if (depthOverrideTo !== null) {
+        depthOverrideTo = null;
+      }
+    }
+  });
+
+  /* ────────── S3 スポットライト境界 ────────── */
+  if (!isTouch && !reduce) {
+    document.querySelectorAll('[data-spotlight]').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        card.style.setProperty('--mx', `${x}px`);
+        card.style.setProperty('--my', `${y}px`);
+      });
+    });
+  }
+
+  /* ────────── S4 プロダクトモック: カウントダウン + チルト ────────── */
+  const ring = document.querySelector('[data-ring]');
+  const countdownEl = document.querySelector('[data-countdown]');
+  const mock = document.querySelector('[data-tilt]');
+  if (ring && countdownEl) {
+    const TOTAL = 25 * 60;
+    const circumference = 2 * Math.PI * 54;
+    ring.style.strokeDasharray = `${circumference}`;
+    let remaining = TOTAL;
+    if (reduce) { remaining = TOTAL; countdownEl.textContent = '25:00'; ring.style.strokeDashoffset = '0'; }
+    else {
+      const tick = () => {
+        remaining -= 1;
+        if (remaining < 0) remaining = TOTAL;
+        const mm = String(Math.floor(remaining / 60)).padStart(2, '0');
+        const ss = String(remaining % 60).padStart(2, '0');
+        countdownEl.textContent = `${mm}:${ss}`;
+        const ratio = remaining / TOTAL;
+        ring.style.strokeDashoffset = `${(1 - ratio) * circumference}`;
+      };
+      setInterval(tick, 1000);
+    }
+  }
+  if (mock && !isTouch && !reduce) {
+    let rx = 0, ry = 0;
+    let curX = 0, curY = 0;
+    const onMove = (e) => {
+      const r = mock.getBoundingClientRect();
+      rx = ((e.clientX - r.left) / r.width  - 0.5) * 12; // max ±6deg
+      ry = ((e.clientY - r.top)  / r.height - 0.5) * -12;
+    };
+    const apply = () => {
+      curX += (rx - curX) * 0.08;
+      curY += (ry - curY) * 0.08;
+      mock.style.transform = `rotateX(${curY.toFixed(2)}deg) rotateY(${curX.toFixed(2)}deg)`;
+      requestAnimationFrame(apply);
+    };
+    window.addEventListener('pointermove', onMove);
+    requestAnimationFrame(apply);
+  }
+
+  /* ────────── S3 棒グラフ（in-view で下から伸びる） ────────── */
+  const chartObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const chart = entry.target;
+      const bars = chart.querySelectorAll('span[data-h]');
+      bars.forEach((bar, i) => {
+        const h = Number(bar.dataset.h || 0);
+        setTimeout(() => { bar.style.height = `${h}%`; }, i * 80);
+      });
+      chartObserver.unobserve(chart);
+    }
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[data-chart]').forEach((c) => chartObserver.observe(c));
+
+  /* ────────── P2 #12: 通知の潮止めトグル ──────────
+     in-view で 200ms stagger で OFF に切り替わり、また ON に戻る、
+     「セッション開始」のデモ。reduce-motion 時は常時 ON のまま。*/
+  const toggleCard = document.querySelector('[data-toggles]');
+  if (toggleCard) {
+    const toggles = Array.from(toggleCard.querySelectorAll('.feature__toggle'));
+    const toggleObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        toggleCard.classList.add('in-view');
+        if (reduce) continue;
+        // 全 ON → 200ms stagger で全 OFF → 1.4 秒保持 → 全 ON
+        toggles.forEach((t) => t.classList.remove('is-on'));
+        setTimeout(() => {
+          toggles.forEach((t, i) => {
+            setTimeout(() => t.classList.add('is-on'), 1400 + i * 200);
+          });
+        }, 200 * toggles.length);
+        toggleObserver.unobserve(entry.target);
+      }
+    }, { threshold: 0.5 });
+    toggleObserver.observe(toggleCard);
+  }
+
+  /* ────────── S5 カウンター (in-view カウントアップ) ────────── */
+  // P2 #10: 整数ターゲットは toLocaleString('ja-JP') で 3 桁カンマ区切り。
+  const fmtInt = (n) => Math.round(n).toLocaleString('ja-JP');
+  const counterObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const el = entry.target;
+      const target = Number(el.dataset.counter || 0);
+      const suffix = el.dataset.suffix || '';
+      const isInt = el.dataset.counterFormat === 'int' || Number.isInteger(target);
+      const finalText = isInt ? `${fmtInt(target)}${suffix}` : `${target.toFixed(1)}${suffix}`;
+      const dur = 1600;
+      const t0 = performance.now();
+      if (reduce) {
+        el.textContent = finalText;
+      } else {
+        const tick = (now) => {
+          const t = Math.min(1, (now - t0) / dur);
+          // easeOutCubic
+          const eased = 1 - Math.pow(1 - t, 3);
+          const v = target * eased;
+          const formatted = isInt ? fmtInt(v) : v.toFixed(1);
+          el.textContent = `${formatted}${suffix}`;
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = finalText;
+        };
+        requestAnimationFrame(tick);
+      }
+      counterObserver.unobserve(el);
+    }
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-counter]').forEach((c) => counterObserver.observe(c));
+
+  /* ────────── S6 料金トグル ────────── */
+  // P1 #5: ピル位置・幅を選択中ボタンの offsetLeft/offsetWidth から算出。
+  // pill は position:absolute; left:0（トグルの padding box 左端）なので、
+  // ボタンの offsetLeft（パディング含む）分だけ translateX で寄せる。
+  const toggle = document.querySelector('[data-pricing]');
+  if (toggle) {
+    const pill = toggle.querySelector('.pricing-toggle__pill');
+    const btns = Array.from(toggle.querySelectorAll('.pricing-toggle__btn[data-period]'));
+    const placePill = (btn) => {
+      if (!pill || !btn) return;
+      pill.style.transform = `translateX(${btn.offsetLeft}px)`;
+      pill.style.width = `${btn.offsetWidth}px`;
+    };
+    // 初期位置（is-active ボタンに合わせる）。バッジ付きボタンは幅が違うので
+    // 必ずレイアウト確定後に測る。
+    requestAnimationFrame(() => {
+      const active = btns.find((b) => b.classList.contains('is-active')) || btns[0];
+      placePill(active);
+    });
+    window.addEventListener('resize', () => {
+      const active = btns.find((b) => b.classList.contains('is-active')) || btns[0];
+      placePill(active);
+    });
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const period = btn.dataset.period;
+        btns.forEach((b) => b.classList.toggle('is-active', b === btn));
+        const isYear = period === 'yearly';
+        toggle.classList.toggle('is-year', isYear);
+        // プランカードとトグルは兄弟要素なので、共通の祖先 #pricing にも伝播
+        const section = toggle.closest('section');
+        if (section) section.classList.toggle('is-year', isYear);
+        placePill(btn);
+      });
+    });
+  }
+
+  /* ────────── スムーススクロールで入る前はディープ測定を "0m" ────────── */
+  // 初期状態: 0m
+  if (depthLabel) depthLabel.textContent = '-00m';
+
+  function fluidSimulation(canvas) {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+
+    let config = {
+      SIM_RESOLUTION: 200,
+      DYE_RESOLUTION: 512,
+      DENSITY_DISSIPATION: 0.958,
+      VELOCITY_DISSIPATION: 0.96,
+      PRESSURE_DISSIPATION: 0.8,
+      PRESSURE_ITERATIONS: 20,
+      CURL: 42,
+      SPLAT_RADIUS: 0.22,
+      SHADING: true,
+      COLORFUL: true,
+      PAUSED: false,
+      BACK_COLOR: { r: 4, g: 5, b: 12 },
+      TRANSPARENT: false,
+      BLOOM: false,
+      BLOOM_ITERATIONS: 8,
+      BLOOM_RESOLUTION: 256,
+      BLOOM_INTENSITY: 0.8,
+      BLOOM_THRESHOLD: 0.8,
+      BLOOM_SOFT_KNEE: 0.7
+    };
+
+    function pointerPrototype() {
+      this.id = -1;
+      this.x = 0;
+      this.y = 0;
+      this.dx = 0;
+      this.dy = 0;
+      this.down = false;
+      this.moved = false;
+      this.color = [30, 0, 300];
+    }
+
+    let pointers = [];
+    let splatStack = [];
+    pointers.push(new pointerPrototype());
+
+    /* Phase 2: ムード（流体深度）。
+       mood 値は毎フレーム moodTarget へ lerp（係数 0.04/frame ≒ 約1.2秒で追従）。
+       generateColor / driveVirtualPointer / config.DENSITY_DISSIPATION は
+       すべて mood を参照する。*/
+    const mood = {
+      hueMin: 0.5,
+      hueRange: 0.42,
+      intensity: 1.0,
+      orbitSpeed: 0.026,
+      orbitScale: 1.0,
+      density: 0.958,
+      dim: 0.0,
+    };
+    const moodTarget = { ...mood };
+    let riseBurstDone = false;
+
+    const { gl, ext } = getWebGLContext(canvas);
+
+    if (isMobile()) config.SHADING = false;
+    if (!ext.supportLinearFiltering) {
+      config.SHADING = false;
+      config.BLOOM = false;
+    }
+
+    function getWebGLContext(canvas) {
+      const params = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
+      let gl = canvas.getContext('webgl2', params);
+      const isWebGL2 = !!gl;
+      if (!isWebGL2)
+        gl = canvas.getContext('webgl', params) || canvas.getContext('experimental-webgl', params);
+
+      let halfFloat;
+      let supportLinearFiltering;
+      if (isWebGL2) {
+        gl.getExtension('EXT_color_buffer_float');
+        supportLinearFiltering = gl.getExtension('OES_texture_float_linear');
+      } else {
+        halfFloat = gl.getExtension('OES_texture_half_float');
+        supportLinearFiltering = gl.getExtension('OES_texture_half_float_linear');
+      }
+
+      gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+      const halfFloatTexType = isWebGL2 ? gl.HALF_FLOAT : halfFloat.HALF_FLOAT_OES;
+      let formatRGBA, formatRG, formatR;
+      if (isWebGL2) {
+        formatRGBA = getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, halfFloatTexType);
+        formatRG = getSupportedFormat(gl, gl.RG16F, gl.RG, halfFloatTexType);
+        formatR = getSupportedFormat(gl, gl.R16F, gl.RED, halfFloatTexType);
+      } else {
+        formatRGBA = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+        formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+        formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+      }
+
+      return {
+        gl,
+        ext: { formatRGBA, formatRG, formatR, halfFloatTexType, supportLinearFiltering }
+      };
+    }
+
+    function getSupportedFormat(gl, internalFormat, format, type) {
+      if (!supportRenderTextureFormat(gl, internalFormat, format, type)) {
+        switch (internalFormat) {
+          case gl.R16F: return getSupportedFormat(gl, gl.RG16F, gl.RG, type);
+          case gl.RG16F: return getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, type);
+          default: return null;
+        }
+      }
+      return { internalFormat, format };
+    }
+
+    function supportRenderTextureFormat(gl, internalFormat, format, type) {
+      let texture = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, 4, 4, 0, format, type, null);
+
+      let fbo = gl.createFramebuffer();
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+
+      const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+      return status == gl.FRAMEBUFFER_COMPLETE;
+    }
+
+    function clamp01(input) { return Math.min(Math.max(input, 0), 1); }
+    function isMobile() { return /Mobi|Android/i.test(navigator.userAgent); }
+
+    class GLProgram {
+      constructor(vertexShader, fragmentShader) {
+        this.uniforms = {};
+        this.program = gl.createProgram();
+        gl.attachShader(this.program, vertexShader);
+        gl.attachShader(this.program, fragmentShader);
+        gl.linkProgram(this.program);
+        if (!gl.getProgramParameter(this.program, gl.LINK_STATUS))
+          throw gl.getProgramInfoLog(this.program);
+        const uniformCount = gl.getProgramParameter(this.program, gl.ACTIVE_UNIFORMS);
+        for (let i = 0; i < uniformCount; i++) {
+          const uniformName = gl.getActiveUniform(this.program, i).name;
+          this.uniforms[uniformName] = gl.getUniformLocation(this.program, uniformName);
+        }
+      }
+      bind() { gl.useProgram(this.program); }
+    }
+
+    function compileShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
+        throw gl.getShaderInfoLog(shader);
+      return shader;
+    }
+
+    const baseVertexShader = compileShader(gl.VERTEX_SHADER, `
+      precision highp float;
+      attribute vec2 aPosition;
+      varying vec2 vUv;
+      varying vec2 vL;
+      varying vec2 vR;
+      varying vec2 vT;
+      varying vec2 vB;
+      uniform vec2 texelSize;
+      void main () {
+        vUv = aPosition * 0.5 + 0.5;
+        vL = vUv - vec2(texelSize.x, 0.0);
+        vR = vUv + vec2(texelSize.x, 0.0);
+        vT = vUv + vec2(0.0, texelSize.y);
+        vB = vUv - vec2(0.0, texelSize.y);
+        gl_Position = vec4(aPosition, 0.0, 1.0);
+      }
+    `);
+
+    const clearShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying highp vec2 vUv;
+      uniform sampler2D uTexture; uniform float value;
+      void main () { gl_FragColor = value * texture2D(uTexture, vUv); }
+    `);
+
+    const colorShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float;
+      uniform vec4 color;
+      void main () { gl_FragColor = color; }
+    `);
+
+    const backgroundShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv;
+      uniform sampler2D uTexture; uniform float aspectRatio;
+      #define SCALE 25.0
+      void main () {
+        vec2 uv = floor(vUv * SCALE * vec2(aspectRatio, 1.0));
+        float v = mod(uv.x + uv.y, 2.0);
+        v = v * 0.1 + 0.8;
+        gl_FragColor = vec4(vec3(v), 1.0);
+      }
+    `);
+
+    const displayShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv;
+      uniform sampler2D uTexture;
+      void main () {
+        vec3 C = texture2D(uTexture, vUv).rgb;
+        float a = max(C.r, max(C.g, C.b));
+        gl_FragColor = vec4(C, a);
+      }
+    `);
+
+    const displayBloomShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv;
+      uniform sampler2D uTexture;
+      uniform sampler2D uBloom;
+      uniform sampler2D uDithering;
+      uniform vec2 ditherScale;
+      void main () {
+        vec3 C = texture2D(uTexture, vUv).rgb;
+        vec3 bloom = texture2D(uBloom, vUv).rgb;
+        vec3 noise = texture2D(uDithering, vUv * ditherScale).rgb;
+        noise = noise * 2.0 - 1.0;
+        bloom += noise / 800.0;
+        bloom = pow(bloom.rgb, vec3(1.0 / 2.2));
+        C += bloom;
+        float a = max(C.r, max(C.g, C.b));
+        gl_FragColor = vec4(C, a);
+      }
+    `);
+
+    const displayShadingShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;
+      uniform sampler2D uTexture; uniform vec2 texelSize;
+      void main () {
+        vec3 L = texture2D(uTexture, vL).rgb;
+        vec3 R = texture2D(uTexture, vR).rgb;
+        vec3 T = texture2D(uTexture, vT).rgb;
+        vec3 B = texture2D(uTexture, vB).rgb;
+        vec3 C = texture2D(uTexture, vUv).rgb;
+        float dx = length(R) - length(L);
+        float dy = length(T) - length(B);
+        vec3 n = normalize(vec3(dx, dy, length(texelSize)));
+        vec3 l = vec3(0.0, 0.0, 1.0);
+        float diffuse = clamp(dot(n, l) + 0.7, 0.7, 1.0);
+        C.rgb *= diffuse;
+        float a = max(C.r, max(C.g, C.b));
+        gl_FragColor = vec4(C, a);
+      }
+    `);
+
+    const displayBloomShadingShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;
+      uniform sampler2D uTexture;
+      uniform sampler2D uBloom;
+      uniform sampler2D uDithering;
+      uniform vec2 ditherScale;
+      uniform vec2 texelSize;
+      void main () {
+        vec3 L = texture2D(uTexture, vL).rgb;
+        vec3 R = texture2D(uTexture, vR).rgb;
+        vec3 T = texture2D(uTexture, vT).rgb;
+        vec3 B = texture2D(uTexture, vB).rgb;
+        vec3 C = texture2D(uTexture, vUv).rgb;
+        float dx = length(R) - length(L);
+        float dy = length(T) - length(B);
+        vec3 n = normalize(vec3(dx, dy, length(texelSize)));
+        vec3 l = vec3(0.0, 0.0, 1.0);
+        float diffuse = clamp(dot(n, l) + 0.7, 0.7, 1.0);
+        C *= diffuse;
+        vec3 bloom = texture2D(uBloom, vUv).rgb;
+        vec3 noise = texture2D(uDithering, vUv * ditherScale).rgb;
+        noise = noise * 2.0 - 1.0;
+        bloom += noise / 800.0;
+        bloom = pow(bloom.rgb, vec3(1.0 / 2.2));
+        C += bloom;
+        float a = max(C.r, max(C.g, C.b));
+        gl_FragColor = vec4(C, a);
+      }
+    `);
+
+    const bloomPrefilterShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying vec2 vUv;
+      uniform sampler2D uTexture; uniform vec3 curve; uniform float threshold;
+      void main () {
+        vec3 c = texture2D(uTexture, vUv).rgb;
+        float br = max(c.r, max(c.g, c.b));
+        float rq = clamp(br - curve.x, 0.0, curve.y);
+        rq = curve.z * rq * rq;
+        c *= max(rq, br - threshold) / max(br, 0.0001);
+        gl_FragColor = vec4(c, 0.0);
+      }
+    `);
+
+    const bloomBlurShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;
+      uniform sampler2D uTexture;
+      void main () {
+        vec4 sum = vec4(0.0);
+        sum += texture2D(uTexture, vL);
+        sum += texture2D(uTexture, vR);
+        sum += texture2D(uTexture, vT);
+        sum += texture2D(uTexture, vB);
+        sum *= 0.25;
+        gl_FragColor = sum;
+      }
+    `);
+
+    const bloomFinalShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;
+      uniform sampler2D uTexture; uniform float intensity;
+      void main () {
+        vec4 sum = vec4(0.0);
+        sum += texture2D(uTexture, vL);
+        sum += texture2D(uTexture, vR);
+        sum += texture2D(uTexture, vT);
+        sum += texture2D(uTexture, vB);
+        sum *= 0.25;
+        gl_FragColor = sum * intensity;
+      }
+    `);
+
+    const splatShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv;
+      uniform sampler2D uTarget;
+      uniform float aspectRatio;
+      uniform vec3 color;
+      uniform vec2 point;
+      uniform float radius;
+      void main () {
+        vec2 p = vUv - point.xy;
+        p.x *= aspectRatio;
+        vec3 splat = exp(-dot(p, p) / radius) * color;
+        vec3 base = texture2D(uTarget, vUv).xyz;
+        gl_FragColor = vec4(base + splat, 1.0);
+      }
+    `);
+
+    const advectionManualFilteringShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv;
+      uniform sampler2D uVelocity;
+      uniform sampler2D uSource;
+      uniform vec2 texelSize;
+      uniform vec2 dyeTexelSize;
+      uniform float dt;
+      uniform float dissipation;
+      vec4 bilerp (sampler2D sam, vec2 uv, vec2 tsize) {
+        vec2 st = uv / tsize - 0.5;
+        vec2 iuv = floor(st);
+        vec2 fuv = fract(st);
+        vec4 a = texture2D(sam, (iuv + vec2(0.5, 0.5)) * tsize);
+        vec4 b = texture2D(sam, (iuv + vec2(1.5, 0.5)) * tsize);
+        vec4 c = texture2D(sam, (iuv + vec2(0.5, 1.5)) * tsize);
+        vec4 d = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+        return mix(mix(a, b, fuv.x), mix(c, d, fuv.x), fuv.y);
+      }
+      void main () {
+        vec2 coord = vUv - dt * bilerp(uVelocity, vUv, texelSize).xy * texelSize;
+        gl_FragColor = dissipation * bilerp(uSource, coord, dyeTexelSize);
+        gl_FragColor.a = 1.0;
+      }
+    `);
+
+    const advectionShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv;
+      uniform sampler2D uVelocity;
+      uniform sampler2D uSource;
+      uniform vec2 texelSize;
+      uniform float dt;
+      uniform float dissipation;
+      void main () {
+        vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
+        gl_FragColor = dissipation * texture2D(uSource, coord);
+        gl_FragColor.a = 1.0;
+      }
+    `);
+
+    const divergenceShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying highp vec2 vUv;
+      varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;
+      uniform sampler2D uVelocity;
+      void main () {
+        float L = texture2D(uVelocity, vL).x;
+        float R = texture2D(uVelocity, vR).x;
+        float T = texture2D(uVelocity, vT).y;
+        float B = texture2D(uVelocity, vB).y;
+        vec2 C = texture2D(uVelocity, vUv).xy;
+        if (vL.x < 0.0) { L = -C.x; }
+        if (vR.x > 1.0) { R = -C.x; }
+        if (vT.y > 1.0) { T = -C.y; }
+        if (vB.y < 0.0) { B = -C.y; }
+        float div = 0.5 * (R - L + T - B);
+        gl_FragColor = vec4(div, 0.0, 0.0, 1.0);
+      }
+    `);
+
+    const curlShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying highp vec2 vUv;
+      varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;
+      uniform sampler2D uVelocity;
+      void main () {
+        float L = texture2D(uVelocity, vL).y;
+        float R = texture2D(uVelocity, vR).y;
+        float T = texture2D(uVelocity, vT).x;
+        float B = texture2D(uVelocity, vB).x;
+        float vorticity = R - L - T + B;
+        gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);
+      }
+    `);
+
+    const vorticityShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision highp float; precision highp sampler2D;
+      varying vec2 vUv;
+      varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;
+      uniform sampler2D uVelocity;
+      uniform sampler2D uCurl;
+      uniform float curl;
+      uniform float dt;
+      void main () {
+        float L = texture2D(uCurl, vL).x;
+        float R = texture2D(uCurl, vR).x;
+        float T = texture2D(uCurl, vT).x;
+        float B = texture2D(uCurl, vB).x;
+        float C = texture2D(uCurl, vUv).x;
+        vec2 force = 0.5 * vec2(abs(T) - abs(B), abs(R) - abs(L));
+        force /= length(force) + 0.0001;
+        force *= curl * C;
+        force.y *= -1.0;
+        vec2 vel = texture2D(uVelocity, vUv).xy;
+        gl_FragColor = vec4(vel + force * dt, 0.0, 1.0);
+      }
+    `);
+
+    const pressureShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying highp vec2 vUv;
+      varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;
+      uniform sampler2D uPressure;
+      uniform sampler2D uDivergence;
+      vec2 boundary (vec2 uv) { return uv; }
+      void main () {
+        float L = texture2D(uPressure, boundary(vL)).x;
+        float R = texture2D(uPressure, boundary(vR)).x;
+        float T = texture2D(uPressure, boundary(vT)).x;
+        float B = texture2D(uPressure, boundary(vB)).x;
+        float divergence = texture2D(uDivergence, vUv).x;
+        float pressure = (L + R + B + T - divergence) * 0.25;
+        gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);
+      }
+    `);
+
+    const gradientSubtractShader = compileShader(gl.FRAGMENT_SHADER, `
+      precision mediump float; precision mediump sampler2D;
+      varying highp vec2 vUv;
+      varying highp vec2 vL; varying highp vec2 vR; varying highp vec2 vT; varying highp vec2 vB;
+      uniform sampler2D uPressure;
+      uniform sampler2D uVelocity;
+      vec2 boundary (vec2 uv) { return uv; }
+      void main () {
+        float L = texture2D(uPressure, boundary(vL)).x;
+        float R = texture2D(uPressure, boundary(vR)).x;
+        float T = texture2D(uPressure, boundary(vT)).x;
+        float B = texture2D(uPressure, boundary(vB)).x;
+        vec2 velocity = texture2D(uVelocity, vUv).xy;
+        velocity.xy -= vec2(R - L, T - B);
+        gl_FragColor = vec4(velocity, 0.0, 1.0);
+      }
+    `);
+
+    const blit = (() => {
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
+      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(0);
+      return (destination) => {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, destination);
+        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+      };
+    })();
+
+    let simWidth, simHeight, dyeWidth, dyeHeight;
+    let density, velocity, divergence, curl, pressure, bloom;
+    let ditheringTexture = createNoiseTexture(256);
+
+    const clearProgram = new GLProgram(baseVertexShader, clearShader);
+    const colorProgram = new GLProgram(baseVertexShader, colorShader);
+    const backgroundProgram = new GLProgram(baseVertexShader, backgroundShader);
+    const displayProgram = new GLProgram(baseVertexShader, displayShader);
+    const displayBloomProgram = new GLProgram(baseVertexShader, displayBloomShader);
+    const displayShadingProgram = new GLProgram(baseVertexShader, displayShadingShader);
+    const displayBloomShadingProgram = new GLProgram(baseVertexShader, displayBloomShadingShader);
+    const bloomPrefilterProgram = new GLProgram(baseVertexShader, bloomPrefilterShader);
+    const bloomBlurProgram = new GLProgram(baseVertexShader, bloomBlurShader);
+    const bloomFinalProgram = new GLProgram(baseVertexShader, bloomFinalShader);
+    const splatProgram = new GLProgram(baseVertexShader, splatShader);
+    const advectionProgram = new GLProgram(baseVertexShader, ext.supportLinearFiltering ? advectionShader : advectionManualFilteringShader);
+    const divergenceProgram = new GLProgram(baseVertexShader, divergenceShader);
+    const curlProgram = new GLProgram(baseVertexShader, curlShader);
+    const vorticityProgram = new GLProgram(baseVertexShader, vorticityShader);
+    const pressureProgram = new GLProgram(baseVertexShader, pressureShader);
+    const gradienSubtractProgram = new GLProgram(baseVertexShader, gradientSubtractShader);
+
+    function initFramebuffers() {
+      let simRes = getResolution(config.SIM_RESOLUTION);
+      let dyeRes = getResolution(config.DYE_RESOLUTION);
+      simWidth = simRes.width; simHeight = simRes.height;
+      dyeWidth = dyeRes.width; dyeHeight = dyeRes.height;
+
+      const texType = ext.halfFloatTexType;
+      const rgba = ext.formatRGBA, rg = ext.formatRG, r = ext.formatR;
+      const filtering = ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
+
+      if (density == null) density = createDoubleFBO(dyeWidth, dyeHeight, rgba.internalFormat, rgba.format, texType, filtering);
+      else density = resizeDoubleFBO(density, dyeWidth, dyeHeight, rgba.internalFormat, rgba.format, texType, filtering);
+
+      if (velocity == null) velocity = createDoubleFBO(simWidth, simHeight, rg.internalFormat, rg.format, texType, filtering);
+      else velocity = resizeDoubleFBO(velocity, simWidth, simHeight, rg.internalFormat, rg.format, texType, filtering);
+
+      divergence = createFBO(simWidth, simHeight, r.internalFormat, r.format, texType, gl.NEAREST);
+      curl = createFBO(simWidth, simHeight, r.internalFormat, r.format, texType, gl.NEAREST);
+      pressure = createDoubleFBO(simWidth, simHeight, r.internalFormat, r.format, texType, gl.NEAREST);
+    }
+
+    function createFBO(w, h, internalFormat, format, type, param) {
+      gl.activeTexture(gl.TEXTURE0);
+      let texture = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, w, h, 0, format, type, null);
+
+      let fbo = gl.createFramebuffer();
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+      gl.viewport(0, 0, w, h);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+
+      return {
+        texture, fbo, width: w, height: h,
+        attach(id) { gl.activeTexture(gl.TEXTURE0 + id); gl.bindTexture(gl.TEXTURE_2D, texture); return id; }
+      };
+    }
+
+    function createDoubleFBO(w, h, internalFormat, format, type, param) {
+      let fbo1 = createFBO(w, h, internalFormat, format, type, param);
+      let fbo2 = createFBO(w, h, internalFormat, format, type, param);
+      return {
+        get read() { return fbo1; },
+        set read(value) { fbo1 = value; },
+        get write() { return fbo2; },
+        set write(value) { fbo2 = value; },
+        swap() { let temp = fbo1; fbo1 = fbo2; fbo2 = temp; }
+      };
+    }
+
+    function resizeFBO(target, w, h, internalFormat, format, type, param) {
+      let newFBO = createFBO(w, h, internalFormat, format, type, param);
+      clearProgram.bind();
+      gl.uniform1i(clearProgram.uniforms.uTexture, target.attach(0));
+      gl.uniform1f(clearProgram.uniforms.value, 1);
+      blit(newFBO.fbo);
+      return newFBO;
+    }
+
+    function resizeDoubleFBO(target, w, h, internalFormat, format, type, param) {
+      target.read = resizeFBO(target.read, w, h, internalFormat, format, type, param);
+      target.write = createFBO(w, h, internalFormat, format, type, param);
+      return target;
+    }
+
+    function createNoiseTexture(size) {
+      const data = new Uint8Array(size * size * 3);
+      for (let i = 0; i < data.length; i++) data[i] = Math.floor(Math.random() * 256);
+      let texture = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, size, size, 0, gl.RGB, gl.UNSIGNED_BYTE, data);
+      return {
+        texture, width: size, height: size,
+        attach(id) { gl.activeTexture(gl.TEXTURE0 + id); gl.bindTexture(gl.TEXTURE_2D, texture); return id; }
+      };
+    }
+
+    initFramebuffers();
+    multipleSplats(34);
+    for (let i = 0; i < 8; i++) splatStack.push(10 + parseInt(Math.random() * 10));
+
+    let lastColorChangeTime = Date.now();
+    let virtualSeeded = false;
+    let orbitAngle = 0;
+    let vPrevX = 0, vPrevY = 0;
+    let virtualColor = null;
+    let lastVColorTime = 0;
+    const engineStart = Date.now();
+    const ORBIT_RADIUS = 300;
+    const ORBIT_SPEED = 0.026;
+    const ORBIT_START_DELAY = 700;
+
+    let rafHandle = 0;
+    let destroyed = false;
+
+    update();
+
+    function update() {
+      if (destroyed) return;
+      resizeCanvas();
+      // mood を target へ lerp（各キー独立、係数 0.04/frame）
+      for (const k of Object.keys(mood)) {
+        mood[k] += (moodTarget[k] - mood[k]) * 0.04;
+      }
+      // config.DENSITY_DISSIPATION は mood.density と毎フレーム同期
+      config.DENSITY_DISSIPATION = mood.density;
+      // --depth-dim を root に書き戻し、ページ全体の暗さとして反映
+      document.documentElement.style.setProperty('--depth-dim', mood.dim.toFixed(3));
+      driveVirtualPointer();
+      input();
+      if (!config.PAUSED) step(0.016);
+      render(null);
+      rafHandle = requestAnimationFrame(update);
+    }
+
+    function driveVirtualPointer() {
+      if (Date.now() - engineStart < ORBIT_START_DELAY) return;
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const base = Math.min(ORBIT_RADIUS * mood.orbitScale, canvas.width * 0.35, canvas.height * 0.35);
+      const r = base * (0.72 + 0.28 * Math.sin(orbitAngle * 0.37));
+      orbitAngle += mood.orbitSpeed;
+      const x = cx + Math.cos(orbitAngle) * r;
+      const y = cy + Math.sin(orbitAngle) * r;
+      if (!virtualSeeded) {
+        virtualSeeded = true;
+        vPrevX = x; vPrevY = y;
+        return;
+      }
+      // P0 #2: 深い mood で自動カーソルがほぼ同じ位置に留まり続けると染料が
+      // 1点に溜まって白飛びする。orbitSpeed に比例して色倍率を下げ、
+      // deep/dive では 3 フレームに 1 回だけ splat する。
+      const slowFactor = Math.min(1, mood.orbitSpeed / 0.026);
+      const stride = mood.orbitSpeed < 0.012 ? 3 : 1;
+      driveVirtualPointer.frameCount = (driveVirtualPointer.frameCount || 0) + 1;
+      if (driveVirtualPointer.frameCount % stride !== 0) return;
+      if (!virtualColor || Date.now() - lastVColorTime > 120) {
+        virtualColor = generateColor();
+        // 狭い画面では軌道半径が小さく染料が重なって白飛びするので、半径で正規化（ヒーロー surface は Phase 1 のまま）
+        const areaFactor = mood.dim > 0.02 ? Math.max(0.35, Math.min(1, base / 300)) : 1;
+        const k = 3.2 * mood.intensity * slowFactor * areaFactor;
+        virtualColor.r *= k; virtualColor.g *= k; virtualColor.b *= k;
+        lastVColorTime = Date.now();
+      }
+      const dx = (x - vPrevX) * 9.0;
+      const dy = (y - vPrevY) * 9.0;
+      vPrevX = x; vPrevY = y;
+      splat(x, y, dx, dy, virtualColor);
+    }
+
+    function input() {
+      if (splatStack.length > 0) multipleSplats(splatStack.pop());
+      for (let i = 0; i < pointers.length; i++) {
+        const p = pointers[i];
+        if (p.moved) {
+          splat(p.x, p.y, p.dx, p.dy, p.color);
+          p.moved = false;
+        }
+      }
+      if (!config.COLORFUL) return;
+      if (lastColorChangeTime + 100 < Date.now()) {
+        lastColorChangeTime = Date.now();
+        for (let i = 0; i < pointers.length; i++) pointers[i].color = generateColor();
+      }
+    }
+
+    function step(dt) {
+      gl.disable(gl.BLEND);
+      gl.viewport(0, 0, simWidth, simHeight);
+
+      curlProgram.bind();
+      gl.uniform2f(curlProgram.uniforms.texelSize, 1.0 / simWidth, 1.0 / simHeight);
+      gl.uniform1i(curlProgram.uniforms.uVelocity, velocity.read.attach(0));
+      blit(curl.fbo);
+
+      vorticityProgram.bind();
+      gl.uniform2f(vorticityProgram.uniforms.texelSize, 1.0 / simWidth, 1.0 / simHeight);
+      gl.uniform1i(vorticityProgram.uniforms.uVelocity, velocity.read.attach(0));
+      gl.uniform1i(vorticityProgram.uniforms.uCurl, curl.attach(1));
+      gl.uniform1f(vorticityProgram.uniforms.curl, config.CURL);
+      gl.uniform1f(vorticityProgram.uniforms.dt, dt);
+      blit(velocity.write.fbo);
+      velocity.swap();
+
+      divergenceProgram.bind();
+      gl.uniform2f(divergenceProgram.uniforms.texelSize, 1.0 / simWidth, 1.0 / simHeight);
+      gl.uniform1i(divergenceProgram.uniforms.uVelocity, velocity.read.attach(0));
+      blit(divergence.fbo);
+
+      clearProgram.bind();
+      gl.uniform1i(clearProgram.uniforms.uTexture, pressure.read.attach(0));
+      gl.uniform1f(clearProgram.uniforms.value, config.PRESSURE_DISSIPATION);
+      blit(pressure.write.fbo);
+      pressure.swap();
+
+      pressureProgram.bind();
+      gl.uniform2f(pressureProgram.uniforms.texelSize, 1.0 / simWidth, 1.0 / simHeight);
+      gl.uniform1i(pressureProgram.uniforms.uDivergence, divergence.attach(0));
+      for (let i = 0; i < config.PRESSURE_ITERATIONS; i++) {
+        gl.uniform1i(pressureProgram.uniforms.uPressure, pressure.read.attach(1));
+        blit(pressure.write.fbo);
+        pressure.swap();
+      }
+
+      gradienSubtractProgram.bind();
+      gl.uniform2f(gradienSubtractProgram.uniforms.texelSize, 1.0 / simWidth, 1.0 / simHeight);
+      gl.uniform1i(gradienSubtractProgram.uniforms.uPressure, pressure.read.attach(0));
+      gl.uniform1i(gradienSubtractProgram.uniforms.uVelocity, velocity.read.attach(1));
+      blit(velocity.write.fbo);
+      velocity.swap();
+
+      advectionProgram.bind();
+      gl.uniform2f(advectionProgram.uniforms.texelSize, 1.0 / simWidth, 1.0 / simHeight);
+      if (!ext.supportLinearFiltering)
+        gl.uniform2f(advectionProgram.uniforms.dyeTexelSize, 1.0 / simWidth, 1.0 / simHeight);
+      let velocityId = velocity.read.attach(0);
+      gl.uniform1i(advectionProgram.uniforms.uVelocity, velocityId);
+      gl.uniform1i(advectionProgram.uniforms.uSource, velocityId);
+      gl.uniform1f(advectionProgram.uniforms.dt, dt);
+      gl.uniform1f(advectionProgram.uniforms.dissipation, config.VELOCITY_DISSIPATION);
+      blit(velocity.write.fbo);
+      velocity.swap();
+
+      gl.viewport(0, 0, dyeWidth, dyeHeight);
+      if (!ext.supportLinearFiltering)
+        gl.uniform2f(advectionProgram.uniforms.dyeTexelSize, 1.0 / dyeWidth, 1.0 / dyeHeight);
+      gl.uniform1i(advectionProgram.uniforms.uVelocity, velocity.read.attach(0));
+      gl.uniform1i(advectionProgram.uniforms.uSource, density.read.attach(1));
+      gl.uniform1f(advectionProgram.uniforms.dissipation, config.DENSITY_DISSIPATION);
+      blit(density.write.fbo);
+      density.swap();
+    }
+
+    function render(target) {
+      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      gl.enable(gl.BLEND);
+
+      let width = target == null ? gl.drawingBufferWidth : dyeWidth;
+      let height = target == null ? gl.drawingBufferHeight : dyeHeight;
+      gl.viewport(0, 0, width, height);
+
+      if (!config.TRANSPARENT) {
+        colorProgram.bind();
+        let bc = config.BACK_COLOR;
+        gl.uniform4f(colorProgram.uniforms.color, bc.r / 255, bc.g / 255, bc.b / 255, 1);
+        blit(target);
+      }
+
+      if (config.SHADING) {
+        let program = displayShadingProgram;
+        program.bind();
+        gl.uniform2f(program.uniforms.texelSize, 1.0 / width, 1.0 / height);
+        gl.uniform1i(program.uniforms.uTexture, density.read.attach(0));
+      } else {
+        let program = displayProgram;
+        program.bind();
+        gl.uniform1i(program.uniforms.uTexture, density.read.attach(0));
+      }
+
+      blit(target);
+    }
+
+    function splat(x, y, dx, dy, color) {
+      gl.viewport(0, 0, simWidth, simHeight);
+      splatProgram.bind();
+      gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
+      gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
+      gl.uniform2f(splatProgram.uniforms.point, x / canvas.width, 1.0 - y / canvas.height);
+      gl.uniform3f(splatProgram.uniforms.color, dx, -dy, 1.0);
+      gl.uniform1f(splatProgram.uniforms.radius, config.SPLAT_RADIUS / 100.0);
+      blit(velocity.write.fbo);
+      velocity.swap();
+
+      gl.viewport(0, 0, dyeWidth, dyeHeight);
+      gl.uniform1i(splatProgram.uniforms.uTarget, density.read.attach(0));
+      gl.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
+      blit(density.write.fbo);
+      density.swap();
+    }
+
+    function multipleSplats(amount) {
+      for (let i = 0; i < amount; i++) {
+        const color = generateColor();
+        color.r *= 10.0; color.g *= 10.0; color.b *= 10.0;
+        const x = canvas.width * Math.random();
+        const y = canvas.height * Math.random();
+        const dx = 1000 * (Math.random() - 0.5);
+        const dy = 1000 * (Math.random() - 0.5);
+        splat(x, y, dx, dy, color);
+      }
+    }
+
+    function resizeCanvas() {
+      if (canvas.width != canvas.clientWidth || canvas.height != canvas.clientHeight) {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+        initFramebuffers();
+      }
+    }
+
+    const teardown = [];
+    function on(target, type, handler, opts) {
+      target.addEventListener(type, handler, opts);
+      teardown.push(() => target.removeEventListener(type, handler, opts));
+    }
+
+    on(window, 'mousemove', e => {
+      const { x, y } = pointerPos(e.clientX, e.clientY);
+      const p = pointers[0];
+      if (!p.everMoved) {
+        p.everMoved = true;
+        p.x = x; p.y = y;
+        p.down = true;
+        return;
+      }
+      p.down = true;
+      p.moved = true;
+      p.dx = (x - p.x) * 5.0;
+      p.dy = (y - p.y) * 5.0;
+      p.x = x; p.y = y;
+      p.color = generateColor();
+    });
+
+    on(window, 'touchmove', e => {
+      const touches = e.targetTouches;
+      for (let i = 0; i < touches.length; i++) {
+        if (i >= pointers.length) pointers.push(new pointerPrototype());
+        const p = pointers[i];
+        const { x, y } = pointerPos(touches[i].clientX, touches[i].clientY);
+        p.down = true;
+        p.moved = p.everMoved === true;
+        p.everMoved = true;
+        p.dx = (x - p.x) * 8.0;
+        p.dy = (y - p.y) * 8.0;
+        p.x = x; p.y = y;
+      }
+    }, { passive: true });
+
+    on(window, 'touchstart', e => {
+      const touches = e.targetTouches;
+      for (let i = 0; i < touches.length; i++) {
+        if (i >= pointers.length) pointers.push(new pointerPrototype());
+        const p = pointers[i];
+        const { x, y } = pointerPos(touches[i].clientX, touches[i].clientY);
+        p.id = touches[i].identifier;
+        p.down = true;
+        p.x = x; p.y = y;
+        p.color = generateColor();
+      }
+    }, { passive: true });
+
+    on(window, 'mouseup', () => { pointers[0].down = false; });
+
+    on(window, 'touchend', e => {
+      const touches = e.changedTouches;
+      for (let i = 0; i < touches.length; i++)
+        for (let j = 0; j < pointers.length; j++)
+          if (touches[i].identifier == pointers[j].id) pointers[j].down = false;
+    });
+
+    function pointerPos(clientX, clientY) {
+      const rect = canvas.getBoundingClientRect();
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+    function generateColor() {
+      const h = mood.hueMin + Math.random() * mood.hueRange;
+      let c = HSVtoRGB(h, 0.95, 1.0);
+      c.r *= 0.92;
+      c.g *= 0.92;
+      c.b *= 0.92;
+      return c;
+    }
+
+    /* Phase 2: 制御オブジェクト。
+       2-3 仕様: setMood(partial) / burst(n, waves) / pause() / resume()。*/
+    const control = {
+      setMood(partial) { Object.assign(moodTarget, partial); },
+      burst(n = 24, waves = 4) {
+        multipleSplats(n);
+        for (let i = 0; i < waves; i++) splatStack.push(8 + (Math.random() * 8 | 0));
+      },
+      pause()  { config.PAUSED = true; },
+      resume() { config.PAUSED = false; },
+      // 内部用: 浮上バーストを「初回だけ」発火する
+      triggerRiseBurst() {
+        if (riseBurstDone) return;
+        riseBurstDone = true;
+        this.burst(28, 6);
+      },
+    };
+
+    // 2-3 仕様: document.visibilitychange で hidden→pause / visible→resume
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) control.pause();
+      else control.resume();
+    });
+
+    return control;
+    function HSVtoRGB(h, s, v) {
+      let r, g, b, i, f, p, q, t;
+      i = Math.floor(h * 6);
+      f = h * 6 - i;
+      p = v * (1 - s);
+      q = v * (1 - f * s);
+      t = v * (1 - (1 - f) * s);
+      switch (i % 6) {
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+      }
+      return { r, g, b };
+    }
+
+    function getResolution(resolution) {
+      let aspectRatio = gl.drawingBufferWidth / gl.drawingBufferHeight;
+      if (aspectRatio < 1) aspectRatio = 1.0 / aspectRatio;
+      let max = Math.round(resolution * aspectRatio);
+      let min = Math.round(resolution);
+      if (gl.drawingBufferWidth > gl.drawingBufferHeight) return { width: max, height: min };
+      else return { width: min, height: max };
+    }
+  }
+
+  const canvas = document.querySelector('canvas');
+  // Phase 2: window.flow にムード制御を露出（2-3 仕様）
+  window.flow = canvas ? fluidSimulation(canvas) : null;
+</script>
+</body>
+</html>

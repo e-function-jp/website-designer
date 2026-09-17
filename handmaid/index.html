@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>handmaid</title>
+<style>
+  :root { color-scheme: dark light; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", "Noto Sans JP", sans-serif; margin: 0; background: #0c0d10; color: #e7e9ee; }
+  main { max-width: 60rem; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+  h1 { font-size: 1.75rem; letter-spacing: -0.02em; margin: 0 0 .25rem; }
+  .sub { color: #9aa3b2; font-size: .95rem; margin: 0 0 2rem; }
+  .grid { list-style: none; padding: 0; margin: 1.25rem 0 0; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+  .card a { position: relative; display: flex; flex-direction: column; gap: 0; padding: 1rem 1.1rem; border: 1px solid #1f232c; border-radius: .75rem; background: #11141a; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
+  .card a:hover { border-color: #4d8dff; transform: translateY(-1px); }
+  .card--missing a { opacity: .55; cursor: not-allowed; pointer-events: none; }
+  .card__body { position: relative; z-index: 1; display: flex; flex-direction: column; gap: .35rem; }
+  .card__id { font-weight: 600; font-size: 1.05rem; }
+  .card__status { font-size: .8rem; color: #8a93a3; }
+  .empty { color: #b9becf; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #161922; padding: .1em .35em; border-radius: .25rem; }
+
+  /* ── Rotating border glow (getlayers.ai 風) ─────────────────────────
+     1.5px のリングを mask-composite:exclude で切り抜き、その上を
+     radial-gradient のブロブ 2 個が 180° 位相で周回する。
+     --lift を hover で 0→1 にして opacity を持ち上げる。
+  */
+  .border-glow {
+    --lift: 0;
+    --accent: #4d8dff;
+    position: absolute;
+    inset: 0;
+    padding: 1.5px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: var(--lift);
+    transition: opacity 700ms cubic-bezier(0.2, 0, 0, 1);
+    overflow: hidden;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0) border-box;
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    will-change: opacity;
+  }
+  .card a:hover .border-glow { --lift: 1; }
+  .border-glow-blob {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 468px;
+    height: 468px;
+    margin: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      var(--accent) 0%,
+      var(--accent) 5%,
+      rgba(232, 234, 239, 0.7) 16%,
+      rgba(232, 234, 239, 0.22) 34%,
+      transparent 58%);
+    will-change: transform;
+    transform: translate(-50%, -50%) translate(0px, 0px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .border-glow { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>handmaid</h1>
+  <p class="sub">4 件のサンプル</p>
+  <ul class="grid">
+        <li class="card">
+          <a href="001-motion/">
+            <span class="border-glow" aria-hidden="true">
+              <span class="border-glow-blob"></span>
+              <span class="border-glow-blob"></span>
+            </span>
+            <span class="card__body">
+              <span class="card__id">001-motion</span>
+              <span class="card__status">Flowstate — 散らかった世界で、深く潜る。</span>
+            </span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="002-particles/">
+            <span class="border-glow" aria-hidden="true">
+              <span class="border-glow-blob"></span>
+              <span class="border-glow-blob"></span>
+            </span>
+            <span class="card__body">
+              <span class="card__id">002-particles</span>
+              <span class="card__status">KIRI — 香りは、記憶にかかる霧。</span>
+            </span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="003-terrain/">
+            <span class="border-glow" aria-hidden="true">
+              <span class="border-glow-blob"></span>
+              <span class="border-glow-blob"></span>
+            </span>
+            <span class="card__body">
+              <span class="card__id">003-terrain</span>
+              <span class="card__status">天空舎 — 星に、いちばん近い宿。</span>
+            </span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="004-loopstack/">
+            <span class="border-glow" aria-hidden="true">
+              <span class="border-glow-blob"></span>
+              <span class="border-glow-blob"></span>
+            </span>
+            <span class="card__body">
+              <span class="card__id">004-loopstack</span>
+              <span class="card__status">Loopstack — 考える。つくる。繰り返す。</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+</main>
+<script>
+/* Rotating border-glow driver
+ * ─────────────────────────────────────────────────────────────────
+ * 元実装: getlayers.ai の ProjectCard / BorderGlow (Next.js + react-spring)
+ * vanilla 移植: rAF + ResizeObserver + IntersectionObserver。
+ *   - 角丸長方形の外周を 4.2s で一周する 2 個のブロブを 180° 位相で配置
+ *   - prefers-reduced-motion:reduce / 非可視状態ではアニメ停止
+ *   - ResizeObserver でカードサイズ / border-radius に追従
+ */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /**
+   * 角丸長方形 (W x H, 角丸 R) の外周を時計回りに 1 周する。
+   * progress ∈ [0, 1) を渡すと (x, y) を返す。左上 (R, 0) 起点。
+   */
+  function perimeterWalk(progress, W, H, R) {
+    var w = W - 2 * R;
+    var h = H - 2 * R;
+    var arc = (Math.PI / 2) * R;
+    var perimeter = 2 * w + 2 * h + 4 * arc;
+    if (perimeter <= 0) return { x: 0, y: 0 };
+    var s = ((progress % 1) * perimeter + perimeter) % perimeter;
+
+    if (s < w) return { x: R + s, y: 0 };                          // top edge (L→R)
+    s -= w;
+    if (s < arc) {                                                 // top-right corner
+      var a = -Math.PI / 2 + (Math.PI / 2) * (s / arc);
+      return { x: W - R + R * Math.cos(a), y: R + R * Math.sin(a) };
+    }
+    s -= arc;
+    if (s < h) return { x: W, y: R + s };                          // right edge (T→B)
+    s -= h;
+    if (s < arc) {                                                 // bottom-right corner
+      var b = (Math.PI / 2) * (s / arc);
+      return { x: W - R + R * Math.cos(b), y: H - R + R * Math.sin(b) };
+    }
+    s -= arc;
+    if (s < w) return { x: W - R - s, y: H };                      // bottom edge (R→L)
+    s -= w;
+    if (s < arc) {                                                 // bottom-left corner
+      var c = Math.PI / 2 + (Math.PI / 2) * (s / arc);
+      return { x: R + R * Math.cos(c), y: H - R + R * Math.sin(c) };
+    }
+    s -= arc;
+    if (s < h) return { x: 0, y: H - R - s };                      // left edge (B→T)
+    s -= h;
+    var u = Math.PI + (Math.PI / 2) * (s / arc);                   // top-left corner
+    return { x: R + R * Math.cos(u), y: R + R * Math.sin(u) };
+  }
+
+  function init(card) {
+    var glow = card.querySelector('.border-glow');
+    if (!glow) return;
+    var blobs = glow.querySelectorAll('.border-glow-blob');
+    if (blobs.length < 2) return;
+
+    var W = 0, H = 0, R = 0;
+    var active = false;
+    var startTime = 0;
+    var rafId = 0;
+    var DURATION = 4200;
+
+    function measure() {
+      W = card.offsetWidth;
+      H = card.offsetHeight;
+      var cs = getComputedStyle(card);
+      var r = parseFloat(cs.borderTopLeftRadius) || 0;
+      R = Math.min(r, W / 2, H / 2);
+    }
+    measure();
+
+    var ro = new ResizeObserver(measure);
+    ro.observe(card);
+
+    function tick(now) {
+      if (!active) return;
+      var t = ((now - startTime) % DURATION) / DURATION;
+      var p1 = perimeterWalk(t, W, H, R);
+      var p2 = perimeterWalk((t + 0.5) % 1, W, H, R);
+      blobs[0].style.transform =
+        'translate(-50%, -50%) translate(' + p1.x + 'px, ' + p1.y + 'px)';
+      blobs[1].style.transform =
+        'translate(-50%, -50%) translate(' + p2.x + 'px, ' + p2.y + 'px)';
+      rafId = requestAnimationFrame(tick);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      var visible = entries[0].isIntersecting;
+      if (visible && !active) {
+        active = true;
+        rafId = requestAnimationFrame(function (t) {
+          startTime = t;
+          tick(t);
+        });
+      } else if (!visible && active) {
+        active = false;
+        cancelAnimationFrame(rafId);
+      }
+    }, { rootMargin: '200px 0px' });
+    io.observe(card);
+  }
+
+  document.querySelectorAll('.card a').forEach(function (a) {
+    init(a);
+  });
+})();
+</script>
+</body>
+</html>

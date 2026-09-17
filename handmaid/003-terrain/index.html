@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>天空舎 — 星に、いちばん近い宿。</title>
+<meta name="description" content="標高2,400mの稜線に建つ、十二室だけの星見の宿「天空舎」。夕暮れに着き、星空の夜を過ごし、夜明けに発つ。（架空の宿泊施設のデザインサンプル）" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;500&family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; box-sizing: border-box; }
+  html { font-size: 16px; }
+  @media (max-width: 1920px) { html { font-size: 0.833333vw; } }
+  @media (max-width: 1440px) { html { font-size: 1.111111vw; } }
+  @media (max-width: 1024px) { html { font-size: 1.5625vw; } }
+  @media (max-width: 640px)  { html { font-size: 4.444444vw; } }
+
+  :root {
+    --night:        #060912;
+    --frost:        #e9eef5;
+    --frost-muted:  #9aa6b8;
+    --line:         rgba(233,238,245,0.14);
+    --glass:        rgba(8,12,24,0.38);
+    --lamp:         #ffb36b;
+    --lamp-glow:    rgba(255,179,107,0.35);
+    --ease-entrance:cubic-bezier(0.2, 0, 0, 1);
+    --ease-drift:   cubic-bezier(0.45, 0, 0.2, 1);
+    --f-serif: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+    --f-ui:    "Inter Tight", "Noto Serif JP", "Hiragino Sans", sans-serif;
+    --f-mono:  "IBM Plex Mono", ui-monospace, monospace;
+  }
+  body {
+    background: var(--night); color: var(--frost); overflow-x: hidden;
+    font-family: var(--f-ui); font-weight: 300; line-height: 1.95; letter-spacing: 0.05em;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; letter-spacing: inherit; }
+  select { font: inherit; color: inherit; letter-spacing: inherit; }
+  .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+
+  /* ───── 背景 ───── */
+  #sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; opacity: 0; transition: opacity 1800ms var(--ease-entrance); }
+  #sky.is-on { opacity: 1; }
+  body.no-webgl #sky { display: none; }
+  body.no-webgl { background: linear-gradient(#0b1224, #060912 60%) fixed; }
+  .grain {
+    position: fixed; inset: -180px; z-index: 1; pointer-events: none; opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+    animation: grain 0.6s steps(6) infinite;
+  }
+  @keyframes grain { 0% { transform: translate(0,0); } 20% { transform: translate(-40px,30px); } 40% { transform: translate(50px,-60px); } 60% { transform: translate(-70px,80px); } 80% { transform: translate(90px,20px); } 100% { transform: translate(0,0); } }
+  main, .footer { position: relative; z-index: 10; transition: opacity 1200ms var(--ease-drift); }
+
+  /* ───── ヘッダー ───── */
+  .header { position: fixed; top: 0; inset-inline: 0; z-index: 40; background: linear-gradient(180deg, rgba(6,9,18,0.7), rgba(6,9,18,0.35) 60%, transparent); display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; transition: opacity 1200ms var(--ease-drift); }
+  @media (min-width: 640px) { .header { padding: 1.75rem 2.5rem; } }
+  .logo { display: grid; gap: 0.15rem; line-height: 1; }
+  .logo b { font-family: var(--f-serif); font-weight: 500; font-size: 1.2rem; letter-spacing: 0.3em; }
+  .logo small { font-family: var(--f-mono); font-size: 0.65rem; color: var(--frost-muted); letter-spacing: 0.08em; }
+  .nav { display: none; align-items: center; gap: 2rem; font-size: 0.85rem; }
+  @media (min-width: 1024px) { .nav { display: flex; } }
+  .nav a:not(.pill) { color: var(--frost-muted); transition: color 300ms var(--ease-entrance); }
+  .nav a:not(.pill):hover { color: var(--frost); }
+  .pill { display: inline-flex; align-items: center; justify-content: center; height: 2.6rem; padding: 0 1.3rem; border-radius: 999px; border: 1px solid var(--lamp); color: var(--lamp); font-weight: 400; white-space: nowrap; transition: background 300ms var(--ease-entrance), color 300ms var(--ease-entrance), box-shadow 300ms var(--ease-entrance); }
+  .pill:hover, .pill:focus-visible { background: var(--lamp); color: var(--night); box-shadow: 0 0 24px var(--lamp-glow); outline: none; }
+  .menu-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; }
+  @media (min-width: 1024px) { .menu-btn { display: none; } }
+  .menu-btn i { width: 1.4rem; height: 0.5rem; border-block: 1px solid var(--frost); transition: transform 400ms var(--ease-entrance); }
+  .menu-open .menu-btn i { transform: scaleY(0) ; border-bottom-width: 0; }
+  .menu { position: fixed; inset: 0; z-index: 39; display: grid; align-content: center; gap: 1.4rem; padding: 0 2rem; background: rgba(6,9,18,0.55); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); opacity: 0; visibility: hidden; transition: opacity 400ms var(--ease-entrance), visibility 0s 400ms; }
+  .menu-open .menu { opacity: 1; visibility: visible; transition: opacity 400ms var(--ease-entrance); }
+  .menu a { font-family: var(--f-serif); font-size: 1.7rem; letter-spacing: 0.12em; }
+  .menu .pill { justify-self: start; font-family: var(--f-ui); font-size: 1rem; margin-top: 1rem; }
+
+  /* ───── HUD / 時刻ダイヤル ───── */
+  .hud, .dial { position: fixed; z-index: 30; display: none; transition: opacity 1200ms var(--ease-drift); }
+  @media (min-width: 1024px) { .hud, .dial { display: block; } }
+  .hud { left: 1.5rem; bottom: 1.5rem; font-size: 0.7rem; color: var(--frost-muted); line-height: 1.9; padding: 0.5rem 0.9rem; border-radius: 0.5rem; background: rgba(6,9,18,0.45); border: 1px solid var(--line); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .hud__row { display: flex; gap: 0.8rem; }
+  .hud__row > span:first-child { width: 2.6rem; opacity: 0.7; }
+  .digit { white-space: pre; display: inline-block; position: relative; overflow: hidden; height: 1.9em; vertical-align: top; }
+  .digit b { display: block; font-weight: 400; }
+  .digit.flip b { animation: flip 200ms var(--ease-entrance); }
+  @keyframes flip { from { transform: translateY(100%); } to { transform: none; } }
+  .dial { right: 1.75rem; top: 50%; transform: translateY(-50%); height: 42vh; width: 6rem; }
+  .dial svg { position: absolute; right: 0; top: 0; height: 100%; width: 3rem; overflow: visible; }
+  .dial__dot { position: absolute; right: 0; top: 0; width: 0.5rem; height: 0.5rem; margin: -0.25rem -0.25rem 0 0; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 10px var(--lamp-glow); will-change: transform; }
+  .dial a { position: absolute; right: 2.2rem; font-size: 0.7rem; color: var(--frost-muted); line-height: 1; white-space: nowrap; transform: translateY(-50%); transition: color 300ms; }
+  .dial a:hover { color: var(--frost); }
+
+  body.lights-out .header, body.lights-out .hud, body.lights-out .dial { opacity: 0.25; }
+  body.lights-out main > section:not(#night), body.lights-out .night__head, body.lights-out .tl__item:not(.tl__item--dark) { opacity: 0.25; }
+  .night__head, .tl__item { transition: opacity 1200ms var(--ease-drift), transform 900ms var(--ease-entrance); }
+  main > section { transition: opacity 1200ms var(--ease-drift); }
+
+  /* ───── 共通 ───── */
+  .section { position: relative; min-height: 100svh; padding: 8rem 1.25rem; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 640px) { .section { padding-inline: 2.5rem; } }
+  .wrap { width: 100%; max-width: 76rem; margin-inline: auto; }
+  .kicker { font-family: var(--f-mono); font-size: 0.72rem; color: var(--frost-muted); letter-spacing: 0.12em; }
+  .h2 { font-family: var(--f-serif); font-weight: 300; font-size: clamp(1.8rem, 3.2vw, 3rem); line-height: 1.5; letter-spacing: 0.12em; margin-top: 0.8rem; }
+  .lead { color: var(--frost-muted); max-width: 34rem; margin-top: 1.25rem; font-size: 0.98rem; }
+  .glass { background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  .reveal { opacity: 0; transform: translateY(1.25rem); filter: blur(6px); transition: opacity 1000ms var(--ease-entrance), transform 1000ms var(--ease-entrance), filter 1000ms var(--ease-entrance); }
+  .reveal.is-in { opacity: 1; transform: none; filter: none; }
+
+  /* ───── S0 到着 ───── */
+  .arrive { justify-content: flex-end; padding-bottom: 7rem; }
+  .arrive .wrap { max-width: 76rem; }
+  .arrive__eyebrow { font-size: 0.75rem; }
+  .arrive__eyebrow span { opacity: 0; }
+  .arrive__eyebrow span.on { opacity: 1; }
+  .arrive h1 { font-family: var(--f-serif); font-weight: 300; font-size: clamp(2.4rem, 6vw, 6rem); line-height: 1.4; letter-spacing: 0.1em; margin-top: 1rem; }
+  .mask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+  .mask > span { display: block; transform: translateY(110%); transition: transform 1200ms var(--ease-entrance); }
+  .is-ready .mask > span { transform: none; }
+  .arrive__lead, .arrive__cta { opacity: 0; transform: translateY(1rem); transition: opacity 800ms var(--ease-entrance), transform 800ms var(--ease-entrance); }
+  .is-ready .arrive__lead, .is-ready .arrive__cta { opacity: 1; transform: none; }
+  .arrive__lead { color: var(--frost-muted); max-width: 30rem; margin-top: 1.5rem; }
+  .arrive__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2rem; margin-top: 2.25rem; }
+  .textlink { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+  .textlink svg { width: 0.9rem; transition: transform 400ms var(--ease-entrance); }
+  .textlink:hover svg { transform: translateY(0.2rem); }
+  .sp-br { display: none; }
+  @media (max-width: 639.98px) {
+    .sp-br { display: inline; }
+    .arrive h1 { font-size: 2.1rem; letter-spacing: 0.06em; }
+    .clouds__text { font-size: 1.3rem; }
+    .reserve .h2 { font-size: 1.6rem; }
+  }
+  @media (max-width: 639.98px) { .arrive { text-align: center; } .arrive__lead { margin-inline: auto; } .arrive__cta { justify-content: center; } }
+
+  /* ───── S1 雲海 ───── */
+  .clouds { height: 200vh; padding: 0; display: block; }
+  .clouds__stage { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; padding-inline: 1.25rem; text-align: center; }
+  .clouds__text { font-family: var(--f-serif); font-weight: 300; font-size: clamp(1.7rem, 4.2vw, 4rem); line-height: 1.7; will-change: letter-spacing, filter; text-shadow: 0 0 30px rgba(6,9,18,0.6); }
+
+  /* ───── S2 夜 ───── */
+  .night__grid { display: grid; gap: 3rem; }
+  @media (min-width: 1024px) { .night__grid { grid-template-columns: 4fr 8fr; gap: 5rem; } }
+  .tl { position: relative; padding-left: 7.5rem; display: grid; gap: 3.5rem; }
+  .tl__line { position: absolute; left: 5.25rem; top: 0.6rem; bottom: 0.6rem; width: 1px; background: var(--line); transform-origin: top; transform: scaleY(0); transition: transform 1400ms var(--ease-entrance); }
+  .tl.is-in .tl__line { transform: none; }
+  .tl__item { position: relative; opacity: 0; transform: translateX(-1.5rem); }
+  .tl__item.is-in { opacity: 1; transform: none; }
+  .tl__time { position: absolute; left: -7.5rem; top: 0.15rem; width: 4.5rem; text-align: right; font-size: 0.85rem; color: var(--frost-muted); }
+  .tl__pin { position: absolute; left: -2.55rem; top: 0.55rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; border: 1px solid var(--frost-muted); background: var(--night); transition: background 600ms, border-color 600ms, box-shadow 600ms; }
+  .tl__item.is-past .tl__pin { background: var(--lamp); border-color: var(--lamp); box-shadow: 0 0 12px var(--lamp-glow); }
+  .tl__item h3 { font-family: var(--f-serif); font-weight: 500; font-size: 1.35rem; letter-spacing: 0.1em; line-height: 1.5; }
+  .tl__item p { color: var(--frost-muted); margin-top: 0.4rem; max-width: 30rem; }
+  body.lights-out .tl__item--dark { opacity: 1; }
+  body.lights-out .tl__item--dark h3 { text-shadow: 0 0 24px rgba(233,238,245,0.55); }
+  body.lights-out .tl__item--dark p { color: var(--frost); }
+  @media (max-width: 639.98px) { .tl { padding-left: 5.2rem; } .tl__line { left: 4rem; } .tl__time { left: -5.2rem; width: 3.4rem; text-align: left; font-size: 0.75rem; } .tl__pin { left: -1.5rem; } }
+
+  /* ───── S3 部屋 ───── */
+  .rooms { display: flex; flex-direction: column; gap: 1rem; margin-top: 3rem; }
+  @media (min-width: 1024px) { .rooms { flex-direction: row; height: 32rem; } }
+  .room { position: relative; border-radius: 1rem; overflow: hidden; padding: 1.75rem; display: flex; flex-direction: column; gap: 1rem; outline: none; }
+  @media (min-width: 1024px) {
+    .room { flex: 1; min-width: 0; transition: flex 700ms var(--ease-drift), border-color 400ms; }
+    .rooms:hover .room, .rooms:focus-within .room { flex: 1; }
+    .rooms .room:hover, .rooms .room:focus-within, .rooms .room:focus { flex: 2.4; border-color: rgba(233,238,245,0.3); }
+    .room__more { opacity: 0; transform: translateY(0.5rem); transition: opacity 400ms var(--ease-entrance), transform 400ms var(--ease-entrance); }
+    .room:hover .room__more, .room:focus-within .room__more, .room:focus .room__more { opacity: 1; transform: none; transition-delay: 200ms; }
+    .rooms:not(:hover):not(:focus-within) .room:first-child { flex: 2.4; }
+    .rooms:not(:hover):not(:focus-within) .room:first-child .room__more { opacity: 1; transform: none; }
+  }
+  .room__window { position: relative; height: 9rem; border-radius: 0.5rem; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(180deg, #0a1330, #1b2548 70%, #3a3350); flex-shrink: 0; }
+  .room__window::before { content: ""; position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; box-shadow: 30px 20px #fff, 80px 45px rgba(255,255,255,0.7), 140px 18px #fff, 190px 60px rgba(255,255,255,0.6), 250px 30px #fff, 300px 70px rgba(255,255,255,0.8), 60px 90px rgba(255,255,255,0.5), 220px 100px rgba(255,255,255,0.6), 340px 40px #fff, 400px 85px rgba(255,255,255,0.7), 460px 25px #fff; top: 0; left: 0; }
+  .room__window svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .room__name { font-family: var(--f-serif); font-weight: 500; font-size: 1.35rem; letter-spacing: 0.14em; line-height: 1.4; }
+  .room__meta { font-size: 0.82rem; color: var(--frost-muted); line-height: 1.7; }
+  .room__price { font-family: var(--f-mono); font-size: 0.95rem; margin-top: auto; }
+  .room__more p { color: var(--frost-muted); font-size: 0.9rem; line-height: 1.85; }
+  .room__more ul { list-style: none; padding: 0; margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .room__more li { font-size: 0.72rem; border: 1px solid var(--line); border-radius: 999px; padding: 0.1rem 0.7rem; }
+
+  /* ───── S4 食 ───── */
+  .food__grid { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 1024px) { .food__grid { grid-template-columns: 5fr 7fr; gap: 5rem; } }
+  .menu-list { list-style: none; padding: 2rem; border-radius: 1rem; display: grid; gap: 1.1rem; }
+  .menu-list li { display: flex; align-items: baseline; gap: 0.8rem; opacity: 0; transition: opacity 800ms var(--ease-entrance); }
+  .menu-list.is-in li { opacity: 1; }
+  .menu-list .dish { font-family: var(--f-serif); font-weight: 500; letter-spacing: 0.08em; }
+  .menu-list .leader { flex: 1; border-bottom: 1px dotted rgba(233,238,245,0.3); transform: translateY(-0.3rem); transition: border-color 300ms; }
+  .menu-list li:hover .leader { border-color: var(--lamp); }
+  .menu-list .origin { font-size: 0.82rem; color: var(--frost-muted); white-space: nowrap; }
+
+  /* ───── S5 アクセス ───── */
+  .profile { position: relative; margin-top: 3rem; padding: 1.5rem 1.5rem 1rem; border-radius: 1rem; }
+  .profile svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+  .profile .ridge { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 2400ms var(--ease-entrance); }
+  .profile.is-in .ridge { stroke-dashoffset: 0; }
+  .profile .pt { opacity: 0; transition: opacity 600ms var(--ease-entrance); }
+  .profile.is-in .pt { opacity: 1; }
+  .tip { position: absolute; top: 0; left: 0; pointer-events: none; padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.72rem; line-height: 1.6; white-space: nowrap; opacity: 0; transition: opacity 200ms; background: rgba(6,9,18,0.8); border: 1px solid var(--line); }
+  .tip.on { opacity: 1; }
+  .steps { list-style: none; padding: 0; margin-top: 2.5rem; display: grid; gap: 1rem; counter-reset: s; }
+  @media (min-width: 1024px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .steps li { padding: 1.25rem 1.5rem; border-radius: 0.75rem; counter-increment: s; }
+  .steps li::before { content: "0" counter(s); display: block; font-family: var(--f-mono); font-size: 0.72rem; color: var(--frost-muted); }
+  .steps b { font-family: var(--f-serif); font-weight: 500; letter-spacing: 0.08em; }
+  .steps span { display: block; color: var(--frost-muted); font-size: 0.85rem; }
+
+  /* ───── S6 予約 ───── */
+  .reserve h2 { text-shadow: 0 0 40px var(--lamp-glow); }
+  .booking { display: grid; gap: 1.5rem; margin-top: 3rem; }
+  @media (min-width: 1024px) { .booking { grid-template-columns: 7fr 5fr; align-items: start; } }
+  .cal { padding: 1.5rem; border-radius: 1rem; }
+  .cal__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
+  .cal__legend { font-size: 0.72rem; color: var(--frost-muted); display: flex; gap: 0.9rem; }
+  .cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.35rem; }
+  .cal__dow { font-family: var(--f-mono); font-size: 0.68rem; color: var(--frost-muted); text-align: center; padding-bottom: 0.3rem; }
+  .day { aspect-ratio: 1; border-radius: 0.5rem; display: grid; place-items: center; align-content: center; gap: 0.1rem; border: 1px solid transparent; font-family: var(--f-mono); font-size: 0.8rem; line-height: 1; transition: border-color 200ms, background 200ms; }
+  .day i { font-style: normal; font-size: 0.7rem; }
+  .day[data-s="o"] i { color: var(--lamp); }
+  .day[data-s="t"] i { color: var(--frost); }
+  .day[data-s="x"] { color: rgba(233,238,245,0.3); cursor: not-allowed; }
+  .day:not([data-s="x"]):hover { border-color: var(--line); }
+  .day[aria-pressed="true"] { border-color: var(--lamp); background: rgba(255,179,107,0.12); }
+  .summary { padding: 1.75rem; border-radius: 1rem; display: grid; gap: 1.1rem; }
+  .summary__row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.9rem; }
+  .summary__row > span:first-child { color: var(--frost-muted); }
+  .stepper { display: inline-flex; align-items: center; gap: 0.9rem; }
+  .stepper button { width: 2rem; height: 2rem; border-radius: 50%; border: 1px solid var(--line); line-height: 1; }
+  .stepper button:disabled { opacity: 0.3; cursor: not-allowed; }
+  .summary select { background: rgba(6,9,18,0.6); border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.35rem 0.6rem; }
+  .summary__total { border-top: 1px solid var(--line); padding-top: 1.1rem; }
+  .summary__total b { font-family: var(--f-mono); font-weight: 400; font-size: 1.5rem; }
+  .book { position: relative; overflow: hidden; height: 3.2rem; border-radius: 999px; border: 1px solid var(--lamp); color: var(--lamp); font-weight: 400; }
+  .book::before { content: ""; position: absolute; inset: 0; background: var(--lamp); transform: scaleX(0); transform-origin: left; }
+  .book.is-busy::before { transform: scaleX(1); transition: transform 1200ms var(--ease-drift); }
+  .book span { position: relative; }
+  .book.is-busy, .book.is-done { color: var(--night); }
+  .book.is-done::before { transform: scaleX(1); }
+  .book:disabled { cursor: default; }
+  .note { font-size: 0.72rem; color: var(--frost-muted); }
+
+  .footer { padding: 3rem 1.25rem; border-top: 1px solid var(--line); background: linear-gradient(transparent, rgba(6,9,18,0.5)); }
+  @media (min-width: 640px) { .footer { padding-inline: 2.5rem; } }
+  .footer .wrap { display: grid; gap: 0.5rem; font-size: 0.78rem; color: var(--frost-muted); }
+  .footer b { font-family: var(--f-serif); font-weight: 500; color: var(--frost); letter-spacing: 0.14em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grain { animation: none; }
+    .reveal, .mask > span, .arrive__lead, .arrive__cta, .tl__item, .tl__line, .menu-list li, .profile .ridge, .profile .pt, #sky { transition-duration: 1ms !important; }
+  }
+</style>
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo" href="#arrive"><b>天空舎</b><small>TENKUSHA — 2,400m</small></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="#night">夜を過ごす</a>
+      <a href="#rooms">部屋</a>
+      <a href="#food">食</a>
+      <a href="#access">アクセス</a>
+      <a class="pill" href="#reserve">空室を見る</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" data-menu>MENU<i aria-hidden="true"></i></button>
+  </header>
+  <nav class="menu" aria-label="モバイル">
+    <a href="#night">夜を過ごす</a>
+    <a href="#rooms">部屋</a>
+    <a href="#food">食</a>
+    <a href="#access">アクセス</a>
+    <a class="pill" href="#reserve">空室を見る</a>
+  </nav>
+
+  <div class="hud mono" aria-hidden="true">
+    <div class="hud__row"><span>ALT</span><span data-hud="alt">2,380 m</span></div>
+    <div class="hud__row"><span>TIME</span><span data-hud="time">17:30</span></div>
+    <div class="hud__row"><span>TEMP</span><span data-hud="temp">6.2°C</span></div>
+  </div>
+
+  <nav class="dial" aria-label="時刻で移動">
+    <svg viewBox="0 0 30 100" preserveAspectRatio="none" aria-hidden="true"><path d="M30 0 Q0 50 30 100" fill="none" stroke="rgba(233,238,245,0.18)" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
+    <a href="#arrive" style="top:0%">黄昏</a>
+    <a href="#rooms" style="top:50%">深夜</a>
+    <a href="#reserve" style="top:100%">夜明け</a>
+    <span class="dial__dot" data-dial-dot></span>
+  </nav>
+
+  <main>
+    <section class="section arrive" id="arrive">
+      <div class="wrap">
+        <p class="arrive__eyebrow mono" data-type>36°20'N 137°38'E — ELEV. 2,400m</p>
+        <h1><span class="mask"><span>星に、</span></span><span class="mask"><span style="transition-delay:140ms">いちばん近い宿。</span></span></h1>
+        <p class="arrive__lead">車道の終点から、歩いて三時間。灯りの少ない稜線に、十二の部屋だけを用意しました。</p>
+        <div class="arrive__cta">
+          <a class="pill" href="#reserve">空室を見る</a>
+          <a class="textlink" href="#night">夜の過ごし方<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="clouds" id="clouds" aria-label="雲海">
+      <div class="clouds__stage">
+        <p class="clouds__text" data-clouds>雲より上では、<br>夜はこんなにも<br class="sp-br">明るい。</p>
+      </div>
+    </section>
+
+    <section class="section" id="night">
+      <div class="wrap night__grid">
+        <div class="night__head">
+          <p class="kicker reveal">01 — NIGHT PROGRAM</p>
+          <h2 class="h2 reveal">夜のプログラム</h2>
+          <p class="lead reveal">日が落ちてから夜が明けるまで、空を見上げる時間をいくつか用意しています。参加は自由、予約は不要です。</p>
+        </div>
+        <div class="tl" data-tl>
+          <span class="tl__line" aria-hidden="true"></span>
+          <article class="tl__item" data-min="120">
+            <span class="tl__time mono">19:30</span><span class="tl__pin" aria-hidden="true"></span>
+            <h3>星の解説会</h3>
+            <p>屋上デッキで、専属ガイドが季節の星座を案内します。</p>
+          </article>
+          <article class="tl__item" data-min="210">
+            <span class="tl__time mono">21:00</span><span class="tl__pin" aria-hidden="true"></span>
+            <h3>天の川の撮影会</h3>
+            <p>三脚を貸し出し、長時間露光の撮り方を一緒に。</p>
+          </article>
+          <article class="tl__item tl__item--dark" data-min="360" data-dark>
+            <span class="tl__time mono">23:30</span><span class="tl__pin" aria-hidden="true"></span>
+            <h3>無灯の時間</h3>
+            <p>館内の灯りをすべて落とし、ただ空を見上げる30分。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rooms">
+      <div class="wrap">
+        <p class="kicker reveal">02 — ROOMS</p>
+        <h2 class="h2 reveal">十二の部屋、三つのかたち。</h2>
+        <div class="rooms">
+          <article class="room glass reveal" tabindex="0">
+            <div class="room__window" aria-hidden="true">
+              <svg viewBox="0 0 400 144" preserveAspectRatio="xMidYMid slice"><rect x="130" y="18" width="140" height="100" fill="none" stroke="rgba(233,238,245,0.55)" stroke-width="3"/><path d="M200 18v100M130 68h140" stroke="rgba(233,238,245,0.35)" stroke-width="2"/></svg>
+            </div>
+            <h3 class="room__name">星窓の間</h3>
+            <p class="room__meta">2名 ／ 天井に天窓</p>
+            <div class="room__more">
+              <p>ベッドに横になったまま、頭上の天窓いっぱいに星が流れていきます。灯りを落とせば、そこはもう屋外と同じ暗さです。</p>
+              <ul><li>天窓</li><li>羽毛布団</li><li>双眼鏡</li></ul>
+            </div>
+            <p class="room__price">¥48,000〜 / 1名（1泊2食）</p>
+          </article>
+          <article class="room glass reveal" tabindex="0">
+            <div class="room__window" aria-hidden="true">
+              <svg viewBox="0 0 400 144" preserveAspectRatio="xMidYMid slice"><path d="M0 120 L70 78 L120 96 L190 52 L250 88 L320 60 L400 100 V144 H0Z" fill="#070a14"/><rect x="20" y="10" width="360" height="124" fill="none" stroke="rgba(233,238,245,0.5)" stroke-width="3"/></svg>
+            </div>
+            <h3 class="room__name">稜線の間</h3>
+            <p class="room__meta">2〜3名 ／ 東向きの大窓</p>
+            <div class="room__more">
+              <p>東の稜線に向けた幅四メートルの窓。夜は星の出を、朝は雲海の向こうから昇る日を、寝床から眺められます。</p>
+              <ul><li>大窓</li><li>ソファベッド</li><li>ハンドドリップ</li></ul>
+            </div>
+            <p class="room__price">¥56,000〜 / 1名（1泊2食）</p>
+          </article>
+          <article class="room glass reveal" tabindex="0">
+            <div class="room__window" aria-hidden="true">
+              <svg viewBox="0 0 400 144" preserveAspectRatio="xMidYMid slice"><rect x="0" y="0" width="400" height="144" fill="rgba(6,9,18,0.45)"/><rect x="160" y="60" width="80" height="84" fill="none" stroke="rgba(233,238,245,0.45)" stroke-width="3"/><path d="M200 132c-18 0-26-14-18-30 5-10 12-12 12-24 12 8 26 22 26 38 0 10-8 16-20 16Z" fill="#ffb36b" opacity="0.9"/><circle cx="200" cy="112" r="40" fill="rgba(255,179,107,0.18)"/></svg>
+            </div>
+            <h3 class="room__name">灯の離れ</h3>
+            <p class="room__meta">4名 ／ 薪ストーブ付き</p>
+            <div class="room__more">
+              <p>母屋から少し離れた一棟。薪ストーブの火を囲み、夜更けまで語らう家族や仲間のための部屋です。</p>
+              <ul><li>薪ストーブ</li><li>ロフト</li><li>専用デッキ</li></ul>
+            </div>
+            <p class="room__price">¥72,000〜 / 1名（1泊2食）</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="food">
+      <div class="wrap food__grid">
+        <div>
+          <p class="kicker reveal">03 — FOOD</p>
+          <h2 class="h2 reveal">山の夜食と、<br>夜明けの粥。</h2>
+          <p class="lead reveal">荷揚げできる食材には限りがあります。だからこそ、麓の畑と沢の水で、ひと皿ずつ丁寧に。星を見て冷えた体に、温かいものを。</p>
+        </div>
+        <ul class="menu-list glass" data-menu-list>
+          <li><span class="dish">山菜の天ぷら</span><span class="leader"></span><span class="origin">麓の里山</span></li>
+          <li><span class="dish">岩魚の炭火焼き</span><span class="leader"></span><span class="origin">梓川上流</span></li>
+          <li><span class="dish">高原野菜の蒸籠</span><span class="leader"></span><span class="origin">標高1,200mの畑</span></li>
+          <li><span class="dish">夜食の生姜にゅうめん</span><span class="leader"></span><span class="origin">無灯の時間のあとに</span></li>
+          <li><span class="dish">雑穀の粥</span><span class="leader"></span><span class="origin">夜明けの食堂</span></li>
+          <li><span class="dish">焙じ茶と干し柿</span><span class="leader"></span><span class="origin">出発の前に</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="access">
+      <div class="wrap">
+        <p class="kicker reveal">04 — ACCESS</p>
+        <h2 class="h2 reveal">たどり着くまでも、旅の一部。</h2>
+        <div class="profile glass" data-profile>
+          <svg viewBox="0 0 1000 320" role="img" aria-label="標高断面図。登山口 標高1,520m から中間小屋 2,050m を経て、7.8km 先の天空舎 2,400m まで。">
+            <g class="mono" font-size="12" fill="#9aa6b8">
+              <text x="0" y="36">2,500m</text><text x="0" y="276">1,500m</text>
+              <text x="60" y="310">0km</text><text x="945" y="310">7.8km</text>
+            </g>
+            <path d="M60 30 H990 M60 150 H990 M60 270 H990" stroke="rgba(233,238,245,0.08)"/>
+            <path class="area" fill="url(#pfill)" opacity="0.5"/>
+            <defs><linearGradient id="pfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(233,238,245,0.18)"/><stop offset="1" stop-color="rgba(233,238,245,0)"/></linearGradient></defs>
+            <path class="ridge" fill="none" stroke="#e9eef5" stroke-width="1.5"/>
+            <g class="pts"></g>
+            <line class="cursor" y1="20" y2="280" stroke="rgba(255,179,107,0.6)" stroke-width="1" opacity="0"/>
+          </svg>
+          <div class="tip mono" data-tip></div>
+        </div>
+        <ol class="steps">
+          <li class="glass reveal"><b>新宿から特急で松本へ</b><span>約2時間40分</span></li>
+          <li class="glass reveal"><b>バスで登山口へ</b><span>松本駅から約1時間50分（夏期のみ運行）</span></li>
+          <li class="glass reveal"><b>徒歩 約3時間</b><span>中間小屋で休憩。荷物は歩荷サービスあり</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section reserve" id="reserve">
+      <div class="wrap">
+        <p class="kicker reveal">05 — RESERVE</p>
+        <h2 class="h2 reveal">今夜、<br class="sp-br">空はあいていますか。</h2>
+        <div class="booking">
+          <div class="cal glass reveal">
+            <div class="cal__head"><b class="mono">2026.10</b><span class="cal__legend"><span><i style="color:var(--lamp);font-style:normal">○</i> 空き</span><span>△ 残りわずか</span><span>× 満室</span></span></div>
+            <div class="cal__grid" data-cal></div>
+          </div>
+          <div class="summary glass reveal" aria-live="polite">
+            <div class="summary__row"><span>チェックイン</span><span class="mono" data-sum-date>日付を選択</span></div>
+            <div class="summary__row"><span>部屋</span>
+              <select data-room aria-label="部屋">
+                <option value="48000" data-max="2">星窓の間</option>
+                <option value="56000" data-max="3">稜線の間</option>
+                <option value="72000" data-max="4">灯の離れ</option>
+              </select>
+            </div>
+            <div class="summary__row"><span>人数</span>
+              <span class="stepper"><button type="button" data-guest="-1" aria-label="人数を減らす">−</button><span class="mono" data-guests>2</span><button type="button" data-guest="1" aria-label="人数を増やす">＋</button></span>
+            </div>
+            <div class="summary__row summary__total"><span>合計（1泊2食・税込）</span><b data-total>¥96,000</b></div>
+            <button class="book" type="button" data-book disabled><span>日付を選んでください</span></button>
+            <p class="note">※ 冬期（12月〜4月）は休業します。表示は架空のデータです。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <b>天空舎 — 標高2,400mの星見の宿</b>
+      <span>長野県 北アルプス某所 ／ 営業期間 5月〜11月（冬期休業）</span>
+      <span>© 2026 TENKUSHA　※本ページは架空の宿泊施設のデザインサンプルです。</span>
+    </div>
+  </footer>
+
+<script id="frag" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+uniform vec2  uRes;
+uniform float uTime, uTravel, uHour, uCloud, uStarBoost, uFade;
+uniform vec2  uLook;
+out vec4 outColor;
+
+// ---------- noise ----------
+float hash21(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p+45.32); return fract(p.x*p.y); }
+float vnoise(vec2 p){
+  vec2 i = floor(p), f = fract(p); vec2 u = f*f*(3.0-2.0*f);
+  return mix(mix(hash21(i), hash21(i+vec2(1,0)), u.x),
+             mix(hash21(i+vec2(0,1)), hash21(i+vec2(1,1)), u.x), u.y);
+}
+const mat2 ROT = mat2(0.8, -0.6, 0.6, 0.8);
+float fbm(vec2 p, int oct){
+  float a = 0.5, s = 0.0;
+  for (int i = 0; i < oct; i++){ s += a*vnoise(p); p = ROT*p*2.03; a *= 0.5; }
+  return s;
+}
+
+// ---------- terrain ----------
+float pathX(float z){ return sin(z*0.045)*7.0 + sin(z*0.017)*11.0; }   // 谷筋（カメラの通り道）
+float terrain(vec2 xz, int oct){
+  float h = fbm(xz*0.075, oct);
+  h = h*h*16.0;                                                        // 尖った稜線
+  float valley = smoothstep(1.5, 16.0, abs(xz.x - pathX(xz.y)));        // 谷を掘る
+  return h*mix(0.18, 1.0, valley) - 2.0;
+}
+vec3 terrainNormal(vec3 p, float t){
+  vec2 e = vec2(0.01 + t*0.002, 0.0);
+  return normalize(vec3(terrain(p.xz-e.xy,8) - terrain(p.xz+e.xy,8),
+                        2.0*e.x,
+                        terrain(p.xz-e.yx,8) - terrain(p.xz+e.yx,8)));
+}
+float march(vec3 ro, vec3 rd){
+  float t = 0.5;
+  for (int i = 0; i < 120; i++){
+    vec3 p = ro + rd*t;
+    float d = p.y - terrain(p.xz, 5);
+    if (d < 0.002*t || t > 160.0) break;
+    t += d*0.42;
+  }
+  return t;
+}
+
+// ---------- sky ----------
+vec3 skyColor(vec3 rd){
+  // 時刻ごとの地平線色と天頂色
+  vec3 horDusk = vec3(0.95,0.48,0.30), zenDusk = vec3(0.10,0.10,0.26);
+  vec3 horNight= vec3(0.05,0.08,0.16), zenNight= vec3(0.005,0.01,0.03);
+  vec3 horDawn = vec3(0.86,0.64,0.70), zenDawn = vec3(0.26,0.34,0.58);   // 夜明けは藤色〜青（夕暮れの橙と区別）
+  float n = 1.0 - abs(uHour*2.0 - 1.0);                // 0=端 1=深夜
+  vec3 hor = uHour < 0.5 ? mix(horDusk, horNight, n) : mix(horDawn, horNight, n);
+  vec3 zen = uHour < 0.5 ? mix(zenDusk, zenNight, n) : mix(zenDawn, zenNight, n);
+  float y = clamp(rd.y, 0.0, 1.0);
+  vec3 col = mix(hor, zen, pow(y, 0.45));
+  // 太陽側（西=夕 / 東=朝）のにじみ
+  vec3 sunDir = normalize(vec3(uHour < 0.5 ? -1.0 : 1.0, 0.02, -0.6));
+  col += (uHour < 0.5 ? horDusk : horDawn) * pow(max(dot(rd, sunDir), 0.0), 6.0) * 0.6 * (1.0 - n);
+  return col;
+}
+float stars(vec3 rd){
+  vec2 uv = vec2(atan(rd.x, rd.z), asin(clamp(rd.y, -1.0, 1.0))) * 160.0;
+  vec2 id = floor(uv), gv = fract(uv) - 0.5;
+  float h = hash21(id);
+  vec2 off = vec2(hash21(id+11.3), hash21(id+27.1)) - 0.5;
+  float s = smoothstep(0.14, 0.0, length(gv - off*0.7)) * step(0.955, h);
+  float tw = 0.55 + 0.45*sin(uTime*(1.2 + h*3.0) + h*60.0);
+  return s * tw * (0.6 + 2.4*fract(h*97.0)) * smoothstep(0.02, 0.2, rd.y);
+}
+vec3 milkyWay(vec3 rd){
+  vec3 N = normalize(vec3(0.85, -0.2, 0.1));     // 前方の空を斜めに横切る向き
+  float d = dot(rd, N);
+  float band = exp(-d*d*40.0);
+  vec2 q = vec2(atan(rd.x, rd.z), rd.y) * 3.0;
+  float dust = fbm(q*2.0, 5);
+  float lanes = smoothstep(0.35, 0.65, fbm(q*4.5 + 3.1, 4));          // 暗黒帯
+  return vec3(0.75, 0.82, 1.0) * 1.6 * band * dust * (0.4 + 0.6*lanes) * smoothstep(0.0, 0.25, rd.y);
+}
+
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*uRes) / uRes.y;
+  float night = 1.0 - abs(uHour*2.0 - 1.0);
+
+  // カメラ
+  float z = uTravel;
+  vec3 ro = vec3(pathX(z), 0.0, z);
+  ro.y = max(terrain(ro.xz, 4), -1.6) + 3.2;
+  vec3 ahead = vec3(pathX(z + 6.0), ro.y - 0.35, z + 6.0);
+  vec3 fw = normalize(ahead - ro);
+  float yaw = uLook.x*0.12, pitch = uLook.y*0.05 + 0.08;
+  fw = normalize(fw + vec3(yaw, pitch, 0.0));
+  vec3 rt = normalize(cross(vec3(0,1,0), fw));
+  vec3 up = cross(fw, rt);
+  vec3 rd = normalize(fw*1.6 + rt*uv.x + up*uv.y);
+
+  vec3 sky = skyColor(rd);
+  sky += vec3(stars(rd)) * night * uStarBoost;
+  sky += milkyWay(rd) * night * night * uStarBoost;
+
+  vec3 col = sky;
+  float t = march(ro, rd);
+  if (t < 160.0){
+    vec3 p = ro + rd*t;
+    vec3 n = terrainNormal(p, t);
+    vec3 moon = normalize(vec3(-0.35, 0.45, 0.8));
+    float dif = clamp(dot(n, moon), 0.0, 1.0);
+    float snow = smoothstep(0.55, 0.85, n.y) * smoothstep(2.5, 6.0, p.y);
+    vec3 rock = mix(vec3(0.030,0.034,0.045), vec3(0.20,0.22,0.27), snow);
+    vec3 lit  = rock * (0.25 + dif*mix(0.9, 0.55, night));
+    lit += (uHour < 0.5 ? vec3(0.9,0.45,0.25) : vec3(0.9,0.6,0.5)) * dif * 0.12 * (1.0 - night);
+    // 稜線上の山小屋の灯（谷筋から 5 離れた位置に 18 単位ごと）
+    float cell = floor(p.z/18.0);
+    vec2 lamp = vec2(pathX(cell*18.0 + 9.0) + 5.0*(hash21(vec2(cell,1.0))>0.5?1.0:-1.0), cell*18.0 + 9.0);
+    float ld = length(p.xz - lamp);
+    lit += vec3(1.0,0.70,0.42) * exp(-ld*ld*6.0) * 2.2 * step(0.6, hash21(vec2(cell, 7.0))) * night * smoothstep(6.0, 16.0, t);  // 近すぎる灯は筋状に伸びるので出さない
+    float fog = 1.0 - exp(-t*mix(0.011, 0.016, night));
+    col = mix(lit, sky*0.9, fog);
+  }
+
+  // 雲海（高さ -1.2 付近の層。上から見下ろす）
+  if (rd.y < 0.0){
+    float tc = (-0.8 - ro.y) / rd.y;
+    if (tc > 0.0 && tc < t){
+      vec3 pc = ro + rd*tc;
+      float c = fbm(pc.xz*0.06 + vec2(uTime*0.02, 0.0), 6);
+      c = smoothstep(0.55 - 0.25*uCloud, 0.9, c) * uCloud;
+      vec3 cloudCol = mix(vec3(0.55,0.58,0.70), vec3(0.16,0.19,0.28), night) + skyColor(vec3(rd.x,0.05,rd.z))*0.35;
+      col = mix(col, cloudCol, c * (1.0 - exp(-tc*0.05)) * 0.9);
+    }
+  }
+
+  col = 1.0 - exp(-col*1.25);                  // トーンマップ（色はディスプレイ空間で指定済み。ガンマは掛けない）
+  col *= 0.55 + 0.45*smoothstep(1.3, 0.2, length(uv));  // ビネット
+  outColor = vec4(col * uFade, 1.0);
+}
+</script>
+<script type="importmap">{ "imports": { "lenis": "https://unpkg.com/lenis@1.3.19/dist/lenis.mjs" } }</script>
+<script type="module">
+import Lenis from 'lenis';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mobile = matchMedia('(max-width: 1023px)').matches || navigator.maxTouchPoints > 0;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const smooth = (t) => t * t * (3 - 2 * t);
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/* ═════════════ Lenis / アンカー / メニュー ═════════════ */
+const lenis = new Lenis({ lerp: reduce ? 1 : 0.08, smoothWheel: !reduce });
+window.__lenis = lenis;
+$$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+  const el = document.querySelector(a.getAttribute('href'));
+  if (!el) return;
+  e.preventDefault();
+  setMenu(false);
+  lenis.scrollTo(el, { duration: reduce ? 0 : 2 });
+}));
+function setMenu(open) {
+  document.body.classList.toggle('menu-open', open);
+  $('[data-menu]').setAttribute('aria-expanded', String(open));
+  open ? lenis.stop() : lenis.start();
+}
+$('[data-menu]').addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+
+/* ═════════════ シェーダー ═════════════ */
+const canvas = $('#sky');
+const glc = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+let prog = null, U = {};
+if (glc) {
+  const sh = (type, src) => { const s = glc.createShader(type); glc.shaderSource(s, src); glc.compileShader(s); if (!glc.getShaderParameter(s, glc.COMPILE_STATUS)) throw new Error(glc.getShaderInfoLog(s)); return s; };
+  try {
+    prog = glc.createProgram();
+    glc.attachShader(prog, sh(glc.VERTEX_SHADER, '#version 300 es\nvoid main(){ vec2 p = vec2((gl_VertexID << 1) & 2, gl_VertexID & 2); gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0); }'));
+    glc.attachShader(prog, sh(glc.FRAGMENT_SHADER, $('#frag').textContent.trim()));
+    glc.linkProgram(prog);
+    if (!glc.getProgramParameter(prog, glc.LINK_STATUS)) throw new Error(glc.getProgramInfoLog(prog));
+    glc.useProgram(prog);
+    for (const n of ['uRes', 'uTime', 'uTravel', 'uHour', 'uCloud', 'uStarBoost', 'uFade', 'uLook']) U[n] = glc.getUniformLocation(prog, n);
+  } catch (err) { console.error('シェーダーの初期化に失敗しました', err); prog = null; }
+}
+if (!prog) document.body.classList.add('no-webgl');
+
+let scale = mobile ? 0.4 : 0.5;
+function resizeCanvas() {
+  const w = Math.max(1, Math.round(innerWidth * scale)), h = Math.max(1, Math.round(innerHeight * scale));
+  if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+}
+
+/* ═════════════ レイアウト計測 ═════════════ */
+const L = {};
+function measure() {
+  const y = scrollY, top = (el) => el.getBoundingClientRect().top + y;
+  const ids = ['arrive', 'clouds', 'night', 'rooms', 'food', 'access', 'reserve'];
+  for (const id of ids) { const el = document.getElementById(id); L[id] = { top: top(el), h: el.offsetHeight }; }
+  L.max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const dark = $('[data-dark]'); L.dark = top(dark) + dark.offsetHeight / 2;
+  resizeCanvas();
+}
+
+// 時刻: S0–S1 0→0.2 / S2–S3 0.2→0.6 / S4 0.6→0.8 / S5–S6 0.8→1.0
+function hourAt(y) {
+  const mid = y + innerHeight * 0.5;
+  const band = (a, b, h0, h1) => (mid >= a && mid < b ? lerp(h0, h1, smooth(clamp((mid - a) / (b - a)))) : null);
+  const end = (id) => L[id].top + L[id].h;
+  return band(0, end('clouds'), 0, 0.2)
+    ?? band(L.night.top, end('rooms'), 0.2, 0.6)
+    ?? band(L.food.top, end('food'), 0.6, 0.8)
+    ?? band(L.access.top, Math.max(end('reserve'), L.max + innerHeight), 0.8, 1.0)
+    ?? 1.0;
+}
+
+/* ═════════════ HUD（変化した桁だけめくる） ═════════════ */
+const hudEls = { alt: $('[data-hud="alt"]'), time: $('[data-hud="time"]'), temp: $('[data-hud="temp"]') };
+const hudPrev = {};
+function setHud(key, text) {
+  if (hudPrev[key] === text) return;
+  const el = hudEls[key], prev = hudPrev[key] || '';
+  if (el.children.length !== text.length) el.innerHTML = [...text].map((c) => `<span class="digit"><b>${c}</b></span>`).join('');
+  [...text].forEach((c, i) => {
+    if (prev[i] === c) return;
+    const d = el.children[i]; d.firstChild.textContent = c;
+    if (!reduce && prev) { d.classList.remove('flip'); void d.offsetWidth; d.classList.add('flip'); }
+  });
+  hudPrev[key] = text;
+}
+
+/* ═════════════ ポインター ═════════════ */
+const look = { x: 0, y: 0, tx: 0, ty: 0 };
+addEventListener('pointermove', (e) => { if (e.pointerType !== 'mouse') return; look.tx = (e.clientX / innerWidth) * 2 - 1; look.ty = -((e.clientY / innerHeight) * 2 - 1); }, { passive: true });
+
+/* ═════════════ ループ（Lenis と統合） ═════════════ */
+const state = { travel: 0, drive: 0, cloud: 1, star: 1, fade: 0, fadeStart: null };
+const dialDot = $('[data-dial-dot]'), dial = $('.dial'), cloudsText = $('[data-clouds]');
+const tlItems = $$('.tl__item');
+let last = performance.now(), frameTimes = [], running = true, lightsOut = false;
+document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) { last = performance.now(); requestAnimationFrame(loop); } });
+
+function loop(now) {
+  if (!running) return;
+  const dt = Math.min(100, now - last); last = now;
+  lenis.raf(now);
+  const y = scrollY, P = clamp(y / L.max);
+
+  // カメラ前進: スクロール追従（慣性）+ 自走
+  const target = P * 140;
+  if (reduce) state.travel = target;
+  else { state.travel += (target - state.travel) * 0.045; state.drive += dt / 1000 * 0.25; }
+
+  // 雲海: #clouds の進捗で 1.0 → 0.35
+  const cp = clamp((y - L.clouds.top) / Math.max(1, L.clouds.h - innerHeight));
+  state.cloud = lerp(1, 0.35, smooth(cp));
+  const ls = lerp(innerWidth < 640 ? 0.3 : 0.6, 0.12, smooth(cp)), bl = lerp(10, 0, smooth(clamp(cp * 1.25)));
+  cloudsText.style.letterSpacing = `${ls.toFixed(3)}em`;
+  cloudsText.style.filter = bl > 0.05 ? `blur(${bl.toFixed(2)}px)` : 'none';
+
+  // 無灯の時間: 項目が画面中央付近にある間
+  const darkNow = Math.abs(L.dark - (y + innerHeight / 2)) < innerHeight * 0.18;
+  if (darkNow !== lightsOut) { lightsOut = darkNow; document.body.classList.toggle('lights-out', darkNow); }
+  state.star += ((darkNow ? 1.8 : 1.0) - state.star) * (1 - Math.exp(-dt / 400));
+
+  // 無灯の時間のあいだは空を深夜へ寄せる（星の増光と同じ進み具合で）
+  const darkBlend = clamp((state.star - 1) / 0.8);
+  const hour = lerp(hourAt(y), 0.5, smooth(darkBlend) * 0.85);
+
+  // HUD
+  const minutes = Math.round(P * 700); // 17:30 → 翌 05:10
+  const tm = (17 * 60 + 30 + minutes) % 1440;
+  setHud('alt', `${(2380 + Math.round(Math.sin(P * Math.PI) * 64)).toLocaleString('en-US')} m`);
+  setHud('time', `${String(Math.floor(tm / 60)).padStart(2, '0')}:${String(tm % 60).padStart(2, '0')}`);
+  setHud('temp', `${(6.2 - Math.sin(P * Math.PI) * 8.4).toFixed(1)}°C`);
+  tlItems.forEach((it) => it.classList.toggle('is-past', minutes >= Number(it.dataset.min)));
+  if (dial.clientHeight) dialDot.style.transform = `translate(${(-Math.sin(hour * Math.PI) * 1.5).toFixed(2)}rem, ${(hour * dial.clientHeight).toFixed(1)}px)`;
+
+  if (prog) {
+    look.x += (look.tx - look.x) * 0.05; look.y += (look.ty - look.y) * 0.05;
+    if (state.fadeStart !== null) state.fade = reduce ? 1 : clamp((now - state.fadeStart) / 1800);
+    resizeCanvas();
+    glc.viewport(0, 0, canvas.width, canvas.height);
+    glc.uniform2f(U.uRes, canvas.width, canvas.height);
+    glc.uniform1f(U.uTime, reduce ? 0 : now / 1000);
+    glc.uniform1f(U.uTravel, state.travel + state.drive);
+    glc.uniform1f(U.uHour, hour);
+    glc.uniform1f(U.uCloud, state.cloud);
+    glc.uniform1f(U.uStarBoost, state.star);
+    glc.uniform1f(U.uFade, smooth(state.fade));
+    glc.uniform2f(U.uLook, reduce ? 0 : look.x, reduce ? 0 : look.y);
+    glc.drawArrays(glc.TRIANGLES, 0, 3);
+
+    // 直近60フレーム平均が 24ms を超えたら解像度を 0.08 ずつ下げる（下限 0.3）
+    frameTimes.push(dt);
+    if (frameTimes.length >= 60) {
+      const avg = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length; frameTimes = [];
+      if (avg > 24 && scale > 0.3) scale = Math.max(0.3, scale - 0.08);
+    }
+  }
+  requestAnimationFrame(loop);
+}
+
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(measure, 120); });
+
+/* ═════════════ in-view ═════════════ */
+const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+  if (!e.isIntersecting) return;
+  const el = e.target;
+  if (el.matches('[data-tl]')) {
+    el.classList.add('is-in');
+    // 線が到達した時点で各項目が出る
+    const items = $$('.tl__item', el), h = el.offsetHeight;
+    items.forEach((it) => setTimeout(() => it.classList.add('is-in'), reduce ? 0 : (it.offsetTop / h) * 1400));
+  } else if (el.matches('[data-menu-list]')) {
+    el.classList.add('is-in');
+    $$('li', el).forEach((li, i) => { li.style.transitionDelay = `${i * 60}ms`; });
+  } else if (el.matches('.reveal')) {
+    const sibs = $$('.reveal', el.parentElement);
+    el.style.transitionDelay = `${Math.max(0, sibs.indexOf(el)) * 100}ms`;
+    el.classList.add('is-in');
+  } else {
+    el.classList.add('is-in');
+  }
+  io.unobserve(el);
+}), { threshold: 0.18 });
+
+/* ═════════════ 標高断面図 ═════════════ */
+const profile = $('[data-profile]'), psvg = $('svg', profile), tip = $('[data-tip]');
+const X0 = 60, X1 = 990, KM = 7.8, E0 = 1500, E1 = 2500, Y0 = 270, Y1 = 30;
+const xOf = (km) => X0 + (km / KM) * (X1 - X0), yOf = (m) => Y0 - ((m - E0) / (E1 - E0)) * (Y0 - Y1);
+const PTS = [{ km: 0, m: 1520, name: '登山口' }, { km: 4.1, m: 2050, name: '中間小屋' }, { km: 7.8, m: 2400, name: '天空舎' }];
+function elevAt(km) {
+  const base = km <= 4.1 ? lerp(1520, 2050, smooth(km / 4.1)) : lerp(2050, 2400, smooth((km - 4.1) / 3.7));
+  const bump = Math.sin(km * 3.1) * 28 + Math.sin(km * 7.3 + 1) * 12;
+  const fade = Math.min(1, Math.abs(km - 0) / 0.4, Math.abs(km - 4.1) / 0.4, Math.abs(km - 7.8) / 0.4);
+  return base + bump * fade;
+}
+const samples = Array.from({ length: 157 }, (_, i) => { const km = (i / 156) * KM; return [xOf(km), yOf(elevAt(km))]; });
+const d = samples.map(([x, yy], i) => `${i ? 'L' : 'M'}${x.toFixed(1)} ${yy.toFixed(1)}`).join(' ');
+$('.ridge', psvg).setAttribute('d', d);
+$('.area', psvg).setAttribute('d', `${d} L${X1} ${Y0} L${X0} ${Y0} Z`);
+$('.ridge', psvg).style.setProperty('--len', Math.ceil($('.ridge', psvg).getTotalLength()));
+$('.pts', psvg).innerHTML = PTS.map((p, i) => `
+  <g class="pt" style="transition-delay:${2400 + i * 300}ms">
+    <circle cx="${xOf(p.km)}" cy="${yOf(p.m)}" r="${i === 2 ? 6 : 4}" fill="${i === 2 ? '#ffb36b' : '#e9eef5'}" ${i === 2 ? 'style="filter:drop-shadow(0 0 6px rgba(255,179,107,.8))"' : ''}/>
+    <text x="${xOf(p.km) + (i === 2 ? -10 : 10)}" y="${yOf(p.m) - 14}" text-anchor="${i === 2 ? 'end' : 'start'}" fill="#e9eef5" font-size="14" font-family="Noto Serif JP, serif">${p.name}</text>
+    <text x="${xOf(p.km) + (i === 2 ? -10 : 10)}" y="${yOf(p.m) + 4}" text-anchor="${i === 2 ? 'end' : 'start'}" fill="#9aa6b8" font-size="11" font-family="IBM Plex Mono, monospace">${p.m.toLocaleString('en-US')}m</text>
+  </g>`).join('');
+const cursor = $('.cursor', psvg);
+function showTip(clientX) {
+  const r = psvg.getBoundingClientRect();
+  const x = clamp(((clientX - r.left) / r.width) * 1000, X0, X1);
+  const km = ((x - X0) / (X1 - X0)) * KM, m = Math.round(elevAt(km));
+  const mins = Math.round(km / KM * 180);
+  cursor.setAttribute('x1', x); cursor.setAttribute('x2', x); cursor.setAttribute('opacity', 1);
+  tip.innerHTML = `${km.toFixed(1)} km<br>${m.toLocaleString('en-US')} m<br>徒歩 ${Math.floor(mins / 60)}時間${String(mins % 60).padStart(2, '0')}分`;
+  const pr = profile.getBoundingClientRect(), px = r.left - pr.left + (x / 1000) * r.width;
+  tip.style.transform = `translate(${Math.min(pr.width - tip.offsetWidth - 8, Math.max(8, px + 12))}px, ${r.top - pr.top + (yOf(m) / 320) * r.height - 70}px)`;
+  tip.classList.add('on');
+}
+psvg.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') showTip(e.clientX); });
+psvg.addEventListener('pointerdown', (e) => showTip(e.clientX));
+psvg.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { tip.classList.remove('on'); cursor.setAttribute('opacity', 0); } });
+
+/* ═════════════ 空室カレンダー（2026-10 固定データ） ═════════════ */
+const AVAIL = 'txxooototxxoooootxxtoooooxxtooo'; // o 空き / t 残りわずか / x 満室（毎回同じ見た目にするため固定）
+const cal = $('[data-cal]');
+const DOW = ['日', '月', '火', '水', '木', '金', '土'];
+const firstDow = new Date(2026, 9, 1).getDay();
+cal.innerHTML = DOW.map((w) => `<span class="cal__dow">${w}</span>`).join('')
+  + '<span></span>'.repeat(firstDow)
+  + [...AVAIL].map((s, i) => `<button type="button" class="day" data-s="${s}" data-day="${i + 1}" aria-pressed="false" ${s === 'x' ? 'aria-disabled="true"' : ''} aria-label="10月${i + 1}日 ${s === 'o' ? '空きあり' : s === 't' ? '残りわずか' : '満室'}">${i + 1}<i>${s === 'o' ? '○' : s === 't' ? '△' : '×'}</i></button>`).join('');
+
+const sum = { day: null, guests: 2, shown: 96000 };
+const roomSel = $('[data-room]'), bookBtn = $('[data-book]');
+function renderSummary() {
+  const opt = roomSel.selectedOptions[0], max = Number(opt.dataset.max);
+  sum.guests = clamp(sum.guests, 1, max);
+  $('[data-guests]').textContent = sum.guests;
+  $('[data-guest="-1"]').disabled = sum.guests <= 1;
+  $('[data-guest="1"]').disabled = sum.guests >= max;
+  $('[data-sum-date]').textContent = sum.day ? `2026.10.${String(sum.day).padStart(2, '0')}（${DOW[(firstDow + sum.day - 1) % 7]}）` : '日付を選択';
+  const total = Number(opt.value) * sum.guests;
+  countTo(total);
+  if (!bookBtn.classList.contains('is-done')) {
+    bookBtn.disabled = !sum.day;
+    $('span', bookBtn).textContent = sum.day ? 'この内容で仮予約する' : '日付を選んでください';
+  }
+}
+let countRaf;
+function countTo(total) {
+  const from = sum.shown, t0 = performance.now(), el = $('[data-total]');
+  cancelAnimationFrame(countRaf);
+  const step = (now) => {
+    const k = reduce ? 1 : clamp((now - t0) / 400), v = Math.round(lerp(from, total, 1 - Math.pow(1 - k, 3)));
+    el.textContent = `¥${v.toLocaleString('ja-JP')}`; sum.shown = v;
+    if (k < 1) countRaf = requestAnimationFrame(step);
+  };
+  countRaf = requestAnimationFrame(step);
+}
+cal.addEventListener('click', (e) => {
+  const b = e.target.closest('.day'); if (!b || b.dataset.s === 'x') return;
+  $$('.day', cal).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  sum.day = Number(b.dataset.day); renderSummary();
+});
+$$('[data-guest]').forEach((b) => b.addEventListener('click', () => { sum.guests += Number(b.dataset.guest); renderSummary(); }));
+roomSel.addEventListener('change', renderSummary);
+bookBtn.addEventListener('click', () => {
+  if (!sum.day || bookBtn.classList.contains('is-busy')) return;
+  bookBtn.classList.add('is-busy'); $('span', bookBtn).textContent = '送信しています';
+  setTimeout(() => { bookBtn.classList.replace('is-busy', 'is-done'); bookBtn.disabled = true; $('span', bookBtn).textContent = '仮予約を受け付けました'; }, reduce ? 0 : 1200);
+});
+
+/* ═════════════ 起動 ═════════════ */
+const eyebrow = $('[data-type]');
+eyebrow.innerHTML = [...eyebrow.textContent].map((c) => `<span>${c}</span>`).join('');
+async function boot() {
+  await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 2000))]);
+  measure();
+  $$('.reveal, [data-tl], [data-menu-list], [data-profile]').forEach((el) => io.observe(el));
+  requestAnimationFrame((t) => { state.fadeStart = t; canvas.classList.add('is-on'); });
+  const t1 = reduce ? 0 : 1200;
+  $$('span', eyebrow).forEach((s, i) => setTimeout(() => s.classList.add('on'), t1 + (reduce ? 0 : i * 18)));
+  const t2 = t1 + (reduce ? 0 : eyebrow.children.length * 18 + 150);
+  setTimeout(() => $('#arrive').classList.add('is-ready'), t2);
+  $('.arrive__lead').style.transitionDelay = reduce ? '0ms' : '1300ms';
+  $('.arrive__cta').style.transitionDelay = reduce ? '0ms' : '1420ms';
+  renderSummary();
+  requestAnimationFrame(loop);
+}
+boot();
+</script>
+</body>
+</html>

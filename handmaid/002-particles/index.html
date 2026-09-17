@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>KIRI — 香りは、記憶にかかる霧。</title>
+<meta name="description" content="京都のフレグランスアトリエ KIRI。白檀の夕べ、月白、潮騒。記憶にかかる霧のような三つの香り。（架空のブランドのデザインサンプル）" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;1,300;1,400&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; box-sizing: border-box; }
+  html { font-size: 16px; }
+  @media (max-width: 1920px) { html { font-size: 0.833333vw; } }
+  @media (max-width: 1440px) { html { font-size: 1.111111vw; } }
+  @media (max-width: 1024px) { html { font-size: 1.5625vw; } }
+  @media (max-width: 640px)  { html { font-size: 4.444444vw; } }
+
+  :root {
+    --ink:          #0b0a09;
+    --ink-2:        #15130f;
+    --paper:        #f3eee6;
+    --paper-muted:  #a8a196;
+    --line:         rgba(243,238,230,0.14);
+    --glass:        rgba(21,19,15,0.42);
+    --shu:          #c8553d;
+    --ease-silk:    cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-entrance:cubic-bezier(0.2, 0, 0, 1);
+    --f-mincho: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+    --f-latin:  "Cormorant Garamond", "Times New Roman", serif;
+    --f-body:   "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    overflow-x: hidden;
+    font-family: var(--f-body);
+    font-weight: 400;
+    line-height: 2;
+    letter-spacing: 0.06em;
+    font-feature-settings: "palt" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; letter-spacing: inherit; }
+  input { font: inherit; color: inherit; letter-spacing: inherit; }
+  .latin { font-family: var(--f-latin); font-style: italic; font-weight: 300; letter-spacing: 0.02em; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ───── 背景: WebGL とビネット ───── */
+  .gl { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
+  .vignette {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(120% 90% at 50% 50%, transparent 40%, rgba(11,10,9,0.75) 100%);
+  }
+  body.no-webgl .gl { display: none; }
+  body.no-webgl { background: radial-gradient(60% 50% at 70% 45%, rgba(243,238,230,0.08), transparent) fixed, var(--ink); }
+  main, .footer { position: relative; z-index: 10; }
+
+  /* ───── ローダー ───── */
+  .loader {
+    position: fixed; inset: 0; z-index: 50; background: var(--ink);
+    display: grid; place-items: center; align-content: center; gap: 0.75rem;
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 900ms var(--ease-silk);
+  }
+  .loader.is-done { clip-path: inset(0 0 100% 0); pointer-events: none; }
+  .loader__kanji { font-family: var(--f-mincho); font-weight: 600; font-size: 4rem; line-height: 1; letter-spacing: 0; }
+  .loader__count { font-family: var(--f-latin); font-style: italic; font-size: 1.1rem; color: var(--paper-muted); font-variant-numeric: tabular-nums; min-width: 3ch; text-align: center; }
+
+  /* ───── ヘッダー ───── */
+  .header {
+    position: fixed; top: 0; inset-inline: 0; z-index: 40;
+    background: linear-gradient(180deg, rgba(11,10,9,0.85), rgba(11,10,9,0.55) 55%, transparent);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.25rem;
+  }
+  @media (min-width: 640px) { .header { padding: 1.75rem 2.5rem; } }
+  .logo { display: inline-flex; align-items: flex-start; gap: 0.35rem; font-family: var(--f-latin); font-weight: 400; font-size: 1.35rem; letter-spacing: 0.3em; line-height: 1; }
+  .logo__seal { width: 0.5rem; height: 0.5rem; background: var(--shu); margin-top: -0.15rem; }
+  .nav { display: none; align-items: center; gap: 2.25rem; }
+  @media (min-width: 1024px) { .nav { display: flex; } }
+  .nav a, .nav button {
+    position: relative; font-size: 0.8rem; color: var(--paper-muted); line-height: 1.6;
+    transition: color 300ms var(--ease-entrance);
+  }
+  .nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -0.2rem; height: 1px; background: var(--paper);
+    transform: scaleX(0); transform-origin: left; transition: transform 400ms var(--ease-silk);
+  }
+  .nav a:hover, .nav button:hover { color: var(--paper); }
+  .nav a:hover::after { transform: scaleX(1); }
+  .cart { display: inline-flex; align-items: center; gap: 0.2rem; }
+  .cart__count { position: relative; display: inline-block; overflow: hidden; height: 1.6em; min-width: 0.7em; vertical-align: bottom; font-variant-numeric: tabular-nums; }
+  .cart__num { display: block; transition: transform 500ms var(--ease-silk); }
+  .cart__num.is-leaving { position: absolute; inset: 0; transform: translateY(-100%); }
+  .cart__num.is-entering { transform: translateY(100%); }
+  .cart__badge { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--shu); opacity: 0; margin-left: 0.2rem; }
+  .cart__badge.is-pulse { animation: badge-pulse 600ms var(--ease-entrance); }
+  @keyframes badge-pulse { 0% { opacity: 0; transform: scale(0.4); } 35% { opacity: 1; transform: scale(1.6); } 100% { opacity: 1; transform: scale(1); } }
+
+  .burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 0.4rem; width: 2rem; height: 2rem; position: relative; z-index: 46; }
+  @media (min-width: 1024px) { .burger { display: none; } }
+  .burger span { display: block; height: 1px; width: 100%; background: var(--paper); transition: transform 400ms var(--ease-silk); }
+  .menu-open .burger span:first-child { transform: translateY(0.2rem) rotate(45deg); }
+  .menu-open .burger span:last-child  { transform: translateY(-0.2rem) rotate(-45deg); }
+  .menu {
+    position: fixed; inset: 0; z-index: 45; background: rgba(11,10,9,0.94);
+    display: flex; flex-direction: column; justify-content: center; gap: 1.5rem; padding: 0 2rem;
+    opacity: 0; visibility: hidden; transition: opacity 400ms var(--ease-entrance), visibility 0s linear 400ms;
+  }
+  .menu-open .menu { opacity: 1; visibility: visible; transition: opacity 400ms var(--ease-entrance); }
+  .menu a { font-family: var(--f-mincho); font-size: 1.8rem; line-height: 1.4; opacity: 0; transform: translateY(1rem); transition: opacity 500ms var(--ease-silk), transform 500ms var(--ease-silk); }
+  .menu-open .menu a { opacity: 1; transform: none; }
+  .menu a span { display: block; font-family: var(--f-latin); font-style: italic; font-size: 0.9rem; color: var(--paper-muted); }
+
+  /* ───── 共通 ───── */
+  .section { position: relative; padding-inline: 1.25rem; }
+  @media (min-width: 640px) { .section { padding-inline: 2.5rem; } }
+  .wrap { max-width: 76rem; margin-inline: auto; }
+  .eyebrow { font-family: var(--f-latin); font-style: italic; font-weight: 400; font-size: 1.05rem; color: var(--paper-muted); letter-spacing: 0.04em; }
+  .h2 { font-family: var(--f-mincho); font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 3.2rem); line-height: 1.5; letter-spacing: 0.12em; }
+  .glass { background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+  .rise { opacity: 0; transform: translateY(1.5rem); transition: opacity 1000ms var(--ease-silk), transform 1000ms var(--ease-silk); }
+  .rise.is-in { opacity: 1; transform: none; }
+
+  /* ───── ヒーロー ───── */
+  .hero { position: relative; height: 100svh; min-height: 34rem; }
+  .hero__title {
+    position: absolute; right: 10vw; top: 53%; transform: translateY(-50%);
+    writing-mode: vertical-rl; font-family: var(--f-mincho); font-weight: 400;
+    font-size: clamp(2.2rem, 4.6vw, 4.6rem); line-height: 1.7; letter-spacing: 0.18em; white-space: nowrap;
+  }
+  .hero__char { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(0.4em); transition: opacity 1100ms var(--ease-silk), filter 1100ms var(--ease-silk), transform 1100ms var(--ease-silk); }
+  .hero__title .hero__char { transform: translateX(-0.4em); }
+  .hero__char.is-in { opacity: 1; filter: blur(0); transform: none; }
+  .hero__meta { position: absolute; left: 2.5rem; bottom: 2.5rem; opacity: 0; transition: opacity 900ms var(--ease-silk); }
+  .hero__cue { position: absolute; left: 50%; bottom: 2rem; transform: translateX(-50%); display: grid; justify-items: center; gap: 0.6rem; opacity: 0; transition: opacity 900ms var(--ease-silk); }
+  .hero.is-ready .hero__meta, .hero.is-ready .hero__cue { opacity: 1; }
+  .cue__label { font-family: var(--f-latin); font-style: italic; font-size: 0.85rem; color: var(--paper-muted); line-height: 1; }
+  .cue__line { position: relative; width: 1px; height: 4rem; background: var(--line); overflow: hidden; }
+  .cue__line::after { content: ""; position: absolute; left: -1px; width: 3px; height: 0.6rem; border-radius: 2px; background: var(--paper); animation: cue 2000ms var(--ease-silk) infinite; }
+  @keyframes cue { from { top: -0.6rem; } to { top: 100%; } }
+  @media (max-width: 639.98px) {
+    .hero__title { writing-mode: horizontal-tb; right: auto; left: 1.25rem; top: auto; bottom: 7.5rem; transform: none; white-space: normal; font-size: 2.1rem; line-height: 1.6; letter-spacing: 0.1em; }
+    .hero__title .hero__char { transform: translateY(0.4em); }
+    .hero__meta { left: 1.25rem; bottom: 5.25rem; font-size: 0.9rem; }
+    .hero__cue { left: auto; right: 1.25rem; transform: none; bottom: 1.5rem; }
+  }
+
+  /* ───── 物語 ───── */
+  .story { padding-block: 10rem 8rem; }
+  .story__grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 1024px) { .story__grid { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+  .story__head .h2 { margin-top: 0.75rem; }
+  .story__body { display: grid; gap: 2rem; color: var(--paper-muted); font-size: 1rem; max-width: 38rem; }
+  @media (min-width: 1024px) { .story__body { margin-left: auto; } }
+  .lines .line { display: block; overflow: hidden; }
+  .lines .line__inner { display: block; transform: translateY(105%); transition: transform 1000ms var(--ease-silk); }
+  .lines.is-in .line__inner { transform: none; }
+
+  /* ───── 香り（sticky） ───── */
+  .scents { height: 400vh; }
+  .scents__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+  .scents__inner { position: relative; height: 100%; max-width: 76rem; margin-inline: auto; }
+  .scent {
+    position: absolute; left: 0; top: 50%; width: min(28rem, 42%);
+    transform: translateY(calc(-50% + 0.6rem)); opacity: 0; filter: blur(6px);
+    transition: opacity 400ms var(--ease-silk), transform 400ms var(--ease-silk), filter 400ms var(--ease-silk);
+    pointer-events: none;
+  }
+  .scent.is-active {
+    opacity: 1; filter: blur(0); transform: translateY(-50%); pointer-events: auto;
+    transition-duration: 700ms; transition-delay: 350ms;
+  }
+  .scent.is-past { transform: translateY(calc(-50% - 0.6rem)); }
+  .scent__no { font-family: var(--f-latin); font-style: italic; font-weight: 300; font-size: 5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(243,238,230,0.35); }
+  .scent__name { font-family: var(--f-mincho); font-size: 2.6rem; font-weight: 400; line-height: 1.4; letter-spacing: 0.14em; margin-top: 1rem; }
+  .scent__en { font-family: var(--f-latin); font-style: italic; font-size: 1.2rem; color: var(--paper-muted); line-height: 1.4; }
+  .scent__notes { list-style: none; padding: 0; margin: 1.75rem 0 1.25rem; border-top: 1px solid var(--line); }
+  .scent__notes li { display: flex; justify-content: space-between; padding-block: 0.6rem; border-bottom: 1px solid var(--line); font-size: 0.9rem; line-height: 1.6; }
+  .scent__notes li span:first-child { font-family: var(--f-latin); font-style: italic; color: var(--paper-muted); }
+  .scent__price { font-family: var(--f-latin); font-size: 1.15rem; letter-spacing: 0.04em; }
+  .scents__progress { position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: grid; justify-items: center; }
+  .scents__dot { width: 0.45rem; height: 0.45rem; border-radius: 50%; border: 1px solid var(--paper-muted); transition: background 400ms var(--ease-entrance), border-color 400ms var(--ease-entrance); }
+  .scents__dot.is-on { background: var(--paper); border-color: var(--paper); }
+  .scents__bar { position: relative; width: 1px; height: 4rem; background: var(--line); margin-block: 0.4rem; }
+  .scents__bar i { position: absolute; inset: 0; background: var(--paper); transform-origin: top; transform: scaleY(0); }
+  @media (max-width: 1023.98px) {
+    .scents__inner { padding-inline: 0; }
+    .scent { left: 0; right: 0; top: auto; bottom: 1.25rem; width: auto; transform: translateY(0.6rem); padding: 1.25rem 1.25rem 1.1rem; background: var(--glass); border: 1px solid var(--line); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .scent.is-active { transform: none; }
+    .scent.is-past { transform: translateY(-0.6rem); }
+    .scent__no { font-size: 2.4rem; position: absolute; right: 1.25rem; top: 1rem; }
+    .scent__name { font-size: 1.6rem; margin-top: 0; }
+    .scent__en { font-size: 1rem; }
+    .scent__notes { margin: 0.8rem 0 0.6rem; }
+    .scent__notes li { padding-block: 0.3rem; font-size: 0.8rem; }
+    .scents__progress { top: 5.5rem; transform: none; }
+    .scents__bar { height: 2rem; }
+  }
+
+  /* ───── 工房（横スクロール） ───── */
+  .craft { height: 250vh; }
+  .craft__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; gap: 3rem; }
+  .craft__head { max-width: 76rem; width: 100%; margin-inline: auto; }
+  .craft__track { display: flex; gap: 1.5rem; will-change: transform; padding-left: max(0px, calc((100vw - 76rem) / 2 - 2.5rem)); }
+  .craft-card { flex: 0 0 26rem; min-height: 22rem; padding: 2.25rem; border-radius: 0.25rem; display: flex; flex-direction: column; }
+  .craft-card__no { font-family: var(--f-latin); font-style: italic; font-weight: 300; font-size: 3.6rem; line-height: 1; color: var(--paper-muted); }
+  .craft-card__icon { width: 2.5rem; height: 2.5rem; margin-top: auto; stroke: var(--paper); }
+  .craft-card__title { font-family: var(--f-mincho); font-size: 1.9rem; letter-spacing: 0.2em; line-height: 1.4; margin-top: 1.5rem; }
+  .craft-card__body { color: var(--paper-muted); font-size: 0.92rem; line-height: 1.95; margin-top: 0.75rem; }
+  @media (max-width: 1023.98px) {
+    .craft { height: auto; padding-block: 6rem; }
+    .craft__stage { position: static; height: auto; overflow: visible; gap: 2rem; }
+    .craft__track { overflow-x: auto; scroll-snap-type: x mandatory; padding-left: 0; margin-inline: -1.25rem; padding-inline: 1.25rem; scrollbar-width: none; transform: none !important; }
+    .craft__track::-webkit-scrollbar { display: none; }
+    .craft-card { flex-basis: 82%; scroll-snap-align: center; min-height: 20rem; padding: 1.75rem; }
+  }
+
+  /* ───── コレクション ───── */
+  .collection { padding-block: 10rem 8rem; }
+  .collection__head { display: grid; gap: 0.75rem; margin-bottom: 4rem; }
+  .products { display: grid; gap: 1.5rem; }
+  @media (min-width: 1024px) { .products { grid-template-columns: repeat(3, 1fr); } }
+  .product { padding: 2rem; border-radius: 0.25rem; display: grid; gap: 1.1rem; }
+  .product__visual { height: 16rem; display: grid; place-items: end center; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+  .bottle { position: relative; width: 6.5rem; display: grid; justify-items: center; }
+  .bottle__cap { width: 3rem; height: 2.2rem; background: linear-gradient(90deg, #2b2621, #4a4239 45%, #2b2621); border: 1px solid rgba(243,238,230,0.18); }
+  .bottle__neck { width: 1.5rem; height: 0.8rem; background: rgba(243,238,230,0.12); border-inline: 1px solid rgba(243,238,230,0.25); }
+  .bottle__body { position: relative; width: 6.5rem; height: 9rem; border-radius: 1.2rem 1.2rem 0.9rem 0.9rem; border: 1px solid rgba(243,238,230,0.35); background: linear-gradient(100deg, rgba(243,238,230,0.10), rgba(243,238,230,0.02) 40%, rgba(243,238,230,0.08)); overflow: hidden; }
+  .bottle__liquid { position: absolute; inset-inline: 0; bottom: 0; height: 62%; background: linear-gradient(180deg, var(--liq-top), var(--liq-bottom)); transition: height 600ms var(--ease-silk); }
+  .bottle__liquid::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 2px; background: rgba(255,255,255,0.35); }
+  .bottle__body::after { content: ""; position: absolute; top: 0.6rem; bottom: 0.8rem; left: 0.9rem; width: 0.35rem; border-radius: 1rem; background: rgba(255,255,255,0.18); }
+  .product:hover .bottle__liquid { height: 68%; }
+  .product__name { font-family: var(--f-mincho); font-size: 1.6rem; line-height: 1.4; letter-spacing: 0.12em; }
+  .product__en { font-family: var(--f-latin); font-style: italic; color: var(--paper-muted); line-height: 1.2; }
+  .sizes { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem; width: max-content; }
+  .sizes button { font-family: var(--f-latin); font-size: 0.95rem; padding: 0.2rem 0.9rem; border-radius: 999px; line-height: 1.5; color: var(--paper-muted); transition: background 300ms var(--ease-entrance), color 300ms var(--ease-entrance); }
+  .sizes button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+  .product__price { font-family: var(--f-latin); font-size: 1.5rem; letter-spacing: 0.03em; line-height: 1.2; }
+  .add {
+    position: relative; overflow: hidden; height: 3rem; border: 1px solid var(--paper); border-radius: 999px;
+    font-size: 0.9rem; transition: background 300ms var(--ease-entrance), color 300ms var(--ease-entrance);
+  }
+  .add:hover { background: var(--paper); color: var(--ink); }
+  .add span { position: absolute; inset: 0; display: grid; place-items: center; transition: transform 500ms var(--ease-silk); }
+  .add span + span { transform: translateY(100%); }
+  .add.is-added span:first-child { transform: translateY(-100%); }
+  .add.is-added span + span { transform: none; }
+
+  /* ───── 訪れる ───── */
+  .visit { padding-block: 8rem; }
+  .visit__grid { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 1024px) { .visit__grid { grid-template-columns: 5fr 7fr; gap: 5rem; } }
+  .visit dl { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.5rem; margin-top: 2rem; font-size: 0.92rem; }
+  .visit dt { font-family: var(--f-latin); font-style: italic; color: var(--paper-muted); }
+  .reserve { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--shu); font-size: 1rem; }
+  .reserve svg { width: 1rem; transition: transform 400ms var(--ease-silk); }
+  .reserve:hover svg { transform: translateX(0.3rem); }
+  .map { padding: 1.5rem; border-radius: 0.25rem; }
+  .map svg { width: 100%; height: auto; display: block; }
+  .map .draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 2000ms var(--ease-silk); }
+  .map.is-in .draw { stroke-dashoffset: 0; }
+  .map .fade { opacity: 0; transition: opacity 1200ms var(--ease-silk) 1200ms; }
+  .map.is-in .fade { opacity: 1; }
+
+  /* ───── 便り + フッター ───── */
+  .sp-br { display: none; }
+  @media (max-width: 639.98px) { .sp-br { display: inline; } }
+  .letter { padding-block: 6rem 8rem; text-align: center; }
+  .letter__form { display: flex; gap: 1.5rem; align-items: flex-end; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; }
+  .field { position: relative; width: min(26rem, 100%); }
+  .field input { width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--line); padding: 0.6rem 0; outline: none; font-size: 1rem; }
+  .field input::placeholder { color: var(--paper-muted); }
+  .field::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--paper); transform: scaleX(0); transform-origin: left; transition: transform 600ms var(--ease-silk); }
+  .field:focus-within::after { transform: scaleX(1); }
+  .letter__submit { padding: 0.6rem 0.2rem; border-bottom: 1px solid var(--paper); font-size: 0.95rem; }
+  .letter__thanks { margin-top: 2.5rem; font-family: var(--f-mincho); font-size: 1.2rem; }
+  .footer { padding: 3rem 1.25rem 2.5rem; border-top: 1px solid var(--line); }
+  @media (min-width: 640px) { .footer { padding-inline: 2.5rem; } }
+  .footer__inner { max-width: 76rem; margin-inline: auto; display: grid; gap: 1.5rem; }
+  @media (min-width: 1024px) { .footer__inner { grid-template-columns: 1fr auto; align-items: end; } }
+  .footer__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; font-size: 0.8rem; color: var(--paper-muted); }
+  .footer small { display: block; font-size: 0.72rem; color: var(--paper-muted); line-height: 1.8; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
+    .rise, .hero__char, .lines .line__inner, .scent, .add span, .bottle__liquid, .map .draw, .map .fade { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+  }
+</style>
+</head>
+<body>
+  <canvas class="gl" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader__kanji">霧</div>
+    <div class="loader__count" data-count>0</div>
+  </div>
+
+  <header class="header">
+    <a class="logo" href="#top" aria-label="KIRI トップへ">KIRI<span class="logo__seal" aria-hidden="true"></span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="#story">物語</a>
+      <a href="#scents">香り</a>
+      <a href="#craft">工房</a>
+      <a href="#collection">コレクション</a>
+      <a href="#visit">訪れる</a>
+      <a class="cart" href="#collection">カート (<span class="cart__count" data-cart><span class="cart__num">0</span></span>)<span class="cart__badge" data-badge></span></a>
+    </nav>
+    <button class="burger" type="button" aria-label="メニューを開く" aria-expanded="false" data-burger><span></span><span></span></button>
+  </header>
+  <nav class="menu" aria-label="モバイル">
+    <a href="#story">物語<span>Story</span></a>
+    <a href="#scents">香り<span>Scents</span></a>
+    <a href="#craft">工房<span>Atelier</span></a>
+    <a href="#collection">コレクション<span>Collection</span></a>
+    <a href="#visit">訪れる<span>Visit</span></a>
+  </nav>
+
+  <main>
+    <section class="hero" id="top" data-offset="hero">
+      <h1 class="hero__title" data-chars>香りは、<br>記憶にかかる霧。</h1>
+      <p class="hero__meta latin">Kyoto — Atelier of Scent, est. 2019</p>
+      <div class="hero__cue" aria-hidden="true"><span class="cue__label">Scroll</span><span class="cue__line"></span></div>
+    </section>
+
+    <section class="section story" id="story" data-offset="story">
+      <div class="wrap story__grid">
+        <div class="story__head">
+          <p class="eyebrow rise">01 — Story</p>
+          <h2 class="h2 rise">朝の鴨川に、<br>霧がかかるころ。</h2>
+        </div>
+        <div class="story__body">
+          <p class="lines" data-lines>鴨川の上流、糺の森にほど近い路地で、KIRI は小さな調香の工房として始まりました。夜明け前、川面から立ちのぼる霧は、土と水と若葉の匂いをいっぺんに運んできます。</p>
+          <p class="lines" data-lines>原点は、祖母の桐箪笥でした。引き出しを開けるたびにふわりと立つ、樟脳と白檀と、古い着物の匂い。何十年も前の季節が、香りだけを頼りに目の前へ戻ってくる。</p>
+          <p class="lines" data-lines>香りは、すぐに消えてしまうもの。だからこそ私たちは、つくるより「残す」ことに時間をかけます。肌の上で消えたあとも、記憶のなかで長くたなびく霧のように。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section scents" id="scents" data-offset="scents" aria-label="三つの香り">
+      <div class="scents__stage">
+        <div class="scents__inner">
+          <article class="scent is-active" data-scent="0">
+            <p class="scent__no">02</p>
+            <h2 class="scent__name">白檀の夕べ</h2>
+            <p class="scent__en">Santal Dusk</p>
+            <ul class="scent__notes">
+              <li><span>Top</span><span>ほうじ茶</span></li>
+              <li><span>Heart</span><span>白檀</span></li>
+              <li><span>Base</span><span>アンバー</span></li>
+            </ul>
+            <p class="scent__price">50ml ¥24,200</p>
+          </article>
+          <article class="scent" data-scent="1">
+            <p class="scent__no">03</p>
+            <h2 class="scent__name">月白</h2>
+            <p class="scent__en">Geppaku</p>
+            <ul class="scent__notes">
+              <li><span>Top</span><span>白木蓮</span></li>
+              <li><span>Heart</span><span>米粉</span></li>
+              <li><span>Base</span><span>ムスク</span></li>
+            </ul>
+            <p class="scent__price">50ml ¥24,200</p>
+          </article>
+          <article class="scent" data-scent="2">
+            <p class="scent__no">04</p>
+            <h2 class="scent__name">潮騒</h2>
+            <p class="scent__en">Shiosai</p>
+            <ul class="scent__notes">
+              <li><span>Top</span><span>海塩</span></li>
+              <li><span>Heart</span><span>紫蘇</span></li>
+              <li><span>Base</span><span>ベチバー</span></li>
+            </ul>
+            <p class="scent__price">50ml ¥24,200</p>
+          </article>
+          <div class="scents__progress" aria-hidden="true">
+            <span class="scents__dot is-on" data-dot></span>
+            <span class="scents__bar"><i data-bar></i></span>
+            <span class="scents__dot" data-dot></span>
+            <span class="scents__bar"><i data-bar></i></span>
+            <span class="scents__dot" data-dot></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section craft" id="craft" data-offset="craft">
+      <div class="craft__stage">
+        <div class="craft__head">
+          <p class="eyebrow rise">05 — Atelier</p>
+          <h2 class="h2 rise">一滴に、九十日。</h2>
+        </div>
+        <div class="craft__track" data-track>
+          <article class="craft-card glass">
+            <p class="craft-card__no">i.</p>
+            <h3 class="craft-card__title">採る</h3>
+            <p class="craft-card__body">春の白木蓮、秋の白檀。原料は産地に足を運び、その年いちばん香りの澄んだものだけを選びます。</p>
+            <svg class="craft-card__icon" viewBox="0 0 40 40" fill="none" stroke-width="1" aria-hidden="true"><path d="M20 36V16"/><path d="M20 22c-6 0-10-4-10-10 6 0 10 4 10 10Z"/><path d="M20 18c5 0 9-3.5 9-9-5 0-9 3.5-9 9Z"/></svg>
+          </article>
+          <article class="craft-card glass">
+            <p class="craft-card__no">ii.</p>
+            <h3 class="craft-card__title">寝かす</h3>
+            <p class="craft-card__body">調合前の原料を桐の樽に移し、蔵の暗がりで六十日。角が取れ、香りが丸く落ち着くのを待ちます。</p>
+            <svg class="craft-card__icon" viewBox="0 0 40 40" fill="none" stroke-width="1" aria-hidden="true"><path d="M11 6h18c2 5 2 23 0 28H11c-2-5-2-23 0-28Z"/><path d="M9.5 13h21M9.5 27h21"/></svg>
+          </article>
+          <article class="craft-card glass">
+            <p class="craft-card__no">iii.</p>
+            <h3 class="craft-card__title">合わせる</h3>
+            <p class="craft-card__body">調香師が一滴ずつ重ね、三十日かけて試香を繰り返す。記憶の中の匂いに近づくまで、何度でも。</p>
+            <svg class="craft-card__icon" viewBox="0 0 40 40" fill="none" stroke-width="1" aria-hidden="true"><path d="M20 4c0 6-7 12-7 19a7 7 0 0 0 14 0c0-7-7-13-7-19Z"/><path d="M8 36h24"/></svg>
+          </article>
+          <article class="craft-card glass">
+            <p class="craft-card__no">iv.</p>
+            <h3 class="craft-card__title">詰める</h3>
+            <p class="craft-card__body">最後は手作業で瓶に詰め、ひと瓶ずつ和紙で包みます。封を切る瞬間まで、香りを眠らせるために。</p>
+            <svg class="craft-card__icon" viewBox="0 0 40 40" fill="none" stroke-width="1" aria-hidden="true"><rect x="12" y="14" width="16" height="22" rx="3"/><path d="M17 14V9h6v5M15 4h10v5H15z"/></svg>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section collection" id="collection" data-offset="collection">
+      <div class="wrap">
+        <div class="collection__head">
+          <p class="eyebrow rise">06 — Collection</p>
+          <h2 class="h2 rise">三つの香り、<br class="sp-br">三つの霧。</h2>
+        </div>
+        <div class="products">
+          <article class="product glass rise" data-product data-price-50="24,200" data-price-100="38,500">
+            <div class="product__visual" aria-hidden="true">
+              <div class="bottle" style="--liq-top: rgba(241,217,181,0.55); --liq-bottom: rgba(176,122,70,0.75);">
+                <div class="bottle__cap"></div><div class="bottle__neck"></div>
+                <div class="bottle__body"><div class="bottle__liquid"></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="product__name">白檀の夕べ</h3>
+              <p class="product__en">Santal Dusk</p>
+            </div>
+            <div class="sizes" role="group" aria-label="容量">
+              <button type="button" aria-pressed="true" data-size="50">50ml</button>
+              <button type="button" aria-pressed="false" data-size="100">100ml</button>
+            </div>
+            <p class="product__price" data-price>¥24,200</p>
+            <button class="add" type="button" data-add><span>カートに入れる</span><span aria-hidden="true">✓ 追加しました</span></button>
+          </article>
+          <article class="product glass rise" data-product data-price-50="24,200" data-price-100="38,500">
+            <div class="product__visual" aria-hidden="true">
+              <div class="bottle" style="--liq-top: rgba(232,236,243,0.45); --liq-bottom: rgba(150,164,190,0.65);">
+                <div class="bottle__cap"></div><div class="bottle__neck"></div>
+                <div class="bottle__body"><div class="bottle__liquid"></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="product__name">月白</h3>
+              <p class="product__en">Geppaku</p>
+            </div>
+            <div class="sizes" role="group" aria-label="容量">
+              <button type="button" aria-pressed="true" data-size="50">50ml</button>
+              <button type="button" aria-pressed="false" data-size="100">100ml</button>
+            </div>
+            <p class="product__price" data-price>¥24,200</p>
+            <button class="add" type="button" data-add><span>カートに入れる</span><span aria-hidden="true">✓ 追加しました</span></button>
+          </article>
+          <article class="product glass rise" data-product data-price-50="24,200" data-price-100="38,500">
+            <div class="product__visual" aria-hidden="true">
+              <div class="bottle" style="--liq-top: rgba(207,227,222,0.45); --liq-bottom: rgba(92,140,132,0.7);">
+                <div class="bottle__cap"></div><div class="bottle__neck"></div>
+                <div class="bottle__body"><div class="bottle__liquid"></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="product__name">潮騒</h3>
+              <p class="product__en">Shiosai</p>
+            </div>
+            <div class="sizes" role="group" aria-label="容量">
+              <button type="button" aria-pressed="true" data-size="50">50ml</button>
+              <button type="button" aria-pressed="false" data-size="100">100ml</button>
+            </div>
+            <p class="product__price" data-price>¥24,200</p>
+            <button class="add" type="button" data-add><span>カートに入れる</span><span aria-hidden="true">✓ 追加しました</span></button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section visit" id="visit" data-offset="visit">
+      <div class="wrap visit__grid">
+        <div>
+          <p class="eyebrow rise">07 — Visit</p>
+          <h2 class="h2 rise">糺の森のそばで、<br>香りを選ぶ。</h2>
+          <dl class="rise">
+            <dt>Address</dt><dd>京都市左京区 下鴨宮崎町 00-0</dd>
+            <dt>Hours</dt><dd>11:00 — 18:00（火・水 休）</dd>
+            <dt>Note</dt><dd>完全予約制・1枠2名まで</dd>
+          </dl>
+          <a class="reserve rise" href="#visit">調香体験を予約する
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+        <div class="map glass" data-map>
+          <svg viewBox="0 0 560 420" fill="none" role="img" aria-label="アトリエ周辺の簡略地図。鴨川と高野川の合流点の北、糺の森の東側。">
+            <path class="draw" d="M150 -10 C170 60 150 120 185 175 C215 225 250 250 262 300 C275 360 262 400 270 440" stroke="rgba(243,238,230,0.55)" stroke-width="2"/>
+            <path class="draw" d="M430 -10 C400 70 380 130 330 190 C300 225 280 250 262 300" stroke="rgba(243,238,230,0.35)" stroke-width="1.5"/>
+            <path class="draw" d="M20 360 L540 330 M40 110 L520 95 M470 20 L500 400" stroke="rgba(243,238,230,0.14)" stroke-width="1"/>
+            <g class="fade" fill="rgba(243,238,230,0.35)" data-forest></g>
+            <g class="fade">
+              <rect x="352" y="140" width="12" height="12" fill="#c8553d"/>
+              <text x="372" y="151" fill="#f3eee6" font-size="13" font-family="Zen Kaku Gothic New, sans-serif" letter-spacing="1">KIRI Atelier</text>
+              <text x="208" y="262" fill="#a8a196" font-size="12" font-family="Zen Kaku Gothic New, sans-serif" letter-spacing="2">糺の森</text>
+              <text x="118" y="60" fill="#a8a196" font-size="11" font-family="Cormorant Garamond, serif" font-style="italic">Kamo River</text>
+              <text x="380" y="60" fill="#a8a196" font-size="11" font-family="Cormorant Garamond, serif" font-style="italic">Takano River</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section letter" id="letter" data-offset="letter">
+      <div class="wrap">
+        <p class="eyebrow rise">08 — Letters</p>
+        <h2 class="h2 rise">季節の便りを<br class="sp-br">受け取る</h2>
+        <form class="letter__form rise" data-letter novalidate>
+          <label class="field"><span class="sr-only">メールアドレス</span><input type="email" placeholder="メールアドレス" autocomplete="email" required /></label>
+          <button class="letter__submit" type="submit">登録</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <a class="logo" href="#top">KIRI<span class="logo__seal" aria-hidden="true"></span></a>
+        <small style="margin-top:1rem">© 2026 KIRI Atelier<br>※本ページは架空のブランドのデザインサンプルです。</small>
+      </div>
+      <div class="footer__links"><a href="#story">物語</a><a href="#scents">香り</a><a href="#collection">コレクション</a><a href="#visit">訪れる</a><a href="#top">プライバシー</a></div>
+    </div>
+  </footer>
+
+<script type="importmap">{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "lenis": "https://unpkg.com/lenis@1.3.19/dist/lenis.mjs"
+} }</script>
+<script type="module">
+import * as THREE from 'three';
+import Lenis from 'lenis';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile = () => matchMedia('(max-width: 1023px)').matches || navigator.maxTouchPoints > 0;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const segmenter = new Intl.Segmenter('ja', { granularity: 'grapheme' });
+const graphemes = (t) => Array.from(segmenter.segment(t), (s) => s.segment);
+
+/* ═════════════ Lenis ═════════════ */
+const lenis = new Lenis({ lerp: reduce ? 1 : 0.075, smoothWheel: !reduce });
+window.__lenis = lenis;
+$$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+  const id = a.getAttribute('href');
+  const el = id.length > 1 && document.querySelector(id);
+  if (!el) return;
+  e.preventDefault();
+  document.body.classList.remove('menu-open');
+  $('[data-burger]').setAttribute('aria-expanded', 'false');
+  lenis.start();   // メニュー表示中は stop しているので、再開してから移動する
+  lenis.scrollTo(el, { duration: reduce ? 0 : 1.6 });
+}));
+
+/* ═════════════ メニュー ═════════════ */
+$('[data-burger]').addEventListener('click', (e) => {
+  const open = document.body.classList.toggle('menu-open');
+  e.currentTarget.setAttribute('aria-expanded', String(open));
+  e.currentTarget.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  $$('.menu a').forEach((a, i) => { a.style.transitionDelay = open ? `${120 + i * 60}ms` : '0ms'; });
+  open ? lenis.stop() : lenis.start();
+});
+
+/* ═════════════ 粒子の形状（起動時に1回生成） ═════════════ */
+const N = isMobile() ? 12000 : 24000;
+
+function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+const rand = rng(20190417);
+function randomDir() {
+  for (;;) {
+    const x = rand() * 2 - 1, y = rand() * 2 - 1, z = rand() * 2 - 1, l = x * x + y * y + z * z;
+    if (l > 1e-4 && l <= 1) { const k = 1 / Math.sqrt(l); return [x * k, y * k, z * k]; }
+  }
+}
+
+function makeMist() {
+  const a = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const [x, y, z] = randomDir(); const r = Math.pow(rand(), 0.6);
+    a.set([x * 3.2 * r, y * 1.6 * r, z * 1.8 * r], i * 3);
+  }
+  return a;
+}
+
+function makeBottle() {
+  const a = new Float32Array(N * 3);
+  const TAU = Math.PI * 2;
+  // 各パーツの表面積で配分（首に偏らないように）
+  const parts = [
+    { w: 2.3,  f: () => { const r = 0.83 * Math.sqrt(rand()), t = rand() * TAU; return [Math.cos(t) * r, -1.25, Math.sin(t) * r]; } },
+    { w: 10.7, f: () => {
+      const y = -1.25 + rand() * 1.8; const d = y + 1.25 < 0.12 ? 0.12 - (y + 1.25) : 0;
+      const R = d > 0 ? 0.83 + Math.sqrt(Math.max(0, 0.0144 - d * d)) : 0.95; const t = rand() * TAU;
+      return [Math.cos(t) * R, y, Math.sin(t) * R]; } },
+    { w: 2.6,  f: () => { const y = 0.55 + rand() * 0.2; const k = (y - 0.55) / 0.2; const s = k * k * (3 - 2 * k); const R = 0.95 + (0.28 - 0.95) * s; const t = rand() * TAU; return [Math.cos(t) * R, y, Math.sin(t) * R]; } },
+    { w: 0.5,  f: () => { const y = 0.75 + rand() * 0.25; const t = rand() * TAU; return [Math.cos(t) * 0.28, y, Math.sin(t) * 0.28]; } },
+    { w: 2.3,  f: () => {
+      const h = 0.45; const u = rand();
+      if (u < 0.35) return [(rand() - 0.5) * 0.9, 1.0 + h, (rand() - 0.5) * 0.9];
+      const side = (rand() * 4) | 0, s = (rand() - 0.5) * 0.9, y = 1.0 + rand() * h;
+      return side === 0 ? [0.45, y, s] : side === 1 ? [-0.45, y, s] : side === 2 ? [s, y, 0.45] : [s, y, -0.45]; } },
+  ];
+  const total = parts.reduce((s, p) => s + p.w, 0);
+  const liquid = Math.floor(N * 0.08);
+  let i = 0;
+  for (; i < liquid; i++) { const r = 0.9 * Math.sqrt(rand()), t = rand() * TAU; a.set([Math.cos(t) * r, 0.2, Math.sin(t) * r], i * 3); }
+  for (; i < N; i++) {
+    let u = rand() * total, p = parts[0];
+    for (const part of parts) { if ((u -= part.w) <= 0) { p = part; break; } }
+    a.set(p.f(), i * 3);
+  }
+  return a;
+}
+
+function makeMoon() {
+  const a = new Float32Array(N * 3);
+  const halo = Math.floor(N * 0.15), core = N - halo;
+  const noise = (x, y, z) => 0.5 + 0.5 * Math.sin(x * 3.7 + Math.sin(y * 5.1 + z * 2.3)) * Math.sin(z * 4.3 + Math.sin(x * 3.1 - y * 1.7));
+  for (let i = 0; i < core; i++) {
+    const phi = Math.acos(1 - 2 * (i + 0.5) / core), theta = Math.PI * (1 + Math.sqrt(5)) * i;
+    const x = Math.sin(phi) * Math.cos(theta), y = Math.cos(phi), z = Math.sin(phi) * Math.sin(theta);
+    const r = 1.35 * (1 - 0.04 * noise(x * 2.2, y * 2.2, z * 2.2));
+    a.set([x * r, y * r, z * r], i * 3);
+  }
+  for (let i = core; i < N; i++) { const [x, y, z] = randomDir(); const r = 1.5 + rand() * 0.7; a.set([x * r, y * r, z * r], i * 3); }
+  return a;
+}
+
+function makeWave() {
+  const a = new Float32Array(N * 3);
+  const cols = Math.ceil(Math.sqrt(N * 1.7)), rows = Math.ceil(N / cols);
+  const c = Math.cos(-0.35), s = Math.sin(-0.35);
+  for (let i = 0; i < N; i++) {
+    const x = -2.4 + 4.8 * ((i % cols) / (cols - 1)) + (rand() - 0.5) * 0.04;
+    const z = -2.0 + 4.0 * (Math.floor(i / cols) / Math.max(1, rows - 1)) + (rand() - 0.5) * 0.04;
+    const y = 0.32 * Math.sin(x * 1.9) + 0.22 * Math.sin(z * 2.3 + x * 0.7);
+    a.set([x + 0.6, y * c - z * s, y * s + z * c], i * 3);
+  }
+  return a;
+}
+
+/* ═════════════ three.js ═════════════ */
+let gl = null;
+try {
+  const canvas = $('.gl');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+  renderer.setSize(innerWidth, innerHeight, false);
+  renderer.setClearColor(0x0b0a09, 1);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 7.5);
+
+  const geo = new THREE.BufferGeometry();
+  const mist = makeMist();
+  geo.setAttribute('position', new THREE.BufferAttribute(mist, 3));
+  geo.setAttribute('aMist', new THREE.BufferAttribute(mist, 3));
+  geo.setAttribute('aBottle', new THREE.BufferAttribute(makeBottle(), 3));
+  geo.setAttribute('aMoon', new THREE.BufferAttribute(makeMoon(), 3));
+  geo.setAttribute('aWave', new THREE.BufferAttribute(makeWave(), 3));
+  const aRandom = new Float32Array(N), aSeed = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) { aRandom[i] = rand(); aSeed.set([rand() * 2 - 1, rand() * 2 - 1, rand() * 2 - 1], i * 3); }
+  geo.setAttribute('aRandom', new THREE.BufferAttribute(aRandom, 1));
+  geo.setAttribute('aSeed', new THREE.BufferAttribute(aSeed, 3));
+  geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 40);
+
+  const uniforms = {
+    uTime: { value: 0 }, uFrom: { value: 0 }, uTo: { value: 1 }, uT: { value: 0 },
+    uIntro: { value: reduce ? 1 : 0 }, uPixelRatio: { value: renderer.getPixelRatio() },
+    uSize: { value: isMobile() ? 30 : 26 }, uMouse: { value: new THREE.Vector3(99, 99, 0) },
+    uMouseStrength: { value: 0 }, uTint: { value: new THREE.Color(0xf3eee6) }, uOpacity: { value: 1 },
+    uDrift: { value: reduce ? 0 : 1 }, uShapeGain: { value: isMobile() ? 1.8 : 1.0 },
+  };
+
+  const material = new THREE.ShaderMaterial({
+    uniforms, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
+    vertexShader: /* glsl */`
+      attribute vec3 aMist; attribute vec3 aBottle; attribute vec3 aMoon; attribute vec3 aWave;
+      attribute float aRandom; attribute vec3 aSeed;
+      uniform float uTime, uT, uIntro, uPixelRatio, uSize, uMouseStrength, uOpacity, uDrift, uShapeGain;
+      uniform int uFrom, uTo; uniform vec3 uMouse;
+      varying float vAlpha; varying float vTwinkle;
+
+      vec3 pick(int k){ if (k == 1) return aBottle; if (k == 2) return aMoon; if (k == 3) return aWave; return aMist; }
+      float ampOf(int k){ return (k == 0 || k == 4) ? 0.22 : 0.035; }
+      vec3 drift(vec3 p, float t){
+        return vec3(sin(p.y*1.7 + t*0.6 + aSeed.x*6.0),
+                    sin(p.z*1.3 + t*0.5 + aSeed.y*6.0),
+                    sin(p.x*1.5 + t*0.4 + aSeed.z*6.0));
+      }
+      void main(){
+        float t = clamp((uT - aRandom*0.35) / 0.65, 0.0, 1.0);
+        t = t < 0.5 ? 4.0*t*t*t : 1.0 - pow(-2.0*t + 2.0, 3.0)/2.0;
+        vec3 pos = mix(pick(uFrom), pick(uTo), t);
+        pos += aSeed * sin(t*3.14159) * 0.9 * step(0.5, abs(float(uFrom - uTo)));
+        pos += drift(pos, uTime) * mix(ampOf(uFrom), ampOf(uTo), t) * uDrift;
+        float waveW = (uFrom == 3 ? 1.0 - t : 0.0) + (uTo == 3 ? t : 0.0);
+        pos.y += 0.12*sin(pos.x*2.0 + uTime*0.9) * waveW * uDrift;
+        pos = mix(normalize(aSeed + 1e-4)*30.0, pos, uIntro);
+        vec3 toM = pos - uMouse; float d = length(toM);
+        pos += normalize(toM + 1e-4) * smoothstep(0.9, 0.0, d) * 0.35 * uMouseStrength;
+        vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+        gl_Position = projectionMatrix * mv;
+        gl_PointSize = max(0.0, uSize * uPixelRatio * (0.55 + aRandom*0.9) / max(0.1, -mv.z));
+        float mistW = mix(float(uFrom == 0 || uFrom == 4), float(uTo == 0 || uTo == 4), t);
+        gl_PointSize *= 1.0 + 0.55 * mistW;
+        vTwinkle = 0.65 + 0.35*sin(uTime*(0.8 + aRandom*2.2) + aRandom*50.0);
+        vAlpha = uOpacity * smoothstep(12.0, 3.0, -mv.z) * mix(uShapeGain, 1.6, mistW);
+      }`,
+    fragmentShader: /* glsl */`
+      uniform vec3 uTint; varying float vAlpha; varying float vTwinkle;
+      void main(){
+        vec2 c = gl_PointCoord - 0.5; float r = length(c);
+        float core = smoothstep(0.5, 0.0, r); core *= core;
+        vec3 col = mix(vec3(0.953, 0.933, 0.902), uTint, 0.6);
+        gl_FragColor = vec4(col * vTwinkle, core * vAlpha * 0.55);
+        if (gl_FragColor.a < 0.004) discard;
+      }`,
+  });
+  const points = new THREE.Points(geo, material);
+  points.frustumCulled = false;
+  scene.add(points);
+  gl = { renderer, scene, camera, points, uniforms };
+} catch (err) {
+  console.warn('WebGL を初期化できないため静的背景に切り替えます', err);
+  document.body.classList.add('no-webgl');
+}
+
+/* ═════════════ レイアウト計測（リサイズ時のみ） ═════════════ */
+const sections = $$('[data-offset]');
+const layout = { tops: [], scentsTop: 0, scentsLen: 1, craftTop: 0, craftLen: 1, trackShift: 0 };
+function measure() {
+  const y = scrollY;
+  layout.tops = sections.map((s) => ({ id: s.dataset.offset, top: s.getBoundingClientRect().top + y, h: s.offsetHeight }));
+  const sc = $('#scents'), cr = $('#craft'), track = $('[data-track]');
+  layout.scentsTop = sc.getBoundingClientRect().top + y;
+  layout.scentsLen = Math.max(1, sc.offsetHeight - innerHeight);
+  layout.craftTop = cr.getBoundingClientRect().top + y;
+  layout.craftLen = Math.max(1, cr.offsetHeight - innerHeight);
+  layout.trackShift = Math.max(0, track.scrollWidth - innerWidth + (innerWidth >= 1024 ? Math.max(40, (innerWidth - 1216) / 2) : 0));
+}
+
+/* ═════════════ スクロール → 形状・パネル ═════════════ */
+const SHAPE_OFFSET = { hero: [1.1, 0, 0], story: [-1.2, 0.1, 0], scents: [1.4, 0, 0], craft: [0, 0, 0], collection: [0, 0, 0], visit: [0, 0, 0], letter: [0, 0, 0] };
+const TINTS = { mist: new THREE.Color(0xf3eee6), 1: new THREE.Color(0xf1d9b5), 2: new THREE.Color(0xe8ecf3), 3: new THREE.Color(0xcfe3de) };
+const scentEls = $$('[data-scent]'), dots = $$('[data-dot]'), bars = $$('[data-bar]');
+let activeScent = 0, exitT = 0;
+
+function currentSection() {
+  const mid = scrollY + innerHeight * 0.5;
+  let id = 'hero';
+  for (const s of layout.tops) if (mid >= s.top) id = s.id;
+  return id;
+}
+
+// #scents の進捗 p から from/to/t を決める（4 attribute を全部渡し、シェーダーで選ぶ）
+function shapeState(p) {
+  const seg = (a, b) => clamp((p - a) / (b - a));
+  if (p <= 0)    return [0, 1, 0];
+  if (p < 0.12)  return [0, 1, seg(0, 0.12)];
+  if (p < 0.30)  return [1, 2, 0];
+  if (p < 0.42)  return [1, 2, seg(0.30, 0.42)];
+  if (p < 0.63)  return [2, 3, 0];
+  if (p < 0.75)  return [2, 3, seg(0.63, 0.75)];
+  return [3, 4, exitT];
+}
+
+function updateScroll(dt) {
+  const p = (scrollY - layout.scentsTop) / layout.scentsLen;
+  // #scents を抜けたら 1400ms かけて波を霧へほどく（戻ると巻き戻る）
+  const exitTarget = p >= 1 ? 1 : 0;
+  exitT = reduce ? exitTarget : clamp(exitT + Math.sign(exitTarget - exitT) * dt / 1400);
+  if (exitTarget === 0 && p < 0.75) exitT = 0;
+  const [from, to, t] = shapeState(p);
+
+  const idx = p < 0.36 ? 0 : p < 0.69 ? 1 : 2;
+  if (idx !== activeScent) {
+    scentEls.forEach((el, i) => { el.classList.toggle('is-active', i === idx); el.classList.toggle('is-past', i < idx); });
+    activeScent = idx;
+  }
+  dots.forEach((d, i) => d.classList.toggle('is-on', i <= idx));
+  bars[0].style.transform = `scaleY(${clamp(p / 0.36)})`;
+  bars[1].style.transform = `scaleY(${clamp((p - 0.36) / 0.33)})`;
+
+  if (innerWidth >= 1024) {
+    const cp = clamp((scrollY - layout.craftTop) / layout.craftLen);
+    $('[data-track]').style.transform = `translate3d(${-cp * layout.trackShift}px,0,0)`;
+  }
+
+  if (!gl) return;
+  const u = gl.uniforms;
+  u.uFrom.value = from; u.uTo.value = to; u.uT.value = reduce ? Math.round(t) : t;
+
+  const sec = currentSection();
+  const inScents = p >= 0 && p < 1;
+  let off = SHAPE_OFFSET[sec] || [0, 0, 0];
+  if (inScents && innerWidth < 1024) off = [0, 0.8, 0];
+  targets.offset.set(...off);
+  targets.opacity = sec === 'collection' || sec === 'visit' || sec === 'letter' ? 0.55 : 1;
+  // SP は本文と霧が重なるので、ヒーローと香り以外は薄くする
+  if (innerWidth < 1024 && sec !== 'hero' && !inScents) targets.opacity = 0.4;
+  targets.tint = inScents && p >= 0.06 ? TINTS[idx + 1] : TINTS.mist;
+  targets.rotX = inScents && p > 0.33 && p < 0.7 ? 0.18 : 0;
+}
+const targets = { offset: new THREE.Vector3(1.1, 0, 0), opacity: 1, tint: new THREE.Color(0xf3eee6), rotX: 0 };
+
+/* ═════════════ ポインター ═════════════ */
+const pointer = { x: 0, y: 0, nx: 0, ny: 0, last: -1e9, active: false };
+addEventListener('pointermove', (e) => {
+  pointer.x = e.clientX; pointer.y = e.clientY;
+  pointer.nx = (e.clientX / innerWidth) * 2 - 1; pointer.ny = -(e.clientY / innerHeight) * 2 + 1;
+  pointer.last = performance.now(); pointer.active = e.pointerType === 'mouse';
+}, { passive: true });
+const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), hit = new THREE.Vector3();
+
+/* ═════════════ 描画ループ（Lenis と1本に統合） ═════════════ */
+let last = performance.now(), frames = [], degraded = false, running = true, introStart = null;
+document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) { last = performance.now(); requestAnimationFrame(loop); } });
+
+function loop(now) {
+  if (!running) return;
+  const dt = Math.min(64, now - last); last = now;
+  lenis.raf(now);
+  updateScroll(dt);
+
+  if (gl) {
+    const { renderer, scene, camera, points, uniforms: u } = gl;
+    u.uTime.value = now / 1000;
+    if (introStart !== null && !reduce) {
+      const k = clamp((now - introStart) / 2400);
+      u.uIntro.value = 1 - Math.pow(1 - k, 4);
+    }
+    points.position.lerp(targets.offset, 0.05);
+    u.uOpacity.value += (targets.opacity - u.uOpacity.value) * 0.05;
+    u.uTint.value.lerp(targets.tint, 1 - Math.pow(0.001, dt / 900));
+    if (!reduce) {
+      points.rotation.y = Math.sin(now / 1000 * 0.12) * 0.5;
+      points.rotation.x += (targets.rotX - points.rotation.x) * 0.04;
+      camera.position.x += (pointer.nx * 0.35 - camera.position.x) * 0.04;
+      camera.position.y += (pointer.ny * 0.2 - camera.position.y) * 0.04;
+    }
+    camera.lookAt(0, 0, 0);
+    // ポインター反発: z=0 平面との交点をオブジェクトのローカル座標へ
+    const moving = pointer.active && !reduce && now - pointer.last < 1200;
+    u.uMouseStrength.value += ((moving ? 1 : 0) - u.uMouseStrength.value) * (moving ? 0.08 : 0.03);
+    if (pointer.active) {
+      ray.setFromCamera({ x: pointer.nx, y: pointer.ny }, camera);
+      if (ray.ray.intersectPlane(plane, hit)) { points.updateMatrixWorld(); u.uMouse.value.copy(points.worldToLocal(hit.clone())); }
+    }
+    renderer.render(scene, camera);
+
+    // 直近60フレーム平均が 22ms を超えたら一度だけ解像度を落とす
+    if (!degraded) {
+      frames.push(dt); if (frames.length > 60) frames.shift();
+      if (frames.length === 60 && frames.reduce((a, b) => a + b, 0) / 60 > 22) {
+        degraded = true; renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight, false); u.uPixelRatio.value = 1;
+      }
+    }
+  }
+  requestAnimationFrame(loop);
+}
+
+let resizeTimer;
+addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (gl) { gl.renderer.setSize(innerWidth, innerHeight, false); gl.camera.aspect = innerWidth / innerHeight; gl.camera.updateProjectionMatrix(); }
+    splitAllLines(); measure();
+  }, 150);
+});
+
+/* ═════════════ 行マスクリビール（物語） ═════════════ */
+const lineBlocks = $$('[data-lines]');
+lineBlocks.forEach((el) => { el.dataset.text = el.textContent.trim(); });
+function splitLines(el) {
+  const chars = graphemes(el.dataset.text);
+  el.innerHTML = chars.map((c) => `<span class="ch">${c}</span>`).join('');
+  const lines = []; let top = null;
+  $$('.ch', el).forEach((span) => {
+    const t = span.offsetTop;
+    if (top === null || Math.abs(t - top) > 4) { lines.push([]); top = t; }
+    lines[lines.length - 1].push(span.textContent);
+  });
+  el.innerHTML = lines.map((l, i) => `<span class="line"><span class="line__inner" style="transition-delay:${i * 90}ms">${l.join('')}</span></span>`).join('');
+}
+function splitAllLines() { lineBlocks.forEach(splitLines); }
+
+/* ═════════════ 汎用 in-view ═════════════ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('is-in');
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.2 });
+
+/* ═════════════ コレクション / カート ═════════════ */
+let cart = 0;
+function setCart(n) {
+  const box = $('[data-cart]'); const olds = $$('.cart__num:not(.is-leaving)', box);
+  const next = document.createElement('span'); next.className = 'cart__num is-entering'; next.textContent = n;
+  box.appendChild(next);
+  olds.forEach((o) => o.classList.add('is-leaving'));
+  requestAnimationFrame(() => requestAnimationFrame(() => next.classList.remove('is-entering')));
+  setTimeout(() => olds.forEach((o) => o.remove()), 520);
+  const badge = $('[data-badge]'); badge.classList.remove('is-pulse'); void badge.offsetWidth; badge.classList.add('is-pulse');
+}
+$$('[data-product]').forEach((card) => {
+  $$('[data-size]', card).forEach((b) => b.addEventListener('click', () => {
+    $$('[data-size]', card).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $('[data-price]', card).textContent = `¥${card.dataset['price-' + b.dataset.size] ?? card.getAttribute('data-price-' + b.dataset.size)}`;
+  }));
+  const add = $('[data-add]', card);
+  add.addEventListener('click', () => {
+    add.classList.add('is-added'); setCart(++cart);
+    clearTimeout(add._t); add._t = setTimeout(() => add.classList.remove('is-added'), 1800);
+  });
+});
+
+/* ═════════════ 地図 ═════════════ */
+const forest = $('[data-forest]');
+for (let i = 0; i < 90; i++) {
+  const a = rand() * Math.PI * 2, r = Math.sqrt(rand());
+  const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  c.setAttribute('cx', (232 + Math.cos(a) * r * 62).toFixed(1)); c.setAttribute('cy', (225 + Math.sin(a) * r * 36).toFixed(1)); c.setAttribute('r', (0.8 + rand() * 1.4).toFixed(1));
+  forest.appendChild(c);
+}
+$$('[data-map] .draw').forEach((p) => p.style.setProperty('--len', Math.ceil(p.getTotalLength())));
+
+$('[data-letter]').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const p = document.createElement('p'); p.className = 'letter__thanks'; p.textContent = 'ありがとうございます';
+  e.currentTarget.replaceWith(p);
+});
+
+/* ═════════════ ローダー → ヒーロー ═════════════ */
+const heroTitle = $('[data-chars]');
+(function splitHero() {
+  const html = heroTitle.innerHTML.split(/<br\s*\/?>/i);
+  heroTitle.innerHTML = html.map((part) => graphemes(part.trim()).map((c) => `<span class="hero__char">${c}</span>`).join('')).join('<br>');
+})();
+
+async function boot() {
+  const countEl = $('[data-count]'); const t0 = performance.now();
+  const MIN = reduce ? 0 : 1400;
+  let ready = false;
+  Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 2500))]).then(() => { ready = true; });
+  introStart = performance.now();
+  await new Promise((resolve) => {
+    const tick = (now) => {
+      const k = MIN ? clamp((now - t0) / MIN) : 1;
+      const eased = 1 - Math.pow(1 - k, 3);
+      const v = Math.round(eased * (ready ? 100 : 99));
+      countEl.textContent = v;
+      if (k >= 1 && ready) { countEl.textContent = 100; resolve(); } else requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+  splitAllLines(); measure();
+  $$('.rise, [data-lines], [data-map]').forEach((el) => io.observe(el));
+  $('.loader').classList.add('is-done');
+  const chars = $$('.hero__char');
+  const start = reduce ? 0 : 500;
+  chars.forEach((c, i) => setTimeout(() => c.classList.add('is-in'), start + (reduce ? 0 : i * 70)));
+  setTimeout(() => $('.hero').classList.add('is-ready'), start + (reduce ? 0 : chars.length * 70 + 600));
+}
+
+measure();
+requestAnimationFrame(loop);
+boot();
+</script>
+</body>
+</html>
