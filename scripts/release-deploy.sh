@@ -84,6 +84,11 @@ PYEOF
   node "${SCRIPT_DIR}/web-render-check.mjs" || die "描画検証で high の指摘あり"
 fi
 
+# 1.8) handmaid: 別フローの単体 HTML を /handmaid/ として載せる
+#      Astro のビルドには混ぜず、品質ゲートの後で書き出す（website のルールで採点しない）。
+echo "--- handmaid ---"
+node "${SCRIPT_DIR}/handmaid-export.mjs" "$DIST" || die "handmaid の書き出し失敗"
+
 # 2) postprocess: 絶対 URL を相対パス化
 echo "--- postprocess (URL → relative) ---"
 python3 "${SCRIPT_DIR}/web-postprocess-deploy.py" "$DIST" || die "postprocess 失敗"

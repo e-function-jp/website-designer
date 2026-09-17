@@ -620,9 +620,14 @@ const SITE_RULES = [
 
 // ---- 収集 -------------------------------------------------------------------
 
+// dist/handmaid/ は別フローの単体 HTML（scripts/handmaid-export.mjs がデプロイ時に書き出す）。
+// website のルールで採点する対象ではない。
+const EXCLUDED_DIRS = new Set([join(DIST, 'handmaid')]);
+
 function collectFiles(dir, ext, out = []) {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
+    if (EXCLUDED_DIRS.has(p)) continue;
     if (statSync(p).isDirectory()) collectFiles(p, ext, out);
     else if (!ext || name.endsWith(ext)) out.push(p);
   }

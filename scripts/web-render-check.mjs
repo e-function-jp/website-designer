@@ -54,6 +54,8 @@ const MIME = {
 function collectRoutes(dir, out = []) {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
+    // handmaid は別フローの単体 HTML（scripts/handmaid-export.mjs）。website の描画検証の対象外
+    if (p === join(DIST, 'handmaid')) continue;
     if (statSync(p).isDirectory()) collectRoutes(p, out);
     else if (name === 'index.html') out.push('/' + relative(DIST, p).replace(/index\.html$/, ''));
   }
