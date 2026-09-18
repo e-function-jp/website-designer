@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "postbuild": "node scripts/web-build-thumbnails.mjs --sync-dist",
+    "postbuild": "node scripts/web-build-thumbnails.mjs --sync-dist && node scripts/handmaid-export.mjs",
     "astro": "astro",
     "check:web": "npm run build && node scripts/web-quality-check.mjs",
     "check:web:strict": "npm run build && node scripts/web-quality-check.mjs --strict",

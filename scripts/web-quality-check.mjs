@@ -620,14 +620,9 @@ const SITE_RULES = [
 
 // ---- 収集 -------------------------------------------------------------------
 
-// dist/handmaid/ は別フローの単体 HTML（scripts/handmaid-export.mjs がデプロイ時に書き出す）。
-// website のルールで採点する対象ではない。
-const EXCLUDED_DIRS = new Set([join(DIST, 'handmaid')]);
-
 function collectFiles(dir, ext, out = []) {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
-    if (EXCLUDED_DIRS.has(p)) continue;
     if (statSync(p).isDirectory()) collectFiles(p, ext, out);
     else if (!ext || name.endsWith(ext)) out.push(p);
   }
@@ -675,6 +670,13 @@ if (!existsSync(DIST)) {
 
 const htmlFiles = collectFiles(DIST, '.html').filter((f) => !isRedirectStub(readFileSync(f, 'utf8')));
 const allRoutes = new Set(htmlFiles.map((f) => '/' + relative(DIST, f).replace(/index\.html$/, '')));
+
+// dist/handmaid/ は Astro とは別フローで作った単体 HTML（scripts/handmaid-export.mjs が
+// postbuild で書き出す）。website のルールで採点する対象ではないので pages から外す。
+// ただし allRoutes には残す — 索引トップから /handmaid/ へ張ったリンクを
+// base-broken-internal-link が「リンク切れ」と誤判定しないため。
+const HANDMAID_DIR = join(DIST, 'handmaid');
+const scoredHtmlFiles = htmlFiles.filter((f) => !f.startsWith(HANDMAID_DIR + '/'));
 const allAssets = new Set(
   collectFiles(DIST, null).map((f) => '/' + relative(DIST, f)).filter((p) => !p.endsWith('.html')),
 );
@@ -682,7 +684,7 @@ const allAssets = new Set(
 // サイトのルート: /sites/{type}/{model}-{stamp}/
 const SITE_RE = /^\/sites\/([^/]+)\/([^/]+)\//;
 
-const pages = htmlFiles.map((file) => {
+const pages = scoredHtmlFiles.map((file) => {
   const path = '/' + relative(DIST, file).replace(/index\.html$/, '');
   const html = readFileSync(file, 'utf8');
   const m = path.match(SITE_RE);

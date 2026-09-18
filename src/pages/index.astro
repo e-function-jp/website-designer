@@ -87,6 +87,7 @@ function pickRepresentative(entries: SampleEntry[]): SampleEntry {
       <nav class="ml-auto flex gap-4 text-sm" aria-label="サイト内ナビゲーション">
         <a href="/" class="link link-hover font-bold" aria-current="page">サンプル</a>
         <a href="/components/" class="link link-hover">コンポーネント</a>
+        <a href="/handmaid/" class="link link-hover">handmaid</a>
       </nav>
     </div>
   </header>
@@ -103,6 +104,14 @@ function pickRepresentative(entries: SampleEntry[]): SampleEntry {
       <p class="text-sm text-base-content/60 tabular-nums">
         現在 {totalSamples} サイト / {totalPages} ページ / {typeGroups.length} 種別 /
         コンポーネントカタログは <a href="/components/" class="link">/components</a>
+      </p>
+      {/*
+        handmaid は参照学習ループとは別フローで作った単体 HTML の実験（WebGL / 演出）。
+        Astro のビルドには含めず postbuild で dist/handmaid/ へ書き出しているので、
+        ここは手書きのリンクで繋ぐ。
+      */}
+      <p class="text-sm text-base-content/60">
+        演出だけを単体 HTML で試した実験は <a href="/handmaid/" class="link">/handmaid</a> にあります。
       </p>
     </section>
 
@@ -160,6 +169,7 @@ function pickRepresentative(entries: SampleEntry[]): SampleEntry {
       <span>計 {totalPages} ページ</span>
       <span aria-hidden="true">/</span>
       <a href="/components/" class="link link-hover">コンポーネントカタログ</a>
+      <a href="/handmaid/" class="link link-hover">handmaid</a>
       <span class="ml-auto">種別: {typeGroups.map((g) => `${g.meta.label}(${g.entries.length})`).join(' / ')}</span>
     </div>
   </footer>
