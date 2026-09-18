@@ -367,6 +367,29 @@ const PAGE_RULES = [
     },
   },
   {
+    // 分割数だけのグリッド（grid-cols-12 等）は、子の col-span が前提。
+    // 付け忘れると子が1カラム幅（1140px の12分割で約55px）に潰れ、
+    // 日本語本文が1文字ずつ縦に折り返される。ビルドは通り、クラスとしても
+    // 正しいので、静的解析でしか捕まえられない。
+    // 実測 2026-09-16: BusinessPhotoText の1箇所でトップと /service/ が
+    // 読めなくなり、独立judge が 38点（visual 6 / quality 4）を付けた。
+    id: 'arch-grid-span-missing', category: 'Arch', severity: 'high',
+    desc: '分割数の多いグリッドで子に col-span が無い（1カラム幅に潰れる）',
+    check: (p) => {
+      const out = [];
+      const re = /class="([^"]*\bgrid-cols-(\d+)\b[^"]*)"/g;
+      let m;
+      while ((m = re.exec(p.html)) !== null) {
+        const cols = Number(m[2]);
+        if (cols < 5) continue; // 3列カードのような「1要素1カラム」は正常
+        const window = p.html.slice(m.index, m.index + 2500);
+        if (/col-span-|grid-column/.test(window)) continue;
+        out.push(`grid-cols-${cols} を切っているのに子に col-span がありません（${m[1].slice(0, 60)}）— 子が1カラム幅に潰れます`);
+      }
+      return [...new Set(out)].slice(0, 5);
+    },
+  },
+  {
     // Astro の <style is:global> はページ境界を越えて全ビルドに漏れる。
     // 各サンプルサイトが自分のブランド色で .btn-primary 等を上書きすると、
     // 別サイトのCSSと衝突し、読み込み順で勝ったものが全ページに適用される。
