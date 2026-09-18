@@ -1,0 +1,25 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import WorkStudyPlate from './WorkStudyPlate.astro';
+import { url } from '../../lib/site';
+import type { SiteConfig } from '../../lib/site';
+interface Work { kind: 'A'|'B'|'C'|'D'|'E'; view: string; name: string; field: string; href: string; image?: string; position?: string }
+interface Props { site: SiteConfig; works: Work[]; limit?: number }
+const { site, works, limit } = Astro.props;
+const visible = limit ? works.slice(0, limit) : works;
+---
+<div class="space-y-8">
+  {Array.from({ length: Math.ceil(visible.length / 5) }, (_, row) => visible.slice(row * 5, row * 5 + 5)).map((works) => (
+    <ScrollReveal animation="fade-up" duration={1500}>
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8 xl:grid-cols-5">
+        {works.map((work) => (
+          <a href={url(site, work.href)} class="col-span-1 block min-w-0 underline-offset-4 hover:underline">
+            {work.image ? <img src={work.image} alt={`${work.name}の${work.view}`} width="1160" height="2050" loading="lazy" class="aspect-[116/205] w-full object-cover" style={work.position ? `object-position:${work.position}` : undefined} />
+              : <WorkStudyPlate kind={work.kind} view={work.view} />}
+            <p class="mt-3 min-h-12 text-sm leading-relaxed">{work.name}｜{work.view}<br /><span class="text-base-content/70">{work.field}</span></p>
+          </a>
+        ))}
+      </div>
+    </ScrollReveal>
+  ))}
+</div>

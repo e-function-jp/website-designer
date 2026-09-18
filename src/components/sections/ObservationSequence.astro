@@ -1,0 +1,7 @@
+---
+interface Item { id: string; title: string; text: string; width: string; align: string }
+interface Props { items: Item[] }
+const { items } = Astro.props;
+---
+<div class="observations">{items.map((item)=><article id={item.id} style={`--width:${item.width};--align:${item.align}`}><div class="image" aria-hidden="true"></div><h2>{item.title}</h2><p>{item.text}</p></article>)}</div>
+<style>.observations{max-width:80rem;margin:auto;padding:0 1.25rem}.observations article{max-width:36em;margin:0 0 5rem}.image{height:12rem;background:linear-gradient(135deg,#e9ede9,#fff);border:1px solid #cbd1ce;margin-bottom:1.5rem}.observations h2{font:400 1.125rem/1.8 "Yu Mincho",serif;margin:0}.observations p{line-height:1.9;margin:.75rem 0 0}@media(min-width:768px){.observations{padding:0 5rem 0 30%}.observations article{width:var(--width);margin-left:var(--align);margin-bottom:10rem}.image{height:16rem}}</style>

@@ -1,0 +1,1142 @@
+{
+  "url": "https://eightdesign.co.jp/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260917-0500/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260917-0500/motion/top-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://eightdesign.co.jp/about",
+      "label": "About Top"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/smvv",
+      "label": "Statement & MVV"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/company-history",
+      "label": "Company & History"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/group-companies",
+      "label": "Group Companies"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/csr",
+      "label": "CSR"
+    },
+    {
+      "href": "https://eightdesign.co.jp/service",
+      "label": "Our Service Top"
+    },
+    {
+      "href": "https://eightdesign.jp/",
+      "label": "Service Site"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers",
+      "label": "Careers Top"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/interviews",
+      "label": "All Career Stories"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/events",
+      "label": "All Events"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/newgrads",
+      "label": "For New-Grads"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/midcareer",
+      "label": "For Mid-Career"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/part-time",
+      "label": "For Part-Time Job"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal",
+      "label": "All Articles"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/news",
+      "label": "News"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/release",
+      "label": "Release"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/media",
+      "label": "Media"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/others",
+      "label": "Others"
+    },
+    {
+      "href": "https://eightdesign.co.jp/contact/for-all",
+      "label": "For All User"
+    },
+    {
+      "href": "https://eightdesign.co.jp/contact/for-partnerships",
+      "label": "For Partnerships"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__NiwIcq__layoutWrapper lenis",
+      "addedClass": [
+        "lenis-scrolling",
+        "lenis-smooth"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Area Developmentby Eight DesignDelightLi"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -476)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Delight"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -476)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Life"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -476)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Style"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "path",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -476)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Design"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "CCCC"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "oooo"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "nnnn"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "cccc"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "eeee"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "pppp"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "tttt"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "oooo"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ffff"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "tttt"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "hhhh"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "eeee"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "nnnn"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "eeee"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "wwww"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "bbbb"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "rrrr"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "aaaa"
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -555,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -370,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -185,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -100,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -655,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -470,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -285.00000000000006,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -200,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -755.0000000000001,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -570.0000000000001,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "style-module-scss-module__PZL1xq__catchLineItem"
+      },
+      "timing": {
+        "duration": 740,
+        "delay": -385,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "EIGHT DESIGN INC.（エイトデザイン株式会社）",
+    "h1": null,
+    "totalHeight": 900,
+    "viewportsTall": 1,
+    "sectionCount": 4,
+    "imgCount": 148,
+    "videoCount": 0,
+    "canvasCount": 8
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 0,
+  "css": {
+    "keyframes": 9,
+    "transitionRules": 72,
+    "animationRules": 4,
+    "keyframeNames": [
+      "style-module-scss-module__b3Qu3G__linkBarOnHover",
+      "style-module-scss-module__47-L1q__linkBarOnHover",
+      "style-module-scss-module__PZL1xq__catchLineItemSwitch",
+      "style-module-scss-module__-HSp9a__loaderEightkunBridge",
+      "style-module-scss-module__-HSp9a__loaderGoodPop",
+      "style-module-scss-module__RAu54q__rotate",
+      "style-module-scss-module__MUVd5G__linkBarOnHover",
+      "style-module-scss-module__OHs4fW__linkBarOnHover",
+      "style-module-scss-module__aXiL3W__linkBarOnHover"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 44,
+      "top": 37,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "header-module-scss-module__-5J3bq__wrapper"
+    },
+    "scrolled": {
+      "height": 44,
+      "top": 37,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "header-module-scss-module__-5J3bq__wrapper"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 2105,
+  "revealSummary": {
+    "total": 33,
+    "scrollLinkedCount": 8,
+    "kinds": {
+      "fade": 30,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 1,
+      "clip-wipe": 2,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade",
+    "designedRevealCount": 33,
+    "durationMs": null,
+    "easings": [
+      "ease"
+    ]
+  }
+}

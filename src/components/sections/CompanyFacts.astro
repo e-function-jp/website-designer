@@ -1,0 +1,7 @@
+---
+interface Fact { term: string; value: string }
+interface Props { facts: Fact[]; compact?: boolean }
+const { facts, compact=false } = Astro.props;
+---
+<dl class:list={['facts',compact && 'facts--compact']}>{facts.map((fact)=><div><dt>{fact.term}</dt><dd>{fact.value}</dd></div>)}</dl>
+<style>.facts{margin:3rem 0 0;border-top:1px solid #cbd1ce}.facts div{padding:1.5rem 0;border-bottom:1px solid #cbd1ce}.facts dt{font-weight:600}.facts dd{margin:.5rem 0 0;line-height:1.9}@media(min-width:768px){.facts div{display:grid;grid-template-columns:10rem 1fr;gap:1rem}.facts dd{margin:0}.facts--compact{margin-top:1.5rem}}</style>

@@ -1,0 +1,10 @@
+---
+interface Props { label: string; wide?: boolean; children?: unknown }
+const { label, wide = false } = Astro.props;
+---
+<section class:list={['section', wide && 'section--wide']}>
+  <h2>{label}</h2><div class="section__body"><slot /></div>
+</section>
+<style>
+  .section{display:grid;grid-template-columns:1fr;gap:1.5rem;max-width:80rem;margin:0 auto;padding:4rem 1.25rem}.section h2{font:400 clamp(1.125rem,2vw,1.25rem)/1.8 "Yu Mincho","Hiragino Mincho ProN",serif;letter-spacing:.04em;margin:0}.section__body{max-width:42em;font-size:1rem;line-height:1.9}.section__body :global(p){margin:0 0 1.5rem}@media(min-width:768px){.section{grid-template-columns:25% 1fr;gap:2rem;padding:6rem 5rem}.section__body{justify-self:start}.section--wide{display:block;max-width:none}.section--wide h2{margin-bottom:3rem}.section--wide .section__body{max-width:none}}
+</style>

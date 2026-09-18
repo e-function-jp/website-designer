@@ -67,6 +67,26 @@
       "weight": 0.0,
       "industry_weight": 0.1667,
       "at": "2026-09-16T05:00:14+09:00"
+    },
+    {
+      "run_id": "corporate-20260917-0500",
+      "site_type": "corporate",
+      "industry": "building",
+      "reference_id": "muuuuu-24669",
+      "reference_title": "EIGHT DESIGN INC.",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-17T05:00:12+09:00"
+    },
+    {
+      "run_id": "corporate-20260918-0500",
+      "site_type": "corporate",
+      "industry": "art",
+      "reference_id": "muuuuu-22656",
+      "reference_title": "NSSG",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-18T05:00:25+09:00"
     }
   ]
 }

@@ -1,0 +1,444 @@
+{
+  "url": "https://eightdesign.co.jp/about",
+  "slug": "about",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260917-0500/motion/about-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260917-0500/motion/about-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://eightdesign.co.jp/about",
+      "label": "About Top"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/smvv",
+      "label": "Statement & MVV"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/company-history",
+      "label": "Company & History"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/group-companies",
+      "label": "Group Companies"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/csr",
+      "label": "CSR"
+    },
+    {
+      "href": "https://eightdesign.co.jp/service",
+      "label": "Our Service Top"
+    },
+    {
+      "href": "https://eightdesign.jp/",
+      "label": "Service Site"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers",
+      "label": "Careers Top"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/interviews",
+      "label": "All Career Stories"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/events",
+      "label": "All Events"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/newgrads",
+      "label": "For New-Grads"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/midcareer",
+      "label": "For Mid-Career"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/part-time",
+      "label": "For Part-Time Job"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal",
+      "label": "All Articles"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/news",
+      "label": "News"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/release",
+      "label": "Release"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/media",
+      "label": "Media"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/others",
+      "label": "Others"
+    },
+    {
+      "href": "https://eightdesign.co.jp/contact/for-all",
+      "label": "For All User"
+    },
+    {
+      "href": "https://eightdesign.co.jp/contact/for-partnerships",
+      "label": "For Partnerships"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__NiwIcq__layoutWrapper lenis",
+      "addedClass": [
+        "lenis-scrolling",
+        "lenis-smooth"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "TopAbout Eight DesignAAAAbbbboooouuuuttt"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__-hSAzW__titleEye",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 13.5655)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -14.475)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "figure",
+      "baseClass": "style-module-scss-module__xgT7Ma__pic",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0.2, 0, 0, 0.2, 196.8, -1170)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0.7368, 0, 0, 0.7368, 20.7165, 682.103)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "figure",
+      "baseClass": "style-module-scss-module__xgT7Ma__pic",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0.2, 0, 0, 0.2, 196.8, -900)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0.6474, 0, 0, 0.6474, 20.7165, 1515.79)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "figure",
+      "baseClass": "style-module-scss-module__xgT7Ma__pic",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0.2, 0, 0, 0.2, 0, -540)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0.5579, 0, 0, 0.5579, 0, 2358.94)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__xgT7Ma__bgPicBox",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0.25, 0, 0, 0.25, -270, -1170)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0.7567, 0, 0, 0.7567, -87.5997, -379.6)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "01"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_slot_switcher_word_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "01"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__Xf7IgW__body",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0.436202, 0.714585, -0.714585, 0.436202, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__Xf7IgW__body",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0.436202, 0.714585, -0.714585, 0.436202, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__Xf7IgW__body",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0.436202, 0.714585, -0.714585, 0.436202, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "エイトデザインについて｜EIGHT DESIGN INC.（エイトデザイン株式会社）",
+    "h1": null,
+    "totalHeight": 900,
+    "viewportsTall": 1,
+    "sectionCount": 4,
+    "imgCount": 73,
+    "videoCount": 0,
+    "canvasCount": 1
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 0,
+  "css": {
+    "keyframes": 9,
+    "transitionRules": 72,
+    "animationRules": 4,
+    "keyframeNames": [
+      "style-module-scss-module__b3Qu3G__linkBarOnHover",
+      "style-module-scss-module__47-L1q__linkBarOnHover",
+      "style-module-scss-module__PZL1xq__catchLineItemSwitch",
+      "style-module-scss-module__-HSp9a__loaderEightkunBridge",
+      "style-module-scss-module__-HSp9a__loaderGoodPop",
+      "style-module-scss-module__RAu54q__rotate",
+      "style-module-scss-module__MUVd5G__linkBarOnHover",
+      "style-module-scss-module__OHs4fW__linkBarOnHover",
+      "style-module-scss-module__aXiL3W__linkBarOnHover"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 44,
+      "top": 37,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "header-module-scss-module__-5J3bq__wrapper"
+    },
+    "scrolled": {
+      "height": 44,
+      "top": 37,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "header-module-scss-module__-5J3bq__wrapper"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 1213,
+  "revealSummary": {
+    "total": 6,
+    "scrollLinkedCount": 5,
+    "kinds": {
+      "fade": 1,
+      "fade-up": 1,
+      "fade-side": 0,
+      "zoom": 3,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 1
+    },
+    "dominantKind": "zoom",
+    "designedRevealCount": 6,
+    "durationMs": null,
+    "easings": [
+      "ease"
+    ]
+  }
+}

@@ -16,7 +16,118 @@
   themes: light --default, dark --prefersdark, corporate, cupcake, luxury,
           business, emerald, retro, nord, autumn, winter, lofi,
           corporate-hokuline, corporate-hokuline-bold, corporate-minamoto,
-          aoba-corporate, aoba-corporate-b, kido-corporate, kido-corporate-b;
+          aoba-corporate, aoba-corporate-b, kido-corporate, kido-corporate-b,
+          aogami-corporate;
+}
+
+@plugin "daisyui/theme" {
+  name: "aogami-corporate";
+  default: false;
+  color-scheme: light;
+  --color-base-100: oklch(97.7% 0.005 100);
+  --color-base-200: oklch(94.5% 0.008 100);
+  --color-base-300: oklch(84.5% 0.012 155);
+  --color-base-content: oklch(32.8% 0.033 214);
+  --color-primary: oklch(32.8% 0.033 214);
+  --color-primary-content: oklch(97.7% 0.005 100);
+  --color-secondary: oklch(49.5% 0.072 45);
+  --color-secondary-content: oklch(97.7% 0.005 100);
+  --color-accent: oklch(49.5% 0.072 45);
+  --color-accent-content: oklch(97.7% 0.005 100);
+  --color-neutral: oklch(32.8% 0.033 214);
+  --color-neutral-content: oklch(97.7% 0.005 100);
+  --radius-box: 0;
+  --radius-field: 0;
+}
+
+[data-theme="aogami-corporate"] {
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+[data-theme="aogami-corporate"] h1,
+[data-theme="aogami-corporate"] h2,
+[data-theme="aogami-corporate"] h3 {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-weight: 400;
+  letter-spacing: .04em;
+}
+[data-theme="aogami-corporate"] a:focus-visible,
+[data-theme="aogami-corporate"] button:focus-visible,
+[data-theme="aogami-corporate"] input:focus-visible,
+[data-theme="aogami-corporate"] select:focus-visible,
+[data-theme="aogami-corporate"] textarea:focus-visible {
+  outline: 2px solid #986044;
+  outline-offset: 4px;
+}
+[data-theme="aogami-corporate"] .site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 191px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+[data-theme="aogami-corporate"] .site-header > div {
+  max-width: none;
+  height: 100%;
+  padding: 32px 80px;
+  align-items: flex-start;
+}
+[data-theme="aogami-corporate"] .site-header a,
+[data-theme="aogami-corporate"] footer a {
+  text-underline-offset: 5px;
+}
+[data-theme="aogami-corporate"] .site-header > div > a {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 22px;
+  font-weight: 400;
+  background: #f7f7f2;
+  padding: 8px;
+}
+[data-theme="aogami-corporate"] .site-header nav {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  margin-left: auto;
+  margin-right: 64px;
+}
+[data-theme="aogami-corporate"] .site-header nav a {
+  min-height: 44px;
+  padding: 10px 0;
+  font-size: 14px;
+  border-radius: 0;
+  background: transparent;
+  text-decoration: underline;
+}
+[data-theme="aogami-corporate"] .site-header .btn-primary,
+[data-theme="aogami-corporate"] footer .btn-primary {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  border-radius: 0;
+  padding: 5px 0;
+  min-height: 44px;
+  text-decoration: underline;
+}
+[data-theme="aogami-corporate"] footer {
+  margin-top: 160px;
+  background: #f7f7f2;
+}
+[data-theme="aogami-corporate"] footer a,
+[data-theme="aogami-corporate"] footer p,
+[data-theme="aogami-corporate"] footer li {
+  font-size: 14px;
+  color: #253d45;
+}
+[data-theme="aogami-corporate"] body nav[aria-label="パンくずリスト"] {
+  padding-top: 224px;
+  background: transparent;
+}
+@media (max-width: 1199px) {
+  [data-theme="aogami-corporate"] .site-header { height: 88px; }
+  [data-theme="aogami-corporate"] .site-header > div { padding: 16px 20px; align-items: center; }
+  [data-theme="aogami-corporate"] .site-header > div > a { font-size: 20px; }
+  [data-theme="aogami-corporate"] body nav[aria-label="パンくずリスト"] { padding-top: 104px; }
+  [data-theme="aogami-corporate"] footer { margin-top: 96px; }
 }
 
 /* 中央固定カプセルヘッダーを使うテーマでは、パンくずの上に余白を確保して

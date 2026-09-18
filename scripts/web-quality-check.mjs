@@ -18,7 +18,7 @@
  *   node scripts/web-quality-check.mjs --strict   # スコアが前回より低下したら exit 1
  */
 import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync, existsSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, dirname } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const DIST = join(ROOT, 'dist');
@@ -659,12 +659,16 @@ const SITE_RULES = [
       let siteTotal = new Set();
       for (const p of s.pages) {
         if (!p.srcCode) continue;
-        const comps = [...p.srcCode.matchAll(/^import\s+(\w+)\s+from\s+['"](?:[./]*)components\/[^'"]+['"]/gm)]
-          .map((m) => m[1]);
-        const all = [...p.srcCode.matchAll(/from\s+['"][^'"]*\/components\/([^'"]+)['"]/g)].map((m) => m[1]);
-        for (const c of all) siteTotal.add(c);
-        const n = Math.max(comps.length, all.length);
-        if (n < MIN_COMPONENTS_PER_PAGE) out.push(`${p.relPath}: コンポーネント利用 ${n} 件（下限 ${MIN_COMPONENTS_PER_PAGE}）`);
+        const direct = componentImportsOf(p.srcCode);
+        const reachable = collectComponentsDeep(p.srcCode);
+        for (const c of reachable) siteTotal.add(c);
+        // 直下で1つも使っていない = ベタ書き。入れ子をたどった数が下限に届かない
+        // = 束ねた先も含めて部品が薄い。どちらも指摘する。
+        const n = reachable.size;
+        if (direct.length === 0 || n < MIN_COMPONENTS_PER_PAGE) {
+          const detail = direct.length === n ? `${n} 件` : `${n} 件（直下 ${direct.length} 件 + 入れ子）`;
+          out.push(`${p.relPath}: コンポーネント利用 ${detail}（下限 ${MIN_COMPONENTS_PER_PAGE}）`);
+        }
       }
       if (siteTotal.size < MIN_COMPONENTS_PER_SITE) {
         out.push(`サイト全体で ${siteTotal.size} 種類（下限 ${MIN_COMPONENTS_PER_SITE}）。学習成果が src/components/ に還元されていない`);
@@ -673,6 +677,68 @@ const SITE_RULES = [
     },
   },
 ];
+
+/**
+ * ページから到達できるコンポーネントを、入れ子をたどって集める。
+ *
+ * 直下の import だけ数えると、束ねるほど数が減る。実測 2026-09-18:
+ * ページ雛形 AogamiEditorialPage（内部で EditorialLead / LabeledSection /
+ * RelatedPagePair を使う）1つで組んだ11ページが「利用1件」と判定され、
+ * ベタ書きが0件なのに arch-component-reuse が出続けた。
+ * 部品に切り出して束ねる行為を減点しないよう、到達できる範囲で数える。
+ */
+const componentSrcCache = new Map();
+/** src/components/<rel> を読む。無ければ null。 */
+function readComponent(rel) {
+  if (!componentSrcCache.has(rel)) {
+    const f = join(ROOT, 'src', 'components', rel);
+    componentSrcCache.set(rel, existsSync(f) ? readFileSync(f, 'utf8') : null);
+  }
+  return componentSrcCache.get(rel);
+}
+
+/**
+ * コード中の .astro import を、src/components/ からの相対パスに正規化して返す。
+ * `fromRel` はそのコード自身の位置（ページなら null）。
+ * 部品どうしは `./EditorialLead.astro` のような兄弟パスで参照し合うので、
+ * `/components/` を含むかどうかだけでは拾えない。
+ */
+function componentImportsOf(code, fromRel = null) {
+  const out = [];
+  for (const m of code.matchAll(/from\s+['"]([^'"]+\.astro)['"]/g)) {
+    const spec = m[1];
+    const viaComponents = spec.match(/\/components\/(.+)$/);
+    if (viaComponents) { out.push(viaComponents[1]); continue; }
+    if (fromRel && (spec.startsWith('./') || spec.startsWith('../'))) {
+      const resolved = relative(
+        join(ROOT, 'src', 'components'),
+        join(ROOT, 'src', 'components', dirname(fromRel), spec),
+      );
+      if (!resolved.startsWith('..')) out.push(resolved);
+    }
+  }
+  return out;
+}
+
+/**
+ * ページから到達できるコンポーネントを、入れ子をたどって集める。
+ *
+ * 直下の import だけ数えると、束ねるほど数が減る。実測 2026-09-18:
+ * ページ雛形 AogamiEditorialPage（内部で EditorialLead / LabeledSection /
+ * RelatedPagePair を使う）1つで組んだ11ページが「利用1件」と判定され、
+ * ベタ書きが0件なのに arch-component-reuse が出続けた。
+ * 部品に切り出して束ねる行為を減点しないよう、到達できる範囲で数える。
+ */
+function collectComponentsDeep(code, fromRel = null, seen = new Set(), depth = 0) {
+  if (depth > 4) return seen;
+  for (const rel of componentImportsOf(code, fromRel)) {
+    if (seen.has(rel)) continue;
+    seen.add(rel);
+    const dep = readComponent(rel);
+    if (dep) collectComponentsDeep(dep, rel, seen, depth + 1);
+  }
+  return seen;
+}
 
 // ---- 収集 -------------------------------------------------------------------
 
@@ -703,7 +769,10 @@ function resolveDirection(path) {
   if (!m) return { directionHtml: null };
   const [, type, model, stamp] = m;
   const dir = join(ROOT, 'docs', 'quality', 'runs', `${type}-${stamp}`);
-  for (const f of [`direction-${model}.html`, 'direction.html']) {
+  // 提出版は b だが、ディレクションはラン1本で direction-a.html に置く（2026-09-18〜）。
+  // ここを直さないと提出版のディレクションが見つからず、
+  // arch-animation-missing が「指示なし」として素通りする。
+  for (const f of [`direction-${model}.html`, 'direction-a.html', 'direction.html']) {
     const cand = join(dir, f);
     if (existsSync(cand)) return { directionHtml: readFileSync(cand, 'utf8') };
   }
