@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-18T00:41:30.816Z",
+  "checked_at": "2026-09-18T06:08:10.453Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -12,208 +12,40 @@
       "findings": []
     },
     {
-      "route": "/sites/corporate/",
-      "pageHeight": 1563,
-      "imageCount": 7,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260903-1448/",
-      "pageHeight": 7025,
-      "imageCount": 6,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260903-1448/about/",
-      "pageHeight": 4625,
-      "imageCount": 1,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260903-1448/company/",
-      "pageHeight": 2601,
-      "imageCount": 1,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260903-1448/contact/",
-      "pageHeight": 2581,
+      "route": "/compare/20260916-0500/",
+      "pageHeight": 900,
       "imageCount": 0,
       "findings": []
     },
     {
-      "route": "/sites/corporate/a-20260903-1448/news/",
-      "pageHeight": 2032,
-      "imageCount": 0,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260903-1448/privacy/",
-      "pageHeight": 1913,
-      "imageCount": 0,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260903-1448/recruit/",
-      "pageHeight": 2982,
-      "imageCount": 0,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260903-1448/service/",
-      "pageHeight": 4245,
-      "imageCount": 6,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260915-1151/",
-      "pageHeight": 7959,
-      "imageCount": 14,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260915-1151/about/",
-      "pageHeight": 5928,
-      "imageCount": 6,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260915-1151/contact/",
-      "pageHeight": 4145,
-      "imageCount": 1,
-      "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260915-1151/new-patients/",
-      "pageHeight": 4517,
+      "route": "/compare/20260916-0500/gemini38flash/",
+      "pageHeight": 3896,
       "imageCount": 2,
       "findings": []
     },
     {
-      "route": "/sites/corporate/a-20260915-1151/news/",
-      "pageHeight": 3548,
-      "imageCount": 1,
+      "route": "/compare/20260916-0500/gpt56terra/",
+      "pageHeight": 4388,
+      "imageCount": 2,
       "findings": []
     },
     {
-      "route": "/sites/corporate/a-20260915-1151/privacy/",
-      "pageHeight": 3808,
-      "imageCount": 1,
+      "route": "/compare/20260916-0500/maicode/",
+      "pageHeight": 4736,
+      "imageCount": 2,
       "findings": []
     },
     {
-      "route": "/sites/corporate/a-20260915-1151/service/",
-      "pageHeight": 5437,
+      "route": "/compare/20260916-0500/sonnet5/",
+      "pageHeight": 4203,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/",
+      "pageHeight": 1149,
       "imageCount": 5,
       "findings": []
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/",
-      "pageHeight": 7779,
-      "imageCount": 2,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/about/",
-      "pageHeight": 3902,
-      "imageCount": 1,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/case/",
-      "pageHeight": 2947,
-      "imageCount": 0,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/company/",
-      "pageHeight": 2407,
-      "imageCount": 0,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/contact/",
-      "pageHeight": 2677,
-      "imageCount": 0,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/news/",
-      "pageHeight": 2099,
-      "imageCount": 0,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/privacy/",
-      "pageHeight": 2251,
-      "imageCount": 0,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/recruit/",
-      "pageHeight": 6175,
-      "imageCount": 1,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
-    },
-    {
-      "route": "/sites/corporate/a-20260916-0500/service/",
-      "pageHeight": 6675,
-      "imageCount": 1,
-      "findings": [
-        {
-          "id": "render-low-contrast",
-          "severity": "medium",
-          "detail": "コントラスト不足 1 件: a\"無料で組織診断を申し込む\"(比2.82, 要4.5)"
-        }
-      ]
     },
     {
       "route": "/sites/corporate/b-20260903-1448/",
@@ -344,6 +176,126 @@
     {
       "route": "/sites/corporate/b-20260916-0500/service/",
       "pageHeight": 3960,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/",
+      "pageHeight": 8603,
+      "imageCount": 10,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/about/",
+      "pageHeight": 6590,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/company/",
+      "pageHeight": 2104,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/contact/",
+      "pageHeight": 2654,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/download/",
+      "pageHeight": 1829,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/faq/",
+      "pageHeight": 1860,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/inspirations/",
+      "pageHeight": 2073,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/news/",
+      "pageHeight": 2226,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/news/consultation-guide/",
+      "pageHeight": 1799,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/news/site-guide/",
+      "pageHeight": 2104,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/news/work-guide/",
+      "pageHeight": 1829,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/privacy/",
+      "pageHeight": 1829,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/projects/",
+      "pageHeight": 6915,
+      "imageCount": 10,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/projects/editorial/",
+      "pageHeight": 1799,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/projects/exhibition/",
+      "pageHeight": 1799,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/projects/identity/",
+      "pageHeight": 1829,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/projects/mark/",
+      "pageHeight": 1829,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/projects/sign/",
+      "pageHeight": 1799,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/recruit/",
+      "pageHeight": 1829,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260918-0500/service/",
+      "pageHeight": 4769,
       "imageCount": 1,
       "findings": []
     },
