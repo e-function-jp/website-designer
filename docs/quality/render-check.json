@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-16T09:30:13.023Z",
+  "checked_at": "2026-09-18T00:41:30.816Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -7,7 +7,7 @@
   "results": [
     {
       "route": "/",
-      "pageHeight": 1363,
+      "pageHeight": 1399,
       "imageCount": 1,
       "findings": []
     },
