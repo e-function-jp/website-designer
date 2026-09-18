@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import AogamiEditorialPage from '../../../../../components/sections/AogamiEditorialPage.astro';
+---
+<SiteLayout site={site} title="制作の背景" description="紙、文字、余白、案内という四つの視点から、蒼紙舎が視覚設計を考える背景をご紹介します。" path="/inspirations/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'制作の背景'}]}><AogamiEditorialPage site={site} title="制作の背景" intro="紙、文字、余白、案内。制作物を構成する身近な要素にも、伝わり方を左右する条件があります。このページでは、視覚設計を考えるときの観察の視点を紹介します。" sections={[{label:'紙の手触り',heading:'紙は情報を支える素材',text:'厚み、表面の質感、光の受け方によって、同じ文字や色でも印象が変わります。紙の端や重なりを見ることは、完成した印刷物を受け取る場面を考えることにつながります。'},{label:'文字・余白・案内',heading:'読む順序を整える',text:'字間、行間、段落の間隔は、情報のまとまりをつくります。空間では入口と分岐で必要な情報が異なります。必要な情報を必要な場所に置くため、移動の順序と判断する場面を考えます。'}]} related={[{title:'冊子の情報設計',text:'紙と文字の関係を見る。',href:'/projects/editorial/'},{title:'空間の案内計画',text:'情報に出会う順序を見る。',href:'/projects/sign/'}]} /></SiteLayout>

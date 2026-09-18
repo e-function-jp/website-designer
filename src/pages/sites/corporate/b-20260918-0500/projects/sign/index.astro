@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro'; import { site } from '../../_site'; import AogamiEditorialPage from '../../../../../../components/sections/AogamiEditorialPage.astro';
+---
+<SiteLayout site={site} title="空間の案内計画" description="入口、分岐、目的地で必要な情報を整える、蒼紙舎の空間グラフィックの制作例をご紹介します。" path="/projects/sign/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'制作実績・制作例',href:'/projects/'},{label:'空間の案内計画'}]}><AogamiEditorialPage site={site} title="空間の案内計画" intro="担当領域：空間グラフィック。案内は、必要な情報が書かれているだけでは十分ではありません。どの場所で、どの方向から、どれくらいの距離で見るかによって、読み取りやすさが変わります。" sections={[{label:'迷う手前に、情報を置く',heading:'場所ごとに役割を分ける',text:'入口では全体を知り、分岐では方向を選び、目的地では到着を確かめます。案内語、矢印、余白の関係を揃え、光、背景、設置高さを含めて現場で見え方を確認します。'}]} related={[{title:'展示の体験設計',text:'案内と解説のつながりを見る。',href:'/projects/exhibition/'},{title:'制作相談を申し込む',text:'空間グラフィックについて相談する。',href:'/contact/'}]} /></SiteLayout>

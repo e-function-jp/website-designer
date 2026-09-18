@@ -367,6 +367,39 @@ const PAGE_RULES = [
     },
   },
   {
+    // 見出しや本文が空のまま出荷される事故を拾う。
+    // .astro のテンプレートはビルド時に型検査されないので、部品へ渡す値の形が
+    // 違っても素通りする。実測 2026-09-18: NumberedPrinciples が
+    // items: {title,text}[] を期待しているのに [title,text][] を渡しており、
+    // item.title / item.text が undefined になって番号と罫線だけが並んだ。
+    // 静的チェックは 100点、ビルドも通り、独立judge だけが「主要コンテンツが
+    // 欠落して見える」と減点していた。
+    id: 'impl-empty-text-node', category: 'Impl', severity: 'high',
+    desc: '見出しや本文が空のまま出力されている（渡す値の形が違う疑い）',
+    check: (p) => {
+      // カタログは部品を props 無しで並べる面なので、空で正しい。
+      if (p.isCatalog) return [];
+      const out = [];
+      const re = /<(h1|h2|h3|h4|p|dd|li)(\s[^>]*)?>\s*<\/\1>/g;
+      // JS が後から入れる枠は空で正しい。見分けは「JS 用のフックを持つか」。
+      //   - aria-live / role=status|alert … 更新を読み上げる領域
+      //   - hidden … 条件表示の枠
+      //   - data-* フック（data-astro-cid はビルド由来なので除く）
+      //     … data-field-error, data-form-message, data-confirm など
+      const filled = /aria-live|role=["'](status|alert)["']|\bhidden\b|data-(?!astro-cid)[a-z-]+/;
+      const counts = new Map();
+      let m;
+      while ((m = re.exec(p.html)) !== null) {
+        if (filled.test(m[2] ?? '')) continue;
+        counts.set(m[1], (counts.get(m[1]) ?? 0) + 1);
+      }
+      for (const [tag, n] of counts) {
+        out.push(`空の <${tag}> が ${n} 件。部品へ渡す値の形（プロパティ名）が合っているか確認してください`);
+      }
+      return out.slice(0, 4);
+    },
+  },
+  {
     // 分割数だけのグリッド（grid-cols-12 等）は、子の col-span が前提。
     // 付け忘れると子が1カラム幅（1140px の12分割で約55px）に潰れ、
     // 日本語本文が1文字ずつ縦に折り返される。ビルドは通り、クラスとしても

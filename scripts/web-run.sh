@@ -120,7 +120,7 @@ if should images && [[ $SKIP_IMAGES -eq 0 ]]; then
 fi
 
 if should draft; then
-  echo "### 6/10 たたき台の実装（minimax-m3）"
+  echo "### 6/10 たたき台の実装"
   # 実装が空のまま採点へ進むと "not found" 画像に 0 点が付き、
   # その講評が SKILL へ蓄積されて学習を汚す（実測 2026-09-14）。
   if ! bash scripts/web-implement-minimax.sh "$RUN_DIR" "$DRAFT"; then

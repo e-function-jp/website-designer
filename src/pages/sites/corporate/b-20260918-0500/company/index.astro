@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import AogamiEditorialPage from '../../../../../components/sections/AogamiEditorialPage.astro';
+---
+<SiteLayout site={site} title="会社概要" description="蒼紙舎株式会社の所在地、設立、従業員数、事業内容と、視覚設計の実績数値をご案内します。" path="/company/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'会社概要'}]}><AogamiEditorialPage site={site} title="会社概要" intro="蒼紙舎株式会社は、東京都台東区谷中を拠点とする、ブランディング・グラフィックデザインの会社です。中小企業や文化施設に向けて、ロゴ、印刷物、空間グラフィック、展示演出を手がけています。" sections={[{label:'蒼紙舎の基本情報',heading:'会社の規模と仕事',text:'商号は蒼紙舎株式会社、設立は2011年、従業員数は14名、所在地は東京都台東区谷中です。企画から制作、現場監修までを一貫して手がける視覚設計を行います。'},{label:'仕事の積み重ね',heading:'確認できる実績',text:'累計制作案件420件超、リピート発注率68%、年間展示・空間案件35件。企画、制作、現場監修を社内でつなぐ体制で、企業や文化施設の視覚設計を手がけています。'}]} related={[{title:'蒼紙舎について',text:'理念と制作体制を読む。',href:'/about/'},{title:'会社案内',text:'基本情報を保存する。',href:'/download/'}]} /></SiteLayout>

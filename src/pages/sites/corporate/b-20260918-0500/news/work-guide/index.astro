@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro'; import { site } from '../../_site'; import AogamiEditorialPage from '../../../../../../components/sections/AogamiEditorialPage.astro';
+---
+<SiteLayout site={site} title="制作例の見方について" description="五つの制作例と五十五の図版が示す内容、実績数値との違いを説明する蒼紙舎からのご案内です。" path="/news/work-guide/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'お知らせ',href:'/news/'},{label:'制作例の見方について'}]}><AogamiEditorialPage site={site} title="制作例の見方について" intro="制作実績・制作例では、企業の視覚統一、ロゴの設計、冊子の情報設計、空間の案内計画、展示の体験設計の五つを紹介しています。掲載している制作物は、仕事の範囲や設計の考え方を伝えるための制作例です。" sections={[{label:'55枠について',heading:'55案件ではありません',text:'一つの制作例を、全景、文字、形、余白、運用など十一の観点で見せています。同じ意図が異なる接点へどのように広がるかを見比べるための構成です。累計制作案件420件超という実績数値とは分けて表示しています。'}]} related={[{title:'制作実績・制作例',text:'一覧を見比べる。',href:'/projects/'},{title:'制作のご相談',text:'検討内容を入力する。',href:'/contact/'}]} /></SiteLayout>
