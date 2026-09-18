@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SOTTO N1 — 静けさを、耳の中に。</title>
+<meta name="description" content="ノイズキャンセリングイヤホン SOTTO N1。開いて、取り出して、分解して、色を選ぶ。スクロールで製品を見るページ。（架空のプロダクトのデザインサンプル）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #07080a;
+    --paper: #eef1f4;
+    --accent: #9fd8ff;
+    --fg: #eef1f4;
+    --fg-mute: rgba(238, 241, 244, 0.62);
+    --line: rgba(238, 241, 244, 0.18);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --f-ui: 'Outfit', 'Zen Kaku Gothic New', sans-serif;
+    --f-jp: 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; background: var(--ink); }
+  @media (max-width: 1920px) { html { font-size: 0.833333vw; } }
+  @media (max-width: 1440px) { html { font-size: 1.111111vw; } }
+  @media (max-width: 1024px) { html { font-size: 1.5625vw; } }
+  @media (max-width: 640px)  { html { font-size: 4.444444vw; } }
+  body {
+    background: var(--ink);
+    color: var(--fg);
+    overflow-x: hidden;
+    font-family: var(--f-jp);
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+    font-feature-settings: "palt" 1;
+    -webkit-font-smoothing: antialiased;
+    transition: color 0.6s linear;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; letter-spacing: inherit; }
+  .en { font-family: var(--f-ui); font-weight: 400; letter-spacing: 0.14em; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ───── 3D ステージ ───── */
+  .stage { position: fixed; inset: 0; z-index: 0; }
+  .stage canvas { display: block; width: 100%; height: 100%; }
+  body.no-webgl .stage { background: linear-gradient(180deg, #07080a, #1b2028 55%, #eef1f4); }
+  body.no-webgl .stage canvas { display: none; }
+
+  /* ───── 分解ラベル ───── */
+  .labels { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+  .labels svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .lb {
+    position: absolute; top: 0; left: 0; white-space: nowrap;
+    font-family: var(--f-ui); font-size: 0.8rem; letter-spacing: 0.06em;
+    color: var(--fg); opacity: 0; will-change: transform, opacity;
+  }
+  @media (max-width: 639.98px) { .labels { display: none; } }
+  .lb b { display: block; font-family: var(--f-jp); font-weight: 500; font-size: 0.92rem; letter-spacing: 0.04em; }
+  .lb span { color: var(--fg-mute); font-size: 0.72rem; }
+
+  /* ───── ヘッダー / インジケータ ───── */
+  .header {
+    position: fixed; top: 0; inset-inline: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem; color: var(--fg);
+  }
+  @media (min-width: 640px) { .header { padding: 1.5rem 2.5rem; } }
+  .logo { font-family: var(--f-ui); font-weight: 500; font-size: 1.15rem; letter-spacing: 0.3em; }
+  .header__right { display: flex; align-items: center; gap: 1.5rem; font-size: 0.9rem; }
+  .price { font-family: var(--f-ui); letter-spacing: 0.06em; }
+  @media (max-width: 639.98px) { .price { display: none; } }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    height: 2.6rem; padding: 0 1.3rem; border-radius: 999px;
+    border: 1px solid var(--accent); color: var(--accent); font-size: 0.9rem; font-family: var(--f-ui);
+    transition: background 0.4s var(--ease), color 0.4s var(--ease);
+  }
+  .btn:hover, .btn:focus-visible { background: var(--accent); color: var(--ink); outline: none; }
+
+  .rail { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 30; display: none; }
+  @media (min-width: 1024px) { .rail { display: grid; gap: 1.6rem; } }
+  .rail button { display: flex; align-items: center; gap: 0.7rem; color: var(--fg-mute); font-family: var(--f-ui); font-size: 0.72rem; letter-spacing: 0.12em; transition: color 0.4s ease; }
+  .rail button i { position: relative; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .rail button i::after { content: ""; position: absolute; left: 50%; top: 10px; width: 1px; height: 1.6rem; background: currentColor; opacity: 0.35; transform: scaleY(var(--fill, 0)); transform-origin: top; }
+  .rail button:last-child i::after { display: none; }
+  .rail button.is-on { color: var(--accent); }
+  /* 白いスペック面に入ったら、インジケータは引っ込め、ヘッダーは下地を敷く */
+  .rail.is-hidden { opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .header.on-paper { background: rgba(238,241,244,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+
+  .cue { position: fixed; left: 50%; bottom: 2rem; transform: translateX(-50%); z-index: 30; display: grid; justify-items: center; gap: 0.6rem; color: var(--fg-mute); transition: opacity 0.6s ease; }
+  .cue span { font-family: var(--f-ui); font-size: 0.72rem; letter-spacing: 0.2em; }
+  .cue i { position: relative; display: block; width: 1px; height: 3.5rem; background: var(--line); overflow: hidden; }
+  .cue i::after { content: ""; position: absolute; left: -1px; width: 3px; height: 0.7rem; border-radius: 2px; background: var(--accent); animation: cue 1900ms var(--ease) infinite; }
+  @keyframes cue { from { top: -0.7rem; } to { top: 100%; } }
+
+  /* ───── 章 ───── */
+  main { position: relative; z-index: 2; }
+  .chapter { height: 450svh; overflow-x: clip; }
+  .chapter__inner {
+    position: sticky; top: 0; height: 100svh;
+    display: flex; align-items: center;
+    padding: 0 1.25rem;
+  }
+  @media (min-width: 640px) { .chapter__inner { padding-inline: 2.5rem; } }
+  .chapter__text {
+    position: relative; width: 100%; max-width: 72rem; margin-inline: auto;
+    will-change: opacity, transform, filter;
+  }
+  .chapter__text > * { max-width: 30rem; }
+  .chapter__text::before {
+    content: ""; position: absolute; inset: -30% -25%; z-index: -1; pointer-events: none;
+    background: radial-gradient(60% 55% at 30% 50%, rgba(7,8,10,0.72) 0%, rgba(7,8,10,0.45) 45%, transparent 100%);
+    transition: opacity 0.6s linear;
+  }
+  body.is-light .chapter__text::before { background: radial-gradient(60% 55% at 30% 50%, rgba(238,241,244,0.82) 0%, rgba(238,241,244,0.5) 45%, transparent 100%); }
+  .chapter--right .chapter__text > * { margin-left: auto; }
+  @media (min-width: 1024px) { .chapter--right .chapter__text > * { margin-right: 6rem; } }
+  .chapter--right .chapter__text::before { background: radial-gradient(60% 55% at 70% 50%, rgba(7,8,10,0.72) 0%, rgba(7,8,10,0.45) 45%, transparent 100%); }
+  body.is-light .chapter--right .chapter__text::before { background: radial-gradient(60% 55% at 70% 50%, rgba(238,241,244,0.82) 0%, rgba(238,241,244,0.5) 45%, transparent 100%); }
+  .c-label { font-family: var(--f-ui); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--accent); }
+  .c-title { font-size: clamp(1.9rem, 3.6vw, 3.2rem); font-weight: 500; line-height: 1.45; letter-spacing: 0.02em; margin-top: 1rem; }
+  .c-body { color: var(--fg-mute); margin-top: 1.4rem; font-size: 0.98rem; }
+  @media (max-width: 639.98px) {
+    .chapter__inner { align-items: flex-end; padding-bottom: 4.5rem; }
+    .chapter__text > *, .chapter--right .chapter__text > * { max-width: none; margin-left: 0; }
+    .c-title { font-size: 1.65rem; }
+    .c-body { font-size: 0.9rem; }
+    .chapter__text::before, body.is-light .chapter__text::before,
+    .chapter--right .chapter__text::before, body.is-light .chapter--right .chapter__text::before {
+      inset: -12% -18% -30% -18%;
+      background: linear-gradient(to top, rgba(7,8,10,0.9) 35%, rgba(7,8,10,0.55) 70%, transparent);
+    }
+    body.is-light .chapter__text::before, body.is-light .chapter--right .chapter__text::before {
+      background: linear-gradient(to top, rgba(238,241,244,0.94) 35%, rgba(238,241,244,0.6) 70%, transparent);
+    }
+  }
+
+  /* ───── カラー切替 / ドラッグ ───── */
+  .colors { display: flex; gap: 0.9rem; margin-top: 2rem; }
+  .swatch { width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid var(--line); position: relative; transition: transform 0.4s var(--ease); }
+  .swatch::after { content: ""; position: absolute; inset: -0.35rem; border-radius: 50%; border: 1px solid transparent; transition: border-color 0.4s var(--ease); }
+  .swatch[aria-pressed="true"]::after { border-color: var(--accent); }
+  .swatch:hover { transform: translateY(-2px); }
+  .swatch__name { position: absolute; left: 50%; top: calc(100% + 0.6rem); transform: translateX(-50%); font-size: 0.7rem; color: var(--fg-mute); white-space: nowrap; }
+  .drag-hint { margin-top: 3rem; font-family: var(--f-ui); font-size: 0.72rem; letter-spacing: 0.14em; color: var(--fg-mute); }
+
+  /* ───── スペック / フッター（明転側・通常フロー） ───── */
+  .flow { position: relative; z-index: 2; background: var(--paper); color: var(--ink); }
+  .spec { padding: 7rem 1.25rem; }
+  @media (min-width: 640px) { .spec { padding-inline: 2.5rem; } }
+  .spec__wrap { max-width: 72rem; margin-inline: auto; display: grid; gap: 3rem; }
+  @media (min-width: 1024px) { .spec__wrap { grid-template-columns: 5fr 7fr; gap: 5rem; } }
+  .spec h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 500; line-height: 1.5; }
+  .spec__price { font-family: var(--f-ui); font-size: 2.4rem; margin-top: 1.5rem; letter-spacing: 0.02em; }
+  .spec__price small { font-size: 0.85rem; color: rgba(7,8,10,0.55); margin-left: 0.5rem; }
+  .spec .btn { margin-top: 2rem; border-color: var(--ink); color: var(--ink); height: 3rem; padding-inline: 1.8rem; }
+  .spec .btn:hover { background: var(--ink); color: var(--paper); }
+  .spec dl { display: grid; grid-template-columns: auto 1fr; gap: 0; border-top: 1px solid rgba(7,8,10,0.12); }
+  .spec dt, .spec dd { padding: 1.1rem 0; border-bottom: 1px solid rgba(7,8,10,0.12); font-size: 0.95rem; }
+  .spec dt { color: rgba(7,8,10,0.55); padding-right: 2.5rem; font-family: var(--f-ui); letter-spacing: 0.08em; }
+  .footer { background: var(--paper); color: var(--ink); padding: 4rem 1.25rem 2.5rem; }
+  @media (min-width: 640px) { .footer { padding-inline: 2.5rem; } }
+  .footer__logo { font-family: var(--f-ui); font-weight: 400; font-size: 19vw; line-height: 0.82; letter-spacing: -0.02em; }
+  .footer__row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; margin-top: 2.5rem; font-size: 0.85rem; color: rgba(7,8,10,0.6); }
+  .footer nav { display: flex; flex-wrap: wrap; gap: 1.6rem; }
+  .footer small { display: block; margin-top: 1.2rem; font-size: 0.72rem; color: rgba(7,8,10,0.45); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cue i::after { animation: none; }
+    .chapter__text { opacity: 1 !important; transform: none !important; filter: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="stage" aria-hidden="true"><canvas id="gl"></canvas></div>
+<div class="labels" id="labels" aria-hidden="true">
+  <svg id="leaders"></svg>
+  <div class="lb" data-lb="driver"><b>10mm ドライバー</b><span>Full-range driver</span></div>
+  <div class="lb" data-lb="mic"><b>ハイブリッドANC マイク</b><span>Feed-forward / feedback</span></div>
+  <div class="lb" data-lb="battery"><b>24時間ぶんのバッテリー</b><span>with case</span></div>
+  <div class="lb" data-lb="shell"><b>4.3g のシェル</b><span>per earbud</span></div>
+</div>
+
+<header class="header">
+  <a class="logo" href="#top">SOTTO</a>
+  <div class="header__right">
+    <span class="price">¥29,800</span>
+    <a class="btn" href="#buy">購入する</a>
+  </div>
+</header>
+
+<nav class="rail" id="rail" aria-label="章"></nav>
+
+<div class="cue" id="cue" aria-hidden="true"><span>SCROLL</span><i></i></div>
+
+<main id="top">
+  <section class="chapter" data-ch="0">
+    <div class="chapter__inner"><div class="chapter__text">
+      <p class="c-label">01 — CASE</p>
+      <h1 class="c-title">静けさを、<br>耳の中に。</h1>
+      <p class="c-body">ノイズキャンセリングイヤホン SOTTO N1。手のひらの中で、世界の音量をさげる。</p>
+    </div></div>
+  </section>
+  <section class="chapter chapter--right" data-ch="1">
+    <div class="chapter__inner"><div class="chapter__text">
+      <p class="c-label">02 — OPEN</p>
+      <h2 class="c-title">開くと、<br>静けさが起動する。</h2>
+      <p class="c-body">蓋を開けた瞬間に接続。取り出す前から、あなたの耳の準備は終わっている。</p>
+    </div></div>
+  </section>
+  <section class="chapter" data-ch="2">
+    <div class="chapter__inner"><div class="chapter__text">
+      <p class="c-label">03 — FIT</p>
+      <h2 class="c-title">4.3g、<br>耳が忘れる軽さ。</h2>
+      <p class="c-body">三点で支える豆型のシェル。装着したことを忘れたまま、半日が過ぎる。</p>
+    </div></div>
+  </section>
+  <section class="chapter chapter--right" data-ch="3">
+    <div class="chapter__inner"><div class="chapter__text">
+      <p class="c-label">04 — INSIDE</p>
+      <h2 class="c-title">中身は、<br>静けさのための<br>部品だけ。</h2>
+      <p class="c-body">10mm ドライバー、ANC用の2つのマイク、24時間ぶんの電池。余白は音のために空けた。</p>
+    </div></div>
+  </section>
+  <section class="chapter" data-ch="4">
+    <div class="chapter__inner"><div class="chapter__text">
+      <p class="c-label">05 — LIGHT</p>
+      <h2 class="c-title">明るい場所でも、<br>静かでいられる。</h2>
+      <p class="c-body">外の音は聞き取れるまま、雑音だけを薄くする外音取り込み。会話のために外す必要はない。</p>
+    </div></div>
+  </section>
+  <section class="chapter chapter--right" data-ch="5">
+    <div class="chapter__inner"><div class="chapter__text">
+      <p class="c-label">06 — COLOR</p>
+      <h2 class="c-title">三つの色、<br>ひとつの静けさ。</h2>
+      <p class="c-body">霧白・墨黒・砂金。どの色でも、耳に入れたときの静けさは変わらない。</p>
+      <div class="colors" id="colors" role="group" aria-label="カラー"></div>
+      <p class="drag-hint">DRAG TO ROTATE</p>
+    </div></div>
+  </section>
+
+  <div class="flow">
+    <section class="spec" id="buy">
+      <div class="spec__wrap">
+        <div>
+          <h2>SOTTO N1</h2>
+          <p class="spec__price">¥29,800<small>税込</small></p>
+          <a class="btn" href="#buy">オンラインストアで見る</a>
+        </div>
+        <dl>
+          <dt>ANC</dt><dd>ハイブリッド方式（フィードフォワード＋フィードバック）</dd>
+          <dt>Driver</dt><dd>10mm ダイナミックドライバー</dd>
+          <dt>Battery</dt><dd>本体 8時間＋ケース 24時間（ANC オン時）</dd>
+          <dt>Weight</dt><dd>片耳 4.3g ／ ケース 38g</dd>
+          <dt>Water</dt><dd>IPX4（本体のみ）</dd>
+          <dt>Connect</dt><dd>Bluetooth 5.4 ／ マルチポイント 2台</dd>
+        </dl>
+      </div>
+    </section>
+    <footer class="footer">
+      <p class="footer__logo">SOTTO</p>
+      <div class="footer__row">
+        <nav aria-label="フッター">
+          <a href="#top">製品</a><a href="#buy">スペック</a><a href="#buy">購入</a><a href="#top">サポート</a>
+        </nav>
+        <span>© 2026 SOTTO</span>
+      </div>
+      <small>※本ページは架空のプロダクトのデザインサンプルです。</small>
+    </footer>
+  </div>
+</main>
+
+<script type="importmap">{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+  "lenis": "https://unpkg.com/lenis@1.3.19/dist/lenis.mjs"
+} }</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import Lenis from 'lenis';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const smooth = (t) => t * t * (3 - 2 * t);
+const lerp = (a, b, t) => a + (b - a) * t;
+const mobile = () => innerWidth < 640;
+
+/* ═════════ Lenis ═════════ */
+const lenis = new Lenis({ lerp: reduce ? 1 : 0.08, smoothWheel: !reduce });
+window.__lenis = lenis;
+$$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+  const el = document.querySelector(a.getAttribute('href'));
+  if (!el) return;
+  e.preventDefault();
+  lenis.scrollTo(el, { duration: reduce ? 0 : 1.6 });
+}));
+
+/* ═════════ 章インジケータ ═════════ */
+const CH = [['01', 'CASE'], ['02', 'OPEN'], ['03', 'FIT'], ['04', 'INSIDE'], ['05', 'LIGHT'], ['06', 'COLOR']];
+const rail = $('#rail');
+rail.innerHTML = CH.map(([n, l], i) => `<button type="button" data-goto="${i}"><i></i>${n} ${l}</button>`).join('');
+const railBtns = $$('button', rail);
+railBtns.forEach((b, i) => b.addEventListener('click', () => lenis.scrollTo($$('.chapter')[i], { duration: reduce ? 0 : 1.6 })));
+
+/* ═════════ カラー ═════════ */
+const COLORS = [
+  { name: '霧白', en: 'Fog', hex: 0xe8e6e1 },
+  { name: '墨黒', en: 'Sumi', hex: 0x16181b },
+  { name: '砂金', en: 'Kinsa', hex: 0xc9a978 },
+];
+let colorIndex = 0;
+$('#colors').innerHTML = COLORS.map((c, i) => `
+  <button class="swatch" type="button" data-color="${i}" aria-pressed="${i === 0}" style="background:#${c.hex.toString(16).padStart(6, '0')}">
+    <span class="sr-only">${c.name}</span>
+    <span class="swatch__name" aria-hidden="true">${c.name}</span>
+  </button>`).join('');
+
+/* ═════════ three.js ═════════ */
+let G = null;
+try {
+  const canvas = $('#gl');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'high-performance' });
+  let dpr = Math.min(devicePixelRatio, 1.25);
+  renderer.setPixelRatio(dpr);
+  renderer.setSize(innerWidth, innerHeight, false);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x07080a);
+  const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, 0.01, 10);
+
+  // 環境光は RoomEnvironment を1回だけ焼く（HDR ファイルなし）
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  pmrem.dispose();
+  const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(2.5, 3.5, 2); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xbcd5ff, 0.6); fill.position.set(-3, 1, -2); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffffff, 1.4); rim.position.set(-1, 0.6, -2.5); scene.add(rim);
+
+  const mat = (o) => new THREE.MeshPhysicalMaterial(o);
+  const shellMat = mat({ color: COLORS[0].hex, metalness: 0, roughness: 0.35, clearcoat: 1, clearcoatRoughness: 0.12 });
+  const caseMat = mat({ color: new THREE.Color(COLORS[0].hex).multiplyScalar(0.88), metalness: 0, roughness: 0.42, clearcoat: 0.8 });
+  const metalMat = mat({ color: 0xc8ccd2, metalness: 0.95, roughness: 0.22 });
+  const tipMat = mat({ color: 0xd8dbe0, metalness: 0, roughness: 0.85, sheen: 0.4 });
+  const innerMat = mat({ color: 0x2a2f36, metalness: 0.6, roughness: 0.4, transparent: true, opacity: 0 });
+  const driverMat = mat({ color: 0x9fd8ff, emissive: 0x9fd8ff, emissiveIntensity: 0.35, metalness: 0.6, roughness: 0.3, transparent: true, opacity: 0 });
+  const padMat = mat({ color: 0xf4f6f8, metalness: 0, roughness: 0.9 });
+
+  // 背景: 内側から見る球に上下グラデーション。暗⇄明を uMix で補間する
+  const bgMat = new THREE.ShaderMaterial({
+    side: THREE.BackSide, depthWrite: false, toneMapped: false,
+    uniforms: { uMix: { value: 0 } },
+    vertexShader: 'varying float vY; void main(){ vY = normalize(position).y; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: `varying float vY; uniform float uMix;
+      void main(){
+        float t = clamp(vY * 0.5 + 0.5, 0.0, 1.0);
+        vec3 dark = mix(vec3(0.020,0.024,0.030), vec3(0.016,0.019,0.026), t);
+        vec3 lite = mix(vec3(0.788,0.812,0.843), vec3(0.965,0.976,0.988), t);
+        gl_FragColor = vec4(mix(dark, lite, uMix), 1.0);
+      }`,
+  });
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(4, 32, 16), bgMat));
+
+  // 接地影（キャンバスで作った放射グラデーションのテクスチャ）
+  const shCanvas = document.createElement('canvas'); shCanvas.width = shCanvas.height = 128;
+  const sctx = shCanvas.getContext('2d');
+  const grad = sctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grad.addColorStop(0, 'rgba(0,0,0,0.55)'); grad.addColorStop(0.55, 'rgba(0,0,0,0.18)'); grad.addColorStop(1, 'rgba(0,0,0,0)');
+  sctx.fillStyle = grad; sctx.fillRect(0, 0, 128, 128);
+  const shadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.22, 0.22),
+    new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(shCanvas), transparent: true, opacity: 0, depthWrite: false, toneMapped: false })
+  );
+  shadow.rotation.x = -Math.PI / 2; shadow.position.y = -0.0288;   // 台座の天面(-0.0295)より上に置いて干渉を避ける
+
+  const root = new THREE.Group(); scene.add(root);
+  root.add(shadow);
+
+  // ── ケース（本体 + 蓋） ──
+  const caseGroup = new THREE.Group(); root.add(caseGroup);
+  const caseBody = new THREE.Mesh(new RoundedBoxGeometry(0.064, 0.026, 0.050, 6, 0.007), caseMat);
+  caseBody.position.y = -0.013; caseGroup.add(caseBody);
+  const hinge = new THREE.Group(); hinge.position.set(0, -0.0012, -0.0245); caseGroup.add(hinge);
+  const lid = new THREE.Mesh(new RoundedBoxGeometry(0.0635, 0.013, 0.0495, 6, 0.0045), caseMat);
+  lid.position.set(0, 0.0058, 0.0245); hinge.add(lid);
+  const seam = new THREE.Mesh(new THREE.TorusGeometry(0.0028, 0.0006, 8, 32), metalMat);
+  seam.rotation.x = Math.PI / 2; seam.position.set(0, 0.0005, 0.0252); caseGroup.add(seam);
+
+  // ── イヤホン（左右）──
+  function lathe(profile, seg = 24) {
+    return new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), seg);
+  }
+  const budGeo = new THREE.SphereGeometry(0.0115, 32, 24);
+  const nozzleGeo = new THREE.CylinderGeometry(0.0040, 0.0044, 0.0105, 24);
+  const tipGeo = lathe([[0.0030, 0.0105], [0.0052, 0.0075], [0.0072, 0.0035], [0.0062, 0.0008], [0.0036, 0]]);
+  const ringGeo = new THREE.TorusGeometry(0.0072, 0.0009, 12, 48);
+  const grilleGeo = new THREE.CircleGeometry(0.0034, 24);
+  const grilleMat = mat({ color: 0x1b1f25, metalness: 0.5, roughness: 0.6 });
+  const driverGeo = new THREE.CylinderGeometry(0.0050, 0.0050, 0.0030, 24);
+  const battGeo = new THREE.CylinderGeometry(0.0035, 0.0035, 0.0060, 20);
+  const boardGeo = new THREE.BoxGeometry(0.0110, 0.0016, 0.0070);
+  const micGeo = new THREE.CylinderGeometry(0.0012, 0.0012, 0.0010, 12);
+
+  const buds = [];
+  for (const side of [-1, 1]) {
+    const g = new THREE.Group();
+    const shell = new THREE.Mesh(budGeo, shellMat); shell.scale.set(1, 0.85, 1.15); g.add(shell);
+    // ノズルは外下へ伸ばす（Group ごと傾けて、分解時は軸方向へ抜ける）
+    const nozzleG = new THREE.Group(); nozzleG.rotation.z = side * 0.9; g.add(nozzleG);
+    const nozzle = new THREE.Mesh(nozzleGeo, metalMat); nozzle.position.y = -0.0105; nozzleG.add(nozzle);
+    const grille = new THREE.Mesh(grilleGeo, grilleMat); grille.rotation.x = Math.PI / 2; grille.position.y = -0.0157; nozzleG.add(grille);
+    const tipG = new THREE.Group(); tipG.rotation.z = side * 0.9; g.add(tipG);
+    const tip = new THREE.Mesh(tipGeo, tipMat); tip.rotation.z = Math.PI; tip.position.y = -0.0075; tipG.add(tip);
+    const ring = new THREE.Mesh(ringGeo, metalMat); ring.rotation.x = Math.PI / 2; ring.position.set(0, 0.0076, 0); g.add(ring);
+    const driver = new THREE.Mesh(driverGeo, driverMat); driver.rotation.z = Math.PI / 2; g.add(driver);
+    const batt = new THREE.Mesh(battGeo, innerMat); batt.rotation.z = Math.PI / 2; batt.position.set(side * -0.002, 0, 0); g.add(batt);
+    const board = new THREE.Mesh(boardGeo, innerMat); board.position.set(0, -0.001, 0); g.add(board);
+    const mic = new THREE.Mesh(micGeo, innerMat); mic.rotation.x = Math.PI / 2; mic.position.set(0, 0.004, 0.009); g.add(mic);
+    g.userData = { side, shell, nozzle: nozzleG, tip: tipG, ring, driver, batt, board, mic };
+    caseGroup.add(g); buds.push(g);
+  }
+
+  // ── 台座（明転で出る）──
+  const pad = new THREE.Mesh(new THREE.CylinderGeometry(0.052, 0.054, 0.008, 64), padMat);
+  pad.position.y = -0.0335; pad.visible = false; root.add(pad);
+
+  G = { renderer, scene, camera, root, caseGroup, hinge, buds, pad, shellMat, caseMat, innerMat, driverMat, dpr, bgMat, shadow };
+} catch (err) {
+  console.error('WebGL を初期化できません', err);
+  document.body.classList.add('no-webgl');
+}
+
+/* ═════════ スクロールのタイムライン ═════════ */
+// p: ページ全体の進捗。各キーに カメラ / 注視点 / 蓋 / 取り出し / 分解 / 背景(0=暗,1=明)
+const KEYS = [
+  // 章1つ = 450svh。章 i が sticky で見えているのは p ≈ [i*450/2600, (i*450+350)/2600]
+  // → 各章の中央に見せ場が来るようキーを置く（ch0 0.07 / ch1 0.24 / ch2 0.41 / ch3 0.59 / ch4 0.76 / ch5 0.93）
+  { p: 0.00, cam: [0.00, 0.045, 0.300], tgt: [0, 0.000, 0], lid: 0.00, rise: 0.00, ex: 0.0, light: 0.00 },
+  { p: 0.12, cam: [0.05, 0.055, 0.260], tgt: [0, 0.002, 0], lid: 0.15, rise: 0.00, ex: 0.0, light: 0.00 },
+  { p: 0.24, cam: [0.10, 0.075, 0.220], tgt: [0, 0.008, 0], lid: 1.85, rise: 0.15, ex: 0.0, light: 0.00 },
+  { p: 0.41, cam: [0.02, 0.100, 0.210], tgt: [0, 0.030, 0], lid: 1.85, rise: 1.00, ex: 0.0, light: 0.00 },
+  { p: 0.53, cam: [0.12, 0.050, 0.195], tgt: [0, 0.034, 0], lid: 1.85, rise: 1.00, ex: 0.35, light: 0.00 },
+  { p: 0.60, cam: [0.15, 0.038, 0.190], tgt: [0, 0.034, 0], lid: 1.85, rise: 1.00, ex: 1.0, light: 0.00 },
+  { p: 0.68, cam: [0.05, 0.050, 0.220], tgt: [0, 0.030, 0], lid: 1.40, rise: 1.00, ex: 0.2, light: 0.35 },
+  { p: 0.76, cam: [0.00, 0.055, 0.260], tgt: [0, 0.028, 0], lid: 0.60, rise: 1.00, ex: 0.0, light: 1.00 },
+  { p: 0.93, cam: [-0.10, 0.050, 0.220], tgt: [0, 0.034, 0], lid: 0.00, rise: 1.00, ex: 0.0, light: 1.00 },
+  { p: 1.00, cam: [0.00, 0.045, 0.300], tgt: [0, 0.020, 0], lid: 0.00, rise: 1.00, ex: 0.0, light: 1.00 },
+];
+const state = { cam: new THREE.Vector3(), tgt: new THREE.Vector3(), lid: 0, rise: 0, ex: 0, light: 0 };
+const offTarget = new THREE.Vector3();
+function sample(p) {
+  let i = 0;
+  while (i < KEYS.length - 2 && p > KEYS[i + 1].p) i++;
+  const a = KEYS[i], b = KEYS[i + 1];
+  const t = smooth(clamp((p - a.p) / (b.p - a.p)));
+  state.cam.set(lerp(a.cam[0], b.cam[0], t), lerp(a.cam[1], b.cam[1], t), lerp(a.cam[2], b.cam[2], t));
+  state.tgt.set(lerp(a.tgt[0], b.tgt[0], t), lerp(a.tgt[1], b.tgt[1], t), lerp(a.tgt[2], b.tgt[2], t));
+  state.lid = lerp(a.lid, b.lid, t);
+  state.rise = lerp(a.rise, b.rise, t);
+  state.ex = lerp(a.ex, b.ex, t);
+  state.light = lerp(a.light, b.light, t);
+}
+
+/* ═════════ ドラッグで回す ═════════ */
+let dragging = false, dragX = 0, yawDrag = 0, yawTarget = 0;
+const stage = $('.stage');
+stage.style.touchAction = 'pan-y';
+stage.addEventListener('pointerdown', (e) => { dragging = true; dragX = e.clientX; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener('pointermove', (e) => {
+  if (!dragging) return;
+  yawTarget = clamp(yawTarget + (e.clientX - dragX) * 0.006, -0.9, 0.9);
+  dragX = e.clientX;
+});
+const endDrag = () => { dragging = false; yawTarget = 0; };
+stage.addEventListener('pointerup', endDrag);
+stage.addEventListener('pointercancel', endDrag);
+stage.addEventListener('pointerleave', endDrag);
+
+/* ═════════ カラー切替 ═════════ */
+const colTarget = new THREE.Color(COLORS[0].hex);
+$('#colors').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-color]'); if (!b) return;
+  colorIndex = Number(b.dataset.color);
+  $$('.swatch').forEach((s) => s.setAttribute('aria-pressed', String(s === b)));
+  colTarget.setHex(COLORS[colorIndex].hex);
+  if (reduce && G) { G.shellMat.color.copy(colTarget); G.caseMat.color.copy(colTarget).multiplyScalar(0.88); }
+});
+
+/* ═════════ 分解ラベル ═════════ */
+const LB = $$('.lb');
+const leaders = $('#leaders');
+LB.forEach(() => leaders.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'line')));
+const lines = $$('line', leaders);
+lines.forEach((l) => { l.setAttribute('stroke', 'currentColor'); l.setAttribute('stroke-width', '1'); l.setAttribute('opacity', '0'); });
+// ラベルは画面左に縦一列。各部品へ線を引く（右側の本文と衝突させない）
+const LB_ROWS = [0.26, 0.40, 0.54, 0.68];
+const projV = new THREE.Vector3();
+
+/* ═════════ ループ ═════════ */
+const chapters = $$('.chapter');
+const texts = $$('.chapter__text');
+const cue = $('#cue');
+let frames = [], degraded = false, running = true, maxScroll = 1;
+function measure() {
+  maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  if (G) {
+    G.renderer.setSize(innerWidth, innerHeight, false);
+    G.camera.aspect = innerWidth / innerHeight;
+    G.camera.updateProjectionMatrix();
+  }
+}
+document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) requestAnimationFrame(loop); });
+
+let last = performance.now();
+function loop(now) {
+  if (!running) return;
+  const dt = Math.min(64, now - last); last = now;
+  lenis.raf(now);
+  const y = scrollY;
+  // 3D は章の範囲（= main の章部分）だけで進む
+  const chapEnd = chapters[chapters.length - 1].offsetTop + chapters[chapters.length - 1].offsetHeight - innerHeight;
+  const p = clamp(y / Math.max(1, chapEnd));
+  sample(p);
+
+  // 章テキスト: スクロール量から直接スタイルを書く（scrub）
+  let current = 0;
+  chapters.forEach((sec, i) => {
+    const c = clamp((y - sec.offsetTop) / Math.max(1, sec.offsetHeight - innerHeight));
+    if (c > 0 && c < 1) current = i;
+    const inK = clamp(c / 0.18), outK = clamp((c - 0.78) / 0.22);
+    const vis = reduce ? 1 : Math.min(inK, 1 - outK);
+    const t = texts[i];
+    t.style.opacity = vis.toFixed(3);
+    t.style.transform = reduce ? '' : `translateY(${((1 - vis) * 1.5).toFixed(2)}rem)`;
+    t.style.filter = reduce || vis > 0.98 ? '' : `blur(${((1 - vis) * 10).toFixed(1)}px)`;
+    if (railBtns[i]) railBtns[i].firstElementChild.style.setProperty('--fill', clamp(c).toFixed(3));
+  });
+  railBtns.forEach((b, i) => b.classList.toggle('is-on', i === current));
+  const inFlow = y > chapEnd - innerHeight * 0.2;
+  rail.classList.toggle('is-hidden', inFlow);
+  $('.header').classList.toggle('on-paper', inFlow);
+  cue.style.opacity = p > 0.02 ? '0' : '1';
+
+  // 明転（背景・文字色）
+  const L = state.light;
+  document.body.classList.toggle('is-light', L > 0.5);
+  const fg = L > 0.5 ? '7, 8, 10' : '238, 241, 244';
+  document.body.style.setProperty('--fg', `rgb(${fg})`);
+  document.body.style.setProperty('--fg-mute', `rgba(${fg}, 0.62)`);
+  document.body.style.setProperty('--line', `rgba(${fg}, 0.18)`);
+
+  if (G) {
+    const { renderer, scene, camera, caseGroup, hinge, buds, pad } = G;
+    // テキストが左の章では製品を右へ、右の章では左へ寄せる（SP は上へ）
+    const sp = mobile();
+    offTarget.set(sp ? 0 : (current % 2 === 0 ? 0.042 : -0.042), sp ? 0.020 : 0, 0);
+    G.root.position.lerp(offTarget, reduce ? 1 : 0.06);
+    // 縦長の画面では水平画角が狭くなるので、その分カメラを引いて製品を収める
+    const fitK = camera.aspect < 1 ? Math.pow(1 / Math.max(0.5, camera.aspect), 0.8) : 1;
+    camera.position.copy(state.tgt).addScaledVector(state.cam.clone().sub(state.tgt), fitK);
+    camera.lookAt(state.tgt);
+    hinge.rotation.x = -state.lid;
+
+    // 取り出し / 分解 / 回転
+    yawDrag = lerp(yawDrag, yawTarget, dragging ? 0.4 : 0.06);
+    if (!reduce) caseGroup.rotation.y += 0.0016 * (dt / 16.67);
+    caseGroup.rotation.y = caseGroup.rotation.y % (Math.PI * 2);
+    G.root.rotation.y = yawDrag;
+    const r = smooth(state.rise), ex = state.ex;
+    buds.forEach((g, i) => {
+      const side = g.userData.side;
+      g.position.set(side * 0.011 + side * 0.011 * r, 0.006 + 0.035 * r, 0.004 - 0.004 * r);
+      g.rotation.y = side * 0.6 * r;
+      g.rotation.z = (1 - r) * side * 0.2;
+      const u = g.userData;
+      u.nozzle.position.set(side * 0.018 * ex, -0.012 * ex, 0);
+      u.tip.position.set(side * 0.030 * ex, -0.020 * ex, 0);
+      u.ring.position.set(0, 0.0076 + 0.016 * ex, 0);
+      u.driver.position.z = 0.020 * ex;
+      u.batt.position.x = side * -0.002 - side * 0.022 * ex;
+      u.board.position.y = -0.001 - 0.020 * ex;
+      u.mic.position.set(0, 0.004 + 0.012 * ex, 0.009 + 0.010 * ex);
+      u.shell.material.opacity = 1 - 0.55 * ex;
+      u.shell.material.transparent = ex > 0.01;
+    });
+    G.innerMat.opacity = ex; G.driverMat.opacity = ex;
+
+    // 明転
+    G.bgMat.uniforms.uMix.value = L;
+    G.shadow.material.opacity = 0.35 + 0.5 * L;
+    renderer.toneMappingExposure = lerp(1.05, 1.15, L);
+    pad.visible = L > 0.15;
+    padOpacity(pad, L);
+
+    // カラーの追従
+    G.shellMat.color.lerp(colTarget, reduce ? 1 : 0.08);
+    G.caseMat.color.lerp(new THREE.Color().copy(colTarget).multiplyScalar(0.88), reduce ? 1 : 0.08);
+
+    renderer.render(scene, camera);
+
+    // 分解ラベル
+    const show = clamp((p - 0.54) / 0.04) * (1 - clamp((p - 0.63) / 0.03));   // 分解章（ch4 INSIDE）だけ
+    const anchors = [buds[1].userData.driver, buds[1].userData.mic, buds[1].userData.batt, buds[1].userData.shell];
+    leaders.style.color = L > 0.5 ? '#07080a' : '#eef1f4';
+    LB.forEach((el, i) => {
+      const o = show * (reduce ? 1 : clamp((p - 0.54 - i * 0.006) / 0.04));
+      anchors[i].getWorldPosition(projV).project(camera);
+      const sx = (projV.x * 0.5 + 0.5) * innerWidth, sy = (-projV.y * 0.5 + 0.5) * innerHeight;
+      const lx = 48, ly = innerHeight * LB_ROWS[i];
+      const off = projV.z > 1 || o < 0.02;
+      el.style.opacity = off ? 0 : o.toFixed(3);
+      el.style.transform = `translate3d(${lx}px, ${ly.toFixed(1)}px, 0)`;
+      const ln = lines[i];
+      const w = el.offsetWidth || 190;
+      ln.setAttribute('x1', (lx + w + 10).toFixed(1)); ln.setAttribute('y1', (ly + 16).toFixed(1));
+      ln.setAttribute('x2', sx.toFixed(1)); ln.setAttribute('y2', sy.toFixed(1));
+      ln.setAttribute('opacity', off ? 0 : (o * 0.7).toFixed(3));
+    });
+
+    // 性能: 平均 24ms 超で一度だけ解像度を落とす
+    if (!degraded) {
+      frames.push(dt); if (frames.length > 60) frames.shift();
+      if (frames.length === 60 && frames.reduce((a, b) => a + b, 0) / 60 > 24) {
+        degraded = true; renderer.setPixelRatio(Math.min(0.75, G.dpr)); renderer.setSize(innerWidth, innerHeight, false);
+      }
+    }
+  }
+  requestAnimationFrame(loop);
+}
+function padOpacity(pad, L) {
+  pad.material.transparent = L < 0.99;
+  pad.material.opacity = clamp((L - 0.15) / 0.5);
+}
+
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(measure, 150); });
+measure();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
