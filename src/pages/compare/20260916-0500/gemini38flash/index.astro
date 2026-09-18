@@ -4,7 +4,6 @@ import { site } from '../../../sites/corporate/b-20260916-0500/_site';
 import { url } from '../../../../lib/site';
 import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
 import Alert from '../../../../components/data-display/Alert.astro';
-import Steps from '../../../../components/navigation/Steps.astro';
 
 const SHARED = '/sites/corporate/_shared/20260916-0500';
 
@@ -86,11 +85,14 @@ const metrics = [
           </div>
           <div class="hero__bottom-line">
             <span class="hero__bottom-bar" aria-hidden="true"></span>
-            <Steps class="hero__steps">
-              <li class="step step-secondary">組織診断</li>
-              <li class="step step-secondary">商談設計</li>
-              <li class="step step-secondary">現場定着</li>
-            </Steps>
+            <p class="hero__steps">
+              {processSteps.map((s, i) => (
+                <>
+                  {i > 0 && <span class="hero__steps-arrow" aria-hidden="true">→</span>}
+                  <span class="hero__steps-label">{s.label}</span>
+                </>
+              ))}
+            </p>
           </div>
         </div>
 
@@ -379,18 +381,27 @@ const metrics = [
     opacity: 0.6;
     flex-shrink: 0;
   }
+  /* ディレクション 01 の指示は「底部に細い横線と『組織診断 → 商談設計 → 現場定着』」。
+     当初は DaisyUI の steps（番号丸）で組んでいたが、.step の既定 min-width は
+     4rem = 64px で、13〜16px の日本語4文字がちょうど収まってしまう。
+     ラベル同士の隙間が 0 になり「組織診断商談設計現場定着」と一続きに読めた。
+     指示どおりの矢印テキストに戻し、区切りは間隔で作る。 */
   .hero__steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0;
     font-size: 13px;
     letter-spacing: 0.04em;
     opacity: 0.9;
   }
-  .hero__steps :global(.step) {
-    font-size: 13px;
+  .hero__steps-label {
     color: var(--color-primary-content);
+    white-space: nowrap;
   }
-  .hero__steps :global(.step:after) {
-    background-color: var(--color-secondary);
-    color: var(--color-secondary-content);
+  .hero__steps-arrow {
+    color: var(--color-secondary);
   }
 
   .hero__photo-wrapper {

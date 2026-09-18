@@ -101,7 +101,12 @@ CTA・グローバルナビ・モバイル表現の実例を収集してある�
     <p data-role="purpose">このセクションの役割</p>
     <p data-role="layout">具体的なレイアウト。カラム数・画像の位置・寄せ・想定高さ</p>
     <p data-role="copy">実際に入れる日本語コピー（見出しと本文。ダミーテキスト禁止）</p>
-    <p data-role="components">使う既存コンポーネント名、または新規切り出し案</p>
+    <p data-role="components">使う既存コンポーネント名、または新規切り出し案。
+      **layout に書いた見た目と矛盾する部品を挙げない。** 実測 2026-09-18:
+      layout は「細い横線と『組織診断 → 商談設計 → 現場定着』」と書いたのに
+      components に DaisyUI の Steps（番号丸）を挙げ、5モデル中3つが番号丸で実装した。
+      部品名を挙げるときは、その既定の見た目が layout の記述と一致するか確かめる。
+      一致しないなら部品を挙げず、layout の記述だけを残す</p>
     <p data-role="animation">アニメーション指示。種別・duration(ms)・stagger(ms)。無ければ none</p>
     <p data-role="image">必要な画像。無ければ none</p>
   </section>
