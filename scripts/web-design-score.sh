@@ -10,6 +10,11 @@
 #
 # 使い方:
 #   bash scripts/web-design-score.sh <run_dir> <site_type> <stamp> <model> [<model2> ...]
+#
+# 段階は WEB_DESIGNER_SCORE_STAGE で切り替える。
+#   final（既定） … 提出版の採点。design-score-data.json を書き、履歴へ積む
+#   draft         … たたき台の採点。design-score-draft.json を書く。履歴へは積まない
+#                   （提出版と混ぜると単調改善の判定が壊れる）
 # 例:
 #   bash scripts/web-design-score.sh docs/quality/runs/corporate-20260903-1400 corporate 20260903-1400 a b
 #
@@ -26,6 +31,10 @@ STAMP="${3:?stamp required}"
 shift 3
 MODELS=("$@")
 [[ ${#MODELS[@]} -eq 0 ]] && { echo "model(s) required" >&2; exit 2; }
+
+STAGE="${WEB_DESIGNER_SCORE_STAGE:-final}"
+case "$STAGE" in final|draft) ;; *) echo "STAGE は final か draft" >&2; exit 2;; esac
+export WEB_DESIGNER_SCORE_STAGE="$STAGE"
 
 SHOTS="$RUN_DIR/shots"
 mkdir -p "$SHOTS"
@@ -86,9 +95,20 @@ REF_CONTEXT="(job.json なし)"
 
 MODEL_LIST="$(IFS=,; echo "${MODELS[*]}")"
 
+# たたき台の採点は、点を付けること自体より「次の版で直す材料」を出すことが目的。
+if [[ "$STAGE" == "draft" ]]; then
+  STAGE_NOTE="
+これは**提出前のたたき台**の採点である。この講評はそのまま改善版の実装指示になる。
+issues は「どこを・どう直すか」が分かる粒度で書くこと（対象ページと要素を名指しする）。
+直し方が一意に決まらない指摘は書かない。"
+else
+  STAGE_NOTE=""
+fi
+
 PROMPT=$(cat <<EOF
 あなたは website（多ページサイト）デザインの審査員。**あなたはこれらを生成していない。**
 忖度せず、減点理由を具体的に挙げること。甘い点をつけない。
+${STAGE_NOTE}
 
 添付画像の順番:
 1枚目 = 参照サイト（実物）のキャプチャ ※無い場合あり
@@ -216,6 +236,24 @@ run_dir_p = pathlib.Path(run_dir)
 # 反復履歴を残す。lp-designer の実測で、指摘を読んで直す反復が単調改善せず
 # (65/63 -> 60/56 -> 49/47 -> 62/68)、最後の結果を採用するとベストより
 # 悪い状態で出荷される事故が起きた。後退は明示的に警告する。
+stage = os.environ.get("WEB_DESIGNER_SCORE_STAGE", "final")
+out_name = "design-score-draft.json" if stage == "draft" else "design-score-data.json"
+
+# たたき台は履歴に積まない。提出版と混ざると「単調改善しているか」の判定が壊れる。
+if stage == "draft":
+    data["stage"] = "draft"
+    data["measurement_setup"] = {
+        "judge": os.environ.get("WEB_DESIGNER_JUDGE_CMD", "codex"),
+        "judge_model": os.environ.get("WEB_DESIGNER_JUDGE_MODEL", "(codex default)"),
+        "reference_attached": bool(os.environ.get("WEB_DESIGNER_REF_ATTACHED")),
+        "score_pages": os.environ.get("WEB_DESIGNER_SCORE_PAGES", "/ /about/ /service/"),
+    }
+    (run_dir_p / out_name).write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(json.dumps(data, ensure_ascii=False, indent=2))
+    sys.exit(0)
+
+data["stage"] = "final"
 hist_p = run_dir_p / "design-score-history.jsonl"
 attempt = sum(1 for _ in hist_p.open(encoding="utf-8")) + 1 if hist_p.exists() else 1
 data["attempt"] = attempt

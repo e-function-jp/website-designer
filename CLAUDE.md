@@ -43,13 +43,20 @@ vite 8（rolldown）にすると `@tailwindcss/vite` がビルド不能になる
 1. **静的** — `npm run check:web` / `check:web:strict`（`scripts/web-quality-check.mjs`）
    - `PAGE_RULES` … 1ページで判定できるもの
    - `SITE_RULES` … サイト全ページを横断して判定するもの（**website の中核**）
-2. **参照学習+2案** — `docs/learning-pipeline.md`
-   参照サイト → Look（トップ+下層2ページ）→ Direction（IA確定）→ a案/b案実装 →
-   独立judge採点 → Extract
+2. **参照学習+たたき台改善** — `docs/learning-pipeline.md`
+   参照サイト → Look（トップ+下層2ページ）→ Direction（IA確定。ラン1本）→
+   **たたき台実装 → 独立judge採点 → 提出版実装（指摘を直す）** → 採点 → Extract
 
-サンプル新規作成時はループ2を必須。
+サンプル新規作成時はループ2を必須。**1ランの成果物は1サイト**（提出版だけ）。
+たたき台は採点のための中間生成物で、採点が済んだら破棄する（`web-run.sh` が自動で消す）。
+採点結果と撮影は `docs/quality/runs/{run_id}/` に残るので、何を直したかは後から追える。
 
-**Extract ゲート（必須）** — サンプルを作って終わりにしない。両案から再利用ブロックを
+> 2案（堅実 a / 冒険 b）を並べて勝者を選ぶ方式は 2026-09-18 にやめた。
+> 3ランとも b が勝った（59/61・61/69・38/63）が、差の大半は「b が後から走り、
+> a の部品と画像を引き継げる」順番の利得と、採点が3ページの静止画しか見ないことに
+> よるもので、案の優劣ではなかった。順番の利得を捨てず、明示的な改善段に積み替えた。
+
+**Extract ゲート（必須）** — サンプルを作って終わりにしない。提出版から再利用ブロックを
 `src/components/` に切り出し、`check:web` の `arch-component-reuse` が消えるまで完了扱いにしない。
 
 **モーションゲート** — 参照サイトの演出は `scripts/web-analyze-reference-motion.mjs` で
