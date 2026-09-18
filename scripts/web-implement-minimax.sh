@@ -26,9 +26,28 @@ VARIANT="${2:?variant required (a|b)}"
 # 第3引数があれば「たたき台の採点結果」。提出版はこれを直す作業になる。
 DRAFT_SCORE="${3:-}"
 
-# opencode の -m は "provider/model" 形式
-MODEL="${WEB_DESIGNER_IMPL_MODEL:-opencode-go/minimax-m3}"
-IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-opencode}"
+# 実装 CLI は2系統を持つ。呼び出し方が違うので driver で分ける。
+#   copilot  … copilot -p "<prompt>" --model <model> --allow-all-tools
+#   opencode … opencode run --agent build -m <provider/model> "<prompt>"
+#
+# 既定は copilot / gpt-5.6-terra（2026-09-18〜）。opencode が利用上限に達したため
+# 切り替えた。同一ディレクション・同一素材でトップページを5モデルに実装させた比較
+#（docs/quality/runs/corporate-20260916-0500/compare/ と /compare/20260916-0500/）で、
+# gpt-5.6-terra は minimax-m3 と並んでディレクションの記述どおりに実装できていた。
+# opencode が復活したら WEB_DESIGNER_IMPL_DRIVER=opencode で戻す。
+IMPL_DRIVER="${WEB_DESIGNER_IMPL_DRIVER:-copilot}"
+case "$IMPL_DRIVER" in
+  copilot)
+    MODEL="${WEB_DESIGNER_IMPL_MODEL:-gpt-5.6-terra}"
+    IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-copilot}"
+    ;;
+  opencode)
+    # opencode の -m は "provider/model" 形式
+    MODEL="${WEB_DESIGNER_IMPL_MODEL:-opencode-go/minimax-m3}"
+    IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-opencode}"
+    ;;
+  *) echo "WEB_DESIGNER_IMPL_DRIVER は copilot か opencode" >&2; exit 2 ;;
+esac
 
 JOB="$RUN_DIR/job.json"
 [[ -f "$JOB" ]] || { echo "job.json がありません: $JOB" >&2; exit 1; }
@@ -195,12 +214,18 @@ EOF
 )
 
 echo "==> ${IMPL_CMD} (${MODEL}) で実装中（時間がかかります）"
-# --agent build … ファイル作成・編集ができるエージェント
-"$IMPL_CMD" run --agent build -m "$MODEL" "$PROMPT" > "$LOG" 2>&1 || true
+if [[ "$IMPL_DRIVER" == "copilot" ]]; then
+  # --allow-all-tools は非対話実行に必須。-s で応答本文だけを拾う。
+  # -C でリポジトリを作業ディレクトリに固定する。
+  "$IMPL_CMD" -p "$PROMPT" --model "$MODEL" --allow-all-tools -s -C "$ROOT" > "$LOG" 2>&1 || true
+else
+  # --agent build … ファイル作成・編集ができるエージェント
+  "$IMPL_CMD" run --agent build -m "$MODEL" "$PROMPT" > "$LOG" 2>&1 || true
+fi
 
-python3 - "$META_OUT" "$SITE_TYPE" "$VARIANT" "$STAMP" "$MODEL" "$OUT_DIR" <<'PYEOF'
+python3 - "$META_OUT" "$SITE_TYPE" "$VARIANT" "$STAMP" "$MODEL" "$OUT_DIR" "${IMPL_DRIVER}-cli" <<'PYEOF'
 import json, sys, pathlib, datetime
-meta_out, site_type, variant, stamp, model, out_dir = sys.argv[1:7]
+meta_out, site_type, variant, stamp, model, out_dir, provider = sys.argv[1:8]
 d = pathlib.Path(out_dir)
 pages = sorted(str(p.relative_to(d)) for p in d.rglob('*.astro')) if d.exists() else []
 pathlib.Path(meta_out).write_text(json.dumps({
@@ -209,10 +234,10 @@ pathlib.Path(meta_out).write_text(json.dumps({
     "stamp": stamp,
     "route": f"/sites/{site_type}/{variant}-{stamp}/",
     "model": model,
-    "provider": "opencode-cli",
+    "provider": provider,
     "pages_created": pages,
     "has_site_config": (d / "_site.ts").exists(),
-    "tokens": {"note": "opencode run; per-session token rows not captured"},
+    "tokens": {"note": f"{provider}; per-session token rows not captured"},
     "implemented_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
 }, ensure_ascii=False, indent=2), encoding="utf-8")
 print(f"  作成ページ: {len(pages)} 件 {pages}")
