@@ -1,0 +1,17 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { images } from '../content';
+import QuietPageIntro from '../../../../../components/sections/QuietPageIntro.astro';
+import KabukidoConsultationForm from '../../../../../components/sections/KabukidoConsultationForm.astro';
+import CircleTextLink from '../../../../../components/ui/CircleTextLink.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="家づくり相談" description="新築注文住宅、中古住宅の全面リノベーション、モデルハウス見学について、まだ決まっていないことから相談内容を整理できるフォームです。" path="/contact/" breadcrumbs={[{ label:'ホーム',href:'/' },{ label:'家づくり相談' }]}>
+  <QuietPageIntro title="家づくり相談" lead="まだ決まっていないことから、お聞かせください。新築注文住宅、中古住宅の全面リノベーション、モデルハウス見学について、気になることをご記入ください。" />
+  <section class="notice">このサイトは架空の企業のサンプルです。入力内容は送信されず、予約は成立しません。</section>
+  <img class="meeting" src={images.meeting} alt="図面と素材を確認する相談の設計イメージ" width="2400" height="1600" loading="lazy" />
+  <section class="form"><ScrollReveal animation="fade-up" duration={2000}><h2>ご相談内容を入力する</h2></ScrollReveal><p>相談の種別を選び、連絡先と相談内容をご入力ください。新築かリノベーションかを迷っている場合は、「まだ決めていない」を選べます。</p><KabukidoConsultationForm /></section>
+  <section class="notes"><ScrollReveal animation="fade-up" duration={2000}><h2>相談の前に、もう少し知りたい方へ</h2></ScrollReveal><p>家づくりの流れや素材への考え方を読んでから、相談内容を整理することもできます。</p><CircleTextLink site={site} href="/flow/" label="家づくりの流れを見る" /><CircleTextLink site={site} href="/about/" label="家づくりの考え方を読む" /></section>
+</SiteLayout>
+<style>.notice,.form,.notes { width:min(680px,calc(100% - 48px)); margin:auto; }.notice { padding:24px; background:var(--color-base-200); line-height:1.9; }.meeting { display:block; width:min(680px,calc(100% - 48px)); height:240px; margin:48px auto 0; object-fit:cover; }.form,.notes { padding:80px 0; }h2 { font-size:clamp(26px,3vw,32px); font-weight:500; }p { line-height:1.9; }.notes :global(.circle-text-link) { display:flex; margin-top:16px; }</style>

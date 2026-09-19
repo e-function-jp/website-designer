@@ -353,10 +353,17 @@ const PAGE_RULES = [
       const imported = [...p.srcCode.matchAll(/^\s*import\s+(\w+)\s+from\s+['"]([^'"]+)['"]/gm)]
         .filter(([, name, spec]) => ANIM_COMPONENT_RE.test(name) || ANIM_COMPONENT_RE.test(spec))
         .map(([, name]) => name);
+      // 演出を共有部品の中に持たせ、ページはその部品を呼ぶだけ、という形もある
+      // （実測 2026-09-19: KabukidoContentPage 等が内部で ScrollReveal を使い、
+      // 9ページが「演出なし」と誤判定された。実際には各ページ 11〜14 箇所出ている）。
+      // ページ直下の import だけを見ると、束ねるほど検出できなくなるので、
+      // 到達できる部品までたどって判定する。
+      const delegatedReveal = [...collectComponentsDeep(p.srcCode)]
+        .some((rel) => ANIM_COMPONENT_RE.test(rel) || ANIM_COMPONENT_RE.test(readComponent(rel) ?? ''));
       const handRolled = /<style[^>]*>[\s\S]*?(@keyframes|animation\s*:|transition\s*:)/.test(p.srcCode);
 
-      if (!imported.length && !handRolled) {
-        return [`direction に animation 指示が ${directives.length} 件あるが、アニメーションコンポーネントの import も自前 CSS も無い`];
+      if (!imported.length && !delegatedReveal && !handRolled) {
+        return [`direction に animation 指示が ${directives.length} 件あるが、アニメーションコンポーネントの import も、部品経由の演出も、自前 CSS も無い`];
       }
       // import しただけで使っていないもの（lp-designer で実際に起きた）
       const unused = imported.filter((name) => !new RegExp(`<${name}[\\s/>]`).test(p.srcCode));

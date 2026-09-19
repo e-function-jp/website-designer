@@ -1,0 +1,23 @@
+---
+import { url, type SiteConfig } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+  href: string;
+  label: string;
+  class?: string;
+}
+
+const { site, href, label, class: className = '' } = Astro.props;
+---
+
+<a href={url(site, href)} class={`circle-text-link ${className}`}>
+  <span>{label}</span><span class="circle-text-link__arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .circle-text-link { display:inline-flex; align-items:center; gap:12px; min-height:48px; color:inherit; font-size:16px; text-decoration:none; border-bottom:1px solid currentColor; }
+  .circle-text-link__arrow { display:grid; place-items:center; width:48px; height:48px; border:1px solid currentColor; border-radius:50%; font-size:20px; transition:background-color .2s ease,color .2s ease; }
+  .circle-text-link:hover .circle-text-link__arrow { background:var(--color-primary); color:var(--color-primary-content); }
+  @media (prefers-reduced-motion:reduce) { .circle-text-link__arrow { transition:none; } }
+</style>

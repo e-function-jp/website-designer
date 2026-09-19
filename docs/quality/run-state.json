@@ -87,6 +87,16 @@
       "weight": 0.0,
       "industry_weight": 0.1667,
       "at": "2026-09-18T05:00:25+09:00"
+    },
+    {
+      "run_id": "corporate-20260919-0500",
+      "site_type": "corporate",
+      "industry": "building",
+      "reference_id": "muuuuu-23011",
+      "reference_title": "三次元 The Classic",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-19T05:00:45+09:00"
     }
   ]
 }

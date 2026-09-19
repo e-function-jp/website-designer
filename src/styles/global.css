@@ -17,7 +17,56 @@
           business, emerald, retro, nord, autumn, winter, lofi,
           corporate-hokuline, corporate-hokuline-bold, corporate-minamoto,
           aoba-corporate, aoba-corporate-b, kido-corporate, kido-corporate-b,
-          aogami-corporate;
+          aogami-corporate, kabukido-sumi;
+}
+
+@plugin "daisyui/theme" {
+  name: "kabukido-sumi";
+  default: false;
+  color-scheme: light;
+  --color-base-100: oklch(96.4% 0.008 100);
+  --color-base-200: oklch(92.7% 0.012 122);
+  --color-base-300: oklch(86.4% 0.01 112);
+  --color-base-content: oklch(28.8% 0.012 135);
+  --color-primary: oklch(39.2% 0.035 153);
+  --color-primary-content: oklch(99.2% 0.004 100);
+  --color-secondary: oklch(53.3% 0.065 61);
+  --color-secondary-content: oklch(99.2% 0.004 100);
+  --color-accent: oklch(53.3% 0.065 61);
+  --color-accent-content: oklch(99.2% 0.004 100);
+  --color-neutral: oklch(28.8% 0.012 135);
+  --color-neutral-content: oklch(99.2% 0.004 100);
+  --radius-box: 0;
+  --radius-field: 0;
+}
+
+[data-theme="kabukido-sumi"] {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+[data-theme="kabukido-sumi"] h1,
+[data-theme="kabukido-sumi"] h2,
+[data-theme="kabukido-sumi"] h3 {
+  font-family: "Shippori Mincho", "Yu Mincho", serif;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+[data-theme="kabukido-sumi"] .site-header {
+  position: relative;
+  top: auto;
+  background: #f6f4ef;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+[data-theme="kabukido-sumi"] .site-header > div { max-width: none; padding-inline: 24px; }
+[data-theme="kabukido-sumi"] .site-header > div > a { font-family: "Shippori Mincho", "Yu Mincho", serif; font-size: 20px; font-weight: 500; }
+[data-theme="kabukido-sumi"] .site-header .btn-primary { min-height: 44px; border-radius: 999px; padding-inline: 18px; font-size: 14px; }
+[data-theme="kabukido-sumi"] .site-header a:focus-visible,
+[data-theme="kabukido-sumi"] footer a:focus-visible { outline: 2px solid #43594e; outline-offset: 4px; }
+@media (min-width:1280px) {
+  [data-theme="kabukido-sumi"] .site-header > div { padding-inline: 64px; }
+  [data-theme="kabukido-sumi"] .site-header nav { gap: 0; }
+  [data-theme="kabukido-sumi"] .site-header nav a { padding-inline: 8px; font-size: 13px; }
 }
 
 @plugin "daisyui/theme" {

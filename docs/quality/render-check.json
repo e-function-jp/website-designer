@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-18T06:08:10.453Z",
+  "checked_at": "2026-09-19T04:47:12.987Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -44,7 +44,7 @@
     {
       "route": "/sites/corporate/",
       "pageHeight": 1149,
-      "imageCount": 5,
+      "imageCount": 6,
       "findings": []
     },
     {
@@ -297,6 +297,84 @@
       "route": "/sites/corporate/b-20260918-0500/service/",
       "pageHeight": 4769,
       "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/",
+      "pageHeight": 7005,
+      "imageCount": 9,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/about/",
+      "pageHeight": 6108,
+      "imageCount": 6,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/company/",
+      "pageHeight": 5647,
+      "imageCount": 7,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/contact/",
+      "pageHeight": 3497,
+      "imageCount": 1,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/flow/",
+      "pageHeight": 8177,
+      "imageCount": 7,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/model-house/",
+      "pageHeight": 5598,
+      "imageCount": 7,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/news/",
+      "pageHeight": 4088,
+      "imageCount": 3,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/news/first-consultation/",
+      "pageHeight": 4300,
+      "imageCount": 2,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/privacy/",
+      "pageHeight": 3304,
+      "imageCount": 0,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/recruit/",
+      "pageHeight": 5631,
+      "imageCount": 7,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/service/",
+      "pageHeight": 4437,
+      "imageCount": 4,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/works/",
+      "pageHeight": 3114,
+      "imageCount": 4,
+      "findings": []
+    },
+    {
+      "route": "/sites/corporate/b-20260919-0500/works/wood-and-plaster/",
+      "pageHeight": 5016,
+      "imageCount": 4,
       "findings": []
     },
     {

@@ -1,0 +1,28 @@
+{
+  "site_type": "corporate",
+  "variant": "b",
+  "stamp": "20260919-0500",
+  "route": "/sites/corporate/b-20260919-0500/",
+  "model": "gpt-5.6-terra",
+  "provider": "copilot-cli",
+  "pages_created": [
+    "about/index.astro",
+    "company/index.astro",
+    "contact/index.astro",
+    "flow/index.astro",
+    "index.astro",
+    "model-house/index.astro",
+    "news/first-consultation/index.astro",
+    "news/index.astro",
+    "privacy/index.astro",
+    "recruit/index.astro",
+    "service/index.astro",
+    "works/index.astro",
+    "works/wood-and-plaster/index.astro"
+  ],
+  "has_site_config": true,
+  "tokens": {
+    "note": "copilot-cli; per-session token rows not captured"
+  },
+  "implemented_at": "2026-09-19T13:27:53+09:00"
+}
