@@ -1,0 +1,867 @@
+{
+  "url": "https://contenna.net/service/",
+  "slug": "service",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260920-1616/motion/service-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260920-1616/motion/service-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://contenna.net/",
+      "label": "トップページ"
+    },
+    {
+      "href": "https://contenna.net/about/",
+      "label": "私たちについて"
+    },
+    {
+      "href": "https://contenna.net/service/",
+      "label": "サービス"
+    },
+    {
+      "href": "https://contenna.net/works/",
+      "label": "実績紹介"
+    },
+    {
+      "href": "https://marketing.contenna.jp/",
+      "label": "コラム"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introText",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "各分野の専門チームが連携し、戦略的な視点でワンストップの制作体制を構築。品質・コ"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowCircle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "企画PLANNING"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowTitle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "企画"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowLabel",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "PLANNING"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowArrow",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -3.75)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -3.5)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowCircle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, -60, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "デザインdesign"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowTitle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "デザイン"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowLabel",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "design"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowArrow",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -3.75)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -3.5)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowCircle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, -120, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "開発Technology"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowTitle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "開発"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowLabel",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Technology"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowArrow",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -3.75)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -3.5)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowCircle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, -180, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "運用MARKETING"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowTitle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "運用"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__introFlowLabel",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "MARKETING"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "WEB CREATION"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__unitLead",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ビジネス目標に直結する、“成果を生む” WEBサイトへ。"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureLabel",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "PLANNING"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h3",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureTitle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "企画"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureText",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ターゲットと目的を明確にし、成果につながる設計を行います。戦略的な視点で、プロジ"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureLabel",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Direction"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h3",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureTitle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ディレクション"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureText",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "チームと工程を統括し、制作の質と進行を最適化。アイデアを実現に結びつける調整力で"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureLabel",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "design"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h3",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureTitle",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "デザイン"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Service-module-scss-module__KL9zAa__featureText",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ターゲットとコンセプトに基づき、最適なビジュアルを設計。トレンドと使いやすさを両"
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "サービス | 株式会社コンテナ：CONTENNA.co.ltd",
+    "h1": "SERVICESERVICESERVICE",
+    "totalHeight": 9828,
+    "viewportsTall": 10.9,
+    "sectionCount": 13,
+    "imgCount": 24,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 8928,
+  "css": {
+    "keyframes": 8,
+    "transitionRules": 34,
+    "animationRules": 8,
+    "keyframeNames": [
+      "splide-loading",
+      "Advantage-module-scss-module__RCRFrW__infiniteScroll",
+      "WorksContent-module-scss-module__WzkYKa__worksResultsFadeIn",
+      "WorksContent-module-scss-module__WzkYKa__worksSpinnerRotate",
+      "Header-module-scss-module__t7BEda__dialogFadeIn",
+      "Header-module-scss-module__t7BEda__dialogBackdropFadeIn",
+      "Header-module-scss-module__t7BEda__dialogFadeOut",
+      "Header-module-scss-module__t7BEda__dialogBackdropFadeOut"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 100,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "Header-module-scss-module__t7BEda__header"
+    },
+    "scrolled": {
+      "height": 70,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "Header-module-scss-module__t7BEda__header"
+    },
+    "shrinks": true,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 870,
+  "revealSummary": {
+    "total": 195,
+    "scrollLinkedCount": 9,
+    "kinds": {
+      "fade": 31,
+      "fade-up": 75,
+      "fade-side": 2,
+      "zoom": 58,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 29
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 195,
+    "durationMs": {
+      "min": 2400,
+      "median": 2400,
+      "max": 2400
+    },
+    "easings": [
+      "ease"
+    ]
+  }
+}

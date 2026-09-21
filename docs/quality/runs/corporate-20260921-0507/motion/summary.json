@@ -1,0 +1,137 @@
+{
+  "reference_url": "https://naturehood-pj.com/zinen/",
+  "analyzed_at": "2026-09-20T20:08:23.813Z",
+  "pages": [
+    {
+      "url": "https://naturehood-pj.com/zinen/",
+      "slug": "zinen",
+      "title": "ZINEN | 福岡県那珂川市 一棟貸しのサウナ付きリバーサイドヴィラ",
+      "viewportsTall": 20.2,
+      "revealCount": 109,
+      "dominantKind": "other",
+      "durationMs": {
+        "min": 500,
+        "median": 2000,
+        "max": 5000
+      },
+      "easings": [
+        "ease",
+        "cubic-bezier(0.25, 1, 0.5, 1)",
+        "linear",
+        "cubic-bezier(0.4, 0, 0.2, 1)"
+      ],
+      "scrollLinkedCount": 43,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 29,
+      "keyframes": 8,
+      "header": {
+        "position": "static",
+        "atTop": {
+          "height": 0,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "text-[var(--header-color)] w-full"
+        },
+        "scrolled": {
+          "height": 588,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "text-[var(--header-color)] w-full"
+        },
+        "shrinks": true,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "lenis": "present"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "zinen": 109
+    },
+    "reveal_count_spread": 0,
+    "motion_consistent": true,
+    "libs_union": [
+      "lenis"
+    ],
+    "header_behavior": {
+      "position": "static",
+      "atTop": {
+        "height": 0,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "text-[var(--header-color)] w-full"
+      },
+      "scrolled": {
+        "height": 588,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "text-[var(--header-color)] w-full"
+      },
+      "shrinks": true,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": false
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 109,
+    "reveal_count_reduced": 110,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": [
+      {
+        "tag": "symbol",
+        "className": "",
+        "displayNow": "inline",
+        "opacityNow": "1"
+      },
+      {
+        "tag": "div",
+        "className": "absolute z-10 right-[var(--space-side)] bottom-5 md:bottom-[54px] flex gap-x-2.5 items-center text-w",
+        "displayNow": "flex",
+        "opacityNow": "1"
+      }
+    ]
+  },
+  "direction_hints": {
+    "dominant_reveal": "other",
+    "scroll_linked_count": 43,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": {
+      "min": 500,
+      "median": 2000,
+      "max": 5000
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.25, 1, 0.5, 1)",
+      "linear",
+      "cubic-bezier(0.4, 0, 0.2, 1)"
+    ],
+    "reveal_kinds": {
+      "fade": 10,
+      "fade-up": 8,
+      "fade-side": 1,
+      "zoom": 11,
+      "clip-wipe": 3,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 76
+    },
+    "page_length_viewports": [
+      20.2
+    ]
+  }
+}

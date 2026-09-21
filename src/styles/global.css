@@ -17,7 +17,59 @@
           business, emerald, retro, nord, autumn, winter, lofi,
           corporate-hokuline, corporate-hokuline-bold, corporate-minamoto,
           aoba-corporate, aoba-corporate-b, kido-corporate, kido-corporate-b,
-          aogami-corporate, kabukido-sumi;
+          aogami-corporate, kabukido-sumi, noxray-corporate;
+}
+
+@plugin "daisyui/theme" {
+  name: "noxray-corporate";
+  default: false;
+  color-scheme: light;
+  --color-base-100: oklch(95.8% 0.007 100);
+  --color-base-200: oklch(91.8% 0.012 148);
+  --color-base-300: oklch(77.4% 0.014 151);
+  --color-base-content: oklch(27.2% 0.027 188);
+  --color-primary: oklch(27.2% 0.027 188);
+  --color-primary-content: oklch(95.8% 0.007 100);
+  --color-secondary: oklch(68.2% 0.052 91);
+  --color-secondary-content: oklch(20.2% 0.019 188);
+  --color-accent: oklch(68.2% 0.052 91);
+  --color-accent-content: oklch(20.2% 0.019 188);
+  --color-neutral: oklch(20.2% 0.019 188);
+  --color-neutral-content: oklch(95.8% 0.007 100);
+  --radius-box: 0.125rem;
+  --radius-field: 0.125rem;
+}
+
+[data-theme="noxray-corporate"] {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+[data-theme="noxray-corporate"] h1,
+[data-theme="noxray-corporate"] h2,
+[data-theme="noxray-corporate"] h3 {
+  font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+[data-theme="noxray-corporate"] .site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 100px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--color-neutral-content);
+}
+[data-theme="noxray-corporate"] .site-header > div {
+  max-width: none;
+  height: 100px;
+  padding-inline: 32px;
+}
+[data-theme="noxray-corporate"] .site-header--shrink.is-scrolled > div { height: 70px; }
+[data-theme="noxray-corporate"] .site-header .btn-primary { background: #b7a16b; color: #142326; border-color: #b7a16b; }
+[data-theme="noxray-corporate"] .site-header a:focus-visible,
+[data-theme="noxray-corporate"] footer a:focus-visible { outline: 3px solid #b7a16b; outline-offset: 4px; }
+@media (max-width: 1199px) {
+  [data-theme="noxray-corporate"] .site-header > div { padding-inline: 20px; }
 }
 
 @plugin "daisyui/theme" {

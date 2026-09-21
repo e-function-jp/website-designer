@@ -1,0 +1,193 @@
+{
+  "reference_url": "https://bluebank.co.jp/",
+  "analyzed_at": "2026-09-19T20:01:57.491Z",
+  "pages": [
+    {
+      "url": "https://bluebank.co.jp/",
+      "slug": "top",
+      "title": "BlueBank（ブルーバンク）株式会社",
+      "viewportsTall": 7.9,
+      "revealCount": 9,
+      "dominantKind": "other",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 1,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 1,
+      "keyframes": 13,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 54,
+          "top": 29,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header__inner"
+        },
+        "scrolled": {
+          "height": 54,
+          "top": 29,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header__inner"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {}
+    },
+    {
+      "url": "https://bluebank.co.jp/news/",
+      "slug": "news",
+      "title": "ニュース | BlueBank（ブルーバンク）株式会社",
+      "viewportsTall": 6.9,
+      "revealCount": 1,
+      "dominantKind": "fade-side",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 0,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 13,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 54,
+          "top": 29,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header__inner"
+        },
+        "scrolled": {
+          "height": 54,
+          "top": 29,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header__inner"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {}
+    },
+    {
+      "url": "https://bluebank.co.jp/message/",
+      "slug": "message",
+      "title": "代表メッセージ | BlueBank（ブルーバンク）株式会社",
+      "viewportsTall": 4.6,
+      "revealCount": 1,
+      "dominantKind": "fade-side",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 0,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 13,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 54,
+          "top": 29,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header__inner"
+        },
+        "scrolled": {
+          "height": 54,
+          "top": 29,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header__inner"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {}
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 9,
+      "news": 1,
+      "message": 1
+    },
+    "reveal_count_spread": 8,
+    "motion_consistent": true,
+    "libs_union": [],
+    "header_behavior": {
+      "position": "fixed",
+      "atTop": {
+        "height": 54,
+        "top": 29,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "l-header__inner"
+      },
+      "scrolled": {
+        "height": 54,
+        "top": 29,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "l-header__inner"
+      },
+      "shrinks": false,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": false
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 9,
+    "reveal_count_reduced": 9,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": [
+      {
+        "tag": "script",
+        "className": "",
+        "displayNow": "none",
+        "opacityNow": "1"
+      }
+    ]
+  },
+  "direction_hints": {
+    "dominant_reveal": "other",
+    "scroll_linked_count": 1,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": null,
+    "easings": [
+      "ease"
+    ],
+    "reveal_kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 3,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 6
+    },
+    "page_length_viewports": [
+      7.9,
+      6.9,
+      4.6
+    ]
+  }
+}

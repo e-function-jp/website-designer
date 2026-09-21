@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>株式会社ノクスレイ｜コーポレートサイト制作ディレクション</title>
+<style>
+:root{--ink:#203438;--dark:#142326;--paper:#F4F3EE;--sub:#E3E7E3;--accent:#B7A16B;--line:#BBC4BF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;font-size:16px;line-height:1.9}
+header,main,footer{max-width:1200px;margin:auto;padding:48px 32px}
+header{padding-top:80px;border-bottom:4px solid var(--ink)}
+h1{font-size:clamp(30px,4.5vw,60px);line-height:1.4;letter-spacing:-.04em}
+h2{font-size:30px;margin:0 0 32px}
+h3{font-size:21px;margin:0 0 20px}
+h4{font-size:18px}
+p{margin:12px 0}
+main>section{padding:64px 0;border-bottom:1px solid var(--line)}
+article{margin-top:48px}
+article>h3{padding:24px;background:var(--ink);color:var(--paper)}
+[data-section]{padding:32px 0;border-bottom:1px solid var(--line)}
+[data-role]::before{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;color:#556760}
+[data-role="purpose"]::before{content:"役割"}
+[data-role="layout"]::before{content:"配置・寸法"}
+[data-role="copy"]::before{content:"掲載コピー"}
+[data-role="components"]::before{content:"使用部品"}
+[data-role="animation"]::before{content:"モーション"}
+[data-role="image"]::before{content:"画像"}
+dl{display:grid;grid-template-columns:180px 1fr;gap:20px 32px}
+dt{font-weight:700}
+dd{margin:0;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:16px 12px;text-align:left;vertical-align:top}
+pre{padding:24px;overflow:auto;background:var(--dark);color:var(--paper);font-size:13px;line-height:1.7}
+a{color:inherit;text-underline-offset:4px}
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:32px 0}
+.swatches span{padding:44px 12px 16px;font-size:13px}
+figure{margin:24px 0;padding:24px;border:1px solid var(--line)}
+.note{border-left:4px solid var(--accent);padding:12px 24px}
+@media(max-width:700px){header,main,footer{padding:32px 20px}dl{grid-template-columns:1fr;gap:8px}dd{margin-bottom:20px}table{font-size:12px}th,td{padding:12px 6px;overflow-wrap:anywhere}.swatches{grid-template-columns:1fr 1fr}}
+@media print{pre{white-space:pre-wrap}article{break-before:page}[data-section],figure{break-inside:avoid}header,main,footer{max-width:none}}
+</style>
+</head>
+<body>
+<header>
+<p>制作確定仕様 / corporate-20260920-1616 / 1案</p>
+<h1>伝わる設計で、<br>成果を積む。</h1>
+<p>株式会社ノクスレイの企業理解から、対応範囲の確認、制作物による検証、資料取得・相談までをつなぐ多ページサイト。</p>
+<p class="note">方向性は「墨青の大きな面と、大小の制作物」。参照の情報の順序、非対称な画像配置、密度の緩急を引き継ぐ。大きな英語はページ見出し・姿勢メッセージ・共通CTA・工程見出しに限定し、日本語見出しの上にABOUT/SERVICEを重ねる装飾は禁止。本書はサイトの実装仕様であり、本書自体の紙面デザインをサイトへ転用しない。</p>
+</header>
+
+<main>
+<section id="site-config">
+<h2>サイト定義</h2>
+<dl>
+<dt>name</dt><dd>株式会社ノクスレイ</dd>
+<dt>tagline</dt><dd>伝わる設計で、成果を積む。</dd>
+<dt>theme</dt><dd>noxray-corporate。独自DaisyUIテーマとして登録する。</dd>
+<dt>nav</dt><dd>私たちについて → /about/、Web制作・改善運用 → /service/、制作実績 → /works/、資料・検討ガイド → /download/</dd>
+<dt>footerNav</dt><dd>会社を知る：私たちについて → /about/。依頼を検討する：Web制作・改善運用 → /service/、制作実績 → /works/、資料・検討ガイド → /download/、無料相談・見積もり → /contact/。</dd>
+<dt>organization</dt><dd>legalName：株式会社ノクスレイ。address：東京都渋谷区。founded：2014。従業員数48名は会社概要本文に記載する。電話、メール、番地、代表者、資本金、認証、別拠点は追加しない。</dd>
+<dt>primaryCta</dt><dd>無料相談・見積もり → /contact/</dd>
+<dt>legalNav</dt><dd>個人情報の取り扱い → /privacy/</dd>
+<dt>motion</dt><dd>reveal：zoom、durationMs：2400、staggerMs：0、header：shrink、pageTransition：false。zoomは主に装飾罫線の軸方向伸長を指す。本文に既定値を一括適用しない。</dd>
+</dl>
+<pre><code>import type { SiteConfig } from '../../../../lib/site';
+
+export const site: SiteConfig = {
+  name: '株式会社ノクスレイ',
+  tagline: '伝わる設計で、成果を積む。',
+  base: '/sites/corporate/a-20260920-1616/',
+  theme: 'noxray-corporate',
+  nav: [
+    { label: '私たちについて', href: '/about/' },
+    { label: 'Web制作・改善運用', href: '/service/' },
+    { label: '制作実績', href: '/works/' },
+    { label: '資料・検討ガイド', href: '/download/' },
+  ],
+  footerNav: [
+    {
+      heading: '会社を知る',
+      items: [{ label: '私たちについて', href: '/about/' }],
+    },
+    {
+      heading: '依頼を検討する',
+      items: [
+        { label: 'Web制作・改善運用', href: '/service/' },
+        { label: '制作実績', href: '/works/' },
+        { label: '資料・検討ガイド', href: '/download/' },
+        { label: '無料相談・見積もり', href: '/contact/' },
+      ],
+    },
+  ],
+  organization: {
+    legalName: '株式会社ノクスレイ',
+    address: '東京都渋谷区',
+    founded: '2014',
+  },
+  primaryCta: { label: '無料相談・見積もり', href: '/contact/' },
+  legalNav: [{ label: '個人情報の取り扱い', href: '/privacy/' }],
+  motion: {
+    reveal: 'zoom',
+    durationMs: 2400,
+    staggerMs: 0,
+    header: 'shrink',
+    pageTransition: false,
+  },
+};
+export default site;</code></pre>
+<p>全URLは上記baseからの相対定義。実際のリンクは共通のurl関数でbaseを前置する。アンカー付きリンクも同様。ページを作る前にこの_site.tsを書く。全ページでSiteLayoutを使用する。</p>
+</section>
+
+<section id="sitemap">
+<h2>サイトマップと回遊</h2>
+<table>
+<thead><tr><th>URL</th><th>ページ名</th><th>役割</th><th>想定本文量（文字）</th></tr></thead>
+<tbody>
+<tr><td>/</td><td>トップ</td><td>姿勢・対応範囲・数値・制作物から詳細へ分岐</td><td>1,000〜1,300</td></tr>
+<tr><td>/about/</td><td>私たちについて</td><td>理念、価値、事業姿勢、会社概要、実績による信用形成</td><td>1,200〜1,500</td></tr>
+<tr><td>/service/</td><td>Web制作・改善運用</td><td>業務11項目と工程4段階で依頼範囲を具体化</td><td>1,700〜2,100</td></tr>
+<tr><td>/works/</td><td>制作実績</td><td>提供された実績数値と制作イメージの比較</td><td>650〜900</td></tr>
+<tr><td>/works/brand/</td><td>ブランドサイトの制作イメージ</td><td>事業理解から相談までの情報設計を説明</td><td>750〜1,000</td></tr>
+<tr><td>/works/recruitment/</td><td>採用サイトの制作イメージ</td><td>仕事理解から応募までの情報設計を説明</td><td>750〜1,000</td></tr>
+<tr><td>/works/campaign/</td><td>キャンペーンLPの制作イメージ</td><td>広告接点から相談までの設計を説明</td><td>750〜1,000</td></tr>
+<tr><td>/download/</td><td>資料・検討ガイド</td><td>会社資料の取得、Web刷新・採用強化の検討支援</td><td>1,100〜1,400</td></tr>
+<tr><td>/contact/</td><td>無料相談・見積もり</td><td>相談内容の入力・確認</td><td>650〜900</td></tr>
+<tr><td>/privacy/</td><td>個人情報の取り扱い</td><td>デモにおける入力情報の扱いを明示</td><td>500〜700</td></tr>
+</tbody>
+</table>
+<p>文字数は共通終端を含む目安。文字数を埋めるための文章追加は禁止。本書の掲載コピーを正本とする。未提供のニュースを創作しないため/news/は設けない。</p>
+<p>参照の個別実績への遷移を維持する。ただし顧客・案件情報が未提供なので、3詳細は「制作イメージ」として明示し、実案件の受注、納品、成果を語らない。トップの4展示は「ブランド」「採用」「キャンペーン」「公開後の改善」。4点目は /works/brand/#measurement へ遷移する。</p>
+<p>参照の2媒体への導線は、Web刷新・採用強化の検討ガイド2本へ置き換える。運営していないメディアや外部リンクは作らない。会社・サービスから実績へ、実績から該当サービスと相談へ横断できる構造を保つ。</p>
+</section>
+
+<section id="visual">
+<h2>視覚システム</h2>
+<div class="swatches" aria-label="配色見本">
+<span style="background:#203438;color:#F4F3EE">墨青 #203438</span>
+<span style="background:#142326;color:#F4F3EE">深墨青 #142326</span>
+<span style="background:#B7A16B;color:#142326">鈍金 #B7A16B</span>
+<span style="background:#F4F3EE;color:#203438;border:1px solid #BBC4BF">紙白 #F4F3EE</span>
+<span style="background:#E3E7E3;color:#203438">淡灰 #E3E7E3</span>
+</div>
+<dl>
+<dt>配色</dt><dd>コーポレートカラー#203438、濃色面#142326、アクセント#B7A16B、明色面#F4F3EE、第二背景#E3E7E3。本文は明色面で#203438、暗色面で#F4F3EE。補足は明色面#52615F、暗色面#C3CBC6。アクセントはCTA面・短い罫線・現在地表示だけに使い、明色面の小さな本文色にしない。影・グラデーションなし。</dd>
+<dt>DaisyUI変数</dt><dd>base-100=#F4F3EE、base-200=#E3E7E3、base-300=#BBC4BF、base-content=#203438、primary=#203438、primary-content=#F4F3EE、secondary=#B7A16B、secondary-content=#142326、accent=#B7A16B、accent-content=#142326、neutral=#142326、neutral-content=#F4F3EE。角丸はUI全体で2px、円図のみ50%。</dd>
+<dt>見出し書体</dt><dd>日本語見出しは Zen Kaku Gothic New 700。欧文の大見出しは Inter 700（ローカル配信）。寸法（PC/SP）：トップ英キャッチ「DESIGN THAT WORKS」PC 64px/1.1・SP 28px/1.2（左下、letter-spacing 0.04em）。企業姿勢の巨大日本語 PC 112px/1.3・SP 46px/1.35。下層ページ英h1（ABOUT / SERVICE / WORKS / DOWNLOAD / CONTACT）PC 120px/1.05・SP 55px/1.1。下層日本語導入見出し PC 40px/1.45・SP 28px/1.5。WORKFLOW 英見出し PC 60px/1.1・SP 42px/1.15。共通CTA英見出し DOWNLOAD/CONTACT PC 65px/1.05・SP 40px/1.1。セクション日本語h2 PC 40px/1.45・SP 28px/1.5。h3 24px/1.5・SP 22px。小分類ラベル（英1語）は14px/SP12px・letter-spacing 0.12em・日本語の上ではなく横または下に置く。日本語h1と英語を同じ行に重ねない。字間日本語 −0.03em。</dd>
+<dt>本文書体</dt><dd>Noto Sans JP、400/500。本文16px/1.9、注記14px/1.8、ナビ14px/1.5。数値は同書体700、tabular-nums、PC88px・モバイル64px。本文幅は原則38〜42字。フォントはローカル配信、swap、和文システムフォントへフォールバック。</dd>
+<dt>写真の方向性</dt><dd>制作現場の会話・紙の設計図・作業する手元を実写調で用意。青緑寄りの低彩度、柔らかな窓光、白飛びさせない。人物を架空の代表者・社員として特定しない。画面内文字は画像生成に任せず、制作イメージ部品内でHTMLとして組む。参照企業の画像・ロゴは使用しない。</dd>
+<dt>英語表記の設計</dt><dd>大きな欧文を置く場所を限定する。(1)トップ英キャッチ DESIGN THAT WORKS。(2)下層ページ英h1：ABOUT / SERVICE / WORKS / DOWNLOAD / CONTACT（各1語、PC120px）。(3)工程英見出し WORKFLOW（PC60px）。(4)共通CTA英見出し DOWNLOAD / CONTACT（PC65px）。(5)小ラベルは日本語（私たちについて、制作実績など14px）。日本語見出しの直上にABOUT/SERVICEを装飾で重ねない。ナビ・通常リンク・本文は日本語。参照のCREATING A NEW STANDARD相当は、本案では日本語巨大見出し「伝わることから、成果は始まる。」が担う。</dd>
+<dt>余白の方針</dt><dd>8px単位。PC外周32px、本文最大1200px、展示最大1376px、グリッド24px。文章の狭幅760px。PC上下余白は密な一覧96px、説明160px、作品展示200px。モバイル外周20px、上下56/80/104px、列間24px。各節の指定を優先。すべての節を同じpadding・同じカードにしない。</dd>
+<dt>レスポンシブ</dt><dd>基本は1列。768pxから2列、1200pxからPCナビと4列業務一覧。768〜1199pxの外周32px、h1は56px、円図は2×2。320pxで横スクロールなし。PCの高さは1440×900の目安で、固定heightではなく内容＋paddingで近づける。200%拡大時は伸長を許す。</dd>
+<dt>境界と罫線</dt><dd>暗色面は白10%の1px、明色面は墨青15%の1px。縦線はPCで外周・25%・75%・外周、モバイルでは外周だけ。文字や写真より前に線を重ねない。細かな方眼を全画面に敷かない。</dd>
+<dt>画像の大小差</dt><dd>トップの実績は左幅44%、右幅48%、中央の間隔8%。左は横長と縦長、右は縦長と横長。PCで右列を上へ240pxずらす。モバイルでも幅100%→86%右寄せ→92%左寄せ→100%を保ち、比率を統一しない。</dd>
+</dl>
+</section>
+
+<section id="shared-shell">
+<h2>共通シェルと操作仕様</h2>
+<p>SiteLayout、SiteHeader、SiteFooter、SiteBreadcrumbsを使用。既存シェルの標準ヘッダーは高さ・位置・背景が本仕様と異なるため、noxray-corporateテーマ限定の変種を共通部品側に追加する。ページ内でヘッダー・フッター・パンくずを手書きしない。他サイトの既定値は変えない。</p>
+<dl>
+<dt>ヘッダー</dt><dd>PCはposition:fixed、top:0、全幅、初期100px→scrollY&gt;8で70px（H:300ms ease）、常時表示、背景透明。ロゴ左32px、右に主ナビ4項目とCTA2個。「会社資料を見る」→/download/#company（透明＋1px枠）、「無料相談・見積もり」→/contact/（初期：紙白地・墨青字、HV：墨青地・紙白字 300ms ease）。各CTA高さ44px（参照40pxをタップ領域で上書き）。文字14px。ロゴは日本語社名20px/700。現在地は下線＋aria-current。SP高さ初期64px相当を100→70の縮小ルールに合わせ、左右余白20〜25px、右上48×48メニュー。</dd>
+<dt>暗明の切り替え</dt><dd>各セクションに面の明暗データを付け、ヘッダー中央の高さを通過した面に合わせてロゴ・文字・枠色だけを切り替える。color/padding/heightは300ms/ease。背景色変更・隠す動きは入れない。写真の上端100pxは深墨青65%のスクリーンで可読性を確保する。</dd>
+<dt>モバイルナビ</dt><dd>1200px未満は初期100px→70pxを維持。左20pxに社名16px、右20pxに48×48pxの「メニュー」ボタン。開くと紙白の全面ダイアログ、上端に社名と48px閉じるボタン、本文に主ナビ4件を高さ64pxずつ、その下にCTA2件を縦積み。長い画面は内部スクロール。開閉アニメーションなし。フォーカストラップ、Esc、背景inert、閉じた際のフォーカス復帰を実装。JSなしではdetails型のインラインナビへフォールバック。</dd>
+<dt>モバイル相談導線</dt><dd>画面下固定CTAは置かない。全ページでメニューから1操作で相談リンクへ到達でき、本文終端にも相談行がある。フォームの表示領域を固定帯で狭めない。</dd>
+<dt>下層冒頭</dt><dd>PCは上padding240px、h1左32px、本文幅内に導入文、下端右にパンくず。通常高さ約600px。モバイルは上padding148px、高さ約360〜460px、パンくずは見出し・導入文の後に左寄せ。日本語h1だけを表示する。詳細ページのパンくずはホーム→制作実績→現在ページ。</dd>
+<dt>パンくず拡張</dt><dd>SiteLayoutの既存描画位置を、テーマ限定のページヘッダ領域へ配置できるよう共通部品を拡張する。DOM順はh1・導入・パンくずを維持し、二重描画しない。</dd>
+<dt>リンク</dt><dd>本文リンクは下線＋右矢印、タップ領域44px以上。作品は画像と見出しを1つのリンクで包む。hoverは下線を太くするだけで画像をズームしない。フォーカスは鈍金3px＋外側深墨青1px、offset4px。</dd>
+<dt>共通終端</dt><dd>全10ページで本文後にDOWNLOAD／CONTACTの2行、その後にSiteFooter。PCは各行320〜390px、左45%に英見出し65px＋日本語用途、右55%説明と矢印。モバイルは各行240px、英40px。背景は深墨青。1行全体をリンク。資料ページでは資料行を#companyへ、相談ページでは相談行を#consultationへ。ホバー仕様はmotion HV⑤。</dd>
+<dt>共通終端コピー</dt><dd>資料行：英DOWNLOAD／日「資料・検討ガイド」／説明「対応範囲と進め方を、社内での比較・検討に。会社資料と、Web刷新・採用強化の確認項目をご覧いただけます。」／「資料を見る」。相談行：英CONTACT／日「無料相談・見積もり」／説明「Web刷新、採用強化、キャンペーン施策。まだ整理できていない課題も、現在の状況からお聞かせください。」／「相談内容を入力する」。</dd>
+<dt>フッター</dt><dd>深墨青、PC約520px・モバイル約620px。上段社名28px＋キャッチ、中央は会社情報とfooterNavの3列、最下段legalNav＋著作権。会社情報は「株式会社ノクスレイ」「東京都渋谷区」「2014年設立 / 従業員48名」「広告・Web制作」。下端「© 2026 株式会社ノクスレイ」。架空サイト注記「このサイトは架空企業の制作サンプルです。」を14pxで表示する。3拠点・Pマーク・電話番号は追加しない。</dd>
+</dl>
+</section>
+
+<section id="motion-spec">
+<h2>モーションの確定値</h2>
+<p>実測の2400ms/easeは罫線に採用。会社ページで観測された820ms/cubic-bezier(0.22,1,0.36,1)を画像の共通時間として採用する。後者を全ページへ展開すること、発火位置、stagger=0は本案の設計判断であり、全対象の実測値とは称さない。</p>
+<table>
+<thead><tr><th>記号</th><th>対象と動作</th><th>確定設定</th></tr></thead>
+<tbody>
+<tr><td>L</td><td>背景罫線。縦はscaleY(0→1)、横はscaleX(0→1)</td><td>2400ms / ease / stagger 0ms。原点は縦上・横左。線を持つ節が画面下端95%へ入った際に一度発火。新規AxisRuleとして切り出す。</td></tr>
+<tr><td>R</td><td>本文と図形のfade</td><td>820ms / cubic-bezier(0.22,1,0.36,1) / stagger 0ms。h1、ナビ、CTA、フォームは対象外。節全体を隠さず短いブロックごとに適用。</td></tr>
+<tr><td>U</td><td>画像・工程のfade-up</td><td>820ms / cubic-bezier(0.22,1,0.36,1) / stagger 0ms。translateY(24px→0)、opacity(0→1)。ScrollRevealの既定32px・既定easingをテーマ限定で上書き。</td></tr>
+<tr><td>H</td><td>固定ヘッダー縮小</td><td>100→70px / 300ms / ease / stagger 0ms。非表示化なし、背景透明を維持。</td></tr>
+<tr><td>S</td><td>スクロール連動の装飾横線</td><td>全体4本。トップ stance/works、会社 values、サービス process冒頭。scaleX(0→1)、stagger 0ms。時間durationなし。各対象節の上端が画面下端へ入る位置で0、上端が画面上端へ到達する位置で1。p=clamp((viewportHeight−rect.top)/viewportHeight,0,1)。</td></tr>
+<tr><td>P</td><td>ヒーロー背景の視差</td><td>GsapScrollSection animation=parallax / scrub=true / start=top top / end=bottom top。対象はトップheroのコラージュ背景層のみ。前景の見出し・本文は通常スクロール。背景の移動量はスクロールYに対し右方向約0.25・下方向約0.45（Y=0→900pxで概ね X+220〜420 / Y+350〜520 の比率）。reduced-motion時はparallax停止・背景静止。</td></tr>
+<tr><td>HV</td><td>ホバー（CSS）</td><td>①ヘッダー「無料相談・見積もり」：紙白地・墨青字 → 墨青地・紙白字、300ms ease。②実績カード：暗い被せ opacity 0→0.4、案件名が translateY(12px)→0 で常時ラベルの上に重ねず、ホバー時に説明1行を表示。フォーカス時も同状態。タッチは:activeで0.4。300ms ease。③丸矢印リンク：下線 scaleX(0→1) origin left、円内塗り、矢印 translateX(0→8px)、300ms ease。④制作画面画像（ガイド・サービス末尾）：scale(1→1.06)、transform-origin center、500ms ease、overflow hidden。⑤共通DOWNLOAD行：ホバーで背景写真 opacity 0→1（500ms ease）、非ホバーのCONTACT行は opacity 1→0.35 と罫線を抑える。逆も同様。キーボードfocus-visibleでも同状態。reduced-motion時は色とopacityのみ、transformなし。</td></tr>
+</tbody>
+</table>
+<p>scroll_linked_count=6 の内訳：P（ヒーロー視差1）＋S（装飾横線4）＋工程ナビ sticky（CSS position:sticky; top:110px、ライブラリpinなし）＝6相当。LとSは別要素。Sを本文・画像・フォーカス対象へ適用しない。Lenisの存在は確認されているが係数が未計測のため、スクロールはブラウザー標準とし、独自の慣性値を追加しない。カーソル追従の大円はタッチ・キーボードで使えないため採用しない。ホバー情報は常時ラベル＋focusで代替する。</p>
+<p>サービスの工程図だけは2〜4個目をfade-left、初期translateXを−60/−120/−180px、duration820ms、stagger0msで配置。1個目はfade。移動量は実測、時間の適用は本案の統一判断。モバイルの工程図は移動を外しfadeにする。</p>
+<p>トップ・会社・サービスは各主要節にLを1組、画像または説明の小ブロックにR/Uを1〜3組配置。125/110/195の検出数はDOM由来の参考値であり、空要素を追加して合わせない。他の下層も同じ部品単位・同じ時間を使う。</p>
+<p>prefers-reduced-motion:reduceでは全ページでL/S/R/U/H/P/HVのtransformを停止。線は全長、本文と画像はopacity:1、transform:none、ヘッダーは70px固定、ヒーロー背景は静止、ホバーは色とopacityのみ。View Transitionsは常時off。JS無効でも全内容を初期表示し、JSの初期化完了後にのみ未表示領域のリビールを有効化する。設定が途中で切り替わった場合も即時停止する。</p>
+</section>
+
+<section id="pages">
+<h2>ページ別の実装仕様</h2>
+
+<article data-page="/">
+<h3>トップ</h3>
+<section data-section="hero">
+<h3>制作物から始まるファーストビュー</h3>
+<p data-role="purpose">何を支援する企業かを最初の画面で理解させる。</p>
+<p data-role="layout">深墨青背景。PC高さ900px（1画面）、全幅コラージュに暗幕45%。中央右に採用画面の縦長4:5、左上にブランド画面の横長3:2、右下にLP画面16:9、左下の見出し背面には写真を置かず暗い面を確保。英キャッチ「DESIGN THAT WORKS」は左32px・下220px、PC 64px Inter 700。その下に日本語h1「伝わる設計で、／成果を積む。」PC 40px、本文は下64px。モバイルは約760px、上部330pxを大小3枚のコラージュ、下部に英キャッチ28px→日本語h1 2行→本文。文字を画像に焼き込まない。コラージュ背景層のみ fixed/absolute で視差対象、前景テキストは通常フロー。</p>
+<p data-role="copy">英「DESIGN THAT WORKS」／日本語h1「伝わる設計で、／成果を積む。」（改行は読点後）／「中堅BtoB企業のブランドサイト・採用サイト・キャンペーンLPを、企画設計から公開後の改善運用まで。」／「Web制作・改善運用を見る」→/service/。画像脇注記「画面は制作イメージです。」</p>
+<p data-role="components">新規WorkCollage（または既存HeroCollageを拡張）、TextArrowLink、WorkScreen、GsapScrollSection（背景層のみ）。SiteLayout。</p>
+<p data-role="animation">P：背景コラージュに GsapScrollSection animation=parallax scrub=true start="top top" end="bottom top"。移動量は右0.25・下0.45相当。L：背景線2400ms/ease/stagger0ms。前景h1・本文・リンクは初期表示（リビールなし）。ロード待ち・Openingローダー・スライドショー・画像ズームなし。reduced-motionでP停止。</p>
+<p data-role="image">works:brand、works:recruitment、works:campaignをWorkScreen内に使用し、3画面として合成。about:studioを右上の小窓に再利用。ヒーロー専用の追加生成なし。</p>
+</section>
+<section data-section="stance">
+<h3>企業姿勢</h3>
+<p data-role="purpose">会社ページの理念・価値へ接続する。</p>
+<p data-role="layout">深墨青。PC約1180px（約1.3画面）。上padding200px、左120pxから巨大日本語見出し2行 PC112px。下段は左25%に小ラベル「私たちの考え」14px、右65%にh2 PC40pxと本文17px/行高1.9、間10%。段間144px。目的のない黒空白1画面は置かない（参照の演出余白は視差heroに吸収）。モバイル約760px、巨大見出し→80px間隔→本文。主見出し改行「伝わることから、／成果は始まる。」（2行目を1〜2文字にしない）。</p>
+<p data-role="copy">巨大見出し「伝わることから、／成果は始まる。」／h2「事業の強みを、／相手の判断材料へ。」／「事業の価値は、詳しく説明するだけでは届きません。誰が、何を知り、どのように判断するのか。ノクスレイは業種ごとの検討の流れを踏まえて、情報の順序と接点を設計します。」「公開は、その設計を確かめる出発点です。問い合わせや採用応募につながる動きを計測し、改善を積み重ねます。」／TextArrowLink「私たちについて」→/about/</p>
+<p data-role="components">SectionTitleは本文側h2のみ（英語subtitleなし）。TextArrowLink、AxisRule。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。R：本文820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。Sの1本目を巨大見出し下の横線へ。リンクHV：丸矢印300ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="service-summary">
+<h3>企画から改善までの対応範囲</h3>
+<p data-role="purpose">サービス下層の詳細を読む理由をつくる。</p>
+<p data-role="layout">紙白。PC約900px、左右46:54。左は見出し・本文・リンク。右は直径250pxの円3個を上中央1個・下左右2個の三角形にする。円は墨青、中央文字は紙白、上下間隔16px。モバイル約840px、文章の下に直径136pxの三角配置。円内は見出しと2行以内の説明。</p>
+<p data-role="copy">h2 PC「企画から改善まで、／ひとつの設計で。」（15字／11字相当で折る。SPは「企画から改善まで、／ひとつの設計で。」のまま2行、末尾1〜2字落とし禁止）／「ブランドサイト、採用サイト、キャンペーンLP。それぞれの目的に合わせて、情報設計、UI制作、計測設計をつなぎます。」／円1「企画設計」「業種と課題を整理」／円2「UI制作」「迷わず伝わる接点へ」／円3「改善運用」「計測から次の一手へ」／「対応範囲と制作工程を見る」→/service/</p>
+<p data-role="components">SectionTitle、TextArrowLink、新規ScopeCircles。Stepsは使用しない。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。円3個はR：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。同時出現。</p>
+<p data-role="image">none。円図はHTML/CSS。</p>
+</section>
+<section data-section="proof">
+<h3>数字で見るノクスレイ</h3>
+<p data-role="purpose">抽象的な説明を、提供された実績数値で補強する。</p>
+<p data-role="layout">淡灰。PC約1120px、左30%見出し、右70%に墨青の横長パネル3段、各220px・段間24px。各パネル左55%説明、右45%数値。モバイルは見出しの下に3段、各240px、説明→数値の順。単純な横3列統計にしない。</p>
+<p data-role="copy">「設計と改善の積み重ね。」／「累計制作」「240件超」「ブランドサイト・採用サイト・キャンペーンLPの制作を積み重ねています。」／「公開後90日の問い合わせ」「平均1.8倍」「公開後の問い合わせの変化を、改善の判断材料にしています。」／「取引継続率」「87%」「公開後の改善運用まで、継続して支援します。」／注記「数値は本サンプルの企業設定に基づきます。個別案件の成果を保証するものではありません。」</p>
+<p data-role="components">新規EvidencePanelを3件。SectionTitle。数値は通常テキストで表示しAnimatedCounterは使わない。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。パネル単位R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。数値のカウントアップなし。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="works">
+<h3>大小差のある制作物展示</h3>
+<p data-role="purpose">画面の表現と設計意図を個別詳細へつなぐ。</p>
+<p data-role="layout">深墨青。PC約2220px。上左44%に見出し、右48%に採用の4:5大判。左ブランド3:2は上から520px、右LP4:3は上から1080px、左改善の3:4は上から1320px。画像後に24pxの余白でラベル・見出し。モバイルは説明→採用100%幅4:5→ブランド86%幅右寄せ3:2→LP92%幅左寄せ4:3→改善100%幅3:4。段間64/96/64px。約2400px。各作品のラベルを画像より先に読み上げる。</p>
+<p data-role="copy">「制作実績と、設計の考え方。」／「何を見せ、どこへつなぐか。対応するサイトの制作イメージから、情報設計の考え方をご紹介します。」／共通ラベル「制作イメージ」／「事業の強みを、相談の入口へ。」→/works/brand/／「働く姿から、応募の判断へ。」→/works/recruitment/／「広告の関心を、具体的な相談へ。」→/works/campaign/／「公開後の動きから、次の改善へ。」→/works/brand/#measurement／「制作実績を見る」→/works/</p>
+<p data-role="components">新規StaggeredWorks、WorkScreen、TextArrowLink、SectionTitle。カード背景・影・統一比率を追加しない。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。4展示それぞれU：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。Sの2本目（トップ2本目）を一覧導線上の横線へ。各カードHV：暗い被せ0→0.4＋説明1行 translateY 300ms ease。focus-visible同。ラベル「制作イメージ」と見出しは常時表示（ホバー必須にしない）。角丸PC10px/SP6px。</p>
+<p data-role="image">works:brand、works:recruitment、works:campaign、service:measurement。3制作画面と改善作業写真を使用。列間PC80px相当、開始位置を上下にずらす（右列−240px）。</p>
+</section>
+<section data-section="guides">
+<h3>検討ガイド2本</h3>
+<p data-role="purpose">参照の専門情報への2導線を、自社設定に沿った検討支援に置き換える。</p>
+<p data-role="layout">紙白。PC約1340px、2段。上段は左55%に見出し・本文、右35%にブランド画面の小さな3:2画像。下段は左35%に採用4:5画像、右55%に本文。段間160px。モバイルは各段を文章→画像、画像幅は上84%右寄せ・下70%左寄せ。上下余白80px。</p>
+<p data-role="copy">「Web刷新の前に、判断軸をそろえる。」／「目的、訪問者、問い合わせまでの導線。制作を始める前に整理しておきたい項目をまとめました。」／「Web刷新の検討ガイドを読む」→/download/#web／「採用サイトで、何を伝えるか。」／「仕事、働く環境、応募までの流れ。候補者の判断に必要な情報を、社内で確認するためのガイドです。」／「採用強化の検討ガイドを読む」→/download/#recruitment</p>
+<p data-role="components">新規EditorialPair、TextArrowLink、WorkScreen。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。画像U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。画像HV：scale(1→1.06) 500ms ease、枠 overflow:hidden、角丸PC10px。</p>
+<p data-role="image">works:brand、works:recruitmentを再利用。PC各約520×347相当（3:2）。上段右寄せ・下段左寄せで位置を振る。</p>
+</section>
+<section data-section="closing">
+<h3>資料取得・相談・企業情報</h3>
+<p data-role="purpose">検討段階の異なる訪問者を受け止める。</p>
+<p data-role="layout">共通終端。PCはCTA2段各320〜390px（合計約700px）＋フッター520px。各段は左45%に英大見出し、右55%に日本語説明と矢印。モバイルは各行240px、英40px→日本語。背景は深墨青。1行全体をリンク。</p>
+<p data-role="copy">英「DOWNLOAD」＋日本語「資料・検討ガイド」／説明「対応範囲と進め方を、社内での比較・検討に。会社資料と、Web刷新・採用強化の確認項目をご覧いただけます。」／「資料を見る」→/download/。英「CONTACT」＋日本語「無料相談・見積もり」／説明「Web刷新、採用強化、キャンペーン施策。まだ整理できていない課題も、現在の状況からお聞かせください。」／「相談内容を入力する」→/contact/。フッターは共通指定全文を使用。</p>
+<p data-role="components">ConsultationRows（英大見出し対応に拡張）、SiteFooter。</p>
+<p data-role="animation">L：行の境界線2400ms/ease/stagger0ms。HV：ホバー行の背景写真 opacity 0→1（500ms ease）。非ホバー行は opacity 1→0.35。focus-visible同。背景写真は通常非表示のため、ホバー用に about:studio を低彩度・暗幕60%で敷く（生成追加なし）。フッターはnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/about/">
+<h3>私たちについて</h3>
+<section data-section="hero-philosophy">
+<h3>制作現場を背景にした理念</h3>
+<p data-role="purpose">提供価値の根にある考え方を伝える。</p>
+<p data-role="layout">PC約1620px（参照約1.8画面）。写真背景を冒頭から理念本文まで連続、深墨青70%スクリーン。上端から約400pxがタイトル帯：左に小ラベル「私たちについて」14px、その下に英h1「ABOUT」PC120px（USは付けず1語で横幅を取る）、右下にパンくず「TOP・私たちについて」。帯の下は左25%空け右65%に日本語主張h2 PC40pxと幅を絞った理念本文2段落。モバイル約960px：英h1 55px→日本語導入→パンくず（大見出し下に約80px空け右寄せではなく左寄せで可読優先）→本文。写真は上半分、下部は同色面へ接続。</p>
+<p data-role="copy">小ラベル「私たちについて」／英h1「ABOUT」／導入「事業の価値を、／相手が判断できる情報へ。」／h2「伝わる設計で、／成果を積む。」／「ノクスレイは、中堅BtoB企業に向けて、ブランドサイト・採用サイト・キャンペーンLPの企画設計からUI制作、公開後の改善運用までを一貫して提供します。」／「大切にするのは、業種の知見を踏まえた情報設計と計測設計です。見た目を整えることと、問い合わせや応募につながること。その両方を、ひとつの制作の中で考えます。」</p>
+<p data-role="components">PageIntro（英大見出し対応）、SiteBreadcrumbs、SectionTitle、AxisRule。</p>
+<p data-role="animation">英h1と冒頭写真は初期表示。L：2400ms/ease/stagger0ms。理念本文R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。</p>
+<p data-role="image">about:studio。altは「設計資料を囲んで制作について話す場面」。特定の社員名・役職を付けない。</p>
+</section>
+<section data-section="values">
+<h3>3つの提供価値</h3>
+<p data-role="purpose">トップの姿勢を、情報設計・UI制作・計測設計に展開する。</p>
+<p data-role="layout">紙白、PC約900px。中央h2の下に3列、列間48px。各列上部に160pxの線図、その下に左寄せ見出し・本文。図は矩形3枚の重なり、大小矩形の整列、3つの測定点と折れ線。立体素材は生成しない。モバイルは1列で図96pxを左、本文を右へ置く3段、段間48px。</p>
+<p data-role="copy">「成果につながる、3つの設計。」／「情報を設計する」「業種ごとの検討の流れを踏まえ、訪問者が必要とする情報を整理します。事業の強みと、知りたいことが出会う順序をつくります。」／「接点を設計する」「情報の優先順位を、画面の大きさ、文字の強弱、導線の位置に落とし込みます。PCでもスマートフォンでも、次の行動を選べるUIをつくります。」／「改善を設計する」「公開後に何を確かめるかを、制作の段階から考えます。問い合わせと採用応募につながる動きを計測し、改善の判断につなげます。」</p>
+<p data-role="components">SectionTitle、新規ValueDiagram、AxisRule。図は装飾としてaria-hidden。</p>
+<p data-role="animation">図と文章はR：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。Sの3本目（会社1本目）を見出し下へ。立体常時回転なし。</p>
+<p data-role="image">none。図はCSSまたはインラインSVG。</p>
+</section>
+<section data-section="commitment">
+<h3>事業に向き合う姿勢</h3>
+<p data-role="purpose">参照の代表メッセージの役割を、未提供の人物を創作せずに担う。</p>
+<p data-role="layout">墨青、PC約820px。左52%に見出しと本文、右38%に「ノクスレイ」を縦2行の96px文字で大きく組む。会社ロゴの図案や署名は新造しない。モバイル約640px、本文→48px間隔→社名40px。</p>
+<p data-role="copy">「公開の先まで、考える。」／「サイトを訪れる方の判断と、事業の成果。その間にある情報の不足や迷いを、設計で減らしていきたいと考えています。」／「企画、UI制作、改善運用を別々の作業にせず、同じ目的からつなげる。問い合わせ獲得や採用応募のために何が必要かを問い続ける。それが、ノクスレイの制作に向き合う姿勢です。」／「株式会社ノクスレイ」</p>
+<p data-role="components">SectionTitle、新規StatementPanel。代表者欄・代表写真・引用符は設けない。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。本文R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="company-profile">
+<h3>会社概要</h3>
+<p data-role="purpose">確定している企業情報を比較しやすく示す。</p>
+<p data-role="layout">紙白、PC約900px。左25%に見出し、右75%に罫線表。項目幅160px、上下24px。モバイルは見出しの後に各行の項目→値を縦積み。表のセマンティクスを保持し、横スクロールを生まない。</p>
+<p data-role="copy">「会社概要」／「商号：株式会社ノクスレイ」「よみ：のくすれい」「設立：2014年」「従業員数：48名」「所在地：東京都渋谷区」「業種：広告・Web制作」「事業内容：中堅BtoB企業向けのブランドサイト・採用サイト・キャンペーンLPの企画設計、UI制作、公開後の改善運用」「ご相談：無料相談・見積もり」→/contact/</p>
+<p data-role="components">SectionTitle、Table。zebraなし。項目はth scope="row"。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。表はnone。Sはvaluesに1本のみ（会社合計1本）。表上端は静的1px罫線。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="track-record">
+<h3>制作の積み重ねから実績へ</h3>
+<p data-role="purpose">参照の取引先一覧が担う信用補強を、提供済み数値で行う。</p>
+<p data-role="layout">紙白を継続、PC約800px。左40%に「240件超」の大型数値、右60%に本文、下段に「平均1.8倍」「87%」の2列罫線付き項目。末尾右に実績導線。モバイルは数値→本文→2段の補足。ロゴウォールに置換しない。</p>
+<p data-role="copy">「制作と改善を、積み重ねる。」／「累計制作240件超。公開後90日の問い合わせ平均1.8倍。取引継続率87%。企画から公開後までをつなぐ支援の積み重ねです。」／「対応するサイトの制作イメージと、その設計の考え方をご覧ください。」／「制作実績を見る」→/works/／注記「数値は本サンプルの企業設定に基づきます。」</p>
+<p data-role="components">SectionTitle、EvidencePanelの白背景変種、TextArrowLink。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。説明R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。数値は初期表示。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">会社理解から資料取得・相談へ進める。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。PC合計約1160px、モバイル約1100px。</p>
+<p data-role="copy">英DOWNLOAD／日「資料・検討ガイド」＋共通終端コピー全文→/download/。英CONTACT／日「無料相談・見積もり」＋共通終端コピー全文→/contact/。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/service/">
+<h3>Web制作・改善運用</h3>
+<section data-section="hero">
+<h3>サービスの入口</h3>
+<p data-role="purpose">依頼できる範囲を端的に伝える。</p>
+<p data-role="layout">紙白 #F4F3EE 単色（写真なしでaboutと差を付ける）。共通下層ヘッダPC約400pxタイトル帯＋導入。左に小ラベル「Web制作・改善運用」14px、英h1「SERVICE」PC120px、右下パンくず「TOP・Web制作・改善運用」。導入はPC「大阪・東京を拠点に、」相当の3行構成をノクスレイ向けに再設計：PC改行「企画から改善までを、／専門チームがつなぎ、／一貫した制作を実現。」（10/10/12字、助詞始まりの最終行禁止）。SPは「企画から改善までを、／専門チームがつなぎ、／一貫した制作を実現。」3行。モバイルタイトル帯約303px、英h1 55px。</p>
+<p data-role="copy">小ラベル「Web制作・改善運用」／英h1「SERVICE」／導入見出し「企画から改善までを、／専門チームがつなぎ、／一貫した制作を実現。」／本文「事業の強みを伝えるサイトから、採用応募や問い合わせにつなぐ接点まで。企画設計、UI制作、公開後の改善を一貫して支援します。」</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs、AxisRule。</p>
+<p data-role="animation">英h1・導入初期表示。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="scope">
+<h3>一貫対応の4工程</h3>
+<p data-role="purpose">業務一覧に先立ち、支援全体のつながりを説明する。</p>
+<p data-role="layout">紙白、PC約780px。上段左40%見出し・右50%説明。下段は直径240pxの円4つを横一列、隣接円を1px線で接続。モバイルは直径132pxの2×2、DOM順1→2→3→4、接続線は横のみ。工程番号の丸は作らない。</p>
+<p data-role="copy">「つくる前から、公開の先まで。」／「企画の意図をUIへ、UIの意図を計測へ。各工程で判断したことを次の工程につなぎ、公開後も改善できるサイトを設計します。」／円「企画・設計」「UI制作」「実装・公開」「改善運用」</p>
+<p data-role="components">SectionTitle、ScopeCirclesの4工程変種。Stepsは使わない。</p>
+<p data-role="animation">円1はfade、円2〜4はfade-left（ScrollReveal）、820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。初期X −0/−60/−120/−180pxから最終位置へ開く（実測）。PC円径最大240〜300px、SP約103〜132pxの2×2。モバイルは全円fade・X移動なし。L：2400ms/ease/stagger0ms。接続線は円の後にLで描画。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="web-services">
+<h3>Web制作の5業務</h3>
+<p data-role="purpose">ブランドサイトとキャンペーンLPの支援内容を具体化する。</p>
+<p data-role="layout">紙白、PC約900px。見出しと導入の下に4列＋最終行1列。1項目は上に64px線図、h3、本文。影・塗りカードなし。最終行の空き3枠を埋めない。タブレット2列、モバイル1列で線図を左48px・本文を右に配置。</p>
+<p data-role="copy">「事業を伝え、相談につなぐWeb制作。」／「ブランドサイトとキャンペーンLPを、目的と訪問者に合わせて設計します。」／「課題整理・情報設計」「事業の強みと訪問者の疑問を整理し、必要なページと情報の順序を決めます。」／「ブランドサイト制作」「事業への理解を深め、サービスの検討と問い合わせにつながる構成・UIをつくります。」／「キャンペーンLP制作」「広告や施策で生まれた関心を受け止め、相談までの情報と導線をまとめます。」／「UI制作・実装」「文字、画像、操作の優先順位をそろえ、端末に応じた読みやすさと使いやすさを整えます。」／「計測設計・改善運用」「確認する行動と指標を整理し、公開後の動きから改善の優先順位を考えます。」</p>
+<p data-role="components">SectionTitle、新規CapabilityGrid、ValueDiagram。線図は順に階層・画面・縦長画面・端末・折れ線。</p>
+<p data-role="animation">各項目U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="recruitment-services">
+<h3>採用サイトの6業務</h3>
+<p data-role="purpose">同じ業務構成を採用候補者の検討に合わせて具体化する。</p>
+<p data-role="layout">淡灰、PC約1020px。上節と同じ4列で4＋2。空き2枠を残す。上下padding120px。モバイルは1列、項目間40px。別事業の採用代行や紹介業は追加しない。</p>
+<p data-role="copy">「働く姿を伝え、応募の判断を支える。」／「採用サイトの企画・制作・改善を、候補者が知りたいことから組み立てます。」／「候補者の情報整理」「検討する人が知りたい仕事や環境を整理し、サイトに必要な情報を明確にします。」／「採用情報の構成設計」「会社、仕事、働く環境、募集情報を、理解が深まる順序に並べます。」／「仕事を伝えるページ設計」「仕事内容と役割が伝わる構成を考え、入社後の姿を具体的に捉えられる情報を整えます。」／「採用サイトのUI制作」「文章と写真の関係を整理し、スマートフォンでも仕事の魅力を読み取れる画面にします。」／「応募導線の設計」「募集情報から入力までの流れをそろえ、応募前の確認事項を分かりやすく示します。」／「応募につながる改善」「ページの閲覧や応募までの動きを確認し、情報の不足や導線の迷いを見直します。」</p>
+<p data-role="components">SectionTitle、CapabilityGrid、ValueDiagram。線図は人と文書・階層・文書・画面・矢印・折れ線。</p>
+<p data-role="animation">各項目U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="process">
+<h3>4工程の詳細</h3>
+<p data-role="purpose">発注後の進み方と各工程の役割を説明する。</p>
+<p data-role="layout">深墨青、PC約3200px（約3.5画面）。英大見出し「WORKFLOW」PC60pxの下、左25%は工程内ナビ（position:sticky; top:110px）、右65%は4工程。各工程は小番号→工程名h3 PC36px→本文→画像（枠高PC360px/SP260px・角丸10px）→業務タグ小矩形。画像は順に16:9、4:3、3:2、16:9、幅100/84/100/88%で揃えない。工程間160px（SP96px）。モバイルは上部に4アンカーを2列、sticky解除、写真幅100%。見出しにscroll-margin-top:120px。SPで工程英語ラベルを5pxにしない（最低12px）。</p>
+<p data-role="copy">英「WORKFLOW」／日本語補足「制作の進め方」／ナビ「01 企画・設計」「02 UI制作」「03 実装・公開」「04 改善運用」。／01「判断の軸を、／最初にそろえる。」「事業の目的、訪問者、現在の課題を整理します。必要な情報とページの役割、成果を確認する指標を定め、制作の判断基準を共有します。」タグ「課題整理」「情報設計」「計測設計」。／02「情報の優先順位を、／画面にする。」「構成で定めた順序を、文字、写真、余白、操作の関係へ落とし込みます。ブランドの伝わり方と、相談・応募への進みやすさを両立させます。」タグ「画面設計」「ビジュアル制作」「UI制作」。／03「端末が変わっても、／伝わるように。」「画面の意図を実装し、スマートフォンを含む表示と操作を確認します。情報やリンク、入力導線を点検し、公開に向けて整えます。」タグ「実装」「表示確認」「公開準備」。／04「行動を確かめ、／改善を積む。」「公開後の閲覧や問い合わせ・応募までの動きを確認します。結果から課題を整理し、情報の見せ方や導線の改善へつなげます。」タグ「計測」「課題整理」「改善運用」。</p>
+<p data-role="components">ProcessChapter（または既存ProcessRailを拡張）、Badge、TextArrowLink、ScrollReveal、AxisRule。4工程IDはplan/design/build/operate。TimelineやStepsの番号丸へ置換しない。ライブラリpinは使わずCSS stickyのみ。</p>
+<p data-role="animation">各画像U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。各工程L：2400ms/ease/stagger0ms。Sの4本目（サービス1本目）をWORKFLOW見出し下へ。工程名にY 24px→0のfade-up 820ms可。本文・工程ナビは初期表示。sticky自体はスクロール連動6件の1つとして数える。</p>
+<p data-role="image">01 service:planning、02 works:brandのWorkScreen、03 about:studioの手元寄りトリミング、04 service:measurement。4枠を既存素材で満たす。</p>
+</section>
+<section data-section="related-works">
+<h3>制作物による確認</h3>
+<p data-role="purpose">説明を読んだ直後に設計例へ移動できるようにする。</p>
+<p data-role="layout">紙白、PC約860px。見出し・本文の下に3列の画面、各3:2枠・画像はcontain。ここだけ比較用に枠を揃える。モバイルは1列、画像3:2、項目間48px。</p>
+<p data-role="copy">「設計の考え方を、制作イメージで。」／「ブランドサイト・採用サイト・キャンペーンLP。それぞれの目的に合わせた情報の組み立て方をご紹介します。」／「ブランドサイト」→/works/brand/、「採用サイト」→/works/recruitment/、「キャンペーンLP」→/works/campaign/。各項目に「制作イメージ」。／「制作実績を見る」→/works/</p>
+<p data-role="components">SectionTitle、WorkScreen、TextArrowLink。</p>
+<p data-role="animation">画像U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">works:brand、works:recruitment、works:campaign。</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">対応範囲を理解した訪問者を相談へ導く。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。PC約1160px、モバイル約1100px。</p>
+<p data-role="copy">英DOWNLOAD／日「資料・検討ガイド」＋共通終端コピー全文→/download/。英CONTACT／日「無料相談・見積もり」＋共通終端コピー全文→/contact/。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/works/">
+<h3>制作実績</h3>
+<section data-section="hero">
+<h3>実績と制作イメージの区別</h3>
+<p data-role="purpose">会社設定の数値と例示用画面を誤認なく提示する。</p>
+<p data-role="layout">深墨青、PCタイトル帯約400px＋導入。英h1「WORKS」PC120px、小ラベル「制作実績」14px、パンくず。注記を16pxで明示。</p>
+<p data-role="copy">小ラベル「制作実績」／英h1「WORKS」／「累計制作240件超。目的に合わせた設計と、公開後の改善を積み重ねています。」／「以下は、対応するサイトと設計の考え方を示す制作イメージです。実在の顧客案件や個別の成果を掲載したものではありません。」</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs、AxisRule。</p>
+<p data-role="animation">h1・本文none。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="gallery">
+<h3>3領域の制作イメージ</h3>
+<p data-role="purpose">目的別に詳細を選べる比較導線をつくる。</p>
+<p data-role="layout">深墨青を継続、PC約1900px。1件目左60%・3:2、2件目右42%・4:5を1件目下端より120px上へ、3件目左72%・16:9、2件目下端から160px後。各画像下に領域ラベル・見出し・説明・詳細リンク。モバイルは1列、幅100/86/100%、中央の採用だけ右寄せ。3件のみなので絞り込み・ページネーションは設けない。</p>
+<p data-role="copy">「ブランドサイト」「事業の強みを、相談の入口へ。」「事業理解、支援内容、問い合わせへと判断材料をつなぐ設計です。」「ブランドサイトの制作イメージを見る」→/works/brand/。／「採用サイト」「働く姿から、応募の判断へ。」「会社と仕事への理解を深め、募集情報と応募導線へつなぐ設計です。」「採用サイトの制作イメージを見る」→/works/recruitment/。／「キャンペーンLP」「広告の関心を、具体的な相談へ。」「施策の訴求とページの情報をそろえ、相談までの流れを整理する設計です。」「キャンペーンLPの制作イメージを見る」→/works/campaign/。全件に「制作イメージ」と表示。</p>
+<p data-role="components">StaggeredWorks、WorkScreen、TextArrowLink。</p>
+<p data-role="animation">各画像U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">works:brand、works:recruitment、works:campaign。</p>
+</section>
+<section data-section="service-link">
+<h3>対応範囲への横断</h3>
+<p data-role="purpose">視覚の好みから、依頼内容の検討へ戻れるようにする。</p>
+<p data-role="layout">紙白、PC約480px。左40%見出し、右50%本文とリンク。モバイル1列、上下80px。</p>
+<p data-role="copy">「どこから依頼するかも、ご相談ください。」／「企画設計、UI制作、公開後の改善運用まで。各工程で何を行うかを、サービスページでご案内しています。」／「対応範囲と制作工程を見る」→/service/</p>
+<p data-role="components">SectionTitle、TextArrowLink。</p>
+<p data-role="animation">R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">比較から資料取得・相談へ移動させる。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。</p>
+<p data-role="copy">英DOWNLOAD／日「資料・検討ガイド」＋共通終端コピー全文→/download/。英CONTACT／日「無料相談・見積もり」＋共通終端コピー全文→/contact/。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/works/brand/">
+<h3>ブランドサイトの制作イメージ</h3>
+<section data-section="hero">
+<h3>事業理解を支える画面</h3>
+<p data-role="purpose">ブランドサイトで設計する内容を画面とともに示す。</p>
+<p data-role="layout">紙白。PCは共通導入約650px＋幅1200pxの3:2画面。モバイルは導入約520px＋横長画面、端末枠の装飾なし。パンくず3階層。</p>
+<p data-role="copy">「事業の強みを、相談の入口へ。」／「ブランドサイトの制作イメージ」／「中堅BtoB企業の事業理解から問い合わせまでをつなぐ、情報設計の例です。」／「このページは制作イメージです。実在の顧客案件や個別の成果を示すものではありません。」</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs、WorkScreen。</p>
+<p data-role="animation">h1・画面上部は初期表示。L：2400ms/ease/stagger0ms。画面が初期画面外の場合のみU：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。</p>
+<p data-role="image">works:brand。WorkScreen内の見出し「事業の価値を、次の可能性へ。」、ナビ「事業紹介／強み／会社情報」、CTA「相談する」。これらは展示用テキストで操作不可。</p>
+</section>
+<section data-section="information-design">
+<h3>判断の順序を組み立てる</h3>
+<p data-role="purpose">見た目だけでなく情報設計の意図を説明する。</p>
+<p data-role="layout">紙白、PC約820px。左25%に節タイトル、右65%に3項目を罫線で区切る。下段に「事業を知る → 強みを確かめる → 相談する」の文字と細線。モバイルは1列、矢印は下向き。</p>
+<p data-role="copy">「情報設計の考え方」／「何をする会社かを、最初に。」「トップでは事業の説明と主な支援内容を近接させ、初めて訪れた方が自分の課題との関係をつかめる構成にします。」／「主張の後に、判断材料を。」「強みを伝える文章の後に、対応範囲や制作の考え方への導線を置きます。抽象的な表現だけで検討が止まらないようにします。」／「相談への入口を、各ページに。」「下層ページでも資料と相談の導線を共通化し、トップへ戻らず次の行動を選べるようにします。」</p>
+<p data-role="components">SectionTitle、新規DesignNotes、新規LinearFlow。Stepsは使用しない。</p>
+<p data-role="animation">各項目R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="measurement">
+<h3>公開後の確認と改善</h3>
+<p data-role="purpose">トップの改善展示から直接到達する、計測設計の説明。</p>
+<p data-role="layout">id="measurement"。墨青、PC約900px。左58%に16:9写真、右34%に見出し・本文、写真下に3つの確認項目。モバイルは文章→写真→確認項目。アンカー余白120px。</p>
+<p data-role="copy">「公開後の動きから、次の改善へ。」／「問い合わせ数だけでなく、どの情報が読まれ、どの導線から相談へ進んだかを確認します。訪問者の行動をもとに、情報の不足や迷いやすい箇所を見直す考え方です。」／「確認すること：事業紹介から詳細への移動／資料・相談導線の利用／入力前後の離脱」／「制作例のため、個別の計測結果は掲載していません。」／「改善運用の工程を見る」→/service/#operate</p>
+<p data-role="components">SectionTitle、DesignNotes、TextArrowLink。</p>
+<p data-role="animation">画像U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">service:measurement。</p>
+</section>
+<section data-section="next">
+<h3>関連する制作イメージ</h3>
+<p data-role="purpose">別用途との比較と一覧復帰を用意する。</p>
+<p data-role="layout">紙白、PC約440px、左に次の制作例、右に一覧導線。モバイル縦2段、各行最低96px。</p>
+<p data-role="copy">「次の制作イメージ」「働く姿から、応募の判断へ。」→/works/recruitment/／「制作実績一覧に戻る」→/works/</p>
+<p data-role="components">TextArrowLink、SectionTitle。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。リンクnone。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">設計例から相談へつなぐ。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。</p>
+<p data-role="copy">英DOWNLOAD／日「資料・検討ガイド」＋共通終端コピー全文→/download/。英CONTACT／日「無料相談・見積もり」＋共通終端コピー全文→/contact/。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/works/recruitment/">
+<h3>採用サイトの制作イメージ</h3>
+<section data-section="hero">
+<h3>働く姿を伝える画面</h3>
+<p data-role="purpose">採用候補者の判断を支える構成を示す。</p>
+<p data-role="layout">紙白。共通導入約650pxの下、左32pxに幅58%・4:5画面、右28%に短い設計メモ。モバイルは導入→4:5画面→メモ。ブランド詳細と同じ全幅横長に均さない。</p>
+<p data-role="copy">「働く姿から、応募の判断へ。」／「採用サイトの制作イメージ」／「会社、仕事、働く環境、募集情報。候補者が知りたいことを、理解の順序に沿ってつなぐ設計の例です。」／「このページは制作イメージです。実在の顧客案件や個別の成果を示すものではありません。」／設計メモ「人物の写真は、仕事の説明と近接させる。雰囲気だけで終わらせず、働く姿への理解を支える。」</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs、WorkScreen、DesignNotes。</p>
+<p data-role="animation">h1はnone。画面U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">works:recruitment。画面内見出し「仕事を知る。その先の自分を考える。」、ナビ「仕事を知る／働く環境／募集情報」、CTA「募集情報を見る」。展示用の非操作テキスト。</p>
+</section>
+<section data-section="candidate-journey">
+<h3>候補者の判断を支える情報</h3>
+<p data-role="purpose">採用サイト固有の情報の役割を説明する。</p>
+<p data-role="layout">紙白、PC約880px。左25%見出し、右65%に3つの罫線付き説明。モバイル1列、各項目の上下32px。</p>
+<p data-role="copy">「応募の前に、知りたいことを。」／「会社を知る。」「事業の内容と仕事の関係を示し、どのような価値を届ける会社なのかを理解できるようにします。」／「仕事を知る。」「仕事内容、役割、働く環境を分けて整理します。抽象的な魅力だけでなく、入社後の姿を考えるための情報を置きます。」／「応募を考える。」「募集情報と応募までの手順を近くに置きます。条件を確認した後に、迷わず次の行動を選べる構成にします。」</p>
+<p data-role="components">SectionTitle、DesignNotes。</p>
+<p data-role="animation">説明R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="improvement">
+<h3>応募までの流れを確かめる</h3>
+<p data-role="purpose">採用支援を公開後の改善へ接続する。</p>
+<p data-role="layout">墨青、PC約760px。左55%本文、右35%に3つの縦並び項目。写真を増やさず情報密度を上げる。モバイルは本文→項目、上下80px。</p>
+<p data-role="copy">「応募の数と、その前の行動を。」／「募集情報にたどり着くまでの動きや、入力前の離脱を確認することで、どこに説明や導線の改善が必要かを考えます。」／「仕事紹介の閲覧」「募集情報への移動」「応募入力への到達」／「制作例のため、応募実績や改善率は掲載していません。」／「採用サイトの対応範囲を見る」→/service/#recruitment-services</p>
+<p data-role="components">SectionTitle、DesignNotes、TextArrowLink。</p>
+<p data-role="animation">項目R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="next">
+<h3>関連する制作イメージ</h3>
+<p data-role="purpose">用途の異なる設計例へ回遊させる。</p>
+<p data-role="layout">紙白、PC約440px。左右2導線、モバイル縦2段。</p>
+<p data-role="copy">「次の制作イメージ」「広告の関心を、具体的な相談へ。」→/works/campaign/／「制作実績一覧に戻る」→/works/</p>
+<p data-role="components">SectionTitle、TextArrowLink。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。リンクnone。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">採用サイトの検討から相談へつなぐ。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。</p>
+<p data-role="copy">英DOWNLOAD／日「資料・検討ガイド」＋共通終端コピー全文→/download/。英CONTACT／日「無料相談・見積もり」＋共通終端コピー全文→/contact/。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/works/campaign/">
+<h3>キャンペーンLPの制作イメージ</h3>
+<section data-section="hero">
+<h3>施策の訴求を受け止める画面</h3>
+<p data-role="purpose">広告から訪れた人の判断と行動を支える設計を示す。</p>
+<p data-role="layout">紙白。共通導入約650pxの下、中央幅1000pxの16:9画面、下に幅760pxの導入本文。モバイルは画面幅100%、本文1列。</p>
+<p data-role="copy">「広告の関心を、具体的な相談へ。」／「キャンペーンLPの制作イメージ」／「広告で伝えた内容と、ページで確かめられる情報をそろえる。関心を持った方が相談へ進むための設計の例です。」／「このページは制作イメージです。実在の顧客案件や個別の成果を示すものではありません。」</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs、WorkScreen。</p>
+<p data-role="animation">h1はnone。画面U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">works:campaign。画面内見出し「課題を整理し、次の施策へ。」、項目「支援内容／進め方／ご相談」、CTA「相談内容を入力」。展示用の非操作テキスト。</p>
+</section>
+<section data-section="message-flow">
+<h3>訴求と判断材料をつなぐ</h3>
+<p data-role="purpose">LP固有の情報の流れを説明する。</p>
+<p data-role="layout">紙白、PC約840px。左25%にタイトル、右65%に3項目。下部に横一列の細線フロー。モバイルは縦積み、矢印下向き。</p>
+<p data-role="copy">「関心が生まれた理由から、始める。」／「訴求をそろえる。」「広告や施策で伝えた内容を冒頭で受け止め、訪問先が期待とつながっていると分かる構成にします。」／「判断材料を並べる。」「対象となる課題、支援内容、進め方を順に整理します。説明の順序をそろえ、相談する理由を確かめられるようにします。」／「次の行動を明確にする。」「CTAの文言と遷移先を一致させ、押すと何ができるかを明示します。入力に必要な情報も、事前に分かるようにします。」／フロー「関心 → 理解 → 相談」</p>
+<p data-role="components">SectionTitle、DesignNotes、LinearFlow。</p>
+<p data-role="animation">説明R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="measurement">
+<h3>相談までの動きを確認する</h3>
+<p data-role="purpose">LP制作と計測設計の関係を具体化する。</p>
+<p data-role="layout">墨青、PC約760px。左45%本文、右45%は小さめの16:9改善写真と注記。モバイル本文→画像、画像幅88%右寄せ。</p>
+<p data-role="copy">「流入から相談まで、ひと続きで見る。」／「どこから訪れ、どの情報を読み、どこで行動したのか。入口から相談までの動きを整理し、訴求や情報の並び、入力導線を見直す判断につなげます。」／「制作例のため、広告実績や獲得単価は掲載していません。」／「Web制作と改善運用を見る」→/service/</p>
+<p data-role="components">SectionTitle、TextArrowLink。</p>
+<p data-role="animation">画像U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">service:measurement再利用。</p>
+</section>
+<section data-section="next">
+<h3>関連する制作イメージ</h3>
+<p data-role="purpose">ブランドサイトとの違いを比較できるようにする。</p>
+<p data-role="layout">紙白、PC約440px。左右2導線、モバイル縦2段。</p>
+<p data-role="copy">「次の制作イメージ」「事業の強みを、相談の入口へ。」→/works/brand/／「制作実績一覧に戻る」→/works/</p>
+<p data-role="components">SectionTitle、TextArrowLink。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。リンクnone。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">施策の検討から相談へつなぐ。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。</p>
+<p data-role="copy">英DOWNLOAD／日「資料・検討ガイド」＋共通終端コピー全文→/download/。英CONTACT／日「無料相談・見積もり」＋共通終端コピー全文→/contact/。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/download/">
+<h3>資料・検討ガイド</h3>
+<section data-section="hero">
+<h3>社内検討のための入口</h3>
+<p data-role="purpose">資料の内容と取得方法を明確にする。</p>
+<p data-role="layout">紙白、共通ヘッダPC約400pxタイトル帯。英h1「DOWNLOAD」PC120px、小ラベル「資料・検討ガイド」。導入下にページ内リンク3件。</p>
+<p data-role="copy">小ラベル「資料・検討ガイド」／英h1「DOWNLOAD」／「対応範囲と進め方を、社内での比較・検討に。会社資料は入力不要で保存できます。Web刷新と採用強化の確認項目も、このページでご覧いただけます。」／「会社資料」→#company、「Web刷新の検討ガイド」→#web、「採用強化の検討ガイド」→#recruitment</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs、TextArrowLink。</p>
+<p data-role="animation">導入・リンクnone。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="company">
+<h3>会社資料の取得</h3>
+<p data-role="purpose">連絡先入力なしで会社の基本情報を持ち帰れるようにする。</p>
+<p data-role="layout">id="company"。淡灰、PC約920px。左35%は紙白の縦長資料表紙、右55%は見出し・収録内容・保存リンク。表紙はHTMLでA4比率、社名・キャッチ・細線だけ。モバイルは表紙幅62%→本文。資料本体は同一内容の自己完結HTMLをビルド時に静的生成し、download属性で保存。ブラウザーの印刷からPDF保存できる印刷CSSを付ける。</p>
+<p data-role="copy">「会社資料」／「ノクスレイの対応範囲と制作の進め方を、ひとつの資料にまとめました。」／収録内容「会社概要／対応するサイト／制作の進め方／実績数値」。／「会社資料を保存する（HTML）」／「入力不要。ブラウザーで開いて印刷できます。」／資料全文：「株式会社ノクスレイ。伝わる設計で、成果を積む。」「会社概要：2014年設立。従業員48名。東京都渋谷区。広告・Web制作。」「対応するサイト：中堅BtoB企業向けのブランドサイト、採用サイト、キャンペーンLP。企画設計からUI制作、公開後の改善運用までを一貫して提供します。」「制作の進め方：企画・設計では事業の目的、訪問者、課題と計測指標を整理します。UI制作では情報の優先順位を画面へ落とし込みます。実装・公開では端末ごとの表示と操作を確認します。改善運用では公開後の行動を確認し、改善につなげます。」「実績：累計制作240件超。公開後90日の問い合わせ平均1.8倍。取引継続率87%。」「この資料は架空企業の制作サンプルです。数値は企業設定に基づきます。」</p>
+<p data-role="components">SectionTitle、新規DocumentPreview、TextArrowLink。保存先はbase配下assets/noxray-company.html。保存できないダミーリンクを置かない。</p>
+<p data-role="animation">表紙U：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。保存リンクnone。</p>
+<p data-role="image">none。表紙はテキストとCSS。</p>
+</section>
+<section data-section="web">
+<h3>Web刷新の検討ガイド</h3>
+<p data-role="purpose">マーケ・経営層が依頼前に判断軸を整理できるようにする。</p>
+<p data-role="layout">id="web"。紙白、PC約900px。左25%に見出し、右65%に3項目の番号付き文章。番号は本文と同じ行で「01」等の小さな文字、丸なし。モバイル1列。末尾に相談リンク。</p>
+<p data-role="copy">「Web刷新の前に、判断軸をそろえる。」／「01 目的を言葉にする」「問い合わせを増やしたい、事業を正しく伝えたい。今回の刷新で変えたいことを整理し、何を優先するかを社内でそろえます。」／「02 訪問者と情報を整理する」「誰がサイトを訪れ、何を知って判断するのか。現在のページで不足している情報や、探しにくい情報を書き出します。」／「03 公開後の確認方法を考える」「問い合わせ数だけでなく、詳細ページへの移動や入力までの行動も確認対象にします。どの変化を成果として捉えるかを、制作前に考えます。」／「整理した内容を相談する」→/contact/</p>
+<p data-role="components">SectionTitle、DesignNotes、TextArrowLink。</p>
+<p data-role="animation">項目R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="recruitment">
+<h3>採用強化の検討ガイド</h3>
+<p data-role="purpose">人事が候補者に必要な情報を整理できるようにする。</p>
+<p data-role="layout">id="recruitment"。墨青、PC約900px。上節と同じ情報配置、背景で切り替える。モバイル1列。項目間40px。</p>
+<p data-role="copy">「採用サイトで、何を伝えるか。」／「01 仕事の姿を具体化する」「仕事内容と役割、事業との関係を整理します。候補者が入社後の自分を考えられる情報があるかを確認します。」／「02 判断に必要な情報をそろえる」「働く環境、募集内容、応募までの流れを確認します。魅力を伝える情報と、条件を確かめる情報の両方を用意します。」／「03 応募までの迷いを減らす」「仕事紹介から募集情報、入力へ進む導線を確認します。スマートフォンで読んだときにも、必要な情報を見つけられるかを確かめます。」／「採用サイトについて相談する」→/contact/</p>
+<p data-role="components">SectionTitle、DesignNotes、TextArrowLink。</p>
+<p data-role="animation">項目R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">資料の再取得と相談へ接続する。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。資料行は同ページの会社資料へ戻す。</p>
+<p data-role="copy">英DOWNLOAD→/download/#company、英CONTACT→/contact/。文言は共通終端コピー。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/contact/">
+<h3>無料相談・見積もり</h3>
+<section data-section="hero">
+<h3>相談の入口</h3>
+<p data-role="purpose">未整理の課題でも入力できることを伝える。</p>
+<p data-role="layout">紙白、PC約400pxタイトル帯＋導入幅760px。英h1「CONTACT」PC120px、小ラベル「無料相談・見積もり」。デモ注記は本文16px。</p>
+<p data-role="copy">小ラベル「無料相談・見積もり」／英h1「CONTACT」／「Web刷新、採用強化、キャンペーン施策について、現在の状況をお聞かせください。依頼内容が固まっていない段階でも、課題の整理からご相談いただけます。」／「このフォームは制作サンプルです。入力内容の確認までお試しいただけます。情報は送信されません。実際の個人情報は入力しないでください。」</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs、Alert。Alertはアイコンなし、淡灰背景・墨青文字・2px角丸。</p>
+<p data-role="animation">none。境界の装飾線のみL：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="consultation">
+<h3>相談内容の入力と確認</h3>
+<p data-role="purpose">実送信先がない架空企業で、誤認なく入力体験を提供する。</p>
+<p data-role="layout">id="consultation"。紙白、本文幅800px。PCは左220pxラベル・右入力欄、モバイルはラベル→入力。入力欄高さ56px、textarea200px、行間32px。相談種別だけラジオ4個。エラーは欄直下、上部に要約。確認画面は同じURL内でフォームを値のdl表示へ切り替える。入力状態はメモリのみ、URL・localStorage・外部送信に保存しない。</p>
+<p data-role="copy">「ご相談内容」／ラベル「会社名（必須）」「お名前（必須）」「メールアドレス（必須）」「相談したい内容（必須）」「現在の状況・ご要望（必須）」「対象サイトのURL（任意）」。／種別「ブランドサイト」「採用サイト」「キャンペーンLP」「改善運用・その他」。／本文補助「現在困っていること、検討している内容などをご記入ください。」／同意欄「個人情報の取り扱いを確認しました。」、リンク→/privacy/。／ボタン「入力内容を確認する」。／未入力エラー「この項目を入力してください。」、未選択「相談したい内容を選択してください。」、メール形式「メールアドレスの形式を確認してください。」、未同意「個人情報の取り扱いを確認してください。」。／確認画面見出し「入力内容の確認」、本文「入力内容をご確認ください。このフォームは制作サンプルのため、送信は行いません。」、ボタン「入力に戻る」「確認を終了する」。／終了画面「確認が完了しました。」「入力内容は送信されていません。」「トップへ戻る」→/</p>
+<p data-role="components">TextInput、Textarea、新規ConsultationForm。ラジオと同意チェックはlabel付きのネイティブinput。確認値はtextContentで表示。Alertをエラー要約に使用。</p>
+<p data-role="animation">none。確認切り替え時に確認見出しへフォーカス。エラー時は要約へフォーカスし、各エラーをaria-describedbyで紐付ける。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="preparation">
+<h3>相談前の整理</h3>
+<p data-role="purpose">入力内容を考えるための補助を用意する。</p>
+<p data-role="layout">淡灰、PC約560px。左35%見出し、右55%に3項目。モバイル1列。フォームから独立させ、入力中に自動で開閉しない。</p>
+<p data-role="copy">「まとまっていなくても、大丈夫です。」／「目的：何を変えたいか。問い合わせ、採用応募、事業理解など、重視したいことをお聞かせください。」／「現状：現在のサイトや運用で困っていること。分かる範囲でご記入ください。」／「検討状況：希望する時期や社内での検討段階。未定の項目は、未定のままで構いません。」／「まず資料で確認する」→/download/</p>
+<p data-role="components">SectionTitle、DesignNotes、TextArrowLink。</p>
+<p data-role="animation">説明R：820ms/cubic-bezier(0.22,1,0.36,1)/stagger0ms。L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">資料と入力欄への再アクセスを確保する。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。相談行はフォームへ戻す。</p>
+<p data-role="copy">英DOWNLOAD→/download/、英CONTACT→/contact/#consultation。文言は共通終端コピー。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/privacy/">
+<h3>個人情報の取り扱い</h3>
+<section data-section="hero">
+<h3>入力情報の扱い</h3>
+<p data-role="purpose">この架空サイトで実際に行う処理を説明する。</p>
+<p data-role="layout">紙白、共通ヘッダPC約580px、モバイル約420px。</p>
+<p data-role="copy">「個人情報の取り扱い」／「このサイトは、架空企業である株式会社ノクスレイの制作サンプルです。フォームで入力された情報の扱いについてご案内します。」</p>
+<p data-role="components">PageIntro、SiteBreadcrumbs。</p>
+<p data-role="animation">h1・本文none。装飾線L：2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="handling">
+<h3>デモにおける取り扱いの本文</h3>
+<p data-role="purpose">送信・保存・外部連携の有無を、実装と一致させる。</p>
+<p data-role="layout">紙白、幅760px、PC約1000px。左寄せh2と本文を4組、節間48px。モバイル同じ1列。法務本文をアコーディオンで隠さない。</p>
+<p data-role="copy">「フォームの入力について」「フォームでは、会社名、お名前、メールアドレス、相談内容、対象サイトのURLを入力できます。入力内容は同じページ内で確認するためにのみ使用します。実際の個人情報は入力しないでください。」／「送信と保存について」「この制作サンプルには送信機能がありません。入力内容をサーバーへ送信したり、外部サービスと共有したりする処理は行いません。サイト側の処理で入力内容をブラウザーの保存領域やURLへ記録することもありません。確認を終了すると、ページ内の入力内容を消去します。」／「外部サービスについて」「このサイトには、フォーム情報を受け取る外部サービスやアクセス解析タグを組み込みません。画像と書体はサイト内のファイルを使用します。ブラウザー自身の入力補完や、閲覧環境に関する機能は、このフォームの保存処理とは別のものです。」／「資料の取得について」「会社資料は、連絡先の入力を必要とせずに保存できます。資料の取得を条件として個人情報を求めることはありません。」</p>
+<p data-role="components">SectionTitle、DesignNotesの読み物変種。見出しと文章を常時表示。</p>
+<p data-role="animation">本文none。L：節外側の装飾線のみ2400ms/ease/stagger0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="return">
+<h3>入力欄へ戻る</h3>
+<p data-role="purpose">内容確認後に相談ページへ復帰できるようにする。</p>
+<p data-role="layout">淡灰、幅760px、上下80px。本文と44px以上のリンク。モバイル上下56px。</p>
+<p data-role="copy">「内容をご確認いただいた方へ。」／「このサイトのフォームは、入力内容の確認までを体験できる制作サンプルです。」／「無料相談・見積もりの入力欄へ」→/contact/#consultation</p>
+<p data-role="components">SectionTitle、TextArrowLink。</p>
+<p data-role="animation">L：2400ms/ease/stagger0ms。本文・リンクnone。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="closing">
+<h3>共通終端</h3>
+<p data-role="purpose">法務ページからも検討の導線へ戻れるようにする。</p>
+<p data-role="layout">共通CTA2行＋SiteFooter。</p>
+<p data-role="copy">英DOWNLOAD／日「資料・検討ガイド」＋共通終端コピー全文→/download/。英CONTACT／日「無料相談・見積もり」＋共通終端コピー全文→/contact/。共通フッター全文。</p>
+<p data-role="components">ConsultationRows、SiteFooter。</p>
+<p data-role="animation">境界線L：2400ms/ease/stagger0ms。共通CTAはHV⑤（背景写真fade 500ms、非選択行opacity 0.35）。フッターnone。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+</section>
+
+<section id="images">
+<h2>生成画像仕様：6枚</h2>
+<p>生成するのは以下6枚だけ。制作画面そのものを画像生成で描かせず、WorkScreenの写真領域へ使用する。画面枠・文字・ナビはHTML/CSSで組む。全画像にwidth/heightを付け、ヒーローで必要な画像以外はlazy。作品の表示枠比率と元画像比率は区別し、人物の顔や作業中の手を切らない。</p>
+
+<figure data-placement="about:studio" data-tags="Web制作,打合せ,人物,実写,横位置" data-aspect="landscape">
+<figcaption data-prompt="日本のWeb制作現場を想起させる実写調写真。木とグレーの落ち着いた打合せ机を囲み、成人3人が紙のワイヤーフレームとノートPCを見ながら話している。カメラは机の斜め上からの広角、人物と手元は右側65パーセント、左側35パーセントは暗めで余白のある構図。北向きの窓から柔らかな光。墨青、灰、生成りを中心に彩度を抑える。過剰な笑顔、握手、カメラ目線なし。企業ロゴ、読める文字、透かしなし。特定の実在人物を模倣しない。横3:2。">会社ページ背景、トップの小窓、実装工程の手元トリミングへ再利用。代替テキスト「設計資料を囲んで制作について話す場面」。</figcaption>
+</figure>
+
+<figure data-placement="works:brand" data-tags="事業,オフィス,建築,実写,横位置" data-aspect="landscape">
+<figcaption data-prompt="ブランドサイトの制作イメージ内に使用する実写調の写真。日本の落ち着いた業務空間、窓越しの柔らかな自然光、奥行きのある通路とガラス越しに見える打合せの気配。人は背景に小さく、主役は空間の秩序と奥行き。正面より少し斜め、左下に文字を後から置ける静かな暗い余白。墨青、温かい灰、生成りの低彩度。高級ホテルのような豪華さは不要。企業ロゴ、看板、読める文字、画面UI、端末の合成、透かしなし。横3:2。">ブランド制作画面内に使用。トップ・一覧・ブランド詳細・サービス工程・ガイドで同じ素材を共有。代替テキスト「奥行きのある落ち着いた業務空間」。</figcaption>
+</figure>
+
+<figure data-placement="works:recruitment" data-tags="採用,仕事,人物,実写,縦位置" data-aspect="portrait">
+<figcaption data-prompt="採用サイトの制作イメージ内に使用する実写調の縦位置写真。日本のオフィスで成人の仕事仲間2人が机の資料を一緒に確認している。中心人物は右寄りの上半身、視線は資料へ、自然な表情。肩と手元を含む。左上に後から短い見出しを配置できる余白。窓から柔らかな昼光、墨青とベージュと灰色の控えめな配色。広告モデルのポーズ、握手、カメラ目線なし。実在人物に似せない。企業ロゴ、読める文字、透かしなし。縦4:5。">採用制作画面内に使用。トップ・一覧・採用詳細・サービスの関連作品・検討ガイドへ再利用。代替テキスト「資料を確認しながら仕事を進める人たち」。</figcaption>
+</figure>
+
+<figure data-placement="works:campaign" data-tags="相談,企画,手元,実写,横位置" data-aspect="landscape">
+<figcaption data-prompt="キャンペーンLPの制作イメージ内に使用する実写調写真。BtoBの相談場面を示す机上の手元、成人2人が無地に近い整理用シートを挟んで論点を確認している。片方の手が紙を指し、もう片方はペンを持つ。人物の顔は画角に入れない。横長の俯瞰寄り構図、右側に手元、左側は整った余白。柔らかい窓光、生成りの紙、墨青の服、落ち着いた木の机、低彩度。読める文字、企業ロゴ、透かしなし。横16:9。">LP画面内に使用。トップ・一覧・LP詳細・サービス関連作品へ再利用。代替テキスト「相談内容を整理する机上の手元」。</figcaption>
+</figure>
+
+<figure data-placement="service:planning" data-tags="情報設計,ワイヤーフレーム,紙,手元,横位置" data-aspect="landscape">
+<figcaption data-prompt="Webサイトの情報設計作業を撮影した実写調写真。広い机に大小の白い紙が並び、線と空の矩形だけで描かれたページ構成とワイヤーフレームを成人の手が整理している。真上に近い角度、紙は中央から右、左に少し余白。細い鉛筆、無地の付箋を少数。柔らかい側光で紙の質感が分かる。灰、生成り、墨青の低彩度。読める文字、ロゴ、完成Web画面、透かしなし。横16:9。">サービスの企画・設計工程に使用。代替テキスト「ページ構成とワイヤーフレームを整理する手元」。</figcaption>
+</figure>
+
+<figure data-placement="service:measurement" data-tags="改善運用,計測,PC,手元,横位置" data-aspect="landscape">
+<figcaption data-prompt="Webサイト公開後の改善検討を示す実写調写真。机上のノートPCと成人の手元を斜め後ろから撮影。画面にはブランドや数字を持たない単純な折れ線と小さな図形が見えるが、具体的な成果値や読める文字は描かない。横に無地に近いメモ用紙。夕方前の柔らかな自然光、墨青、灰、生成り、彩度控えめ。PC全体と机の余白を含む引きの構図、主題は中央右。企業ロゴ、透かしなし。横3:2。">トップ4点目、サービス改善工程、ブランド詳細、LP詳細で再利用。代替テキスト「画面上の動きを確認して改善を検討する手元」。</figcaption>
+</figure>
+</section>
+
+<section id="implementation-contract">
+<h2>実装・審査の固定条件</h2>
+<dl>
+<dt>部品の切り出し</dt><dd>既存を優先：PageIntro、AxisRule、TextArrowLink、WorkScreen、ConsultationRows、DesignNotes、EditorialPair、HeroCollage、ProcessRail、DocumentDownload、GsapScrollSection、ScrollReveal。不足時のみ新規：WorkCollage、StaggeredWorks、ScopeCircles、EvidencePanel、ValueDiagram、StatementPanel、CapabilityGrid、ProcessChapter、LinearFlow、ConsultationForm、DocumentPreview。propsは配置・背景・比率・内容で定義。サイト固有コピーは各ページデータへ分離。Extractとカタログ登録を提出前に完了する。</dd>
+<dt>再利用数</dt><dd>全ページでsrc/components/から最低2種類を本文に使用。SectionTitle、TextArrowLink、AxisRule、PageIntro、DesignNotes、WorkScreenなどをサイト全体で共有し、6種類以上を満たす。SiteLayoutを部品再利用件数の代用にしない。</dd>
+<dt>画面内の作品</dt><dd>WorkScreenは展示用で、内部のナビ・ボタン風表現はspan等の非操作要素。作品全体の外側に1つの詳細リンクを置く。リンクの入れ子禁止。実在顧客サイトやクリック可能な偽サイトを作らない。作品名・制作イメージのラベルは画像外に常時表示する。</dd>
+<dt>アンカー</dt><dd>各data-sectionと同名のidを実ページに設定。共通終端の行は重複idを使わない。#company、#web、#recruitment、#measurement、#consultation、#operate、#recruitment-servicesの到達先を検証。href="#"は禁止。</dd>
+<dt>アクセシビリティ</dt><dd>各ページh1は1つ。パンくずと現在地を共通シェルで表示。通常本文4.5:1以上、大きな文字3:1以上のコントラストを確認。写真上の文字は暗幕を含め実画面で測る。キーボードのみでメニュー開閉・全導線・フォーム確認が使えること。見出し・フォーカス先が固定ヘッダーの下に隠れないこと。画像内説明は本文にも置く。</dd>
+<dt>メタ情報</dt><dd>各ページのtitleはサイトマップのページ名。descriptionは各ページ冒頭の導入コピーを基に40〜120字で設定し、他ページと重複させない。Organization/WebSite/BreadcrumbListのJSON-LDはSiteLayoutに任せ、未提供の企業情報を追加しない。</dd>
+<dt>機能確認</dt><dd>全10ページを直接URLで開く。会社・サービス→実績→詳細→相談の回遊、資料ファイルの実保存、内部アンカー、フォームの必須・メール形式・確認・戻る・終了、エラーの読み上げ、reduced-motion、JS無効時の可視性を確認する。</dd>
+<dt>視覚確認</dt><dd>1440×900、768×1024、390×844、320×740で確認。トップだけでなく会社・サービス・実績詳細・フォームも全長を撮影する。トップ展示の画像比率差、右列の上方オフセット、明暗の切り替え、工程の写真幅差、業務一覧の最終行の空き枠を確認する。</dd>
+<dt>完成判定</dt><dd>npm run build、npm run check:web、npm run check:catalogを実行。highゼロ、arch-component-reuseゼロ、ia-required-page-missingゼロ。独立審査員の指摘は本案の視覚システム内で修正し、別案を作らない。下層の厚み・写真の大小差・余白の緩急を削って採点対策をしない。</dd>
+</dl>
+</section>
+
+<section id="reference-review">
+<h2>参照確認と採用範囲</h2>
+<p>中心参照は提供されたトップ画像とLook解析。未解析の実績詳細・資料・相談ページの内部構成は、本書で確定した設計であり、参照から観測した事実とは区別する。</p>
+<p>指定カタログの3カテゴリを確認した。<a href="https://loadmo.re/posts/water-works-project">モバイル表現の掲載例</a>では個別情報へ進む導線の存在を確認。掲載画像の取得には失敗したため、モバイルの寸法・メニュー挙動を観測済みとは扱わず、本書の仕様で固定した。</p>
+<p><a href="https://www.supaste.com/">ナビゲーションの掲載例</a>では、情報を探すリンクと取得アクションの分離を確認。本案では事業を読める4ラベルと2つのCTAへ整理した。<a href="https://www.hello-world.studio/">CTAの掲載例</a>では制作物から詳細へ進む導線と、ページ末尾の連絡導線を確認。本案では「制作イメージを見る」「相談内容を入力する」と、遷移後に行うことを日本語で明示する。</p>
+<p>これらの確認リンクはディレクション資料内だけに残し、制作する企業サイトには掲載しない。</p>
+</section>
+</main>
+<footer>
+<p>株式会社ノクスレイ / corporate-20260920-1616 / 出力先：/sites/corporate/a-20260920-1616/</p>
+</footer>
+</body>
+</html>

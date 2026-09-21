@@ -937,7 +937,109 @@
       "provider": "xai",
       "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260919_132019_61ff4ef8.jpg",
       "created_at": "2026-09-19T04:20:19.592Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260920-1616/img-a-01.jpg",
+      "category": "corporate",
+      "tags": [
+        "Web制作",
+        "打合せ",
+        "人物",
+        "実写",
+        "横位置"
+      ],
+      "prompt": "日本のWeb制作現場を想起させる実写調写真。木とグレーの落ち着いた打合せ机を囲み、成人3人が紙のワイヤーフレームとノートPCを見ながら話している。カメラは机の斜め上からの広角、人物と手元は右側65パーセント、左側35パーセントは暗めで余白のある構図。北向きの窓から柔らかな光。墨青、灰、生成りを中心に彩度を抑える。過剰な笑顔、握手、カメラ目線なし。企業ロゴ、読める文字、透かしなし。特定の実在人物を模倣しない。横3:2。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260920_164749_de6d868d.jpg",
+      "created_at": "2026-09-20T07:47:49.484Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260920-1616/img-a-02.jpg",
+      "category": "corporate",
+      "tags": [
+        "事業",
+        "オフィス",
+        "建築",
+        "実写",
+        "横位置"
+      ],
+      "prompt": "ブランドサイトの制作イメージ内に使用する実写調の写真。日本の落ち着いた業務空間、窓越しの柔らかな自然光、奥行きのある通路とガラス越しに見える打合せの気配。人は背景に小さく、主役は空間の秩序と奥行き。正面より少し斜め、左下に文字を後から置ける静かな暗い余白。墨青、温かい灰、生成りの低彩度。高級ホテルのような豪華さは不要。企業ロゴ、看板、読める文字、画面UI、端末の合成、透かしなし。横3:2。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260920_164757_88a2b5bc.jpg",
+      "created_at": "2026-09-20T07:47:57.687Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260920-1616/img-a-03.jpg",
+      "category": "corporate",
+      "tags": [
+        "採用",
+        "仕事",
+        "人物",
+        "実写",
+        "縦位置"
+      ],
+      "prompt": "採用サイトの制作イメージ内に使用する実写調の縦位置写真。日本のオフィスで成人の仕事仲間2人が机の資料を一緒に確認している。中心人物は右寄りの上半身、視線は資料へ、自然な表情。肩と手元を含む。左上に後から短い見出しを配置できる余白。窓から柔らかな昼光、墨青とベージュと灰色の控えめな配色。広告モデルのポーズ、握手、カメラ目線なし。実在人物に似せない。企業ロゴ、読める文字、透かしなし。縦4:5。",
+      "aspect": "portrait",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260920_164807_5c0574bc.jpg",
+      "created_at": "2026-09-20T07:48:07.931Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260920-1616/img-a-04.jpg",
+      "category": "corporate",
+      "tags": [
+        "相談",
+        "企画",
+        "手元",
+        "実写",
+        "横位置"
+      ],
+      "prompt": "キャンペーンLPの制作イメージ内に使用する実写調写真。BtoBの相談場面を示す机上の手元、成人2人が無地に近い整理用シートを挟んで論点を確認している。片方の手が紙を指し、もう片方はペンを持つ。人物の顔は画角に入れない。横長の俯瞰寄り構図、右側に手元、左側は整った余白。柔らかい窓光、生成りの紙、墨青の服、落ち着いた木の机、低彩度。読める文字、企業ロゴ、透かしなし。横16:9。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260920_164816_c50b720f.jpg",
+      "created_at": "2026-09-20T07:48:17.022Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260920-1616/img-a-05.jpg",
+      "category": "corporate",
+      "tags": [
+        "情報設計",
+        "ワイヤーフレーム",
+        "紙",
+        "手元",
+        "横位置"
+      ],
+      "prompt": "Webサイトの情報設計作業を撮影した実写調写真。広い机に大小の白い紙が並び、線と空の矩形だけで描かれたページ構成とワイヤーフレームを成人の手が整理している。真上に近い角度、紙は中央から右、左に少し余白。細い鉛筆、無地の付箋を少数。柔らかい側光で紙の質感が分かる。灰、生成り、墨青の低彩度。読める文字、ロゴ、完成Web画面、透かしなし。横16:9。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260920_164823_ba6cca91.jpg",
+      "created_at": "2026-09-20T07:48:23.766Z"
+    },
+    {
+      "path": "public/sites/corporate/_shared/20260920-1616/img-a-06.jpg",
+      "category": "corporate",
+      "tags": [
+        "改善運用",
+        "計測",
+        "PC",
+        "手元",
+        "横位置"
+      ],
+      "prompt": "Webサイト公開後の改善検討を示す実写調写真。机上のノートPCと成人の手元を斜め後ろから撮影。画面にはブランドや数字を持たない単純な折れ線と小さな図形が見えるが、具体的な成果値や読める文字は描かない。横に無地に近いメモ用紙。夕方前の柔らかな自然光、墨青、灰、生成り、彩度控えめ。PC全体と机の余白を含む引きの構図、主題は中央右。企業ロゴ、透かしなし。横3:2。",
+      "aspect": "landscape",
+      "model": "grok-imagine-image",
+      "provider": "xai",
+      "source_url": "/Users/estaff-agent/.hermes/cache/images/xai_grok-imagine-image_20260920_164830_eaf68b3e.jpg",
+      "created_at": "2026-09-20T07:48:30.443Z"
     }
   ],
-  "updated_at": "2026-09-19T04:20:19.593Z"
+  "updated_at": "2026-09-20T07:48:30.444Z"
 }

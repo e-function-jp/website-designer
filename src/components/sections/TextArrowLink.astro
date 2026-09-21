@@ -1,0 +1,16 @@
+---
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+interface Props { site: SiteConfig; href: string; label: string; class?: string; }
+const { site, href, label, class: className = '' } = Astro.props;
+---
+
+<a href={url(site, href)} class:list={['text-arrow-link', className]}>
+  <span>{label}</span><span aria-hidden="true">→</span>
+</a>
+
+<style>
+  .text-arrow-link { display: inline-flex; align-items: center; gap: .75rem; min-height: 44px; color: inherit; font-weight: 700; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 7px; }
+  .text-arrow-link:hover { text-decoration-thickness: 3px; }
+  .text-arrow-link:focus-visible { outline: 3px solid #b7a16b; outline-offset: 4px; }
+</style>

@@ -97,6 +97,26 @@
       "weight": 0.0,
       "industry_weight": 0.1667,
       "at": "2026-09-19T05:00:45+09:00"
+    },
+    {
+      "run_id": "corporate-20260920-0500",
+      "site_type": "corporate",
+      "industry": "technology",
+      "reference_id": "muuuuu-24212",
+      "reference_title": "BlueBank株式会社",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-09-20T05:00:57+09:00"
+    },
+    {
+      "run_id": "corporate-20260921-0507",
+      "site_type": "corporate",
+      "industry": "trip",
+      "reference_id": "muuuuu-18892",
+      "reference_title": "ZINEN",
+      "weight": 0.0,
+      "industry_weight": 0.0625,
+      "at": "2026-09-21T05:07:39+09:00"
     }
   ]
 }

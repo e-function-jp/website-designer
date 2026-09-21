@@ -1,0 +1,19 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { site } from '../../_site';
+import PageIntro from '../../../../../../components/sections/PageIntro.astro';
+import SectionTitle from '../../../../../../components/ui/SectionTitle.astro';
+import AxisRule from '../../../../../../components/sections/AxisRule.astro';
+import ScrollReveal from '../../../../../../components/ui/ScrollReveal.astro';
+import TextArrowLink from '../../../../../../components/sections/TextArrowLink.astro';
+import WorkScreen from '../../../../../../components/sections/WorkScreen.astro';
+import DesignNotes from '../../../../../../components/sections/DesignNotes.astro';
+import ConsultationRows from '../../../../../../components/sections/ConsultationRows.astro';
+const base = '/sites/corporate/_shared/20260920-1616/';
+---
+<SiteLayout site={site} title="ブランドサイトの制作イメージ" description="中堅BtoB企業の事業理解から問い合わせまでをつなぐブランドサイトの情報設計と、公開後の改善の考え方を示す制作イメージです。" path="/works/brand/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'制作実績',href:'/works/'},{label:'ブランドサイトの制作イメージ'}]}>
+  <section id="hero"><PageIntro title="事業の強みを、相談の入口へ。" description="中堅BtoB企業の事業理解から問い合わせまでをつなぐ、情報設計の例です。"><p class="mt-5 text-sm">このページは制作イメージです。実在の顧客案件や個別の成果を示すものではありません。</p></PageIntro><div class="mx-auto max-w-6xl px-5 pb-20 lg:px-8"><WorkScreen image={`${base}img-a-02.jpg`} alt="奥行きのある落ち着いた業務空間" title="事業の価値を、次の可能性へ。" nav="事業紹介 / 強み / 会社情報" cta="相談する" eager /></div></section>
+  <section id="information-design" class="px-5 py-20 lg:px-8 lg:py-28"><div class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[25%_65%]"><SectionTitle title="情報設計の考え方" align="left" /><div><AxisRule /><ScrollReveal animation="fade" duration={820}><DesignNotes notes={[{title:'何をする会社かを、最初に。',body:'トップでは事業の説明と主な支援内容を近接させ、初めて訪れた方が自分の課題との関係をつかめる構成にします。'},{title:'主張の後に、判断材料を。',body:'強みを伝える文章の後に、対応範囲や制作の考え方への導線を置きます。抽象的な表現だけで検討が止まらないようにします。'},{title:'相談への入口を、各ページに。',body:'下層ページでも資料と相談の導線を共通化し、トップへ戻らず次の行動を選べるようにします。'}]} /></ScrollReveal><p class="mt-10 font-bold">事業を知る → 強みを確かめる → 相談する</p></div></div></section>
+  <section id="measurement" class="bg-neutral px-5 py-20 text-neutral-content lg:px-8 lg:py-28"><div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[58%_34%] lg:justify-between"><ScrollReveal animation="fade-up" duration={820}><WorkScreen image={`${base}img-a-06.jpg`} alt="画面上の動きを確認して改善を検討する手元" title="" ratio="wide" /></ScrollReveal><div><SectionTitle title="公開後の動きから、次の改善へ。" align="left" /><p class="leading-9">問い合わせ数だけでなく、どの情報が読まれ、どの導線から相談へ進んだかを確認します。訪問者の行動をもとに、情報の不足や迷いやすい箇所を見直す考え方です。</p><p class="mt-6 leading-8">確認すること：事業紹介から詳細への移動 / 資料・相談導線の利用 / 入力前後の離脱</p><p class="mt-4 text-sm">制作例のため、個別の計測結果は掲載していません。</p><TextArrowLink site={site} href="/service/#operate" label="改善運用の工程を見る" class="mt-7" /></div></div></section>
+  <section id="next" class="px-5 py-20 lg:px-8"><div class="mx-auto max-w-5xl"><SectionTitle title="次の制作イメージ" align="left" /><TextArrowLink site={site} href="/works/recruitment/" label="働く姿から、応募の判断へ。" /><TextArrowLink site={site} href="/works/" label="制作実績一覧に戻る" class="ml-8" /></div></section><ConsultationRows site={site} />
+</SiteLayout>

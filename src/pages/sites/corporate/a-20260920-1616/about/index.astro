@@ -1,0 +1,21 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import AxisRule from '../../../../../components/sections/AxisRule.astro';
+import TextArrowLink from '../../../../../components/sections/TextArrowLink.astro';
+import DesignNotes from '../../../../../components/sections/DesignNotes.astro';
+import WorkScreen from '../../../../../components/sections/WorkScreen.astro';
+import ConsultationRows from '../../../../../components/sections/ConsultationRows.astro';
+const studio = '/sites/corporate/_shared/20260920-1616/img-a-01.jpg';
+---
+<SiteLayout site={site} title="私たちについて" description="ノクスレイが中堅BtoB企業の事業価値を判断できる情報へ整え、企画から改善運用まで一貫して支援する考え方をご紹介します。" path="/about/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'私たちについて'}]}>
+  <section id="hero-philosophy" class="relative bg-neutral text-neutral-content overflow-hidden"><img src={studio} alt="設計資料を囲んで制作について話す場面" width="1200" height="800" class="absolute inset-0 h-full w-full object-cover opacity-35" /><div class="absolute inset-0 bg-neutral/70"></div><div class="relative"><PageIntro title="私たちについて" description="事業の価値を、相手が判断できる情報へ。" /><div class="mx-auto max-w-6xl px-5 pb-24 lg:px-8 lg:pb-40 lg:pl-[35%]"><AxisRule /><ScrollReveal animation="fade" duration={820}><h2 class="mt-12 text-3xl">伝わる設計で、成果を積む。</h2><p class="mt-6 leading-9">ノクスレイは、中堅BtoB企業に向けて、ブランドサイト・採用サイト・キャンペーンLPの企画設計からUI制作、公開後の改善運用までを一貫して提供します。</p><p class="mt-5 leading-9">大切にするのは、業種の知見を踏まえた情報設計と計測設計です。見た目を整えることと、問い合わせや応募につながること。その両方を、ひとつの制作の中で考えます。</p></ScrollReveal></div></div></section>
+  <section id="values" class="px-5 py-20 lg:px-8 lg:py-32"><div class="mx-auto max-w-6xl"><SectionTitle title="成果につながる、3つの設計。" /><AxisRule /><div class="mt-12 grid gap-12 md:grid-cols-3"><DesignNotes notes={[{title:'情報を設計する',body:'業種ごとの検討の流れを踏まえ、訪問者が必要とする情報を整理します。事業の強みと、知りたいことが出会う順序をつくります。'},{title:'接点を設計する',body:'情報の優先順位を、画面の大きさ、文字の強弱、導線の位置に落とし込みます。PCでもスマートフォンでも、次の行動を選べるUIをつくります。'},{title:'改善を設計する',body:'公開後に何を確かめるかを、制作の段階から考えます。問い合わせと採用応募につながる動きを計測し、改善の判断につなげます。'}]} /></div></div></section>
+  <section id="commitment" class="bg-neutral px-5 py-20 text-neutral-content lg:px-8 lg:py-32"><div class="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[52%_38%] lg:justify-between"><div><SectionTitle title="公開の先まで、考える。" align="left" /><ScrollReveal animation="fade" duration={820}><p class="leading-9">サイトを訪れる方の判断と、事業の成果。その間にある情報の不足や迷いを、設計で減らしていきたいと考えています。</p><p class="mt-5 leading-9">企画、UI制作、改善運用を別々の作業にせず、同じ目的からつなげる。問い合わせ獲得や採用応募のために何が必要かを問い続ける。それが、ノクスレイの制作に向き合う姿勢です。</p></ScrollReveal></div><p class="self-end text-5xl leading-tight lg:text-8xl">ノクス<br />レイ</p></div></section>
+  <section id="company-profile" class="px-5 py-20 lg:px-8 lg:py-32"><div class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[25%_1fr]"><SectionTitle title="会社概要" align="left" /><div><AxisRule /><table class="mt-8 w-full text-left"><tbody>{[['商号','株式会社ノクスレイ'],['よみ','のくすれい'],['設立','2014年'],['従業員数','48名'],['所在地','東京都渋谷区'],['業種','広告・Web制作'],['事業内容','中堅BtoB企業向けのブランドサイト・採用サイト・キャンペーンLPの企画設計、UI制作、公開後の改善運用']].map(([k,v]) => <tr class="border-b border-base-300"><th scope="row" class="w-40 py-5 pr-4 align-top">{k}</th><td class="py-5 leading-8">{v}</td></tr>)}</tbody></table><TextArrowLink site={site} href="/contact/" label="無料相談・見積もり" class="mt-7" /></div></div></section>
+  <section id="track-record" class="px-5 pb-20 lg:px-8 lg:pb-32"><div class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[40%_1fr]"><strong class="text-6xl tabular-nums lg:text-8xl">240件超</strong><div><SectionTitle title="制作と改善を、積み重ねる。" align="left" /><p class="leading-9">累計制作240件超。公開後90日の問い合わせ平均1.8倍。取引継続率87%。企画から公開後までをつなぐ支援の積み重ねです。</p><TextArrowLink site={site} href="/works/" label="制作実績を見る" class="mt-7" /><p class="mt-5 text-sm">数値は本サンプルの企業設定に基づきます。</p></div></div></section>
+  <ConsultationRows site={site} />
+</SiteLayout>

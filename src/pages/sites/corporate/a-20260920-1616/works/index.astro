@@ -1,0 +1,19 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import AxisRule from '../../../../../components/sections/AxisRule.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import TextArrowLink from '../../../../../components/sections/TextArrowLink.astro';
+import WorkScreen from '../../../../../components/sections/WorkScreen.astro';
+import ConsultationRows from '../../../../../components/sections/ConsultationRows.astro';
+const base = '/sites/corporate/_shared/20260920-1616/';
+const works = [['ブランドサイト','事業の強みを、相談の入口へ。','事業理解、支援内容、問い合わせへと判断材料をつなぐ設計です。','/works/brand/','img-a-02.jpg','landscape'],['採用サイト','働く姿から、応募の判断へ。','会社と仕事への理解を深め、募集情報と応募導線へつなぐ設計です。','/works/recruitment/','img-a-03.jpg','portrait'],['キャンペーンLP','広告の関心を、具体的な相談へ。','施策の訴求とページの情報をそろえ、相談までの流れを整理する設計です。','/works/campaign/','img-a-04.jpg','wide']] as const;
+---
+<SiteLayout site={site} title="制作実績" description="累計制作240件超の設定値と、ブランドサイト、採用サイト、キャンペーンLPで支援する情報設計の制作イメージを明確に区別してご紹介します。" path="/works/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'制作実績'}]}>
+  <section id="hero" class="bg-neutral text-neutral-content"><PageIntro title="制作実績" description="累計制作240件超。目的に合わせた設計と、公開後の改善を積み重ねています。" /><div class="mx-auto max-w-6xl px-5 pb-16 lg:px-8"><AxisRule /><p class="mt-8 max-w-3xl leading-9">以下は、対応するサイトと設計の考え方を示す制作イメージです。実在の顧客案件や個別の成果を掲載したものではありません。</p></div></section>
+  <section id="gallery" class="bg-neutral px-5 pb-24 text-neutral-content lg:px-8 lg:pb-40"><div class="mx-auto max-w-6xl space-y-24">{works.map(([label,title,body,href,image,ratio],i) => <ScrollReveal animation="fade-up" duration={820} class={i===1?'lg:ml-auto lg:w-[70%]':''}><article class={i===2?'lg:w-[85%]':''}><p class="mb-3 text-sm text-secondary">制作イメージ / {label}</p><WorkScreen image={`${base}${image}`} alt="" title={title} ratio={ratio} /><h2 class="mt-6 text-3xl">{title}</h2><p class="mt-4 max-w-xl leading-9">{body}</p><TextArrowLink site={site} href={href} label={`${label}の制作イメージを見る`} class="mt-5" /></article></ScrollReveal>)}</div></section>
+  <section id="service-link" class="px-5 py-20 lg:px-8 lg:py-28"><div class="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[40%_50%] lg:justify-between"><SectionTitle title="どこから依頼するかも、ご相談ください。" align="left" /><div><p class="leading-9">企画設計、UI制作、公開後の改善運用まで。各工程で何を行うかを、サービスページでご案内しています。</p><TextArrowLink site={site} href="/service/" label="対応範囲と制作工程を見る" class="mt-7" /></div></div></section>
+  <ConsultationRows site={site} />
+</SiteLayout>

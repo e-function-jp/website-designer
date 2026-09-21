@@ -1,0 +1,15 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import AxisRule from '../../../../../components/sections/AxisRule.astro';
+import TextArrowLink from '../../../../../components/sections/TextArrowLink.astro';
+import ConsultationRows from '../../../../../components/sections/ConsultationRows.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="サイトについて" description="株式会社ノクスレイは架空企業の制作サンプルであり、掲載する制作イメージ、企業情報、実績数値の扱いと各ページの案内を明確にするページです。" path="/news/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'サイトについて'}]}>
+  <section id="hero"><PageIntro title="サイトについて" description="このサイトは、株式会社ノクスレイを題材にした制作サンプルです。" /><div class="mx-auto max-w-6xl px-5 pb-12 lg:px-8"><AxisRule /></div></section>
+  <section id="information" class="px-5 py-20 lg:px-8 lg:py-28"><div class="mx-auto max-w-3xl"><SectionTitle title="掲載内容について" align="left" /><ScrollReveal animation="fade" duration={820}><p class="leading-9">掲載している制作イメージは、対応する情報設計の考え方を示すための例です。実在の顧客案件や個別の成果を掲載したものではありません。会社情報と実績数値も本サンプルの企業設定に基づいています。</p><p class="mt-6 leading-9">対応範囲、制作の進め方、検討ガイドは各ページから確認できます。具体的な相談内容は、無料相談・見積もりの入力ページで確認までお試しいただけます。</p><TextArrowLink site={site} href="/works/" label="制作実績を見る" class="mt-8" /><TextArrowLink site={site} href="/contact/" label="無料相談・見積もりへ" class="mt-8 ml-8" /></ScrollReveal></div></section>
+  <ConsultationRows site={site} />
+</SiteLayout>

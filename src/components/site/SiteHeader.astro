@@ -132,9 +132,16 @@ const [nameMain, nameSuffix] = site.name.includes('株式会社')
       </nav>
 
       {site.primaryCta && (
-        <a href={url(site, site.primaryCta.href)} class="btn btn-primary btn-sm hidden lg:inline-flex">
-          {site.primaryCta.label}
-        </a>
+        <>
+          {site.theme === 'noxray-corporate' && (
+            <a href={url(site, '/download/#company')} class="btn btn-outline btn-sm hidden lg:inline-flex">
+              会社資料を見る
+            </a>
+          )}
+          <a href={url(site, site.primaryCta.href)} class="btn btn-primary btn-sm hidden lg:inline-flex">
+            {site.primaryCta.label}
+          </a>
+        </>
       )}
 
       <!-- モバイル: details/summary の CSS-only ドロワー。JS を足さない -->

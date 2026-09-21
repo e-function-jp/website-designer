@@ -1,8 +1,8 @@
 # website 品質レポート
 
-- 計測日時: 2026/9/19 13:43:34
+- 計測日時: 2026/9/20 16:53:03
 - **総合スコア: 100 / 100**（前回 100、+0）
-- サイト数: 6 / ページ数: 68
+- サイト数: 7 / ページ数: 80
 
 | ページ | スコア | 指摘数 |
 |---|---|---|
@@ -13,6 +13,18 @@
 | /compare/20260916-0500/sonnet5/ | 100 | 0 |
 | /components/ | 95 | 1 |
 | / | 100 | 0 |
+| /sites/corporate/a-20260920-1616/about/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/assets/noxray-company.html | 100 | 0 |
+| /sites/corporate/a-20260920-1616/contact/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/download/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/ | 93 | 2 |
+| /sites/corporate/a-20260920-1616/news/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/privacy/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/service/ | 98 | 1 |
+| /sites/corporate/a-20260920-1616/works/brand/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/works/campaign/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/works/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/works/recruitment/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/about/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/company/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/contact/ | 100 | 0 |
@@ -99,9 +111,62 @@
 
 | 重要度 | ルール | 内容 |
 |---|---|---|
-| 🟡 medium | perf-img-lazy: ファーストビュー以降の img に loading="lazy" が無い | lazy 未指定 2件 / 全9件 |
+| 🟡 medium | perf-img-lazy: ファーストビュー以降の img に loading="lazy" が無い | lazy 未指定 2件 / 全10件 |
 
 ## / — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/about/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/assets/noxray-company.html — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/contact/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/download/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/ — 93点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | ia-orphan-page: どこからもリンクされていない孤立ページ | 孤立: /news/（グロナビ・フッター・本文のどこからも辿れない） |
+| 🔵 low | ia-recommended-page-missing: サイト種別の推奨ページが欠けている | 推奨ページ欠落: /company/, /recruit/ |
+
+## /sites/corporate/a-20260920-1616/news/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/privacy/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/service/ — 98点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🔵 low | a11y-nav-label: 複数の <nav> に aria-label が無い | <nav> が 6 個あるが 1 個に aria-label が無い |
+
+## /sites/corporate/a-20260920-1616/works/brand/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/works/campaign/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/works/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/works/recruitment/ — 100点
 
 指摘なし 🎉
 
