@@ -1,0 +1,185 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import FieldWindow from '../../../../../components/sections/FieldWindow.astro';
+import DiagnosticForm from '../../../../../components/sections/DiagnosticForm.astro';
+import NextPageLinks from '../../../../../components/site/NextPageLinks.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+
+const dialogueImage = {
+  src: `${SHARED}/img-b-04.jpg`,
+  alt: '相談の場で、相手の話に耳を傾ける人物',
+};
+---
+
+<SiteLayout
+  site={site}
+  title="無料の組織診断"
+  description="商談設計、パイプライン可視化、現場定着について、現在の状況をご記入ください。軌道セールス設計の無料組織診断のお申し込みページです。"
+  path="/contact/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '無料の組織診断' }]}
+>
+  <!-- 01 相談の入口（PageIntro + Alert） -->
+  <PageIntro
+    title="無料の組織診断"
+    description="営業組織の現状を整理するところから、受注のの型づくりを考えてみませんか。商談設計、パイプライン可視化、現場定着について、現在の状況をご記入ください。"
+  >
+    <Alert variant="warning" class="contact-alert">
+      <p>このサイトは架空企業の紹介サンプルです。フォームは入力内容の確認まで体験でき、実際の申し込みや外部送信は行いません。実在する個人情報・機密情報は入力しないでください。</p>
+    </Alert>
+  </PageIntro>
+
+  <!-- 02 相談内容を整理する（白背景・左写真・右本文） -->
+  <section class="preparation bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="preparation__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <figure class="preparation__photo">
+              <img
+                src={dialogueImage.src}
+                alt={dialogueImage.alt}
+                loading="lazy"
+                width="1200"
+                height="800"
+                class="preparation__img aspect-[3/2]"
+              />
+              <figcaption class="preparation__caption">支援場面のイメージ</figcaption>
+            </figure>
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-7">
+          <p class="preparation__num" aria-hidden="true">02</p>
+          <h2 class="preparation__heading">いま気になっていることから。</h2>
+          <div class="preparation__body">
+            <p>商談の進め方を組織で共有したい。案件の状況を捉えやすくしたい。整備した仕組みを現場で使い続運用できるようにしたい。</p>
+            <p>ご相談内容は、現在の問題意識から整理できます。課題が一つに絞れていない場合は、複数の項目を選び、分かる範囲で状況をご記入ください。</p>
+            <p>対象は、中堅製造業とSaaS企業の営業責任者・経営企画・事業責任者の皆さまです。支援内容を先に確認したい方は、営業変革プログラムをご覧ください。</p>
+            <p class="preparation__link-row">
+              <a href={url(site, '/service/')} class="preparation__link">
+                支援内容を見る
+                <span aria-hidden="true">→</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 入力と確認（DiagnosticForm） -->
+  <DiagnosticForm site={site} />
+
+  <!-- 04 検討を続ける（紙色背景） -->
+  <section class="next-step bg-base-200">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <div class="next-step__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <div class="lg:col-span-4">
+            <p class="next-step__num" aria-hidden="true">04</p>
+            <h2 class="next-step__heading">支援の全体像も、ご確認ください。</h2>
+          </div>
+          <div class="lg:col-span-8">
+            <p class="next-step__body">軌道セールス設計の営業変革プログラムは、組織診断だけで完結するものではありません。商談設計・パイプライン可視化・現場安定を一体で支援し、再現性のある受注プロセスの構築につなげます。支援の範囲と進め方は、営業変革プログラムのページで確認できます。</p>
+            <p class="next-step__link-row">
+              <a href={url(site, '/service/')} class="next-step__link">
+                営業変革プログラムを見る
+                <span aria-hidden="true">→</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- /contact/ は主要CTAを重・表示しない -->
+  <NextPageLinks site={site} currentPath="/contact/" onContact={true} />
+</SiteLayout>
+
+<style>
+  .contact-alert { margin-top: 16px; }
+
+  .preparation__photo { margin: 0; }
+  .preparation__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background: var(--color-base-300);
+    display: block;
+  }
+  .preparation__caption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-base-content);
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+  .preparation__num,
+  .next-step__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+  }
+  .preparation__heading,
+  .next-step__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 24px;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .preparation__body p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+  .preparation__body p:last-child { margin-bottom: 0; }
+  .preparation__link-row { margin-top: 16px; }
+  .preparation__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .preparation__link:hover { color: var(--color-secondary); border-color: var(--color-secondary); }
+
+  .next-step__body {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+  .next-step__link-row { margin: 0; }
+  .next-step__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .next-step__link:hover { color: var(--color-secondary); border-color: var(--color-secondary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preparation__link, .next-step__link { transition: none; }
+  }
+</style>

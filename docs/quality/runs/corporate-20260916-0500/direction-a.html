@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>軌道セールス設計株式会社｜コーポレートサイト ディレクション A</title>
+<style>
+:root{--navy:#243B53;--accent:#176B87;--ink:#172B3A;--muted:#526575;--paper:#F3F5F6;--line:#CDD5DB}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;line-height:1.85}
+main{max-width:1160px;margin:auto;padding:48px 24px 96px}
+header{padding:48px;background:var(--navy);color:white}
+h1{font-size:clamp(26px,4vw,42px);line-height:1.5;margin:12px 0}
+h2{font-size:27px;border-bottom:2px solid var(--navy);padding-bottom:16px}
+h3{font-size:21px;margin:0 0 16px}
+h4{font-size:18px}
+main>section{margin-top:48px;background:white;padding:32px}
+article{margin-top:40px;padding-top:24px;border-top:3px solid var(--navy)}
+[data-section]{padding:24px 0;border-bottom:1px solid var(--line)}
+[data-role]{margin:12px 0}
+[data-role]::before{display:block;font-size:12px;font-weight:bold;color:var(--accent);letter-spacing:.06em}
+[data-role="purpose"]::before{content:"役割"}
+[data-role="layout"]::before{content:"配置・寸法"}
+[data-role="copy"]::before{content:"掲載コピー"}
+[data-role="components"]::before{content:"部品"}
+[data-role="animation"]::before{content:"モーション"}
+[data-role="image"]::before{content:"画像"}
+dt{font-weight:700;margin-top:20px}
+dd{margin:8px 0 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;border:1px solid var(--line);padding:12px;vertical-align:top}
+th{background:var(--paper)}
+pre{overflow:auto;background:#142535;color:#F3F5F6;padding:24px;font-size:13px;line-height:1.7}
+a{color:var(--accent)}
+figure{margin:20px 0;padding:20px;border:1px solid var(--line)}
+small{color:var(--muted)}
+.swatches{display:flex;flex-wrap:wrap;gap:12px}
+.swatches span{padding:18px;color:white;background:var(--navy)}
+@media(max-width:640px){main{padding:24px 16px 64px}header{padding:28px 20px}main>section{padding:20px}th,td{padding:8px;font-size:12px}pre{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+<p>corporate-20260916-0500 ／ A案・堅実路線 ／ 実装確定仕様</p>
+<h1>軌道セールス設計株式会社<br>受注の型を、現場に残す</h1>
+<p>支援方針、支援内容、成果、会社情報を別ページで確かめられる企業サイト。中央固定ヘッダーと濃紺の共通シェルを軸に、説明図・実写調写真・数値を整然と配置する。</p>
+</header>
+<main>
+<section id="site-config">
+<h2>1. サイト定義</h2>
+<p>最初に出力先の <code>_site.ts</code> を作る。以下は確認済みの SiteConfig 型に適合する。各 href はサイト内相対パスとして保持し、描画時は既存の <code>url(site, href)</code> で base を付ける。</p>
+<dl>
+<dt>name</dt><dd>軌道セールス設計株式会社</dd>
+<dt>tagline</dt><dd>受注の型を、現場に残す</dd>
+<dt>theme</dt><dd>business を継承した独自 DaisyUI テーマ <code>kido-corporate</code>。下記の配色で必ず上書きする。</dd>
+<dt>nav</dt><dd>私たちの支援方針 → /about/ ／ 営業変革プログラム → /service/ ／ 会社概要 → /company/ ／ 採用について → /recruit/ ／ お知らせ → /news/ ／ 支援実績 → /case/</dd>
+<dt>footerNav</dt><dd>「営業変革の支援」：/about/、/service/、/case/、/contact/。「企業情報」：/company/、/recruit/、/news/。</dd>
+<dt>organization</dt><dd>商号：軌道セールス設計株式会社。よみ：きどうせーるすせっけい。設立：2016年。従業員数：48名。所在地：東京都港区。電話、メール、番地、代表者、資本金は追加しない。</dd>
+<dt>primaryCta</dt><dd>無料で組織診断を申し込む → /contact/</dd>
+<dt>legalNav</dt><dd>個人情報の取り扱い → /privacy/</dd>
+<dt>motion</dt><dd>reveal: fade-up ／ durationMs: 600 ／ staggerMs: 0 ／ header: none ／ pageTransition: true。600msと0msは未計測項目に対する本案の補完値であり、参照実測値ではない。</dd>
+</dl>
+<pre><code>import type { SiteConfig } from '../../../../lib/site';
+
+export const site: SiteConfig = {
+  name: '軌道セールス設計株式会社',
+  tagline: '受注の型を、現場に残す',
+  base: '/sites/corporate/a-20260916-0500/',
+  theme: 'kido-corporate',
+  nav: [
+    { label: '私たちの支援方針', href: '/about/' },
+    { label: '営業変革プログラム', href: '/service/' },
+    { label: '会社概要', href: '/company/' },
+    { label: '採用について', href: '/recruit/' },
+    { label: 'お知らせ', href: '/news/' },
+    { label: '支援実績', href: '/case/' }
+  ],
+  footerNav: [
+    {
+      heading: '営業変革の支援',
+      items: [
+        { label: '私たちの支援方針', href: '/about/' },
+        { label: '営業変革プログラム', href: '/service/' },
+        { label: '支援実績', href: '/case/' },
+        { label: '無料で組織診断を申し込む', href: '/contact/' }
+      ]
+    },
+    {
+      heading: '企業情報',
+      items: [
+        { label: '会社概要', href: '/company/' },
+        { label: '採用について', href: '/recruit/' },
+        { label: 'お知らせ', href: '/news/' }
+      ]
+    }
+  ],
+  organization: {
+    legalName: '軌道セールス設計株式会社',
+    address: '東京都港区',
+    founded: '2016'
+  },
+  primaryCta: {
+    label: '無料で組織診断を申し込む',
+    href: '/contact/'
+  },
+  legalNav: [
+    { label: '個人情報の取り扱い', href: '/privacy/' }
+  ],
+  motion: {
+    reveal: 'fade-up',
+    durationMs: 600,
+    staggerMs: 0,
+    header: 'none',
+    pageTransition: true
+  }
+};
+export default site;</code></pre>
+<p>よみ・従業員数は既存 organization 型にないため、会社概要の Table に記載する。架空の公式URLをJSON-LDへ追加しない。</p>
+</section>
+
+<section id="sitemap">
+<h2>2. ページ構成</h2>
+<p>下表のURLは base 相対。本文量はナビ・共通フッターを除く目安。下記確定コピーを優先し、字数合わせの文章は追加しない。ニュース記事、個別顧客事例、採用募集要項は根拠となる情報がないため作らない。</p>
+<table>
+<thead><tr><th>URL</th><th>ページ名</th><th>役割</th><th>想定本文量（文字）</th></tr></thead>
+<tbody>
+<tr><td>/</td><td>ホーム</td><td>提供価値の理解と目的別の振り分け</td><td>700〜950</td></tr>
+<tr><td>/about/</td><td>私たちの支援方針</td><td>伴走と再現性の考え方を理解する</td><td>550〜750</td></tr>
+<tr><td>/service/</td><td>営業変革プログラム</td><td>支援範囲と現場での進め方を判断する</td><td>750〜1,000</td></tr>
+<tr><td>/case/</td><td>支援実績</td><td>提供済みの3指標を同じ情報単位で比較する</td><td>350〜500</td></tr>
+<tr><td>/company/</td><td>会社概要</td><td>法人の基本情報と事業内容を確認する</td><td>300〜450</td></tr>
+<tr><td>/recruit/</td><td>採用について</td><td>仕事の対象と現在掲載できる情報を確認する</td><td>300〜450</td></tr>
+<tr><td>/news/</td><td>お知らせ</td><td>更新情報の入口。未提供記事を捏造しない</td><td>160〜260</td></tr>
+<tr><td>/contact/</td><td>無料組織診断のお申し込み</td><td>課題を整理して申し込むための入力画面</td><td>450〜650</td></tr>
+<tr><td>/privacy/</td><td>個人情報の取り扱い</td><td>サンプルの入力情報の扱いを明示する</td><td>300〜450</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="visual">
+<h2>3. 意匠・共通シェル</h2>
+<dl>
+<dt>配色</dt>
+<dd>主色 #243B53、アクセント #176B87、本文 #172B3A、補助文字 #526575、背景 #FFFFFF、補助背景 #F3F5F6、罫線 #CDD5DB。主色とアクセント以外は無彩色に近い補助色に限定。ヒーロー・姿勢宣言・採用帯・フッターは主色。説明と一覧は白。主要ボタンはアクセント色＋白文字。紫、発光、グラデーションは使わない。</dd>
+<dt>DaisyUIトークン</dt>
+<dd>primary=#243B53、primary-content=#FFFFFF、secondary/ accent=#176B87、secondary-content/accent-content=#FFFFFF、base-100=#FFFFFF、base-200=#F3F5F6、base-300=#CDD5DB、base-content=#172B3A、neutral=#243B53、neutral-content=#FFFFFF。カード半径4px、ボタン半径4px。ヘッダーのみ32px。エラーは色だけに依存せず文章とアイコンで示す。</dd>
+<dt>見出し書体</dt>
+<dd>日本語は「Noto Sans JP」700。ヒーローはPC 72px・行高1.35、390px幅で40px、320px幅で34px。下層h1はPC 56px／モバイル32px。h2は40px／28px、h3は24px／21px。数値のみ「Marcellus」400、PC 80px／モバイル60px。欧文の装飾見出しは追加しない。</dd>
+<dt>本文書体</dt>
+<dd>「Noto Sans JP」400、16px、行高1.85。注記14px、行高1.7。本文ブロックは最大42em、長文ページは最大760px。日本語の字間は本文0、見出し0.025em。フォント読み込み失敗時も日本語ゴシックへフォールバックする。</dd>
+<dt>写真の方向性</dt>
+<dd>実写調の業務風景4枚。営業担当者・製造業の担当者が資料を囲んで検討する場面。自然光、低彩度、紺・グレー・白を中心にする。握手、カメラ目線の集合写真、抽象3Dは使わない。写真は説明対象の右か直後に置く。生成画像は実在の社員・顧客・拠点の記録として扱わず、隣接キャプション「写真は業務イメージです。」を付ける。</dd>
+<dt>余白の方針</dt>
+<dd>PC本文幅1140px、1440px時の左右余白150px。768〜1199pxは左右32px、767px以下は20px。PC章間120px、モバイル72px。見出しから本文24px、本文からボタン32px、2列の間64px。長大な空白や高さ稼ぎは行わない。以下の高さは内容を含む目安で、固定heightによる切り捨ては禁止。</dd>
+<dt>中央固定ヘッダー</dt>
+<dd>SiteHeaderに本テーマ専用のカプセル変種を追加し、SiteLayoutから一度だけ描画。PCは幅680px・高64px・上16px・中央。左に商号（15px太字）、中央に「メニュー」と二本線、右に主要CTA全文（14px）。長い商号と日本語CTAの可読性のため参照の400pxから拡幅する。モバイルは幅calc(100% - 40px)、最大350px・高64px・上16px。商号は「軌道セールス設計」「株式会社」の2行、右に48px以上のメニューボタン。モバイルの主要CTAは下部固定帯に移す。</dd>
+<dt>メニューの開閉</dt>
+<dd>PC・モバイルとも同じ6項目をnavの順に表示。白いパネルをカプセル直下に展開し、幅はヘッダーと同じ。各行56px、左右24px、下端に主要CTA。開閉は即時、暗転や移動なし。閉じるボタン、Esc、外側クリック、リンク選択で閉じ、閉じたときはトリガーへフォーカスを戻す。aria-expandedを更新し、非表示メニューはタブ移動対象から外す。モーダル化せず、フォーカストラップを追加しない。</dd>
+<dt>常設CTA</dt>
+<dd>PCは右24px・下24px、幅280px・高58px。「無料で組織診断を申し込む」→ /contact/。モバイルは白い下部帯内、左右16px・ボタン高52px、下にsafe-area分を加算。全ページ本文末尾に固定帯分の余白を確保。/contact/のみ重複した固定CTAを出さず、フォーム内ボタンを使う。資料請求ページは新設しない。</dd>
+<dt>下層タイトル</dt>
+<dd>背景#F3F5F6。パンくずはPC上112px、モバイル上104pxから。h1は左揃え、PC上190px／モバイル上156px。導入文はその24px下。ヘッダー帯の目安PC400px／モバイル320px。全下層で同じ位置。SiteLayoutのパンくずを使用し、「ホーム → 現在のページ名」を表示する。</dd>
+<dt>末尾の大型リンクとフッター</dt>
+<dd>全ページの本文直後に新規 SiteEndLinks を共通描画。PCは「会社概要」「支援実績」を2列各180px高、下に主要CTAを全幅160px高。モバイルは1列、各120px。背景#F3F5F6、白い1px境界、右下に矢印、文字は主色。現在ページへのタイルは省略し、残るタイルを全幅へ再配置する。フッターは主色、PCは左商号・右2列サイトマップ、モバイルは商号の下に2列。法務リンクと「© 軌道セールス設計株式会社」を末尾に置く。住所や電話を追加しない。</dd>
+<dt>ボタン・操作状態</dt>
+<dd>主要ボタン高56px以上、文字16px・700、左右24px。補助導線は主色の下線付きテキストと右矢印。hoverは下線または2pxの内側枠を即時表示し、移動・拡大なし。focus-visibleは3pxのアクセント色アウトラインと白い2pxの隙間。タップ領域は最低44×44px。横スクロールのカード列は使わない。</dd>
+<dt>共有する企業設定</dt>
+<dd>BtoB営業支援・営業組織コンサルティング。中堅製造業とSaaS企業に、商談設計・パイプライン可視化・現場定着までを一体で支援する営業変革プログラムを提供。伴走型の組織診断とプレイブック整備を軸に、再現性のある受注プロセスを構築。2016年設立、48名、東京都港区。これ以外の沿革、肩書、顧客、認証、受賞、価格、期間は追加しない。</dd>
+</dl>
+</section>
+
+<section id="motion-spec">
+<h2>4. モーションの確定範囲</h2>
+<table>
+<thead><tr><th>項目</th><th>参照実測</th><th>実装の決定</th></tr></thead>
+<tbody>
+<tr><td>主要リビール</td><td>fade-up 250/256。fade 2、fade-side 1、zoom 1、other 2。</td><td>全ページでfade-upに統一。件数は文字分割に左右されるため256件を実装目標にしない。</td></tr>
+<tr><td>移動・透明度</td><td>文字要素で約89.6px → 0、opacity 0 → 1。</td><td>章見出しにのみ89.6px → 0、opacity 0 → 1。本文、画像、フォーム、数値は初期表示。文字分割はしない。</td></tr>
+<tr><td>duration / stagger</td><td>duration_ms: null。staggerは未取得。</td><td>600ms / 0msを補完仕様として採用。nullを0msと解釈しない。</td></tr>
+<tr><td>easing</td><td>ease</td><td>easeを使用。既存ScrollRevealの独自ベジェはこのサイト内だけ上書きする。</td></tr>
+<tr><td>スクロール連動</td><td>2件。pin・scrubはnull。</td><td>対象・進行範囲が未確定のため追加しない。長尺ピン、視差、Lenisは採用しない。</td></tr>
+<tr><td>ヘッダー</td><td>固定配置を観測。収納挙動は未確認。</td><td>header: none。CSSで中央固定。方向別収納、縮小はなし。</td></tr>
+<tr><td>ページ遷移</td><td>View Transitions in-use。方式・時間は未計測。</td><td>on。補完仕様として既定の視覚アニメーションは無効化し、未観測のクロスフェード時間を追加しない。</td></tr>
+<tr><td>ローダー</td><td>候補0件、DOMには0%要素。</td><td>新規ローダーを追加しない。参照に存在しないと断定しない。</td></tr>
+<tr><td>軽減設定</td><td>通常256、軽減255、respected: false。</td><td>継承しない。移動、透明度変化、ページ遷移アニメーションを停止。最初から全内容を可視化する。</td></tr>
+</tbody>
+</table>
+<p>以下の「共通リビール」は ScrollReveal animation="fade-up"、duration=600ms、stagger=0ms、ease、移動89.6pxを意味する。各本文セクションのh2を1ブロックとして一度だけ実行する。ヒーローと下層h1は初期表示。トップ・下層とも演出対象を同じ役割に限定し、ページ長に比例した件数とする。</p>
+<p>ScrollRevealは現在の既定値が移動32px・独自ベジェであるため、テーマ範囲内に限って調整する。JSが初期化できた場合だけ待機状態を有効化し、JS無効・Observer未対応・軽減設定時は可視状態を保つ。共通ヘッダーや本文全体をScrollRevealで包まない。</p>
+</section>
+
+<section id="pages">
+<h2>5. 全ページの配置と掲載コピー</h2>
+
+<article data-page="/">
+<h2>ホーム</h2>
+
+<section data-section="hero">
+<h3>ファーストビュー</h3>
+<p data-role="purpose">提供領域と受注プロセスを残す価値を最初に伝える。</p>
+<p data-role="layout">PCは濃紺の全幅領域、目安900px。本文幅1140px、左7列に見出し、右5列に縦寄りの写真を置く。写真は上180px・高500px、文字とは重ねない。見出しは下端に揃え、その下に紹介文とCTA。最下部に細線と対象業種。モバイルは見出し→紹介文→CTA→写真の1列、上136pxから開始、写真は横長4:3・上余白32px。総高約900px、内容優先。</p>
+<p data-role="copy">受注の型を、<br>現場に残す<br><br>中堅製造業とSaaS企業の営業変革を、商談設計から現場定着まで。軌道セールス設計は、伴走型の組織診断とプレイブック整備を通じて、再現性のある受注プロセスを構築します。<br>主要CTA：無料で組織診断を申し込む → /contact/<br>対象：中堅製造業・SaaS企業</p>
+<p data-role="components">SiteLayout、SectionTitle、Badge。配置を新規 CorporateSalesHero として切り出す。</p>
+<p data-role="animation">none。見出し・写真・CTAを初期状態から表示。</p>
+<p data-role="image">top:hero。業務資料を囲む営業責任者と支援担当者。object-position:50% 50%。写真下に「写真は業務イメージです。」。</p>
+</section>
+
+<section data-section="stance">
+<h3>企業姿勢</h3>
+<p data-role="purpose">サービス説明の前に、支援の考え方を簡潔に示す。</p>
+<p data-role="layout">ヒーローから濃紺を連続させる。中央寄せ、最大760px。PC目安540px、モバイル460px。見出しの下48pxに本文、段落間24px。写真やカードを挟まない。</p>
+<p data-role="copy">成果を、組織の力として残す。<br><br>商談が進んだ理由を、次の商談でも使える形にする。<br>案件の状況を、チームで同じ視点から捉えられるようにする。<br>そして、整えた型を、日々の営業活動に定着させる。<br><br>私たちは、診断から設計、現場での活用までを一体で支援します。</p>
+<p data-role="components">SectionTitle、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="program">
+<h3>営業変革プログラムへの入口</h3>
+<p data-role="purpose">課題・方法・提供価値の順で支援範囲を説明する。</p>
+<p data-role="layout">白背景。PC目安760px、モバイル980px。上に見出しと導入文、下に同幅3列の番号付き項目。各項目は上罫線・見出し・本文。最下部に「組織診断 → プレイブック整備 → 現場定着」の図を1列表示。モバイルは項目も図も縦方向。図の直後に詳細リンク。</p>
+<p data-role="copy">営業の課題を、つながったプロセスで解く。<br>商談の進め方、案件の見え方、日々の運用。分断しがちな課題を、一つの受注プロセスとして整えます。<br><br>01 商談設計<br>顧客との対話で何を確かめ、次にどう進むか。商談の判断を共有できる形にします。<br>02 パイプライン可視化<br>案件の状況と次の行動を捉え、チームで進捗を確認できる状態を目指します。<br>03 現場定着<br>設計した進め方をプレイブックに整理し、現場での活用につなげます。<br>リンク：営業変革プログラムを詳しく見る → /service/</p>
+<p data-role="components">SectionTitle、Steps、ScrollReveal。3項目の説明を新規 SalesSupportOverview として切り出す。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。図は静止。</p>
+<p data-role="image">none。図はHTML/CSSで作り、画像化しない。</p>
+</section>
+
+<section data-section="about">
+<h3>支援方針への入口</h3>
+<p data-role="purpose">支援範囲を理解した訪問者を、理念と方法の説明へ送る。</p>
+<p data-role="layout">補助背景。PCは写真5列・本文7列、目安600px。写真4:3。モバイルは見出し・本文・写真・リンクの順、約720px。抽象立体や装飾の大文字は使わない。</p>
+<p data-role="copy">現場とともに、受注の型をつくる。<br>営業の変革は、設計だけでは完結しません。現場の状況を捉える組織診断と、日々の判断を支えるプレイブック。その両方を軸に、再現性のある受注プロセスを構築します。<br>リンク：私たちの支援方針を読む → /about/</p>
+<p data-role="components">SectionTitle、ScrollReveal。写真と文章の2列配置は新規 BusinessPhotoText として切り出す。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">about:workshopを再利用。写真下に業務イメージの注記。</p>
+</section>
+
+<section data-section="results">
+<h3>支援実績への入口</h3>
+<p data-role="purpose">提供された実績を数値で比較可能に示す。</p>
+<p data-role="layout">白背景。PCは見出しの下に3列のStat、境界は縦罫線。目安520px。モバイルは縦3段・横罫線、約760px。数値の直下に期間と指標を必ず併記する。</p>
+<p data-role="copy">数字で見る、営業変革の実績。<br>1.6倍 — 支援企業の平均受注率を14か月で改善<br>92% — 導入後12か月の定着率<br>210以上 — 累計支援チーム数<br>各指標の対象・期間を含めて、支援実績をご確認ください。<br>リンク：支援実績を見る → /case/</p>
+<p data-role="components">SectionTitle、Stat、ScrollReveal。新規 SalesResultsStrip として共有。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。カウントアップなし。</p>
+<p data-role="image">none。顧客ロゴを創作しない。</p>
+</section>
+
+<section data-section="recruit">
+<h3>採用への入口</h3>
+<p data-role="purpose">顧客向けの支援導線と採用導線を分ける。</p>
+<p data-role="layout">濃紺の全幅帯。中央寄せ、最大760px、PC440px／モバイル380px。見出し、本文、白文字の下線付きリンクを縦積み。</p>
+<p data-role="copy">営業の変革を、現場から支える。<br>組織診断、商談設計、プレイブック整備。私たちが向き合う仕事と、採用に関する掲載情報をご案内します。<br>リンク：採用について見る → /recruit/</p>
+<p data-role="components">SectionTitle、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+
+<section data-section="news">
+<h3>お知らせへの入口</h3>
+<p data-role="purpose">お知らせ一覧への定位置を確保する。</p>
+<p data-role="layout">PCは左4列に見出し、右8列に空状態と一覧リンク、約340px。モバイルは1列、約300px。架空の日付付き記事で3行を埋めない。</p>
+<p data-role="copy">お知らせ<br>現在、このサイトに掲載しているお知らせはありません。<br>リンク：お知らせ一覧を見る → /news/</p>
+<p data-role="components">SectionTitle、Alert、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/about/">
+<h2>私たちの支援方針</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">理念と支援の考え方を説明するページだと示す。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル320px。</p>
+<p data-role="copy">私たちの支援方針<br>診断から現場定着まで。受注の型を組織に残すための、私たちの考え方をご紹介します。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="mission">
+<h3>支援の目的</h3>
+<p data-role="purpose">再現性という提供価値を図解と文章で示す。</p>
+<p data-role="layout">白背景、中央最大760px。PC720px／モバイル680px。見出し・本文の下に左右同径240pxの2円。「現場の経験」「共有できる型」を中央の線で接続し、線の下に「組織に残る受注プロセス」。モバイルの円は各140px、横並びを維持。</p>
+<p data-role="copy">経験を、次の受注につながる型へ。<br>一つひとつの商談には、顧客への理解と現場の判断が積み重なっています。その経験をチームで共有し、次の行動に使える形へ整理すること。私たちは、そこに営業変革の土台があると考えています。<br>現場の経験と共有できる型を結び、再現性のある受注プロセスを構築します。</p>
+<p data-role="components">SectionTitle、ScrollReveal。新規 SalesProcessDiagram。円は装飾、同じ内容を通常テキストで読めるようにする。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。図は静止。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="principles">
+<h3>支援で重視すること</h3>
+<p data-role="purpose">現場・可視化・定着の関係を具体化する。</p>
+<p data-role="layout">写真を上部に幅1140px・比率16:7で配置。その下に3行。PCは各行左4列の番号と見出し、右8列の説明。行間64px。モバイルは見出しの下に本文、行間40px。PC約1000px／モバイル約1100px。</p>
+<p data-role="copy">現場と設計を、切り離さない。<br>01 現場の状況から考える<br>組織診断を通じて、営業活動の進め方と課題を捉えます。チームの状況を起点に、整えるべき受注プロセスを考えます。<br>02 判断を共有できる形にする<br>商談設計とパイプライン可視化をつなげ、何を確認し、次に何をするかをチームで捉えられる状態を目指します。<br>03 使い続けられる形に整える<br>プレイブック整備と現場定着を一体で支援します。設計した内容を日々の営業活動で使うことを重視します。</p>
+<p data-role="components">SectionTitle、ScrollReveal、BusinessPhotoText。</p>
+<p data-role="animation">章見出しのみ共通リビール：fade-up、600ms、stagger 0ms。各行は初期表示。</p>
+<p data-role="image">about:workshop。object-position:50% 45%。</p>
+</section>
+<section data-section="strength">
+<h3>一体で支援する強み</h3>
+<p data-role="purpose">理念をサービスの選択につなげる。</p>
+<p data-role="layout">濃紺。PCは左6列に文章、右6列に「組織診断／プレイブック整備／現場定着」の3段図。PC600px／モバイル740px。モバイルは本文→図→リンク。</p>
+<p data-role="copy">診断と実行を、一つの支援に。<br>組織の課題を捉えることと、現場で使える型を整えること。その間を分断せず、商談設計から現場定着までを一体で支援します。<br>中堅製造業とSaaS企業の営業責任者、経営企画、事業責任者の皆さまと、再現性のある受注プロセスに向き合います。<br>リンク：営業変革プログラムを確認する → /service/</p>
+<p data-role="components">SectionTitle、Steps、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/service/">
+<h2>営業変革プログラム</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">支援対象と全体の支援範囲を明示する。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル360px。</p>
+<p data-role="copy">営業変革プログラム<br>中堅製造業とSaaS企業に向けて、商談設計・パイプライン可視化・現場定着を一体で支援します。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="scope">
+<h3>支援する領域</h3>
+<p data-role="purpose">何を依頼できるかを3つの比較単位で示す。</p>
+<p data-role="layout">PCは左に文章7列、右に写真5列、約900px。左は3行を罫線で区切る。モバイルは導入→写真→3行、約1250px。各行は課題・支援内容の順。</p>
+<p data-role="copy">営業活動を、三つの視点から整える。<br>商談の質と案件の見通し、そして日々の運用を、つながった課題として捉えます。<br><br>商談設計<br>課題：商談で確かめることや、次に進む判断を揃えたい。<br>支援内容：顧客理解と商談の進め方を整理し、共有できる受注プロセスを設計します。<br><br>パイプライン可視化<br>課題：案件がどの段階にあり、何を確認すべきかを把握したい。<br>支援内容：案件の状況と次の行動を捉えるための視点を整えます。<br><br>現場定着<br>課題：整えた進め方を、現場で継続して使えるようにしたい。<br>支援内容：プレイブック整備を軸に、日々の営業活動への定着を支援します。</p>
+<p data-role="components">SectionTitle、Table、ScrollReveal、BusinessPhotoText。モバイルのTableは項目ラベルを残して縦積み。</p>
+<p data-role="animation">章見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">service:planning。写真キャプションは業務イメージの注記のみ。</p>
+</section>
+<section data-section="process">
+<h3>診断から定着まで</h3>
+<p data-role="purpose">支援の各段階と目的を対応させる。</p>
+<p data-role="layout">補助背景。PCは左4列の見出し・右8列の縦Timeline。3段、各段160px以上。PC760px／モバイル850px。期間や納品数を付け足さない。</p>
+<p data-role="copy">型をつくり、現場に残すまで。<br>01 組織診断<br>営業組織の状況と課題を捉え、受注プロセスのどこを整えるべきかを考えます。<br>02 商談設計・プレイブック整備<br>商談の進め方と判断の視点を整理し、チームで共有できる形にします。パイプラインの見え方もあわせて整えます。<br>03 現場定着<br>設計した型を現場の営業活動につなげます。使われる受注プロセスとして定着することを目指します。</p>
+<p data-role="components">SectionTitle、Timeline、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="questions">
+<h3>検討時に確認できること</h3>
+<p data-role="purpose">対象と支援範囲の疑問を解消し、申し込みへ送る。</p>
+<p data-role="layout">白背景、最大900px。Accordion3件、初期は1件目を開く。PC600px／モバイル720px。末尾に主要CTA。</p>
+<p data-role="copy">ご検討にあたって<br>Q. どのような企業が対象ですか。<br>A. 中堅製造業とSaaS企業を対象としています。営業責任者、経営企画、事業責任者の方に向けた営業変革の支援です。<br>Q. 支援範囲はどこまでですか。<br>A. 伴走型の組織診断とプレイブック整備を軸に、商談設計・パイプライン可視化・現場定着までを一体で支援します。<br>Q. 申し込み時には何を伝えればよいですか。<br>A. 現在の営業活動で課題に感じていることをお聞かせください。商談の進め方、案件の見え方、現場での運用など、分かる範囲でご記入ください。<br>無料で組織診断を申し込む → /contact/</p>
+<p data-role="components">SectionTitle、Accordion、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。Accordionは即時開閉。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/case/">
+<h2>支援実績</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">個別事例ではなく、提供済みの集計実績を掲載する。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル320px。</p>
+<p data-role="copy">支援実績<br>受注率、定着率、支援チーム数。営業変革の実績を三つの指標でご紹介します。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="metrics">
+<h3>同じ単位で比較する実績一覧</h3>
+<p data-role="purpose">数値の意味と期間を省略せず伝える。</p>
+<p data-role="layout">幅1140pxの1列、細いグレー枠の行を3件、間隔12px。PC各280px、左4列に数値、右8列に指標名・期間・説明。モバイル各320px、数値→指標→説明。カルーセル、検索、架空ロゴ、詳細リンクは付けない。</p>
+<p data-role="copy">営業変革を示す三つの指標<br><br>1.6倍<br>平均受注率の改善<br>期間：14か月<br>支援企業の平均受注率を14か月で1.6倍に改善しました。<br><br>92%<br>導入後の定着率<br>時点：導入後12か月<br>導入後12か月の定着率は92%です。<br><br>210以上<br>累計支援チーム数<br>累計で210以上のチームを支援しています。</p>
+<p data-role="components">SectionTitle、Stat、Card、ScrollReveal。各行は新規 SalesMetricRow として切り出す。</p>
+<p data-role="animation">章見出しのみ共通リビール：fade-up、600ms、stagger 0ms。数値は静止。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="context">
+<h3>支援内容への接続</h3>
+<p data-role="purpose">成果を支えるプログラムの説明へ送る。</p>
+<p data-role="layout">補助背景、最大760pxの左揃え。PC380px／モバイル440px。文章の下に2本の導線。</p>
+<p data-role="copy">数字の背景にある、支援の全体像。<br>軌道セールス設計は、伴走型の組織診断とプレイブック整備を軸に、商談設計・パイプライン可視化・現場定着を一体で支援しています。<br>掲載値は支援実績であり、個別の成果を保証するものではありません。<br>営業変革プログラムを見る → /service/<br>無料で組織診断を申し込む → /contact/</p>
+<p data-role="components">SectionTitle、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/company/">
+<h2>会社概要</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">法人情報を確認する入口を用意する。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル320px。</p>
+<p data-role="copy">会社概要<br>軌道セールス設計株式会社の基本情報と事業内容をご案内します。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="profile">
+<h3>法人の基本情報</h3>
+<p data-role="purpose">企業設定の正本を欠落なく掲載する。</p>
+<p data-role="layout">最大900pxのTable。PCラベル幅200px、各行上下24px。モバイルはラベルと値を縦積み。PC約650px／モバイル約850px。</p>
+<p data-role="copy">会社情報<br>商号：軌道セールス設計株式会社<br>よみ：きどうせーるすせっけい<br>設立：2016年<br>従業員数：48名<br>所在地：東京都港区<br>業種：BtoB営業支援・営業組織コンサルティング<br>事業内容：中堅製造業とSaaS企業向けに、商談設計・パイプライン可視化・現場定着までを一体で支援する営業変革プログラムを提供する。伴走型の組織診断とプレイブック整備を軸に、再現性のある受注プロセスを構築する。</p>
+<p data-role="components">SectionTitle、Table、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none。番地不明のため地図・建物写真を追加しない。</p>
+</section>
+<section data-section="business">
+<h3>事業理解への導線</h3>
+<p data-role="purpose">会社の基本情報から、支援内容と方針へ送る。</p>
+<p data-role="layout">補助背景、PC2列、モバイル1列。枠なしの2ブロックを罫線で区切る。PC340px／モバイル460px。</p>
+<p data-role="copy">事業と支援方針を知る<br>営業変革プログラム<br>組織診断から現場定着まで、支援する領域と進め方をご紹介します。→ /service/<br>私たちの支援方針<br>受注の型を現場に残すために重視する考え方をご紹介します。→ /about/</p>
+<p data-role="components">SectionTitle、Card、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/recruit/">
+<h2>採用について</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">会社が向き合う仕事を紹介する。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル320px。</p>
+<p data-role="copy">採用について<br>営業組織の変革を支える、私たちの仕事をご紹介します。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="work">
+<h3>仕事の対象</h3>
+<p data-role="purpose">未提供の待遇や社員談を使わず、事業に基づく仕事理解を支える。</p>
+<p data-role="layout">PC左6列に本文・右6列に写真4:3、約600px。モバイルは本文→写真、約720px。</p>
+<p data-role="copy">顧客の現場と、受注プロセスに向き合う。<br>私たちが支援するのは、中堅製造業とSaaS企業の営業組織です。組織診断を通じて課題を捉え、商談設計とプレイブック整備を進め、現場での活用につなげます。<br>営業活動を構造で捉えることと、現場の状況を理解すること。その両方に向き合う仕事です。<br>私たちの支援方針を読む → /about/</p>
+<p data-role="components">SectionTitle、BusinessPhotoText、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">recruit:discussion。実在社員のプロフィールとして扱わない。</p>
+</section>
+<section data-section="recruitment-info">
+<h3>募集情報の掲載状態</h3>
+<p data-role="purpose">募集条件のない状態を正確に伝える。</p>
+<p data-role="layout">補助背景、最大760px、PC340px／モバイル380px。見出し、Alert、会社概要リンクの順。応募ボタンは設置しない。</p>
+<p data-role="copy">募集に関する情報<br>現在、このサイトには募集職種・勤務条件・選考方法を掲載していません。<br>会社の基本情報は、会社概要ページでご確認いただけます。<br>会社概要を見る → /company/</p>
+<p data-role="components">SectionTitle、Alert、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/news/">
+<h2>お知らせ</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">更新情報の一覧ページとして位置づける。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル320px。</p>
+<p data-role="copy">お知らせ<br>軌道セールス設計からのお知らせを掲載するページです。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="news-list">
+<h3>一覧の空状態</h3>
+<p data-role="purpose">公開できる記事がない状態を誤認なく示す。</p>
+<p data-role="layout">幅1140px、上下1px罫線。内側余白PC64px／モバイル32px。見出しと本文を左揃え、PC320px／モバイル300px。日付、カテゴリ、ページネーションは出さない。</p>
+<p data-role="copy">掲載中のお知らせ<br>現在、このサイトに掲載しているお知らせはありません。<br>営業変革プログラムや会社の基本情報は、各ページでご覧いただけます。</p>
+<p data-role="components">SectionTitle、Alert、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="related">
+<h3>次の閲覧先</h3>
+<p data-role="purpose">空状態から検討を続けられるようにする。</p>
+<p data-role="layout">PC2列、モバイル縦2段。目安280px／380px。文章主体のCard。</p>
+<p data-role="copy">お探しの情報へ<br>営業変革プログラム：支援内容と進め方をご確認いただけます。→ /service/<br>会社概要：商号、設立、所在地などの基本情報をご確認いただけます。→ /company/</p>
+<p data-role="components">SectionTitle、Card、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/contact/">
+<h2>無料組織診断のお申し込み</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">CTAと遷移先の目的を一致させる。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル360px。</p>
+<p data-role="copy">無料組織診断のお申し込み<br>商談の進め方、案件の見え方、現場での運用。現在の営業組織で課題に感じていることをお聞かせください。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="guidance">
+<h3>入力前の案内</h3>
+<p data-role="purpose">用意する情報とサンプルの動作範囲を明示する。</p>
+<p data-role="layout">最大760px、白背景。PC300px／モバイル340px。見出し、本文、Alertの順。入力画面の前に表示する。</p>
+<p data-role="copy">分かる範囲から、お聞かせください。<br>会社名、ご担当者名、ご連絡先と、現在の課題をご入力ください。整理しきれていない場合も、気になっていることをそのままご記入いただけます。<br>このサイトは架空企業のサンプルです。入力内容は送信・保存されません。実在の個人情報や機密情報は入力しないでください。</p>
+<p data-role="components">SectionTitle、Alert、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。注意文は初期表示。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="form">
+<h3>申し込み入力と確認</h3>
+<p data-role="purpose">実装者が項目・文言・状態を創作せずフォームを作れるようにする。</p>
+<p data-role="layout">最大760px、常に1列。ラベルは入力欄の上、項目間28px。TextInput高52px、Textarea最低180px。必須表示はラベル右。入力→同ページ内の確認の2段階。確認画面はTableと「入力内容を修正する」「確認を終了する」。送信処理・送信成功画面は作らない。</p>
+<p data-role="copy">お申し込み情報<br>会社名（必須）<br>部署・役職（任意）<br>ご担当者名（必須）<br>メールアドレス（必須）<br>現在の課題・ご相談内容（必須）<br>補助文：商談設計、案件の可視化、現場への定着など、現在の状況をお書きください。<br>確認チェック：サンプルサイトであり、入力内容が送信・保存されないことを確認しました。<br>個人情報の取り扱いを読む → /privacy/<br>入力段階ボタン：入力内容を確認する<br>必須エラー：この項目を入力してください。<br>メール形式エラー：メールアドレスの形式を確認してください。<br>確認見出し：入力内容の確認<br>確認説明：以下は入力内容の確認表示です。お申し込みは送信されません。<br>確認ボタン：入力内容を修正する ／ 確認を終了する<br>終了表示：確認を終了しました。入力内容は送信されていません。</p>
+<p data-role="components">SectionTitle、TextInput、Textarea、Table、Alert。新規 OrganizationDiagnosisForm として切り出す。確認チェックはラベル付きネイティブcheckboxを内部使用。</p>
+<p data-role="animation">none。確認状態の切り替えも即時。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+
+<article data-page="/privacy/">
+<h2>個人情報の取り扱い</h2>
+<section data-section="page-header">
+<h3>ページヘッダー</h3>
+<p data-role="purpose">サンプルサイトの入力情報の扱いを明示する。</p>
+<p data-role="layout">共通下層タイトル。PC400px／モバイル320px。</p>
+<p data-role="copy">個人情報の取り扱い<br>このサンプルサイトにおける、フォーム入力情報の扱いをご案内します。</p>
+<p data-role="components">SiteLayout、SectionTitle。</p>
+<p data-role="animation">none</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="handling">
+<h3>入力情報の扱い</h3>
+<p data-role="purpose">実装する挙動と掲載文を一致させる。</p>
+<p data-role="layout">最大760px、白背景。3項目を縦積み、見出し間40px。PC560px／モバイル650px。</p>
+<p data-role="copy">フォームの入力情報について<br>1. サイトの位置づけ<br>このサイトは架空の企業「軌道セールス設計株式会社」のサンプルです。実際のお申し込みの受け付けは行っていません。<br>2. 入力内容の利用<br>フォームに入力した内容は、この画面内の確認表示にのみ使用します。フォームから外部へ送信せず、ブラウザーの保存領域にも記録しません。<br>3. 入力時のお願い<br>動作を確認する際は、実在する個人情報や機密情報を入力しないでください。</p>
+<p data-role="components">SectionTitle、ScrollReveal。</p>
+<p data-role="animation">章見出しのみ共通リビール：fade-up、600ms、stagger 0ms。本文は初期表示。</p>
+<p data-role="image">none</p>
+</section>
+<section data-section="return">
+<h3>入力画面への戻り先</h3>
+<p data-role="purpose">法務リンク閲覧後に目的の画面へ戻れるようにする。</p>
+<p data-role="layout">補助背景、最大760px、PC240px／モバイル260px。Alertと下線付きリンク。</p>
+<p data-role="copy">入力画面の動作を確認する方へ<br>フォームでは入力内容の確認までをお試しいただけます。送信は行われません。<br>無料組織診断のお申し込み画面へ → /contact/</p>
+<p data-role="components">SectionTitle、Alert、ScrollReveal。</p>
+<p data-role="animation">見出しのみ共通リビール：fade-up、600ms、stagger 0ms。</p>
+<p data-role="image">none</p>
+</section>
+</article>
+</section>
+
+<section id="images">
+<h2>6. 画像制作指示・4枚</h2>
+<p>全画像は実写調の業務イメージ。顧客ロゴ、判読可能な資料文字、固有の製品UIを生成しない。出力はローカルアセットに保存し、ヒーロー以外は遅延読み込み。使用箇所では画像寸法とアスペクト比を予約する。</p>
+<figure data-placement="top:hero" data-tags="営業支援,商談設計,会議,人物,横位置" data-aspect="landscape">
+<figcaption data-prompt="日本のBtoB企業の静かな会議室、営業責任者と組織支援担当者を含む成人3名が紙の商談資料を囲んで話し合う実写調写真。腰から上の中景、人物を画面中央60パーセントに収め、縦トリミングにも耐える構図。自然な横向きの視線と手の動き。窓から柔らかい日中光、紺とグレーのビジネスカジュアル、低彩度、白い壁、誇張しない表情。握手やカメラ目線なし。ロゴ、読める文字、透かしなし。">
+top:hero ／ 推奨1600×1200。PCでは縦寄りにトリミング、モバイル4:3。代替テキスト「商談資料を囲んで検討する人たちのイメージ」。
+</figcaption>
+</figure>
+<figure data-placement="about:workshop" data-tags="組織診断,製造業,対話,人物,横位置" data-aspect="landscape">
+<figcaption data-prompt="製造業の事務室に併設された打ち合わせ空間で、成人の営業担当者と業務担当者と支援担当者が業務フローの紙を見ながら対話する実写調写真。3人を中央に置く横長の引きの構図、机と手元が見える。背景のガラス越しに整然とした作業場の気配がわずかに見えるが、機械を主役にしない。柔らかな自然光、低彩度、紺、白、淡いグレー。清潔で実務的、笑顔を強要しない。読める文字、会社名、ロゴ、透かしなし。">
+about:workshop ／ 推奨1800×1200。トップにも再利用。代替テキスト「現場の状況について話し合う担当者たちのイメージ」。
+</figcaption>
+</figure>
+<figure data-placement="service:planning" data-tags="営業設計,プレイブック,資料,手元,横位置" data-aspect="landscape">
+<figcaption data-prompt="日本の企業の会議テーブルで、2名の成人が営業プロセスを整理する資料とノートを並べて検討している実写調写真。斜め上から机と手元を中心に撮影、紙には判読不能な細い罫線と単純な枠のみ、ペンと閉じた濃紺のノート。画面端に人物の肩が入り、仕事の文脈が分かる。窓の自然光、白と淡いグレー、紺の小物、低彩度。派手な小道具、ブランドロゴ、読める文字、透かしなし。">
+service:planning ／ 推奨1600×1200。代替テキスト「資料を使って営業プロセスを整理する手元のイメージ」。
+</figcaption>
+</figure>
+<figure data-placement="recruit:discussion" data-tags="営業組織,チーム,対話,人物,横位置" data-aspect="landscape">
+<figcaption data-prompt="日本の落ち着いたオフィスで、年齢の異なる成人3名が小さな丸テーブルを囲み、ノートを見ながら真剣に意見交換する実写調写真。目線の高さからの横長中景、全員の顔は自然な斜め向き、相手の話を聞く瞬間。窓から柔らかな日中光、紺とグレーのビジネスカジュアル、低彩度、余計な装飾のない背景。採用広告風の集合ポーズやカメラ目線なし。会社名、ロゴ、読める文字、透かしなし。">
+recruit:discussion ／ 推奨1600×1200。代替テキスト「意見を交わすチームの業務イメージ」。
+</figcaption>
+</figure>
+</section>
+
+<section id="implementation">
+<h2>7. 実装・確認条件</h2>
+<dl>
+<dt>共通部品の還元</dt>
+<dd>CorporateSalesHero、BusinessPhotoText、SalesSupportOverview、SalesProcessDiagram、SalesResultsStrip、SalesMetricRow、SiteEndLinks、OrganizationDiagnosisFormを必要な新規コンポーネントとしてsrc/components/へ切り出す。SiteHeaderのカプセル変種はテーマ範囲に限定する。ページ内にナビ・フッターを複製しない。</dd>
+<dt>ページの骨格</dt>
+<dd>全ページSiteLayout、固有title、40文字以上の固有description、pathを設定。下層はパンくずを渡す。共通末尾導線は全ページの本文の後に一度だけ描画。各ページで既存コンポーネントを2件以上、サイト全体で6種類以上使用する。</dd>
+<dt>フォーム挙動</dt>
+<dd>フォーム入力をURL、ログ、localStorage、sessionStorage、分析イベントへ流さない。入力内容はDOMテキストとして表示し、HTMLとして解釈しない。確認終了時に値を消去する。エラーは各項目にaria-describedbyで関連付け、最初の不正項目へフォーカス。確認表示時は確認見出しにフォーカス。架空サイトのため実送信先・営業メールアドレスを創作しない。</dd>
+<dt>モバイルと拡大</dt>
+<dd>320px・390px・768px・1440pxで確認。320pxでCTA全文が収まり、200%文字拡大で高さが伸びること。モバイルメニューは最大高calc(100dvh - 112px)で内部スクロール可能にする。アンカー到達位置は固定ヘッダー分のscroll-margin-topを確保。固定CTAがリンク・フォーム末尾を覆わないこと。</dd>
+<dt>情報の境界</dt>
+<dd>平均受注率の改善、定着率、累計支援チーム数を別指標として表示する。母数・集計日・業種別値・顧客談を補わない。募集情報やニュースがない状態は公開済み事実に見せかけない。個人情報ページはサンプル挙動の説明であり、架空の本番運用方針を作らない。</dd>
+<dt>完成確認</dt>
+<dd>npm run build、npm run check:web、npm run check:catalog。highゼロ、arch-component-reuseゼロ、ia-required-page-missingゼロ。全URLの実体、navとCTAの遷移先、パンくず、固定ヘッダー、reduced-motion、JS無効時の本文可視性を確認する。画像やフォント未読込時にも長大な白場を作らない。</dd>
+</dl>
+</section>
+
+<section id="reference-notes">
+<h2>8. 参照の採用範囲</h2>
+<p>添付と提供されたLook解析から、トップの「価値提示 → 姿勢 → 事業説明 → 支援方針 → 実績 → 採用 → お知らせ → 大型リンク → フッター」の順、中央固定シェル、理念ページの図解、実績ページの連続行を継承する。長大な白場・固有ブランド表現・リンク不整合は継承しない。</p>
+<p>部品カタログは3分類から確認した。モバイルの参照入口は <a href="https://loadmo.re/posts/water-works-project">モバイル事例掲載ページ</a>。ナビの分類粒度は <a href="https://www.cloudflare.com/">グローバルナビ参照</a>、CTAの目的とリンク先の対応は <a href="https://www.webestica.com/bootstrap-templates">CTA参照</a> を確認対象とした。これらの固有文言・ブランド・レイアウトは制作サイトへ転用しない。本案の寸法は上記の確定仕様を使用する。</p>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>株木堂建築株式会社｜コーポレートサイト ディレクション</title>
+  <style>
+    :root{color-scheme:light;--paper:#f6f4ef;--ink:#292d29;--green:#43594e;--accent:#956c46;--line:#d6d7cf}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-size:15px;line-height:1.9}
+    body>header,main{width:min(1120px,calc(100% - 40px));margin:auto}
+    body>header{padding:72px 0 48px;border-bottom:1px solid var(--line)}
+    h1,h2,h3,h4{font-family:"Shippori Mincho","Yu Mincho",serif;font-weight:500;line-height:1.55}
+    h1{font-size:clamp(28px,4vw,48px)}
+    h2{font-size:30px;margin:0 0 28px}
+    h3{font-size:22px}
+    h4{font-size:19px}
+    main>section{padding:64px 0;border-bottom:1px solid var(--line)}
+    article{margin:48px 0;padding:32px;border:1px solid var(--line);background:#fffefa}
+    article>section{padding:24px 0;border-top:1px solid var(--line)}
+    dl{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px 24px}
+    dt{font-weight:700;color:var(--green)}
+    dd{margin:0;overflow-wrap:anywhere}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:14px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+    th{background:#e9ece6}
+    pre{padding:24px;overflow:auto;background:#e9ece6;font-size:13px;line-height:1.7}
+    code{font-family:ui-monospace,monospace}
+    a{color:var(--green);text-underline-offset:4px}
+    p[data-role]::before{display:block;color:var(--green);font-size:12px;font-weight:700;letter-spacing:.08em}
+    p[data-role="purpose"]::before{content:"役割"}
+    p[data-role="layout"]::before{content:"レイアウト"}
+    p[data-role="copy"]::before{content:"掲載コピー"}
+    p[data-role="components"]::before{content:"使用部品"}
+    p[data-role="animation"]::before{content:"モーション"}
+    p[data-role="image"]::before{content:"画像"}
+    figure{margin:24px 0;padding:24px;border:1px solid var(--line)}
+    .note{border-left:3px solid var(--accent);padding-left:20px}
+    @media(max-width:700px){dl{grid-template-columns:1fr;gap:8px}dd{margin-bottom:16px}article{padding:20px}th,td{padding:10px 6px;font-size:12px}}
+    @media print{article{break-before:page}pre{white-space:pre-wrap}body{font-size:11px}}
+  </style>
+</head>
+<body>
+<header>
+  <p>corporate-20260919-0500 ／ 確定ディレクション・1案</p>
+  <h1>余白に、木と左官の手仕事を置く。</h1>
+  <p>株木堂建築株式会社の多ページ企業サイト。トップは検討の入口を振り分け、思想・設計施工・住まいの写真・見学・工程を、それぞれ独立した読み物として用意する。大きな写真、小さな写真、長い静かな間、情報の集まる面を交互に置く。</p>
+  <p>出力先：<code>/sites/corporate/a-20260919-0500/</code>。本書内のページURLはこのルートからの相対指定。本文コピーは本書で確定し、実装時に企業実績・住所・料金・開催日時・採用条件を追加創作しない。</p>
+</header>
+<main>
+<section id="site-config">
+  <h2>1. サイト定義</h2>
+  <dl>
+    <dt>name</dt><dd>株木堂建築株式会社</dd>
+    <dt>tagline</dt><dd>時を重ねる住まいを、静かに。</dd>
+    <dt>theme</dt><dd>kabukido-sumi。DaisyUIの独自テーマとして登録する。以下の配色指定を全ページに適用。</dd>
+    <dt>nav</dt><dd>家づくりの考え方 → /about/ ／ 注文住宅・リノベーション → /service/ ／ 住まいの写真 → /works/ ／ モデルハウス → /model-house/ ／ 家づくりの流れ → /flow/ ／ 会社案内 → /company/ ／ お知らせ → /news/</dd>
+    <dt>footerNav</dt><dd>「家づくりを知る」：/about/、/service/、/works/、/model-house/、/flow/。「株木堂建築について」：/company/、/recruit/、/news/。「相談する」：/contact/。正確なラベルは下記コード。</dd>
+    <dt>organization</dt><dd>legalName：株木堂建築株式会社 ／ address：静岡県静岡市葵区 ／ founded：1998。電話・メール・番地・営業時間・代表者名は未提供のため追加しない。</dd>
+    <dt>primaryCta</dt><dd>家づくり相談を予約する → /contact/</dd>
+    <dt>legalNav</dt><dd>個人情報の取り扱い → /privacy/</dd>
+    <dt>motion</dt><dd>reveal：fade-up ／ durationMs：2000 ／ staggerMs：0 ／ header：none ／ pageTransition：false</dd>
+  </dl>
+  <pre><code>import type { SiteConfig } from '../../../../lib/site';
+
+export const site: SiteConfig = {
+  name: '株木堂建築株式会社',
+  tagline: '時を重ねる住まいを、静かに。',
+  base: '/sites/corporate/a-20260919-0500/',
+  theme: 'kabukido-sumi',
+  nav: [
+    { label: '家づくりの考え方', href: '/about/' },
+    { label: '注文住宅・リノベーション', href: '/service/' },
+    { label: '住まいの写真', href: '/works/' },
+    { label: 'モデルハウス', href: '/model-house/' },
+    { label: '家づくりの流れ', href: '/flow/' },
+    { label: '会社案内', href: '/company/' },
+    { label: 'お知らせ', href: '/news/' }
+  ],
+  footerNav: [
+    {
+      heading: '家づくりを知る',
+      items: [
+        { label: '家づくりの考え方', href: '/about/' },
+        { label: '注文住宅・リノベーション', href: '/service/' },
+        { label: '住まいの写真', href: '/works/' },
+        { label: '木と左官の住まい', href: '/works/wood-and-plaster/' },
+        { label: 'モデルハウス', href: '/model-house/' },
+        { label: '家づくりの流れ', href: '/flow/' }
+      ]
+    },
+    {
+      heading: '株木堂建築について',
+      items: [
+        { label: '会社案内', href: '/company/' },
+        { label: '採用について', href: '/recruit/' },
+        { label: 'お知らせ', href: '/news/' },
+        { label: '家づくり相談の前に', href: '/news/first-consultation/' }
+      ]
+    },
+    {
+      heading: '相談する',
+      items: [
+        { label: '家づくり相談を予約する', href: '/contact/' }
+      ]
+    }
+  ],
+  organization: {
+    legalName: '株木堂建築株式会社',
+    address: '静岡県静岡市葵区',
+    founded: '1998'
+  },
+  primaryCta: {
+    label: '家づくり相談を予約する',
+    href: '/contact/'
+  },
+  legalNav: [
+    { label: '個人情報の取り扱い', href: '/privacy/' }
+  ],
+  motion: {
+    reveal: 'fade-up',
+    durationMs: 2000,
+    staggerMs: 0,
+    header: 'none',
+    pageTransition: false
+  }
+};
+export default site;</code></pre>
+  <p>従業員数42名、累計施工480棟、リノベ完工率92%、モデルハウス来場 年1,200組は本文データに保持する。現行SiteConfigにないプロパティは追加しない。「リノベ完工率」を満足度・成約率に読み替えない。未提供の集計期間・分母・算出方法を補わない。</p>
+</section>
+
+<section id="sitemap">
+  <h2>2. ページ構成と回遊</h2>
+  <table>
+    <thead><tr><th>URL</th><th>ページ名</th><th>役割</th><th>想定本文量（文字）</th></tr></thead>
+    <tbody>
+      <tr><td>/</td><td>ホーム</td><td>思想・写真・見学・工程・会社への分岐</td><td>650〜900</td></tr>
+      <tr><td>/about/</td><td>家づくりの考え方</td><td>素材・暮らし・住み継ぐ思想の編集記事</td><td>800〜1,100</td></tr>
+      <tr><td>/service/</td><td>注文住宅・リノベーション</td><td>新築と全面改修の違い、相談内容を整理</td><td>800〜1,100</td></tr>
+      <tr><td>/works/</td><td>住まいの写真</td><td>4つの視点による非対称の写真一覧</td><td>450〜650</td></tr>
+      <tr><td>/works/wood-and-plaster/</td><td>木と左官の住まい</td><td>写真を大きく読む独立詳細ページ</td><td>650〜900</td></tr>
+      <tr><td>/model-house/</td><td>モデルハウス</td><td>見学の観点と予約希望入力への入口</td><td>650〜900</td></tr>
+      <tr><td>/flow/</td><td>家づくりの流れ</td><td>3段階・16工程を写真付きで説明</td><td>1,200〜1,600</td></tr>
+      <tr><td>/company/</td><td>会社案内</td><td>会社情報・事業・実績を確認</td><td>500〜750</td></tr>
+      <tr><td>/recruit/</td><td>採用について</td><td>仕事の接点と採用問い合わせの入口</td><td>500〜750</td></tr>
+      <tr><td>/news/</td><td>お知らせ</td><td>相談案内の記事と関連案内への分岐</td><td>450〜650</td></tr>
+      <tr><td>/news/first-consultation/</td><td>家づくり相談の前に</td><td>初回相談の準備を具体的に説明</td><td>650〜900</td></tr>
+      <tr><td>/contact/</td><td>家づくり相談</td><td>相談種別・希望日・連絡先の入力と確認</td><td>500〜750</td></tr>
+      <tr><td>/privacy/</td><td>個人情報の取り扱い</td><td>フォーム利用時の情報の扱いを説明</td><td>550〜800</td></tr>
+    </tbody>
+  </table>
+  <p>パンくずは全下層で表示。通常は「ホーム → 現在ページ」、写真詳細は「ホーム → 住まいの写真 → 木と左官の住まい」、記事詳細は「ホーム → お知らせ → 家づくり相談の前に」。主要ページ間は共通フッターから1クリック、詳細ページもフッターから到達可能にする。</p>
+  <p>参照の施工アルバム一覧・詳細という粒度は残す。ただし未提供の施主・竣工年・所在地・面積・工事費を作らない。本ランの写真は「設計イメージ」と明記した1件の編集記事にまとめ、同じ住宅の4視点を4棟の実績として扱わない。SNSアカウントも未提供のため導線を作らない。</p>
+</section>
+
+<section id="visual">
+  <h2>3. 視覚システム</h2>
+  <dl>
+    <dt>配色</dt>
+    <dd>背景 #F6F4EF、本文 #292D29、企業色 #43594E、アクセント #956C46、面色 #E9ECE6、罫線 #D6D7CF、濃色面上の文字 #FFFEFA。企業色はリンク・主要CTA・メニュー、アクセントは小さな区切り・現在位置の線に限定。本文を薄い灰色にしない。写真以外のグラデーション・影・ぼかしは使用しない。</dd>
+    <dt>見出し書体</dt>
+    <dd>Shippori Mincho、代替は Yu Mincho / serif。ウエイト500。トップH1はPC56px・SP34px、行高1.55、字間.08em。下層H1はPC40px・SP30px。H2はPC32px・SP26px、H3はPC22px・SP20px。英語の装飾見出しを付けない。</dd>
+    <dt>本文書体</dt>
+    <dd>Noto Sans JP、代替は sans-serif。本文16px・400・行高1.9、導入18px・行高2。補助文とパンくず14px・行高1.7。文字幅は原則36〜40字、モバイルは約20字。数字は同書体のtabular-nums。本文を13px以下に縮めない。</dd>
+    <dt>写真の方向性</dt>
+    <dd>木の床、無地の左官壁、窓辺の自然光、生活のための家具。空間の引きと材料・作業の寄りを交互にする。実写調で、黒つぶれ・過剰な橙色・ホテルのような豪華さを避ける。建物写真に暖炉・特徴的なロゴ・文字看板を入れない。生成画像を実在の施工物件や実際の従業員の記録と説明しない。</dd>
+    <dt>余白の方針</dt>
+    <dd>8px単位。PC外側余白64px、本文最大1120px、読み物680px。SP外側24px、320px幅時は20px。標準間隔はPC128px／SP80px、密な情報間はPC48px／SP32px、章間の大きな間はPC192px／SP112px。全セクションに同じpaddingを付けない。</dd>
+    <dt>レイアウト切替</dt>
+    <dd>基準画面1440×900と390×844。768px未満はSP、768〜1279pxは本文幅calc(100% - 64px)でPCの比率を維持し、横ナビのみメニュー化。1280px以上で横ナビ。写真サイズの指定は最大値として扱い、本文が増えた場合はセクションを伸ばす。</dd>
+    <dt>写真の縁とリンク</dt>
+    <dd>写真の角丸0、枠線0。写真下に14pxの日本語ラベルを12px空けて置く。通常リンクは文字＋直径48pxの円形矢印を1つのアンカーにする。主CTAのみ高さ56px、左右32pxのピル型。矢印だけの無名リンクを作らない。</dd>
+    <dt>トップの密度</dt>
+    <dd>PCの目安：hero1080px → 導入1280px → 写真1260px → モデルハウス810px → 流れ810px → お知らせ900px → 会社810px → CTA720px → フッター900px。合計約9,570px、ヘッダーを含め約10.7 viewport。参照約11.9 viewportの長さと緩急を基準に、空白のためだけに本文を消さない。SPでは高さ固定を解除し、hero約780px、導入約700px、写真約1500pxを目安に内容で伸ばす。</dd>
+    <dt>下層の密度</dt>
+    <dd>/about/は約8,000〜8,600px、/flow/は約8,000〜8,800pxをPC目安とする。導入、写真、固有本文、関連写真、CTA、フッターまでを含む。フォーム・法務は内容優先で短くし、空白で同じ長さにしない。</dd>
+  </dl>
+  <p>DaisyUIテーマ変数はbase-100＝背景、base-200＝面色、base-300＝罫線、base-content＝本文、primary＝企業色、primary-content＝濃色面上の文字、secondary＝アクセント、secondary-content＝濃色面上の文字に割り当てる。ブランド固有スタイルは必ず <code>[data-theme="kabukido-sumi"]</code> 以下に限定する。</p>
+</section>
+
+<section id="shared">
+  <h2>4. 全ページ共通の実装契約</h2>
+  <h3>シェル</h3>
+  <p>全ページはSiteLayoutと同じ_site.tsを使う。SiteHeaderはPC64px・SP64px、通常フロー内。現行の既定ヘッダーにはstickyがあるため、このテーマだけposition:relative、top:auto、背景ぼかしなし、下罫線なしにする。左に商号を明朝20px、PC右に7項目のナビを13px・2行以内、最右に主要CTAを14pxで置く。1280px未満では商号と「メニュー」の2要素に切り替える。</p>
+  <p>モバイルメニューは既存のdetails/summaryを使い、開いた面は画面幅−32px、最大高さcalc(100dvh - 88px)、内部スクロール可。各リンクは最小48px高、最後に主要CTAと採用リンク。外側操作・Escapeで閉じ、Escape後はsummaryへフォーカスを戻す。固定の下部CTAは設けない。</p>
+  <p>共通フッターはSiteFooter内にテーマ限定の構成として実装し、ページ本文に手書きしない。上から「相談CTA帯」「4枚の小写真」「商号とサイトマップ」の3層。contactだけCTA帯を「入力内容の確認へ」に切り替え、同ページのフォームへ戻す。法務ページも同じフッターを持つ。</p>
+  <h3>共通フッターの確定仕様</h3>
+  <p>相談帯はPC720px・SP400px。画像01を横長に切り、企業色の80%オーバーレイ。中央にH2「住まいのこれからを、話しませんか。」、本文「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」、ボタン「家づくり相談を予約する」→ /contact/。通常文字は白、ボタンは暖白地と濃緑文字。</p>
+  <p>小写真帯はPC高さ360px。画像02・03・04・05を左から幅180・240・160・220px、高さ120・180・110・150pxで配置し、上端を72・128・176・88pxにずらす。SPでは2列、幅44%・38%、縦位置を32pxずらす。装飾再掲なのでaltは空。写真帯の後、左に商号・よみ・キャッチ、右に_site.tsの3群のリンク。末尾に「© 株木堂建築株式会社」「個人情報の取り扱い」「ページの先頭へ」。ページ先頭はシェルの実在idへ接続する。</p>
+  <h3>新規部品として切り出すもの</h3>
+  <p><strong>QuietPageIntro</strong>：H1・導入文・余白の共通導入。<strong>EditorialPair</strong>：写真と本文の左右交互配置。<strong>HousePhotoCollage</strong>：4写真の非対称配置。<strong>CircleTextLink</strong>：文字＋48px円形矢印。<strong>ConsultationBand</strong>：相談帯。<strong>PhaseRows</strong>：丸囲みを使わない16工程。<strong>QuietNewsList</strong>：罫線主体の案内一覧。すべてsrc/components/sections/またはui/へ切り出し、カタログ用の実例も付ける。見た目の一致しないCard・Steps・Timelineで代用しない。</p>
+  <p>各ページ本文で最低2種類のsrc/components由来部品を直接使用する。共通シェルだけを再利用件数に数えない。SectionTitleはsubtitle未指定、テーマ内でh2のウエイト500・所定のサイズに変更。Tableはzebra=false、背景透過、横罫線のみ。本文内の写真と説明はカードの箱で囲わない。</p>
+  <h3>モーションの確定仕様</h3>
+  <p>各ページちょうど4対象にScrollRevealを使用し、以下のA〜Dをそのまま実装する。animation="fade-up"、duration=2000、stagger=0、delay=0、Y移動32px→0、opacity 0→1、easingはease。既存ScrollRevealの既定easingをこのテーマ内でeaseへ上書きする。durationMsは実測中央値2000を採用し、600〜900msへの独自短縮は行わない。staggerは実測で確定していないため0で無効化する。</p>
+  <p>4対象は各ページの内容に分散し、1つの対象は高さ480px以下の写真または見出し群に限定。長い章全体、ナビ、リンク、フォーム、法務本文は隠さない。初期表示領域のH1と主写真は即時表示。40,000msは通常リビールに使わず、検出されたスクロール連動6件は個別の振幅・区間が不明なため再現対象にしない。pin・scrub・自動スライダー・ローダーを追加しない。ヘッダーnone、View Transitionsはoff。</p>
+  <p>reduced-motionではすべてのtransform・animation・transitionを無効にし、opacity:1を初期状態から保証。JS無効時も本文・写真をすべて表示する。タブでフォーカスが入った対象は即時表示。ページを最後までスクロールしてから撮影し、通常設定では最終発火後2,100ms以上待つ。</p>
+  <h3>操作・コンテンツ・検収</h3>
+  <p>h1は1ページ1つ。見出し順を守る。フォーカス枠は企業色2px＋外側余白4px。タッチ対象44px以上。画像にはwidth/heightを指定、主写真は遅延読込しない。装飾以外の写真には被写体を説明するaltを付ける。画像の上に本文を直接置くのは共通相談帯だけ。</p>
+  <p>全ページのdescriptionには各導入コピーの冒頭40〜100字を使用して重複を避ける。リンクはurl(site, href)を通す。仮の電話・メール・地図・SNS・開催日時を作らない。サンプルの生成写真には初出箇所で「写真は設計イメージです。」を表示する。</p>
+  <p>予約は送信先が未提供のため、たたき台では入力・確認まで実装する。ページ冒頭と確認画面に「このサイトは架空の企業のサンプルです。入力内容は送信されず、予約は成立しません。」を表示する。成功送信や予約確定を偽装しない。入力はメモリ内だけで保持し、URL・localStorageへ保存しない。</p>
+  <p>検収は390px・1440pxで全ページを確認し、320pxでも横スクロールがないことを確認。通常／reduced-motion／JS無効、メニューのキーボード操作、フォームのエラーと戻る操作を検証。npm run build、npm run check:web、npm run check:catalogを実行し、high・arch-component-reuse・ia-required-page-missingをゼロにする。独立審査の指摘修正後も、写真比率・余白の差・下層の本文を維持する。</p>
+</section>
+
+<section id="pages">
+  <h2>5. 全ページの確定構成</h2>
+
+  <article data-page="/">
+    <h2>ホーム</h2>
+    <section data-section="hero">
+      <h3>ファーストビュー</h3>
+      <p data-role="purpose">商号と住宅の静かな空気を同時に認識させる。</p>
+      <p data-role="layout">PC高さ1080px。中央H1を上端から112px、2行で配置。「時を重ねる住まいを、」で改行。48px下に事業説明、さらに104px下に幅720px・比率4:3の画像01。見出しと写真の間に幅1px・高さ80pxの縦線。写真右上に幅216pxの案内を48pxだけ外へ張り出す。SPはH1上64px、写真は幅100%・4:5に切り、案内は写真下24pxの通常フローにする。</p>
+      <p data-role="copy">H1「時を重ねる住まいを、静かに。」／「木と左官の手仕事から生まれる、注文住宅とリノベーション。」／案内「家づくりを考え始めた方へ」「相談の前に、整理しておきたいこと」→ /news/first-consultation/。写真注記「写真は設計イメージです。」</p>
+      <p data-role="components">新規QuietPageIntroのhome変種、CircleTextLink。主見出しをSectionTitleのh2で代用しない。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像01 top:hero。中央のダイニングと窓を残す。PC object-position:50% 50%、SP 56% 50%。</p>
+    </section>
+    <section data-section="introduction">
+      <h3>静かな導入と実績</h3>
+      <p data-role="purpose">余白の中で素材と会社の姿勢を伝え、思想ページへ送る。</p>
+      <p data-role="layout">PC高さ1280px。上に240pxの間を置き、中央より右に幅440pxの本文。左下に幅240px・3:4の画像03を本文より160px下げる。本文下120pxに実績3項目を細い横罫線で区切って横並び。SPは上112px、本文→右寄せ幅62%写真→実績縦3行。全面を均等な数値カードにしない。</p>
+      <p data-role="copy">「暮らしの変化を、受けとめる家。」／「家族の過ごし方は、少しずつ変わります。新築でも、今ある家を生かすときでも、考えたいのはその先の暮らし。木の表情や左官の陰影を手がかりに、長く住み継げる住まいを設計し、つくります。」／「家づくりの考え方を読む」→ /about/。実績「累計施工 480棟」「リノベ完工率 92%」「モデルハウス来場 年1,200組」。</p>
+      <p data-role="components">SectionTitle、新規EditorialPair、CircleTextLink。実績は新規の細罫線付きdlとして切り出す。</p>
+      <p data-role="animation">A：画像03だけfade-up、duration 2000ms、stagger 0ms、ease。本文と実績は即時表示。</p>
+      <p data-role="image">画像03 about:plaster。</p>
+    </section>
+    <section data-section="photo-collage">
+      <h3>住まいの写真</h3>
+      <p data-role="purpose">空間の引き・木部・左官・改修の4視点から詳細へ誘導する。</p>
+      <p data-role="layout">PC幅960px・高さ1260px。左見出しの下に幅360pxの縦写真03、左下に幅320pxの横写真04。右は上端から幅400pxの横写真01、右下に幅300pxの縦写真02。写真間の縦余白は80pxと160px。右下端に一覧リンク。SPは1列で、幅100%→76%右寄せ→88%左寄せ→70%右寄せ、間隔64・96・64px。写真の高さを統一しない。</p>
+      <p data-role="copy">「住まいの写真」／「光の入り方、手に触れる素材、部屋と部屋のつながり。暮らしを思い描くための、四つの視点を集めました。」／各ラベル「食卓に届く光」「左官の陰影」「木の手触り」「今ある住まいを生かす」。各写真は /works/wood-and-plaster/ のlight・plaster・wood・renewalへ接続。「住まいの写真をすべて見る」→ /works/。</p>
+      <p data-role="components">新規HousePhotoCollage、SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">B：左下の画像04だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像01・02・03・04を再利用。1つの設計イメージの異なる視点として扱う。</p>
+    </section>
+    <section data-section="model-house">
+      <h3>モデルハウスへの入口</h3>
+      <p data-role="purpose">写真から実際の見学検討へ進ませる。</p>
+      <p data-role="layout">PC高さ810px、左幅360pxの見出し・本文、右上に幅440px・高さ180pxの横写真05。写真は本文上端より96px上げる。下に160pxの空白。SPは横写真→48px→本文、写真幅92%を右寄せ。</p>
+      <p data-role="copy">「写真の先の、居心地へ。」／「床の感触、壁に落ちる光、家族が並んで歩く広さ。住まいの心地よさには、写真だけでは分からないことがあります。モデルハウスで確かめたいことを、見学前に整理してみませんか。」／「モデルハウスの見方を知る」→ /model-house/。</p>
+      <p data-role="components">EditorialPair、SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像05 model-house:exterior、16:7の横長切り取り。</p>
+    </section>
+    <section data-section="flow">
+      <h3>工程への入口</h3>
+      <p data-role="purpose">相談から引き渡しまでの見通しを持たせる。</p>
+      <p data-role="layout">PC高さ810px、左に幅560px・3:2の画像06、右に幅320pxの本文を96px下げて置く。SPは幅100%の画像の下40pxに本文。</p>
+      <p data-role="copy">「家づくりの流れ」／「何から話し、どこで決めるのか。相談、設計、工事と、家づくりにはいくつもの節目があります。新築とリノベーション、それぞれの確認事項を、16の工程でご案内します。」／「相談から引き渡しまでを見る」→ /flow/。</p>
+      <p data-role="components">EditorialPair、SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">C：画像06だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像06 flow:craft。</p>
+    </section>
+    <section data-section="news">
+      <h3>お知らせ</h3>
+      <p data-role="purpose">検討中の訪問者が必要とする案内を、濃い情報面として挿入する。</p>
+      <p data-role="layout">PC高さ900px。左幅400pxに画像07・記事名、右幅440pxに2行の関連案内と一覧リンク。上端に見出し。SPは主記事→関連案内。罫線1px、各行上下24px、均等カードにしない。</p>
+      <p data-role="copy">「お知らせ」／主記事「家づくり相談の前に、整理しておきたいこと」→ /news/first-consultation/。関連案内「モデルハウスで確かめたい三つのこと」→ /model-house/#checkpoints/ ではなく /model-house/#checkpoints、「新築と全面リノベーションの考え方」→ /service/。「お知らせを見る」→ /news/。</p>
+      <p data-role="components">SectionTitle、新規QuietNewsList、CircleTextLink。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像07 contact:meeting、主記事のみ3:2で使用。</p>
+    </section>
+    <section data-section="company">
+      <h3>会社の信頼情報</h3>
+      <p data-role="purpose">所在地・事業・設立をトップでも確認できるようにする。</p>
+      <p data-role="layout">PC高さ810px。左に幅420pxの画像02、右に幅420pxの会社情報表。上に見出し。写真は素材接写であり社屋とは表示しない。SPは見出し→写真→表、表の見出し列は30%。</p>
+      <p data-role="copy">「株木堂建築について」／「木と左官の手仕事を軸に、住まいを設計し、施工する会社です。静岡県静岡市葵区を拠点に、平屋と2階建ての注文住宅、中古住宅の全面リノベーションに取り組んでいます。」／表「商号：株木堂建築株式会社」「設立：1998年」「従業員数：42名」「所在地：静岡県静岡市葵区」。「会社案内を読む」→ /company/。</p>
+      <p data-role="components">Table、SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">D：画像02だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像02 works:wood。</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>相談とサイトマップ</h3>
+      <p data-role="purpose">全ページへの回遊と相談の出口を揃える。</p>
+      <p data-role="layout">本文終了後、共通フッターの相談帯720px＋写真・サイトマップ900px。SPは共通仕様の自然高。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteLayoutが出力するSiteFooter、新規ConsultationBand。本文側で重複出力しない。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通画像01・02・03・04・05。</p>
+    </section>
+  </article>
+
+  <article data-page="/about/">
+    <h2>家づくりの考え方</h2>
+    <section data-section="intro">
+      <h3>思想の導入</h3>
+      <p data-role="purpose">素材の見た目だけに留まらない、長く住むための姿勢を伝える。</p>
+      <p data-role="layout">PC高さ810px、中央680px。H1上112px、主文まで64px、本文まで40px。SPは上下80px。次の画像01は本文幅を超え、幅100%・高さ720px、SPは4:3で表示。</p>
+      <p data-role="copy">「家づくりの考え方」／「長く住むことを、最初から考える。」／「完成した日の美しさだけでなく、暮らしが重なった先の姿まで。株木堂建築は、木と左官の手仕事を軸に、新築注文住宅と中古住宅の全面リノベーションを設計施工する工務店です。家族の過ごし方に耳を傾け、素材と空間を一つずつ考えます。大切にしたいのは、住まいが暮らしに静かになじんでいくことです。」</p>
+      <p data-role="components">QuietPageIntro、EditorialPairの全幅写真変種。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像01 top:hero。注記「写真は設計イメージです。」</p>
+    </section>
+    <section data-section="wood">
+      <h3>木と向き合う</h3>
+      <p data-role="purpose">木の質感を住まい方と結び付ける。</p>
+      <p data-role="layout">PC高さ1000px、左本文400px、右写真02幅420px・3:4、上端差120px。章後に画像04を全幅・高さ640pxで挿入。SPは本文→写真幅78%右寄せ→96px→全幅写真。</p>
+      <p data-role="copy">「触れるたびに、暮らしになじむ。」／「床に腰を下ろす。建具に手をかける。住まいの中では、毎日いろいろな場所に触れています。木の表情を飾りとして眺めるだけでなく、どこで、どのように使うのかを考えること。手の届くところにある素材だからこそ、見え方と使い方を一緒に整えたいと考えています。家族の動きや家具との関係を見ながら、暮らしの中に木の居場所をつくります。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">A：画像02の上部480px以内を1対象としてfade-up、duration 2000ms、stagger 0ms、ease。全幅画像04は即時表示。</p>
+      <p data-role="image">画像02 works:wood、画像04 service:renovation。</p>
+    </section>
+    <section data-section="plaster">
+      <h3>左官と光</h3>
+      <p data-role="purpose">左官を装飾ではなく空間の背景として説明する。</p>
+      <p data-role="layout">PC高さ1080px、左写真03幅360px・3:4、右本文440px。本文を写真より160px下げる。SPは写真幅74%左寄せ→48px→本文。</p>
+      <p data-role="copy">「光を受けとめる、壁の表情。」／「朝と夕方で、同じ壁の見え方は変わります。左官の面に落ちるやわらかな陰影は、家具や木部とともに部屋の背景になります。強い装飾を重ねるよりも、光の入り方と素材の組み合わせを丁寧に見ること。窓の位置や過ごす場所と合わせて、落ち着いて過ごせる空間を考えます。素材の名前だけで決めず、住まい全体の中でどのように感じられるかを大切にします。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">B：画像03の上部480px以内をfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像03 about:plaster。</p>
+    </section>
+    <section data-section="living">
+      <h3>変化を受けとめる空間</h3>
+      <p data-role="purpose">家族層の具体的な検討に接続する。</p>
+      <p data-role="layout">PC上に全幅画像01高さ600px、下192px空けて左本文440px・右画像04幅380px。ブロック合計約1480px。SPは全幅写真→80px→本文→48px→右寄せ写真。</p>
+      <p data-role="copy">「今の暮らしと、その先の暮らし。」／「家族で集まる時間も、一人で過ごす時間も、どちらも住まいの一部です。平屋か2階建てかを考えるときにも、部屋数だけでは決められません。毎日の移動、ものの置き場所、家族の距離を見つめながら、長く使える間取りを考えます。中古住宅では、今ある住まいの良さを確かめ、残す部分と変える部分を整理します。新しくつくることと、住み継ぐこと。その両方から、暮らしに合う方法をご提案します。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">C：右の画像04だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像01と04を再利用。</p>
+    </section>
+    <section data-section="related">
+      <h3>理解から比較・見学へ</h3>
+      <p data-role="purpose">事業と写真、見学へ検討を進める。</p>
+      <p data-role="layout">中央の幅680pxの案内帯を高さ360px。その下にトップと同じHousePhotoCollageを高さ1000pxで配置。SPは案内上下64px、コラージュは幅差を維持して縦に並べる。</p>
+      <p data-role="copy">「どのようにつくるかを、もう少し具体的に。」／「新築注文住宅と全面リノベーションの違いを知り、写真で素材や空間のつながりを確かめてみてください。見学を考えている方には、モデルハウスで見ておきたいポイントもご案内しています。」／「注文住宅・リノベーションを知る」→ /service/。「住まいの写真を見る」→ /works/。「モデルハウスを見る」→ /model-house/。</p>
+      <p data-role="components">HousePhotoCollage、CircleTextLink。</p>
+      <p data-role="animation">D：コラージュ内の画像04だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像01・02・03・04。</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>共通の相談導線</h3>
+      <p data-role="purpose">思想を読んだ後の相談を受け止める。</p>
+      <p data-role="layout">共通フッター3層。本文と相談帯の間192px、SP96px。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/service/">
+    <h2>注文住宅・リノベーション</h2>
+    <section data-section="intro">
+      <h3>二つの方法を示す</h3>
+      <p data-role="purpose">新築と全面改修の両方を設計施工する会社だと明確にする。</p>
+      <p data-role="layout">QuietPageIntro高さ720px、SP上下80px。導入下に画像01を幅100%・高さ620px、SP4:3。直下に「新築注文住宅」「全面リノベーション」の本文内アンカーを2列、SP縦並び。</p>
+      <p data-role="copy">「注文住宅・リノベーション」／「新しくつくる。今ある家を、住み継ぐ。」／「住まいを考えるとき、方法は一つではありません。敷地に合わせて一からつくる注文住宅と、中古住宅を暮らしに合わせて整える全面リノベーション。株木堂建築は、どちらも設計から施工まで手がけます。木と左官の手仕事を軸に、家族のこれからに合う方法を一緒に考えます。」</p>
+      <p data-role="components">QuietPageIntro、CircleTextLink。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像01。写真は設計イメージである旨を付記。</p>
+    </section>
+    <section data-section="new-build">
+      <h3>新築注文住宅</h3>
+      <p data-role="purpose">平屋と2階建てを、生活から比較させる。</p>
+      <p data-role="layout">実装id=new-build。PC高さ1080px、左本文440px・右画像05幅480px、本文上端と写真上端を80pxずらす。下に平屋／2階建ての2行の説明。SP本文→写真→説明。</p>
+      <p data-role="copy">「家族の暮らしから、間取りをつくる。」／「朝の支度、食卓を囲む時間、洗濯や片付け。毎日の動きを言葉にすることから、注文住宅の検討が始まります。敷地の形や周囲との関係を確かめ、光と風、家族の距離、ものの置き場所を考えます。木と左官をどこに使うかも、間取りや家具とのつながりから整えていきます。」／「平屋を考える：一つの階に生活をまとめたいときは、部屋同士の距離と外とのつながりを確かめます。」「2階建てを考える：階ごとの過ごし方を分けながら、階段を含む毎日の移動を整理します。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">A：画像05をfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像05 model-house:exterior。</p>
+    </section>
+    <section data-section="renovation">
+      <h3>中古住宅の全面リノベーション</h3>
+      <p data-role="purpose">既存建物を確認して計画する順序を伝える。</p>
+      <p data-role="layout">実装id=renovation。画像04を左幅620px・3:2、右本文360px。上192px、下128px。SPは写真を全幅に近づけ、本文を48px下に置く。</p>
+      <p data-role="copy">「残す良さと、変える理由を見つける。」／「今ある住まいには、その家ならではの光や広がりがあります。一方で、これからの暮らしに合わせて変えたい部分もあります。全面リノベーションでは、希望する間取りや素材の話とともに、建物の状態を確認することが大切です。残したい場所、不便に感じる場所、まだ判断できない場所を分けて考え、改修の範囲を整理します。見た目だけを先に決めず、既存の住まいと向き合いながら計画を進めます。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">B：画像04をfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像04 service:renovation。施工前後比較には使わない。</p>
+    </section>
+    <section data-section="comparison">
+      <h3>相談前に整理すること</h3>
+      <p data-role="purpose">訪問者が自分の状況を言語化できるようにする。</p>
+      <p data-role="layout">PC幅880px、上128px・下192px。比較表は3列「確認すること／新築／全面リノベーション」。SPでは行ごとに見出し＋新築＋改修の縦積みに変更し、横スクロール不要。見出し右に画像02幅200px・高さ140px。</p>
+      <p data-role="copy">「決まっていないことも、相談の出発点です。」／表「住まいの場所：敷地の希望や検討状況／対象となる住宅の状況」「暮らしの希望：平屋・2階建て、部屋の使い方／残したい部分、変えたい使い方」「確認する条件：敷地と周辺環境／既存建物の状態と改修範囲」。／「どちらを選ぶか迷っている場合も、先に結論を出す必要はありません。今の住まいで困っていることと、これから大切にしたいことを分けておくと、相談の論点が見えてきます。」</p>
+      <p data-role="components">Table、SectionTitle、新規のSP比較表変種。</p>
+      <p data-role="animation">C：画像02だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像02 works:wood。</p>
+    </section>
+    <section data-section="related">
+      <h3>工程と実績を確かめる</h3>
+      <p data-role="purpose">事業説明を工程・会社情報と結び付ける。</p>
+      <p data-role="layout">PC幅960px、見出し下48pxに実績を横3項目、下80pxに2本の円形リンク。SP実績は縦3行。</p>
+      <p data-role="copy">「家づくりを、具体的な順序へ。」／「累計施工480棟、リノベ完工率92%、モデルハウス来場は年1,200組。会社の概要とともに、相談から引き渡しまでの確認事項をご覧いただけます。費用や工期はこのサイトに一律の金額・期間を掲げず、計画の条件と合わせて相談する項目として整理しています。」／「家づくりの流れを見る」→ /flow/。「会社案内を見る」→ /company/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink、共通実績dl。</p>
+      <p data-role="animation">D：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。数値はアニメーションしない。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>相談への出口</h3>
+      <p data-role="purpose">検討方法が分かった段階で相談へ進める。</p>
+      <p data-role="layout">192px空けて共通フッター3層。SP96px。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/works/">
+    <h2>住まいの写真</h2>
+    <section data-section="intro">
+      <h3>写真の読み方</h3>
+      <p data-role="purpose">施工例型の一覧を、事実のない実績を作らず成立させる。</p>
+      <p data-role="layout">PC高さ640px、中央680px。SP上下80px。導入の後に小さな注記。カテゴリフィルターは1記事しかないため設置しない。</p>
+      <p data-role="copy">「住まいの写真」／「一つの住まいを、四つの視点から。」／「家全体の雰囲気だけでなく、窓辺の光、壁の陰影、木の手触りにも目を向けてみてください。気になる一枚から、暮らしの中で大切にしたいことが見つかるかもしれません。ここでは木と左官を使った住まいの設計イメージを、空間と素材に分けてご紹介します。」／「掲載写真は設計イメージです。実際の施工物件を紹介するものではありません。」</p>
+      <p data-role="components">QuietPageIntro、SectionTitle。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="collage">
+      <h3>4視点の非対称一覧</h3>
+      <p data-role="purpose">各写真から独立した詳細記事の対応位置へ送る。</p>
+      <p data-role="layout">PC幅1040px、2列。左列幅440px、右列幅400px・開始位置220px下げ。画像01は440×330、03は320×426、02は400×533、04は440×294。上下間隔120pxと200px。DOM順は光→左官→木→改修。SPはこの順に幅100%→74%右→82%左→100%、間隔80px。各写真下に見出しと40〜70字の説明。</p>
+      <p data-role="copy">「食卓に届く光：家族が集まる場所に、どの方向から光が届くか。窓と食卓、隣の部屋の関係を見てみます。」→ /works/wood-and-plaster/#light。「左官の陰影：壁に近づくと見える、やわらかな面の表情。光の当たる場所と影になる場所を比べます。」→ #plaster。「木の手触り：毎日触れる床や建具。木目の印象だけでなく、暮らしの中で手が届く場所を考えます。」→ #wood。「今ある住まいを生かす：空間のつながりを見直し、残す部分と変える部分を考える視点を紹介します。」→ #renewal。各アンカーは同じ詳細ページを接頭する。</p>
+      <p data-role="components">HousePhotoCollage、CircleTextLink。</p>
+      <p data-role="animation">A〜D：各写真1対象、合計4対象。fade-up、duration 2000ms、stagger 0ms、ease。高さ480pxを超える画像02は写真上のラベル群を対象にし、画像自体は即時表示。</p>
+      <p data-role="image">画像01・03・02・04。</p>
+    </section>
+    <section data-section="reading-guide">
+      <h3>写真を自分の暮らしへ引き寄せる</h3>
+      <p data-role="purpose">写真を見るだけで終わらせず、事業説明へ接続する。</p>
+      <p data-role="layout">PC幅680px、上160px・下160px。本文の下48pxに2本の縦積みリンク。SP上下80px。</p>
+      <p data-role="copy">「好きな雰囲気から、暮らしの希望へ。」／「写真のどこに惹かれたのかを、短い言葉にしてみてください。明るさ、素材の色、家具の置き方、外とのつながり。理由が分かると、そのままの間取りを求めるのではなく、ご家族の暮らしに合う取り入れ方を考えやすくなります。新築とリノベーションの違いや、素材を選ぶときの考え方も、合わせてご覧ください。」／「家づくりの考え方を読む」→ /about/。「注文住宅・リノベーションを知る」→ /service/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>写真から相談へ</h3>
+      <p data-role="purpose">好みを言葉にした後の相談を促す。</p>
+      <p data-role="layout">共通フッター3層。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/works/wood-and-plaster/">
+    <h2>木と左官の住まい</h2>
+    <section data-section="intro">
+      <h3>写真詳細の導入</h3>
+      <p data-role="purpose">一覧とは異なる大きさで空間を見せ、記事の前提を明示する。</p>
+      <p data-role="layout">PC導入560px＋画像01全幅720px。SP導入自然高・画像4:3。写真下に注記を置き、所在地や面積の空欄表は作らない。</p>
+      <p data-role="copy">「木と左官の住まい」／「光と素材から、暮らしを思い描く。」／「木の床と左官の壁がある住まいを、四つの視点で見ていきます。空間全体を眺めた後に、壁や木部へ視線を近づけてみてください。写真の中に自分たちの家具や日々の動きを重ねると、住まいに求めるものを具体的に考えられます。」／「写真は設計イメージです。実際の施工実績・モデルハウスの写真ではありません。」</p>
+      <p data-role="components">QuietPageIntro、EditorialPair。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像01。</p>
+    </section>
+    <section data-section="light">
+      <h3>食卓に届く光</h3>
+      <p data-role="purpose">部屋の使い方と窓の関係を説明する。</p>
+      <p data-role="layout">実装id=light。PC左画像01幅620px・3:2、右本文320px。上160px・下192px。SP写真→40px→本文。</p>
+      <p data-role="copy">「家族が集まる場所から考える。」／「食卓は、食事だけをする場所とは限りません。会話をしたり、手を動かしたり、それぞれのことをしながら同じ場所にいたり。どんな時間を過ごすかによって、欲しい明るさや周囲との距離も変わります。窓の位置だけでなく、座ったときに見えるものや、隣の部屋とのつながりにも目を向けてみてください。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">A：写真だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像01の4:3内から3:2で切り取る。</p>
+    </section>
+    <section data-section="plaster">
+      <h3>左官の陰影</h3>
+      <p data-role="purpose">素材接写で視覚密度を変える。</p>
+      <p data-role="layout">実装id=plaster。PC左本文400px・右画像03幅320px、高さ426px。余白は上96px・下200px。SP写真幅72%右寄せ、本文はその下。</p>
+      <p data-role="copy">「壁は、暮らしの背景になる。」／「左官の壁は、距離や光によって表情の見え方が変わります。写真では、明るい部分と暗い部分の境目を見てみてください。素材だけを大きく主張させるのではなく、木や家具と並んだときの落ち着きも大切にしたいところです。部屋の中で長く目に入る面だからこそ、空間全体との関係から考えます。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">B：写真だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像03。</p>
+    </section>
+    <section data-section="wood">
+      <h3>木の手触り</h3>
+      <p data-role="purpose">引き写真とは異なる身体的な視点を提示する。</p>
+      <p data-role="layout">実装id=wood。PC左画像02幅350px・高さ466px、右本文400px。前章から左右を反転。SP写真幅80%左寄せ、本文下48px。</p>
+      <p data-role="copy">「毎日、手が届くところに。」／「建具を開く、床を歩く、窓辺に腰をかける。木のある住まいを考えるときは、見た目の色だけでなく、どんな動作で触れるかを想像してみてください。大きな空間写真では見落としがちな納まりや素材のつながりも、近づくことで見えてきます。気になった場所を覚えておくと、見学や相談のときの手がかりになります。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">C：写真だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像02。</p>
+    </section>
+    <section data-section="renewal">
+      <h3>今ある住まいを生かす</h3>
+      <p data-role="purpose">写真記事を全面リノベーションの検討へつなぐ。</p>
+      <p data-role="layout">実装id=renewal。PC画像04幅960px・高さ480px、下80pxに本文680pxを右寄せ。SP画像全幅・本文下32px。末尾に一覧へ戻るリンク。</p>
+      <p data-role="copy">「変えるところを、暮らしから見つける。」／「今ある家を見直すときは、不便な部分だけでなく、気に入っている場所にも目を向けてみてください。光の入る窓辺や落ち着く部屋など、残したい良さが計画の軸になることがあります。写真は改修後の空間を考えるためのイメージです。実際に変えられる範囲は建物の状態によって異なるため、既存住宅の確認と希望の整理を合わせて進めます。」／「全面リノベーションを知る」→ /service/#renovation。「住まいの写真に戻る」→ /works/。</p>
+      <p data-role="components">EditorialPair、CircleTextLink。</p>
+      <p data-role="animation">D：写真だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像04。</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>相談への出口</h3>
+      <p data-role="purpose">具体的な好みを相談へ持ち込めるようにする。</p>
+      <p data-role="layout">共通フッター3層。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/model-house/">
+    <h2>モデルハウス</h2>
+    <section data-section="intro">
+      <h3>見学の目的を示す</h3>
+      <p data-role="purpose">見学を寸法・素材・暮らしの確認機会として位置付ける。</p>
+      <p data-role="layout">PC導入720px、SP上下80px。画像05を幅1120px・高さ560pxで中央に置く。住所入りの地図は設けない。</p>
+      <p data-role="copy">「モデルハウス」／「写真では分からないことを、確かめる。」／「床に立ったときの感触、壁に落ちる光、家族が並んで歩く距離。住まいの心地よさを考えるには、その場で気づくことも大切です。見学では、好きな雰囲気を探すだけでなく、自分たちの毎日に置き換えて、空間と素材を確かめてみてください。」／「掲載写真は設計イメージです。見学施設の所在地・公開日時は本サンプルには掲載していません。」</p>
+      <p data-role="components">QuietPageIntro、EditorialPair。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像05。実際のモデルハウスの外観と断定しない。</p>
+    </section>
+    <section data-section="checkpoints">
+      <h3>見学で確かめたい三つのこと</h3>
+      <p data-role="purpose">見学前に具体的な観察軸を渡す。</p>
+      <p data-role="layout">実装id=checkpoints。3ブロックを縦に配置し、高さ目安PC各680px。1は写真01左幅520px、2は写真03右幅320px、3は写真02左幅240px。本文は各400px。SP写真幅100%・72%右・64%左と変え、各本文を下に置く。</p>
+      <p data-role="copy">「1. 家族の距離を見る」／「食卓、台所、くつろぐ場所の関係を確かめてみてください。誰かが家事をしているとき、ほかの家族はどこで過ごすか。普段の動きを重ねると、部屋の広さだけでは分からない使いやすさに目が向きます。」／「2. 光と壁の関係を見る」／「窓から離れた場所や、壁の陰になる部分にも目を向けてみましょう。写真で好きだと感じた雰囲気が、どのような光と素材の組み合わせから生まれているかを確かめます。」／「3. 手が触れる場所を見る」／「床、建具、窓辺など、毎日使う場所を見てみてください。素材の色や模様とともに、家具を置いたときや家族が動いたときの関係を考えることが、住まい選びの手がかりになります。」</p>
+      <p data-role="components">EditorialPairを3回、SectionTitle。</p>
+      <p data-role="animation">A・B・C：各ブロックの写真1対象ずつ。fade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像01・03・02。</p>
+    </section>
+    <section data-section="visit">
+      <h3>見学の希望を整理する</h3>
+      <p data-role="purpose">場所や開催日時を捏造せず、希望入力へ接続する。</p>
+      <p data-role="layout">PC幅880px、左320pxに見出し、右480pxに説明と3行の確認リスト。下64pxに主要CTA。SP縦積み。上128px・下160px。</p>
+      <p data-role="copy">「見学で聞きたいことを、少しだけ。」／「新築とリノベーションのどちらを考えているか、特に見たい素材や空間はあるか、ご家族で確かめたいことは何か。まだ答えがまとまっていなくても、気になることを短く書き出してみてください。」／確認項目「検討している住まい方」「見ておきたい場所や素材」「希望する日程と人数」。／「フォームでは『モデルハウス見学』を選べます。このサンプルでは希望内容の入力・確認までを体験でき、見学予約は成立しません。」／「モデルハウス見学の希望を入力する」→ /contact/?type=visit。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">D：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。リストとCTAは即時表示。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>関連閲覧と相談</h3>
+      <p data-role="purpose">見学以外の検討段階にも出口を用意する。</p>
+      <p data-role="layout">本文幅680pxで関連リンク2本。その下128pxから共通フッター。</p>
+      <p data-role="copy">「先に考え方を知りたい方へ」→ /about/。「相談の進め方を知りたい方へ」→ /flow/。共通帯「住まいのこれからを、話しませんか。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">CircleTextLink、SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/flow/">
+    <h2>家づくりの流れ</h2>
+    <section data-section="intro">
+      <h3>工程の全体像</h3>
+      <p data-role="purpose">相談・計画・施工の節目を読み始める前に示す。</p>
+      <p data-role="layout">PC導入810px＋画像06横長720px。SP導入自然高＋3:2写真。導入下に3つの章への文字リンクを横並び、SP縦並び。</p>
+      <p data-role="copy">「家づくりの流れ」／「一つずつ確かめて、住まいにする。」／「相談から計画、工事、引き渡しへ。家づくりでは、希望と条件を確かめながら、いくつもの判断を重ねます。ここでは検討の目安となる16の工程を紹介します。新築と全面リノベーションでは確認する内容が異なり、進める順序も計画によって変わります。契約・費用・日程の条件は、それぞれの計画で確認する項目です。」</p>
+      <p data-role="components">QuietPageIntro、CircleTextLink。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像06 flow:craft。写真は作業のイメージ。</p>
+    </section>
+    <section data-section="phase-one">
+      <h3>第一段階：相談から計画の整理</h3>
+      <p data-role="purpose">最初の接点から提案内容を確かめるまでを説明する。</p>
+      <p data-role="layout">実装id=phase-one。PC高さ約1800px、左幅320pxに章名と画像07、右幅600pxに01〜05。番号は24pxの平文、丸囲みなし。各工程上に1px罫線、上下40px。左はstickyにしない。SP章名→写真→工程、番号列40px。</p>
+      <p data-role="copy">「相談から、計画の輪郭へ」／「01 相談のきっかけを伝える：新築かリノベーションか、どのような暮らしを考えているかを整理します。まだ方向が決まっていない場合は、今の住まいで感じていることから書き出してみてください。」「02 希望と優先順位を整理する：家族の過ごし方、必要な場所、変えたい不便を確認します。希望をすべて同じ重さで並べず、特に大切にしたいことを見つけます。」「03 敷地・建物の条件を確かめる：新築では敷地と周辺環境、リノベーションでは既存建物の状態が計画の前提になります。分かっている情報と、これから確認することを分けます。」「04 計画の方向を考える：希望と条件を照らし合わせ、間取りや改修範囲の方向を検討します。平屋・2階建ての使い方や、残したい場所も合わせて考えます。」「05 提案と費用の考え方を確認する：計画に含まれる内容と、含まれない内容を確かめます。判断に必要な情報を揃え、不明点をそのままにせず次の段階へ進みます。」</p>
+      <p data-role="components">新規PhaseRows、SectionTitle。</p>
+      <p data-role="animation">A：左の画像07だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像07 contact:meeting、4:3。</p>
+    </section>
+    <section data-section="phase-two">
+      <h3>第二段階：契約の確認から着工準備</h3>
+      <p data-role="purpose">決定内容と準備事項を分けて説明する。</p>
+      <p data-role="layout">実装id=phase-two。PC高さ約1600px。前章と同じ2列、左画像02幅240px・高さ320px、右06〜10。章間192px。SP画像を右寄せ幅62%、工程は全幅。</p>
+      <p data-role="copy">「決めたことを、工事の準備へ」／「06 契約条件を確認する：契約の対象、費用、支払い、日程などの条件を確認します。説明と書面を照らし合わせ、理解できていない点があれば、この段階で整理します。」「07 間取りと仕様を具体化する：部屋の使い方、開口部、収納、設備などを具体的に考えます。暮らしの動きと照らし合わせながら、図面と仕様の内容を確かめます。」「08 木と左官の使い方を決める：床や壁、建具などの素材を、空間全体との関係で確認します。写真だけで判断せず、色や質感、使う場所を合わせて検討する項目です。」「09 必要な手続きを整理する：計画に応じて必要となる確認や申請、準備事項を整理します。誰が何を進めるかを明らかにし、工事前に必要な条件を確かめます。」「10 着工前の段取りを確認する：工事の範囲と日程、連絡方法、住まいに関わる準備を確認します。リノベーションでは、工事中の暮らしについても計画に応じた整理が必要です。」</p>
+      <p data-role="components">PhaseRows、SectionTitle。</p>
+      <p data-role="animation">B：画像02だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像02 works:wood。</p>
+    </section>
+    <section data-section="phase-three">
+      <h3>第三段階：施工から住み始めた後へ</h3>
+      <p data-role="purpose">後半の工程も写真と確認事項で読み続けられるようにする。</p>
+      <p data-role="layout">実装id=phase-three。PC高さ約1900px。11〜13の後に画像06を右本文列いっぱい・高さ320pxで挿入し、14〜16へ続ける。左には章名と「工事の途中にも、確認の節目を。」。SPも13と14の間に写真。後半を写真なし長文リストにしない。</p>
+      <p data-role="copy">「つくる過程を確かめ、暮らしへつなぐ」／「11 工事を始める：着工前に確認した計画をもとに、工事が始まります。既存住宅の改修では、工事を進める中で確認が必要になる点も整理します。」「12 下地や構造に関わる部分を確認する：仕上げると見えなくなる部分にも、確認の節目があります。計画と現場の状況を照らし合わせ、必要な内容を共有します。」「13 木工事と設備工事を進める：部屋の形や使い方が見えてくる段階です。図面だけでは分かりにくかった位置関係も、工事の進行に合わせて確かめます。」「14 左官と仕上げを整える：木部や壁など、暮らしの中で目に入り、手が触れる部分を整えます。素材同士のつながりを含め、仕上がりを確認します。」「15 完成した住まいを確認する：計画内容と完成した状態を照らし合わせ、設備や建具の使い方などを確認します。引き渡しに向けて、必要な説明や書類を整理します。」「16 住み始めた後のことを確認する：手入れの方法や、気になる点が生じたときの連絡方法を確かめます。点検や保証の内容は一律の条件を推測せず、契約時の取り決めに沿って確認する項目です。」</p>
+      <p data-role="components">PhaseRows、SectionTitle。</p>
+      <p data-role="animation">C：工程途中の画像06だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像06 flow:craft。</p>
+    </section>
+    <section data-section="related">
+      <h3>工程から住まいの姿へ</h3>
+      <p data-role="purpose">長い説明の後に写真の回遊を置く。</p>
+      <p data-role="layout">上96pxに中央案内、下80pxにHousePhotoCollageの短縮版。PC高さ約900px、写真幅240・320・220・280px。SPの幅差と左右寄せはトップの規則を継承。</p>
+      <p data-role="copy">「順序が見えたら、暮らしを思い描く。」／「工程は、住まいをつくるための道筋です。写真や素材の考え方も合わせて見ながら、ご家族が大切にしたいことを探してみてください。」／「住まいの写真を見る」→ /works/。「相談の前に整理すること」→ /news/first-consultation/。</p>
+      <p data-role="components">HousePhotoCollage、CircleTextLink。</p>
+      <p data-role="animation">D：コラージュの画像03だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像01・02・03・04。</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>相談への出口</h3>
+      <p data-role="purpose">工程への疑問を相談へ集約する。</p>
+      <p data-role="layout">共通フッター3層。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/company/">
+    <h2>会社案内</h2>
+    <section data-section="intro">
+      <h3>会社の輪郭</h3>
+      <p data-role="purpose">企業の基礎情報を事業説明とともに伝える。</p>
+      <p data-role="layout">PC導入640px、SP上下80px。下に画像06を幅960px・高さ440px、中央配置。</p>
+      <p data-role="copy">「会社案内」／「設計と施工を、手仕事でつなぐ。」／「株木堂建築株式会社は、静岡県静岡市葵区にある工務店です。1998年の設立以来、木と左官の手仕事を軸に、新築注文住宅と中古住宅の全面リノベーションを設計施工しています。30〜50代のファミリー層に向けて、長く住み継げる平屋・2階建てを提案しています。」</p>
+      <p data-role="components">QuietPageIntro、EditorialPair。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像06。実際の社員・現場を示すキャプションは付けない。</p>
+    </section>
+    <section data-section="profile">
+      <h3>会社概要</h3>
+      <p data-role="purpose">確定している会社情報を一覧で確認できるようにする。</p>
+      <p data-role="layout">PC左見出し280px・右Table680px。上128px・下160px。表は横罫線のみ、セル上下24px。SP見出し→表、項目幅30%。</p>
+      <p data-role="copy">「会社概要」／「商号：株木堂建築株式会社」「よみ：かぶきどうけんちく」「設立：1998年」「従業員数：42名」「所在地：静岡県静岡市葵区」「事業内容：新築注文住宅の設計施工／中古住宅の全面リノベーション」「住まいの提案：長く住み継げる平屋・2階建て」。／「家づくりを考える方とモデルハウス見学を希望する方に向けて、相談の入口を一つにまとめています。ご相談内容に合わせて、フォームで希望する種別を選択できます。」</p>
+      <p data-role="components">Table、SectionTitle。</p>
+      <p data-role="animation">A：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。表は即時表示。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="figures">
+      <h3>数字で見る株木堂建築</h3>
+      <p data-role="purpose">提供された実績を誤解のないラベルで示す。</p>
+      <p data-role="layout">PC幅960pxの3列、数字48px、ラベル16px。縦線で区切り、カード背景なし。SP縦3行、数字40px。上下128px。</p>
+      <p data-role="copy">「住まいづくりの実績」／「累計施工 480棟」「リノベ完工率 92%」「モデルハウス来場 年1,200組」。／「住まいを検討するときには、数値だけでなく、何を大切にしてつくる会社なのか、どのように相談を進めるのかも合わせて確かめたいものです。このサイトでは、素材への考え方、事業内容、家づくりの工程を、それぞれ独立したページでご紹介しています。」</p>
+      <p data-role="components">共通実績dl、SectionTitle。</p>
+      <p data-role="animation">B：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。カウントアップなし。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="business">
+      <h3>事業と姿勢</h3>
+      <p data-role="purpose">会社情報を素材・事業ページに接続する。</p>
+      <p data-role="layout">PC左画像02幅320px・高さ426px、右本文440px。SP写真幅72%左寄せ。章間160px。</p>
+      <p data-role="copy">「つくる方法が違っても、大切にすることは同じ。」／「新しい敷地に住まいをつくることと、今ある家を住み継ぐこと。出発点は異なりますが、ご家族の暮らしを考え、素材と空間を整える姿勢は共通しています。木と左官をどう生かすかを、間取りや毎日の動きから考えます。詳しい提案領域は、注文住宅・リノベーションのページでご覧いただけます。」／「事業内容を読む」→ /service/。</p>
+      <p data-role="components">EditorialPair、CircleTextLink。</p>
+      <p data-role="animation">C：画像02だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像02。</p>
+    </section>
+    <section data-section="related">
+      <h3>人と家づくりへの入口</h3>
+      <p data-role="purpose">採用と思想への分岐を設ける。</p>
+      <p data-role="layout">PC幅800px、2行の横罫線リンク。SPも縦2行。上下96px。</p>
+      <p data-role="copy">「株木堂建築を、もう少し知る。」／「家づくりの考え方を読む」→ /about/。「住まいをつくる仕事に関心のある方へ」→ /recruit/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">D：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>共通相談</h3>
+      <p data-role="purpose">会社情報の確認から相談へ進める。</p>
+      <p data-role="layout">共通フッター3層。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/recruit/">
+    <h2>採用について</h2>
+    <section data-section="intro">
+      <h3>仕事への入口</h3>
+      <p data-role="purpose">採用条件を創作せず、事業と仕事の関係を説明する。</p>
+      <p data-role="layout">PC導入640px、続いて画像06幅960px・高さ480px。SP導入上下80px・画像3:2。</p>
+      <p data-role="copy">「採用について」／「住まいを考え、手を動かす仕事。」／「株木堂建築は、新築注文住宅と中古住宅の全面リノベーションを設計施工する、従業員42名の工務店です。木と左官の手仕事を軸に、長く住み継げる住まいを提案しています。このページでは、住まいづくりの仕事に関心を持つ方へ、事業と仕事のつながりをご紹介します。」</p>
+      <p data-role="components">QuietPageIntro、EditorialPair。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像06。キャプション「手仕事のイメージ」。</p>
+    </section>
+    <section data-section="design">
+      <h3>暮らしを聞き、計画する</h3>
+      <p data-role="purpose">設計の仕事を企業の事業に即して伝える。</p>
+      <p data-role="layout">PC左本文440px・右画像07幅400px・3:2。上下128px。SP写真→本文。</p>
+      <p data-role="copy">「暮らしの言葉を、住まいの計画へ。」／「家族が住まいに求めることは、最初から図面の形になっているとは限りません。毎日の不便や、これからの希望を聞き取り、条件と照らし合わせて考えることが、計画の出発点です。注文住宅とリノベーションでは確認する前提が異なるため、対象となる敷地や建物への理解も欠かせません。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">A：画像07だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像07。</p>
+    </section>
+    <section data-section="craft">
+      <h3>素材を住まいにする</h3>
+      <p data-role="purpose">施工と設計の接点を示す。</p>
+      <p data-role="layout">PC左画像03幅280px・高さ373px、右本文440px。上96px・下192px。SP写真幅68%左寄せ。</p>
+      <p data-role="copy">「考えた空間を、手仕事でかたちに。」／「木や左官は、図面に記された材料名だけで住まいになるわけではありません。素材を使う場所や、ほかの部材とのつながりを確かめ、施工によって空間を整えていきます。仕上がった姿だけでなく、そこに至る工程を理解することが、設計と施工をつなぐ仕事への入口になります。」</p>
+      <p data-role="components">EditorialPair、SectionTitle。</p>
+      <p data-role="animation">B：画像03だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像03。</p>
+    </section>
+    <section data-section="information">
+      <h3>採用に関する問い合わせ</h3>
+      <p data-role="purpose">募集の有無や労働条件を捏造せず、問い合わせに集約する。</p>
+      <p data-role="layout">PC幅680px、左揃え。上下96px。薄い横罫線を見出し上に1本。本文下32pxに問い合わせリンク。</p>
+      <p data-role="copy">「採用について知りたい方へ」／「募集職種、応募条件、勤務条件、選考方法は、このページには掲載していません。採用に関する問い合わせでは、関心のある仕事や、確認したいことをお知らせいただく形としています。家づくりへの考え方や事業内容を読んで、気になった点を書き留めてみてください。本サンプルでは入力内容の確認までを体験でき、応募や問い合わせの送信は行われません。」／「採用について問い合わせる」→ /contact/?type=recruit。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">C：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="related">
+      <h3>会社と工程を知る</h3>
+      <p data-role="purpose">応募判断に必要な周辺情報へ接続する。</p>
+      <p data-role="layout">PC幅800pxの2本の縦積みリンク、上下80px。</p>
+      <p data-role="copy">「事業と仕事を、もう少し具体的に。」／「会社案内を見る」→ /company/。「家づくりの工程を読む」→ /flow/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">D：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>共通フッター</h3>
+      <p data-role="purpose">採用専用CTAの後にもサイト全体への回遊を確保する。</p>
+      <p data-role="layout">共通フッター3層。採用問い合わせと家づくり相談はラベルを明確に分ける。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/news/">
+    <h2>お知らせ</h2>
+    <section data-section="intro">
+      <h3>案内一覧の導入</h3>
+      <p data-role="purpose">相談前後で役立つ案内を集める。</p>
+      <p data-role="layout">PC高さ560px、中央680px。SP上下72px。日付未提供のため架空の開催日や休業日を作らず、掲載順だけで整理する。</p>
+      <p data-role="copy">「お知らせ」／「家づくりを考える方へ。」／「相談の前に整理しておきたいこと、見学で確かめたいこと、つくり方を選ぶときの考え方をまとめました。どの段階から読み始めても、ご家族の状況に合わせて次のページへ進めます。まだ新築かリノベーションかを決めていない方は、最初の相談案内からご覧ください。」</p>
+      <p data-role="components">QuietPageIntro、SectionTitle。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="featured">
+      <h3>相談前の読み物</h3>
+      <p data-role="purpose">独立した記事詳細に十分な入口を与える。</p>
+      <p data-role="layout">PC左画像07幅560px・3:2、右本文360pxを80px下げる。SP画像全幅→32px→本文。下160px。</p>
+      <p data-role="copy">「家づくり相談の前に、整理しておきたいこと」／「希望がまとまっていなくても、今の暮らしで感じていることは相談の手がかりになります。困っていること、残したいこと、まだ迷っていることを分けて、住まいについて話し始める準備をしてみませんか。家族で意見が異なるときにも、先に一つの答えに揃える必要はありません。」／「相談前の案内を読む」→ /news/first-consultation/。</p>
+      <p data-role="components">EditorialPair、CircleTextLink。</p>
+      <p data-role="animation">A：画像07だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像07。</p>
+    </section>
+    <section data-section="visit-guide">
+      <h3>見学の案内</h3>
+      <p data-role="purpose">見学ページへの関連導線を一覧の中に置く。</p>
+      <p data-role="layout">PC幅880px、左本文560px・右画像03幅160px・高さ213px。横罫線、上下56px。SP本文下に幅48%の写真を右寄せ。</p>
+      <p data-role="copy">「モデルハウスで確かめたい三つのこと」／「家族の距離、光と壁の関係、手が触れる場所。見学では、写真の印象を確かめるだけでなく、自分たちの日常を重ねてみることが大切です。見ておきたいポイントを、三つの視点から紹介しています。」／「見学のポイントを見る」→ /model-house/#checkpoints。</p>
+      <p data-role="components">QuietNewsList、CircleTextLink。</p>
+      <p data-role="animation">B：画像03だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像03。</p>
+    </section>
+    <section data-section="service-guide">
+      <h3>つくり方の案内</h3>
+      <p data-role="purpose">新築と改修の比較ページへ送る。</p>
+      <p data-role="layout">前章と同じ横罫線の一覧行。画像04は幅240px・高さ160pxに変更して面積差をつける。SP本文下に幅72%左寄せ。</p>
+      <p data-role="copy">「新築と全面リノベーションの考え方」／「新しくつくる場合と、今ある家を生かす場合では、確認する条件が異なります。敷地や建物の状況と、ご家族の希望をどう整理するか。注文住宅と全面リノベーションのページで、それぞれの出発点を紹介します。」／「つくり方の違いを知る」→ /service/。</p>
+      <p data-role="components">QuietNewsList、CircleTextLink。</p>
+      <p data-role="animation">C：画像04だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像04。</p>
+    </section>
+    <section data-section="related">
+      <h3>次の検討へ</h3>
+      <p data-role="purpose">記事を読んだ後の行動を明確にする。</p>
+      <p data-role="layout">PC幅680px、上下128px。見出し下32pxに本文、さらに32px下に円形リンク。</p>
+      <p data-role="copy">「分からないことも、次の手がかりに。」／「読み進める中で気になった言葉や、確認したい点があれば、相談内容として書き留めてみてください。順序を先に知りたい方は、相談から引き渡しまでの流れをご覧いただけます。」／「家づくりの流れを見る」→ /flow/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">D：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>相談への出口</h3>
+      <p data-role="purpose">案内を読んだ後の相談を受け止める。</p>
+      <p data-role="layout">共通フッター3層。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/news/first-consultation/">
+    <h2>家づくり相談の前に</h2>
+    <section data-section="intro">
+      <h3>記事の導入</h3>
+      <p data-role="purpose">準備が完全でなくても検討を始められると伝える。</p>
+      <p data-role="layout">PC中央760px、H1は36px・最大2行。上112px・下80px。続いて画像07幅960px・高さ480px。SP30px、写真3:2。</p>
+      <p data-role="copy">「家づくり相談の前に、整理しておきたいこと」／「家づくりについて話そうと思っても、何から伝えればよいか迷うことがあります。間取りや素材をすべて決めておく必要はありません。今の暮らしを振り返り、これから大切にしたいことを短い言葉にするところから、相談の準備を始めてみてください。」</p>
+      <p data-role="components">QuietPageIntro、EditorialPair。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像07。</p>
+    </section>
+    <section data-section="present">
+      <h3>今の暮らしを振り返る</h3>
+      <p data-role="purpose">相談に使える具体的な問いを提示する。</p>
+      <p data-role="layout">本文幅680px、上128px・下80px。見出しの下32pxに本文、最後に薄い面色の引用枠を1つ。</p>
+      <p data-role="copy">「1. 困っていることと、気に入っていること」／「収納が足りない、家事の移動が長い、家族の居場所が重なる。困っていることは、いつ、どこで起きるかまで考えると伝えやすくなります。同じように、気に入っている場所も書き出してみてください。朝の光が入る窓辺や、家族が自然と集まる食卓など、残したい良さが新しい計画の軸になることがあります。」／問い「今の住まいで、そのまま残したいところはどこですか。」</p>
+      <p data-role="components">SectionTitle、新規の読み物本文ブロック。</p>
+      <p data-role="animation">A：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="priority">
+      <h3>希望に優先順位を付ける</h3>
+      <p data-role="purpose">家族の意見を無理に均さず整理する。</p>
+      <p data-role="layout">本文幅680px、上下80px。右に画像02幅220px・高さ294pxを本文後に配置。SP幅60%右寄せ。</p>
+      <p data-role="copy">「2. 大切にしたいことを分けてみる」／「家族それぞれが、住まいに違う希望を持っていることもあります。すぐに一つの答えにまとめず、『特に大切にしたいこと』『できれば取り入れたいこと』『まだ迷っていること』に分けてみてください。部屋数や広さの希望だけでなく、どんな時間を過ごしたいかを書いておくと、間取りを考える理由が見えてきます。」</p>
+      <p data-role="components">SectionTitle、EditorialPair。</p>
+      <p data-role="animation">B：画像02だけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">画像02。</p>
+    </section>
+    <section data-section="conditions">
+      <h3>分かっている条件を分ける</h3>
+      <p data-role="purpose">土地や住宅の情報を相談材料として整理する。</p>
+      <p data-role="layout">本文幅680px、上下80px。箇条書き3項目は番号丸なし、細い横罫線で区切る。</p>
+      <p data-role="copy">「3. 決まっていることと、これからのこと」／「新築では敷地の検討状況、リノベーションでは対象となる住宅の情報が、計画の前提になります。手元にある図面や写真があれば、どのような情報かを確認しておきましょう。資料が揃っていない場合は、分からないことを分けておくだけでも構いません。」／「住まいの場所や建物について分かっていること」「希望する時期や、時期を決める事情」「費用について考えていること、確認したいこと」。</p>
+      <p data-role="components">SectionTitle、新規読み物本文ブロック。</p>
+      <p data-role="animation">C：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="next">
+      <h3>次に確かめること</h3>
+      <p data-role="purpose">記事を相談または工程確認につなぐ。</p>
+      <p data-role="layout">本文幅680px、上96px・下128px。リンク3本を縦並び、各56px以上。</p>
+      <p data-role="copy">「言葉になったことから、次の一歩へ。」／「整理した内容は、きれいな文章にする必要はありません。短い箇条書きでも、家族の言葉のままでも、暮らしを考える手がかりになります。先に流れを知りたい方は工程のページへ、素材や空間を見たい方はモデルハウスの案内へお進みください。」／「家づくりの流れを見る」→ /flow/。「モデルハウスを見る」→ /model-house/。「お知らせに戻る」→ /news/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">D：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>相談への出口</h3>
+      <p data-role="purpose">準備した内容を相談へつなぐ。</p>
+      <p data-role="layout">共通フッター3層。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/contact/">
+    <h2>家づくり相談</h2>
+    <section data-section="intro">
+      <h3>相談の入口</h3>
+      <p data-role="purpose">何を入力するかとサンプルの動作範囲を明示する。</p>
+      <p data-role="layout">PC導入560px、中央680px。SP上64px・下48px。サンプルの説明は導入直下の面色付き枠、16px。画像07は幅680px・高さ240px、本文とフォームの間。</p>
+      <p data-role="copy">「家づくり相談」／「まだ決まっていないことから、お聞かせください。」／「新築注文住宅、中古住宅の全面リノベーション、モデルハウス見学について、気になることをご記入ください。ご家族の希望がまとまっていない場合は、今の住まいで困っていることや、これから大切にしたいことから書き始められます。」／「このサイトは架空の企業のサンプルです。入力内容は送信されず、予約は成立しません。」</p>
+      <p data-role="components">QuietPageIntro、Alert。Alertはアイコンなし・面色背景・角丸0に調整。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">画像07 contact:meeting。</p>
+    </section>
+    <section data-section="preparation">
+      <h3>入力前の案内</h3>
+      <p data-role="purpose">入力に必要な情報を整理する。</p>
+      <p data-role="layout">PC幅680px、上下64px。3つの短い段落を24px間隔で置く。SP同幅規則。</p>
+      <p data-role="copy">「ご相談にあたって」／「相談の種別を選び、連絡先と相談内容をご入力ください。新築かリノベーションかを迷っている場合は、『まだ決めていない』を選べます。」「見学を希望する方は、ご希望の日程と人数をお書きください。希望日の入力だけで日程が確定するものではありません。」「採用について確認したい方は、相談種別で『採用について』を選び、関心のある仕事や確認したいことをご記入ください。」</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">A：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="form">
+      <h3>入力フォーム</h3>
+      <p data-role="purpose">相談内容を入力し、送信せず確認できる状態まで実装する。</p>
+      <p data-role="layout">実装id=consultation-form。幅680px、1列、項目間32px、入力高56px、textarea高さ180px。種別はfieldset内のラジオをPC2列・SP1列。queryのtype=visit/recruitで該当項目を初期選択。ラベルは常時表示し、プレースホルダーで代用しない。必須は文字で表示。</p>
+      <p data-role="copy">「ご相談内容を入力する」／項目「相談種別（必須）：新築注文住宅／全面リノベーション／モデルハウス見学／まだ決めていない／採用について」「お名前（必須）」「メールアドレス（必須）」「電話番号（任意）」「希望日（任意）」「見学人数（任意）」「相談内容（必須）」。補助文「分かる範囲で、ご希望や確認したいことをご記入ください。」「希望日・見学人数は、モデルハウス見学を選んだ場合に入力できます。」／同意「個人情報の取り扱いを確認しました（必須）」、文中リンク /privacy/。ボタン「入力内容を確認する」。エラー「入力内容をご確認ください。」「お名前を入力してください。」「メールアドレスを正しい形式で入力してください。」「相談内容を入力してください。」「個人情報の取り扱いをご確認ください。」</p>
+      <p data-role="components">TextInput、Textarea、新規ConsultationForm。ラジオ・同意チェックはネイティブ入力。errorはaria-describedby、上部エラー要約から各入力に接続。先頭エラーへフォーカス移動。</p>
+      <p data-role="animation">none。フォーム・エラー・確認内容にScrollRevealを使わない。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="confirmation">
+      <h3>確認状態</h3>
+      <p data-role="purpose">入力後の挙動を具体化し、架空の送信成功を作らない。</p>
+      <p data-role="layout">別URLへ遷移せずフォーム領域を確認パネルに置換。幅680px、ラベルと値を縦に並べたdl。確認見出しへフォーカス。「入力に戻る」で同じ値を復元し元のボタンへフォーカス。通常表示時はこのパネルをhiddenにする。</p>
+      <p data-role="copy">「入力内容の確認」／「ご入力いただいた内容は、以下のとおりです。修正する場合は『入力に戻る』を選んでください。」／「このサイトは架空の企業のサンプルです。入力内容は送信されず、予約は成立しません。」／「入力に戻る」「住まいの写真を見る」→ /works/。送信ボタンは設置しない。</p>
+      <p data-role="components">ConsultationForm、Alert。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="notes">
+      <h3>相談前後の補足</h3>
+      <p data-role="purpose">予約希望と予約確定の違い、情報の扱い、次の閲覧先を示す。</p>
+      <p data-role="layout">幅680px、フォーム下96px。3ブロックを各上下40pxの横罫線で区切る。見出しと本文を分け、リンクは表示したままにする。</p>
+      <p data-role="copy">「希望日について」／「入力する日程は、ご希望を整理するためのものです。このサンプルでは空き状況の確認や日程の調整は行わず、入力内容の確認画面までを表示します。」／「入力内容について」／「入力した内容は送信されず、この画面での確認にのみ使われます。画面を閉じたり再読み込みしたりすると、入力内容は保持されません。」／「相談の前に、もう少し知りたい方へ」／「家づくりの流れや素材への考え方を読んでから、相談内容を整理することもできます。」／「家づくりの流れを見る」→ /flow/。「家づくりの考え方を読む」→ /about/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">B・C・D：3ブロックの見出しだけ各1対象。fade-up、duration 2000ms、stagger 0ms、ease。本文とリンクは常時表示。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>フォームに戻る出口</h3>
+      <p data-role="purpose">現在ページへの無意味な再遷移を避ける。</p>
+      <p data-role="layout">共通フッター3層。相談帯のリンクだけ同ページ#consultation-formへ。確認状態では「入力に戻る」と同じ復元処理を行ってからフォームへ移動。</p>
+      <p data-role="copy">「住まいのこれからを、言葉にする。」「ご家族の希望や気になることを、分かる範囲でお聞かせください。」「相談内容の入力へ戻る」→ #consultation-form。</p>
+      <p data-role="components">SiteFooter、ConsultationBandのcontact変種。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+
+  <article data-page="/privacy/">
+    <h2>個人情報の取り扱い</h2>
+    <section data-section="intro">
+      <h3>対象と前提</h3>
+      <p data-role="purpose">サンプルフォームの実際の処理と説明を一致させる。</p>
+      <p data-role="layout">PC導入400px、本文幅680px。SP上下64px。写真付きの導入は置かない。本文16px・行高1.9。</p>
+      <p data-role="copy">「個人情報の取り扱い」／「このページは、架空の企業である株木堂建築株式会社のサンプルサイトにおける、相談フォームの入力内容の取り扱いを説明するものです。実在する企業のサービス利用規約や個人情報保護方針を示すものではありません。相談フォームは入力と内容確認のために設けており、予約、問い合わせ、採用応募の送信は行いません。」</p>
+      <p data-role="components">QuietPageIntro、SectionTitle。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="input">
+      <h3>入力項目と利用範囲</h3>
+      <p data-role="purpose">入力する情報と使用目的を明示する。</p>
+      <p data-role="layout">幅680px、上64px・下48px。見出し下24pxに本文。罫線は章上に1本。</p>
+      <p data-role="copy">「1. 入力する情報」／「相談フォームには、相談種別、お名前、メールアドレス、電話番号、希望日、見学人数、相談内容の入力欄があります。必須と表示された項目は確認画面を表示するために使用し、任意の項目は空欄のまま進められます。入力内容は、ブラウザー上での入力確認と、修正のためにフォームへ戻る操作にのみ使用します。」</p>
+      <p data-role="components">SectionTitle、新規読み物本文ブロック。</p>
+      <p data-role="animation">A：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。本文は即時表示。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="transmission">
+      <h3>送信と予約について</h3>
+      <p data-role="purpose">確認画面が受付完了ではないことを明確にする。</p>
+      <p data-role="layout">幅680px、上下48px。前章と同じ組版。</p>
+      <p data-role="copy">「2. 外部への送信」／「本サンプルのフォームには送信機能がありません。入力した内容をメールや問い合わせ管理システムへ送信せず、第三者への提供や営業連絡にも使用しません。確認画面が表示されても、家づくり相談、モデルハウス見学、採用応募の受付や予約は成立しません。希望日の入力によって施設の空き枠が確保されることもありません。」</p>
+      <p data-role="components">SectionTitle、新規読み物本文ブロック。</p>
+      <p data-role="animation">B：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="retention">
+      <h3>入力内容の保持</h3>
+      <p data-role="purpose">ブラウザー内での一時保持と消去条件を示す。</p>
+      <p data-role="layout">幅680px、上下48px。リストカード化しない。</p>
+      <p data-role="copy">「3. 画面内での保持」／「入力内容は、同じ画面で確認や修正を行う間だけ一時的に保持します。フォームが入力内容をCookie、localStorage、URLに保存することはありません。画面を閉じるか再読み込みすると、フォーム内で保持している内容は失われます。ご利用のブラウザーによる自動入力や入力履歴の保存は、ブラウザー側の設定をご確認ください。」</p>
+      <p data-role="components">SectionTitle、新規読み物本文ブロック。</p>
+      <p data-role="animation">C：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="scope">
+      <h3>この説明の範囲</h3>
+      <p data-role="purpose">フォームの処理範囲を正確に区切り、戻る導線を設ける。</p>
+      <p data-role="layout">幅680px、上48px・下96px。末尾に高さ56pxの戻るリンク。</p>
+      <p data-role="copy">「4. この説明が対象とするもの」／「このページは、本サンプルに実装された相談フォームの動作について説明しています。サイトへのアクセスに伴う通信や、ご利用の端末・ブラウザーの機能全体について説明するものではありません。フォームの動作範囲は相談ページの冒頭と確認画面にも表示しています。入力内容を確認する際は、予約や問い合わせが送信されないことを改めてご確認ください。」／「家づくり相談に戻る」→ /contact/。</p>
+      <p data-role="components">SectionTitle、CircleTextLink。</p>
+      <p data-role="animation">D：見出しだけfade-up、duration 2000ms、stagger 0ms、ease。</p>
+      <p data-role="image">none</p>
+    </section>
+    <section data-section="shared-exit">
+      <h3>サイトへの復帰</h3>
+      <p data-role="purpose">法務ページを行き止まりにしない。</p>
+      <p data-role="layout">共通フッター3層。</p>
+      <p data-role="copy">「住まいのこれからを、話しませんか。」「新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。」「家づくり相談を予約する」→ /contact/。</p>
+      <p data-role="components">SiteFooter、ConsultationBand。</p>
+      <p data-role="animation">none</p>
+      <p data-role="image">共通フッター画像。</p>
+    </section>
+  </article>
+</section>
+
+<section id="images">
+  <h2>6. 画像生成指示：合計7枚</h2>
+  <p>各画像は一度だけ生成し、指定した別ページでは同じファイルを再利用する。01・02・03・04は同じ設計世界観に揃える。横位置は長辺2400px以上、縦位置は長辺2000px以上を目安に納品。配置ごとの切り取りはCSSで行い、生成枚数を増やさない。以下のプロンプトには企業ロゴ・文字・実在物件の指定を入れない。</p>
+
+  <figure data-placement="top:hero" data-tags="注文住宅,木,左官,ダイニング,自然光,横位置" data-aspect="landscape">
+    <figcaption data-prompt="日本の家族向け注文住宅の室内を建築写真として撮影した実写調画像。明るすぎないオークの無垢床、暖白の左官壁、簡潔な木のダイニングテーブルと椅子、右奥の大きな窓から曇天の柔らかな自然光。カメラは目線の高さで水平、手前の食卓から奥の居間へ空間が続く。人はいない。中央55%に食卓と窓をまとめ、縦4:5にも切り取れる余地を残す。彩度を抑え、木部は橙色に寄せず自然な茶色、壁の陰影を残す。暖炉、球形の大きな照明、ロゴ、文字、過剰な装飾は入れない。">
+      画像01｜トップ主写真。aboutの全幅写真、写真一覧・詳細、モデルハウスの観察例、共通相談帯に再利用。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="works:wood" data-tags="木工,建具,無垢材,手触り,接写,縦位置" data-aspect="portrait">
+    <figcaption data-prompt="日本の木と左官の住宅にある木製建具と窓台の接写を、実写の建築ディテール写真として描く。オーク材の穏やかな木目、建具枠と暖白の左官壁の取り合い、指が触れる高さの角の納まりを主役にする。縦構図、画面左下から右上へ窓台の線が通る。右上から柔らかな昼光、背景は自然な浅い被写界深度。人物、工具、文字、ロゴなし。低彩度、木部の赤みと黄色みを抑え、素材の繊維を丁寧に表現。">
+      画像02｜木の接写。施工写真詳細、思想、事業比較、会社、工程第二段階に再利用。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="about:plaster" data-tags="左官,壁,自然光,陰影,素材,縦位置" data-aspect="portrait">
+    <figcaption data-prompt="暖白の左官壁と細い木製窓枠を写した実写調の建築素材写真。画面の約75%を微細な鏝跡のある平らな壁にし、左上からの柔らかな自然光が右下へ緩やかな陰影をつくる。右端に控えめなオーク材の窓枠を入れ、住宅の一部だと分かる構図。縦位置、目線の高さ、被写界深度は深め。強いスポット光、アーチ、装飾棚、人物、文字、ロゴは入れない。背景は暖白と淡い灰緑、過度に滑らかなCG質感を避ける。">
+      画像03｜左官の接写。思想、写真一覧・詳細、見学案内、採用に再利用。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="service:renovation" data-tags="住宅,全面リノベーション,木,左官,空間のつながり,横位置" data-aspect="landscape">
+    <figcaption data-prompt="日本の中古住宅を全面リノベーションした空間を想定する、実写調の建築写真。控えめな既存の木柱を一本残し、暖白の左官壁と落ち着いたオーク床で、居間から奥のダイニングへ二つの空間が緩やかにつながる。手前に余白、奥に簡素な木の家具を少数置く。左窓から自然光、水平垂直を整えた広角すぎない横構図。生活のための住宅らしい規模感。改修前後の分割画像にしない。人物、暖炉、文字、ロゴ、豪華な石材、過度な演出はなし。">
+      画像04｜全面リノベーションの設計イメージ。トップ、思想、写真一覧・詳細、お知らせに再利用。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="model-house:exterior" data-tags="平屋,住宅外観,木,左官,庭,横位置" data-aspect="landscape">
+    <figcaption data-prompt="日本の静かな住宅地にある平屋の設計イメージを、実写の建築外観写真のように描く。低い軒、灰白の左官外壁、木製の玄関まわり、控えめな植栽と砂利の前庭。正面から少し斜め、35mm相当、建物全体の水平線を整える。曇りがちな朝の柔らかな光で外壁の質感を残す。彩度を抑えた灰緑と自然な木色。画面中央に建物をまとめ、上下を横長に切り取れる構図。人物、車、表札、看板、住所、ロゴ、文字は入れない。">
+      画像05｜外観の設計イメージ。モデルハウス導入、新築紹介、トップの小さな横写真に使用。実在施設とは表示しない。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="flow:craft" data-tags="木工,職人の手,施工,住宅,現場,横位置" data-aspect="landscape">
+    <figcaption data-prompt="日本の木造住宅の施工を想定する実写調の記録写真。作業台の上で木材の納まりを確かめる成人の職人の手と前腕を中心に、木口、鉛筆の控えめな印、手工具を写す。顔は画面に入れない。背景に施工途中の木造室内が自然にぼけて見える。危険な工具操作は写さない。窓からの柔らかい自然光、低彩度、実際の手の皮膚と木の繊維が自然に見える質感。横位置で左側に手、右側に木材の長い線。企業名、文字、ロゴなし。">
+      画像06｜手仕事のイメージ。工程、トップ、会社、採用に再利用。
+    </figcaption>
+  </figure>
+
+  <figure data-placement="contact:meeting" data-tags="家づくり相談,図面,素材見本,木,打ち合わせ,横位置" data-aspect="landscape">
+    <figcaption data-prompt="住宅の設計相談を想定した実写調写真。木のテーブル上に、文字が読めない簡素な住宅平面図、オーク材と暖白の左官の小さな素材見本、鉛筆を置く。成人二人の手だけが画面の左右端から少し入り、図面と素材を確かめている。顔や身体全体は写さない。真上ではなく斜め45度からの横構図。自然な窓光、落ち着いた中間調、背景は暖白の壁。営業資料のロゴ、判読できる文字、連絡先、模型、派手な小物は入れない。">
+      画像07｜相談のイメージ。相談ページ、記事、ニュース、工程第一段階に再利用。
+    </figcaption>
+  </figure>
+</section>
+
+<section id="reference-review">
+  <h2>7. 部品参考の確認と採用範囲</h2>
+  <p>モバイル表現は<a href="https://loadmo.re/posts/in-common-with">指定カタログの写真中心事例</a>を確認対象とした。写真・最小限の情報という着眼点を、本案では390pxでの写真幅100%・76%・88%・70%の変化として具体化する。参考先のインタラクションそのものは導入しない。</p>
+  <p>ナビゲーションは<a href="https://chesapeakeplywood.com/">指定された木材関連サイト</a>で、商品・用途・会社・相談の入口が分かれている構造を確認した。本案では「注文住宅・リノベーション」「家づくりの流れ」のように事業内容を読むだけで判断できる日本語へ置き換える。</p>
+  <p>CTAは<a href="https://counterpublic.org/">指定されたCTA参考ページ</a>も確認対象とした。本案の導線は独自に固定し、「相談を予約する」は相談フォーム、「見学の希望を入力する」は見学種別を選択したフォーム、「写真を見る」は写真一覧へ接続する。遷移先と操作結果の一致を最終判断基準とする。</p>
+  <p class="note">提出版の審査では、同サイズのカード一覧への置換、写真の全幅統一、全章同一padding、下層本文の省略を修正対象とする。写真の大小、配置の左右差、章ごとの余白量、本文と写真の密度差を本書の数値で照合する。</p>
+</section>
+</main>
+</body>
+</html>

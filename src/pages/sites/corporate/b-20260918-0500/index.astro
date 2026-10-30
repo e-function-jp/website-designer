@@ -1,0 +1,25 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from './_site';
+import { url } from '../../../../lib/site';
+import EditorialHero from '../../../../components/sections/EditorialHero.astro';
+import LabeledSection from '../../../../components/sections/LabeledSection.astro';
+import WorkTileGrid from '../../../../components/sections/WorkTileGrid.astro';
+import NewsRows from '../../../../components/sections/NewsRows.astro';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+
+const images = { A: '/sites/corporate/_shared/20260918-0500/img-a-03.jpg', B: '/sites/corporate/_shared/20260918-0500/img-a-04.jpg', C: '/sites/corporate/_shared/20260918-0500/img-a-05.jpg', D: '/sites/corporate/_shared/20260918-0500/img-a-06.jpg', E: '/sites/corporate/_shared/20260918-0500/img-a-07.jpg' } as const;
+const defs = [['A','企業の視覚統一','ブランディング・ロゴ・印刷物','/projects/identity/'],['B','ロゴの設計','ロゴ・グラフィック','/projects/mark/'],['C','冊子の情報設計','印刷物・グラフィック','/projects/editorial/'],['D','空間の案内計画','空間グラフィック','/projects/sign/'],['E','展示の体験設計','展示演出・印刷物','/projects/exhibition/']] as const;
+const orders = [[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4]];
+const views = [['全景','文字','紙への展開','形','全景'],['形','全景','文字','紙への展開','形'],['紙への展開','形','全景','文字','紙への展開'],['文字','紙への展開','形','全景','文字']];
+const works = orders.flatMap((row, r) => row.map((index, c) => { const d = defs[index]; return { kind: d[0], name: d[1], field: d[2], href: d[3], view: views[r][c], image: views[r][c] === '全景' ? images[d[0]] : undefined }; }));
+const rows = [{date:'2026.09.18',title:'目的から探す、サイトのご案内',text:'知りたい内容に合わせたページの選び方を紹介します。',href:'/news/site-guide/'},{date:'2026.09.18',title:'制作例の見方について',text:'担当領域と制作例の表示説明をご案内します。',href:'/news/work-guide/'},{date:'2026.09.18',title:'制作相談の前に整理しておきたいこと',text:'相談を準備するための読み物です。',href:'/news/consultation-guide/'}];
+const inspiration = [['紙の手触り','厚みと光が、受け取る印象を変える。','paper','0 0'],['文字の間隔','文字と文字の間にも、読みやすさが宿る。','letters','100% 0'],['余白の働き','置かない場所が、伝えたいことを支える。','space','0 100%'],['案内の順序','迷う手前に、必要な情報を置く。','wayfinding','100% 100%']];
+---
+<SiteLayout site={site} title="かたちで、意図を残す" description="企画から制作、現場監修までを社内でつなぐ蒼紙舎の視覚設計を、制作例と目的別の情報からご紹介します。" path="/" isHome>
+  <EditorialHero image="/sites/corporate/_shared/20260918-0500/img-a-01.jpg" alt="紙の見本を広げ、印刷物の仕上がりを確かめる制作風景" />
+  <LabeledSection label="蒼紙舎の考え方"><ScrollReveal animation="fade-up" duration={1000}><h1 class="text-[28px] leading-[1.8]">かたちで、<br />意図を残す</h1><p class="mt-8">中小企業や文化施設が伝えたいことを、ロゴ、印刷物、空間グラフィック、展示演出へ。蒼紙舎は企画から制作、現場監修までを社内でつなぐデザインスタジオです。目に触れる一つひとつに、伝える理由を持たせます。</p><dl class="mt-12 grid gap-6 sm:grid-cols-3"><div><dt class="text-[32px]">420件超</dt><dd>累計制作案件</dd></div><div><dt class="text-[32px]">68%</dt><dd>リピート発注率</dd></div><div><dt class="text-[32px]">35件</dt><dd>年間展示・空間案件</dd></div></dl><a href={url(site,'/about/')} class="mt-10 inline-block underline">蒼紙舎について</a></ScrollReveal></LabeledSection>
+  <LabeledSection wide label="制作のかたち"><p class="max-w-[42em]">ロゴの輪郭から、紙面の読み順、空間の案内まで。5つの制作例を通して、視覚設計の広がりをご覧いただけます。掲載画像は制作領域を伝えるための制作例です。</p><div class="mt-12"><WorkTileGrid site={site} works={works} /></div><a href={url(site,'/projects/')} class="mx-auto mt-16 block w-fit underline">制作例をすべて見る</a></LabeledSection>
+  <LabeledSection wide label="お知らせ"><ScrollReveal animation="fade-up" duration={1000}><NewsRows site={site} items={rows} /><a href={url(site,'/news/')} class="mt-8 inline-block underline">お知らせ一覧</a></ScrollReveal></LabeledSection>
+  <LabeledSection wide label="制作の背景"><h2 class="text-xl">かたちを考えるための、四つの視点</h2><ScrollReveal animation="fade-up" duration={1000} class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-8">{inspiration.map(([title, text, anchor, position]) => <a href={url(site,`/inspirations/#${anchor}`)} class="col-span-1 block underline-offset-4 hover:underline"><img src="/sites/corporate/_shared/20260918-0500/img-a-08.jpg" alt={`${title}を観察する写真`} width="2000" height="1250" loading="lazy" class="aspect-[8/5] w-full object-cover" style={`object-position:${position}`} /><h3 class="mt-3 text-base">{title}</h3><p class="mt-2 text-sm">{text}</p></a>)}</ScrollReveal></LabeledSection>
+</SiteLayout>

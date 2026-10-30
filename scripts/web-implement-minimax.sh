@@ -23,20 +23,46 @@ cd "$ROOT"
 
 RUN_DIR="${1:?run_dir required}"
 VARIANT="${2:?variant required (a|b)}"
+# 第3引数があれば「たたき台の採点結果」。提出版はこれを直す作業になる。
+DRAFT_SCORE="${3:-}"
 
-# opencode の -m は "provider/model" 形式
-MODEL="${WEB_DESIGNER_IMPL_MODEL:-opencode-go/minimax-m3}"
-IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-opencode}"
+# 実装 CLI は2系統を持つ。呼び出し方が違うので driver で分ける。
+#   copilot  … copilot -p "<prompt>" --model <model> --allow-all-tools
+#   opencode … opencode run --agent build -m <provider/model> "<prompt>"
+#
+# 既定は copilot / gpt-5.6-terra（2026-09-18〜）。opencode が利用上限に達したため
+# 切り替えた。同一ディレクション・同一素材でトップページを5モデルに実装させた比較
+#（docs/quality/runs/corporate-20260916-0500/compare/ と /compare/20260916-0500/）で、
+# gpt-5.6-terra は minimax-m3 と並んでディレクションの記述どおりに実装できていた。
+# opencode が復活したら WEB_DESIGNER_IMPL_DRIVER=opencode で戻す。
+IMPL_DRIVER="${WEB_DESIGNER_IMPL_DRIVER:-copilot}"
+case "$IMPL_DRIVER" in
+  copilot)
+    MODEL="${WEB_DESIGNER_IMPL_MODEL:-gpt-5.6-terra}"
+    IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-copilot}"
+    ;;
+  opencode)
+    # opencode の -m は "provider/model" 形式
+    MODEL="${WEB_DESIGNER_IMPL_MODEL:-opencode-go/minimax-m3}"
+    IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-opencode}"
+    ;;
+  *) echo "WEB_DESIGNER_IMPL_DRIVER は copilot か opencode" >&2; exit 2 ;;
+esac
 
 JOB="$RUN_DIR/job.json"
 [[ -f "$JOB" ]] || { echo "job.json がありません: $JOB" >&2; exit 1; }
 SITE_TYPE="$(python3 -c "import json;print(json.load(open('$JOB'))['site_type'])")"
 STAMP="$(python3 -c "import json;print(json.load(open('$JOB'))['stamp'])")"
 
+# ディレクションはラン1本。提出版は、たたき台と同じディレクションを
+# 採点の指摘で直したものであって、別案ではない。
 DIRECTION="$RUN_DIR/direction-${VARIANT}.html"
-[[ -f "$DIRECTION" ]] || { echo "ディレクションがありません: $DIRECTION" >&2; exit 1; }
+[[ -f "$DIRECTION" ]] || DIRECTION="$RUN_DIR/direction-a.html"
+[[ -f "$DIRECTION" ]] || { echo "ディレクションがありません: $RUN_DIR/direction-a.html" >&2; exit 1; }
 
+# 画像もラン1本。提出版はたたき台と同じ写真を使う（撮り直すと比較にならない）。
 MANIFEST="$RUN_DIR/image-manifest-${VARIANT}.json"
+[[ -f "$MANIFEST" ]] || MANIFEST="$RUN_DIR/image-manifest-a.json"
 MANIFEST_LINE="画像は使わない（image-manifest なし）。写真枠は CSS のプレースホルダで作る。"
 [[ -f "$MANIFEST" ]] && MANIFEST_LINE="画像: ${MANIFEST} の placement→path 対応表どおりに配置する。パスは書き換えない。"
 
@@ -45,11 +71,57 @@ LOG="$RUN_DIR/implement-${VARIANT}.raw.log"
 META_OUT="$RUN_DIR/meta/${VARIANT}.json"
 mkdir -p "$RUN_DIR/meta"
 
+# --- 改善モード（提出版）の指示 ------------------------------------------
+REVISION_BLOCK=""
+if [[ -n "$DRAFT_SCORE" && -f "$DRAFT_SCORE" ]]; then
+  DRAFT_DIR="src/pages/sites/${SITE_TYPE}/a-${STAMP}"
+  DRAFT_ISSUES="$(python3 -c "
+import json
+d = json.load(open('$DRAFT_SCORE'))
+m = (d.get('models') or {}).get('a', {})
+print('総合', m.get('total'), '/ 内訳', json.dumps(m.get('layers', {}), ensure_ascii=False))
+print()
+print('### 直す指摘')
+for i, s in enumerate(m.get('issues', []), 1):
+    print(f'{i}. {s}')
+notes = m.get('page_notes') or {}
+if notes:
+    print()
+    print('### ページ別の指摘')
+    for k, v in notes.items():
+        print(f'- {k}: {v}')
+st = m.get('strengths') or []
+if st:
+    print()
+    print('### 残す（壊さない）良かった点')
+    for s in st:
+        print(f'- {s}')
+")"
+  REVISION_BLOCK="
+## これは「提出版」の実装である（最重要）
+
+同じディレクションで先に**たたき台**を作り、独立の審査員に採点させた。
+その指摘を直したものが提出版であり、**別案ではない**。
+
+- たたき台の実装: \`${DRAFT_DIR}/\`（読んでよい。丸ごとコピーしない）
+- たたき台で良かった点は引き継ぐ。指摘された箇所だけを作り直す。
+- 提出版の出力先は \`${OUT_DIR}/\` で、たたき台は書き換えない。
+
+### たたき台の採点結果
+
+${DRAFT_ISSUES}
+
+**上の指摘は1件ずつ潰すこと。** 直せない指摘があるなら、最後の報告に
+「どれを・なぜ直せなかったか」を書く。黙って落とさない。
+"
+fi
+
 PROMPT=$(cat <<EOF
 あなたは website-designer リポジトリ (${ROOT}) で Astro の website を実装するエンジニア。
 ファイル作成・ビルド・品質チェックまで自分で行ってよい。ただし
 **main ブランチのまま作業し、git add / commit / push は一切しない**。
 
+${REVISION_BLOCK}
 ## 実装対象
 
 - 出力ディレクトリ: ${OUT_DIR}/
@@ -119,6 +191,11 @@ PROMPT=$(cat <<EOF
 
 ## 禁止事項
 
+- \`grid-cols-12\` のような**分割数だけのグリッド**を切って、子に \`col-span-*\` を付け忘れること
+  （子が1カラム = 幅55px ほどに潰れ、本文が1文字ずつ縦に折り返される。
+  実測 2026-09-16: これ1件でトップとサービスの2ページが読めなくなり、採点が38点まで落ちた。
+  ビルドも静的チェックも通ってしまうので、書いた直後に自分で確かめること。
+  \`arch-grid-span-missing\` が検出する）
 - \`<style is:global>\` で \`.btn\` \`.card\` \`.input\` 等の DaisyUI 共通クラスを上書きすること
   （1ビルドに複数サイトが載るので他サイトを壊す。\`arch-global-style-collision\` が検出する）
 - DaisyUI 既定テーマ（light / dark / cupcake）のまま出荷すること
@@ -131,18 +208,34 @@ PROMPT=$(cat <<EOF
 
 ## 完了条件
 
-\`node scripts/web-quality-check.mjs\` で対象サイトのページに high の指摘が無いこと。
-終わったら、作成したファイル一覧と最終スコアを報告すること。
+\`node scripts/web-quality-check.mjs\` を実行し、**対象サイトのページについて**
+次の3つを満たすこと。high だけを見て終わらせない。
+
+1. high の指摘が無いこと
+2. \`arch-animation-missing\` が無いこと
+   （ディレクションの \`data-role="animation"\` を全ページ実装する。medium だが、
+   実測 2026-09-18/19 の2ラン連続で下層ページの演出が丸ごと抜け、
+   後から手作業で付け直している。トップだけ演出があって下層が静止しているのは
+   ページ間の一貫性の欠落として judge にも減点されている）
+3. \`arch-component-reuse\` が無いこと（各ページ最低2件、サイト全体で6種類以上）
+
+終わったら、作成したファイル一覧と最終スコア、上の3点それぞれの件数を報告すること。
 EOF
 )
 
 echo "==> ${IMPL_CMD} (${MODEL}) で実装中（時間がかかります）"
-# --agent build … ファイル作成・編集ができるエージェント
-"$IMPL_CMD" run --agent build -m "$MODEL" "$PROMPT" > "$LOG" 2>&1 || true
+if [[ "$IMPL_DRIVER" == "copilot" ]]; then
+  # --allow-all-tools は非対話実行に必須。-s で応答本文だけを拾う。
+  # -C でリポジトリを作業ディレクトリに固定する。
+  "$IMPL_CMD" -p "$PROMPT" --model "$MODEL" --allow-all-tools -s -C "$ROOT" > "$LOG" 2>&1 || true
+else
+  # --agent build … ファイル作成・編集ができるエージェント
+  "$IMPL_CMD" run --agent build -m "$MODEL" "$PROMPT" > "$LOG" 2>&1 || true
+fi
 
-python3 - "$META_OUT" "$SITE_TYPE" "$VARIANT" "$STAMP" "$MODEL" "$PROVIDER" "$OUT_DIR" <<'PYEOF'
+python3 - "$META_OUT" "$SITE_TYPE" "$VARIANT" "$STAMP" "$MODEL" "$OUT_DIR" "${IMPL_DRIVER}-cli" <<'PYEOF'
 import json, sys, pathlib, datetime
-meta_out, site_type, variant, stamp, model, provider, out_dir = sys.argv[1:8]
+meta_out, site_type, variant, stamp, model, out_dir, provider = sys.argv[1:8]
 d = pathlib.Path(out_dir)
 pages = sorted(str(p.relative_to(d)) for p in d.rglob('*.astro')) if d.exists() else []
 pathlib.Path(meta_out).write_text(json.dumps({
@@ -151,10 +244,10 @@ pathlib.Path(meta_out).write_text(json.dumps({
     "stamp": stamp,
     "route": f"/sites/{site_type}/{variant}-{stamp}/",
     "model": model,
-    "provider": "opencode-cli",
+    "provider": provider,
     "pages_created": pages,
     "has_site_config": (d / "_site.ts").exists(),
-    "tokens": {"note": "hermes -z oneshot; per-session token rows not captured"},
+    "tokens": {"note": f"{provider}; per-session token rows not captured"},
     "implemented_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
 }, ensure_ascii=False, indent=2), encoding="utf-8")
 print(f"  作成ページ: {len(pages)} 件 {pages}")

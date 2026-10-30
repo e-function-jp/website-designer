@@ -1,0 +1,240 @@
+{
+  "url": "https://3jigen.jp/flow",
+  "slug": "flow",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260919-0500/motion/flow-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260919-0500/motion/flow-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://3jigen.jp/concept",
+      "label": "Concept"
+    },
+    {
+      "href": "https://3jigen.jp/flow",
+      "label": "Flow"
+    },
+    {
+      "href": "https://3jigen.jp/album",
+      "label": "Album"
+    },
+    {
+      "href": "https://3jigen.jp/modelhouse",
+      "label": "Model House"
+    },
+    {
+      "href": "https://3jigen.jp/company",
+      "label": "Company"
+    },
+    {
+      "href": "https://3jigen.jp/recruit",
+      "label": "Recruit"
+    },
+    {
+      "href": "https://3jigen.jp/news",
+      "label": "News"
+    },
+    {
+      "href": "https://3jigen.jp/contact",
+      "label": "Contact"
+    },
+    {
+      "href": "https://www.instagram.com/3jigen/",
+      "label": "Instagram"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "img",
+      "baseClass": "js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -42)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 438)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "l-footer-contact__img1 js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -500)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -13)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "l-footer-contact__img2 js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -500)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -13)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "swiper-wrapper",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -322.39, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -880.401, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "40s",
+        "delay": "0s",
+        "timing": "linear"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "swiper-wrapper"
+      },
+      "timing": {
+        "duration": 40000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": "3.11.0",
+    "ScrollTrigger": "present",
+    "lenis": null,
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": "present",
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [
+    {
+      "tag": "div",
+      "className": "c-loading js-loading",
+      "displayNow": "none",
+      "opacityNow": "1"
+    }
+  ],
+  "meta": {
+    "title": "家づくりの流れ | 三次元 The Classic",
+    "h1": "家づくりの流れ",
+    "totalHeight": 8778,
+    "viewportsTall": 9.8,
+    "sectionCount": 13,
+    "imgCount": 23,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": [],
+  "scrollYAfter": 7878,
+  "css": {
+    "keyframes": 9,
+    "transitionRules": 35,
+    "animationRules": 3,
+    "keyframeNames": [
+      "spin",
+      "blink",
+      "swiper-preloader-spin",
+      "hide-bg-line",
+      "show-bg-line",
+      "move-bg-line"
+    ]
+  },
+  "header": null,
+  "probedBefore": 313,
+  "revealSummary": {
+    "total": 3,
+    "scrollLinkedCount": 1,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 2,
+      "fade-side": 1,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 3,
+    "durationMs": {
+      "min": 40000,
+      "median": 40000,
+      "max": 40000
+    },
+    "easings": [
+      "ease",
+      "linear"
+    ]
+  }
+}

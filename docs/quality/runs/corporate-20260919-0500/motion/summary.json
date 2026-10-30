@@ -1,0 +1,163 @@
+{
+  "reference_url": "https://3jigen.jp/",
+  "analyzed_at": "2026-09-18T20:01:44.182Z",
+  "pages": [
+    {
+      "url": "https://3jigen.jp/",
+      "slug": "top",
+      "title": "三次元 The Classic",
+      "viewportsTall": 11.9,
+      "revealCount": 17,
+      "dominantKind": "fade-up",
+      "durationMs": {
+        "min": 2000,
+        "median": 2000,
+        "max": 40000
+      },
+      "easings": [
+        "ease",
+        "linear"
+      ],
+      "scrollLinkedCount": 6,
+      "scrollTriggerCount": 0,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 1,
+      "keyframes": 9,
+      "header": null,
+      "libs": {
+        "gsap": "3.11.0",
+        "ScrollTrigger": "present",
+        "swiper": "present"
+      }
+    },
+    {
+      "url": "https://3jigen.jp/concept",
+      "slug": "concept",
+      "title": "コンセプト | 三次元 The Classic",
+      "viewportsTall": 9.4,
+      "revealCount": 8,
+      "dominantKind": "fade-up",
+      "durationMs": {
+        "min": 40000,
+        "median": 40000,
+        "max": 40000
+      },
+      "easings": [
+        "ease",
+        "linear"
+      ],
+      "scrollLinkedCount": 1,
+      "scrollTriggerCount": 0,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 1,
+      "keyframes": 9,
+      "header": null,
+      "libs": {
+        "gsap": "3.11.0",
+        "ScrollTrigger": "present",
+        "swiper": "present"
+      }
+    },
+    {
+      "url": "https://3jigen.jp/flow",
+      "slug": "flow",
+      "title": "家づくりの流れ | 三次元 The Classic",
+      "viewportsTall": 9.8,
+      "revealCount": 3,
+      "dominantKind": "fade-up",
+      "durationMs": {
+        "min": 40000,
+        "median": 40000,
+        "max": 40000
+      },
+      "easings": [
+        "ease",
+        "linear"
+      ],
+      "scrollLinkedCount": 1,
+      "scrollTriggerCount": 0,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 1,
+      "keyframes": 9,
+      "header": null,
+      "libs": {
+        "gsap": "3.11.0",
+        "ScrollTrigger": "present",
+        "swiper": "present"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 17,
+      "concept": 8,
+      "flow": 3
+    },
+    "reveal_count_spread": 14,
+    "motion_consistent": false,
+    "libs_union": [
+      "gsap",
+      "ScrollTrigger",
+      "swiper"
+    ],
+    "header_behavior": null
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 17,
+    "reveal_count_reduced": 17,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {},
+    "loader_candidates": [
+      {
+        "tag": "body",
+        "className": "home blog wp-theme-3jigen l-body -loading -loaded",
+        "displayNow": "block",
+        "opacityNow": "1"
+      },
+      {
+        "tag": "div",
+        "className": "c-loading js-loading",
+        "displayNow": "none",
+        "opacityNow": "1"
+      }
+    ]
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade-up",
+    "scroll_linked_count": 6,
+    "scroll_trigger_summary": {
+      "total": 0,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": {
+      "min": 2000,
+      "median": 2000,
+      "max": 40000
+    },
+    "easings": [
+      "ease",
+      "linear"
+    ],
+    "reveal_kinds": {
+      "fade": 0,
+      "fade-up": 16,
+      "fade-side": 1,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "page_length_viewports": [
+      11.9,
+      9.4,
+      9.8
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+---
+/**
+ * EvidenceRows — 数値と条件を行として並べるコンポーネント。
+ *
+ * ディレクション指示 (direction-b):
+ *   - 数値 + 単位（数値と単位を分離しない）+ 条件 を 1 行
+ *   - 3件以上対応。境界は細細の罫線
+ *   - 白背景: 数値 4列・条件 8列、濃紺背景: 白文字で縦積み
+ */
+interface Evidence {
+  value: string;
+  condition: string;
+}
+
+interface Props {
+  heading?: string;
+  body?: string;
+  evidences: Evidence[];
+  /** 'light' = 白背景 / 'dark' = 濃紺背景白文字 */
+  variant?: 'light' | 'dark';
+  sectionNumber?: string;
+}
+
+const {
+  heading,
+  body,
+  evidences,
+  variant = 'light',
+  sectionNumber,
+} = Astro.props;
+
+const bgClass = variant === 'dark' ? 'bg-primary text-primary-content' : 'bg-base-100';
+const textColor = variant === 'dark' ? 'text-primary-content' : 'text-base-content';
+const numColor = variant === 'dark' ? 'text-primary-content' : 'text-primary';
+const divider = variant === 'dark' ? 'border-white/30' : 'border-base-300';
+---
+
+<section class={`er ${bgClass}`}>
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+    {heading && (
+      <div class="er__head">
+        {sectionNumber && <p class={`er__num ${textColor}`} aria-hidden="true">{sectionNumber}</p>}
+        <h2 class={`er__heading ${textColor}`}>{heading}</h2>
+      </div>
+    )}
+    {body && <p class={`er__body ${textColor}`}>{body}</p>}
+    <ul class={`er__list ${divider}`}>
+      {evidences.map((e) => (
+        <li class={`er__row ${divider}`}>
+          <div class={`er__value ${numColor}`}>{e.value}</div>
+          <p class={`er__cond ${textColor}`}>{e.condition}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .er__head { margin-bottom: 24px; }
+  .er__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    margin: 0 0 12px;
+  }
+  .er__heading {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  .er__body {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 32px;
+    opacity: 0.85;
+  }
+
+  .er__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .er__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 24px 0;
+    border-bottom: 1px solid currentColor;
+    border-color: inherit;
+  }
+  .er__row:first-child { border-top: 1px solid currentColor; }
+
+  .er__value {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+  .er__cond {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    opacity: 0.92;
+  }
+
+  /* PC: 数値 4列・条件 8列の 12列グリッド */
+  @media (min-width: 768px) {
+    .er__row {
+      grid-template-columns: 4fr 8fr;
+      gap: 32px;
+      align-items: center;
+      padding: 28px 0;
+    }
+  }
+</style>

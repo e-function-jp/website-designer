@@ -1,0 +1,86 @@
+---
+/**
+ * モデル比較（corporate-20260916-0500 のトップページ）。
+ *
+ * 同じディレクション（direction-b.html）・同じ画像・同じ _site.ts から、
+ * 実装モデルだけを変えてトップページを1枚ずつ作らせたものを並べる。
+ * 比較の主語は「モデルの実装」なので、他の条件は動かさない。
+ *
+ * minimax-m3 版はサンプルサイト本体（提出版）なので、そのルートを指す。
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const stamp = '20260916-0500';
+const entries = [
+  {
+    model: 'minimax-m3',
+    via: 'opencode CLI',
+    href: `/sites/corporate/b-${stamp}/`,
+    note: '提出版。サイト全7ページを実装した中のトップ。',
+    current: true,
+  },
+  {
+    model: 'Claude Sonnet 5',
+    via: 'copilot CLI',
+    href: `/compare/${stamp}/sonnet5/`,
+    note: 'トップのみ。',
+  },
+  {
+    model: 'Gemini 3.8 Flash',
+    via: 'copilot CLI',
+    href: `/compare/${stamp}/gemini38flash/`,
+    note: 'トップのみ。',
+  },
+  {
+    model: 'MAI-Code-1.1-Flash',
+    via: 'copilot CLI',
+    href: `/compare/${stamp}/maicode/`,
+    note: 'トップのみ。',
+  },
+  {
+    model: 'gpt-5.6-terra',
+    via: 'copilot CLI',
+    href: `/compare/${stamp}/gpt56terra/`,
+    note: 'トップのみ。',
+  },
+];
+---
+<BaseLayout
+  title="モデル比較 — 軌道セールス設計株式会社トップページ"
+  description="同一ディレクション・同一画像・同一サイト定義で、実装モデルだけを変えて作ったトップページを並べて比較するページ。corporate-20260916-0500 のラン成果物。"
+  theme="corporate"
+>
+  <main id="main" class="max-w-4xl mx-auto px-4 py-12 md:py-16 space-y-10">
+    <section class="space-y-3">
+      <p class="text-sm text-base-content/60">
+        <a href="/" class="link link-hover">サンプル</a> / モデル比較
+      </p>
+      <h1 class="text-3xl md:text-4xl font-bold">実装モデルの比較</h1>
+      <p class="text-base-content/80 leading-relaxed">
+        ラン <code class="text-sm">corporate-20260916-0500</code>（軌道セールス設計株式会社）の
+        <strong>トップページ1枚</strong>を、実装モデルだけ変えて作ったものです。
+        ディレクション・写真・サイト定義（ヘッダー/フッター/ナビ）は4本とも同じで、
+        違うのは実装したモデルだけです。
+      </p>
+      <p class="text-sm text-base-content/60">
+        ヘッダーのナビは既存サイトの下層ページへ繋がります（下層は minimax-m3 版のみ実装）。
+      </p>
+    </section>
+
+    <ul class="space-y-4">
+      {entries.map((e) => (
+        <li>
+          <a
+            href={e.href}
+            class="flex flex-wrap items-baseline gap-x-3 gap-y-1 border border-base-300 rounded-lg p-5 hover:border-primary transition-colors"
+          >
+            <span class="text-lg font-bold">{e.model}</span>
+            <span class="badge badge-sm badge-outline">{e.via}</span>
+            {e.current && <span class="badge badge-sm badge-primary">提出版</span>}
+            <span class="w-full text-sm text-base-content/70">{e.note}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</BaseLayout>

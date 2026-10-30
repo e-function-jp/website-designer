@@ -1,0 +1,21 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import WorkStudyPlate from './WorkStudyPlate.astro';
+import RelatedPagePair from './RelatedPagePair.astro';
+import { url } from '../../lib/site';
+import type { SiteConfig } from '../../lib/site';
+interface Props {
+  site: SiteConfig; kind: 'A'|'B'|'C'|'D'|'E'; number: string; field: string; image: string; imageAlt: string;
+  overview: string; heading: string; detail: string; plates: string[]; related: { title: string; text: string; href: string }[];
+}
+const { site, kind, number, field, image, imageAlt, overview, heading, detail, plates, related } = Astro.props;
+---
+<section class="mx-auto max-w-[1280px] px-5 pt-12 lg:px-20">
+  <h1 class="sr-only">{number === '01' ? '企業の視覚統一' : number === '02' ? 'ロゴの設計' : number === '03' ? '冊子の情報設計' : number === '04' ? '空間の案内計画' : '展示の体験設計'}</h1>
+  <div class="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]"><p class="text-sm">制作例{number}</p><ScrollReveal animation="fade-up" duration={1000}><p class="max-w-[42em] text-base leading-loose">{overview}</p></ScrollReveal></div>
+  <ScrollReveal animation="clip-up" duration={1500} class="mt-16 lg:ml-[328px]"><img src={image} alt={imageAlt} width="1160" height="2050" loading="lazy" class="aspect-[3/2] w-full object-cover" /></ScrollReveal>
+</section>
+<section class="mx-auto mt-20 max-w-[1280px] px-5 lg:px-20">
+  <div class="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]"><p class="text-sm">{heading}</p><div><ScrollReveal animation="fade-up" duration={1000}><p class="max-w-[42em] whitespace-pre-line leading-loose">{detail}</p></ScrollReveal><ScrollReveal animation="fade-up" duration={1500} class="mt-12"><div class="grid grid-cols-2 gap-8">{plates.map((plate) => <WorkStudyPlate kind={kind} view={plate} />)}</div></ScrollReveal></div></div>
+</section>
+<RelatedPagePair site={site} items={related} />

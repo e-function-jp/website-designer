@@ -1,0 +1,15 @@
+---
+interface Row { number: string; title: string; body: string; }
+interface Props { rows: Row[]; }
+const { rows } = Astro.props;
+---
+<ol class="phase-rows">
+  {rows.map((row) => <li><span>{row.number}</span><div><h3>{row.title}</h3><p>{row.body}</p></div></li>)}
+</ol>
+<style>
+  .phase-rows { list-style:none; padding:0; margin:0; border-top:1px solid var(--color-base-300); }
+  li { display:grid; grid-template-columns:40px 1fr; gap:16px; padding:32px 0; border-bottom:1px solid var(--color-base-300); }
+  span { font-size:20px; color:var(--color-secondary); }
+  h3 { margin:0 0 12px; font-size:20px; font-weight:500; }
+  p { margin:0; font-size:16px; line-height:1.9; }
+</style>

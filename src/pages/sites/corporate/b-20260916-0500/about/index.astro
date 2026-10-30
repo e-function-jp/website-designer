@@ -1,0 +1,273 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import ProcessRail from '../../../../../components/sections/ProcessRail.astro';
+import FieldWindow from '../../../../../components/sections/FieldWindow.astro';
+import NextPageLinks from '../../../../../components/site/NextPageLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+
+const aboutWorkImage = {
+  src: `${SHARED}/img-b-02.jpg`,
+  alt: '資料を囲み、進め方を検討する人々の手元',
+};
+
+const relationshipSteps = [
+  {
+    number: '01',
+    label: '組織診断',
+    body: '商談と案件管理の現状を捉え、設計の出発点にする。',
+  },
+  {
+    number: '02',
+    label: '商談設計・プレイブック',
+    body: '受注までのプロセスを共通の言葉にして、組織で扱える形へ整える。',
+  },
+  {
+    number: '03',
+    label: '現場定着',
+    body: '整えた仕組みを日々の営業活動へつなぐ。',
+  },
+];
+
+const principles = [
+  {
+    number: '01',
+    title: '現状を捉える',
+    body: '伴走型の組織診断を軸に、営業組織の課題を整理します。仕組みを先に当てはめるのではなく、商談と案件管理の現状を、設計の出発点として捉えます。',
+  },
+  {
+    number: '02',
+    title: '進め方を共有する',
+    body: '商談設計とパイプライン可視化を通じて、受注に向けたプロセスを整理します。プレイブックは、その進め方を組織で共有するための土台です。',
+  },
+  {
+    number: '03',
+    title: '実践につなぐ',
+    body: '整備したプレイブックを、現場の営業活動へつなげます。資料の完成だけで区切らず、現場定着までを含むプログラムとして支援します。',
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="私たちの営業設計"
+  description="受注の型を、現場に残す。組織診断からプレイブック整備、現場定着までをつなぐ、軌道セールス設計の営業変革の考え方をご紹介します。"
+  path="/about/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '私たちの営業設計' }]}
+>
+  <!-- 01 理念の入口（共通PageIntro） -->
+  <PageIntro
+    title="私たちの営業設計"
+    description="受注の型を、現場に残す。私たちは、営業の仕組みをつくることと、その仕組みが現場で使われ続けることを、一つの課題として捉えています。組織診断からプレイブック整備、現場定着までをつなぐ。それが、軌道セールス設計の営業変革です。"
+  />
+
+  <!-- 02 仕組みと実践の関係（白背景・左本文・右縦線図） -->
+  <section class="relationship bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="relationship__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="relationship__copy lg:col-span-5">
+          <p class="relationship__num" aria-hidden="true">02</p>
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <SectionTitle title="設計と実践を、ひと続きに。" align="left" class="relationship__title" />
+            <div class="relationship__body">
+              <p>受注に向けたプロセスは、商談の場面だけでは完結しません。どの案件に、どのような状況があるのかを捉えること。進め方をチームで共有できる形にすること。整えた仕組みを、日々の営業活動へつなぐこと。組織診断は、その起点です。</p>
+              <p>商談設計とパイプライン可視化を通じて、営業の進め方を共通の言葉にし、プレイブックの整備と現場定着へ結びつけます。</p>
+            </div>
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-7">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <ProcessRail
+              steps={relationshipSteps}
+              caption="再現性のある受注プロセス。"
+            />
+          </ScrollReveal>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 三つの支援の視点（白背景・写真左・3つの説明行） -->
+  <section class="principles bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="principles__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <figure class="principles__photo lg:col-span-5">
+          <img
+            src={aboutWorkImage.src}
+            alt={aboutWorkImage.alt}
+            loading="lazy"
+            width="1200"
+            height="1500"
+            class="principles__img aspect-[4/5]"
+          />
+          <figcaption class="principles__caption">支援場面のイメージ</figcaption>
+        </figure>
+        <div class="principles__copy lg:col-span-7">
+          <p class="principles__num" aria-hidden="true">03</p>
+          <h2 class="principles__heading">現場に残すために。</h2>
+          <ul class="principles__list">
+            {principles.map((p) => (
+              <li class="principles__row">
+                <div class="principles__row-num">{p.number}</div>
+                <div class="principles__row-body">
+                  <p class="principles__row-title">{p.title}</p>
+                  <p class="principles__row-text">{p.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 支援内容へつなぐ（濃紺・テキストリンク） -->
+  <section class="closing bg-primary text-primary-content">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="closing__num" aria-hidden="true">04</p>
+        <h2 class="closing__heading">現場で使える型を、ともにつくる。</h2>
+        <div class="closing__body">
+          <p>私たちが支援するのは、中堅製造業とSaaS企業の営業組織です。営業責任者、経営企画、事業責任者の皆さまと、商談設計・パイプライン可視化・現場定着を一体で考えます。自社の課題がどの領域にあるのかを整理する際は、営業変革プログラムの支援内容をご確認ください。組織診断の申し込みも、同じサイトから進められます。</p>
+        </div>
+        <p class="closing__link-row">
+          <a href={url(site, '/service/')} class="closing__link">
+            営業変革プログラムを見る
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <NextPageLinks site={site} currentPath="/about/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .relationship__num,
+  .principles__num,
+  .closing__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+  }
+  .closing__num { color: var(--color-secondary); }
+  .relationship__title { margin-bottom: 24px; }
+  .relationship__body p {
+    font-size: 16px;
+    line-height: 1.9;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+  .relationship__body p:last-child { margin-bottom: 0; }
+
+  .principles__photo { margin: 0; }
+  .principles__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: 50% 45%;
+    background: var(--color-base-300);
+    display: block;
+  }
+  .principles__caption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-base-content);
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+  .principles__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 32px;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .principles__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .principles__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-base-300);
+  }
+  .principles__row-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 0.05em;
+  }
+  .principles__row-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--color-base-content);
+  }
+  .principles__row-text {
+    font-size: 15px;
+    line-height: 1.85;
+    margin: 0;
+    color: var(--color-base-content);
+  }
+
+  @media (min-width: 768px) {
+    .principles__row {
+      grid-template-columns: 1fr 4fr;
+      gap: 24px;
+      align-items: start;
+    }
+  }
+
+  .closing__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 32px;
+    letter-spacing: 0.02em;
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .closing__body {
+    max-width: 720px;
+  }
+  .closing__body p {
+    font-size: 16px;
+    line-height: 1.9;
+    margin: 0 0 24px;
+    opacity: 0.95;
+  }
+  .closing__body p:last-child { margin-bottom: 0; }
+  .closing__link-row { margin-top: 32px; }
+  .closing__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary-content);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .closing__link { transition: none; }
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from './_site';
+import SectionTitle from '../../../../components/ui/SectionTitle.astro';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+import AxisRule from '../../../../components/sections/AxisRule.astro';
+import TextArrowLink from '../../../../components/sections/TextArrowLink.astro';
+import WorkScreen from '../../../../components/sections/WorkScreen.astro';
+import ConsultationRows from '../../../../components/sections/ConsultationRows.astro';
+const base = '/sites/corporate/_shared/20260920-1616/';
+const works = [
+  ['事業の強みを、相談の入口へ。', '/works/brand/', 'img-a-02.jpg', '奥行きのある落ち着いた業務空間', 'landscape'],
+  ['働く姿から、応募の判断へ。', '/works/recruitment/', 'img-a-03.jpg', '資料を確認しながら仕事を進める人たち', 'portrait'],
+  ['広告の関心を、具体的な相談へ。', '/works/campaign/', 'img-a-04.jpg', '相談内容を整理する机上の手元', 'wide'],
+  ['公開後の動きから、次の改善へ。', '/works/brand/#measurement', 'img-a-06.jpg', '画面上の動きを確認して改善を検討する手元', 'portrait'],
+] as const;
+---
+
+<SiteLayout site={site} title="トップ" description="中堅BtoB企業のブランド、採用、キャンペーン施策を、企画設計から公開後の改善運用まで一貫して支援するノクスレイの案内です。" path="/" isHome>
+  <section id="hero" class="bg-neutral text-neutral-content min-h-[760px] px-5 pt-32 pb-16 lg:px-8 lg:min-h-[900px] relative overflow-hidden">
+    <div class="absolute inset-0 grid grid-cols-2 gap-3 opacity-55"><WorkScreen image={`${base}img-a-02.jpg`} alt="" title="" ratio="landscape" eager /><WorkScreen image={`${base}img-a-03.jpg`} alt="" title="" ratio="portrait" /><WorkScreen image={`${base}img-a-04.jpg`} alt="" title="" ratio="wide" /><WorkScreen image={`${base}img-a-01.jpg`} alt="" title="" ratio="landscape" /></div>
+    <div class="absolute inset-0 bg-neutral/70"></div><AxisRule class="absolute bottom-32 left-8 right-8 w-auto text-secondary" />
+    <div class="relative z-10 max-w-6xl mx-auto pt-72 lg:pt-96"><h1 class="max-w-4xl text-5xl leading-[1.35] lg:text-8xl">伝わる設計で、<br />成果を積む。</h1><p class="mt-8 max-w-2xl text-lg leading-9">中堅BtoB企業のブランドサイト・採用サイト・キャンペーンLPを、企画設計から公開後の改善運用まで。</p><TextArrowLink site={site} href="/service/" label="Web制作・改善運用を見る" class="mt-8" /><p class="mt-8 text-sm">画面は制作イメージです。</p></div>
+  </section>
+
+  <section id="stance" class="bg-neutral text-neutral-content px-5 py-24 lg:px-8 lg:py-48"><div class="max-w-6xl mx-auto"><h2 class="text-5xl leading-[1.35] lg:text-8xl">伝わることから、<br />成果は始まる。</h2><div class="mt-20 lg:ml-[35%]"><ScrollReveal animation="fade" duration={820}><p class="text-sm text-secondary">私たちの考え</p><h3 class="mt-5 text-3xl">事業の強みを、相手の判断材料へ。</h3><p class="mt-6 max-w-2xl leading-9">事業の価値は、詳しく説明するだけでは届きません。誰が、何を知り、どのように判断するのか。ノクスレイは業種ごとの検討の流れを踏まえて、情報の順序と接点を設計します。</p><p class="mt-5 max-w-2xl leading-9">公開は、その設計を確かめる出発点です。問い合わせや採用応募につながる動きを計測し、改善を積み重ねます。</p><TextArrowLink site={site} href="/about/" label="私たちについて" class="mt-8" /></ScrollReveal></div></div></section>
+
+  <section id="service-summary" class="px-5 py-20 lg:px-8 lg:py-32"><div class="max-w-6xl mx-auto grid gap-16 lg:grid-cols-2 lg:items-center"><div><SectionTitle title="企画から改善まで、ひとつの設計で。" align="left" /><p class="max-w-xl leading-9">ブランドサイト、採用サイト、キャンペーンLP。それぞれの目的に合わせて、情報設計、UI制作、計測設計をつなぎます。</p><TextArrowLink site={site} href="/service/" label="対応範囲と制作工程を見る" class="mt-8" /></div><ScrollReveal animation="fade" duration={820}><div class="grid grid-cols-2 gap-4 justify-items-center"><div class="col-span-2 circle">企画設計<small>業種と課題を整理</small></div><div class="circle">UI制作<small>迷わず伝わる接点へ</small></div><div class="circle">改善運用<small>計測から次の一手へ</small></div></div></ScrollReveal></div></section>
+
+  <section id="proof" class="bg-base-200 px-5 py-20 lg:px-8 lg:py-32"><div class="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[30%_1fr]"><SectionTitle title="設計と改善の積み重ね。" align="left" /><div class="space-y-6">{[['累計制作','240件超','ブランドサイト・採用サイト・キャンペーンLPの制作を積み重ねています。'],['公開後90日の問い合わせ','平均1.8倍','公開後の問い合わせの変化を、改善の判断材料にしています。'],['取引継続率','87%','公開後の改善運用まで、継続して支援します。']].map(([label,number,copy]) => <ScrollReveal animation="fade" duration={820}><article class="bg-neutral text-neutral-content p-8 lg:flex lg:items-center lg:justify-between"><div><h3 class="text-xl">{label}</h3><p class="mt-3 max-w-lg leading-8">{copy}</p></div><strong class="mt-5 block text-5xl tabular-nums lg:text-7xl">{number}</strong></article></ScrollReveal>)}<p class="text-sm">数値は本サンプルの企業設定に基づきます。個別案件の成果を保証するものではありません。</p></div></div></section>
+
+  <section id="works" class="bg-neutral text-neutral-content px-5 py-24 lg:px-8 lg:py-48"><div class="max-w-6xl mx-auto"><SectionTitle title="制作実績と、設計の考え方。" align="left" /><p class="max-w-xl leading-9">何を見せ、どこへつなぐか。対応するサイトの制作イメージから、情報設計の考え方をご紹介します。</p><div class="mt-20 grid gap-16 lg:grid-cols-2">{works.map(([title,href,image,alt,ratio], i) => <ScrollReveal animation="fade-up" duration={820} class={i % 2 ? 'lg:translate-y-32' : ''}><article><p class="mb-3 text-sm text-secondary">制作イメージ</p><WorkScreen image={`${base}${image}`} alt={alt} title={title} ratio={ratio} /><TextArrowLink site={site} href={href} label={title} class="mt-5" /></article></ScrollReveal>)}</div><TextArrowLink site={site} href="/works/" label="制作実績を見る" class="mt-16" /></div></section>
+
+  <section id="guides" class="px-5 py-20 lg:px-8 lg:py-32"><div class="max-w-6xl mx-auto space-y-24"><div class="grid gap-10 lg:grid-cols-[55%_35%] lg:justify-between"><div><SectionTitle title="Web刷新の前に、判断軸をそろえる。" align="left" /><p class="leading-9">目的、訪問者、問い合わせまでの導線。制作を始める前に整理しておきたい項目をまとめました。</p><TextArrowLink site={site} href="/download/#web" label="Web刷新の検討ガイドを読む" class="mt-7" /></div><WorkScreen image={`${base}img-a-02.jpg`} alt="奥行きのある落ち着いた業務空間" title="" /></div><div class="grid gap-10 lg:grid-cols-[35%_55%] lg:justify-between"><WorkScreen image={`${base}img-a-03.jpg`} alt="資料を確認しながら仕事を進める人たち" title="" ratio="portrait" /><div><SectionTitle title="採用サイトで、何を伝えるか。" align="left" /><p class="leading-9">仕事、働く環境、応募までの流れ。候補者の判断に必要な情報を、社内で確認するためのガイドです。</p><TextArrowLink site={site} href="/download/#recruitment" label="採用強化の検討ガイドを読む" class="mt-7" /></div></div></div></section>
+  <ConsultationRows site={site} />
+</SiteLayout>
+
+<style>
+  .circle { display: grid; place-content: center; width: min(42vw, 250px); aspect-ratio: 1; border-radius: 50%; background: var(--color-neutral); color: var(--color-neutral-content); text-align: center; font-weight: 700; }
+  .circle small { display: block; margin-top: .5rem; font-size: .75rem; font-weight: 400; }
+</style>

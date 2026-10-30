@@ -1,0 +1,451 @@
+{
+  "url": "https://nssg.jp/about/",
+  "slug": "about",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260918-0500/motion/about-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260918-0500/motion/about-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://nssg.jp/projects/",
+      "label": "Projects"
+    },
+    {
+      "href": "https://nssg.jp/about/",
+      "label": "About"
+    },
+    {
+      "href": "https://nssg.jp/service/",
+      "label": "Service"
+    },
+    {
+      "href": "https://nssg.jp/news/",
+      "label": "News"
+    },
+    {
+      "href": "https://nssg.jp/contact/",
+      "label": "Contact"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "l-header js-header",
+      "addedClass": [
+        "is-hidden"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "1s, 1s",
+        "delay": "0s, 0s",
+        "timing": "ease-out, ease"
+      },
+      "textSnippet": "NSSG\n              \n            \n       "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "g-logo",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.5s",
+        "delay": "0s",
+        "timing": "ease-out"
+      },
+      "textSnippet": "NSSG\n              \n            \n       "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "nav",
+      "baseClass": "g-header-navigation",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.5s",
+        "delay": "0s",
+        "timing": "ease-out"
+      },
+      "textSnippet": "Projects\n            About\n            S"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h2",
+      "baseClass": "m-heading2",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Value"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "about-value_body about-section_body",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "本質を探り、削ぎ落とす\n                            "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "about-value-images",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "https://nssg.jp/cms/wp-content/uploads/2"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h2",
+      "baseClass": "m-heading2",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Team"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "about-team_body about-section_body",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Art Director, CEO\n                      "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h2",
+      "baseClass": "m-heading2",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Independent Project"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "about-independent-projects-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "park\n                                   "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "about-independent-projects-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "paperwork\n                              "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "about-independent-projects-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Friday’s Worst Enemy\n                   "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "section",
+      "baseClass": "about-company-profile about-section",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Company Profile\n              \n\n        "
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "m-banner-list",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Service\n              \n                 "
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "About / NSSG – Branding, Art Direction",
+    "h1": "About",
+    "totalHeight": 5720,
+    "viewportsTall": 6.4,
+    "sectionCount": 18,
+    "imgCount": 25,
+    "videoCount": 0,
+    "canvasCount": 1
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 4820,
+  "css": {
+    "keyframes": 2,
+    "transitionRules": 124,
+    "animationRules": 6,
+    "keyframeNames": [
+      "swiper-preloader-spin",
+      "opacity-anime"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 191,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "l-header js-header"
+    },
+    "scrolled": {
+      "height": 191,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "l-header js-header is-hidden"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": true
+  },
+  "probedBefore": 396,
+  "revealSummary": {
+    "total": 11,
+    "scrollLinkedCount": 3,
+    "kinds": {
+      "fade": 11,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade",
+    "designedRevealCount": 11,
+    "durationMs": {
+      "min": 1000,
+      "median": 1000,
+      "max": 1000
+    },
+    "easings": [
+      "ease-in-out"
+    ]
+  }
+}

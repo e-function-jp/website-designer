@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro'; import { site } from '../../_site'; import AogamiEditorialPage from '../../../../../../components/sections/AogamiEditorialPage.astro';
+import ScrollReveal from '../../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="企業の視覚統一" description="企業の視覚統一を、ロゴ、印刷物、使用場面の関係から考える蒼紙舎の制作例をご紹介します。" path="/projects/identity/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'制作実績・制作例',href:'/projects/'},{label:'企業の視覚統一'}]}><ScrollReveal animation="fade-up" duration={1000}><AogamiEditorialPage site={site} title="企業の視覚統一" intro="担当領域：ブランディング・ロゴ・印刷物。企業の印象は、一つのロゴだけで決まるものではありません。名刺や案内など、見る人が出会う接点を通して積み重なります。実在の受注案件ではなく、制作領域を説明するための制作例です。" sections={[{label:'形と運用をつなぐ',heading:'揃える場所を決める',text:'文字の基準位置と余白の取り方を揃えます。媒体の大きさが変わっても、どこに名前があり、どこから読むかが分かる関係をつくります。小さな名刺と大きな案内を並べ、同じ企業の表現として受け取れるかを確認します。'}]} related={[{title:'ロゴの設計',text:'形と余白の検討を見る。',href:'/projects/mark/'},{title:'制作相談を申し込む',text:'ブランド刷新について相談する。',href:'/contact/'}]} /></ScrollReveal></SiteLayout>

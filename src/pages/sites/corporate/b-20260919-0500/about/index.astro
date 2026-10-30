@@ -1,0 +1,21 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { images } from '../content';
+import QuietPageIntro from '../../../../../components/sections/QuietPageIntro.astro';
+import EditorialPair from '../../../../../components/sections/EditorialPair.astro';
+import CircleTextLink from '../../../../../components/ui/CircleTextLink.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="家づくりの考え方" description="完成した日の美しさだけでなく、暮らしが重なった先の姿までを考える、木と左官の住まいづくりについてご紹介します。" path="/about/" breadcrumbs={[{ label:'ホーム', href:'/' },{ label:'家づくりの考え方' }]}>
+  <QuietPageIntro title="家づくりの考え方" lead="完成した日の美しさだけでなく、暮らしが重なった先の姿まで。株木堂建築は、木と左官の手仕事を軸に、新築注文住宅と中古住宅の全面リノベーションを設計施工する工務店です。家族の過ごし方に耳を傾け、素材と空間を一つずつ考えます。" />
+  <figure class="wide"><img src={images.home} alt="木のダイニングと窓がある住まいの設計イメージ" width="2400" height="1600" loading="lazy" /><figcaption>写真は設計イメージです。</figcaption></figure>
+  <section><ScrollReveal animation="fade-up" duration={2000}><EditorialPair image={images.wood} alt="木製建具の納まりの設計イメージ"><h2>触れるたびに、暮らしになじむ。</h2><p>床に腰を下ろす。建具に手をかける。住まいの中では、毎日いろいろな場所に触れています。木の表情を飾りとして眺めるだけでなく、どこで、どのように使うのかを考えること。手の届くところにある素材だからこそ、家族の動きや家具との関係を見ながら、見え方と使い方を一緒に整えます。</p></EditorialPair></ScrollReveal></section>
+  <figure class="wide renewal"><img src={images.renovation} alt="空間がつながる全面リノベーションの設計イメージ" width="2400" height="1600" loading="lazy" /><figcaption>写真は設計イメージです。</figcaption></figure>
+  <section><ScrollReveal animation="fade-up" duration={2000}><EditorialPair image={images.plaster} alt="光を受ける左官壁の設計イメージ" reverse><h2>光を受けとめる、壁の表情。</h2><p>朝と夕方で、同じ壁の見え方は変わります。左官の面に落ちるやわらかな陰影は、家具や木部とともに部屋の背景になります。強い装飾を重ねるよりも、光の入り方と素材の組み合わせを丁寧に見ること。窓の位置や過ごす場所と合わせて、落ち着いて過ごせる空間を考えます。</p></EditorialPair></ScrollReveal></section>
+  <section class="living"><img src={images.home} alt="光が入る食卓の設計イメージ" width="2400" height="1600" loading="lazy" /><div><h2>今の暮らしと、その先の暮らし。</h2><p>家族で集まる時間も、一人で過ごす時間も、どちらも住まいの一部です。平屋か2階建てかを考えるときにも、部屋数だけでは決められません。毎日の移動、ものの置き場所、家族の距離を見つめながら、長く使える間取りを考えます。中古住宅では、今ある住まいの良さを確かめ、残す部分と変える部分を整理します。</p></div><ScrollReveal animation="fade-up" duration={2000}><img src={images.renovation} alt="既存の柱を生かす改修の設計イメージ" width="2400" height="1600" loading="lazy" /></ScrollReveal></section>
+  <section class="related"><ScrollReveal animation="fade-up" duration={2000}><h2>どのようにつくるかを、もう少し具体的に。</h2></ScrollReveal><p>新築注文住宅と全面リノベーションの違いを知り、写真で素材や空間のつながりを確かめてみてください。見学を考えている方には、モデルハウスで見ておきたいポイントもご案内しています。</p><div><CircleTextLink site={site} href="/service/" label="注文住宅・リノベーションを知る" /><CircleTextLink site={site} href="/works/" label="住まいの写真を見る" /><CircleTextLink site={site} href="/model-house/" label="モデルハウスを見る" /></div></section>
+</SiteLayout>
+<style>
+  .wide { width:min(1120px,100%); margin:0 auto; } .wide img { display:block; width:100%; height:clamp(320px,50vw,720px); object-fit:cover; } figcaption { margin-top:12px; font-size:14px; } section { width:min(1120px,calc(100% - 48px)); margin:auto; padding:96px 0; } h2 { font-size:clamp(26px,3vw,32px); font-weight:500; line-height:1.55; } p { font-size:16px; line-height:1.9; } .renewal { margin-top:48px; } .living > img:first-child { width:100%; height:clamp(260px,42vw,600px); object-fit:cover; } .living > div { width:min(440px,100%); margin:96px 0 64px auto; } .living :global(.scroll-reveal) img { width:min(380px,78%); margin-left:auto; display:block; } .related { width:min(680px,calc(100% - 48px)); padding-bottom:128px; } .related div { display:grid; gap:16px; margin-top:40px; }
+</style>

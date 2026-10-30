@@ -109,6 +109,21 @@ bash scripts/release-deploy.sh
 
 成果物に変化がなければコミットせず終了する。
 
+### handmaid（/handmaid/）
+
+`handmaid/` は Astro とは別フローで作った単体 HTML のサンプル群。
+`npm run build` には混ぜず、品質ゲートの**後**で `scripts/handmaid-export.mjs` が
+`dist/handmaid/` へ書き出す（website のルールで採点しないため。
+`web-quality-check` と `web-render-check` も `dist/handmaid/` は読まない）。
+
+| 公開 URL | 中身 |
+|---|---|
+| `/handmaid/` | 一覧（`scripts/handmaid-index.mjs` で生成。手元の `npm run preview:handmaid` と同じ HTML） |
+| `/handmaid/<id>/` | `handmaid/<id>/` の中身。`*.md`（仕様・レビュー）は載せない |
+
+`src/lib/seo.ts` の `NOINDEX` が `true` の間は、各ページに robots の noindex を差し込む。
+ローカルで確認するなら `npm run build && npm run export:handmaid`。
+
 ### フラグ
 
 ```bash

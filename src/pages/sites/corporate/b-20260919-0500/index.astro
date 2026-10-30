@@ -1,0 +1,37 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from './_site';
+import { figures, images, photos } from './content';
+import EditorialPair from '../../../../components/sections/EditorialPair.astro';
+import HousePhotoCollage from '../../../../components/sections/HousePhotoCollage.astro';
+import QuietNewsList from '../../../../components/sections/QuietNewsList.astro';
+import CircleTextLink from '../../../../components/ui/CircleTextLink.astro';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="ホーム" description="木と左官の手仕事から生まれる注文住宅とリノベーション。静岡で、長く住み継げる住まいを設計施工する株木堂建築のご案内です。" path="/" isHome>
+  <section class="hero">
+    <div class="hero__copy"><h1>時を重ねる住まいを、<br />静かに。</h1><span></span><p>木と左官の手仕事から生まれる、注文住宅とリノベーション。</p></div>
+    <figure><img src={images.home} alt="木のダイニングと窓がある住まいの設計イメージ" width="2400" height="1600" /><figcaption>写真は設計イメージです。</figcaption></figure>
+    <aside><p>家づくりを考え始めた方へ</p><CircleTextLink site={site} href="/news/first-consultation/" label="相談の前に、整理しておきたいこと" /></aside>
+  </section>
+
+  <section class="intro">
+    <div><h2>暮らしの変化を、<br />受けとめる家。</h2><p>家族の過ごし方は、少しずつ変わります。新築でも、今ある家を生かすときでも、考えたいのはその先の暮らし。木の表情や左官の陰影を手がかりに、長く住み継げる住まいを設計し、つくります。</p><CircleTextLink site={site} href="/about/" label="家づくりの考え方を読む" /></div>
+    <ScrollReveal animation="fade-up" duration={2000}><img src={images.plaster} alt="光を受ける左官壁の設計イメージ" width="1600" height="2400" loading="lazy" /></ScrollReveal>
+    <dl>{figures.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd><small>2026年9月時点</small></div>)}</dl>
+  </section>
+
+  <section class="photos"><div class="section-head"><h2>住まいの写真</h2><p>光の入り方、手に触れる素材、部屋と部屋のつながり。暮らしを思い描くための、四つの視点を集めました。</p></div><ScrollReveal animation="fade-up" duration={2000}><HousePhotoCollage site={site} photos={photos} /></ScrollReveal><CircleTextLink site={site} href="/works/" label="住まいの写真をすべて見る" /></section>
+
+  <section class="split"><EditorialPair image={images.exterior} alt="平屋の設計イメージ" reverse><h2>写真の先の、居心地へ。</h2><p>床の感触、壁に落ちる光、家族が並んで歩く広さ。住まいの心地よさには、写真だけでは分からないことがあります。モデルハウスで確かめたいことを、見学前に整理してみませんか。</p><CircleTextLink site={site} href="/model-house/" label="モデルハウスの見方を知る" /></EditorialPair></section>
+  <section class="split"><ScrollReveal animation="fade-up" duration={2000}><EditorialPair image={images.craft} alt="木材を確かめる手仕事の設計イメージ"><h2>家づくりの流れ</h2><p>何から話し、どこで決めるのか。相談、設計、工事と、家づくりにはいくつもの節目があります。新築とリノベーション、それぞれの確認事項を、16の工程でご案内します。</p><CircleTextLink site={site} href="/flow/" label="相談から引き渡しまでを見る" /></EditorialPair></ScrollReveal></section>
+  <section class="news"><h2>お知らせ</h2><QuietNewsList site={site} items={[{ title:'家づくり相談の前に、整理しておきたいこと', body:'相談の準備を、今の暮らしから始めるための案内です。', href:'/news/first-consultation/', image:images.meeting, alt:'図面と素材を囲む相談の設計イメージ' },{ title:'モデルハウスで確かめたい三つのこと', body:'家族の距離、光と壁、手が触れる場所を見てみましょう。', href:'/model-house/#checkpoints' },{ title:'新築と全面リノベーションの考え方', body:'二つの方法で異なる、相談前の確認事項を整理します。', href:'/service/' }]} /><CircleTextLink site={site} href="/news/" label="お知らせを見る" /></section>
+  <section class="company"><h2>株木堂建築について</h2><p>木と左官の手仕事を軸に、住まいを設計し、施工する会社です。静岡県静岡市葵区を拠点に、平屋と2階建ての注文住宅、中古住宅の全面リノベーションに取り組んでいます。</p><dl><div><dt>商号</dt><dd>株木堂建築株式会社</dd></div><div><dt>設立</dt><dd>1998年</dd></div><div><dt>従業員数</dt><dd>42名</dd></div><div><dt>所在地</dt><dd>静岡県静岡市葵区</dd></div></dl><CircleTextLink site={site} href="/company/" label="会社案内を読む" /></section>
+</SiteLayout>
+<style>
+  section { width:min(1120px,calc(100% - 48px)); margin:auto; } h1,h2 { font-weight:500; line-height:1.55; } h2 { font-size:clamp(26px,3vw,32px); } p { font-size:16px; line-height:1.9; }
+  .hero { padding:96px 0 128px; } .hero__copy { max-width:680px; } h1 { margin:0; font-size:clamp(34px,4vw,56px); letter-spacing:.08em; } .hero__copy span { display:block; width:1px; height:80px; margin:48px 0; background:var(--color-secondary); } .hero figure { width:min(720px,100%); margin:80px auto 0; } .hero img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; } figcaption { margin-top:12px; font-size:14px; } .hero aside { width:min(420px,100%); margin:32px 0 0 auto; }
+  .intro { padding:96px 0 112px; display:grid; gap:48px; } .intro > div { max-width:440px; justify-self:end; } .intro img { width:min(240px,62%); justify-self:start; display:block; } .intro dl,.company dl { margin:24px 0 0; border-top:1px solid var(--color-base-300); } .intro dl div { padding:20px 0; border-bottom:1px solid var(--color-base-300); } dt { color:var(--color-primary); } dd { margin:4px 0; font-size:24px; } small { color:color-mix(in srgb,var(--color-base-content) 70%, transparent); }
+  .photos,.news,.company { padding:112px 0; } .section-head { max-width:680px; margin-bottom:48px; } .photos > :global(.circle-text-link), .news > :global(.circle-text-link) { margin:48px 0 0 auto; } .split { padding:72px 0; } .news { width:min(880px,calc(100% - 48px)); } .company { width:min(840px,calc(100% - 48px)); } .company dl div { display:grid; grid-template-columns:30% 1fr; padding:20px 0; border-bottom:1px solid var(--color-base-300); } .company dd { font-size:16px; }
+  @media(min-width:768px) { .hero { min-height:900px; } .hero aside { margin-top:-32px; transform:translateX(48px); } .intro { grid-template-columns:1fr 240px; align-items:end; } .intro dl { grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; } .intro dl div { border-bottom:0; } .intro dl div+div { border-left:1px solid var(--color-base-300); padding-left:24px; } }
+</style>

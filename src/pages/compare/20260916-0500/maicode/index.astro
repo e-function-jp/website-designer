@@ -1,0 +1,474 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import site from '../../../sites/corporate/b-20260916-0500/_site';
+import { url } from '../../../../lib/site';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+import ProcessRail from '../../../../components/sections/ProcessRail.astro';
+import EvidenceRows from '../../../../components/sections/EvidenceRows.astro';
+import FieldWindow from '../../../../components/sections/FieldWindow.astro';
+import Steps from '../../../../components/navigation/Steps.astro';
+import Alert from '../../../../components/data-display/Alert.astro';
+import FloatingCta from '../../../../components/site/FloatingCta.astro';
+import NextPageLinks from '../../../../components/site/NextPageLinks.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+
+const heroImage = {
+  src: `${SHARED}/img-b-01.jpg`,
+  alt: '机を囲み、商談の進め方を話し合う人々',
+};
+
+const workImage = {
+  src: `${SHARED}/img-b-02.jpg`,
+  alt: '業務資料を広げ、検討を進める仕事場',
+};
+
+const processSteps = [
+  {
+    number: '01',
+    label: '組織診断',
+    body: '営業組織の現状を捉え、商談の進め方と案件管理の課題を整理する。',
+  },
+  {
+    number: '02',
+    label: '商談設計',
+    body: '受注までのプロセスを見える形にし、プレイブックとして整える。',
+  },
+  {
+    number: '03',
+    label: '現場定着',
+    body: '設計した型を現場の実践につなぎ、継続して使える受注プロセスを構築する。',
+  },
+];
+
+const metrics = [
+  { value: '1.6倍', condition: '支援企業の平均受注率を14か月で改善。' },
+  { value: '92%', condition: '導入後12か月の定着率。' },
+  { value: '210以上', condition: '累計支援チーム数。' },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="受注の型を、現場に残す"
+  description="中堅製造業とSaaS企業の営業変革を、伴走型の組織診断とプレイブック整備で支援する軌道セールス設計株式会社のトップページです。"
+  path="/"
+  isHome
+>
+  <section class="hero bg-primary text-primary-content">
+    <div class="hero__inner max-w-[1140px] mx-auto px-5 lg:px-10">
+      <div class="hero__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="hero__copy lg:col-span-7">
+          <h1 class="hero__title">
+            <span>受注の型を、</span>
+            <span>現場に残す</span>
+          </h1>
+          <p class="hero__lede">
+            中堅製造業とSaaS企業の営業変革を、商談設計から現場定着まで。軌道セールス設計は、伴走型の組織診断とプレイブック整備を軸に、再現性のある受注プロセスを構築します。
+          </p>
+          <p class="hero__audience">営業責任者・経営企画・事業責任者の皆さまへ。</p>
+
+          <div class="hero__cta-row">
+            <a href={url(site, '/contact/')} class="hero__cta">
+              無料で組織診断を申し込む
+              <span aria-hidden="true" class="hero__cta-arrow">→</span>
+            </a>
+            <a href={url(site, '/service/')} class="hero__sub-link">
+              営業変革プログラムを見る
+              <span aria-hidden="true" class="hero__sub-arrow">→</span>
+            </a>
+          </div>
+
+          <div class="hero__steps-wrap">
+            <span class="hero__steps-line" aria-hidden="true"></span>
+            <Steps class="hero__steps">
+              <li class="step step-primary">組織診断</li>
+              <li class="step">商談設計</li>
+              <li class="step">現場定着</li>
+            </Steps>
+          </div>
+        </div>
+
+        <figure class="hero__photo lg:col-span-5">
+          <img
+            src={heroImage.src}
+            alt={heroImage.alt}
+            width="1200"
+            height="1800"
+            fetchpriority="high"
+            loading="eager"
+            class="hero__img"
+          />
+          <figcaption class="hero__caption">支援場面のイメージ</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="stance bg-primary text-primary-content">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="stance__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="stance__num lg:col-span-3" aria-hidden="true">
+          <span class="stance__num-text">02</span>
+        </div>
+        <div class="stance__copy lg:col-span-9">
+          <ScrollReveal animation="fade-up" duration={site.motion?.durationMs ?? 700}>
+            <h2 class="stance__heading">型は、使われてこそ力になる。</h2>
+            <div class="stance__body">
+              <p>
+                商談の進め方を整えること。案件の状況を見えるようにすること。その仕組みを、現場で使い続けられるようにすること。私たちは、この三つをひと続きの支援として捉えています。
+              </p>
+              <p>
+                営業組織のいまを診断し、プレイブックに整理し、日々の実践につなげる。仕組みと現場の間をつなぐことが、軌道セールス設計の仕事です。
+              </p>
+              <p class="stance__link-row">
+                <a href={url(site, '/about/')} class="stance__link">
+                  私たちの営業設計を知る
+                  <span aria-hidden="true">→</span>
+                </a>
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ProcessRail
+    heading="営業変革を、分断しない。"
+    steps={processSteps}
+    caption="一つの施策を切り離して考えるのではなく、診断から定着までを一体で支援します。"
+    sectionNumber="03"
+    background="paper"
+  />
+
+  <section class="process-link bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 pb-16 lg:pb-24">
+      <p class="process-cta">
+        <a href={url(site, '/service/')} class="process-cta__link">
+          支援内容と進め方を見る
+          <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <EvidenceRows
+    heading="成果と、続く仕組み。"
+    body="受注率と、導入後に使い続けられること。その両方を、営業変革の成果として捉えます。これらは支援実績を示す数値であり、個別の支援成果を保証するものではありません。"
+    evidences={metrics}
+    variant="light"
+    sectionNumber="04"
+  />
+
+  <section class="process-link bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 pb-16 lg:pb-24">
+      <p class="process-cta process-cta--right">
+        <a href={url(site, '/service/')} class="process-cta__link">
+          営業変革プログラムを確認する
+          <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <FieldWindow image={workImage} position="left" aspect="4/3" background="paper" sectionNumber="05">
+    <h2 class="news__heading">営業の現場に向き合う会社です。</h2>
+    <p>
+      軌道セールス設計株式会社は、2016年設立、東京都港区のBtoB営業支援・営業組織コンサルティング会社です。48名の組織で、中堅製造業とSaaS企業に向けた営業変革プログラムを提供しています。
+    </p>
+    <p class="news__link-row">
+      <a href={url(site, '/company/')} class="news__link">
+        会社概要を見る
+        <span aria-hidden="true">→</span>
+      </a>
+    </p>
+
+    <h3 class="news__sub">お知らせ</h3>
+    <Alert variant="info" class="news__alert">
+      <p>現在、掲載中のお知らせはありません。支援内容は「営業変革プログラム」、企業情報は「会社概要」でご確認いただけます。</p>
+    </Alert>
+    <p class="news__link-row">
+      <a href={url(site, '/news/')} class="news__link">
+        お知らせ一覧へ
+        <span aria-hidden="true">→</span>
+      </a>
+    </p>
+  </FieldWindow>
+
+  <NextPageLinks site={site} currentPath="/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .hero {
+    width: 100%;
+  }
+
+  .hero__inner {
+    padding-top: 200px;
+    padding-bottom: 80px;
+    min-height: 820px;
+  }
+
+  .hero__grid {
+    align-items: end;
+  }
+
+  .hero__copy {
+    padding-bottom: 8px;
+  }
+
+  .hero__title {
+    margin: 0 0 32px;
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+    font-size: clamp(2.75rem, 6vw, 6rem);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+
+  .hero__title span {
+    display: block;
+  }
+
+  .hero__lede {
+    max-width: 36em;
+    margin: 0 0 24px;
+    font-size: 1rem;
+    line-height: 1.9;
+    opacity: 0.95;
+  }
+
+  .hero__audience {
+    margin: 0 0 32px;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  .hero__cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 52px;
+  }
+
+  .hero__cta,
+  .hero__sub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .hero__cta {
+    height: 56px;
+    padding: 0 28px;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+    border-radius: 4px;
+  }
+
+  .hero__sub-link {
+    color: var(--color-primary-content);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 4px;
+  }
+
+  .hero__cta:hover,
+  .hero__sub-link:hover {
+    opacity: 0.9;
+  }
+
+  .hero__steps-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 12px;
+  }
+
+  .hero__steps-line {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .hero__steps {
+    flex: 1;
+  }
+
+  .hero__photo {
+    margin: 0;
+  }
+
+  .hero__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 580px;
+    object-fit: cover;
+    object-position: 60% 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .hero__caption {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+
+  .stance__grid {
+    align-items: start;
+  }
+
+  .stance__num {
+    padding-top: 8px;
+  }
+
+  .stance__num-text {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2.25rem, 4vw, 4rem);
+    line-height: 1;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  .stance__heading {
+    margin: 0 0 20px;
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .stance__body p {
+    margin: 0 0 18px;
+    font-size: 1rem;
+    line-height: 1.9;
+    opacity: 0.96;
+  }
+
+  .stance__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .stance__link-row {
+    margin-top: 16px;
+  }
+
+  .stance__link {
+    color: var(--color-primary-content);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 3px;
+  }
+
+  .process-link {
+    width: 100%;
+  }
+
+  .process-cta {
+    margin: 0;
+  }
+
+  .process-cta--right {
+    text-align: right;
+  }
+
+  .process-cta__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 4px;
+  }
+
+  .news__heading {
+    margin: 0 0 20px;
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', serif;
+    font-size: clamp(2rem, 3vw, 2.3rem);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .news__link-row {
+    margin: 0 0 22px;
+  }
+
+  .news__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 4px;
+  }
+
+  .news__sub {
+    margin: 24px 0 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .news__alert {
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 767px) {
+    .hero__inner {
+      padding-top: 128px;
+      min-height: 0;
+      padding-bottom: 48px;
+    }
+
+    .hero__cta-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .hero__cta,
+    .hero__sub-link {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero__steps-wrap {
+      display: block;
+    }
+
+    .hero__steps-line {
+      display: none;
+    }
+
+    .process-cta--right {
+      text-align: left;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__cta,
+    .hero__sub-link,
+    .process-cta__link,
+    .news__link,
+    .stance__link {
+      transition: none;
+    }
+  }
+</style>

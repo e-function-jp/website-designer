@@ -1,0 +1,50 @@
+---
+/**
+ * CorporatePageHeader — 全下層ページ共通のタイトル帯。
+ *
+ * ディレクションの指示:
+ *   - 背景 #F3F5F6（bg-base-200）
+ *   - ヘッダー帯の目安 PC 400px / モバイル 320px
+ *   - h1 左揃え、PC 56px / モバイル 32px
+ *   - 導入文は h1 の 24px 下
+ *   - 全下層で同じ位置・同じ余白
+ *   - SiteLayout のパンくずは別途表示されるため、このコンポーネントは
+ *     h1 と導入文のみ
+ */
+interface Props {
+  title: string;
+  intro: string;
+}
+const { title, intro } = Astro.props;
+---
+
+<section class="cph bg-base-200">
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 pt-[112px] lg:pt-[112px] pb-12 lg:pb-16 min-h-[320px] lg:min-h-[400px] flex flex-col justify-center">
+    <h1 class="cph__title">{title}</h1>
+    <p class="cph__intro">{intro}</p>
+  </div>
+</section>
+
+<style>
+  .cph__title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-base-content);
+    letter-spacing: 0.025em;
+    margin: 0;
+  }
+  .cph__intro {
+    margin: 24px 0 0;
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    max-width: 760px;
+  }
+
+  @media (min-width: 768px) {
+    .cph__title {
+      font-size: 56px;
+    }
+  }
+</style>

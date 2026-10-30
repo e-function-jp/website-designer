@@ -1,0 +1,136 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import ClinicPageIntro from '../../../../../components/sections/ClinicPageIntro.astro';
+import AobaConsultationBand from "../../../../../components/sections/AobaConsultationBand.astro";
+import AobaClinicInfo from "../../../../../components/sections/AobaClinicInfo.astro";
+import ClinicRelatedLinks from '../../../../../components/sections/ClinicRelatedLinks.astro';
+import PageTopButton from '../../../../../components/ui/PageTopButton.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260915-1151';
+
+const introImage = { src: `${SHARED}/img-b-02.jpg`, alt: '院内イメージ' };
+const modelImage = { src: `${SHARED}/img-b-04.jpg`, alt: '歯列模型のイメージ' };
+
+const relatedLinks = [
+  { label: '医院概要を見る', href: '/about/#overview', description: '所在地、設立、診療内容など、医院の基本情報を掲載しています。' },
+  { label: '個人情報の取り扱いを見る', href: '/privacy/', description: '予約入力デモでの情報の扱いを確認できます。' },
+];
+---
+<SiteLayout
+  site={site}
+  title="お知らせ"
+  description="あおば矯正歯科クリニックのお知らせページ。医院からのお知らせを掲載します。初診相談や治療内容については、各案内ページからも確認できます。"
+  path="/news/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お知らせ' }]}
+>
+  <!-- 01 お知らせの導入 (animation: none) -->
+  <ClinicPageIntro
+    heading="お知らせ"
+    description="医院からのお知らせを掲載するページです。初診相談や治療内容については、各案内ページからも確認できます。"
+    image={introImage}
+  />
+
+  <!-- 02 掲載状況 (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[760px] mx-auto px-5 lg:px-10 py-12 lg:py-16">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="掲載中のお知らせ" align="left" />
+      </ScrollReveal>
+      <Alert variant="info">
+        <div class="space-y-3">
+          <p>現在、掲載しているお知らせはありません。</p>
+          <p class="text-xs lg:text-sm">このサイトは架空の医院を用いた制作サンプルです。実際の診療日や休診予定の案内は行っていません。</p>
+        </div>
+      </Alert>
+    </div>
+  </section>
+
+  <!-- 03 初診相談を探している方へ (青背景の横長帯、見出しのみ fade-up) -->
+  <section class="bg-primary text-primary-content">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-12 lg:py-14">
+      <div class="grid lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+        <div class="lg:col-span-4">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <h2 class="text-xl lg:text-2xl font-medium leading-snug tracking-[0.02em]">
+              初診相談について知りたい方へ
+            </h2>
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-8">
+          <p class="text-sm lg:text-base leading-[1.9] text-primary-content/90 mb-4 lg:mb-6">
+            気になっている歯並びや噛み合わせについて、相談前に整理したいことをご案内しています。予約入力デモも、初診相談のページから確認できます。
+          </p>
+          <a href={url(site, '/contact/')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-primary-content/40 pb-1 hover:border-primary-content text-primary-content">
+            初診相談・来院案内を見る
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 治療内容を探している方へ (模型写真のみ fade-left) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[960px] mx-auto px-5 lg:px-10 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <ScrollReveal animation="fade-left" duration={site.motion!.durationMs} class="lg:col-span-4">
+          <figure class="overflow-hidden">
+            <img
+              src={modelImage.src}
+              alt={modelImage.alt}
+              width="800"
+              height="800"
+              loading="lazy"
+              class="w-3/5 lg:w-full aspect-square object-cover"
+            />
+            <figcaption class="mt-3 text-xs lg:text-sm text-base-content/65">
+              歯列模型のイメージ
+            </figcaption>
+          </figure>
+        </ScrollReveal>
+        <div class="lg:col-span-8">
+          <SectionTitle title="矯正治療の内容を確認する" align="left" />
+          <p class="text-sm lg:text-base leading-[1.9] text-base-content/85">
+            子どもと大人、それぞれの相談の入口から、マウスピース矯正・ワイヤー矯正・保定管理まで。治療案内のページにまとめています。
+          </p>
+          <div class="mt-6">
+            <a href={url(site, '/service/')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content">
+              矯正治療について見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 関連する案内 (見出しのみ fade-up) -->
+  <section class="bg-base-100 border-t border-base-300">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <SectionTitle title="関連する案内" align="left" />
+      </ScrollReveal>
+      <div class="mt-2">
+        <ClinicRelatedLinks site={site} links={relatedLinks} />
+      </div>
+    </div>
+  </section>
+
+  <PageTopButton />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  @media (min-width: 1024px) {
+    section[class*="bg-base-100"], section[class*="bg-primary"] {
+      padding-left: 72px;
+      padding-right: 72px;
+    }
+  }
+</style>

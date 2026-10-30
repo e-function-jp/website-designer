@@ -1,0 +1,360 @@
+{
+  "url": "https://3jigen.jp/concept",
+  "slug": "concept",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260919-0500/motion/concept-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260919-0500/motion/concept-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://3jigen.jp/concept",
+      "label": "Concept"
+    },
+    {
+      "href": "https://3jigen.jp/flow",
+      "label": "Flow"
+    },
+    {
+      "href": "https://3jigen.jp/album",
+      "label": "Album"
+    },
+    {
+      "href": "https://3jigen.jp/modelhouse",
+      "label": "Model House"
+    },
+    {
+      "href": "https://3jigen.jp/company",
+      "label": "Company"
+    },
+    {
+      "href": "https://3jigen.jp/recruit",
+      "label": "Recruit"
+    },
+    {
+      "href": "https://3jigen.jp/news",
+      "label": "News"
+    },
+    {
+      "href": "https://3jigen.jp/contact",
+      "label": "Contact"
+    },
+    {
+      "href": "https://www.instagram.com/3jigen/",
+      "label": "Instagram"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "img",
+      "baseClass": "js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -48)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 355)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -116)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 395)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -138)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 265)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -229)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 280)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -228)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 175)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -335)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 161)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "l-footer-contact__img1 js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -487)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -20)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "l-footer-contact__img2 js-rellax",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -487)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -20)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "swiper-wrapper",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -322.533, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -855.957, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "40s",
+        "delay": "0s",
+        "timing": "linear"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "swiper-wrapper"
+      },
+      "timing": {
+        "duration": 40000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": "3.11.0",
+    "ScrollTrigger": "present",
+    "lenis": null,
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": "present",
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [
+    {
+      "tag": "div",
+      "className": "c-loading js-loading",
+      "displayNow": "none",
+      "opacityNow": "1"
+    }
+  ],
+  "meta": {
+    "title": "コンセプト | 三次元 The Classic",
+    "h1": "コンセプト",
+    "totalHeight": 8440,
+    "viewportsTall": 9.4,
+    "sectionCount": 15,
+    "imgCount": 28,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": [],
+  "scrollYAfter": 7540,
+  "css": {
+    "keyframes": 9,
+    "transitionRules": 35,
+    "animationRules": 3,
+    "keyframeNames": [
+      "spin",
+      "blink",
+      "swiper-preloader-spin",
+      "hide-bg-line",
+      "show-bg-line",
+      "move-bg-line"
+    ]
+  },
+  "header": null,
+  "probedBefore": 255,
+  "revealSummary": {
+    "total": 8,
+    "scrollLinkedCount": 1,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 7,
+      "fade-side": 1,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 8,
+    "durationMs": {
+      "min": 40000,
+      "median": 40000,
+      "max": 40000
+    },
+    "easings": [
+      "ease",
+      "linear"
+    ]
+  }
+}

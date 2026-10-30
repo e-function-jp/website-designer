@@ -1,0 +1,102 @@
+---
+/**
+ * BusinessPhotoText — 写真と本文の2列配置コンポーネント。
+ *
+ * ディレクションの指示:
+ *   - PC: 写真5列・本文7列、または本文6列・写真6列など2列レイアウト
+ *   - モバイル: 縦積み
+ *   - 写真下に「写真は業務イメージです。」のキャプション
+ *   - PC 600px / モバイル 約720px が目安
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Props {
+  site: SiteConfig;
+  image: { src: string; alt: string };
+  /** "left" で写真を左、"right" で写真を右に配置 */
+  photoPosition?: 'left' | 'right';
+  /** 写真の縦横比。デフォルト 4:3 */
+  aspect?: '3/2' | '4/3' | '16/9' | '16/7';
+  /** 背景トーン。デフォルト白、'subtle' で補助背景 */
+  background?: 'white' | 'subtle' | 'primary';
+  showCaption?: boolean;
+  /** コンテンツ幅。デフォルト 'max-w-[1140px]' */
+  maxWidthClass?: string;
+}
+
+const {
+  site,
+  image,
+  photoPosition = 'left',
+  aspect = '4/3',
+  background = 'white',
+  showCaption = true,
+  maxWidthClass = 'max-w-[1140px]',
+} = Astro.props;
+
+const bg = background === 'subtle'
+  ? 'bg-base-200'
+  : background === 'primary'
+    ? 'bg-primary text-primary-content'
+    : 'bg-base-100';
+const textColor = background === 'primary' ? 'text-primary-content' : 'text-base-content';
+const captionColor = background === 'primary' ? 'text-primary-content/70' : 'text-base-content/65';
+const orderPhoto = photoPosition === 'left' ? 'lg:order-1' : 'lg:order-2';
+const orderCopy = photoPosition === 'left' ? 'lg:order-2' : 'lg:order-1';
+const aspectClass = {
+  '3/2': 'aspect-[3/2]',
+  '4/3': 'aspect-[4/3]',
+  '16/9': 'aspect-[16/9]',
+  '16/7': 'aspect-[16/7]',
+}[aspect];
+---
+
+<section class={`bpt ${bg}`}>
+  <div class={`${maxWidthClass} mx-auto px-5 lg:px-10 py-16 lg:py-24`}>
+    <div class="bpt__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <ScrollReveal
+        animation="fade-up"
+        duration={site.motion?.durationMs ?? 600}
+        class={`bpt__photo ${orderPhoto}`}
+      >
+        <figure class="bpt__figure">
+          <img
+            src={image.src}
+            alt={image.alt}
+            width="1200"
+            height={aspect === '16/9' ? 675 : aspect === '16/7' ? 525 : 800}
+            loading="lazy"
+            class={`bpt__img ${aspectClass}`}
+          />
+          {showCaption && <figcaption class={`bpt__caption ${captionColor}`}>写真は業務イメージです。</figcaption>}
+        </figure>
+      </ScrollReveal>
+      <ScrollReveal
+        animation="fade-up"
+        duration={site.motion?.durationMs ?? 600}
+        class={`bpt__copy ${orderCopy} ${textColor}`}
+      >
+        <slot />
+      </ScrollReveal>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bpt__figure { margin: 0; }
+  .bpt__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: 50% 45%;
+    background: var(--color-base-300);
+    display: block;
+  }
+  .bpt__caption {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+</style>

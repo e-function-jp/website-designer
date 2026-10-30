@@ -1,0 +1,147 @@
+---
+/**
+ * ProcessRail — 診断・設計・定着の対応図コンポーネント。
+ *
+ * ディレクション指示 (direction-b):
+ *   - 「組織診断」「商談設計・プレイブック」「現場定着」を線で結ぶ対応図
+ *   - 各ラベルは本文と同順
+ *   - 角丸 0、装飾は 1px の縦線と直径 8px の接続点
+ *   - 末尾の結びキャプションを表示可能
+ */
+interface Step {
+  number: string;
+  label: string;
+  body: string;
+}
+
+interface Props {
+  heading?: string;
+  steps: Step[];
+  caption?: string;
+  /** 章番号（本文左に置く装飾） */
+  sectionNumber?: string;
+  background?: 'paper' | 'white' | 'primary';
+}
+
+const {
+  heading,
+  steps,
+  caption,
+  sectionNumber,
+  background = 'paper',
+} = Astro.props;
+
+const bgClass = {
+  paper: 'bg-base-100',
+  white: 'bg-base-100',
+  primary: 'bg-primary text-primary-content',
+}[background];
+
+const textColor = background === 'primary' ? 'text-primary-content' : 'text-base-content';
+const numColor = background === 'primary' ? 'text-primary-content' : 'text-primary';
+---
+
+<section class={`pr ${bgClass}`}>
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+    {heading && (
+      <div class="pr__head">
+        {sectionNumber && <p class="pr__num" aria-hidden="true">{sectionNumber}</p>}
+        <h2 class={`pr__heading ${textColor}`}>{heading}</h2>
+      </div>
+    )}
+    <ol class="pr__rail" aria-label={heading ?? '支援の流れ'}>
+      {steps.map((s, i) => (
+        <li class="pr__step">
+          <span class="pr__dot" aria-hidden="true"></span>
+          <div class="pr__step-body">
+            <p class={`pr__step-num ${numColor}`}>{s.number}</p>
+            <p class={`pr__step-label ${textColor}`}>{s.label}</p>
+            <p class={`pr__step-text ${textColor}`}>{s.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    {caption && <p class={`pr__caption ${textColor}`}>{caption}</p>}
+  </div>
+</section>
+
+<style>
+  .pr__head {
+    margin-bottom: 32px;
+  }
+  .pr__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    margin: 0 0 12px;
+  }
+  .pr__heading {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .pr__rail {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pr__step {
+    position: relative;
+    padding: 24px 0 24px 32px;
+    border-left: 1px solid var(--color-primary);
+  }
+  .pr__step:not(:last-child) {
+    border-bottom: 0;
+  }
+  .pr__dot {
+    position: absolute;
+    top: 32px;
+    left: -5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+  }
+  .pr__step-body { display: block; }
+  .pr__step-num {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px;
+  }
+  .pr__step-label {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .pr__step-text {
+    font-size: 15px;
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  .pr__caption {
+    margin: 24px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-base-300);
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.85;
+  }
+
+  /* primary 背景では罫線とドットを反転 */
+  .pr :global(.bg-primary) .pr__step,
+  [class*="bg-primary"] .pr__step {
+    border-left-color: var(--color-secondary);
+  }
+  [class*="bg-primary"] .pr__dot { background: var(--color-secondary); }
+  [class*="bg-primary"] .pr__caption { border-top-color: rgba(255,255,255,0.3); }
+
+  @media (max-width: 767px) {
+    .pr__step { padding-left: 28px; }
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+interface Note { title: string; body: string; }
+interface Props { notes: Note[]; dark?: boolean; numbered?: boolean; }
+const { notes, dark = false, numbered = false } = Astro.props;
+---
+
+<div class:list={['design-notes', dark && 'design-notes--dark']}>
+  {notes.map((note, index) => (
+    <article>
+      <h3>{numbered && <span>{String(index + 1).padStart(2, '0')} </span>}{note.title}</h3>
+      <p>{note.body}</p>
+    </article>
+  ))}
+</div>
+
+<style>
+  .design-notes { border-top: 1px solid color-mix(in oklab, currentColor 22%, transparent); }
+  .design-notes article { padding: 2rem 0; border-bottom: 1px solid color-mix(in oklab, currentColor 22%, transparent); }
+  .design-notes h3 { margin: 0 0 .75rem; font-size: 1.3rem; }
+  .design-notes h3 span { color: var(--color-secondary); font-size: .85rem; }
+  .design-notes p { margin: 0; line-height: 1.9; max-width: 42rem; }
+</style>

@@ -1,0 +1,211 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from '../../../sites/corporate/b-20260916-0500/_site';
+import { url } from '../../../../lib/site';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+import ProcessRail from '../../../../components/sections/ProcessRail.astro';
+import Alert from '../../../../components/data-display/Alert.astro';
+
+const shared = '/sites/corporate/_shared/20260916-0500';
+
+const processSteps = [
+  {
+    number: '01',
+    label: '組織診断',
+    body: '営業組織の現状を捉え、商談の進め方と案件管理の課題を整理する。',
+  },
+  {
+    number: '02',
+    label: '商談設計',
+    body: '受注までのプロセスを見える形にし、プレイブックとして整える。',
+  },
+  {
+    number: '03',
+    label: '現場定着',
+    body: '設計した型を現場の実践につなぎ、継続して使える受注プロセスを構築する。',
+  },
+];
+
+const metrics = [
+  ['1.6倍', '支援企業の平均受注率を14か月で改善。'],
+  ['92%', '導入後12か月の定着率。'],
+  ['210以上', '累計支援チーム数。'],
+];
+---
+
+<SiteLayout
+  site={site}
+  title="受注の型を、現場に残す"
+  description="中堅製造業とSaaS企業の営業変革を、商談設計から現場定着まで支援し、再現性のある受注プロセスを構築するコーポレートサイトです。"
+  path="/"
+  isHome
+>
+  <section class="hero bg-primary text-primary-content">
+    <div class="shell hero__inner">
+      <div class="grid items-end gap-10 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-7">
+          <h1 class="hero__title">受注の型を、<br />現場に残す</h1>
+          <p class="hero__lede">
+            中堅製造業とSaaS企業の営業変革を、商談設計から現場定着まで。軌道セールス設計は、伴走型の組織診断とプレイブック整備を軸に、再現性のある受注プロセスを構築します。
+          </p>
+          <p class="hero__audience">営業責任者・経営企画・事業責任者の皆さまへ。</p>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-5">
+            <a class="hero__cta" href={url(site, '/contact/')}>無料で組織診断を申し込む <span aria-hidden="true">→</span></a>
+            <a class="text-link text-primary-content" href={url(site, '/service/')}>営業変革プログラムを見る <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="hero__process"><span aria-hidden="true"></span>組織診断 → 商談設計 → 現場定着</p>
+        </div>
+        <figure class="hero__figure lg:col-span-5">
+          <img
+            src={`${shared}/img-b-01.jpg`}
+            alt="机を囲み、商談の進め方を話し合う人々"
+            width="1200"
+            height="1800"
+            fetchpriority="high"
+            loading="eager"
+          />
+          <figcaption>支援場面のイメージ</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement bg-primary text-primary-content">
+    <div class="shell py-18 lg:py-28">
+      <div class="grid gap-8 lg:grid-cols-12 lg:gap-16">
+        <p class="section-number lg:col-span-3" aria-hidden="true">02</p>
+        <div class="lg:col-span-7">
+          <ScrollReveal animation="fade-up" duration={site.motion?.durationMs}>
+            <h2>型は、使われてこそ力になる。</h2>
+          </ScrollReveal>
+          <div class="statement__body">
+            <p>商談の進め方を整えること。案件の状況を見えるようにすること。その仕組みを、現場で使い続けられるようにすること。私たちは、この三つをひと続きの支援として捉えています。</p>
+            <p>営業組織のいまを診断し、プレイブックに整理し、日々の実践につなげる。仕組みと現場の間をつなぐことが、軌道セールス設計の仕事です。</p>
+            <a class="text-link text-primary-content" href={url(site, '/about/')}>私たちの営業設計を知る <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ProcessRail
+    heading="営業変革を、分断しない。"
+    steps={processSteps}
+    caption="一つの施策を切り離して考えるのではなく、診断から定着までを一体で支援します。"
+    sectionNumber="03"
+    background="paper"
+  />
+  <div class="bg-base-100">
+    <div class="shell pb-18 lg:pb-28">
+      <a class="text-link" href={url(site, '/service/')}>支援内容と進め方を見る <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <section class="evidence bg-base-100">
+    <div class="shell py-18 lg:py-28">
+      <div class="evidence__heading">
+        <p class="section-number" aria-hidden="true">04</p>
+        <h2>成果と、続く仕組み。</h2>
+        <p>受注率と、導入後に使い続けられること。その両方を、営業変革の成果として捉えます。これらは支援実績を示す数値であり、個別の支援成果を保証するものではありません。</p>
+      </div>
+      <ScrollReveal animation="fade-up" duration={site.motion?.durationMs}>
+        <dl class="evidence__list">
+          {metrics.map(([value, condition]) => (
+            <div>
+              <dt>{value}</dt>
+              <dd>{condition}</dd>
+            </div>
+          ))}
+        </dl>
+      </ScrollReveal>
+      <p class="evidence__link"><a class="text-link" href={url(site, '/service/')}>営業変革プログラムを確認する <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <section class="company bg-base-200">
+    <div class="shell py-18 lg:py-28">
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-6">
+          <figure class="company__figure">
+            <img
+              src={`${shared}/img-b-02.jpg`}
+              alt="業務資料を広げ、検討を進める仕事場"
+              width="1600"
+              height="1200"
+              loading="lazy"
+            />
+            <figcaption>支援場面のイメージ</figcaption>
+          </figure>
+          <p class="section-number mt-8" aria-hidden="true">05</p>
+          <h2>営業の現場に向き合う会社です。</h2>
+          <p class="company__lede">軌道セールス設計株式会社は、2016年設立、東京都港区のBtoB営業支援・営業組織コンサルティング会社です。48名の組織で、中堅製造業とSaaS企業に向けた営業変革プログラムを提供しています。</p>
+          <a class="text-link" href={url(site, '/company/')}>会社概要を見る <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="company__news lg:col-span-6">
+          <h3>お知らせ</h3>
+          <Alert variant="info">
+            <p>現在、掲載中のお知らせはありません。支援内容は「営業変革プログラム」、企業情報は「会社概要」でご確認いただけます。</p>
+          </Alert>
+          <a class="text-link" href={url(site, '/news/')}>お知らせ一覧へ <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .shell { width: min(100%, 1140px); margin-inline: auto; padding-inline: 1.25rem; }
+  .hero__inner { min-height: 820px; padding-top: 8rem; padding-bottom: 4rem; }
+  .hero__title, h2 {
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', serif;
+    font-weight: 500;
+    letter-spacing: .02em;
+  }
+  .hero__title { margin: 0 0 1.75rem; font-size: clamp(2.25rem, 7vw, 6rem); line-height: 1.2; }
+  .hero__lede { max-width: 36em; margin: 0 0 1rem; font-size: 1rem; line-height: 1.9; }
+  .hero__audience { margin: 0 0 2rem; font-size: .875rem; opacity: .85; }
+  .hero__cta {
+    display: inline-flex; align-items: center; gap: .625rem; min-height: 3.5rem; padding: .75rem 1.5rem;
+    border-radius: 4px; background: var(--color-secondary); color: var(--color-secondary-content);
+    font-weight: 700; text-decoration: none;
+  }
+  .text-link { display: inline-flex; gap: .5rem; align-items: center; font-weight: 700; text-decoration: underline; text-underline-offset: .3rem; }
+  .hero__process { display: flex; gap: 1rem; align-items: center; margin: 3.5rem 0 0; padding-top: 1.5rem; border-top: 1px solid rgb(255 255 255 / .28); font-size: .875rem; }
+  .hero__process span { width: 4rem; height: 1px; background: currentColor; opacity: .7; }
+  .hero__figure { position: relative; margin: 1.5rem 0 0; }
+  .hero__figure::before { position: absolute; top: 0; bottom: 1.7rem; left: -1.5rem; width: 1px; background: rgb(255 255 255 / .3); content: ''; }
+  .hero__figure img { display: block; width: 78%; height: 17.5rem; margin-left: auto; object-fit: cover; object-position: 50% 45%; }
+  figcaption { margin-top: .5rem; font-size: .75rem; line-height: 1.5; opacity: .72; }
+  .section-number { margin: 0 0 .75rem; font-size: .8125rem; font-weight: 700; letter-spacing: .1em; opacity: .72; }
+  .statement h2, .evidence h2, .company h2 { margin: 0 0 2rem; font-size: clamp(1.75rem, 3.5vw, 2.625rem); line-height: 1.4; }
+  .statement__body { max-width: 42em; }
+  .statement__body p, .company__lede { margin: 0 0 1.5rem; line-height: 1.9; }
+  .evidence__heading { max-width: 43rem; margin-bottom: 2rem; }
+  .evidence__heading > p:last-child { margin: 0; line-height: 1.9; }
+  .evidence__list { margin: 0; border-top: 1px solid var(--color-base-300); }
+  .evidence__list > div { display: grid; grid-template-columns: 1fr; gap: .5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--color-base-300); }
+  .evidence__list dt { color: var(--color-primary); font-family: 'Shippori Mincho', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.05; }
+  .evidence__list dd { margin: 0; line-height: 1.7; }
+  .evidence__link { margin: 2rem 0 0; }
+  .company__figure { margin: 0 0 2rem; }
+  .company__figure img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 50%; }
+  .company__news { align-self: center; }
+  .company__news h3 { margin: 0 0 1rem; font-size: 1.125rem; }
+  .company__news :global(.alert) { margin-bottom: 1.25rem; }
+
+  @media (min-width: 768px) {
+    .shell { padding-inline: 2.5rem; }
+    .evidence__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .evidence__list > div { min-height: 12rem; padding: 1.75rem 2rem 1.75rem 0; border-bottom: 0; border-right: 1px solid var(--color-base-300); }
+    .evidence__list > div + div { padding-left: 2rem; }
+    .evidence__list > div:last-child { border-right: 0; }
+  }
+  @media (min-width: 1024px) {
+    .hero__inner { padding-top: 12.5rem; padding-bottom: 5rem; }
+    .hero__figure { margin: 0; }
+    .hero__figure img { width: 100%; height: 36.25rem; object-position: 60% 50%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__cta { transition: none; }
+  }
+</style>

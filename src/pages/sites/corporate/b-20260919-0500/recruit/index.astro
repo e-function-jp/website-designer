@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import { images } from '../content'; import KabukidoInfoPage from '../../../../../components/sections/KabukidoInfoPage.astro';
+---
+<SiteLayout site={site} title="採用について" description="新築注文住宅と中古住宅の全面リノベーションを、木と左官の手仕事で設計施工する住まいづくりの仕事をご紹介します。" path="/recruit/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'採用について'}]}><KabukidoInfoPage site={site} title="採用について" lead="株木堂建築は、新築注文住宅と中古住宅の全面リノベーションを設計施工する、従業員42名の工務店です。木と左官の手仕事を軸に、長く住み継げる住まいを提案しています。このページでは、住まいづくりの仕事に関心を持つ方へ、事業と仕事のつながりをご紹介します。" image={images.craft} imageAlt="手仕事の設計イメージ" first="住まいを考え、手を動かす仕事。" second="暮らしの言葉を、住まいの計画へ。" third="採用について知りたい方へ" linkLabel="採用について問い合わせる" linkHref="/contact/?type=recruit" sectionAnimations={{0:{target:'image'},1:{target:'image'},2:{target:'heading'}}} phaseHeadingAnimation={true} /></SiteLayout>

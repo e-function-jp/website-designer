@@ -1,0 +1,37 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Props {
+  image: string;
+  alt: string;
+  reverse?: boolean;
+  imageClass?: string;
+  caption?: string;
+  imageAnimation?: { duration: number; stagger?: number };
+}
+const { image, alt, reverse = false, imageClass = '', caption, imageAnimation } = Astro.props;
+---
+<div class:list={['editorial-pair', reverse && 'editorial-pair--reverse']}>
+  {imageAnimation ? (
+    <ScrollReveal animation="fade-up" duration={imageAnimation.duration} stagger={imageAnimation.stagger ?? 0}>
+      <figure class="editorial-pair__figure">
+        <img src={image} alt={alt} width="2400" height="1600" loading="lazy" class={imageClass} />
+        {caption && <figcaption>{caption}</figcaption>}
+      </figure>
+    </ScrollReveal>
+  ) : (
+    <figure class="editorial-pair__figure">
+      <img src={image} alt={alt} width="2400" height="1600" loading="lazy" class={imageClass} />
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
+  )}
+  <div class="editorial-pair__copy"><slot /></div>
+</div>
+<style>
+  .editorial-pair { display:grid; gap:48px; align-items:center; width:min(960px,calc(100% - 48px)); margin:auto; }
+  .editorial-pair__figure { margin:0; }
+  img { display:block; width:100%; height:clamp(280px,40vw,540px); object-fit:cover; }
+  figcaption { margin-top:12px; font-size:14px; line-height:1.7; }
+  .editorial-pair__copy { font-size:16px; line-height:1.9; }
+  @media(min-width:768px) { .editorial-pair { grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr); gap:80px; } .editorial-pair--reverse .editorial-pair__figure { order:2; } }
+</style>

@@ -1,0 +1,200 @@
+{
+  "reference_url": "https://eightdesign.co.jp/",
+  "analyzed_at": "2026-09-16T20:01:22.491Z",
+  "pages": [
+    {
+      "url": "https://eightdesign.co.jp/",
+      "slug": "top",
+      "title": "EIGHT DESIGN INC.（エイトデザイン株式会社）",
+      "viewportsTall": 1,
+      "revealCount": 33,
+      "dominantKind": "fade",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 8,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 12,
+      "keyframes": 9,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 44,
+          "top": 37,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header-module-scss-module__-5J3bq__wrapper"
+        },
+        "scrolled": {
+          "height": 44,
+          "top": 37,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header-module-scss-module__-5J3bq__wrapper"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    },
+    {
+      "url": "https://eightdesign.co.jp/about",
+      "slug": "about",
+      "title": "エイトデザインについて｜EIGHT DESIGN INC.（エイトデザイン株式会社）",
+      "viewportsTall": 1,
+      "revealCount": 6,
+      "dominantKind": "zoom",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 5,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 9,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 44,
+          "top": 37,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header-module-scss-module__-5J3bq__wrapper"
+        },
+        "scrolled": {
+          "height": 44,
+          "top": 37,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header-module-scss-module__-5J3bq__wrapper"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    },
+    {
+      "url": "https://eightdesign.co.jp/about/smvv",
+      "slug": "about-smvv",
+      "title": "社是・MVV｜EIGHT DESIGN INC.（エイトデザイン株式会社）",
+      "viewportsTall": 1,
+      "revealCount": 24,
+      "dominantKind": "other",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 2,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 9,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 44,
+          "top": 37,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header-module-scss-module__-5J3bq__wrapper"
+        },
+        "scrolled": {
+          "height": 44,
+          "top": 37,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "header-module-scss-module__-5J3bq__wrapper"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 33,
+      "about": 6,
+      "about-smvv": 24
+    },
+    "reveal_count_spread": 27,
+    "motion_consistent": false,
+    "libs_union": [
+      "lenis",
+      "viewTransitions"
+    ],
+    "header_behavior": {
+      "position": "fixed",
+      "atTop": {
+        "height": 44,
+        "top": 37,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "header-module-scss-module__-5J3bq__wrapper"
+      },
+      "scrolled": {
+        "height": 44,
+        "top": 37,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "header-module-scss-module__-5J3bq__wrapper"
+      },
+      "shrinks": false,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": false
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 33,
+    "reveal_count_reduced": 28,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {
+      "viewTransitions": "in-use"
+    },
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade",
+    "scroll_linked_count": 8,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": null,
+    "easings": [
+      "ease"
+    ],
+    "reveal_kinds": {
+      "fade": 30,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 1,
+      "clip-wipe": 2,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "page_length_viewports": [
+      1,
+      1,
+      1
+    ]
+  }
+}

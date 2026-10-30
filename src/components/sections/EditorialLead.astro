@@ -1,0 +1,12 @@
+---
+interface Props { title: string; children?: unknown; date?: string }
+const { title, date } = Astro.props;
+---
+<header class="lead">
+  {date && <p class="date">{date}</p>}
+  <h1>{title}</h1>
+  <div class="lead__copy"><slot /></div>
+</header>
+<style>
+  .lead{max-width:42em;margin:0 auto;padding:3rem 1.25rem 4rem}.date{font-size:.875rem;margin:0 0 1rem}.lead h1{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:clamp(1.375rem,2vw,1.5rem);font-weight:400;letter-spacing:.04em;line-height:1.8;margin:0 0 2rem}.lead__copy{font-size:1rem;line-height:1.9}.lead__copy :global(p){margin:0}
+</style>

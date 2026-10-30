@@ -1,0 +1,31 @@
+---
+import { url, type SiteConfig } from '../../lib/site';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+interface Photo { image: string; alt: string; label: string; href: string; }
+interface Props { site: SiteConfig; photos: Photo[]; revealAll?: boolean; }
+const { site, photos, revealAll = false } = Astro.props;
+---
+<div class="house-collage">
+  {photos.map((photo, index) => (
+    revealAll ? (
+      <ScrollReveal animation="fade-up" duration={2000} stagger={0}>
+        <a class={`house-collage__item house-collage__item--${index + 1}`} href={url(site, photo.href)}>
+          <img src={photo.image} alt={photo.alt} width="2400" height="1600" loading="lazy" />
+          <span>{photo.label}</span>
+        </a>
+      </ScrollReveal>
+    ) : (
+      <a class={`house-collage__item house-collage__item--${index + 1}`} href={url(site, photo.href)}>
+        <img src={photo.image} alt={photo.alt} width="2400" height="1600" loading="lazy" />
+        <span>{photo.label}</span>
+      </a>
+    )
+  ))}
+</div>
+<style>
+  .house-collage { display:grid; gap:64px; width:min(960px,calc(100% - 48px)); margin:auto; }
+  .house-collage__item { display:block; color:inherit; text-decoration:none; }
+  img { display:block; width:100%; height:360px; object-fit:cover; }
+  span { display:block; margin-top:12px; font-size:14px; }
+  @media(min-width:768px) { .house-collage { grid-template-columns:360px 400px; justify-content:space-between; gap:80px 120px; } .house-collage__item--2 { margin-top:120px; } .house-collage__item--3 { margin-top:-80px; } .house-collage__item--4 { margin-top:40px; } .house-collage__item--2 img { height:430px; } .house-collage__item--3 img { height:290px; } }
+</style>

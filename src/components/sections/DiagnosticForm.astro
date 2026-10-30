@@ -1,0 +1,576 @@
+---
+/**
+ * DiagnosticForm — 無料組織診断のお申し込みフォーム。
+ *
+ * ディレクション指示 (direction-b):
+ *   - 白背景、最大 760px の 1列
+ *   - ラベルは入力欄の上、項目間 28px
+ *   - 入力欄 高さ 52px、Textarea 最低 160px
+ *   - チェック項目は fieldset と legend を使用
+ *   - 下部に確認ボタン
+ *   - 確認画面も同じ領域内で表示し、画面上部へフォーカスを移す
+ *   - 必須項目: 会社名、お名前、メールアドレス、ご相談のテーマ、同意
+ *   - 任意項目: 部署・役職、現在の状況
+ *   - JS はクライアント側で完結（送信・localStorage なし）
+ *   - aria-describedby でエラーとフィールドを結びつける
+ *   - 確認チェックは fieldset の checkbox
+ *   - JavaScript 無効時は「入力内容の確認には JavaScript が必要です。」を表示
+ *
+ * 実装では OrganizationDiagnosisForm と同じアーキテクチャを採用しつつ、
+ * b 案固有の仕様（フィールドセットのチェックボックス、複数選択テーマ）に合わせる。
+ */
+import Table from '../data-display/Table.astro';
+import Alert from '../data-display/Alert.astro';
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+}
+
+const { site } = Astro.props;
+---
+
+<section class="df bg-base-100">
+  <div class="max-w-[760px] mx-auto px-5 lg:px-0 py-16 lg:py-24">
+    <h2 class="df__title">ご相談内容を入力する。</h2>
+
+    <noscript>
+      <Alert variant="info">
+        <p>入力内容の確認には JavaScript が必要です。外部への送信は行われません。</p>
+      </Alert>
+    </noscript>
+
+    <div class="df__stage" data-df-stage="input">
+      <form class="df__form" novalidate aria-describedby="df-input-help">
+        <div class="df__field">
+          <label class="df__label" for="df-company">
+            会社名
+            <span class="df__required">必須</span>
+          </label>
+          <input
+            id="df-company"
+            name="company"
+            type="text"
+            required
+            data-df-field="company"
+            class="df__input"
+            aria-describedby="df-company-err"
+          />
+          <p id="df-company-err" class="df__error" data-df-error="company" hidden>必須項目を入力してください。</p>
+        </div>
+
+        <div class="df__field">
+          <label class="df__label" for="df-name">
+            お名前
+            <span class="df__required">必須</span>
+          </label>
+          <input
+            id="df-name"
+            name="name"
+            type="text"
+            required
+            data-df-field="name"
+            class="df__input"
+            aria-describedby="df-name-err"
+          />
+          <p id="df-name-err" class="df__error" data-df-error="name" hidden>必須項目を入力してください。</p>
+        </div>
+
+        <div class="df__field">
+          <label class="df__label" for="df-email">
+            メールアドレス
+            <span class="df__required">必須</span>
+          </label>
+          <input
+            id="df-email"
+            name="email"
+            type="email"
+            required
+            data-df-field="email"
+            class="df__input"
+            aria-describedby="df-email-err"
+          />
+          <p id="df-email-err" class="df__error" data-df-error="email" hidden>メールアドレスの形式を確認してください。</p>
+        </div>
+
+        <div class="df__field">
+          <label class="df__label" for="df-dept">
+            部署・役職
+            <span class="df__optional">任意</span>
+          </label>
+          <input
+            id="df-dept"
+            name="department"
+            type="text"
+            data-df-field="department"
+            class="df__input"
+          />
+        </div>
+
+        <fieldset class="df__field df__fieldset" aria-describedby="df-theme-err">
+          <legend class="df__legend">
+            ご相談のテーマ
+            <span class="df__required">必須</span>
+          </legend>
+          <p class="df__help">複数選択できます。</p>
+          <div class="df__check-group">
+            <label class="df__check-row">
+              <input type="checkbox" name="theme" value="商談設計" data-df-field="theme" class="df__check" />
+              <span>商談設計</span>
+            </label>
+            <label class="df__check-row">
+              <input type="checkbox" name="theme" value="パイプライン可視化" data-df-field="theme" class="df__check" />
+              <span>パイプライン可視化</span>
+            </label>
+            <label class="df__check-row">
+              <input type="checkbox" name="theme" value="現場定着" data-df-field="theme" class="df__check" />
+              <span>現場定着</span>
+            </label>
+            <label class="df__check-row">
+              <input type="checkbox" name="theme" value="まだ整理できていない" data-df-field="theme" class="df__check" />
+              <span>まだ整理できていない</span>
+            </label>
+          </div>
+          <p id="df-theme-err" class="df__error" data-df-error="theme" hidden>ご相談のテーマを選択してください。</p>
+        </fieldset>
+
+        <div class="df__field">
+          <label class="df__label" for="df-status">
+            現在の状況
+            <span class="df__optional">任意</span>
+          </label>
+          <textarea
+            id="df-status"
+            name="status"
+            data-df-field="status"
+            class="df__textarea"
+            rows="6"
+            aria-describedby="df-status-help"
+          ></textarea>
+          <p id="df-status-help" class="df__help">
+            会社名やお名前には架空の情報を入力してください。メールアドレスには example@example.com などのサンプルを使用してください。個人情報や社外秘の情報は記入しないでください。
+          </p>
+        </div>
+
+        <div class="df__field">
+          <label class="df__check-label">
+            <input type="checkbox" name="consent" data-df-field="consent" class="df__check" aria-describedby="df-consent-err" />
+            <span>
+              <a href={url(site, '/privacy/')} class="df__inline-link">個人情報の取り扱い</a>
+              と、外部送信されないサンプルであることを確認しました。
+            </span>
+          </label>
+          <p id="df-consent-err" class="df__error" data-df-error="consent" hidden>確認項目にチェックしてください。</p>
+        </div>
+
+        <p id="df-input-help" class="df__note">
+          入力内容は確認画面までの表示に用いられ、外部送信されません。
+        </p>
+
+        <div class="df__actions">
+          <button type="button" class="df__submit" data-df-action="confirm">入力内容を確認する</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="df__stage" data-df-stage="confirm" hidden>
+      <h3 class="df__confirm-title" tabindex="-1" data-df-confirm-title>入力内容の確認。</h3>
+      <p class="df__confirm-note">内容は外部へ送信されません。</p>
+      <Table class="df__confirm-table">
+        <tbody>
+          <tr>
+            <th class="df__th">会社名</th>
+            <td data-df-confirm="company"></td>
+          </tr>
+          <tr>
+            <th class="df__th">お名前</th>
+            <td data-df-confirm="name"></td>
+          </tr>
+          <tr>
+            <th class="df__th">メールアドレス</th>
+            <td data-df-confirm="email"></td>
+          </tr>
+          <tr>
+            <th class="df__th">部署・役職</th>
+            <td data-df-confirm="department"></td>
+          </tr>
+          <tr>
+            <th class="df__th">ご相談のテーマ</th>
+            <td data-df-confirm="theme"></td>
+          </tr>
+          <tr>
+            <th class="df__th">現在の状況</th>
+            <td data-df-confirm="status" class="df__confirm-body"></td>
+          </tr>
+          <tr>
+            <th class="df__th">同意</th>
+            <td data-df-confirm="consent"></td>
+          </tr>
+        </tbody>
+      </Table>
+      <div class="df__actions df__actions--confirm">
+        <button type="button" class="df__btn-secondary" data-df-action="edit">入力内容を修正する</button>
+        <button type="button" class="df__submit" data-df-action="finish">確認を終了して入力を消去する</button>
+      </div>
+    </div>
+
+    <div class="df__stage" data-df-stage="finish" hidden>
+      <Alert variant="info">
+        <p>入力内容を消去しました。実際の申し込みは行われていません。</p>
+      </Alert>
+    </div>
+  </div>
+</section>
+
+<style>
+  .df__title {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+  .df__form { display: flex; flex-direction: column; gap: 28px; }
+
+  .df__field { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; border: 0; }
+  .df__label,
+  .df__legend {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+  }
+  .df__fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .df__required {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-error);
+  }
+  .df__optional {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    opacity: 0.6;
+  }
+
+  .df__input,
+  .df__textarea {
+    width: 100%;
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+    border-radius: 4px;
+    padding: 12px 16px;
+    color: var(--color-base-content);
+    font-size: 15px;
+    line-height: 1.5;
+    font-family: inherit;
+  }
+  .df__input { height: 52px; }
+  .df__textarea { min-height: 160px; resize: vertical; }
+  .df__input:focus,
+  .df__textarea:focus {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+    border-color: var(--color-primary);
+  }
+
+  .df__help {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-base-content);
+    opacity: 0.75;
+  }
+  .df__error {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-error);
+    font-weight: 700;
+  }
+
+  .df__check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .df__check-row,
+  .df__check-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-base-content);
+    line-height: 1.7;
+    cursor: pointer;
+  }
+  .df__check {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    flex: 0 0 auto;
+  }
+  .df__inline-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .df__note {
+    font-size: 13px;
+    color: var(--color-base-content);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .df__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .df__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 28px;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+    border: 1px solid var(--color-secondary);
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .df__submit:hover { opacity: 0.92; }
+  .df__submit:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  .df__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 28px;
+    background: var(--color-base-100);
+    color: var(--color-primary);
+    border: 1px solid var(--color-base-300);
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+  .df__btn-secondary:hover { border-color: var(--color-primary); }
+  .df__btn-secondary:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .df__confirm-title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-base-content);
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+  .df__confirm-title:focus { outline: none; }
+  .df__confirm-note {
+    font-size: 14px;
+    color: var(--color-base-content);
+    opacity: 0.75;
+    margin: 0 0 24px;
+  }
+  .df__confirm-table { margin-bottom: 24px; }
+  .df__th {
+    width: 30%;
+    background: var(--color-base-200);
+    font-weight: 700;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+  .df__confirm-body { white-space: pre-wrap; }
+  .df__actions--confirm { flex-direction: column; }
+
+  @media (min-width: 640px) {
+    .df__actions--confirm { flex-direction: row; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .df__submit, .df__btn-secondary, .df__inline-link { transition: none; }
+  }
+</style>
+
+<script>
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const init = () => {
+    const roots = document.querySelectorAll<HTMLElement>('.df');
+    if (!roots.length) return;
+
+    roots.forEach((root) => {
+      if (root.dataset.dfReady) return;
+      root.dataset.dfReady = '1';
+
+      const stages = {
+        input: root.querySelector<HTMLElement>('[data-df-stage="input"]'),
+        confirm: root.querySelector<HTMLElement>('[data-df-stage="confirm"]'),
+        finish: root.querySelector<HTMLElement>('[data-df-stage="finish"]'),
+      } as const;
+
+      const fields = root.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-df-field]');
+      const errors = root.querySelectorAll<HTMLElement>('[data-df-error]');
+
+      const checkboxesForTheme = root.querySelectorAll<HTMLInputElement>('input[name="theme"][data-df-field="theme"]');
+      const consentBox = root.querySelector<HTMLInputElement>('input[name="consent"][data-df-field="consent"]');
+
+      const showError = (key: string, show: boolean) => {
+        errors.forEach((el) => {
+          if (el.dataset.dfError === key) {
+            el.hidden = !show;
+          }
+        });
+        const field = root.querySelector<HTMLElement>(`[data-df-field="${key}"]`);
+        if (field) {
+          if (show) field.setAttribute('aria-invalid', 'true');
+          else field.removeAttribute('aria-invalid');
+        }
+      };
+
+      const validateAll = (): string | null => {
+        let firstInvalid: string | null = null;
+        for (const f of Array.from(fields)) {
+          const name = (f as HTMLInputElement).name;
+          const value = (f.value ?? '').trim();
+          let invalid = false;
+          if ((f as HTMLInputElement).required && !value) invalid = true;
+          if (f.type === 'email' && value && !EMAIL_RE.test(value)) invalid = true;
+          if (invalid) {
+            showError(name, true);
+            if (firstInvalid === null) firstInvalid = name;
+          } else {
+            showError(name, false);
+          }
+        }
+        // theme: チェックボックス1個以上
+        const themeChecked = Array.from(checkboxesForTheme).some((c) => c.checked);
+        if (!themeChecked) {
+          showError('theme', true);
+          if (firstInvalid === null) firstInvalid = 'theme';
+        } else {
+          showError('theme', false);
+        }
+        // consent
+        if (!consentBox?.checked) {
+          showError('consent', true);
+          if (firstInvalid === null) firstInvalid = 'consent';
+        } else {
+          showError('consent', false);
+        }
+        return firstInvalid;
+      };
+
+      const focusFirstInvalid = (key: string) => {
+        const el = root.querySelector<HTMLElement>(`[data-df-field="${key}"]`);
+        el?.focus();
+      };
+
+      const showStage = (which: 'input' | 'confirm' | 'finish') => {
+        Object.entries(stages).forEach(([k, el]) => {
+          if (!el) return;
+          if (k === which) el.hidden = false;
+          else el.hidden = true;
+        });
+        if (which === 'confirm') {
+          const t = root.querySelector<HTMLElement>('[data-df-confirm-title]');
+          if (t) {
+            t.scrollIntoView({ block: 'start' });
+            t.focus();
+          }
+        } else if (which === 'finish') {
+          root.scrollIntoView({ block: 'start' });
+        } else {
+          root.scrollIntoView({ block: 'start' });
+        }
+      };
+
+      const fillConfirm = () => {
+        const map: Record<string, string> = {};
+        fields.forEach((f) => {
+          const name = (f as HTMLInputElement).name;
+          if ((f as HTMLInputElement).type === 'checkbox') {
+            map[name] = (f as HTMLInputElement).checked ? 'はい' : 'いいえ';
+          } else {
+            map[name] = f.value;
+          }
+        });
+        // theme はチェックされた値をカンマ結合
+        map['theme'] = Array.from(checkboxesForTheme)
+          .filter((c) => c.checked)
+          .map((c) => c.value)
+          .join('、');
+        root.querySelectorAll<HTMLElement>('[data-df-confirm]').forEach((cell) => {
+          const k = cell.dataset.dfConfirm!;
+          cell.textContent = map[k] ?? '';
+        });
+      };
+
+      const clearForm = () => {
+        fields.forEach((f) => {
+          if ((f as HTMLInputElement).type === 'checkbox') (f as HTMLInputElement).checked = false;
+          else (f as HTMLInputElement).value = '';
+        });
+        errors.forEach((el) => { el.hidden = true; });
+        fields.forEach((f) => f.removeAttribute('aria-invalid'));
+      };
+
+      // 入力時にエラーを消す
+      fields.forEach((f) => {
+        const handler = () => showError((f as HTMLInputElement).name, false);
+        f.addEventListener('input', handler);
+        f.addEventListener('change', handler);
+      });
+
+      root.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const action = target.dataset.dfAction;
+        if (!action) return;
+
+        if (action === 'confirm') {
+          const first = validateAll();
+          if (first) {
+            focusFirstInvalid(first);
+            return;
+          }
+          fillConfirm();
+          showStage('confirm');
+        }
+
+        if (action === 'edit') {
+          showStage('input');
+        }
+
+        if (action === 'finish') {
+          clearForm();
+          showStage('finish');
+        }
+      });
+    });
+  };
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

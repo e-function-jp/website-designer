@@ -1,0 +1,366 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Badge from '../../../../../components/data-display/Badge.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import Steps from '../../../../../components/navigation/Steps.astro';
+import Accordion from '../../../../../components/data-display/Accordion.astro';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import ProcessRail from '../../../../../components/sections/ProcessRail.astro';
+import FieldWindow from '../../../../../components/sections/FieldWindow.astro';
+import EvidenceRows from '../../../../../components/sections/EvidenceRows.astro';
+import NextPageLinks from '../../../../../components/site/NextPageLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+
+const serviceFieldImage = {
+  src: `${SHARED}/img-b-03.jpg`,
+  alt: '製造現場に隣接した打ち合わせスペースで資料を確認する人々',
+};
+
+const scopes = [
+  {
+    title: '商談設計',
+    arrange: '受注に向けた商談の進め方。',
+    connect: 'チームで共有するプレイブック。',
+  },
+  {
+    title: 'パイプライン可視化',
+    arrange: '案件の状況と受注までのプロセス。',
+    connect: '営業組織の現状を捉える共通の視点。',
+  },
+  {
+    title: '現場定着',
+    arrange: '設計した型と日々の営業活動のつながり。',
+    connect: '継続して使える受注プロセス。',
+  },
+];
+
+const flowSteps = [
+  { label: '第1段階', body: '組織診断' },
+  { label: '第2段階', body: '設計と整備' },
+  { label: '第3段階', body: '現場定着' },
+];
+
+const evidences = [
+  { value: '1.6倍', condition: '支援企業の平均受注率を14か月で改善。' },
+  { value: '92%', condition: '導入後12か月の定着率。' },
+  { value: '210以上', condition: '累計支援チーム数。' },
+];
+
+const qaItems = [
+  {
+    q: 'どのような企業が対象ですか。',
+    a: '中堅製造業とSaaS企業を対象にしています。営業組織の商談設計・パイプライン可視化・現場定着を一体で扱います。',
+  },
+  {
+    q: '商談設計だけの支援ですか。',
+    a: '商談設計に加え、パイプライン可視化と現場定着までを含む営業変革プログラムです。伴走型の組織診断とプレイブック整備を軸にしています。',
+  },
+  {
+    q: 'どこから相談できますか。',
+    a: '「無料で組織診断を申し込む」から、相談内容を入力するページへ進めます。現在の課題が整理できていない場合も、その状況を入力内容としてまとめられます。',
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="営業変革プログラム"
+  description="中堅製造業とSaaS企業に向けて、商談設計・パイプライン可視化・現場定着までを一体で支援する軌道セールス設計の営業変革プログラムをご紹介します。"
+  path="/service/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '営業変革プログラム' }]}
+>
+  <!-- 01 対象と提供範囲（共通PageIntro + Badge） -->
+  <PageIntro
+    title="営業変革プログラム"
+    description="商談設計・パイプライン可視化・現場定着までを、一体で支援します。対象は、中堅製造業とSaaS企業。従業員100〜2000名規模のBtoB企業で、営業組織の進め方を見直したい営業責任者・経営企画・事業責任者の皆さまに向けたプログラムです。"
+  >
+    <div class="service-badges" aria-label="対象">
+      <Badge variant="outline">中堅製造業</Badge>
+      <Badge variant="outline">SaaS企業</Badge>
+    </div>
+  </PageIntro>
+
+  <!-- 02 支援領域の比較 -->
+  <section class="scope bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="scope__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-3">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <p class="scope__num" aria-hidden="true">02</p>
+            <SectionTitle title="三つの領域を、一つのプロセスに。" align="left" class="scope__title" />
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-9">
+          <Table class="scope__table">
+            <thead>
+              <tr>
+                <th class="scope__th" scope="col">領域</th>
+                <th class="scope__th" scope="col">整理すること</th>
+                <th class="scope__th" scope="col">つなぐ先</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scopes.map((s) => (
+                <tr>
+                  <th scope="row" class="scope__rowhead">{s.title}</th>
+                  <td class="scope__cell">{s.arrange}</td>
+                  <td class="scope__cell">{s.connect}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <p class="scope__note">
+            これらを、伴走型の組織診断とプレイブック整備を軸につなぎます。自社の課題を一つの領域だけで捉えにくい場合も、組織全体の現状から整理します。
+          </p>
+        </div>
+      </div>
+      <!-- モバイル用（縦型 dl） -->
+      <div class="scope__mobile">
+        {scopes.map((s) => (
+          <dl class="scope__mobile-row">
+            <dt class="scope__mobile-label">{s.title}</dt>
+            <dd class="scope__mobile-cell">
+              <p class="scope__mobile-key">整理すること</p>
+              <p class="scope__mobile-val">{s.arrange}</p>
+              <p class="scope__mobile-key">つなぐ先</p>
+              <p class="scope__mobile-val">{s.connect}</p>
+            </dd>
+          </dl>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 診断から定着まで（白背景・左写真・右Steps） -->
+  <section class="process bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="process__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <figure class="process__photo lg:col-span-5">
+          <img
+            src={serviceFieldImage.src}
+            alt={serviceFieldImage.alt}
+            loading="lazy"
+            width="1200"
+            height="1600"
+            class="process__img aspect-[3/4]"
+          />
+        </figure>
+        <div class="process__body lg:col-span-7">
+          <p class="process__num" aria-hidden="true">03</p>
+          <h2 class="process__heading">現状を捉え、型を整え、現場へ。</h2>
+          <p class="process__phase"><strong>第1段階・組織診断：</strong>営業組織の現状と課題を整理します。商談の進め方や案件管理を見直すための起点です。</p>
+          <p class="process__phase"><strong>第2段階・設計と整備：</strong>商談設計とパイプライン可視化を進め、プレイブックを整えます。受注までのプロセスを、チームで扱える形へつなぎます。</p>
+          <p class="process__phase"><strong>第3段階・現場定着：</strong>整えた型を日々の営業活動へつなげます。組織診断からここまでを、ひと続きの営業変革プログラムとして支援します。</p>
+          <Steps vertical class="process__steps" >
+            {flowSteps.map((s, i) => (
+              <li class="step step-primary">
+                <span class="process__step-label">{s.label}</span>
+                <span class="process__step-body">{s.body}</span>
+              </li>
+            ))}
+          </Steps>
+          <p class="process__note">
+            具体的な支援範囲や進め方は、組織の状況に合わせて検討する内容です。このページでは、プログラムの全体像を紹介しています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 実績と読み取り方（濃紺背景白文字・EvidenceRows） -->
+  <EvidenceRows
+    heading="受注と定着、二つの視点から。"
+    body="営業変革の成果を、受注の変化と、導入後に使われ続けることの両面から示しています。平均受注率、定着率、支援チーム数は、それぞれ異なる指標です。個別の企業で同じ結果が得られることを約束する数値ではありません。"
+    evidences={evidences}
+    variant="dark"
+    sectionNumber="04"
+  />
+
+  <!-- 05 検討時に確認すること（Accordion） -->
+  <section class="questions bg-base-100">
+    <div class="max-w-[880px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <p class="questions__num" aria-hidden="true">05</p>
+      <h2 class="questions__heading">ご検討にあたって。</h2>
+      <div class="questions__list">
+        {qaItems.map((qa, i) => (
+          <Accordion name="service-qa" class="questions__item">
+            <div slot="title">Q. {qa.q}</div>
+            <p>A. {qa.a}</p>
+          </Accordion>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <NextPageLinks site={site} currentPath="/service/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .service-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .scope__num,
+  .process__num,
+  .questions__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+  }
+  .scope__title { margin: 0; }
+  .scope__table {
+    width: 100%;
+    border-top: 1px solid var(--color-base-300);
+    border-bottom: 1px solid var(--color-base-300);
+  }
+  .scope__th {
+    background: var(--color-base-200);
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-base-300);
+  }
+  .scope__rowhead {
+    width: 25%;
+    background: var(--color-base-200);
+    font-weight: 700;
+    color: var(--color-primary);
+    vertical-align: top;
+    padding: 20px;
+  }
+  .scope__cell {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    padding: 20px;
+    vertical-align: top;
+  }
+  .scope__note {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 24px 0 0;
+    color: var(--color-base-content);
+  }
+  .scope__mobile { display: none; }
+  .scope__mobile-row {
+    margin: 0 0 24px;
+    padding: 20px;
+    border: 1px solid var(--color-base-300);
+    background: var(--color-base-100);
+  }
+  .scope__mobile-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+  }
+  .scope__mobile-key {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin: 0 0 4px;
+  }
+  .scope__mobile-val {
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0 0 12px;
+    color: var(--color-base-content);
+  }
+
+  /* PC ではテーブル、モバイルでは縦型 dl */
+  @media (max-width: 767px) {
+    .scope__table { display: none; }
+    .scope__mobile { display: block; }
+  }
+
+  .process__photo { margin: 0; }
+  .process__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background: var(--color-base-300);
+    display: block;
+  }
+  .process__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 24px;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .process__phase {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 16px;
+    color: var(--color-base-content);
+  }
+  .process__phase strong {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .process__steps {
+    margin: 24px 0 16px;
+  }
+  .process__step-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+  }
+  .process__step-body {
+    display: block;
+    font-size: 14px;
+    color: var(--color-base-content);
+    margin-top: 2px;
+  }
+  .process__note {
+    font-size: 13px;
+    line-height: 1.85;
+    margin: 16px 0 0;
+    color: var(--color-base-content);
+    opacity: 0.85;
+  }
+
+  .questions__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 32px;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .questions__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .questions__item {
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+    border-radius: 4px;
+  }
+  .questions__item :global(.collapse-content p) {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+  }
+</style>

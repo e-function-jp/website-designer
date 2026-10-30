@@ -1,0 +1,18 @@
+---
+import { url, type SiteConfig } from '../../lib/site';
+interface Props { site: SiteConfig; contact?: boolean; }
+const { site, contact = false } = Astro.props;
+const href = contact ? '#consultation-form' : site.primaryCta?.href ?? '/contact/';
+const label = contact ? '相談内容の入力へ戻る' : '家づくり相談を予約する';
+---
+<section class="consultation-band">
+  <div>
+    <h2>{contact ? '住まいのこれからを、言葉にする。' : '住まいのこれからを、話しませんか。'}</h2>
+    <p>{contact ? 'ご家族の希望や気になることを、分かる範囲でお聞かせください。' : '新築か、住み替えか、今の家を生かすか。考え始めたところから、お聞かせください。'}</p>
+    <a href={url(site, href)}>{label}</a>
+  </div>
+</section>
+<style>
+  .consultation-band { display:grid; place-items:center; min-height:400px; padding:64px 24px; color:#fffefa; text-align:center; background:linear-gradient(rgb(67 89 78 / .8),rgb(67 89 78 / .8)),url('/sites/corporate/_shared/20260919-0500/img-a-01.jpg') center/cover; }
+  div { max-width:680px; } h2 { margin:0 0 24px; font-size:clamp(26px,3vw,36px); font-weight:500; } p { margin:0 auto 32px; line-height:1.9; } a { display:inline-flex; align-items:center; min-height:56px; padding:0 32px; border-radius:999px; background:#fffefa; color:#43594e; text-decoration:none; }
+</style>

@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro'; import { site } from '../../_site'; import AogamiEditorialPage from '../../../../../../components/sections/AogamiEditorialPage.astro';
+import ScrollReveal from '../../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="目的から探す、サイトのご案内" description="蒼紙舎のサイトで会社、依頼範囲、制作例、相談準備を目的から探すためのご案内です。" path="/news/site-guide/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'お知らせ',href:'/news/'},{label:'目的から探す、サイトのご案内'}]}><ScrollReveal animation="fade" duration={1000}><AogamiEditorialPage site={site} title="目的から探す、サイトのご案内" intro="蒼紙舎のサイトは、知りたい内容から仕事を確かめられるように構成しています。制作の相談を始める前に、会社の姿勢や依頼できる範囲を確認したい方にも、必要なページへ進んでいただけます。" sections={[{label:'会社を知りたいとき',heading:'理念と制作体制を読む',text:'蒼紙舎についてでは、理念、制作で大切にすること、企画から現場監修までの体制を紹介しています。設立や所在地、従業員数は会社概要にまとめています。'},{label:'依頼を考えるとき',heading:'領域と制作例を見る',text:'視覚設計の仕事では対応範囲を、制作実績・制作例では形にするまでの考え方を説明しています。'}]} related={[{title:'制作例の見方について',text:'図版の読み方を確認する。',href:'/news/work-guide/'},{title:'ご相談の前に',text:'相談準備の考え方を読む。',href:'/faq/'}]} /></ScrollReveal></SiteLayout>

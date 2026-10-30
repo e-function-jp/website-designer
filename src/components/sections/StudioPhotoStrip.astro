@@ -1,0 +1,14 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+interface Props { first: string; second: string }
+const { first, second } = Astro.props;
+---
+<ScrollReveal animation="clip-up" duration={1500}>
+  <div class="flex gap-8 overflow-x-auto pb-3">
+    <img src={first} alt="紙見本と制作机のあるスタジオのイメージ" width="1800" height="1200" loading="lazy" class="h-72 min-w-[min(952px,85vw)] object-cover lg:h-[580px]" />
+    <!-- 2枚目は横スクロールの外側に出るため lazy にすると読み込まれない。
+     ブラウザはスクロールポートの外にある lazy 画像を取りに行かないので、
+     横へスクロールするまで空のままになる（render-image-broken が検出）。 -->
+<img src={second} alt="紙見本と制作机のあるスタジオのイメージ" width="2880" height="1800" loading="eager" class="h-72 w-32 shrink-0 object-cover lg:h-[580px]" />
+  </div>
+</ScrollReveal>

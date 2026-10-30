@@ -1,0 +1,97 @@
+---
+/**
+ * FloatingCta — 右下に固定する主要CTA（PC）と下部のモバイル固定帯。
+ *
+ * ディレクションの指示:
+ *   - PC: 右24px・下24px、幅280px・高58px
+ *   - モバイル: 白い下部帯内、左右16px・ボタン高52px、下に safe-area 分を加算
+ *   - 全ページ本文末尾に固定帯分の余白を確保
+ *   - /contact/ のみ重複した固定CTAを出さない
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+  /** true のとき表示しない（/contact/ など） */
+  hidden?: boolean;
+}
+
+const { site, hidden = false } = Astro.props;
+const cta = site.primaryCta;
+---
+
+{!hidden && cta && (
+  <>
+    <a href={url(site, cta.href)} class="floating-cta" aria-label={cta.label}>
+      <span class="floating-cta__label">{cta.label}</span>
+      <span class="floating-cta__arrow" aria-hidden="true">→</span>
+    </a>
+
+    <div class="floating-cta__spacer" aria-hidden="true"></div>
+  </>
+)}
+
+<style>
+  .floating-cta {
+    display: none;
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 280px;
+    height: 58px;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 4px;
+    box-shadow: 0 8px 20px rgb(15 30 50 / 18%);
+    z-index: 30;
+    transition: opacity 0.15s ease;
+  }
+  .floating-cta:hover { opacity: 0.92; }
+  .floating-cta__label { white-space: nowrap; }
+  .floating-cta__arrow { font-size: 18px; }
+
+  .floating-cta__spacer { display: none; }
+
+  @media (min-width: 768px) {
+    .floating-cta {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .floating-cta {
+      display: flex;
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      width: auto;
+      height: 52px;
+      font-size: 14px;
+      border-radius: 4px;
+      z-index: 30;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .floating-cta__spacer {
+      display: block;
+      height: calc(72px + env(safe-area-inset-bottom, 0));
+    }
+  }
+
+  @media (max-width: 380px) {
+    .floating-cta {
+      font-size: 13px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .floating-cta { transition: none; }
+  }
+</style>

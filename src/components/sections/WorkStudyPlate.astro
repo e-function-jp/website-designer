@@ -1,0 +1,22 @@
+---
+interface Props { kind: 'A' | 'B' | 'C' | 'D' | 'E'; view: string; class?: string }
+const { kind, view, class: className = '' } = Astro.props;
+const words = {
+  A: '意図を、ひとつのかたちへ。',
+  B: 'かたちと余白',
+  C: '読む順序をつくる',
+  D: '展示室　受付　出口',
+  E: '見る、その手前から。',
+}[kind];
+---
+<div class:list={['aspect-[116/205] border border-base-300 bg-base-100 p-6 text-primary', className]} aria-label={`${kind}の${view}図版`}>
+  {view === '形' ? <div class="mt-20 grid place-items-center"><div class:list={['h-24 w-24 bg-primary', kind === 'B' && 'shadow-[24px_24px_0_var(--color-primary)]', kind === 'D' && 'clip-path-polygon']} /></div>
+    : view === '白黒' ? <div class="flex h-full flex-col justify-between bg-primary p-5 text-base-100"><p class="font-serif text-xl">{words}</p><div class="h-20 w-20 border-4 border-base-100" /></div>
+    : view === '配置' ? <div class="grid h-full grid-cols-3 grid-rows-4 border border-primary">{Array.from({ length: 12 }).map((_, i) => <span class:list={['border border-primary/50', i === 11 && 'bg-secondary']} />)}</div>
+    : view === '運用' ? <div class="mt-10 space-y-8 font-serif text-base">{['形を揃える', '色を揃える', '使い方を揃える'].map((text) => <p class="border-b border-primary pb-4">{kind === 'D' ? text.replace('形', '入口').replace('色', '分岐').replace('使い方', '出口') : text}</p>)}</div>
+    : <div class="flex h-full flex-col justify-between"><p class="mt-8 max-w-[10em] font-serif text-xl leading-relaxed">{words}</p><span class="h-px w-16 bg-primary" /><div class="self-end border border-primary p-4 text-sm">{view}</div></div>}
+</div>
+
+<style>
+  .clip-path-polygon { clip-path: polygon(0 35%, 58% 35%, 58% 0, 100% 50%, 58% 100%, 58% 65%, 0 65%); }
+</style>

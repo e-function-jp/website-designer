@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>蒼紙舎株式会社｜コーポレートサイト・確定ディレクション</title>
+  <style>
+    :root{--paper:#f7f7f2;--ink:#253d45;--sub:#56636a;--accent:#986044;--line:#cbd1ce}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;font-size:15px;line-height:1.9}
+    main{max-width:1180px;margin:auto;padding:64px 32px 120px}
+    h1,h2,h3{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-weight:500}
+    h1{font-size:30px;margin:0 0 24px}h2{font-size:24px;margin:0 0 32px}h3{font-size:19px}
+    main>section{margin-top:88px;padding-top:32px;border-top:1px solid var(--ink)}
+    article{margin-top:64px;padding-top:24px;border-top:1px solid var(--line)}
+    article>section{margin:32px 0 48px;padding-left:24px;border-left:2px solid var(--line)}
+    p{max-width:90ch}
+    [data-role]::before{display:block;font:600 12px/1.8 sans-serif;color:var(--accent);letter-spacing:.05em}
+    [data-role="purpose"]::before{content:"役割"}
+    [data-role="layout"]::before{content:"配置・寸法"}
+    [data-role="copy"]::before{content:"掲載コピー"}
+    [data-role="components"]::before{content:"部品"}
+    [data-role="animation"]::before{content:"モーション"}
+    [data-role="image"]::before{content:"画像"}
+    table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+    th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:12px}
+    th{font-weight:600}
+    dt{font-weight:700;margin-top:24px}dd{margin:8px 0 0}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#e9ede9;padding:24px;font-size:13px;line-height:1.7}
+    a{color:inherit;text-underline-offset:4px}
+    figure{margin:24px 0;padding:24px;border:1px solid var(--line)}
+    .swatches{display:flex;gap:12px;flex-wrap:wrap}.swatches span{padding:16px;border:1px solid var(--line)}
+    small{font-size:13px}
+    @media(max-width:700px){main{padding:32px 20px 80px}h1{font-size:25px}table{display:block;overflow-x:auto}article>section{padding-left:16px}pre{padding:16px}}
+    @media print{main{max-width:none;padding:16px}article,figure{break-inside:avoid}a{text-decoration:none}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p>corporate-20260918-0500 ／ 確定ディレクション・1本</p>
+    <h1>蒼紙舎株式会社<br>余白の中に、仕事の密度を置く。</h1>
+    <p>大きな制作風景から入り、短い理念、密度の高い制作物群、静かな更新情報へ進む。会社紹介は左の見出しと右の本文位置を揃え、文章・番号リスト・室内写真・組織説明・会社概要で密度を変える。意匠は本書で固定する。</p>
+    <p>企業設定は提示情報のみを使用する。代表者名、資本金、番地、電話、メール、取引先、受賞歴、採用条件、料金、納期は補作しない。制作物は5テーマの「制作例」として設計し、実在の受注案件とは表示しない。トップ20枠、一覧55枠は制作物の表示枠数であり、案件数ではない。</p>
+  </header>
+
+  <section id="site-config">
+    <h2>サイト定義</h2>
+    <p>ページ作成前に下記を _site.ts に保存する。すべての内部リンクは url(site, href) で base を前置する。テーマは独自DaisyUIテーマとして登録する。</p>
+    <dl>
+      <dt>name</dt><dd>蒼紙舎株式会社</dd>
+      <dt>tagline</dt><dd>かたちで、意図を残す</dd>
+      <dt>theme</dt><dd>aogami-corporate</dd>
+      <dt>nav</dt><dd>制作実績・制作例 → /projects/ ／ 蒼紙舎について → /about/ ／ 視覚設計の仕事 → /service/ ／ お知らせ → /news/ ／ 制作のご相談 → /contact/</dd>
+      <dt>footerNav</dt><dd>主要5項目を再掲。「制作の背景」/inspirations/、「採用について」/recruit/、「ご相談の前に」/faq/、「会社案内」/download/ の補助4項目を独立列に置く。会社概要 /company/ は所在地列からリンクする。</dd>
+      <dt>organization</dt><dd>legalName: 蒼紙舎株式会社 ／ address: 東京都台東区谷中 ／ founded: 2011</dd>
+      <dt>primaryCta</dt><dd>制作相談を申し込む → /contact/</dd>
+      <dt>legalNav</dt><dd>個人情報の取り扱い → /privacy/</dd>
+      <dt>motion</dt><dd>reveal: fade-up ／ durationMs: 1000 ／ staggerMs: 0 ／ header: hide ／ pageTransition: true</dd>
+    </dl>
+    <pre><code>import type { SiteConfig } from '../../../../lib/site';
+
+export const site: SiteConfig = {
+  name: '蒼紙舎株式会社',
+  tagline: 'かたちで、意図を残す',
+  base: '/sites/corporate/a-20260918-0500/',
+  theme: 'aogami-corporate',
+  nav: [
+    { label: '制作実績・制作例', href: '/projects/' },
+    { label: '蒼紙舎について', href: '/about/' },
+    { label: '視覚設計の仕事', href: '/service/' },
+    { label: 'お知らせ', href: '/news/' },
+    { label: '制作のご相談', href: '/contact/' }
+  ],
+  footerNav: [
+    {
+      heading: '蒼紙舎の仕事',
+      items: [
+        { label: '制作実績・制作例', href: '/projects/' },
+        { label: '蒼紙舎について', href: '/about/' },
+        { label: '視覚設計の仕事', href: '/service/' },
+        { label: 'お知らせ', href: '/news/' },
+        { label: '制作のご相談', href: '/contact/' }
+      ]
+    },
+    {
+      heading: 'さらに知る',
+      items: [
+        { label: '制作の背景', href: '/inspirations/' },
+        { label: '採用について', href: '/recruit/' },
+        { label: 'ご相談の前に', href: '/faq/' },
+        { label: '会社案内', href: '/download/' }
+      ]
+    },
+    {
+      heading: '会社情報',
+      items: [{ label: '会社概要', href: '/company/' }]
+    }
+  ],
+  organization: {
+    legalName: '蒼紙舎株式会社',
+    address: '東京都台東区谷中',
+    founded: '2011'
+  },
+  primaryCta: {
+    label: '制作相談を申し込む',
+    href: '/contact/'
+  },
+  legalNav: [
+    { label: '個人情報の取り扱い', href: '/privacy/' }
+  ],
+  motion: {
+    reveal: 'fade-up',
+    durationMs: 1000,
+    staggerMs: 0,
+    header: 'hide',
+    pageTransition: true
+  }
+};
+
+export default site;</code></pre>
+  </section>
+
+  <section id="sitemap">
+    <h2>サイトマップ</h2>
+    <p>表のURLはbase相対。本文量は見出し・説明・作品キャプションを含み、共通ナビは含めない。下記20ページをすべて実装する。制作例の詳細5ページはそれぞれ独立した内容を持つ。</p>
+    <table>
+      <thead><tr><th>URL</th><th>ページ名</th><th>役割</th><th>想定本文量（文字）</th></tr></thead>
+      <tbody>
+        <tr><td>/</td><td>かたちで、意図を残す</td><td>制作物を見せ、目的別の下層へ分岐</td><td>750</td></tr>
+        <tr><td>/about/</td><td>蒼紙舎について</td><td>理念・姿勢・制作体制・会社の実体</td><td>1,700</td></tr>
+        <tr><td>/service/</td><td>視覚設計の仕事</td><td>依頼できる範囲と進め方</td><td>1,400</td></tr>
+        <tr><td>/projects/</td><td>制作実績・制作例</td><td>実績数値と55枠の制作例・分類</td><td>1,100</td></tr>
+        <tr><td>/projects/identity/</td><td>企業の視覚統一</td><td>制作例01の判断過程と展開</td><td>550</td></tr>
+        <tr><td>/projects/mark/</td><td>ロゴの設計</td><td>制作例02の形状・余白・運用</td><td>550</td></tr>
+        <tr><td>/projects/editorial/</td><td>冊子の情報設計</td><td>制作例03の読む順序と編集</td><td>550</td></tr>
+        <tr><td>/projects/sign/</td><td>空間の案内計画</td><td>制作例04の誘導と視認性</td><td>550</td></tr>
+        <tr><td>/projects/exhibition/</td><td>展示の体験設計</td><td>制作例05の導入・解説・回遊</td><td>550</td></tr>
+        <tr><td>/news/</td><td>お知らせ</td><td>更新内容を時系列で確認</td><td>450</td></tr>
+        <tr><td>/news/site-guide/</td><td>目的から探す、サイトのご案内</td><td>サイト内の情報の探し方</td><td>450</td></tr>
+        <tr><td>/news/work-guide/</td><td>制作例の見方について</td><td>担当領域と制作例の表示説明</td><td>450</td></tr>
+        <tr><td>/news/consultation-guide/</td><td>制作相談の前に整理しておきたいこと</td><td>相談準備の読み物</td><td>450</td></tr>
+        <tr><td>/contact/</td><td>制作のご相談</td><td>相談内容の入力・確認</td><td>650</td></tr>
+        <tr><td>/company/</td><td>会社概要</td><td>会社情報と規模の確認</td><td>450</td></tr>
+        <tr><td>/recruit/</td><td>採用について</td><td>仕事と組織の理解。未確定の募集条件を作らない</td><td>450</td></tr>
+        <tr><td>/privacy/</td><td>個人情報の取り扱い</td><td>試作フォームのデータ取り扱いの説明</td><td>450</td></tr>
+        <tr><td>/inspirations/</td><td>制作の背景</td><td>紙・文字・余白・案内の観察</td><td>600</td></tr>
+        <tr><td>/faq/</td><td>ご相談の前に</td><td>相談時の疑問を解消</td><td>650</td></tr>
+        <tr><td>/download/</td><td>会社案内</td><td>事業・会社情報を保存できる入口</td><td>450</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="visual">
+    <h2>視覚システム</h2>
+    <dl>
+      <dt>配色</dt>
+      <dd>背景 #F7F7F2、本文・コーポレートカラー #253D45、補助文字 #56636A、アクセント #986044、罫線 #CBD1CE、入力面 #FFFFFF。彩色は蒼色と赤茶の2系統。赤茶はフォーカス枠・現在地の短い下線・フォーム必須表示に限定する。写真を除き新しい有彩色を増やさない。背景の交互塗り分け、グラデーション、影、ピル形状は禁止。</dd>
+      <dt>見出し書体</dt>
+      <dd>"Yu Mincho","Hiragino Mincho ProN",serif。通常ウェイト。h1はPC24px／モバイル22px、理念28px／24px、h2は20px／18px、h3は17px／16px。行高1.8、字間.04em。巨大な英字や48px以上のコピーを置かない。</dd>
+      <dt>本文書体</dt>
+      <dd>"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif。本文16px・行高1.9。ナビ14px、日付・キャプション14px・行高1.65。本文幅最大42em。最小文字サイズ14px。数値は32px、単位16px。装飾目的の英訳は付けない。</dd>
+      <dt>写真の方向性</dt>
+      <dd>自然光、低彩度、紙の厚みと手の動作が分かる実写調。制作机、印刷見本、サイン、展示空間を撮る。人物は作業の中景に限定。集合写真・握手・会議室のストック写真は使わない。ヒーローは横長の引き、実績は縦長、背景紹介は横長の寄りに分ける。</dd>
+      <dt>余白の方針</dt>
+      <dd>単位8px。使用値8／16／24／32／48／64／96／112／160／200／240。1440px時は左右80px、有効1280px。本文の右領域はx=408〜1360px、左ラベルはx=80px。幅768〜1199pxは左右40px、左領域25%。767px以下は左右20px、1列へ積む。画面幅320pxでも横スクロールを起こさない。</dd>
+      <dt>密度の固定</dt>
+      <dd>トップは全面写真900px → 疎な理念640px → 密な20枠約2,120px → 中密度のお知らせ480px → 横長4枠480px → フッター480px。1440×900で約5.7画面。会社紹介は約5,700px、制作例一覧は約6,000pxを目安とし、文字増加時は高さを伸ばす。固定heightで文章を切らない。</dd>
+      <dt>作品タイル</dt>
+      <dd>PCは5列、gap32px、画像232×410px相当、aspect-ratio:116/205。キャプションは画像下12px、2行48pxを確保。1200px未満で3列、768px未満で2列・gap16px。390px時は167×295pxの画像。320px時は132×233px。写真の外形は揃えるが、画像内の寄り・引き、印刷物・図版、明暗を変える。全タイルを同じ写真の単純トリミングで埋めない。</dd>
+      <dt>リンク・CTA</dt>
+      <dd>通常リンクは1px下線、下線オフセット5px。主要CTAも通常は14〜16pxの下線付きテキストとし、ヘッダーで塗りボタンにしない。フォームの確認ボタンのみ蒼色塗り、白文字、角丸0、高さ52px。すべての操作領域は44×44px以上。ホバーは下線色のみ変更し、拡大しない。</dd>
+    </dl>
+    <div class="swatches" aria-label="確定配色">
+      <span style="background:#253d45;color:#fff">#253D45</span>
+      <span style="background:#986044;color:#fff">#986044</span>
+      <span style="background:#f7f7f2">#F7F7F2</span>
+      <span style="background:#fff">#FFFFFF</span>
+    </div>
+  </section>
+
+  <section id="shared-shell">
+    <h2>共通シェル・部品・操作</h2>
+    <p>全ページをSiteLayoutで囲む。既存のSiteHeader／SiteFooter／SiteBreadcrumbsをテーマ限定で拡張し、各ページにナビを手書きしない。既存シェルの横並びナビ・背景・境界線・塗りCTA・太字ロゴは本テーマで解除する。</p>
+    <dl>
+      <dt>PCヘッダー</dt>
+      <dd>1200px以上でfixed、top:0、height:191px、背景透明、境界線なし。ロゴ文字「蒼紙舎」をx=80、y=48、22px明朝で配置し、リンクのaccessible nameは商号。右端80pxに44px四方の2本線メニュー。その左64pxに幅168pxの縦ナビ、行ピッチ31px。先頭はy=48。「制作のご相談」の行だけprimaryCtaの「制作相談を申し込む」で表示し、同じリンクを二重表示しない。</dd>
+      <dt>モバイルヘッダー</dt>
+      <dd>1199px以下では縦ナビを閉じ、ロゴ左20px・上24px、右20pxに44pxのメニュー。高さ88px。details/summaryを維持し、開くとtop:80px、左右20px、紙色背景のパネル。5リンクを56px行、下に補助4リンクを48px行。最大高さcalc(100dvh - 104px)、内部スクロール可。非モーダルで背景を覆わず、Escapeで閉じてsummaryへ戻す。JS無効でも開閉可能。</dd>
+      <dt>ヘッダーと写真の可読性</dt>
+      <dd>ヒーローの上端220pxは明るい無地壁を確保する。ロゴとメニューボタンの背後だけ紙色の小さな矩形を敷き、暗い写真上でも読めるようにする。ヘッダー全体の背景は透明のまま。本文リンクを遮らないよう外枠はpointer-events:none、操作要素のみauto。</dd>
+      <dt>下層導入</dt>
+      <dd>パンくずはPCでy=240px、h1はy=296px、本文はy=400px前後。モバイルはパンくずy=120px、h1はy=168px、本文y=248px。パンくずをSiteLayoutの既存位置からテーマ限定で調整する。写真付きタイトル帯は作らない。</dd>
+      <dt>フッター</dt>
+      <dd>本文後PC160px／モバイル96px。PCはロゴ16%、主要ナビ20%、補助ナビ20%、所在地28%、著作権16%の5列。所在地は「東京都台東区谷中」「会社概要を見る」。SNSと番地は作らない。モバイルはロゴ全幅、その下ナビ2列、所在地と著作権全幅。背景は本文と同色。下段はPC112px／モバイル64px空け、書体選択「標準／すべてゴシック」を44pxボタンで置く。aria-pressedを同期し、選択をlocalStorageへ保存。既定は本書の混植。reduced-motionでは切替演出なし。</dd>
+      <dt>新規切り出し</dt>
+      <dd>src/components/sections/にEditorialLead（小さなh1と導入）、LabeledSection（左ラベル・右本文）、WorkTileGrid（作品一覧）、WorkStudyPlate（文字と図形の制作図版）、RelatedPagePair（左右2分割の関連導線）、NewsRows（罫線付き日付一覧）、CompanyFacts（会社情報）を追加する。入力はsrc/components/ui/へConsultationFormとして切り出す。各ページでEditorialLeadと別の部品を必ず使用し、サイト全体で6種類以上を共有する。</dd>
+      <dt>既存部品との整合</dt>
+      <dd>ScrollRevealを演出に使用。Tableはzebra=falseで会社概要に使用。既存SectionTitleは既定の大きな太字が合わないため使用せず、小見出しはLabeledSectionに実装する。既存TextInput／Textareaはid・name・required等を受け渡せないため、そのままフォームに使わない。ConsultationForm内でlabel付きのネイティブ入力を実装する。Steps、丸番号、カードの影、Statの大きな既定表示は採用しない。</dd>
+      <dt>共通関連導線</dt>
+      <dd>RelatedPagePairはPC2列、gap32px、上罫線、上下32px。見出し18px、説明14px、右下に矢印。モバイル1列、各リンク最低96px。画像付きの指示がある場合のみ画像高160px／モバイル140pxを追加。主要CTAは全ページのフッターに常設する。</dd>
+      <dt>SEO・a11y</dt>
+      <dd>h1は各ページ1つ。各ページ最初の本文から40〜120文字をmeta descriptionに使用する。詳細のパンくずはホーム→一覧→現在ページ。フォーカスは赤茶2px・offset4px。作品キャプションは常時表示し、hoverに依存しない。フォームのラベル・エラーを関連付ける。モバイル、200%文字拡大、キーボードで確認する。canonicalのホストは既存環境設定から取得する。</dd>
+    </dl>
+  </section>
+
+  <section id="motion-spec">
+    <h2>モーションの確定値</h2>
+    <table>
+      <thead><tr><th>対象</th><th>指定</th><th>根拠・実装</th></tr></thead>
+      <tbody>
+        <tr><td>通常本文</td><td>fade-up／1000ms／stagger 0ms／ease-in-out</td><td>durationは実測中央値。移動距離16pxは本制作で決定。</td></tr>
+        <tr><td>会社紹介・記事本文</td><td>fade／1000ms／stagger 0ms／ease-in-out</td><td>About実測。</td></tr>
+        <tr><td>作品一覧の行</td><td>fade-up／1500ms／stagger 0ms／ease-in-out</td><td>Projects実測中央値・最大値。</td></tr>
+        <tr><td>大きな写真</td><td>clip-up／1500ms／stagger 0ms／ease-in-out</td><td>検出されたclip-wipeを利用可能なclip-upへ対応。</td></tr>
+        <tr><td>補助の関連導線</td><td>fade-up／700ms／stagger 0ms／ease</td><td>実測最小値。</td></tr>
+        <tr><td>ヘッダー内部ナビ</td><td>opacity／500ms／ease-out</td><td>外枠・ロゴ・メニューは消さない。高さ・背景は変えない。</td></tr>
+      </tbody>
+    </table>
+    <p>既存ScrollRevealの32px移動とcubic-bezierはテーマスコープ内で16px・ease-in-outへ変更する。700ms指定だけeaseとする。監視外枠は変形させない。初回のみ発火、thresholdは実効値0.01、rootMarginは0px 0px -5% 0pxとする。距離・発火条件・stagger 0は設計判断であり実測値ではない。</p>
+    <p>演出量はページ全体の件数ではなく、同じ部品・同じ画面内密度で揃える。一覧はPCの1行につき1群、モバイルも表示上の1行につき1群。文章はセクション単位で1群。1画面の独立発火は最大2群。トップだけ文字やタイルを1枚ずつ連続発火させない。PCトップは約9群、Aboutは約10群、Projectsは11行を中心に約13群となる。</p>
+    <p>header:hideの既存実装は外枠をtranslateY(-100%)にするため、本テーマではそのtransformを解除する。下方向かつscrollY&gt;160pxで内部PCナビだけis-hidden、上方向で復帰する。160pxは実装値。非表示ナビはinertを付けてTab対象から外す。focus-within、メニュー展開中は表示を維持する。モバイルでは開閉ボタンと展開中のナビを隠さない。</p>
+    <p>View Transitionsはon。時間が未測定のため追加の全画面フェード・スライド・ローダーを設計しない。標準遷移を使用し、入口リビールとの二重フェードを避ける。Lenisは導入せず通常スクロール。pin、scrub、パララックスは未確認なので追加しない。</p>
+    <p>prefers-reduced-motion:reduceでは全内容を初期表示し、transform・clip-path・transition・ページ遷移アニメーションを解除する。ヘッダーナビも隠さない。JS無効時も内容を初期表示するようScrollRevealにnoscriptフォールバックを追加する。入力フォームは常に静止表示する。</p>
+  </section>
+
+  <section id="work-data">
+    <h2>作品表示データ・55枠の固定設計</h2>
+    <p>未提示の受注案件を捏造しないため、5つの制作例を11の観点で見せる。一覧には「5つの制作例・55の図版」と明記する。累計制作案件420件超と55枠を混同しない。各図版は対応する5ページのいずれかへ遷移する。</p>
+    <table>
+      <thead><tr><th>ID</th><th>制作例名・詳細URL</th><th>担当領域</th><th>図版に用いる固定文字</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>企業の視覚統一／projects/identity/</td><td>ブランディング・ロゴ・印刷物</td><td>「意図を、ひとつのかたちへ。」</td></tr>
+        <tr><td>B</td><td>ロゴの設計／projects/mark/</td><td>ロゴ・グラフィック</td><td>「かたちと余白」</td></tr>
+        <tr><td>C</td><td>冊子の情報設計／projects/editorial/</td><td>印刷物・グラフィック</td><td>「読む順序をつくる」</td></tr>
+        <tr><td>D</td><td>空間の案内計画／projects/sign/</td><td>空間グラフィック</td><td>「展示室」「受付」「出口」</td></tr>
+        <tr><td>E</td><td>展示の体験設計／projects/exhibition/</td><td>展示演出・印刷物</td><td>「見る、その手前から。」</td></tr>
+      </tbody>
+    </table>
+    <p>WorkStudyPlateはSVGまたはHTML/CSSで制作する図版。生成画像を追加しない。viewBoxは232×410。基本余白24px、線幅1px、図版内の文字は14〜24px。会社の新しいロゴとしては使用しない。以下の11行×A〜Eで55枠を定義する。captionは「制作例名｜観点名」、次行に担当領域。画像代替テキストは「制作例名の観点名」。</p>
+    <table>
+      <thead><tr><th>観点ID・名前</th><th>図版の構成</th><th>A〜Eでの差分</th></tr></thead>
+      <tbody>
+        <tr><td>01 全景</td><td>各テーマ専用写真。全面cover、中央50%/50%。</td><td>A=projects:identity、B=projects:mark、C=projects:editorial、D=projects:sign、E=projects:exhibition。</td></tr>
+        <tr><td>02 文字</td><td>紙色、固定文字を18px明朝で左24px・上64px。下端に短い蒼色線。</td><td>Aは3行、Bは2行、Cは縦2列、Dは案内語3段、Eは4行に分ける。</td></tr>
+        <tr><td>03 形</td><td>蒼色地に紙色の図形。中央に120×120px以内。</td><td>A=平行な長方形3枚、B=一辺72pxの正方形2枚を24pxずらす、C=開いた本の矩形2枚、D=右向き矢印、E=開口のある矩形。</td></tr>
+        <tr><td>04 紙への展開</td><td>薄灰地、紙色の矩形を回転なしで配置。影なし。</td><td>A=名刺2枚、B=封筒1枚、C=冊子表紙1枚、D=案内カード3枚、E=チケット2枚。固定文字を14pxで組む。</td></tr>
+        <tr><td>05 余白</td><td>紙色、対象を右下に寄せ、上部60%を空ける。</td><td>A=短い横罫3本、B=03の図形を40pxへ縮小、C=縦本文5行、D=「出口」と矢印、E=小さな開口図。</td></tr>
+        <tr><td>06 配置</td><td>紙色、1pxの蒼色線で3×4の区画。右下1区画のみ赤茶。</td><td>A=左上に固定文字、B=中央に図形、C=本文段組、D=横方向の誘導線、E=縦方向の回遊線。グリッド形状は共通。</td></tr>
+        <tr><td>07 素材の寄り</td><td>01と同じ写真をobject-fit:cover、scaleなし、専用crop。</td><td>A=紙の端20%/70%、B=印刷面70%/60%、C=綴じ50%/70%、D=取付部70%/40%、E=解説板30%/50%。</td></tr>
+        <tr><td>08 白黒</td><td>背景#253D45、固定文字と03の図形を紙色で反転。</td><td>A=上段文字・下段図形、B=中央図形、C=白い表紙、D=「受付 →」、E=中央の開口図。</td></tr>
+        <tr><td>09 縮小</td><td>紙色、同じ図形を大64px・中40px・小24pxで縦置き。</td><td>各テーマ03の図形を使用。左に「大」「中」「小」を14pxで添える。</td></tr>
+        <tr><td>10 組み合わせ</td><td>薄灰地、異なる大きさの紙面を縦に3枚。角度0度、重なり16px。</td><td>A=名刺・封筒・案内、B=マーク・文字・余白図、C=表紙・目次・本文、D=入口・分岐・出口、E=導入・解説・案内。</td></tr>
+        <tr><td>11 運用</td><td>紙色、上64pxから短文3段。段間32px、段の間に罫線。</td><td>A「形を揃える／色を揃える／使い方を揃える」、B「小さくする／反転する／余白を保つ」、C「順序を決める／見出しを揃える／読み返せる」、D「入口で知る／分岐で選ぶ／出口へ進む」、E「導入で出会う／解説で深める／余韻を残す」。</td></tr>
+      </tbody>
+    </table>
+    <p>トップ20枠の順序は行1=A01・B02・C04・D03・E01、行2=A03・B01・C02・D04・E03、行3=A04・B03・C01・D02・E04、行4=A02・B04・C03・D01・E02。5列の同じ位置が同じ色にならない構成を維持する。</p>
+    <p>一覧55枠は観点01〜11を行とし、奇数行A→B→C→D→E、偶数行E→D→C→B→A。PCは11行、モバイルはDOM順の2列で表示する。カテゴリは「すべて／ブランディング／ロゴ／印刷物／空間グラフィック／展示演出／グラフィック」の7項目。未提供の事業を増やさず、各テーマの担当領域との完全一致で絞る。絞り込み後は元の順序を保つ。</p>
+  </section>
+
+  <section id="pages">
+    <h2>全ページ・セクション仕様</h2>
+
+    <article data-page="/">
+      <h2>トップ</h2>
+      <section data-section="hero">
+        <h3>制作の現場</h3>
+        <p data-role="purpose">紙と手のある制作風景を第一印象にする。</p>
+        <p data-role="layout">PCは全幅・高さ900px。モバイルは高さ82svh、最小520px、最大760px。写真の机と人物を中心に、object-positionはPC50%/50%、モバイル58%/50%。写真に見出し・CTAを重ねない。h1「かたちで、意図を残す」は次セクションに置く。</p>
+        <p data-role="copy">写真下端の外、左20px／80pxに14pxで「企画から制作、現場監修まで。蒼紙舎の視覚設計。」</p>
+        <p data-role="components">新規EditorialHero。SiteLayout共通ヘッダー。</p>
+        <p data-role="animation">none。LCP画像を初期表示する。</p>
+        <p data-role="image">top:hero。alt「紙の見本を広げ、印刷物の仕上がりを確かめる制作風景」。eager、widthとheightを指定。</p>
+      </section>
+      <section data-section="philosophy">
+        <h3>かたちで、意図を残す</h3>
+        <p data-role="purpose">会社の姿勢と規模を短く示してAboutへ送る。</p>
+        <p data-role="layout">PC左ラベルx80、本文x408。上112px、下160px、全体約640px。h1を「かたちで、／意図を残す」の2行、28px。本文まで32px、数値3列まで48px。右下に下線リンク。モバイルは左ラベル→24px→本文、上下80px、数値3列は各104px相当、横にはみ出す場合1列。</p>
+        <p data-role="copy">蒼紙舎の考え方。かたちで、意図を残す。中小企業や文化施設が伝えたいことを、ロゴ、印刷物、空間グラフィック、展示演出へ。蒼紙舎は企画から制作、現場監修までを社内でつなぐデザインスタジオです。目に触れる一つひとつに、伝える理由を持たせます。累計制作案件 420件超／リピート発注率 68%／年間展示・空間案件 35件。「蒼紙舎について」→/about/。</p>
+        <p data-role="components">LabeledSection。数値は同部品内のdlで表示し、カウントアップを使わない。</p>
+        <p data-role="animation">fade-up、1000ms、stagger 0ms、ease-in-out。セクション全体1群。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="selected-works">
+        <h3>制作のかたち</h3>
+        <p data-role="purpose">説明より作品面積を大きくし、制作領域の幅を見せる。</p>
+        <p data-role="layout">20枠はwork-dataの順序を厳守。PC5列×4行、画像比116:205、gap32px。見出しと説明は一覧上48px。末尾は中央に「制作例をすべて見る」、上64px・下200px。モバイル2列×10行、gap16px、末尾下96px。横長カードや3件の抜粋へ減らさない。</p>
+        <p data-role="copy">制作のかたち。ロゴの輪郭から、紙面の読み順、空間の案内まで。5つの制作例を通して、視覚設計の広がりをご覧いただけます。掲載画像は制作領域を伝えるための制作例です。キャプションはwork-dataの20組を使用。「制作例をすべて見る」→/projects/。</p>
+        <p data-role="components">WorkTileGrid、WorkStudyPlate。</p>
+        <p data-role="animation">表示上の1行ごとにfade-up、1500ms、stagger 0ms、ease-in-out。タイル単位の連鎖は禁止。</p>
+        <p data-role="image">projects:identity／mark／editorial／sign／exhibition。写真5枠とWorkStudyPlate15枠。</p>
+      </section>
+      <section data-section="news">
+        <h3>お知らせ</h3>
+        <p data-role="purpose">更新情報から内容を確認できるようにする。</p>
+        <p data-role="layout">左ラベルと右3行。PC各行88px、日付幅120px、題名可変幅。上下余白合計160px。モバイルは日付を題名上、各行最低104px。末尾に「お知らせ一覧」。</p>
+        <p data-role="copy">お知らせ。2026.09.18「目的から探す、サイトのご案内」→/news/site-guide/。2026.09.18「制作例の見方について」→/news/work-guide/。2026.09.18「制作相談の前に整理しておきたいこと」→/news/consultation-guide/。お知らせ一覧→/news/。3件は本試作の案内記事であり、過去の企業活動を作らない。</p>
+        <p data-role="components">LabeledSection、NewsRows。</p>
+        <p data-role="animation">3行まとめてfade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="inspirations">
+        <h3>制作の背景</h3>
+        <p data-role="purpose">制作物の後ろにある観察の視点を見せる。</p>
+        <p data-role="layout">見出し左、説明右。下48pxに4列・gap32px、画像16:10。各画像下12pxに題名と1文。モバイル2列・gap16px。作品タイルより明確に背を低くし、上下96px。4リンクは/inspirations/内のpaper・letters・space・wayfindingへ。</p>
+        <p data-role="copy">制作の背景。かたちを考えるための、四つの視点。紙の手触り—厚みと光が、受け取る印象を変える。文字の間隔—文字と文字の間にも、読みやすさが宿る。余白の働き—置かない場所が、伝えたいことを支える。案内の順序—迷う手前に、必要な情報を置く。</p>
+        <p data-role="components">新規InspirationGrid。</p>
+        <p data-role="animation">4枠まとめてfade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">inspirations:materialsを4象限に分割。画像生成は1枚のみ。</p>
+      </section>
+    </article>
+
+    <article data-page="/about/">
+      <h2>蒼紙舎について</h2>
+      <section data-section="intro">
+        <h3>理念</h3>
+        <p data-role="purpose">トップの理念を会社理解につなげる。</p>
+        <p data-role="layout">共通下層導入の後、左ラベル「考え方」、右に28pxの2行理念と最大38字幅の本文。約480px。モバイル上下64px。</p>
+        <p data-role="copy">蒼紙舎について。かたちで、意図を残す。伝えたいことが、見る人に届く。そのために、言葉と形の関係を整える。蒼紙舎は、ブランディングとグラフィックデザインを通して、中小企業や文化施設の視覚設計を手がけています。ロゴ、印刷物、空間グラフィック、展示演出を、別々の成果物で終わらせず、一つの意図でつなぎます。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">fade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="vision">
+        <h3>伝わる理由をつくる</h3>
+        <p data-role="purpose">企画から現場監修までの一貫性を説明する。</p>
+        <p data-role="layout">右本文のみ、最大42em。上32px・下112px、約280px。背景色を変えない。</p>
+        <p data-role="copy">伝わる理由をつくる。何を伝えるかと、どう見せるかを切り離さない。私たちは企画から制作、現場監修までを社内でつなぎます。紙面で読む情報も、空間で目にする案内も、受け取る場面はそれぞれ違います。媒体ごとの条件を確かめながら、企業や施設が大切にしている意図を、ぶれのない視覚表現へ整えていきます。</p>
+        <p data-role="components">LabeledSection。</p>
+        <p data-role="animation">fade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="values">
+        <h3>制作で大切にすること</h3>
+        <p data-role="purpose">仕事の判断基準を6項目で具体化する。</p>
+        <p data-role="layout">右領域に01〜06の縦リスト。番号幅64px、内容可変、各項目上32px・下40px、下罫線。PC約1,120px。モバイル番号幅40px、自然高。丸番号・アイコンは使わない。</p>
+        <p data-role="copy">01 意図を言葉にする。形を決める前に、誰に何を伝えたいのかを確かめる。判断の拠り所を言葉にして、制作の出発点を揃えます。<br>02 接点をつなぐ。ロゴだけ、印刷物だけで完結させず、見る人が出会う順序を考える。媒体をまたいでも同じ意図が伝わる関係をつくります。<br>03 読む人の側に立つ。見出し、文字の大きさ、情報の順序を検討する。見た目の印象と、必要なことが読み取れることを一緒に扱います。<br>04 素材を確かめる。紙の厚みや印刷の見え方、設置場所の光まで、表現に影響する条件を確かめる。画面の中だけで判断しません。<br>05 現場までつなぐ。企画と制作で決めた意図を、現場監修まで引き継ぐ。実際に使われる場所での見え方を、視覚設計の一部として考えます。<br>06 使い続ける視点を持つ。一度見せて終わる形ではなく、更新や展開の場面も考える。運用する人が判断しやすい、整理された表現を目指します。</p>
+        <p data-role="components">LabeledSection内に新規NumberedPrinciplesとして切り出す。</p>
+        <p data-role="animation">2項目を1群としてfade、1000ms、stagger 0ms、ease-in-out。全3群。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="studio">
+        <h3>制作をつなぐ場所</h3>
+        <p data-role="purpose">文章から室内写真へ転換し、会社の実体を補う。</p>
+        <p data-role="layout">PCはx408から幅952px・高さ580pxの写真、その右32px先に次の制作机写真を120pxだけ見せる横スクロール領域。ページ全体の横overflowは禁止。モバイルは幅calc(100vw - 56px)、比4:3、次画像16px露出。矢印ボタンは44px。自動送りなし。下112px。</p>
+        <p data-role="copy">制作をつなぐ場所。東京都台東区谷中を拠点に、14名で視覚設計に取り組む蒼紙舎。企画から制作、現場監修まで、仕事のつながりを社内で持っています。写真は制作環境を伝えるためのイメージです。</p>
+        <p data-role="components">新規StudioPhotoStrip。LabeledSection。</p>
+        <p data-role="animation">写真帯1群にclip-up、1500ms、stagger 0ms、ease-in-out。操作による移動は即時、reduced-motionも即時。</p>
+        <p data-role="image">about:studio、2枚目はtop:hero再使用。altは「紙見本と制作机のあるスタジオのイメージ」。</p>
+      </section>
+      <section data-section="team">
+        <h3>制作体制</h3>
+        <p data-role="purpose">未提示の人物名を作らず、社内でつなぐ役割を示す。</p>
+        <p data-role="layout">右側3列、gap32px、各列見出し16px＋本文。上48px・下112px、約320px。モバイル1列、列間32px。</p>
+        <p data-role="copy">制作体制。企画—伝えたいことと必要な接点を整理し、視覚設計の方針を定めます。制作—ロゴ、印刷物、空間グラフィック、展示演出へ、方針を具体的な形にしていきます。現場監修—制作したものが置かれる場面を確かめ、企画の意図を現場までつなぎます。従業員数は14名です。役割ごとの人数や個人名は掲載しません。</p>
+        <p data-role="components">LabeledSection。</p>
+        <p data-role="animation">fade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="practice">
+        <h3>視覚設計の広がり</h3>
+        <p data-role="purpose">参照の自主事業紹介に相当する厚みを、実際の事業範囲の説明で持たせる。</p>
+        <p data-role="layout">右領域に3段。各段は説明2/3、図版1/3、最低240px、段間64px。モバイルは説明→図版、図版幅60%・右寄せ。約920px。</p>
+        <p data-role="copy">企業の輪郭を整える。ロゴや印刷物は、企業が社会と出会う接点です。伝えたいことを整理し、複数の媒体を通じて同じ意図を感じられる表現へつなぎます。企業の視覚統一を見る→/projects/identity/。<br>空間の中で伝える。空間グラフィックでは、設置位置や視線、移動の順序が伝わり方を変えます。情報そのものと、情報に出会う場所を一緒に設計します。空間の案内計画を見る→/projects/sign/。<br>展示の体験を支える。導入から解説、案内まで、見る人が展示に触れる流れを考えます。作品や内容の理解を支える視覚表現を、企画から現場までつなぎます。展示の体験設計を見る→/projects/exhibition/。</p>
+        <p data-role="components">LabeledSection、WorkStudyPlate。</p>
+        <p data-role="animation">各段fade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">生成画像なし。図版A03、D03、E03。</p>
+      </section>
+      <section data-section="company">
+        <h3>会社情報</h3>
+        <p data-role="purpose">会社の基本情報をAboutにも集約する。</p>
+        <p data-role="layout">右側2列表、見出し幅160px、各行上下24px。下に実績数値3列。上64px・下112px、約640px。モバイルは項目名を値の上に積む。</p>
+        <p data-role="copy">商号：蒼紙舎株式会社。よみ：あおがみしゃ。設立：2011年。従業員数：14名。所在地：東京都台東区谷中。事業内容：中小企業や文化施設向けのブランディング・グラフィックデザイン。ロゴ、印刷物、空間グラフィック、展示演出を、企画から制作、現場監修まで一貫して手がけます。累計制作案件420件超、リピート発注率68%、年間展示・空間案件35件。会社概要を見る→/company/。</p>
+        <p data-role="components">CompanyFacts、Table。</p>
+        <p data-role="animation">fade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>次に見る</h3>
+        <p data-role="purpose">会社理解から依頼範囲と制作例へ進める。</p>
+        <p data-role="layout">左右2分割画像リンク。PC画像高160px、モバイル1列。上48px・下64px。</p>
+        <p data-role="copy">視覚設計の仕事—ご相談いただける領域と、制作の進め方をご紹介します。→/service/。制作実績・制作例—形にするときの考え方を、制作物からご覧いただけます。→/projects/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">top:hero、projects:editorialを再使用。</p>
+      </section>
+    </article>
+
+    <article data-page="/service/">
+      <h2>視覚設計の仕事</h2>
+      <section data-section="intro">
+        <h3>意図から、接点まで</h3>
+        <p data-role="purpose">何を依頼できる会社かを明確にする。</p>
+        <p data-role="layout">共通導入。右本文幅42em、下96px。その下に横長写真、幅952px・比16:9、右寄せ。</p>
+        <p data-role="copy">視覚設計の仕事。意図から、接点まで。ブランドの刷新、ロゴの設計、印刷物の制作、空間の案内、展示の演出。蒼紙舎は、中小企業や文化施設が伝えたいことを整理し、見る人に届く視覚表現をつくります。企画から制作、現場監修までを社内でつなぎ、媒体ごとの条件を一つの方針にまとめていきます。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文fade-up、1000ms。写真clip-up、1500ms。ともにstagger 0ms、ease-in-out。</p>
+        <p data-role="image">top:heroを再使用。</p>
+      </section>
+      <section data-section="fields">
+        <h3>ご相談いただける領域</h3>
+        <p data-role="purpose">提供範囲と制作物を具体的に示す。</p>
+        <p data-role="layout">左ラベル、右に4段。各段は本文60%と図版32%、gap8%。段高最低300px、段間64px。図版は正方形。モバイルは図版を各段末尾、幅65%、右寄せ。カード背景なし。</p>
+        <p data-role="copy">01 ブランドとロゴ。企業や施設が大切にする意図を、視覚表現の軸へ整理します。ロゴの形だけでなく、印刷物や空間へ展開するときの関係まで考えます。制作例：企業の視覚統一→/projects/identity/、ロゴの設計→/projects/mark/。<br>02 印刷物。読む順序と情報のまとまりを整理し、紙面に落とし込みます。文字の大きさ、余白、写真や図版の位置を、伝える内容に合わせて設計します。制作例：冊子の情報設計→/projects/editorial/。<br>03 空間グラフィック。入口、分岐、目的地で必要な情報を整理し、空間の中で読める形へ整えます。設置場所や視線の高さも、グラフィックの条件として扱います。制作例：空間の案内計画→/projects/sign/。<br>04 展示演出。展示の意図を、導入、解説、案内へつなぎます。見る人が内容に出会い、理解を深める流れを、視覚表現と空間の関係から考えます。制作例：展示の体験設計→/projects/exhibition/。</p>
+        <p data-role="components">LabeledSection、WorkStudyPlate。</p>
+        <p data-role="animation">各段fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">生成追加なし。A03、C04、D03、E03の図版。</p>
+      </section>
+      <section data-section="process">
+        <h3>企画から現場監修まで</h3>
+        <p data-role="purpose">社内で完結する工程を説明する。</p>
+        <p data-role="layout">右側縦4段、番号は小さな平文、横罫線だけ。各段上32px・下40px。工程間を線や矢印で接続しない。約700px。</p>
+        <p data-role="copy">01 整理する。背景、伝える相手、必要な媒体を確かめ、制作の目的を揃えます。現時点で決まっていることと、検討が必要なことを分けます。<br>02 方針を定める。情報の優先順位と視覚表現の方向を整理します。複数の媒体へ展開する場合も、共通する判断の軸をつくります。<br>03 形にする。ロゴ、印刷物、空間グラフィック、展示演出を制作します。実際の大きさや素材の条件を踏まえ、細部を確かめます。<br>04 現場までつなぐ。設置や使用の場面で、企画と制作の意図が伝わるかを確認します。現場監修までを社内でつなぐことが、蒼紙舎の仕事の範囲です。</p>
+        <p data-role="components">LabeledSection、NumberedPrinciples。Stepsは使用しない。</p>
+        <p data-role="animation">2段ずつfade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="consult">
+        <h3>相談の準備</h3>
+        <p data-role="purpose">依頼前に整理する情報を示す。</p>
+        <p data-role="layout">右本文＋4項目リスト。上96px・下64px。末尾はRelatedPagePair。</p>
+        <p data-role="copy">まだ形が決まっていなくても。相談内容を整理する際は「伝えたい相手」「変えたいこと」「必要な制作物」「希望する時期」をお聞かせください。すべてが決まっている必要はありません。費用や進行期間は本サイトでは一律に表示していません。ご相談の前に—よくある疑問を確認する→/faq/。制作相談を申し込む—相談内容を入力する→/contact/。</p>
+        <p data-role="components">LabeledSection、RelatedPagePair。</p>
+        <p data-role="animation">fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/projects/">
+      <h2>制作実績・制作例</h2>
+      <section data-section="intro-filter">
+        <h3>仕事を、接点から見る</h3>
+        <p data-role="purpose">数値の実績と、閲覧用の制作例を区別して探索させる。</p>
+        <p data-role="layout">共通導入。右側に3数値を小さく横並び、その下32pxで説明。カテゴリはh1の次の帯に14pxで折り返し、間隔24px、操作高44px。モバイルも折り返し、横スクロールや隠れた項目を作らない。</p>
+        <p data-role="copy">制作実績・制作例。累計制作案件420件超／リピート発注率68%／年間展示・空間案件35件。仕事を、接点から見る。ここでは5つの制作例を、55の図版で紹介します。写真、文字、紙面、空間の案内を見比べながら、視覚設計の考え方をご覧ください。各図版は制作領域を伝えるための表現であり、55件の受注案件を示すものではありません。</p>
+        <p data-role="components">EditorialLead、新規WorkFilter。フィルターはbuttonとaria-pressedで実装し、タブの見た目にしない。</p>
+        <p data-role="animation">導入fade-up、1000ms、stagger 0ms、ease-in-out。フィルター操作と件数表示はnone。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="all-works">
+        <h3>制作例一覧</h3>
+        <p data-role="purpose">トップと同じ部品を55枠まで拡張する。</p>
+        <p data-role="layout">work-dataの11行×5列を使用。トップと同一比率・gap・キャプション。上64px。PC一覧だけで約5,350px。無限スクロール・ページ分割なし。絞り込み結果をaria-live=politeで「表示中：○図版」と通知。JS無効時は全件表示し、フィルターを隠す。</p>
+        <p data-role="copy">キャプション55組はwork-dataの定義を使用。「制作例名｜観点名」「担当領域」の順。末尾説明：同じ意図でも、紙面と空間では必要な設計が変わります。各制作例の詳細では、何を整理し、どのように展開するかを説明しています。ご相談の領域を考える手がかりとしてご覧ください。</p>
+        <p data-role="components">WorkTileGrid、WorkStudyPlate。</p>
+        <p data-role="animation">表示上の行ごとにfade-up、1500ms、stagger 0ms、ease-in-out。フィルター変更後は即時表示し、既読項目を再リビールしない。</p>
+        <p data-role="image">写真5枚を全景・寄りの計10枠で使用。残り45枠は図版。</p>
+      </section>
+      <section data-section="related">
+        <h3>制作を相談する</h3>
+        <p data-role="purpose">探索をサービス理解と相談へつなぐ。</p>
+        <p data-role="layout">最終行から160px。RelatedPagePair、画像なし。</p>
+        <p data-role="copy">視覚設計の仕事—ご相談いただける領域と制作の流れをご覧ください。→/service/。制作相談を申し込む—背景や検討中の内容をお聞かせください。→/contact/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/projects/identity/">
+      <h2>企業の視覚統一</h2>
+      <section data-section="overview">
+        <h3>制作例01</h3>
+        <p data-role="purpose">ブランドの接点を揃える考え方を説明する。</p>
+        <p data-role="layout">共通導入。左に「制作例01」、右に本文。下64pxに幅952px・比3:2の主写真を右寄せ。下112px。</p>
+        <p data-role="copy">企業の視覚統一。担当領域：ブランディング・ロゴ・印刷物。企業の印象は、一つのロゴだけで決まるものではありません。名刺や案内など、見る人が出会う接点を通して積み重なります。この制作例では「意図を、ひとつのかたちへ。」を共通の言葉とし、文字の位置、色、余白を揃えることで、異なる印刷物に同じ方向性を持たせています。実在の受注案件ではなく、制作領域を説明するための制作例です。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文fade-up、1000ms。写真clip-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">projects:identity。</p>
+      </section>
+      <section data-section="design">
+        <h3>形と運用をつなぐ</h3>
+        <p data-role="purpose">見た目の統一を具体的な判断へ分解する。</p>
+        <p data-role="layout">右本文、下48pxにA03・A04を2列。さらに96px空けA10を幅60%・右寄せ。図版の大小差を保つ。</p>
+        <p data-role="copy">揃える場所を決める。すべてを同じ大きさにするのではなく、文字の基準位置と余白の取り方を揃えます。媒体の大きさが変わっても、どこに名前があり、どこから読むかが分かる関係をつくります。<br>使う場面を確かめる。小さな名刺と大きな案内では、情報量も見る距離も異なります。縮小したときに読めるか、複数の制作物を並べたときに同じ企業の表現として受け取れるかを確認します。<br>担当する範囲。企画で意図を整理し、ロゴや紙面へ展開し、使用場面まで見通す。蒼紙舎の一貫した視覚設計を、この関係からご覧いただけます。</p>
+        <p data-role="components">LabeledSection、WorkStudyPlate。</p>
+        <p data-role="animation">本文fade-up、1000ms。図版群fade-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">生成追加なし。A03・A04・A10。</p>
+      </section>
+      <section data-section="related">
+        <h3>関連する仕事</h3>
+        <p data-role="purpose">別の制作例と相談へ進める。</p>
+        <p data-role="layout">上112px、RelatedPagePair。</p>
+        <p data-role="copy">ロゴの設計—形と余白の検討を見る。→/projects/mark/。制作相談を申し込む—ブランド刷新について相談する。→/contact/。制作例一覧へ戻る→/projects/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/projects/mark/">
+      <h2>ロゴの設計</h2>
+      <section data-section="overview">
+        <h3>制作例02</h3>
+        <p data-role="purpose">ロゴを運用条件まで含む設計として示す。</p>
+        <p data-role="layout">共通導入後、右に本文、下64pxに主写真3:2。主写真幅952px。モバイル全幅。</p>
+        <p data-role="copy">ロゴの設計。担当領域：ロゴ・グラフィック。ロゴは、大きく見せるときだけでなく、小さく印刷するときや、背景色が変わるときにも使われます。この制作例では、ずらした二つの正方形を用いて、形と余白の関係を検討します。複雑な装飾を加える前に、輪郭が読み取れること、周囲の情報と混ざらないことを確かめる構成です。実在の企業のロゴではなく、設計の考え方を伝えるための制作例です。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文fade-up、1000ms。写真clip-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">projects:mark。</p>
+      </section>
+      <section data-section="design">
+        <h3>小さな形を、細かく確かめる</h3>
+        <p data-role="purpose">形状・縮小・余白を異なるサイズの図版で見せる。</p>
+        <p data-role="layout">右領域にB03を幅40%・左寄せ、B09を幅40%・右寄せの2列。間に20%余白。次段B05は横幅100%の紙色面に小さな図形。段間112px。</p>
+        <p data-role="copy">輪郭を確かめる。形の特徴がどこにあるかを整理し、線や面が詰まりすぎない関係をつくります。正方形の重なりとずれが、小さい表示でも見分けられるかを確認します。<br>余白を確かめる。ロゴの周囲には、ほかの文字や図形と距離を取るための空間が必要です。形そのものと同じように、周囲の余白も設計の対象として扱います。<br>使い方へ展開する。白地と濃色地、大きな掲示と小さな印刷物。それぞれの条件で同じ形として認識できるかを見比べます。ロゴをつくることと、使える状態に整えることを、一続きの仕事として考えます。</p>
+        <p data-role="components">LabeledSection、WorkStudyPlate。</p>
+        <p data-role="animation">各段fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">B03・B09・B05。生成追加なし。</p>
+      </section>
+      <section data-section="related">
+        <h3>関連する仕事</h3>
+        <p data-role="purpose">ブランド全体へ視点を広げる。</p>
+        <p data-role="layout">上112px、RelatedPagePair。</p>
+        <p data-role="copy">企業の視覚統一—複数の接点への展開を見る。→/projects/identity/。制作相談を申し込む—ロゴの設計について相談する。→/contact/。制作例一覧へ戻る→/projects/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/projects/editorial/">
+      <h2>冊子の情報設計</h2>
+      <section data-section="overview">
+        <h3>制作例03</h3>
+        <p data-role="purpose">印刷物を情報の順序から理解させる。</p>
+        <p data-role="layout">共通導入、右本文。主写真は幅952px・比3:2。写真後112px。</p>
+        <p data-role="copy">冊子の情報設計。担当領域：印刷物・グラフィック。冊子は、表紙を見て、ページを開き、見出しを追いながら読み進める媒体です。この制作例では「読む順序をつくる」を軸に、表紙、目次、本文の関係を整理しています。文字の大きさだけで情報の強弱をつけず、位置や行間、余白によって、読み始める場所と次に進む場所を示します。実在の刊行物ではなく、紙面設計を説明するための制作例です。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文fade-up、1000ms。写真clip-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">projects:editorial。</p>
+      </section>
+      <section data-section="design">
+        <h3>読む速さを整える</h3>
+        <p data-role="purpose">紙面ごとの密度差を見せる。</p>
+        <p data-role="layout">C04を幅45%・右寄せ、その下96pxにC06・C10を2列。本文は図版の間に置き、図版だけの連続を避ける。</p>
+        <p data-role="copy">入口をつくる。表紙では情報を絞り、冊子が何を伝えるものかを示します。本文と同じ密度にせず、読む前の短い時間に必要な要素を選びます。<br>探せる構造にする。目次や見出しの位置を揃えることで、読みたい情報へ戻りやすくします。最初から順に読む人と、必要な部分だけを探す人の両方を想定します。<br>紙の条件を確かめる。画面上で整って見える紙面も、印刷すると文字や余白の印象が変わります。紙の厚み、綴じる位置、実際の大きさを踏まえ、読む体験を確かめます。企画と制作をつなぐ視覚設計は、こうした細部の判断にも表れます。</p>
+        <p data-role="components">LabeledSection、WorkStudyPlate。</p>
+        <p data-role="animation">本文fade-up、1000ms。図版群fade-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">C04・C06・C10。生成追加なし。</p>
+      </section>
+      <section data-section="related">
+        <h3>関連する仕事</h3>
+        <p data-role="purpose">展示の印刷物や相談へつなぐ。</p>
+        <p data-role="layout">上112px、RelatedPagePair。</p>
+        <p data-role="copy">展示の体験設計—紙面と展示空間の関係を見る。→/projects/exhibition/。制作相談を申し込む—印刷物について相談する。→/contact/。制作例一覧へ戻る→/projects/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/projects/sign/">
+      <h2>空間の案内計画</h2>
+      <section data-section="overview">
+        <h3>制作例04</h3>
+        <p data-role="purpose">空間グラフィックの役割を具体化する。</p>
+        <p data-role="layout">共通導入後、右本文。主写真は幅952px・高さ600px、入口とサインの関係が見える引き。モバイル比4:3。</p>
+        <p data-role="copy">空間の案内計画。担当領域：空間グラフィック。案内は、必要な情報が書かれているだけでは十分ではありません。どの場所で、どの方向から、どれくらいの距離で見るかによって、読み取りやすさが変わります。この制作例では、入口、分岐、出口の順に情報を整理し、移動する人が判断する手前に案内を置く考え方を示します。実在の施設に設置したサインではなく、空間での伝え方を説明するための制作例です。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文fade-up、1000ms。写真clip-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">projects:sign。</p>
+      </section>
+      <section data-section="design">
+        <h3>迷う手前に、情報を置く</h3>
+        <p data-role="purpose">設置・文字・経路の関係を説明する。</p>
+        <p data-role="layout">右にD06を大きく幅70%、続く本文の下にD02・D08を2列。段間96px。平面図は実在施設の図面に見せない。</p>
+        <p data-role="copy">場所ごとに役割を分ける。入口では全体を知り、分岐では方向を選び、目的地では到着を確かめる。それぞれの場所に必要な情報量を分け、すべてを一枚に詰め込まないようにします。<br>文字と矢印を揃える。案内語、矢印、余白の関係を揃えることで、違う場所でも同じ仕組みとして読めるようにします。色だけに意味を持たせず、文字と形を併用します。<br>現場で確かめる。光、背景、設置高さ、近くにある情報を含めて見え方を確認します。紙面の設計と現場監修をつなぎ、実際に使われる場所で意図が伝わることを考えます。</p>
+        <p data-role="components">LabeledSection、WorkStudyPlate。</p>
+        <p data-role="animation">各段fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">D06・D02・D08。生成追加なし。</p>
+      </section>
+      <section data-section="related">
+        <h3>関連する仕事</h3>
+        <p data-role="purpose">展示演出と相談へ進める。</p>
+        <p data-role="layout">上112px、RelatedPagePair。</p>
+        <p data-role="copy">展示の体験設計—案内と解説のつながりを見る。→/projects/exhibition/。制作相談を申し込む—空間グラフィックについて相談する。→/contact/。制作例一覧へ戻る→/projects/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/projects/exhibition/">
+      <h2>展示の体験設計</h2>
+      <section data-section="overview">
+        <h3>制作例05</h3>
+        <p data-role="purpose">展示を一続きの体験として見せる。</p>
+        <p data-role="layout">共通導入後、右本文。主写真は有効幅1280pxまで広げ比16:9。ほかの詳細より横の広がりをつくる。モバイルは左右20px。</p>
+        <p data-role="copy">展示の体験設計。担当領域：展示演出・印刷物。展示に入る前の導入、内容を深める解説、次の場所へ進む案内。それぞれは小さな接点でも、見る人にとっては一続きの体験になります。この制作例では「見る、その手前から。」を軸に、展示空間と紙面の関係を整理しています。作品や内容を支えながら、必要な情報に出会える順序を考えます。実在の展覧会ではなく、展示演出の考え方を説明するための制作例です。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文fade-up、1000ms。写真clip-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">projects:exhibition。</p>
+      </section>
+      <section data-section="design">
+        <h3>導入、解説、余韻</h3>
+        <p data-role="purpose">展示体験の密度差を説明する。</p>
+        <p data-role="layout">右本文、E02・E10を幅40%と60%の2列・gap32pxで配置。次に上112px空けてE11を幅50%・右寄せ。モバイル1列。</p>
+        <p data-role="copy">入口で出会う。導入では、展示の主題に触れる短い言葉と余白を用います。細かな解説を入口に集めず、まず見る人が内容へ向かうきっかけをつくります。<br>理解を深める。解説は、立ち止まって読む距離や時間を踏まえて整理します。見出しと本文を分け、展示物の近くで情報を探しやすい関係をつくります。<br>持ち帰る接点を整える。案内や印刷物にも同じ視覚の方針を通すことで、空間を離れた後も展示の印象をつなぎます。企画から制作、現場監修までを扱う視覚設計は、展示全体のまとまりを支える仕事です。</p>
+        <p data-role="components">LabeledSection、WorkStudyPlate。</p>
+        <p data-role="animation">各段fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">E02・E10・E11。生成追加なし。</p>
+      </section>
+      <section data-section="related">
+        <h3>関連する仕事</h3>
+        <p data-role="purpose">紙面設計と相談へ進める。</p>
+        <p data-role="layout">上112px、RelatedPagePair。</p>
+        <p data-role="copy">冊子の情報設計—読む順序の設計を見る。→/projects/editorial/。制作相談を申し込む—展示演出について相談する。→/contact/。制作例一覧へ戻る→/projects/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/news/">
+      <h2>お知らせ</h2>
+      <section data-section="intro">
+        <h3>サイトのご案内</h3>
+        <p data-role="purpose">更新情報の性格と読み方を説明する。</p>
+        <p data-role="layout">共通導入。右本文最大42em。下64px。</p>
+        <p data-role="copy">お知らせ。蒼紙舎の仕事や、このサイトの見方をご案内します。制作を検討している方は、事業の範囲や制作例の読み方からご覧ください。会社について確かめたい方には、理念や制作体制をまとめたページをご用意しています。この一覧には、サイトの案内、制作例の説明、相談を準備するための読み物を掲載しています。日付と見出しから、知りたい内容へお進みください。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="list">
+        <h3>更新一覧</h3>
+        <p data-role="purpose">3記事を概要付きで一覧にする。</p>
+        <p data-role="layout">右領域の3行、各行最低152px。日付120px、見出しと概要を右に置く。モバイル1列。罫線1px。</p>
+        <p data-role="copy">2026.09.18 目的から探す、サイトのご案内。会社のこと、依頼できること、制作物のこと。知りたい内容に合わせたページの選び方を紹介します。→/news/site-guide/。<br>2026.09.18 制作例の見方について。制作例と実績数値の違い、図版の分類、詳細ページで確かめられる内容を説明します。→/news/work-guide/。<br>2026.09.18 制作相談の前に整理しておきたいこと。伝えたい相手、変えたいこと、必要な制作物、希望時期を整理するための読み物です。→/news/consultation-guide/。</p>
+        <p data-role="components">NewsRows。</p>
+        <p data-role="animation">一覧全体fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>仕事を知る</h3>
+        <p data-role="purpose">ニュース閲覧後の回遊をつくる。</p>
+        <p data-role="layout">上112px、RelatedPagePair。</p>
+        <p data-role="copy">蒼紙舎について—理念と制作体制をご紹介します。→/about/。視覚設計の仕事—依頼できる領域を確認する。→/service/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/news/site-guide/">
+      <h2>目的から探す、サイトのご案内</h2>
+      <section data-section="article">
+        <h3>2026年9月18日</h3>
+        <p data-role="purpose">目的ごとにページを選べるようにする。</p>
+        <p data-role="layout">共通導入。記事本文はx408から最大42em、h2間64px、段落間24px。日付はh1上16px、14px。</p>
+        <p data-role="copy">目的から探す、サイトのご案内。蒼紙舎のサイトは、知りたい内容から仕事を確かめられるように構成しています。制作の相談を始める前に、会社の姿勢や依頼できる範囲を確認したい方にも、必要なページへ進んでいただけます。<br>会社を知りたいとき。「蒼紙舎について」では、理念、制作で大切にすること、企画から現場監修までの体制を紹介しています。設立や所在地、従業員数は「会社概要」にまとめています。→/about/、/company/。<br>依頼できることを知りたいとき。「視覚設計の仕事」では、ブランドとロゴ、印刷物、空間グラフィック、展示演出の範囲を説明しています。検討している制作物と照らし合わせてご覧ください。→/service/。<br>形から仕事を知りたいとき。「制作実績・制作例」では、制作領域を図版で見比べられます。各詳細ページでは、見た目だけでなく、整理する情報や使用場面について説明しています。→/projects/。<br>相談を準備したいとき。「ご相談の前に」から、まだ決まっていないことがある場合の考え方を確認できます。サイト内のどのページからも、制作相談の入口へ進めます。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文を2群に分けfade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>関連するご案内</h3>
+        <p data-role="purpose">次の記事へ送る。</p>
+        <p data-role="layout">上96px、RelatedPagePair。</p>
+        <p data-role="copy">制作例の見方について→/news/work-guide/。ご相談の前に→/faq/。お知らせ一覧へ戻る→/news/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/news/work-guide/">
+      <h2>制作例の見方について</h2>
+      <section data-section="article">
+        <h3>2026年9月18日</h3>
+        <p data-role="purpose">表示件数や制作例の意味を明確にする。</p>
+        <p data-role="layout">共通導入。本文右寄せ・最大42em。段落間24px、見出し間64px。</p>
+        <p data-role="copy">制作例の見方について。「制作実績・制作例」では、企業の視覚統一、ロゴの設計、冊子の情報設計、空間の案内計画、展示の体験設計の5つを紹介しています。掲載している制作物は、仕事の範囲や設計の考え方を伝えるための制作例です。実在の受注案件や顧客名を示すものではありません。<br>55枠は、55案件ではありません。一つの制作例を、全景、文字、形、余白、運用など11の観点で見せています。同じ意図が異なる接点へどのように広がるかを見比べるための構成です。累計制作案件420件超という実績数値とは分けて表示しています。<br>担当領域から探せます。ブランディング、ロゴ、印刷物、空間グラフィック、展示演出、グラフィックの分類から、関心のある内容を絞り込めます。画像の下には制作例名と担当領域を常時表示しています。<br>詳細では判断の過程を紹介します。何を整理し、どの場面で使うか。制作物を形にするまでの考え方を、文章と図版で説明しています。ご相談の内容を考える際の手がかりとしてご覧ください。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文2群にfade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>制作例を読む</h3>
+        <p data-role="purpose">一覧と相談準備へ進める。</p>
+        <p data-role="layout">上96px、RelatedPagePair。</p>
+        <p data-role="copy">制作実績・制作例を見る→/projects/。制作相談の前に整理しておきたいこと→/news/consultation-guide/。お知らせ一覧へ戻る→/news/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/news/consultation-guide/">
+      <h2>制作相談の前に整理しておきたいこと</h2>
+      <section data-section="article">
+        <h3>2026年9月18日</h3>
+        <p data-role="purpose">具体的な相談内容を準備しやすくする。</p>
+        <p data-role="layout">共通導入。本文右寄せ・最大42em。4項目は番号を小さく添え、罫線で分割。各項目上下32px。</p>
+        <p data-role="copy">制作相談の前に整理しておきたいこと。制作物の形が決まる前にも、整理できることがあります。まずは、伝えたい相手と、今感じている課題を言葉にしてみてください。完成した依頼書を用意する必要はありません。決まっていることと、これから考えたいことを分けるだけでも、相談の出発点になります。<br>01 誰に伝えたいか。経営者、広報担当、施設の来場者など、見る人と出会う場面を整理します。誰がどこで触れる情報かによって、必要な視覚設計は変わります。<br>02 何を変えたいか。印象を揃えたい、情報を読みやすくしたい、空間の案内を分かりやすくしたい。具体的な制作物の名前よりも、変えたいことから考えられます。<br>03 何が必要か。ロゴ、印刷物、空間グラフィック、展示演出のうち、検討している範囲を整理します。複数の媒体がある場合は、一緒に扱うものを挙げてください。<br>04 いつ使いたいか。公開や使用を予定している時期があれば、検討内容と合わせて整理します。まだ決まっていない項目は、そのまま未定としてお伝えください。</p>
+        <p data-role="components">EditorialLead、NumberedPrinciples。</p>
+        <p data-role="animation">本文2項目ずつfade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>相談へ進む</h3>
+        <p data-role="purpose">疑問の解消とフォームへつなぐ。</p>
+        <p data-role="layout">上96px、RelatedPagePair。</p>
+        <p data-role="copy">ご相談の前に—よくある疑問を確認する。→/faq/。制作相談を申し込む—検討内容を入力する。→/contact/。お知らせ一覧へ戻る→/news/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/contact/">
+      <h2>制作のご相談</h2>
+      <section data-section="intro">
+        <h3>制作相談を申し込む</h3>
+        <p data-role="purpose">CTAの遷移先と操作内容を一致させる。</p>
+        <p data-role="layout">共通導入、右本文。最大680px。写真なし。下48pxにフォーム。試作注記は本文と同じ16pxで隠さない。</p>
+        <p data-role="copy">制作のご相談。ブランドの刷新、ロゴ、印刷物、空間グラフィック、展示演出について、検討している内容をお聞かせください。伝えたい相手や、変えたいことから整理していただけます。まだ決まっていない項目は、未定のままで構いません。<br>このサイトは架空企業の試作です。フォームでは入力と確認を試せますが、相談内容は送信されません。実際の氏名や連絡先は入力せず、サンプル情報をご使用ください。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">none</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="form">
+        <h3>相談内容の入力</h3>
+        <p data-role="purpose">入力・確認・修正の操作を完結させる。</p>
+        <p data-role="layout">PCは右領域幅680px、ラベル上・入力下の1列。入力高52px、項目間32px、textarea高192px。モバイル全幅。必須は文字で表示し色だけに依存しない。確認ボタンはPC幅240px、モバイル全幅。確認表示は同じ場所にdlで置き換え、上部へフォーカス移動。</p>
+        <p data-role="copy">会社名・施設名［任意］。お名前［必須］。メールアドレス［必須］。ご相談の領域［必須］：ブランド・ロゴ／印刷物／空間グラフィック／展示演出／まだ決まっていない。ご相談内容［必須］：「伝えたい相手、変えたいこと、必要な制作物などをご記入ください。」希望時期［任意］：「未定の場合は空欄で構いません。」確認欄［必須］：「試作フォームであり、入力内容が送信されないことを確認しました。」個人情報の取り扱い→/privacy/。ボタン「入力内容を確認する」。確認画面見出し「入力内容の確認」。説明「この内容は送信されていません。修正する場合は入力画面へ戻れます。」ボタン「入力に戻る」「確認を終える」。終了表示「確認が完了しました。内容は送信されていません。」</p>
+        <p data-role="components">新規ConsultationForm。input、select、textarea、checkboxにid・name・label・requiredを設定する。</p>
+        <p data-role="animation">none</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="help">
+        <h3>入力の補助と次の行動</h3>
+        <p data-role="purpose">エラーや未定の項目で操作が止まらないようにする。</p>
+        <p data-role="layout">フォーム末尾64px後に本文、96px後にRelatedPagePair。エラーは項目直下、上にエラー概要のリンク一覧。入力値は画面内メモリのみ保持し、終了時消去。</p>
+        <p data-role="copy">必須項目が未入力の場合：「入力が必要な項目をご確認ください。」メール形式エラー：「メールアドレスの形式をご確認ください。」確認欄未選択：「試作フォームについての確認をお願いします。」内容がまだ整理できていない場合は、気になっていることや検討を始めた背景をご記入ください。費用や期間、返信日数などの条件は、この試作では確定していません。視覚設計の仕事を見る→/service/。ご相談の前に確認する→/faq/。JavaScript無効時：「入力確認機能を使うにはJavaScriptを有効にしてください。このフォームから内容は送信されません。」</p>
+        <p data-role="components">ConsultationForm、RelatedPagePair。formの送信先は作らず、JS無効時は操作ボタンを無効化する。</p>
+        <p data-role="animation">none</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/company/">
+      <h2>会社概要</h2>
+      <section data-section="intro-facts">
+        <h3>蒼紙舎の基本情報</h3>
+        <p data-role="purpose">所在地・設立・規模をまとめて確認できるようにする。</p>
+        <p data-role="layout">共通導入。右本文の下48pxにCompanyFacts。項目幅160px、行上下24px。モバイルは項目名と値を縦積み。</p>
+        <p data-role="copy">会社概要。蒼紙舎株式会社は、東京都台東区谷中を拠点とする、ブランディング・グラフィックデザインの会社です。中小企業や文化施設に向けて、ロゴ、印刷物、空間グラフィック、展示演出を手がけています。<br>商号：蒼紙舎株式会社。よみ：あおがみしゃ。設立：2011年。従業員数：14名。所在地：東京都台東区谷中。事業内容：企画から制作、現場監修までを一貫して手がける視覚設計。<br>企業の経営者・広報担当の方、美術館やギャラリーの企画担当の方が、依頼先の情報を確認できるように基本情報をまとめています。番地、電話番号、メールアドレスはこの試作には掲載していません。</p>
+        <p data-role="components">EditorialLead、CompanyFacts、Table。</p>
+        <p data-role="animation">本文と表を1群にfade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="records">
+        <h3>仕事の積み重ね</h3>
+        <p data-role="purpose">指定された実績を落ち着いた数値表現で示す。</p>
+        <p data-role="layout">右側に3列のdl、数値32px、説明16px。上下96px。モバイルは3行で横罫線。</p>
+        <p data-role="copy">累計制作案件420件超。リピート発注率68%。年間展示・空間案件35件。企画、制作、現場監修を社内でつなぐ体制で、企業や文化施設の視覚設計を手がけています。会社の考え方は「蒼紙舎について」、具体的な仕事の領域は「視覚設計の仕事」でご紹介しています。</p>
+        <p data-role="components">LabeledSection。</p>
+        <p data-role="animation">fade、1000ms、stagger 0ms、ease-in-out。数値は静止。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>会社をさらに知る</h3>
+        <p data-role="purpose">理念と保存用資料へ分岐する。</p>
+        <p data-role="layout">RelatedPagePair。</p>
+        <p data-role="copy">蒼紙舎について—理念と制作体制を読む。→/about/。会社案内—基本情報と事業内容を保存する。→/download/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/recruit/">
+      <h2>採用について</h2>
+      <section data-section="intro">
+        <h3>企画から現場までを知る</h3>
+        <p data-role="purpose">採用条件を創作せず、働く対象となる仕事を紹介する。</p>
+        <p data-role="layout">共通導入。右本文、下64pxに室内写真比16:9。写真下112px。</p>
+        <p data-role="copy">採用について。蒼紙舎は、企画から制作、現場監修までを社内でつなぐデザインスタジオです。ロゴや印刷物だけでなく、空間グラフィックや展示演出まで、異なる接点を一つの意図で結ぶ視覚設計を手がけています。仕事を知る際は、完成した形だけでなく、その前に何を整理し、その後どのような場所で使われるかにも目を向けてみてください。会社の考え方や制作例から、扱う領域を確認できます。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">本文fade、1000ms。写真clip-up、1500ms。stagger 0ms、ease-in-out。</p>
+        <p data-role="image">about:studioを再使用。</p>
+      </section>
+      <section data-section="status">
+        <h3>募集情報について</h3>
+        <p data-role="purpose">未確定の募集を誤認させない。</p>
+        <p data-role="layout">左ラベル・右本文、上32px・下96px。罫線付きの短い情報表を置き、大きな求人カードにしない。</p>
+        <p data-role="copy">募集情報について。この試作サイトには、募集職種、雇用条件、選考方法の情報を掲載していません。応募の受付も行っていません。募集がある、または募集を終了したという状態を示すものではありません。<br>会社の規模は14名、設立は2011年、所在地は東京都台東区谷中です。事業の範囲や制作の姿勢は、会社紹介とサービス紹介でご覧いただけます。採用条件の代わりに推測の情報を載せず、確認できる会社情報と仕事内容をお伝えしています。</p>
+        <p data-role="components">LabeledSection、CompanyFactsの簡略表示。</p>
+        <p data-role="animation">fade、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>仕事と会社を見る</h3>
+        <p data-role="purpose">採用の入口を袋小路にしない。</p>
+        <p data-role="layout">RelatedPagePair。</p>
+        <p data-role="copy">蒼紙舎について—制作で大切にすることを読む。→/about/。視覚設計の仕事—企画から現場監修までの範囲を知る。→/service/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/inspirations/">
+      <h2>制作の背景</h2>
+      <section data-section="intro">
+        <h3>かたちを考える、四つの視点</h3>
+        <p data-role="purpose">制作活動の背景を独立した読み物にする。</p>
+        <p data-role="layout">共通導入。右に短い本文。下96px。続く4項目は画像と文章の比率を変える。</p>
+        <p data-role="copy">制作の背景。かたちを考える、四つの視点。紙、文字、余白、案内。制作物を構成する身近な要素にも、伝わり方を左右する条件があります。このページでは、視覚設計を考えるときの観察の視点を紹介します。特定の書籍や実在の自主事業を紹介するページではありません。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="observations">
+        <h3>紙・文字・余白・案内</h3>
+        <p data-role="purpose">短い説明と画像を交互に読み進めさせる。</p>
+        <p data-role="layout">各項目にid=paper／letters／space／wayfinding。PC画像幅は順に60%・35%・70%・45%、右領域内で左右交互。文章は最大36em。項目間160px。モバイルは画像全幅、項目間80px。すべてを同じカード4枚にしない。</p>
+        <p data-role="copy">紙の手触り。紙は、印刷された情報を支える素材です。厚み、表面の質感、光の受け方によって、同じ文字や色でも印象が変わります。紙の端や重なりを見ることは、完成した印刷物を受け取る場面を考えることにつながります。<br>文字の間隔。文字は、一つずつの形だけでなく、並び方によって読みやすさが変わります。字間、行間、段落の間隔を調整すると、読み始める場所や情報のまとまりが見えてきます。文字の周囲も、設計する対象です。<br>余白の働き。何も置かれていない場所は、情報がないだけの場所ではありません。見る順序を整え、伝えたい要素に視線を向ける働きがあります。要素を増やす前に、残す空間を確かめます。<br>案内の順序。空間では、人が動きながら情報に出会います。入口で知りたいことと、分岐で必要なことは異なります。必要な情報を必要な場所に置くために、移動の順序と判断する場面を考えます。</p>
+        <p data-role="components">LabeledSection、新規ObservationSequence。</p>
+        <p data-role="animation">項目ごとfade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">inspirations:materialsの4分割画像。</p>
+      </section>
+      <section data-section="related">
+        <h3>制作とのつながり</h3>
+        <p data-role="purpose">観察から仕事へ戻す。</p>
+        <p data-role="layout">上112px、RelatedPagePair。</p>
+        <p data-role="copy">冊子の情報設計—紙と文字の関係を見る。→/projects/editorial/。空間の案内計画—情報に出会う順序を見る。→/projects/sign/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/faq/">
+      <h2>ご相談の前に</h2>
+      <section data-section="intro">
+        <h3>相談を始めるために</h3>
+        <p data-role="purpose">相談段階の疑問をまとめる。</p>
+        <p data-role="layout">共通導入。右本文、下64px。質問一覧は右領域、折りたたまず全件表示する。</p>
+        <p data-role="copy">ご相談の前に。依頼する制作物や進め方がまだ決まっていないときは、伝えたい相手や、変えたいことから整理できます。ここでは、蒼紙舎の仕事の範囲と、相談を準備する際の考え方をまとめています。具体的な条件が未確定の内容は、確約せずにご案内します。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="questions">
+        <h3>よくあるご質問</h3>
+        <p data-role="purpose">対応領域・準備・未確定事項を分ける。</p>
+        <p data-role="layout">5組の質問と回答、各組上32px・下40px、下罫線。質問18px、回答16px。左端に「問」を14pxで置く。Accordionは使わず回答を常時表示。</p>
+        <p data-role="copy">何を依頼できますか。ロゴ、印刷物、空間グラフィック、展示演出を含む、ブランディング・グラフィックデザインを手がけています。企画から制作、現場監修までが事業の範囲です。<br>制作物が決まっていなくても内容を整理できますか。まずは、誰に何を伝えたいか、今どのような課題を感じているかを整理してください。相談内容の欄には、未定の項目を未定のまま記入できます。<br>相談前に何を用意すればよいですか。伝えたい相手、変えたいこと、検討している制作物、希望する時期が分かると、背景を共有しやすくなります。完成した依頼書を用意する必要はありません。<br>費用や制作期間は決まっていますか。このサイトには、一律の料金や制作期間を掲載していません。検討する媒体や範囲によって条件が変わるため、未提示の金額や納期を確約していません。<br>このフォームから相談を送れますか。このサイトは架空企業の試作です。入力と確認を試せますが、内容は送信されず、実際の相談受付や返信は行われません。個人情報を含まないサンプル情報で操作してください。</p>
+        <p data-role="components">新規OpenQuestionList。LabeledSection。</p>
+        <p data-role="animation">2問ずつfade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>相談内容を考える</h3>
+        <p data-role="purpose">サービス確認と入力へ進める。</p>
+        <p data-role="layout">上96px、RelatedPagePair。</p>
+        <p data-role="copy">視覚設計の仕事—対応する領域を確認する。→/service/。制作相談を申し込む—入力と確認へ進む。→/contact/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/download/">
+      <h2>会社案内</h2>
+      <section data-section="intro">
+        <h3>会社と仕事を、ひとつに</h3>
+        <p data-role="purpose">資料の内容を確認してから保存できるようにする。</p>
+        <p data-role="layout">共通導入。右本文、下64pxに幅100%の罫線付き資料枠。アイコン・表紙モックアップを大きく置かない。</p>
+        <p data-role="copy">会社案内。会社と仕事を、ひとつに。蒼紙舎の基本情報と事業内容を、保存しやすいテキストにまとめました。設立、所在地、従業員数に加え、企画から制作、現場監修までの仕事の範囲を確認できます。社内で検討内容を整理するときや、サイトを読み返す際の手がかりとしてお使いください。この資料は架空企業の試作サイト用です。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="document">
+        <h3>会社案内を保存する</h3>
+        <p data-role="purpose">実体のあるファイルを提供する。</p>
+        <p data-role="layout">資料名18px、説明16px、形式14px、下線リンク。枠は上下罫線のみ、padding32px 0。下に収録内容を全文表示する。</p>
+        <p data-role="copy">蒼紙舎株式会社 会社案内。形式：テキスト（UTF-8）。「会社案内を保存する（TXT）」→base配下のassets/company-guide.txt。<br>収録内容：蒼紙舎株式会社（あおがみしゃ）。かたちで、意図を残す。2011年設立、従業員数14名、所在地は東京都台東区谷中。中小企業や文化施設向けに、ロゴ、印刷物、空間グラフィック、展示演出まで一貫した視覚設計を手がけるデザインスタジオです。企画から制作、現場監修まで社内で完結します。累計制作案件420件超、リピート発注率68%、年間展示・空間案件35件。本資料は架空企業の試作サイト用です。掲載している制作例は、実在の受注案件を示すものではありません。</p>
+        <p data-role="components">新規DocumentDownload。上記収録内容をそのままUTF-8ファイル化し、download属性付きリンクを設置する。</p>
+        <p data-role="animation">fade-up、1000ms、stagger 0ms、ease-in-out。</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>詳しい情報を見る</h3>
+        <p data-role="purpose">資料だけで理解が止まらないようにする。</p>
+        <p data-role="layout">上96px、RelatedPagePair。</p>
+        <p data-role="copy">会社概要—基本情報をサイトで確認する。→/company/。視覚設計の仕事—各領域と進め方を読む。→/service/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">fade-up、700ms、stagger 0ms、ease。</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+
+    <article data-page="/privacy/">
+      <h2>個人情報の取り扱い</h2>
+      <section data-section="intro">
+        <h3>この試作サイトについて</h3>
+        <p data-role="purpose">フォームの実際の動作に合った説明を置く。</p>
+        <p data-role="layout">共通導入、右本文最大42em。法務文を小さく薄くしない。下64px。</p>
+        <p data-role="copy">個人情報の取り扱い。このサイトは、架空の企業である蒼紙舎株式会社のコーポレートサイトを検討するための試作です。制作相談フォームは入力と確認の動作を試すために設けており、相談内容を送信する機能はありません。実際の氏名、メールアドレス、そのほか個人を特定できる情報は入力しないでください。ここでは、この試作に実装する入力情報の取り扱いを説明します。</p>
+        <p data-role="components">EditorialLead、LabeledSection。</p>
+        <p data-role="animation">none</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="handling">
+        <h3>入力情報と表示設定</h3>
+        <p data-role="purpose">保存・送信・消去の範囲を具体化する。</p>
+        <p data-role="layout">右側に3項目、項目間48px。上罫線なし。本文16px。</p>
+        <p data-role="copy">入力内容について。フォームに入力した値は、確認画面を表示するためにページ内で一時的に扱います。送信先への通信や、入力内容のlocalStorage・sessionStorageへの保存は行いません。「確認を終える」を選ぶと、ページ内で保持している入力値を消去します。<br>画面の設定について。フッターで選択した書体の表示設定だけを、このブラウザーのlocalStorageに保存します。氏名や連絡先と結び付けて保存するものではありません。設定を戻す場合は、書体選択で「標準」を選んでください。<br>相談の受付について。この試作から実際の相談が受け付けられたり、返信が送られたりすることはありません。公開用の問い合わせ機能を導入する際は、送信先、利用目的、保管方法などを実際の運用に合わせて別途定める必要があります。本ページを実運用の企業方針として流用しません。</p>
+        <p data-role="components">LabeledSection。</p>
+        <p data-role="animation">none</p>
+        <p data-role="image">none</p>
+      </section>
+      <section data-section="related">
+        <h3>フォームに戻る</h3>
+        <p data-role="purpose">説明を読んだ後に元の目的へ戻す。</p>
+        <p data-role="layout">上96px、RelatedPagePair。</p>
+        <p data-role="copy">制作のご相談—入力と確認を試す。→/contact/。ご相談の前に—相談準備の説明を読む。→/faq/。</p>
+        <p data-role="components">RelatedPagePair。</p>
+        <p data-role="animation">none</p>
+        <p data-role="image">none</p>
+      </section>
+    </article>
+  </section>
+
+  <section id="images">
+    <h2>生成画像・8枚</h2>
+    <p>生成は下記8枚に限定する。実在の制作会社・企業・施設・既存ロゴを指定しない。文字が必要な制作物は無地で生成し、work-dataの文字を実装時にSVGまたはHTMLで載せる。各画像は2,000px以上の長辺を確保し、ヒーローのみ長辺2,880pxを目標とする。生成に失敗した画像を無関係なストック写真へ置き換えない。</p>
+
+    <figure data-placement="top:hero" data-tags="デザインスタジオ,紙見本,制作,人物,自然光,横位置" data-aspect="landscape">
+      <figcaption data-prompt="実写の建築・編集写真のような、日本の小規模グラフィックデザインスタジオ。木の大きな制作机の前で、成人のデザイナー1名が無地の紙見本と冊子の仕上がりを確かめている中景。机には厚紙、定規、白い冊子、蒼灰色の印刷見本。人物は画面中央よりやや右、手と机が見える。上端25パーセントは明るい無地の壁で、左右上隅に十分な空間。左の窓から柔らかい昼光。生成色調は低彩度の生成り、蒼灰、木の茶。横長16対10、広い引きの構図。文字、ブランドロゴ、看板、透かしなし。誇張した笑顔、握手、ノートパソコン中心の会議風景にしない。">1. トップの制作風景。serviceとAbout写真帯でも再使用。</figcaption>
+    </figure>
+
+    <figure data-placement="about:studio" data-tags="スタジオ,室内,制作机,紙棚,無人,横位置" data-aspect="landscape">
+      <figcaption data-prompt="実写の室内建築写真。日本の落ち着いた小規模デザインスタジオ、窓際の長い木製制作机、無地の紙見本を分類した棚、冊子、定規、壁の無地ピンナップ。人物なし。室内の奥行きが分かるやや斜めの広角構図、極端な広角歪みなし。左から柔らかい自然光、生成りの壁、蒼灰の小物、控えめな木色。整いすぎない制作途中の机。横長3対2。読める文字、企業ロゴ、観葉植物を主役にした装飾なし。">2. 会社紹介の大きな室内写真。採用ページでも再使用。</figcaption>
+    </figure>
+
+    <figure data-placement="projects:identity" data-tags="ブランディング,印刷物,名刺,封筒,俯瞰,縦位置" data-aspect="portrait">
+      <figcaption data-prompt="実写の印刷物撮影。生成りの大きな台紙の上に、蒼灰色の無地名刺2枚、白い封筒1枚、薄い会社案内冊子1冊を、直角を保って余白豊かに置く。左下に紙の端と重なりがあり、上部は空いている。真上に近い俯瞰。窓からの柔らかい光、繊維と紙の厚みが自然に分かる。低彩度、影は薄く短い。縦長116対205。実在ロゴ、文字、装飾パターン、手、透かしなし。">3. 企業の視覚統一。全景と紙の端の寄りで使用。</figcaption>
+    </figure>
+
+    <figure data-placement="projects:mark" data-tags="ロゴ設計,活版,試し刷り,紙,縦位置" data-aspect="portrait">
+      <figcaption data-prompt="実写のグラフィックデザイン制作写真。白い厚紙に、蒼灰色の小さな正方形二つを少しずらして重ねた単純な幾何学形を試し刷りした紙片が、作業台に3枚置かれている。架空の抽象的な形で既存ブランドに似せない。版の浅い凹みと紙の繊維がわかる斜め45度の近接写真。右側に印刷面、左に静かな余白。柔らかい自然光、白と蒼灰のみ。縦長116対205。読める文字や商標、透かしなし。">4. ロゴ設計の試し刷り。</figcaption>
+    </figure>
+
+    <figure data-placement="projects:editorial" data-tags="冊子,編集,印刷,製本,紙面,縦位置" data-aspect="portrait">
+      <figcaption data-prompt="実写の冊子撮影。生成りの机の上に、薄い白い冊子を開いて置く。左ページは余白が多く、右ページには文字の代わりに細い蒼灰色の罫線と小さな無地の図版枠がある。表紙の別冊が奥に一冊。綴じの部分と紙の重なりが見える斜め上からの構図。温かすぎない昼光、低彩度。上部に机の余白、下部中央に綴じ。縦長116対205。読める文字、実在書籍、ロゴなし。">5. 冊子の紙面と綴じ。</figcaption>
+    </figure>
+
+    <figure data-placement="projects:sign" data-tags="空間グラフィック,案内サイン,文化施設,壁,縦位置" data-aspect="portrait">
+      <figcaption data-prompt="実写の空間デザイン写真。日本の小さな文化施設を想起させる明るい廊下と開口部。生成りの壁に、蒼灰色の細い矩形案内板が設置され、白い単純な右向き矢印だけがある。案内板と奥の入口の関係が分かる中景。右上寄りに取り付け部分、中央に広い壁面、下部に淡い石の床。自然光、低彩度、静かな空間。縦長116対205。読める文字、施設名、既存ピクトグラム、人物、商標なし。">6. 空間の案内。文字は必要時に実装側で追加。</figcaption>
+    </figure>
+
+    <figure data-placement="projects:exhibition" data-tags="展示演出,ギャラリー,展示台,解説板,空間,縦位置" data-aspect="portrait">
+      <figcaption data-prompt="実写の展示空間写真。小規模な文化施設の静かな展示室。低い生成りの展示台3台、無地の紙資料、細い蒼灰色の解説板。壁には著作物ではない白と灰の抽象的な紙のレリーフ。入口から奥への回遊が分かる引きの構図。左中央に解説板、奥に次の室への開口、上部は広い白壁。柔らかい拡散光、低彩度の白、灰、蒼灰。縦長116対205だが中央の横長切り抜きでも展示台が残る配置。人物、展示名、実在作品、ロゴ、読める文字なし。">7. 展示の体験設計。詳細ページでは横長にトリミング。</figcaption>
+    </figure>
+
+    <figure data-placement="inspirations:materials" data-tags="紙,文字組,余白,案内,観察,四分割,横位置" data-aspect="landscape">
+      <figcaption data-prompt="編集用の実写写真コンタクトシート。全体を隙間なしの正確な2列2行に分け、各象限は独立した横長8対5の写真。左上は白い紙束の端と繊維を近接撮影。右上は蒼灰色の短い線が文字組のように整列した活版見本の近接。左下は大きな生成りの紙の右下に小さな蒼灰の長方形が一つあり広い余白。右下は生成りの壁に小さな蒼灰の右向き矢印があり、その先に開口。全象限で柔らかい昼光、低彩度、自然な素材感を統一。中央をまたぐ物体なし。枠線、番号、ラベル、読める文字、ロゴ、透かしなし。">8. 制作の背景。生成後に中央で4分割し、4つの画像ファイルとして利用。</figcaption>
+    </figure>
+  </section>
+
+  <section id="implementation-review">
+    <h2>実装・審査の固定条件</h2>
+    <ol>
+      <li>_site.ts、独自テーマ、共通シェル差分、共有部品の順に作り、その後20ページを実装する。サイト本文は本書のdata-role="copy"を使用し、実装指示・矢印の遷移記号は表示しない。</li>
+      <li>トップの全面写真、20枠、横長4枠のサイズ差を保つ。Aboutの文章・番号リスト・写真帯・3段紹介・表を同じカード群へ変換しない。</li>
+      <li>一覧55枠を案件55件とは呼ばない。写真10枠と図版45枠の違いを保ち、同一画像の大量複製で埋めない。5詳細ページへの遷移先を全タイルに設定する。</li>
+      <li>生成画像を用意した後、全ページを1440px・390px・320pxで確認する。トップ、About、Projectsはフルページで密度と高さを比較し、フォームはエラー・確認・戻る・終了まで操作する。</li>
+      <li>通常設定とreduced-motion、JS無効、キーボード、200%文字拡大で確認する。画像ロード失敗でもキャプションとリンクを残す。固定ヘッダーがフォーカス対象を覆わないようscroll-margin-topをPC208px／モバイル104pxにする。</li>
+      <li>npm run build、npm run check:web、npm run check:catalogを実行。high、arch-component-reuse、ia-required-page-missingをすべてゼロにする。新規共有部品をsrc/components/へExtractし、カタログ表示まで確認する。</li>
+      <li>この1本に沿ったたたき台を独立審査へ渡す。審査指摘は、IA、密度差、文字可読性、画像適合、モバイル、回遊、モーションのどこに対応するかを記録して修正する。未指定の別案へ切り替えず、修正後に同じ代表画面と操作を再確認して提出版とする。</li>
+    </ol>
+  </section>
+
+  <section id="catalog-notes">
+    <h2>部品カタログ確認記録</h2>
+    <p>モバイル資料は、地図と地点名から詳細へ進む構造が紹介されていることを確認した。本案では制作例名を常時表示し、狭い画面でも入口を隠さない方針に反映する。掲載画像の細部や実機操作は未検証。<a href="https://loadmo.re/posts/water-works-project">モバイル部品資料</a></p>
+    <p>ナビ資料では、機能・質問・更新・料金と行動リンクが区別されていることを確認した。本案では「視覚設計の仕事」のように、リンク先の内容が読める日本語ラベルを使用する。<a href="https://www.supaste.com/">ナビゲーション部品資料</a></p>
+    <p>CTA資料では、対象の商品・形式と次の行動を明示するリンクを確認した。本案の資料リンクは「会社案内を保存する（TXT）」、フォームは「入力内容を確認する」とし、押した後の動作を明示する。<a href="https://www.webestica.com/bootstrap-templates">CTA部品資料</a></p>
+    <p>参照の寸法・構成・モーション値は、本ランで提示された画像とLook解析を正本とする。外部の固有名詞、コピー、独自書体、写真は制作サイトへ転用しない。</p>
+  </section>
+</main>
+</body>
+</html>

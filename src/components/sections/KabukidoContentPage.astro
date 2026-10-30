@@ -1,0 +1,55 @@
+---
+import type { SiteConfig } from '../../lib/site';
+import QuietPageIntro from './QuietPageIntro.astro';
+import EditorialPair from './EditorialPair.astro';
+import HousePhotoCollage from './HousePhotoCollage.astro';
+import PhaseRows from './PhaseRows.astro';
+import QuietNewsList from './QuietNewsList.astro';
+import CircleTextLink from '../ui/CircleTextLink.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Section { heading: string; body: string; image?: string; alt?: string; link?: { label: string; href: string }; id?: string; }
+interface SectionAnimation { target: 'heading' | 'image'; }
+interface Props {
+  site: SiteConfig;
+  title: string;
+  lead: string;
+  sections: Section[];
+  collage?: boolean;
+  phases?: { number: string; title: string; body: string }[];
+  news?: { title: string; body: string; href: string; image?: string; alt?: string }[];
+  sectionAnimations?: Record<number, SectionAnimation>;
+  phaseHeadingAnimation?: boolean;
+}
+const { site, title, lead, sections, collage = false, phases, news, sectionAnimations, phaseHeadingAnimation = false } = Astro.props;
+const photos = [
+  { image:'/sites/corporate/_shared/20260919-0500/img-a-01.jpg', alt:'食卓に届く自然光の設計イメージ', label:'食卓に届く光', href:'/works/wood-and-plaster/#light' },
+  { image:'/sites/corporate/_shared/20260919-0500/img-a-03.jpg', alt:'左官壁の陰影の設計イメージ', label:'左官の陰影', href:'/works/wood-and-plaster/#plaster' },
+  { image:'/sites/corporate/_shared/20260919-0500/img-a-02.jpg', alt:'木製建具の設計イメージ', label:'木の手触り', href:'/works/wood-and-plaster/#wood' },
+  { image:'/sites/corporate/_shared/20260919-0500/img-a-04.jpg', alt:'全面リノベーションの設計イメージ', label:'今ある住まいを生かす', href:'/works/wood-and-plaster/#renewal' },
+];
+---
+<QuietPageIntro title={title} lead={lead} />
+{sections.map((section, index) => (
+  <section id={section.id} class="kabukido-section">
+    {(sectionAnimations?.[index]?.target === 'heading' || (!sectionAnimations && [1, 2, 3, 4].includes(index))) ? (
+      <ScrollReveal animation="fade-up" duration={2000} stagger={0}>
+        <h2>{section.heading}</h2>
+      </ScrollReveal>
+    ) : <h2>{section.heading}</h2>}
+    {section.image ? (
+      <EditorialPair image={section.image} alt={section.alt ?? ''} reverse={index % 2 === 1} caption="写真は設計イメージです。" imageAnimation={sectionAnimations?.[index]?.target === 'image' ? { duration: 2000, stagger: 0 } : undefined}>
+        <p>{section.body}</p>
+        {section.link && <CircleTextLink site={site} {...section.link} />}
+      </EditorialPair>
+    ) : <div class="kabukido-section__text"><p>{section.body}</p>{section.link && <CircleTextLink site={site} {...section.link} />}</div>}
+  </section>
+))}
+{phases && <section class="kabukido-section">{phaseHeadingAnimation ? <ScrollReveal animation="fade-up" duration={2000} stagger={0}><h2>一つずつ確かめる工程</h2></ScrollReveal> : <h2>一つずつ確かめる工程</h2>}<PhaseRows rows={phases} /></section>}
+{news && <section class="kabukido-section"><h2>関連するご案内</h2><QuietNewsList site={site} items={news} /></section>}
+{collage && <section class="kabukido-section"><h2>住まいの写真</h2><HousePhotoCollage site={site} photos={photos} /></section>}
+<style>
+  .kabukido-section { width:min(1120px,calc(100% - 48px)); margin:0 auto; padding:clamp(80px,11vw,160px) 0; border-top:1px solid var(--color-base-300); }
+  h2 { width:min(680px,100%); margin:0 auto 48px; font-size:clamp(26px,3vw,32px); line-height:1.55; }
+  .kabukido-section__text { width:min(680px,100%); margin:auto; } p { font-size:16px; line-height:1.9; white-space:pre-line; } .kabukido-section__text :global(.circle-text-link) { margin-top:32px; }
+</style>

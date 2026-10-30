@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import { images } from '../content'; import KabukidoInfoPage from '../../../../../components/sections/KabukidoInfoPage.astro';
+---
+<SiteLayout site={site} title="モデルハウス" description="写真では分からない床の感触、壁に落ちる光、家族が並んで歩く距離を、見学で確かめるための視点をご案内します。" path="/model-house/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'モデルハウス'}]}><KabukidoInfoPage site={site} title="モデルハウス" lead="床に立ったときの感触、壁に落ちる光、家族が並んで歩く距離。住まいの心地よさを考えるには、その場で気づくことも大切です。掲載写真は設計イメージです。見学施設の所在地・公開日時は本サンプルには掲載していません。" image={images.exterior} imageAlt="平屋の設計イメージ" first="写真では分からないことを、確かめる。" second="見学で確かめたい三つのこと" third="見学で聞きたいことを、少しだけ。" linkLabel="モデルハウス見学の希望を入力する" linkHref="/contact/?type=visit" sectionAnimations={{0:{target:'image'},1:{target:'image'},2:{target:'image'}}} phaseHeadingAnimation={true} /></SiteLayout>

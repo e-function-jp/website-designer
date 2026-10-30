@@ -1,0 +1,128 @@
+---
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+/**
+ * ClinicFeatureRows — トップの「青い面で示す医院の特徴」セクション。
+ *
+ * ディレクションの指示:
+ *   - 青い全幅面、上端に浅い波形。PC 約 1,450px
+ *   - 3 行を写真右→左→右で交互配置、写真幅 44%、本文 36%
+ *   - 番号 01〜03 は白 72px、見出しと重ねない
+ *   - モバイルは各項目を番号・見出し→写真→本文、上下 100px、行間 64px
+ *   - 長い青面を一括で隠さず、写真・本文を初期表示する (animation: none)
+ */
+interface Row {
+  number: string;
+  title: string;
+  body: string;
+  image: { src: string; alt: string };
+}
+
+interface Props {
+  site: SiteConfig;
+  rows: Row[];
+  totalHeading: string;
+  trailingLink?: { label: string; href: string };
+}
+
+const { site, rows, totalHeading, trailingLink } = Astro.props;
+const trailingHref = trailingLink ? url(site, trailingLink.href) : undefined;
+---
+<section class="clinic-feature bg-primary text-primary-content relative overflow-hidden">
+  <svg
+    class="clinic-feature__wave-top block w-full h-12 lg:h-12"
+    viewBox="0 0 1440 48"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,32 C240,8 480,56 720,32 C960,8 1200,56 1440,32 L1440,48 L0,48 Z"
+      fill="var(--color-primary)"
+    />
+  </svg>
+
+  <div class="max-w-[1400px] mx-auto px-5 lg:px-10 pt-12 lg:pt-20 pb-24 lg:pb-32">
+    <h2 class="text-2xl lg:text-[2rem] font-medium tracking-[0.06em] mb-12 lg:mb-20 text-center">
+      {totalHeading}
+    </h2>
+
+    <ol class="space-y-16 lg:space-y-24">
+      {rows.map((row, i) => {
+        const reverse = i % 2 === 1;
+        return (
+          <li
+            class:list={[
+              'clinic-feature__row grid gap-8 lg:gap-16 items-center',
+              'lg:grid-cols-[44%_36%]',
+              reverse && 'lg:[&>:first-child]:order-2',
+            ]}
+          >
+            <figure class="clinic-feature__photo overflow-hidden rounded-lg bg-primary-content/10">
+              <img
+                src={row.image.src}
+                alt={row.image.alt}
+                width="1200"
+                height="900"
+                loading="lazy"
+                class="w-full aspect-[4/3] object-cover"
+              />
+            </figure>
+            <div class="clinic-feature__copy">
+              <p class="clinic-feature__num text-5xl lg:text-[4.5rem] font-medium leading-none tracking-tight mb-6 lg:mb-8 text-primary-content/95 tabular-nums">
+                {row.number}
+              </p>
+              <h3 class="text-xl lg:text-[1.625rem] font-medium leading-snug mb-4 lg:mb-5">
+                {row.title}
+              </h3>
+              <p class="text-sm lg:text-base leading-relaxed text-primary-content/90">
+                {row.body}
+              </p>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+
+    {trailingLink && trailingHref && (
+      <div class="mt-16 lg:mt-24 text-center">
+        <a
+          href={trailingHref}
+          class="clinic-feature__link inline-flex items-center gap-2 text-base lg:text-lg font-medium border-b border-primary-content/40 pb-1 hover:border-primary-content"
+        >
+          {trailingLink.label}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    )}
+  </div>
+
+  <svg
+    class="clinic-feature__wave-bottom block w-full h-6 lg:h-12"
+    viewBox="0 0 1440 48"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,16 C240,40 480,-8 720,16 C960,40 1200,-8 1440,16 L1440,48 L0,48 Z"
+      fill="var(--color-primary)"
+    />
+  </svg>
+</section>
+
+<style>
+  .clinic-feature__wave-top,
+  .clinic-feature__wave-bottom {
+    margin: 0;
+  }
+  .clinic-feature__row {
+    /* モバイル: 番号・見出し→写真→本文 */
+  }
+  @media (max-width: 1023px) {
+    .clinic-feature__row { grid-template-columns: 1fr; gap: 16px 0; }
+    .clinic-feature__row + .clinic-feature__row { margin-top: 100px; }
+    .clinic-feature__photo { order: 2; }
+    .clinic-feature__copy { order: 1; }
+    .clinic-feature__copy + .clinic-feature__copy { order: 3; }
+  }
+</style>

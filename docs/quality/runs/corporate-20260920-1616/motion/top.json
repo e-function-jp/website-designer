@@ -1,0 +1,995 @@
+{
+  "url": "https://contenna.net/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260920-1616/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260920-1616/motion/top-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://contenna.net/",
+      "label": "トップページ"
+    },
+    {
+      "href": "https://contenna.net/about/",
+      "label": "私たちについて"
+    },
+    {
+      "href": "https://contenna.net/service/",
+      "label": "サービス"
+    },
+    {
+      "href": "https://contenna.net/works/",
+      "label": "実績紹介"
+    },
+    {
+      "href": "https://marketing.contenna.jp/",
+      "label": "コラム"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "Header-module-scss-module__t7BEda__header",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0.9955",
+        "transform": "matrix(1, 0, 0, 1, 0, -0.4492)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "color, padding",
+        "duration": "0.3s, 0.3s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "私たちについてサービス実績紹介コラム資料ダウンロードお問い合わせトップページ私た"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "Hero-module-scss-module__TbaSSW__bg",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 918.172, -8760.7)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "Hero-module-scss-module__TbaSSW__inner",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0.9955",
+        "transform": "matrix(1, 0, 0, 1, 0, 0.1078)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "心に響く。その先の成果へつながるクリエイティブを。"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "SERVICE"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal"
+      },
+      "timing": {
+        "duration": 2400,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [
+    {
+      "tag": "div",
+      "className": "Opening-module-scss-module__XpVEmW__opening",
+      "displayNow": "block",
+      "opacityNow": "0"
+    }
+  ],
+  "meta": {
+    "title": "株式会社コンテナ：CONTENNA.co.ltd",
+    "h1": "株式会社コンテナ：CONTENNA.co.ltd",
+    "totalHeight": 11711,
+    "viewportsTall": 13,
+    "sectionCount": 9,
+    "imgCount": 12,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 10811,
+  "css": {
+    "keyframes": 8,
+    "transitionRules": 34,
+    "animationRules": 8,
+    "keyframeNames": [
+      "splide-loading",
+      "Advantage-module-scss-module__RCRFrW__infiniteScroll",
+      "WorksContent-module-scss-module__WzkYKa__worksResultsFadeIn",
+      "WorksContent-module-scss-module__WzkYKa__worksSpinnerRotate",
+      "Header-module-scss-module__t7BEda__dialogFadeIn",
+      "Header-module-scss-module__t7BEda__dialogBackdropFadeIn",
+      "Header-module-scss-module__t7BEda__dialogFadeOut",
+      "Header-module-scss-module__t7BEda__dialogBackdropFadeOut"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 100,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "Header-module-scss-module__t7BEda__header"
+    },
+    "scrolled": {
+      "height": 70,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "Header-module-scss-module__t7BEda__header"
+    },
+    "shrinks": true,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 742,
+  "revealSummary": {
+    "total": 125,
+    "scrollLinkedCount": 6,
+    "kinds": {
+      "fade": 15,
+      "fade-up": 10,
+      "fade-side": 4,
+      "zoom": 69,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 27
+    },
+    "dominantKind": "zoom",
+    "designedRevealCount": 125,
+    "durationMs": {
+      "min": 2400,
+      "median": 2400,
+      "max": 2400
+    },
+    "easings": [
+      "ease"
+    ]
+  }
+}

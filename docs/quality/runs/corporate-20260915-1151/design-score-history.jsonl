@@ -1,0 +1,1 @@
+{"attempt": 1, "scored_at": "2026-09-16T18:32:04+09:00", "totals": {"a": 61, "b": 69}, "winner": "b", "setup": {"judge": "codex", "judge_model": "(codex default)", "reference_attached": true, "score_pages": "/ /about/ /service/"}}
