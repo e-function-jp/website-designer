@@ -1,0 +1,8 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import QuietPageIntro from '../../../../../components/sections/QuietPageIntro.astro'; import CounselingBand from '../../../../../components/sections/CounselingBand.astro'; import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="個人情報の取り扱い" description="フォーム等で取得する氏名、連絡先、問い合わせ内容の利用目的、保管、削除について定めた架空企業のサンプル文書です。" path="/privacy/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'個人情報の取り扱い'}]}>
+<QuietPageIntro title="個人情報の取り扱い" lead="フォーム等で取得する情報の扱い。架空企業のサンプル文書です。" />
+<section class="policy"><ScrollReveal animation="fade" duration={300}><article><h2>取得項目</h2><p>氏名、ふりがな、メールアドレス、電話番号、問い合わせ内容、希望日時。採用問い合わせの場合は職務に関する自己申告。</p></article><article><h2>利用目的</h2><p>カウンセリング予約の確認、採用連絡、サイト改善のための統計（個人を特定しない）。サンプル環境では外部送信しない。</p></article><article><h2>保管と削除</h2><p>本サンプルはブラウザメモリ内のみで扱い、リロードで消失します。本番想定では目的達成後、合理的期間で削除する方針とします。</p></article><article><h2>問い合わせ</h2><p>開示等の要望は<a href="/sites/corporate/a-20260926-0500/contact/">カウンセリング予約フォーム</a>より「その他」で連絡してください（サンプルのため実対応なし）。</p></article></ScrollReveal></section><CounselingBand />
+</SiteLayout>
+<style>.policy{padding:clamp(72px,10vw,128px) 20px}.policy>*{width:min(720px,100%);margin:auto}.policy article{padding:40px 0;border-top:1px solid #e0d6cc}.policy article:last-child{border-bottom:1px solid #e0d6cc}.policy h2{margin:0 0 16px;font-size:30px;font-weight:500}.policy p{margin:0;line-height:1.9}.policy a{color:inherit;text-underline-offset:6px}</style>

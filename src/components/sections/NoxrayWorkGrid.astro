@@ -1,0 +1,31 @@
+---
+import WorkScreen from './WorkScreen.astro';
+import TextArrowLink from './TextArrowLink.astro';
+import type { SiteConfig } from '../../lib/site';
+interface Work { label: string; title: string; description: string; href: string; image: string; alt: string; ratio: 'landscape' | 'portrait' | 'wide'; }
+interface Props { site: SiteConfig; works: Work[]; dark?: boolean; }
+const { site, works, dark = false } = Astro.props;
+---
+
+<div class:list={['noxray-works', dark && 'noxray-works--dark']}>
+  {works.map((work) => (
+    <article>
+      <p>{work.label}</p>
+      <WorkScreen image={work.image} alt={work.alt} title={work.title} ratio={work.ratio} />
+      <h3>{work.title}</h3>
+      <p>{work.description}</p>
+      <TextArrowLink site={site} href={work.href} label={`${work.title}を見る`} />
+    </article>
+  ))}
+</div>
+
+<style>
+  .noxray-works { display: grid; gap: 64px 8%; }
+  .noxray-works article:nth-child(even) { margin-left: auto; }
+  .noxray-works article { width: min(100%, 760px); }
+  .noxray-works article > p:first-child { margin: 0 0 12px; font-size: 14px; letter-spacing: .12em; }
+  .noxray-works h3 { margin: 20px 0 8px; font-size: 24px; }
+  .noxray-works article > p { line-height: 1.9; }
+  .noxray-works--dark { color: var(--color-neutral-content); }
+  @media (min-width: 768px) { .noxray-works { grid-template-columns: 1.1fr .9fr; align-items: start; } .noxray-works article:nth-child(2) { margin-top: 160px; } .noxray-works article:nth-child(3) { grid-column: 1 / -1; width: 72%; } }
+</style>

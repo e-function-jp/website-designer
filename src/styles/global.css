@@ -17,8 +17,47 @@
           business, emerald, retro, nord, autumn, winter, lofi,
           corporate-hokuline, corporate-hokuline-bold, corporate-minamoto,
           aoba-corporate, aoba-corporate-b, kido-corporate, kido-corporate-b,
-          aogami-corporate, kabukido-sumi, noxray-corporate;
+          aogami-corporate, kabukido-sumi, noxray-corporate, shirosumi-calm;
 }
+
+@plugin "daisyui/theme" {
+  name: "shirosumi-calm";
+  default: false;
+  color-scheme: light;
+  --color-base-100: oklch(95.5% 0.018 78);
+  --color-base-200: oklch(92.2% 0.025 76);
+  --color-base-300: oklch(86.6% 0.029 74);
+  --color-base-content: oklch(16.5% 0.012 61);
+  --color-primary: oklch(27.1% 0.027 48);
+  --color-primary-content: oklch(99.4% 0.004 90);
+  --color-secondary: oklch(68.1% 0.037 65);
+  --color-secondary-content: oklch(16.5% 0.012 61);
+  --color-accent: oklch(68.1% 0.037 65);
+  --color-accent-content: oklch(16.5% 0.012 61);
+  --color-neutral: oklch(27.1% 0.027 48);
+  --color-neutral-content: oklch(99.4% 0.004 90);
+  --radius-box: 0;
+  --radius-field: 0;
+}
+
+[data-theme="shirosumi-calm"] {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+[data-theme="shirosumi-calm"] h1,
+[data-theme="shirosumi-calm"] h2,
+[data-theme="shirosumi-calm"] h3 {
+  font-family: "Shippori Mincho", "Yu Mincho", serif;
+  font-weight: 500;
+}
+[data-theme="shirosumi-calm"] .site-header {
+  background: rgb(247 240 230 / 94%);
+  border-color: #e0d6cc;
+  color: #1a1410;
+}
+[data-theme="shirosumi-calm"] .site-header > div { height: 134px; max-width: none; padding-inline:clamp(20px,5vw,64px); }
+[data-theme="shirosumi-calm"] .site-header .btn { border-radius:999px; box-shadow:none; }
+[data-theme="shirosumi-calm"] footer { background:#e8dfd9; border-color:#e0d6cc; }
+[data-theme="shirosumi-calm"] footer .btn { border-radius:999px; box-shadow:none; }
 
 @plugin "daisyui/theme" {
   name: "noxray-corporate";
@@ -65,6 +104,11 @@
   padding-inline: 32px;
 }
 [data-theme="noxray-corporate"] .site-header--shrink.is-scrolled > div { height: 70px; }
+[data-theme="noxray-corporate"] .site-header.is-scrolled {
+  background: rgb(244 243 238 / 96%);
+  box-shadow: 0 1px 12px rgb(20 35 38 / 12%);
+  color: #142326;
+}
 [data-theme="noxray-corporate"] .site-header .btn-primary { background: #b7a16b; color: #142326; border-color: #b7a16b; }
 [data-theme="noxray-corporate"] .site-header a:focus-visible,
 [data-theme="noxray-corporate"] footer a:focus-visible { outline: 3px solid #b7a16b; outline-offset: 4px; }

@@ -15,6 +15,7 @@
  */
 import type { SiteConfig } from '../../lib/site';
 import { url } from '../../lib/site';
+import Marquee from '../animations/Marquee.astro';
 
 interface Props {
   site: SiteConfig;
@@ -103,6 +104,12 @@ const [nameMain, nameSuffix] = site.name.includes('株式会社')
     </div>
   </header>
 ) : (
+  <>
+  {site.theme === 'shirosumi-calm' && (
+    <div class="shirosumi-announcement" aria-label="クリニックからのお知らせ">
+      <Marquee speed={30} gap={56} mask={false}><span>港区のメディカル美容と予防ウェルネス — 白澄メディウェル</span><span aria-hidden="true">・</span></Marquee>
+    </div>
+  )}
   <header
     class:list={[
       'site-header sticky top-0 z-40 border-b border-base-300',
@@ -170,10 +177,12 @@ const [nameMain, nameSuffix] = site.name.includes('株式会社')
       </details>
     </div>
   </header>
+  </>
 )}
 
 <style>
   .site-header { transition: height .3s ease, background-color .3s ease, transform .3s ease, box-shadow .3s ease; }
+  .shirosumi-announcement { height:24px; overflow:hidden; background:#efe6dc; color:#3d2a22; font-size:13px; line-height:24px; }
 
   /* solid: 最上部では透過、スクロールすると背景を敷く */
   .site-header--solid { background-color: transparent; }

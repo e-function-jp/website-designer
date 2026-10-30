@@ -1,0 +1,32 @@
+---
+import ImageRevealFrame from './ImageRevealFrame.astro';
+import OrganicCurveOverlay from './OrganicCurveOverlay.astro';
+
+interface Props { title: string; lead: string; image: string; imageAlt: string; actionLabel?: string; actionHref?: string; home?: boolean; note?: string; }
+const { title, lead, image, imageAlt, actionLabel, actionHref, home = false, note } = Astro.props;
+---
+<section class:list={['shirosumi-hero', home && 'shirosumi-hero--home']}>
+  <div class="shirosumi-hero__image"><ImageRevealFrame src={image} alt={imageAlt} priority={home} parallax /></div>
+  <div class="shirosumi-hero__shade"></div><OrganicCurveOverlay count={home ? 5 : 6} />
+  <div class="shirosumi-hero__copy">
+    {home && <p class="shirosumi-hero__eyebrow">港区のメディカル美容クリニック</p>}
+    {home && <p class="shirosumi-hero__english">Medicine,<br />and quiet skin.</p>}
+    <h1>{title}</h1><p class="shirosumi-hero__lead">{lead}</p>
+    {actionLabel && actionHref && <a class="shirosumi-hero__action" href={actionHref}>{actionLabel} ↗</a>}
+    {note && <p class="shirosumi-hero__note">{note}</p>}
+  </div>
+</section>
+<style>
+  .shirosumi-hero { position:relative; min-height:clamp(420px,55vw,660px); isolation:isolate; color:#fff; overflow:hidden; }
+  .shirosumi-hero--home { min-height:clamp(780px,72vw,900px); }
+  .shirosumi-hero__image, .shirosumi-hero__shade { position:absolute; inset:0; z-index:-2; }
+  .shirosumi-hero__shade { z-index:-1; width:52%; background:rgb(61 42 34 / 72%); }
+  .shirosumi-hero__copy { display:flex; min-height:inherit; max-width:720px; padding:clamp(150px,18vw,250px) 24px 54px; margin-left:max(0px, calc((100vw - 1120px) / 2)); flex-direction:column; justify-content:end; }
+  .shirosumi-hero__eyebrow, .shirosumi-hero__note { margin:0 0 12px; font-size:13px; letter-spacing:.08em; }
+  .shirosumi-hero__english { margin:0 0 16px; font-family:"Shippori Mincho","Yu Mincho",serif; font-size:clamp(34px,5vw,55px); line-height:1.1; }
+  h1 { margin:0; max-width:15em; color:#fff; font-size:clamp(39px,5vw,55px); font-weight:500; line-height:1.2; letter-spacing:.02em; }
+  .shirosumi-hero__lead { max-width:39rem; margin:24px 0; font-size:clamp(16px,1.5vw,18px); line-height:1.9; }
+  .shirosumi-hero__action { width:max-content; color:#fff; border-bottom:1px solid currentColor; padding-bottom:6px; font-size:16px; text-decoration:none; }
+  .shirosumi-hero__action:focus-visible { outline:2px solid #a89078; outline-offset:6px; }
+  @media (max-width:640px) { .shirosumi-hero__shade { width:100%; background:rgb(61 42 34 / 58%); } .shirosumi-hero__copy { padding-inline:20px; } .shirosumi-hero--home .shirosumi-hero__action { width:100%; padding:14px 0; border-top:1px solid rgb(255 255 255 / .7); } }
+</style>

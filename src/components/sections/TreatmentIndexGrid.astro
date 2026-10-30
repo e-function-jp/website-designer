@@ -1,0 +1,19 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+interface Treatment { name: string; href?: string; }
+interface Props { title: string; items: Treatment[]; id?: string; }
+const { title, items, id } = Astro.props;
+---
+<section class="treatment-index" id={id}>
+  <div class="treatment-index__inner"><h2>{title}</h2>
+    <div class="treatment-index__tabs" role="tablist" aria-label="施術カテゴリ"><button type="button" role="tab" aria-selected="true">メディカル美容</button><button type="button" role="tab" aria-selected="false">予防ウェルネス</button><button type="button" role="tab" aria-selected="false">目的別コース</button></div>
+    <ScrollReveal animation="fade" duration={300} stagger={80}><div class="treatment-index__grid">{items.map((item, i) => <a href={item.href ?? '/service/'}><span>{String(i + 1).padStart(2, '0')}</span><strong>{item.name}</strong><b aria-hidden="true">↗</b></a>)}</div></ScrollReveal>
+  </div>
+</section>
+<style>
+  .treatment-index { padding:clamp(80px,10vw,144px) 20px; background:#fffefa; }
+  .treatment-index__inner { width:min(1120px,100%); margin:auto; } h2 { margin:0 0 44px; font-size:clamp(39px,5vw,55px); font-weight:500; line-height:1.25; }
+  .treatment-index__tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; } button { min-height:44px; padding:8px 18px; border:1px solid #a89078; background:transparent; color:#1a1410; } button:first-child { background:#a89078; }
+  .treatment-index__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } a { display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:start; min-height:120px; padding:20px; border:1px solid #e0d6cc; color:#1a1410; text-decoration:none; transition:border-color 300ms ease; } a:hover { border-color:#a89078; } a:hover b { transform:translateX(4px); } span { color:#a89078; font-size:13px; } strong { font-size:16px; line-height:1.6; font-weight:400; } b { transition:transform 300ms ease; font-weight:400; } @media (min-width:800px) { .treatment-index__grid { grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; } }
+  @media (prefers-reduced-motion: reduce) { a,b { transition:none; } }
+</style>

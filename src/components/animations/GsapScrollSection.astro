@@ -235,7 +235,7 @@ const styleAttr = [
         case 'parallax':
           // 子要素を parallax
           const target = section.querySelector('[data-gsap-parallax-target]') || section;
-          gsap.fromTo(target, { y: -y }, { y: y, ease: 'none', scrollTrigger: stConfig });
+          gsap.fromTo(target, { x: 0, y: 0 }, { x, y, ease: 'none', scrollTrigger: stConfig });
           break;
         case 'scale':
           // scale prop: 0.9 → 1 のような default 動作を維持しつつ、
