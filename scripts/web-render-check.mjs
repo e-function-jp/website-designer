@@ -124,7 +124,7 @@ for (const route of routes) {
   }
   await page.waitForTimeout(1200);
 
-  const data = await page.evaluate((BLANK_MIN) => {
+  const data = await page.evaluate(async (BLANK_MIN) => {
     // --- 1. 不可視のまま残った要素 ---
     const hidden = [];
     for (const el of document.querySelectorAll('body *')) {
@@ -207,6 +207,19 @@ for (const route of routes) {
       // ヒーローは img を absolute で敷く実装が多く、これを見落とすと
       // 「写真上の白抜き文字」を一律に誤検知する（実測で発生）。
       const behindMedia = (() => {
+        // 実際の重なり順で背後を見る。ヘッダーのように「別セクションの写真の上へ
+        // 載る」形は、祖先をたどるだけでは絶対に拾えない
+        // （実測 2026-09-21: 写真上の白いナビ5件を「同色で不可視」と誤検知した）。
+        const cx = Math.round(r.left + r.width / 2), cy = Math.round(r.top + r.height / 2);
+        if (cx >= 0 && cy >= 0 && cx < window.innerWidth && cy < window.innerHeight) {
+          const stack = document.elementsFromPoint(cx, cy);
+          for (const node of stack) {
+            if (node === el || el.contains(node)) continue;
+            if (/^(img|video|canvas|picture|svg)$/i.test(node.tagName)) return true;
+            const ncs = getComputedStyle(node);
+            if (ncs.backgroundImage && ncs.backgroundImage !== 'none') return true;
+          }
+        }
         let a = el;
         for (let i = 0; a && i < 5; a = a.parentElement, i++) {
           for (const m of a.querySelectorAll(':scope > img, :scope > video, :scope > canvas, :scope > picture > img')) {
@@ -292,7 +305,215 @@ for (const route of routes) {
       if (gap >= BLANK_MIN) blanks.push({ from: Math.round(merged[i - 1][1]), to: Math.round(merged[i][0]), gap: Math.round(gap) });
     }
 
+    // --- 4. テキストどうしの重なり ---
+    // 絶対配置やマイナスマージン、視差の実装ミスで、別々の文章が同じ場所に
+    // 描かれることがある。実測 2026-09-21: 視差を入れたヒーローで
+    // 「仕事を知る」と主見出し・本文が重なり、どれも読めなくなった。
+    // 静的解析では絶対に出ない（HTML としては正しい）。
+    //
+    // **スクロール位置を変えて測る。** 視差は動いて初めて重なるので、
+    // 先頭で1回測るだけでは取り逃がす（実測 2026-09-21: 停止状態では重なり0、
+    // スクロール中にヒーローが破綻していた）。
+    const measureOverlaps = () => {
+      const boxes = [];
+      for (const el of document.querySelectorAll('h1,h2,h3,h4,p,li,a,span')) {
+        const cs = getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) < 0.05) continue;
+        if (cs.position === 'fixed' || cs.position === 'sticky') continue; // ヘッダー等は重なって当然
+        // 透過ヘッダーがヒーロー写真の上に載る形は定番の表現で、欠陥ではない
+        if (el.closest('header, nav, [role="banner"], footer')) continue;
+        const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join('');
+        if (own.length < 4) continue;
+        const r = el.getBoundingClientRect();
+        if (r.width < 8 || r.height < 8) continue;
+        if (r.bottom < 0 || r.top > window.innerHeight) continue; // 画面外は見えていない
+        boxes.push({ el, r, text: own.slice(0, 24) });
+      }
+      const hits = [];
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          const a = boxes[i], b = boxes[j];
+          if (a.el.contains(b.el) || b.el.contains(a.el)) continue;
+          const w = Math.min(a.r.right, b.r.right) - Math.max(a.r.left, b.r.left);
+          const h = Math.min(a.r.bottom, b.r.bottom) - Math.max(a.r.top, b.r.top);
+          if (w <= 2 || h <= 2) continue;
+          const area = w * h;
+          const smaller = Math.min(a.r.width * a.r.height, b.r.width * b.r.height);
+          if (area > smaller * 0.35) hits.push({ a: a.text, b: b.text, ratio: Math.round((area / smaller) * 100) });
+        }
+      }
+      return hits;
+    };
+    const overlapSeen = new Map();
+    const docH = document.body.scrollHeight;
+    for (const frac of [0, 0.15, 0.3, 0.5]) {
+      window.scrollTo(0, Math.round(docH * frac));
+      await new Promise((r) => setTimeout(r, 260));
+      for (const o of measureOverlaps()) overlapSeen.set(`${o.a}|${o.b}`, o);
+    }
+    window.scrollTo(0, 0);
+    await new Promise((r) => setTimeout(r, 200));
+    const overlaps = [...overlapSeen.values()];
+
+    // --- 4.5 別の層に覆われて読めない文字 ---
+    // 「重なっている」だけでは足りない。絵として壊れているのに、文字どうしの
+    // 矩形が重ならない形（画像レイヤーが文字の上に乗る）がある。
+    // 実測 2026-09-21: 視差のヒーローで写真レイヤーが主見出しの上に乗り、
+    // 見出しと本文が画面から消えた。文字の矩形は重なっていないので
+    // render-text-overlap では出ない。**重なり順で判定する。**
+    const coveredBy = (el) => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return null; // 画面外
+      const pts = [
+        [r.left + r.width * 0.2, r.top + r.height / 2],
+        [r.left + r.width * 0.5, r.top + r.height / 2],
+        [r.left + r.width * 0.8, r.top + r.height / 2],
+      ];
+      let hits = 0, who = '';
+      for (const [x, y] of pts) {
+        if (x < 0 || y < 0 || x >= window.innerWidth || y >= window.innerHeight) continue;
+        const top = document.elementsFromPoint(Math.round(x), Math.round(y))[0];
+        if (!top || top === el || el.contains(top) || top.contains(el)) continue;
+        const tcs = getComputedStyle(top);
+        const isMedia = /^(img|video|canvas|picture|svg)$/i.test(top.tagName);
+        const bg = tcs.backgroundColor || '';
+        const m = bg.match(/rgba?\(([^)]+)\)/);
+        const alpha = m ? (m[1].split(',')[3] !== undefined ? parseFloat(m[1].split(',')[3]) : 1) : 0;
+        const opaque = isMedia || alpha > 0.5 || (tcs.backgroundImage && tcs.backgroundImage !== 'none');
+        if (opaque) { hits++; who = `${top.tagName}${top.className ? '.' + String(top.className).split(' ')[0] : ''}`; }
+      }
+      return hits >= 2 ? who : null;
+    };
+    const covered = [];
+    for (const el of document.querySelectorAll('h1,h2,h3,p,li')) {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) < 0.05) continue;
+      if (el.closest('header, nav, footer, [role="banner"]')) continue;
+      const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join('');
+      if (own.length < 4) continue;
+      const by = coveredBy(el);
+      if (by) covered.push({ text: own.slice(0, 26), by });
+    }
+
+    // --- 4.6 ファーストビューに主見出しが出ているか ---
+    // 1画面目に h1 が見えないサイトは、何の会社か分からないまま始まる。
+    const h1 = document.querySelector('h1');
+    let heroH1 = 'なし';
+    if (h1) {
+      const r = h1.getBoundingClientRect();
+      const inFirstView = r.top < window.innerHeight * 1.1 && r.bottom > 0;
+      const hidden = coveredBy(h1);
+      heroH1 = !inFirstView ? '1画面目に無い' : hidden ? `覆われている(${hidden})` : 'ok';
+    }
+
+    // --- 4.7 巨大な文字の自動折り返し ---
+    // 大きな文字が成り行きで折り返されると、数値と単位が割れたり
+    // 1〜2文字だけが次行に落ちたりして品位が落ちる。
+    // 実測 2026-09-21: 「240件超」「平均1.8倍」が巨大サイズのまま2行に割れた。
+    // <br> で改行位置を指定しているものは意図的なので除く。
+    const bigWrap = [];
+    for (const el of document.querySelectorAll('h1,h2,h3,p,span,strong,dd,dt,div')) {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+      const fs = parseFloat(cs.fontSize) || 0;
+      if (fs < 40) continue;
+      const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join('');
+      if (own.length < 2) continue;
+      if (el.querySelector('br')) continue;              // 改行位置を指定している
+      if (/pre|pre-wrap|pre-line/.test(cs.whiteSpace)) continue;
+      const range = document.createRange(); range.selectNodeContents(el);
+      const rects = [...range.getClientRects()].filter((r) => r.width > 1 && r.height > 1);
+      if (rects.length < 2) continue;
+      // 行数は高さで数える（同じ行で複数矩形になることがある）
+      const tops = [...new Set(rects.map((r) => Math.round(r.top)))];
+      if (tops.length < 2) continue;
+      const maxW = Math.max(...rects.map((r) => r.width));
+      const lastW = rects[rects.length - 1].width;
+      bigWrap.push({ text: own.slice(0, 20), fs: Math.round(fs), lines: tops.length, orphan: lastW < maxW * 0.25 });
+    }
+
+    // --- 4.8 クリップされて切れている文字 ---
+    // overflow:hidden の枠から文字がはみ出していると、
+    // 途中で切れた見出しが別の面に写り込んだように見える。
+    // 実測 2026-09-21: 「共に成長するチームへ」がヒーロー背景の上端で切れて残った。
+    const clipped = [];
+    for (const el of document.querySelectorAll('h1,h2,h3,p,li')) {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) < 0.05) continue;
+      const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join('');
+      if (own.length < 4) continue;
+      const r = el.getBoundingClientRect();
+      if (r.height < 4) continue;
+      let node = el.parentElement;
+      for (let i = 0; node && i < 6; node = node.parentElement, i++) {
+        const ncs = getComputedStyle(node);
+        if (!/hidden|clip/.test(ncs.overflow) && !/hidden|clip/.test(ncs.overflowY)) continue;
+        const nr = node.getBoundingClientRect();
+        const visibleH = Math.min(r.bottom, nr.bottom) - Math.max(r.top, nr.top);
+        if (visibleH > 0 && visibleH < r.height * 0.8) {
+          clipped.push({ text: own.slice(0, 24), 見えている割合: Math.round((visibleH / r.height) * 100) });
+        }
+        break;
+      }
+    }
+
+    // --- 4.9 カードの縦位置のばらつき ---
+    // 横並びのカードで、中の要素の開始位置が揃っていないと雑に見える。
+    const cardMisalign = [];
+    for (const box of document.querySelectorAll('div,ul,ol,section')) {
+      const cs = getComputedStyle(box);
+      if (!/grid|flex/.test(cs.display)) continue;
+      if (/column/.test(cs.flexDirection)) continue;
+      const kids = [...box.children].filter((k) => {
+        const kr = k.getBoundingClientRect();
+        return kr.width > 120 && kr.height > 60;
+      });
+      if (kids.length < 2) continue;
+      // 同じ行のカードだけを比べる
+      const row = kids.filter((k) => Math.abs(k.getBoundingClientRect().top - kids[0].getBoundingClientRect().top) < 12);
+      if (row.length < 2) continue;
+      // 「カード」と呼べるのは同程度の幅で並んでいるものだけ。
+      // ラベル列 + 本文列のような非対称の2カラムは、開始位置が違って当然
+      // （実測 2026-09-21: 左に WORKFLOW、右に本文、という節を誤検出した）。
+      const ws = row.map((k) => k.getBoundingClientRect().width);
+      if (Math.max(...ws) > Math.min(...ws) * 1.3) continue;
+      const firstTextTop = row.map((k) => {
+        const t = k.querySelector('h1,h2,h3,h4,p,span,dt');
+        if (!t) return null;
+        return t.getBoundingClientRect().top - k.getBoundingClientRect().top;
+      }).filter((v) => v !== null);
+      if (firstTextTop.length < 2) continue;
+      const spread = Math.max(...firstTextTop) - Math.min(...firstTextTop);
+      if (spread > 24) cardMisalign.push({ 枚数: row.length, ずれ: Math.round(spread) });
+    }
+
+    // --- 5. 小さすぎる見出し ---
+    // 見出しが本文と同じ大きさだと、階層が消えて平板になる。
+    // 実測 2026-09-21: セクション見出しが 16px（本文と同寸）で出力された。
+    const bodyFs = parseFloat(getComputedStyle(document.body).fontSize) || 16;
+    const smallHeadings = [];
+    for (const el of document.querySelectorAll('h1,h2')) {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || !el.textContent.trim()) continue;
+      const fs = parseFloat(cs.fontSize);
+      if (fs <= bodyFs * 1.15) smallHeadings.push({ tag: el.tagName, fs: Math.round(fs), text: el.textContent.trim().slice(0, 22) });
+    }
+
     return {
+      bigWrap: bigWrap.slice(0, 6),
+      bigWrapCount: bigWrap.length,
+      clipped: clipped.slice(0, 6),
+      clippedCount: clipped.length,
+      cardMisalign: cardMisalign.slice(0, 4),
+      cardMisalignCount: cardMisalign.length,
+      covered: covered.slice(0, 6),
+      coveredCount: covered.length,
+      heroH1,
+      overlaps: overlaps.slice(0, 6),
+      overlapCount: overlaps.length,
+      smallHeadings: smallHeadings.slice(0, 6),
+      smallHeadingCount: smallHeadings.length,
+      bodyFs: Math.round(bodyFs),
       lowContrast: lowContrast.sort((a, b) => a.ratio - b.ratio).slice(0, 8),
       lowContrastCount: lowContrast.length,
       invisibleText: lowContrast.filter((c) => c.ratio < 1.3).length,
@@ -308,6 +529,51 @@ for (const route of routes) {
   }, BLANK_MIN_PX);
 
   const findings = [];
+  if (data.bigWrapCount) {
+    findings.push({
+      id: 'render-big-text-wrapped', severity: 'medium',
+      detail: `大きな文字が成り行きで折り返されています ${data.bigWrapCount} 件: ` +
+        data.bigWrap.map((b) => `「${b.text}」${b.fs}px/${b.lines}行${b.orphan ? '（末行が1〜2文字）' : ''}`).join(' / '),
+    });
+  }
+  if (data.clippedCount) {
+    findings.push({
+      id: 'render-text-clipped', severity: 'high',
+      detail: `枠からはみ出して切れている文字が ${data.clippedCount} 件: ` +
+        data.clipped.map((c) => `「${c.text}」(${c['見えている割合']}%だけ見えている)`).join(' / '),
+    });
+  }
+  if (data.cardMisalignCount) {
+    findings.push({
+      id: 'render-card-misaligned', severity: 'medium',
+      detail: `横並びのカードで中身の開始位置が揃っていません ${data.cardMisalignCount} 箇所: ` +
+        data.cardMisalign.map((c) => `${c['枚数']}枚でずれ ${c['ずれ']}px`).join(' / '),
+    });
+  }
+  if (data.coveredCount) {
+    findings.push({
+      id: 'render-text-covered', severity: 'high',
+      detail: `別の層に覆われて読めない文字が ${data.coveredCount} 件: ` +
+        data.covered.map((c) => `「${c.text}」← ${c.by}`).join(' / '),
+    });
+  }
+  if (data.heroH1 !== 'ok' && data.heroH1 !== 'なし') {
+    findings.push({ id: 'render-hero-h1-hidden', severity: 'high', detail: `ファーストビューの主見出し: ${data.heroH1}` });
+  }
+  if (data.overlapCount) {
+    findings.push({
+      id: 'render-text-overlap', severity: 'high',
+      detail: `文章どうしが重なっています ${data.overlapCount} 箇所: ` +
+        data.overlaps.map((o) => `「${o.a}」と「${o.b}」(${o.ratio}%)`).join(' / '),
+    });
+  }
+  if (data.smallHeadingCount) {
+    findings.push({
+      id: 'render-heading-too-small', severity: 'medium',
+      detail: `見出しが本文(${data.bodyFs}px)とほぼ同寸です ${data.smallHeadingCount} 件: ` +
+        data.smallHeadings.map((h) => `${h.tag} ${h.fs}px「${h.text}」`).join(' / '),
+    });
+  }
   if (data.lowContrastCount) {
     // 比 1.3 未満は「同色＝完全に消えている」。読みにくいのではなく存在しないのと同じ。
     findings.push({
