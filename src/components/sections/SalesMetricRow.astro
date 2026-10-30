@@ -1,0 +1,121 @@
+---
+/**
+ * SalesMetricRow — /case/ の各指標行（3件）。
+ *
+ * ディレクションの指示:
+ *   - 幅 1140px の1列、細いグレー枠の行を3件、間隔 12px
+ *   - PC 各 280px、左4列に数値、右8列に指標名・期間・説明
+ *   - モバイル 各 320px、数値→指標→説明
+ *   - カルーセル、検索、架空ロゴ、詳細リンクは付けない
+ */
+import type { SiteConfig } from '../../lib/site';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Metric {
+  value: string;
+  title: string;
+  period: string;
+  body: string;
+}
+
+interface Props {
+  site: SiteConfig;
+  heading: string;
+  intro?: string;
+  metrics: Metric[];
+}
+
+const { site, heading, intro, metrics } = Astro.props;
+---
+
+<section class="smr bg-base-100">
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+    <ScrollReveal animation="fade-up" duration={site.motion?.durationMs ?? 600}>
+      <SectionTitle title={heading} align="left" class="smr__title" />
+      {intro && <p class="smr__intro">{intro}</p>}
+    </ScrollReveal>
+    <ul class="smr__list">
+      {metrics.map((m) => (
+        <li class="smr__row">
+          <div class="smr__num">{m.value}</div>
+          <div class="smr__detail">
+            <div class="smr__title">{m.title}</div>
+            <div class="smr__period">{m.period}</div>
+            <p class="smr__body">{m.body}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .smr__title { margin-bottom: 16px; }
+  .smr__intro {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 32px;
+    color: var(--color-base-content);
+  }
+
+  .smr__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .smr__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    border: 1px solid var(--color-base-300);
+    padding: 24px 20px;
+    background: var(--color-base-100);
+  }
+  .smr__num {
+    font-family: "Marcellus", "Times New Roman", serif;
+    font-size: 56px;
+    line-height: 1.05;
+    color: var(--color-primary);
+  }
+  .smr__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    margin-bottom: 4px;
+  }
+  .smr__period {
+    font-size: 13px;
+    color: var(--color-base-content);
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  .smr__body {
+    font-size: 15px;
+    line-height: 1.85;
+    margin: 0;
+    color: var(--color-base-content);
+  }
+
+  @media (min-width: 768px) {
+    .smr__row {
+      grid-template-columns: 4fr 8fr;
+      gap: 32px;
+      padding: 40px;
+      min-height: 280px;
+      align-items: center;
+    }
+    .smr__num { font-size: 80px; }
+  }
+
+  @media (max-width: 767px) {
+    .smr__num { font-size: 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .smr__row { transition: none; }
+  }
+</style>

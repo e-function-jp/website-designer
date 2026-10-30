@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import AogamiEditorialPage from '../../../../../components/sections/AogamiEditorialPage.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="個人情報の取り扱い" description="架空企業の試作である蒼紙舎サイトのフォーム入力と、ブラウザーに保存する表示設定の扱いをご説明します。" path="/privacy/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'個人情報の取り扱い'}]}><ScrollReveal animation="fade-up" duration={1000}><AogamiEditorialPage site={site} title="個人情報の取り扱い" intro="このサイトは、架空の企業である蒼紙舎株式会社のコーポレートサイトを検討するための試作です。制作相談フォームは入力と確認の動作を試すために設けており、相談内容を送信する機能はありません。" sections={[{label:'入力情報と表示設定',heading:'送信・保存は行いません',text:'フォームに入力した値は、確認画面を表示するためにページ内で一時的に扱います。送信先への通信や、入力内容のlocalStorage・sessionStorageへの保存は行いません。フッターで選択した書体の表示設定だけをブラウザーのlocalStorageに保存します。'}]} related={[{title:'制作のご相談',text:'入力と確認を試す。',href:'/contact/'},{title:'ご相談の前に',text:'相談準備の説明を読む。',href:'/faq/'}]} /></ScrollReveal></SiteLayout>

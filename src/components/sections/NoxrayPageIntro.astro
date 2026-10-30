@@ -1,0 +1,31 @@
+---
+interface Props {
+  eyebrow: string;
+  english: string;
+  title: string;
+  description: string;
+  dark?: boolean;
+}
+const { eyebrow, english, title, description, dark = false } = Astro.props;
+---
+
+<section class:list={['noxray-intro', dark && 'noxray-intro--dark']}>
+  <div class="noxray-intro__inner">
+    <p>{eyebrow}</p>
+    <h1>{english}</h1>
+    <h2>{title}</h2>
+    <p class="noxray-intro__description">{description}</p>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .noxray-intro { background: var(--color-base-100); min-height: 400px; padding: 148px 20px 72px; }
+  .noxray-intro--dark { background: var(--color-neutral); color: var(--color-neutral-content); }
+  .noxray-intro__inner { max-width: 1200px; margin: auto; }
+  .noxray-intro p:first-child { font-size: 14px; margin: 0 0 20px; }
+  .noxray-intro h1 { margin: 0; font-family: Inter, sans-serif; font-size: clamp(55px, 10vw, 120px); line-height: 1.05; letter-spacing: .04em; }
+  .noxray-intro h2 { max-width: 760px; margin: 44px 0 0; font-size: clamp(28px, 3vw, 40px); line-height: 1.5; }
+  .noxray-intro__description { max-width: 760px; margin: 20px 0 0; line-height: 1.9; }
+  @media (min-width: 768px) { .noxray-intro { min-height: 600px; padding: 240px 32px 96px; } }
+</style>

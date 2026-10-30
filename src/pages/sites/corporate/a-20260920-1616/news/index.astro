@@ -1,0 +1,23 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import NoxrayPageIntro from '../../../../../components/sections/NoxrayPageIntro.astro';
+import AxisRule from '../../../../../components/sections/AxisRule.astro';
+import TextArrowLink from '../../../../../components/sections/TextArrowLink.astro';
+import ConsultationRows from '../../../../../components/sections/ConsultationRows.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="お知らせ" description="ノクスレイの制作サンプルにおける資料・検討ガイドと、Web制作・改善運用の対応範囲へご案内するページです。" path="/news/" breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お知らせ' }]}>
+  <NoxrayPageIntro eyebrow="お知らせ" english="NEWS" title="検討に役立つ情報をご案内します。" description="このサイトは架空企業の制作サンプルです。未提供のニュースは掲載せず、制作と検討に必要な情報をご案内します。"><AxisRule /></NoxrayPageIntro>
+  <section>
+    <AxisRule />
+    <ScrollReveal animation="fade" duration={820}><h2>資料・検討ガイド</h2>
+      <p>対応範囲と進め方、Web刷新と採用強化の確認項目を、社内での比較・検討にお役立てください。</p>
+      <TextArrowLink site={site} href="/download/" label="資料・検討ガイドを見る" /></ScrollReveal>
+    <ScrollReveal animation="fade" duration={820}><h2>Web制作・改善運用</h2>
+      <p>企画設計、UI制作、実装・公開、改善運用を一貫して支援する対応範囲をご紹介します。</p>
+      <TextArrowLink site={site} href="/service/" label="Web制作・改善運用を見る" /></ScrollReveal>
+  </section>
+  <ConsultationRows site={site} />
+</SiteLayout>
+<style>section{padding:80px 20px}section>*{max-width:760px;margin-left:auto;margin-right:auto}h2{margin-top:64px;font-size:clamp(28px,4vw,40px)}p{line-height:1.9}@media(min-width:768px){section{padding:120px 32px}}</style>

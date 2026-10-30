@@ -1,0 +1,27 @@
+---
+---
+<form novalidate data-noxray-form>
+  <div data-form-summary tabindex="-1" aria-live="polite"></div>
+  <label>会社名（必須）<input name="company" required /></label>
+  <label>お名前（必須）<input name="name" required /></label>
+  <label>メールアドレス（必須）<input name="email" type="email" required /></label>
+  <fieldset><legend>相談したい内容（必須）</legend>{['ブランドサイト','採用サイト','キャンペーンLP','改善運用・その他'].map((label) => <label class="option"><input type="radio" name="topic" value={label} required />{label}</label>)}</fieldset>
+  <label>現在の状況・ご要望（必須）<textarea name="message" required rows="8"></textarea><span>現在困っていること、検討している内容などをご記入ください。</span></label>
+  <label>対象サイトのURL（任意）<input name="url" type="url" /></label>
+  <label class="option"><input name="privacy" type="checkbox" required />個人情報の取り扱いを確認しました。</label>
+  <button type="submit">入力内容を確認する</button>
+</form>
+<style>
+  form { display:grid; gap:32px; max-width:800px; }
+  label, fieldset { display:grid; gap:10px; font-weight:700; }
+  input, textarea { min-height:56px; border:1px solid var(--color-base-300); border-radius:2px; padding:12px; background:var(--color-base-100); color:var(--color-base-content); font:inherit; }
+  textarea { min-height:200px; } fieldset { border:0; padding:0; } .option { display:flex; align-items:center; gap:10px; font-weight:400; } .option input { min-height:20px; width:20px; } span { font-size:14px; font-weight:400; } button { min-height:56px; padding:12px 24px; border:0; border-radius:2px; background:var(--color-primary); color:var(--color-primary-content); font:inherit; font-weight:700; }
+</style>
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-noxray-form]').forEach((form) => form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const summary = form.querySelector<HTMLElement>('[data-form-summary]');
+    if (!form.checkValidity()) { if (summary) { summary.textContent = '入力内容をご確認ください。必須項目とメールアドレスの形式を確認してください。'; summary.focus(); } form.reportValidity(); return; }
+    if (summary) { summary.textContent = '入力内容の確認。このフォームは制作サンプルのため、送信は行いません。確認が完了しました。入力内容は送信されていません。'; summary.focus(); }
+  }));
+</script>

@@ -1,0 +1,110 @@
+---
+/**
+ * FieldWindow — 縦長写真と説明のセクション部品。
+ *
+ * ディレクション指示 (direction-b):
+ *   - 縦長写真 + 説明の対になるレイアウト
+ *   - 写真比率は page ごとに 4:3 / 縦4:5 / 3:2 / portrait などを渡す
+ *   - 写真下のキャプションは「支援場面のイメージ」を表示する
+ *   - 角丸 0、装飾なし。テキスト主体
+ */
+interface Props {
+  image: { src: string; alt: string };
+  /** 写真の配置。left / right */
+  position?: 'left' | 'right';
+  /** 写真の縦横比 */
+  aspect?: '3/2' | '4/3' | 'portrait' | '4/5';
+  background?: 'paper' | 'white' | 'primary';
+  sectionNumber?: string;
+}
+
+const {
+  image,
+  position = 'right',
+  aspect = '4/3',
+  background = 'paper',
+  sectionNumber,
+} = Astro.props;
+
+const bgClass = {
+  paper: 'bg-base-100',
+  white: 'bg-base-100',
+  primary: 'bg-primary text-primary-content',
+}[background];
+
+const textColor = background === 'primary' ? 'text-primary-content' : 'text-base-content';
+const aspectStyle = {
+  '3/2': 'aspect-[3/2]',
+  '4/3': 'aspect-[4/3]',
+  portrait: 'aspect-[3/4]',
+  '4/5': 'aspect-[4/5]',
+}[aspect];
+
+const photoOrder = position === 'left' ? 'lg:order-1' : 'lg:order-2';
+const copyOrder = position === 'left' ? 'lg:order-2' : 'lg:order-1';
+---
+
+<section class={`fw ${bgClass}`}>
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+    <div class="fw__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+      <figure class={`fw__photo ${photoOrder} lg:col-span-7`}>
+        <img
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          width="1200"
+          height={aspect === '3/2' ? 800 : aspect === '4/5' ? 1500 : 900}
+          class={`fw__img ${aspectStyle}`}
+        />
+        <figcaption class={`fw__caption ${textColor}`}>支援場面のイメージ</figcaption>
+      </figure>
+      <div class={`fw__copy ${copyOrder} lg:col-span-5 ${textColor}`}>
+        {sectionNumber && <p class="fw__number" aria-hidden="true">{sectionNumber}</p>}
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fw__photo { margin: 0; }
+  .fw__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: 50% 45%;
+    background: var(--color-base-300);
+    display: block;
+  }
+  .fw__caption {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.7;
+  }
+  .fw__number {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    margin: 0 0 16px;
+  }
+  .fw__copy :global(h2),
+  .fw__copy :global(h3) {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 20px;
+    letter-spacing: 0.02em;
+  }
+  .fw__copy :global(p) {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 16px;
+  }
+  .fw__copy :global(p:last-child) { margin-bottom: 0; }
+
+  @media (max-width: 767px) {
+    .fw__photo { margin-bottom: 16px; }
+  }
+</style>

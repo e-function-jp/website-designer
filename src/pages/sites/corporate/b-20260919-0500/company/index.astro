@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import { images } from '../content'; import KabukidoInfoPage from '../../../../../components/sections/KabukidoInfoPage.astro';
+---
+<SiteLayout site={site} title="会社案内" description="静岡県静岡市葵区を拠点に、木と左官の手仕事を軸とした新築注文住宅と全面リノベーションを設計施工する会社です。" path="/company/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'会社案内'}]}><KabukidoInfoPage site={site} title="会社案内" lead="株木堂建築株式会社は、静岡県静岡市葵区にある工務店です。1998年の設立以来、木と左官の手仕事を軸に、新築注文住宅と中古住宅の全面リノベーションを設計施工しています。従業員数は42名です。" image={images.craft} imageAlt="手仕事の設計イメージ" first="設計と施工を、手仕事でつなぐ。" second="会社概要と住まいづくりの実績" third="つくる方法が違っても、大切にすることは同じ。" linkLabel="注文住宅・リノベーションを知る" linkHref="/service/" sectionAnimations={{0:{target:'heading'},1:{target:'heading'},2:{target:'image'}}} phaseHeadingAnimation={true} /></SiteLayout>

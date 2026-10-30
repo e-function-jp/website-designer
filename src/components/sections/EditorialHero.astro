@@ -1,0 +1,8 @@
+---
+interface Props { image: string; alt: string }
+const { image, alt } = Astro.props;
+---
+<section>
+  <img src={image} alt={alt} width="2880" height="1800" fetchpriority="high" class="h-[82svh] min-h-[520px] max-h-[760px] w-full object-cover object-[58%_50%] lg:h-[900px] lg:max-h-none lg:object-center" />
+  <p class="mx-auto max-w-[1280px] px-5 pt-4 text-sm lg:px-20">企画から制作、現場監修まで。蒼紙舎の視覚設計。</p>
+</section>

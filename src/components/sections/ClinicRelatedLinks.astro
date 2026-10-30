@@ -1,0 +1,51 @@
+---
+/**
+ * ClinicRelatedLinks — あおば矯正歯科クリニック用の共通関連リンク。
+ *
+ * ディレクションの指示:
+ *   - PC 2 列、モバイル 1 列
+ *   - 白い罫線カード、内側 32px、最小高 160px、間隔 24px
+ *   - 「次に確認すること」「対象に合わせて詳しく見る」など、各ページで
+ *     見出し語を変えて使う
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Link {
+  label: string;
+  href: string;
+  description: string;
+}
+
+interface Props {
+  site: SiteConfig;
+  links: Link[];
+}
+
+const { site, links } = Astro.props;
+---
+<ul class="grid gap-6 md:grid-cols-2">
+  {links.map((l) => (
+    <li>
+      <a
+        href={url(site, l.href)}
+        class="related-card flex flex-col justify-between bg-base-100 border border-base-300 p-8 min-h-[160px] hover:border-primary transition-colors group"
+      >
+        <p class="text-lg font-bold leading-snug mb-3 text-base-content group-hover:text-primary">
+          {l.label}
+        </p>
+        <p class="text-sm leading-relaxed text-base-content/75">
+          {l.description}
+        </p>
+        <p class="mt-4 text-sm font-medium text-primary inline-flex items-center gap-1">
+          詳しく見る
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </p>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .related-card { display: flex; }
+</style>

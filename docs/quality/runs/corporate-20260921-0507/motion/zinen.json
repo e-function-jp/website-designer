@@ -1,0 +1,1723 @@
+{
+  "url": "https://naturehood-pj.com/zinen/",
+  "slug": "zinen",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260921-0507/motion/zinen-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260921-0507/motion/zinen-full.jpg"
+  },
+  "navLinks": [],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "group fixed md:relative z-30 top-0 left-0 w-full h-head-height-sp md:h-auto transition-opacity duration-300 type-home",
+      "addedClass": [
+        "type-ham",
+        "isBlack"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.3s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "textSnippet": "ZINEN NATUREHOOD PROJECT\n      \n        "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "absolute -z-10 top-0 left-0 w-full h-full opacity-0 translate-x-25 [&.is-open]:opacity-100 [&.is-open]:translate-x-0 tra",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 100, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.2s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "section",
+      "baseClass": "custom-bg-black100 relative z-20 w-full h-screen [mask-image:linear-gradient(to_top,transparent_40%,rgba(0,0,0,0.3)_50%,",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 270)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "福岡県那珂川市\n          \n          一棟貸しのサウナ付きリ"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -159.2)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 79.6)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -89.4)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 44.7)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -87.2)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 43.6)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -116.8)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 58.4)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -87)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 43.5)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -71.4)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 35.7)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -71.3969)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 35.6984)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, -131.8)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 65.9)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "hidden lg:block absolute top-0 left-0 w-full h-full custom-bg-black100",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "section",
+      "baseClass": "lg:custom-bg-beige100 group lg:absolute lg:top-0 lg:left-0 lg:w-full lg:h-screen px-[var(--space-side)] lg:p-2.5 lg:[wil",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "visibility",
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Stay\n                  那珂川を臨む一棟貸しのリバーサイド"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "lg:w-full lg:h-full",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-prev",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0.160114",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0.0110926",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "2s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] ease-linear",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.02864, 0, 0, 1.02864, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.00334, 0, 0, 1.00334, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "5s",
+        "delay": "0s",
+        "timing": "linear"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "li",
+      "baseClass": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-active is-visible",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0.839886",
+        "transform": "matrix(1, 0, 0, 1, -1420, 0)"
+      },
+      "to": {
+        "opacity": "0.988907",
+        "transform": "matrix(1, 0, 0, 1, -1420, 0)"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "2s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] ease-linear",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.17067, 0, 0, 1.17067, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.144, 0, 0, 1.144, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "5s",
+        "delay": "0s",
+        "timing": "linear"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] ease-linear",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1.2, 0, 0, 1.2, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1.19666, 0, 0, 1.19666, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "5s",
+        "delay": "0s",
+        "timing": "linear"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "mt-10 lg:mt-0 lg:absolute lg:z-10 lg:left-1/2 lg:-translate-x-1/2 lg:top-1/2 lg:-translate-y-[45%] transition-opacity du",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -122.188, -126.295)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, -122.188, -126.295)"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1.5s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "textSnippet": "Stay\n                  那珂川を臨む一棟貸しのリバーサイド"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "lg:custom-mask-gradient-left lg:[mask-position:100%_0%]",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Stay\n                  那珂川を臨む一棟貸しのリバーサイド"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h2",
+      "baseClass": "en-font-display-l text-center",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "Stay"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "mt-7.5 xl:mt-11.5 ja-font-display-m text-center",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "那珂川を臨む一棟貸しのリバーサイドヴィラ"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "br",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "mx-auto mt-10 xl:mt-17 w-fit",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "View more\n    \n    \n        \n    \n      "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "lg:hidden",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "View more"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "a",
+      "baseClass": "relative overflow-hidden w-[208px] pb-3 grid grid-cols-[auto_auto] justify-between items-center",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "View more"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "grid grid-cols-[auto_auto] gap-x-2.5 md:gap-x-5 items-baseline",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "View more"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "en-font-label-m",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "View more"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "block text-black-100",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-prev"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 5000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-active is-visi"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 5000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 5000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderBottomColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderLeftColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderRightColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderTopColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-prev"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-active is-visi"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 5000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-prev"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 5000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-active is-visi"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 5000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 5000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderBottomColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderLeftColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderRightColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderTopColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 3566.6520000358128,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-prev"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide [&.is-active>img]:scale-100 [&.is-prev>img]:scale-100 !duration-[2s] is-active is-visi"
+      },
+      "timing": {
+        "duration": 2000,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.25, 1, 0.5, 1)"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "IMG",
+        "className": "w-full lg:h-full aspect-[358/219] lg:scale-[120%] md:object-cover transition-all lg:duration-[5.0s] "
+      },
+      "timing": {
+        "duration": 3566.6520000358128,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderBottomColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderLeftColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderRightColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "LI",
+        "className": "splide__slide border-2 border-transparent [&.is-active]:border-white-100 !translate-x-0 !opacity-100"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 350,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "cssProps": [
+        "borderTopColor",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line !block w-fit before:border-[var(--header-color)]"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "SPAN",
+        "className": "en-font-label-s animation-move-line-b before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "finished",
+      "type": "CSSAnimation",
+      "target": {
+        "tag": "A",
+        "className": "animation-move-line before:border-black-100 w-fit grid grid-cols-[15px_auto] items-center gap-x-1.5"
+      },
+      "timing": {
+        "duration": 300,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [
+    {
+      "tag": "symbol",
+      "className": "",
+      "displayNow": "inline",
+      "opacityNow": "1"
+    },
+    {
+      "tag": "div",
+      "className": "absolute z-10 right-[var(--space-side)] bottom-5 md:bottom-[54px] flex gap-x-2.5 items-center text-w",
+      "displayNow": "flex",
+      "opacityNow": "1"
+    }
+  ],
+  "meta": {
+    "title": "ZINEN | 福岡県那珂川市 一棟貸しのサウナ付きリバーサイドヴィラ",
+    "h1": "ZINEN NATUREHOOD PROJECT",
+    "totalHeight": 18193,
+    "viewportsTall": 20.2,
+    "sectionCount": 10,
+    "imgCount": 59,
+    "videoCount": 1,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 15034,
+  "css": {
+    "keyframes": 8,
+    "transitionRules": 0,
+    "animationRules": 6,
+    "keyframeNames": [
+      "spin",
+      "blink",
+      "fadeIn",
+      "ani-text-mask-hover",
+      "moveFrom0to100",
+      "moveFrom100to200",
+      "moveFrom-100to0",
+      "splide-loading"
+    ]
+  },
+  "header": {
+    "position": "static",
+    "atTop": {
+      "height": 0,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "text-[var(--header-color)] w-full"
+    },
+    "scrolled": {
+      "height": 588,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "text-[var(--header-color)] w-full"
+    },
+    "shrinks": true,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 767,
+  "revealSummary": {
+    "total": 109,
+    "scrollLinkedCount": 43,
+    "kinds": {
+      "fade": 10,
+      "fade-up": 8,
+      "fade-side": 1,
+      "zoom": 11,
+      "clip-wipe": 3,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 76
+    },
+    "dominantKind": "other",
+    "designedRevealCount": 109,
+    "durationMs": {
+      "min": 500,
+      "median": 2000,
+      "max": 5000
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.25, 1, 0.5, 1)",
+      "linear",
+      "cubic-bezier(0.4, 0, 0.2, 1)"
+    ]
+  }
+}

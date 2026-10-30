@@ -1,21 +1,30 @@
 # website 品質レポート
 
-- 計測日時: 2026/9/14 13:17:42
+- 計測日時: 2026/9/20 16:53:03
 - **総合スコア: 100 / 100**（前回 100、+0）
-- サイト数: 3 / ページ数: 25
+- サイト数: 7 / ページ数: 80
 
 | ページ | スコア | 指摘数 |
 |---|---|---|
-| /components/ | 100 | 0 |
+| /compare/20260916-0500/gemini38flash/ | 100 | 0 |
+| /compare/20260916-0500/gpt56terra/ | 100 | 0 |
+| /compare/20260916-0500/ | 100 | 0 |
+| /compare/20260916-0500/maicode/ | 100 | 0 |
+| /compare/20260916-0500/sonnet5/ | 100 | 0 |
+| /components/ | 95 | 1 |
 | / | 100 | 0 |
-| /sites/corporate/a-20260903-1448/about/ | 100 | 0 |
-| /sites/corporate/a-20260903-1448/company/ | 100 | 0 |
-| /sites/corporate/a-20260903-1448/contact/ | 100 | 0 |
-| /sites/corporate/a-20260903-1448/ | 100 | 0 |
-| /sites/corporate/a-20260903-1448/news/ | 100 | 0 |
-| /sites/corporate/a-20260903-1448/privacy/ | 100 | 0 |
-| /sites/corporate/a-20260903-1448/recruit/ | 100 | 0 |
-| /sites/corporate/a-20260903-1448/service/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/about/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/assets/noxray-company.html | 100 | 0 |
+| /sites/corporate/a-20260920-1616/contact/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/download/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/ | 93 | 2 |
+| /sites/corporate/a-20260920-1616/news/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/privacy/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/service/ | 98 | 1 |
+| /sites/corporate/a-20260920-1616/works/brand/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/works/campaign/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/works/ | 100 | 0 |
+| /sites/corporate/a-20260920-1616/works/recruitment/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/about/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/company/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/contact/ | 100 | 0 |
@@ -24,6 +33,52 @@
 | /sites/corporate/b-20260903-1448/privacy/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/recruit/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/service/ | 100 | 0 |
+| /sites/corporate/b-20260915-1151/about/ | 100 | 0 |
+| /sites/corporate/b-20260915-1151/contact/ | 100 | 0 |
+| /sites/corporate/b-20260915-1151/ | 98 | 1 |
+| /sites/corporate/b-20260915-1151/news/ | 100 | 0 |
+| /sites/corporate/b-20260915-1151/privacy/ | 100 | 0 |
+| /sites/corporate/b-20260915-1151/service/ | 100 | 0 |
+| /sites/corporate/b-20260916-0500/about/ | 100 | 0 |
+| /sites/corporate/b-20260916-0500/company/ | 100 | 0 |
+| /sites/corporate/b-20260916-0500/contact/ | 100 | 0 |
+| /sites/corporate/b-20260916-0500/ | 98 | 1 |
+| /sites/corporate/b-20260916-0500/news/ | 100 | 0 |
+| /sites/corporate/b-20260916-0500/privacy/ | 100 | 0 |
+| /sites/corporate/b-20260916-0500/service/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/about/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/company/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/contact/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/download/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/faq/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/inspirations/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/news/consultation-guide/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/news/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/news/site-guide/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/news/work-guide/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/privacy/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/projects/editorial/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/projects/exhibition/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/projects/identity/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/projects/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/projects/mark/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/projects/sign/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/recruit/ | 100 | 0 |
+| /sites/corporate/b-20260918-0500/service/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/about/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/company/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/contact/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/flow/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/ | 95 | 1 |
+| /sites/corporate/b-20260919-0500/model-house/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/news/first-consultation/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/news/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/privacy/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/recruit/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/service/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/works/ | 100 | 0 |
+| /sites/corporate/b-20260919-0500/works/wood-and-plaster/ | 100 | 0 |
 | /sites/corporate/base-20260903-1400/about/ | 100 | 0 |
 | /sites/corporate/base-20260903-1400/contact/ | 100 | 0 |
 | /sites/corporate/base-20260903-1400/ | 98 | 1 |
@@ -32,43 +87,86 @@
 | /sites/corporate/base-20260903-1400/service/ | 100 | 0 |
 | /sites/corporate/ | 100 | 0 |
 
-## /components/ — 100点
+## /compare/20260916-0500/gemini38flash/ — 100点
 
 指摘なし 🎉
+
+## /compare/20260916-0500/gpt56terra/ — 100点
+
+指摘なし 🎉
+
+## /compare/20260916-0500/ — 100点
+
+指摘なし 🎉
+
+## /compare/20260916-0500/maicode/ — 100点
+
+指摘なし 🎉
+
+## /compare/20260916-0500/sonnet5/ — 100点
+
+指摘なし 🎉
+
+## /components/ — 95点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | perf-img-lazy: ファーストビュー以降の img に loading="lazy" が無い | lazy 未指定 2件 / 全10件 |
 
 ## / — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/about/ — 100点
+## /sites/corporate/a-20260920-1616/about/ — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/company/ — 100点
+## /sites/corporate/a-20260920-1616/assets/noxray-company.html — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/contact/ — 100点
+## /sites/corporate/a-20260920-1616/contact/ — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/ — 100点
+## /sites/corporate/a-20260920-1616/download/ — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/news/ — 100点
+## /sites/corporate/a-20260920-1616/ — 93点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | ia-orphan-page: どこからもリンクされていない孤立ページ | 孤立: /news/（グロナビ・フッター・本文のどこからも辿れない） |
+| 🔵 low | ia-recommended-page-missing: サイト種別の推奨ページが欠けている | 推奨ページ欠落: /company/, /recruit/ |
+
+## /sites/corporate/a-20260920-1616/news/ — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/privacy/ — 100点
+## /sites/corporate/a-20260920-1616/privacy/ — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/recruit/ — 100点
+## /sites/corporate/a-20260920-1616/service/ — 98点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🔵 low | a11y-nav-label: 複数の <nav> に aria-label が無い | <nav> が 6 個あるが 1 個に aria-label が無い |
+
+## /sites/corporate/a-20260920-1616/works/brand/ — 100点
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260903-1448/service/ — 100点
+## /sites/corporate/a-20260920-1616/works/campaign/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/works/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260920-1616/works/recruitment/ — 100点
 
 指摘なし 🎉
 
@@ -101,6 +199,196 @@
 指摘なし 🎉
 
 ## /sites/corporate/b-20260903-1448/service/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260915-1151/about/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260915-1151/contact/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260915-1151/ — 98点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🔵 low | ia-recommended-page-missing: サイト種別の推奨ページが欠けている | 推奨ページ欠落: /company/, /recruit/ |
+
+## /sites/corporate/b-20260915-1151/news/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260915-1151/privacy/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260915-1151/service/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260916-0500/about/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260916-0500/company/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260916-0500/contact/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260916-0500/ — 98点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🔵 low | ia-recommended-page-missing: サイト種別の推奨ページが欠けている | 推奨ページ欠落: /recruit/ |
+
+## /sites/corporate/b-20260916-0500/news/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260916-0500/privacy/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260916-0500/service/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/about/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/company/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/contact/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/download/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/faq/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/inspirations/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/news/consultation-guide/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/news/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/news/site-guide/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/news/work-guide/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/privacy/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/projects/editorial/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/projects/exhibition/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/projects/identity/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/projects/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/projects/mark/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/projects/sign/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/recruit/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260918-0500/service/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/about/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/company/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/contact/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/flow/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/ — 95点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | motion-consistency-drift: ページ間でモーションの有無が揃っていない | 演出のあるページ（/about/:4, /:3, /service/:4）と、演出ゼロのページ（/company/, /flow/, /model-house/, /news/first-consultation/, /news/, /privacy/, /recruit/, /works/, /works/wood-and-plaster/）が混在している |
+
+## /sites/corporate/b-20260919-0500/model-house/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/news/first-consultation/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/news/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/privacy/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/recruit/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/service/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/works/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20260919-0500/works/wood-and-plaster/ — 100点
 
 指摘なし 🎉
 

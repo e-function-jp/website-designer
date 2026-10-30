@@ -1,0 +1,137 @@
+---
+/**
+ * SiteEndLinks — 全ページ末尾の大型リンクと主要CTA。
+ *
+ * ディレクションの指示:
+ *   - 全ページ本文直後に共通描画
+ *   - PC は「会社概要」「支援実績」を2列各180px高、下に主要CTAを全幅160px高
+ *   - モバイルは1列、各120px
+ *   - 背景 #F3F5F6、白い1px境界、右下に矢印、文字は主色
+ *   - 現在ページへのタイルは省略し、残るタイルを全幅へ再配置
+ *   - /contact/ のみ主CTAを重複して出さない（フォーム内ボタンを使う）
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Tile {
+  label: string;
+  href: string;
+  /** 省略時は / 扱い（現在のページ判定に使用） */
+  current?: boolean;
+}
+
+interface Props {
+  site: SiteConfig;
+  /** 現在のパス。current と一致するタイルは省略される */
+  currentPath?: string;
+  /** 主要CTAを表示するか。/contact/ で false */
+  showCta?: boolean;
+}
+
+const { site, currentPath = '/', showCta = true } = Astro.props;
+
+const tiles: Tile[] = [
+  { label: '会社概要', href: '/company/' },
+  { label: '支援実績', href: '/case/' },
+];
+const visibleTiles = tiles.filter(
+  (t) => !(currentPath === t.href || (currentPath === '/' && t.href === '/')),
+);
+
+// /contact/ 自体では CTA を重複させない
+const ctaVisible = showCta && currentPath !== '/contact/';
+---
+
+<aside class="sel bg-base-200" aria-label="関連ページとお問い合わせ">
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+    <ul class="sel__tiles">
+      {visibleTiles.map((t) => (
+        <li class="sel__tile-cell">
+          <a href={url(site, t.href)} class="sel__tile">
+            <span class="sel__tile-label">{t.label}</span>
+            <span class="sel__tile-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    {ctaVisible && site.primaryCta && (
+      <a href={url(site, site.primaryCta.href)} class="sel__cta">
+        <span class="sel__cta-label">{site.primaryCta.label}</span>
+        <span class="sel__cta-arrow" aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+</aside>
+
+<style>
+  .sel__tiles {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .sel__tile-cell { width: 100%; }
+  .sel__tile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+    color: var(--color-primary);
+    text-decoration: none;
+    height: 120px;
+    padding: 0 24px;
+    transition: border-color 0.15s ease;
+  }
+  .sel__tile:hover { border-color: var(--color-primary); }
+  .sel__tile-label {
+    font-size: 21px;
+    font-weight: 700;
+  }
+  .sel__tile-arrow {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .sel__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+    text-decoration: none;
+    height: 160px;
+    font-size: 21px;
+    font-weight: 700;
+    transition: background-color 0.15s ease;
+  }
+  .sel__cta:hover { background: var(--color-secondary); }
+  .sel__cta-arrow {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    .sel__tiles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .sel__tile {
+      height: 180px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .sel__tile-label { font-size: 18px; }
+    .sel__cta { font-size: 16px; height: 120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sel__tile, .sel__cta { transition: none; }
+  }
+</style>

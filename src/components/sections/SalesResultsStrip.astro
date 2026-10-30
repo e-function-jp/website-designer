@@ -1,0 +1,136 @@
+---
+/**
+ * SalesResultsStrip — トップの3指標ストリップ。
+ *
+ * ディレクションの指示:
+ *   - 白背景、PC は見出しの下に3列の Stat、境界は縦罫線、目安 520px
+ *   - モバイルは縦3段・横罫線、約 760px
+ *   - 数値の直下に期間と指標を必ず併記
+ *   - カウントアップなし（静止）
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Props {
+  site: SiteConfig;
+  heading: string;
+  body?: string;
+  metrics: { value: string; title: string; period: string }[];
+  detailLink?: { label: string; href: string };
+}
+
+const { site, heading, body, metrics, detailLink } = Astro.props;
+---
+
+<section class="srs bg-base-100">
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+    <ScrollReveal animation="fade-up" duration={site.motion?.durationMs ?? 600}>
+      <SectionTitle title={heading} align="left" class="srs__title" />
+      {body && <p class="srs__intro">{body}</p>}
+    </ScrollReveal>
+    <ul class="srs__list">
+      {metrics.map((m) => (
+        <li class="srs__metric">
+          <div class="srs__num">{m.value}</div>
+          <div class="srs__title">{m.title}</div>
+          <div class="srs__period">{m.period}</div>
+        </li>
+      ))}
+    </ul>
+    {detailLink && (
+      <div class="srs__link-row">
+        <a href={url(site, detailLink.href)} class="srs__detail-link">
+          {detailLink.label}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .srs__title { margin-bottom: 16px; }
+  .srs__intro {
+    font-size: 16px;
+    line-height: 1.85;
+    margin: 0 0 40px;
+    color: var(--color-base-content);
+    max-width: 760px;
+  }
+
+  .srs__list {
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--color-base-300);
+    border-bottom: 1px solid var(--color-base-300);
+  }
+  .srs__metric {
+    padding: 32px 0;
+    text-align: left;
+    border-bottom: 1px solid var(--color-base-300);
+  }
+  .srs__metric:last-child { border-bottom: none; }
+  .srs__num {
+    font-family: "Marcellus", "Times New Roman", serif;
+    font-size: 60px;
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+  .srs__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    margin-bottom: 8px;
+  }
+  .srs__period {
+    font-size: 13px;
+    color: var(--color-base-content);
+    opacity: 0.7;
+  }
+
+  .srs__link-row { text-align: right; }
+  .srs__detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-size: 15px;
+  }
+  .srs__detail-link:hover {
+    color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .srs__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .srs__metric {
+      padding: 24px 32px;
+      border-bottom: none;
+      border-right: 1px solid var(--color-base-300);
+    }
+    .srs__metric:last-child { border-right: none; }
+    .srs__num { font-size: 80px; }
+  }
+
+  @media (max-width: 767px) {
+    .srs__num { font-size: 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .srs__detail-link { transition: none; }
+  }
+</style>

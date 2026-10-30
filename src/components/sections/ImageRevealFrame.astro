@@ -1,0 +1,25 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import GsapScrollSection from '../animations/GsapScrollSection.astro';
+
+interface Props { src: string; alt: string; width?: number; height?: number; class?: string; parallax?: boolean; priority?: boolean; }
+const { src, alt, width = 1600, height = 1000, class: className = '', parallax = false, priority = false } = Astro.props;
+---
+<ScrollReveal animation="clip-up" duration={300} class={`image-reveal ${className}`}>
+  <div class="image-reveal__mask">
+    {parallax ? (
+      <GsapScrollSection animation="parallax" start="top center" end="bottom center" y={-100} fallback="none">
+        <img data-gsap-parallax-target src={src} alt={alt} width={width} height={height} loading={priority ? 'eager' : 'lazy'} />
+      </GsapScrollSection>
+    ) : <img src={src} alt={alt} width={width} height={height} loading={priority ? 'eager' : 'lazy'} />}
+    <span class="image-reveal__overlay" aria-hidden="true"></span>
+  </div>
+</ScrollReveal>
+<style>
+  .image-reveal, .image-reveal__mask { display:block; width:100%; height:100%; overflow:hidden; }
+  img { display:block; width:100%; height:100%; object-fit:cover; }
+  .image-reveal__overlay { position:absolute; inset:0; background:#f7f0e6; animation:image-reveal-overlay 2000ms ease-in-out 250ms forwards; pointer-events:none; }
+  .image-reveal__mask { position:relative; }
+  @keyframes image-reveal-overlay { to { transform:translateY(-101%); } }
+  @media (prefers-reduced-motion: reduce) { .image-reveal__overlay { display:none; } }
+</style>

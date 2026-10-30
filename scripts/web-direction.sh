@@ -3,7 +3,8 @@
 #
 # 使い方:
 #   bash scripts/web-direction.sh <run_dir> <variant> [<brand_hint>]
-#     variant: a=堅実路線 / b=冒険路線
+#     variant: a=たたき台（このランの唯一のディレクション）
+#              b は使わない。提出版は a のディレクションを採点の指摘で直す。
 # 出力: <run_dir>/direction-{variant}.html
 set -euo pipefail
 
@@ -35,9 +36,19 @@ REQUIRED="$(python3 -c "import json;print(', '.join(json.load(open('$JOB')).get(
 RECOMMENDED="$(python3 -c "import json;print(', '.join(json.load(open('$JOB')).get('recommended_pages',[])))")"
 SITE_BASE="/sites/${SITE_TYPE}/${VARIANT}-${STAMP}/"
 
+# 2案（堅実 / 冒険）を並べる方式はやめた（2026-09-18）。3ランの採点で
+# 堅実側の講評に出続けた弱点は「参照の構造は写すが、写真サイズ・余白・密度の
+# *変化* を写さず、均等な一覧に均してしまう」であり、冒険側の弱点は
+# 「整っているが参照から離れ、一般的な会社サイトに寄る」だった。
+# どちらか一方を選ぶのではなく、両方の講評をこの1本の指示に畳んである。
 case "$VARIANT" in
-  a) VARIANT_HINT="この案は**堅実路線**。参照サイトの情報設計を素直に踏襲し、網羅性と可読性を優先する。奇をてらわず、迷ったら参照に寄せる。モーションも参照の実測値どおりに。" ;;
-  b) VARIANT_HINT="この案は**冒険路線**。参照サイトの世界観と情報設計の骨格は保ちつつ、トップの構図・余白の取り方・写真の見せ方・モーションの組み立てで踏み込む。ただし必須ページ・a11y・reduced-motion 対応は崩さない。" ;;
+  a|b) VARIANT_HINT="このランのディレクションは**1本**。後でこの指示どおりのたたき台を作り、独立の審査員に採点させ、その指摘を直したものを提出版にする。だから**実装できる粒度で具体的に**書くこと。
+方針:
+- 情報設計は参照サイトを踏襲する。ページの粒度・回遊の作り・下層の厚みまで写す。
+- **参照の「変化」も写す。** 写真のサイズ差、セクションごとの余白の広狭、密度の緩急を、均等な一覧に均さない。ここを均すと講評で必ず『単調な一覧に置き換えている』と減点される。
+- 視覚システム（配色・書体階層・余白の単位）は自分で決めて全ページで一貫させる。参照の色をそのまま拾うことより、サイト内で揃っていることを優先する。
+- 装飾的な英語小見出しを日本語見出しと重ねない。
+- モーションは参照の実測値どおり。必須ページ・a11y・reduced-motion 対応は崩さない。" ;;
   *) echo "variant は a か b" >&2; exit 2 ;;
 esac
 
@@ -185,6 +196,8 @@ if codex_pos:
     body = text[last + len('codex'):end].strip()
 else:
     body = text.strip()
+# codex のフック（SessionStart/Stop 等）の進行行が回答の直後に挟まるので除く。
+body = re.sub(r'^hook: .*\n?', '', body, flags=re.M).strip()
 m = re.search(r'```html\s*\n(.*?)\n```', body, re.S)
 if m:
     body = m.group(1).strip()

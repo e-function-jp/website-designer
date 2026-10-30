@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import ShirosumiHero from '../../../../../components/sections/ShirosumiHero.astro'; import CounselingBand from '../../../../../components/sections/CounselingBand.astro'; import Alert from '../../../../../components/data-display/Alert.astro'; import TextInput from '../../../../../components/navigation/TextInput.astro'; import Textarea from '../../../../../components/navigation/Textarea.astro'; import Select from '../../../../../components/navigation/Select.astro';
+const img='/sites/corporate/_shared/20260926-0500/';
+---
+<SiteLayout site={site} title="カウンセリング予約" description="白澄メディウェルのカウンセリング予約フォームです。方針の説明から始め、入力内容はサンプル環境では送信されません。" path="/contact/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'カウンセリング予約'}]}>
+<ShirosumiHero title="カウンセリング予約" lead="方針の説明から。施術の強制はありません。" image={`${img}img-a-01.jpg`} imageAlt="頬に手を添える女性" />
+<section class="sample-note"><Alert status="warning">このサイトは架空企業のサンプルです。入力内容は送信されず、予約は成立しません。</Alert></section>
+<section class="prepare"><h2>送信前の整理</h2><ul><li>希望の時間帯（第希望・第2希望）</li><li>気になる部位や体調</li><li>採用問い合わせの場合はその旨</li></ul></section>
+<section id="form" class="form-section"><h2>入力フォーム</h2><form data-contact-form novalidate><label>お名前 <span>必須</span><TextInput name="name" /></label><label>ふりがな<TextInput name="kana" /></label><label>メール <span>必須</span><TextInput type="email" name="email" /></label><label>電話（任意・送信されません）<TextInput type="tel" name="tel" /></label><label>希望連絡方法<select name="method"><option>メール</option><option>電話</option></select></label><label>問い合わせ種別<select name="type"><option>カウンセリング</option><option>採用</option><option>その他</option></select></label><label>希望日時（第1）<TextInput name="date1" /></label><label>希望日時（第2）<TextInput name="date2" /></label><label>自由記述<Textarea name="message" /></label><p class="error" hidden>お名前とメールの必須項目を入力してください。</p><button class="btn btn-primary" type="submit">入力内容を確認する</button></form></section>
+<section id="confirmation" class="confirmation" hidden><h2>確認</h2><dl data-confirmation></dl><Alert status="warning">送信先未提供のため、確定予約にはなりません。</Alert><button type="button" class="btn" data-edit>修正する</button><button type="button" class="btn btn-primary" data-complete>サンプルとして完了画面へ</button><p data-complete-message hidden>サンプルとして確認を完了しました。入力内容は保存・送信されていません。</p></section>
+<section class="notes"><p><a href="/sites/corporate/a-20260926-0500/privacy/">個人情報の取り扱い ↗</a> <a href="/sites/corporate/a-20260926-0500/news/first-visit/">はじめての方へ ↗</a></p></section><CounselingBand contact />
+</SiteLayout>
+<style>section{padding:clamp(56px,8vw,100px) 20px}h2{font-size:clamp(34px,4vw,50px);font-weight:500}.sample-note,.prepare,.form-section,.confirmation,.notes{width:min(560px,100%);margin:auto}.prepare{background:#f7f0e6;width:100%;padding-inline:max(20px,calc((100% - 560px)/2))}.prepare li{margin:12px 0;line-height:1.9}.form-section form{display:grid;gap:24px}.form-section label{display:grid;gap:8px;font-size:15px}.form-section label span{color:#7c3025;font-size:13px}.form-section :global(input),.form-section :global(textarea),.form-section select{width:100%;border-color:#a89078;border-radius:0}.form-section :global(textarea){min-height:140px}.form-section .btn,.confirmation .btn{border-radius:999px;width:max-content}.error{margin:0;color:#7c3025}.confirmation dl{margin:24px 0}.confirmation dt{margin-top:16px;font-weight:700}.confirmation dd{margin:4px 0;white-space:pre-wrap}.notes a{margin-right:24px;color:inherit;text-underline-offset:6px}</style>
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const confirmation = document.querySelector<HTMLElement>('#confirmation');
+  const error = form?.querySelector<HTMLElement>('.error');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    if (!String(data.get('name') || '').trim() || !String(data.get('email') || '').trim()) { if (error) error.hidden = false; return; }
+    if (error) error.hidden = true;
+    const list = confirmation?.querySelector('dl');
+    if (list) list.innerHTML = [...data.entries()].map(([key, value]) => `<dt>${key}</dt><dd>${String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;')}</dd>`).join('');
+    form.closest<HTMLElement>('.form-section')!.hidden = true; confirmation!.hidden = false; confirmation!.scrollIntoView({ behavior: 'smooth' });
+  });
+  document.querySelector('[data-edit]')?.addEventListener('click', () => { confirmation!.hidden = true; form!.closest<HTMLElement>('.form-section')!.hidden = false; });
+  document.querySelector('[data-complete]')?.addEventListener('click', () => { const message = document.querySelector<HTMLElement>('[data-complete-message]'); if (message) message.hidden = false; });
+</script>

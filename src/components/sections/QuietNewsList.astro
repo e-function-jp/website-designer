@@ -1,0 +1,20 @@
+---
+import { url, type SiteConfig } from '../../lib/site';
+interface Item { title: string; body?: string; href: string; image?: string; alt?: string; }
+interface Props { site: SiteConfig; items: Item[]; }
+const { site, items } = Astro.props;
+---
+<div class="quiet-news-list">
+  {items.map((item) => <article>
+    {item.image && <img src={item.image} alt={item.alt ?? ''} width="2400" height="1600" loading="lazy" />}
+    <div><h3><a href={url(site, item.href)}>{item.title}</a></h3>{item.body && <p>{item.body}</p>}</div>
+  </article>)}
+</div>
+<style>
+  .quiet-news-list { border-top:1px solid var(--color-base-300); }
+  article { display:grid; gap:24px; padding:28px 0; border-bottom:1px solid var(--color-base-300); }
+  img { width:100%; height:200px; object-fit:cover; }
+  h3 { margin:0; font-size:20px; font-weight:500; } h3 a { color:inherit; text-underline-offset:6px; }
+  p { margin:12px 0 0; font-size:16px; line-height:1.9; }
+  @media(min-width:768px) { article { grid-template-columns:240px 1fr; align-items:center; } }
+</style>

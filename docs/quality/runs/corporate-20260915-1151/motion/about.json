@@ -1,0 +1,145 @@
+{
+  "url": "https://yaizu-ortho.com/about/",
+  "slug": "about",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260915-1151/motion/about-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260915-1151/motion/about-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://yaizu-ortho.com/",
+      "label": "top\n\t\t\t\t\t\tトップページ"
+    },
+    {
+      "href": "https://yaizu-ortho.com/about/",
+      "label": "about us\n\t\t\t\t\t\t当院について"
+    },
+    {
+      "href": "https://yaizu-ortho.com/new-patients/",
+      "label": "new patients guide\n\t\t\t\t\t\tはじめての"
+    },
+    {
+      "href": "https://yaizu-ortho.com/adult_orthodontics/",
+      "label": "大人の矯正"
+    },
+    {
+      "href": "https://yaizu-ortho.com/child_orthodontics/",
+      "label": "子どもの矯正"
+    },
+    {
+      "href": "https://yaizu-ortho.com/whitening/",
+      "label": "ホワイトニング"
+    },
+    {
+      "href": "https://yaizu-ortho.com/#news",
+      "label": "news\n\t\t\t\t\t\tお知らせ"
+    },
+    {
+      "href": "https://reserva.be/yaizu/aikotoba",
+      "label": "24時間Web予約"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "js-header l-header is-shown is-mv",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, -80)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.48s, 0.48s",
+        "delay": "0s, 0s",
+        "timing": "ease, ease"
+      },
+      "textSnippet": "静岡県焼津市の矯正歯科｜2025年10月open\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t"
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": null,
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "当院について｜焼津市の矯正専門歯科【やいづ原崎矯正歯科】｜子どもの矯正・ワイヤー矯正・マウスピース矯正",
+    "h1": "当院について",
+    "totalHeight": 13705,
+    "viewportsTall": 15.2,
+    "sectionCount": 20,
+    "imgCount": 30,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 12805,
+  "css": {
+    "keyframes": 1,
+    "transitionRules": 45,
+    "animationRules": 1,
+    "keyframeNames": [
+      "splide-loading"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 80,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "js-header l-header is-shown"
+    },
+    "scrolled": {
+      "height": 80,
+      "top": -80,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "js-header l-header"
+    },
+    "shrinks": false,
+    "hides": true,
+    "changesBackground": false,
+    "togglesClass": true
+  },
+  "probedBefore": 567,
+  "revealSummary": {
+    "total": 0,
+    "scrollLinkedCount": 1,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade",
+    "designedRevealCount": 0,
+    "durationMs": null,
+    "easings": []
+  }
+}

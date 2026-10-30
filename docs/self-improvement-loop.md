@@ -64,7 +64,7 @@ website の品質は 1 ページを見ても決まらない。実際に起きる
 
 `arch-site-config-missing` は「この構造から外れて手書きしていないか」を見る番人である。
 
-## ループ B — 参照学習 + 2案検証
+## ループ B — 参照学習 + たたき台改善
 
 詳細正本: [learning-pipeline.md](./learning-pipeline.md)
 
@@ -72,9 +72,12 @@ website の品質は 1 ページを見ても決まらない。実際に起きる
 参照サイト選定（site_archive）
   → Look: トップ+下層2ページをキャプチャし、IAとトーンを言語化
   → Direction: サイトマップ・各ページ構成・トーン・コンポーネント選定を direction.html に確定
-  → Fix×2: 堅実案(a) / 冒険案(b) を実装
+  → Draft: たたき台(a) を実装
+  → Judge: web-design-score --stage draft（独立judge）で「直す材料」を出す
+  → Submit: 提出版(b) を実装。同じディレクション + 上の指摘を1件ずつ潰す
+  → たたき台は破棄（成果物は提出版1サイト）
   → Measure: web-design-score（独立judge・複数ページ）+ check:web
-  → Extract: 両案から再利用ブロックを src/components/ へ
+  → Extract: 提出版から再利用ブロックを src/components/ へ
 ```
 
 ### いつ回すか

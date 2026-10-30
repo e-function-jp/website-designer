@@ -39,12 +39,12 @@ npm run check:web         # 採点 → docs/quality/latest.md
 npm run check:web:strict  # 前回より下がったら exit 1
 ```
 
-### ループB — 参照学習 + 2案検証
+### ループB — 参照学習 + たたき台改善
 
 ```bash
 npm run archive:fetch -- --pages 5 --all-types    # 参照サイト収集（muuuuu.org）
 npm run next:run                       # 次のサイト種別を選びランを開く
-bash scripts/web-run.sh docs/quality/runs/{run_id}   # モーション実測→Look→Direction→画像→実装→採点
+bash scripts/web-run.sh docs/quality/runs/{run_id}   # モーション実測→Look→Direction→画像→たたき台→採点→提出版→採点
 ```
 
 実行体制: モーション実測=Playwright / Look=codex / ディレクション・画像=grok / 実装=minimax-m3。

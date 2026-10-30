@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro'; import { site } from '../../_site'; import AogamiEditorialPage from '../../../../../../components/sections/AogamiEditorialPage.astro';
+import ScrollReveal from '../../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="ロゴの設計" description="小さな表示から背景色の違いまで、ロゴの形と余白を確かめる蒼紙舎の制作例をご紹介します。" path="/projects/mark/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'制作実績・制作例',href:'/projects/'},{label:'ロゴの設計'}]}><ScrollReveal animation="fade-up" duration={1000}><AogamiEditorialPage site={site} title="ロゴの設計" intro="担当領域：ロゴ・グラフィック。ロゴは、大きく見せるときだけでなく、小さく印刷するときや、背景色が変わるときにも使われます。実在の企業のロゴではなく、設計の考え方を伝えるための制作例です。" sections={[{label:'小さな形を、細かく確かめる',heading:'輪郭と余白を確かめる',text:'形の特徴がどこにあるかを整理し、線や面が詰まりすぎない関係をつくります。周囲の文字や図形と距離を取るための空間も設計の対象です。白地と濃色地、掲示と小さな印刷物で同じ形として認識できるかを見比べます。'}]} related={[{title:'企業の視覚統一',text:'複数の接点への展開を見る。',href:'/projects/identity/'},{title:'制作相談を申し込む',text:'ロゴの設計について相談する。',href:'/contact/'}]} /></ScrollReveal></SiteLayout>

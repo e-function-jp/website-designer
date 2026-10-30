@@ -1,0 +1,26 @@
+---
+import type { SiteConfig } from '../../lib/site';
+import KabukidoContentPage from './KabukidoContentPage.astro';
+interface Props {
+  site: SiteConfig;
+  title: string;
+  lead: string;
+  image: string;
+  imageAlt: string;
+  first: string;
+  second: string;
+  third: string;
+  linkLabel: string;
+  linkHref: string;
+  phases?: { number:string; title:string; body:string }[];
+  sectionAnimations?: Record<number, { target: 'heading' | 'image' }>;
+  phaseHeadingAnimation?: boolean;
+}
+const { site, title, lead, image, imageAlt, first, second, third, linkLabel, linkHref, phases, sectionAnimations, phaseHeadingAnimation } = Astro.props;
+const sections = [
+  { heading:first, body:lead, image, alt:imageAlt },
+  { heading:second, body:`${lead} ${second}について、今わかっていることと、これから確かめたいことを分けながら進めます。一つの答えを急がず、暮らしの中で大切にしたいことを手がかりに整理してください。`, image:'/sites/corporate/_shared/20260919-0500/img-a-03.jpg', alt:'左官壁の設計イメージ' },
+  { heading:third, body:`${third}。このサイトでは、未提供の費用、工期、所在地、開催日時や条件を定めず、計画ごとに確認する項目として扱います。気になることを短い言葉で書き留め、次の検討へ進めてください。`, image:'/sites/corporate/_shared/20260919-0500/img-a-06.jpg', alt:'手仕事の設計イメージ', link:{label:linkLabel,href:linkHref} },
+];
+---
+<KabukidoContentPage site={site} title={title} lead={lead} sections={sections} phases={phases} collage sectionAnimations={sectionAnimations} phaseHeadingAnimation={phaseHeadingAnimation} />

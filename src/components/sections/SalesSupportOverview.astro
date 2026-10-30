@@ -1,0 +1,176 @@
+---
+/**
+ * SalesSupportOverview — トップの営業変革プログラムへの入口セクション。
+ *
+ * ディレクションの指示:
+ *   - 白背景、PC 760px / モバイル 980px
+ *   - 上に見出しと導入文、下に同幅3列の番号付き項目
+ *   - 各項目は上罫線・見出し・本文
+ *   - 最下部に「組織診断 → プレイブック整備 → 現場定着」の図を1列表示
+ *   - モバイルは項目も図も縦方向
+ *   - 図の直後に詳細リンク
+ */
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+interface Props {
+  site: SiteConfig;
+  heading: string;
+  intro: string;
+  items: { number: string; title: string; body: string }[];
+  figureCaption?: string;
+  detailLink?: { label: string; href: string };
+}
+
+const { site, heading, intro, items, figureCaption, detailLink } = Astro.props;
+---
+
+<section class="sso bg-base-100">
+  <div class="max-w-[760px] lg:max-w-[760px] mx-auto px-5 lg:px-0 py-16 lg:py-24">
+    <ScrollReveal animation="fade-up" duration={site.motion?.durationMs ?? 600}>
+      <SectionTitle title={heading} subtitle="" align="left" class="sso__title" />
+      <p class="sso__intro">{intro}</p>
+    </ScrollReveal>
+
+    <ul class="sso__list">
+      {items.map((it) => (
+        <li class="sso__item">
+          <ScrollReveal animation="fade-up" duration={site.motion?.durationMs ?? 600}>
+            <div class="sso__num">{it.number}</div>
+            <h3 class="sso__item-title">{it.title}</h3>
+            <p class="sso__item-body">{it.body}</p>
+          </ScrollReveal>
+        </li>
+      ))}
+    </ul>
+
+    <div class="sso__figure" aria-label={figureCaption ?? '組織診断から現場定着まで'}>
+      <ol class="sso__flow">
+        <li class="sso__step">組織診断</li>
+        <li class="sso__arrow" aria-hidden="true">→</li>
+        <li class="sso__step">プレイブック整備</li>
+        <li class="sso__arrow" aria-hidden="true">→</li>
+        <li class="sso__step">現場定着</li>
+      </ol>
+      {figureCaption && <p class="sso__figure-caption">{figureCaption}</p>}
+    </div>
+
+    {detailLink && (
+      <div class="sso__link-row">
+        <a href={url(site, detailLink.href)} class="sso__detail-link">
+          {detailLink.label}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .sso__title { margin-bottom: 16px; }
+  .sso__intro {
+    font-size: 16px;
+    line-height: 1.85;
+    margin-bottom: 48px;
+    color: var(--color-base-content);
+  }
+  .sso__list {
+    list-style: none;
+    margin: 0 0 48px;
+    padding: 0;
+  }
+  .sso__item {
+    border-top: 1px solid var(--color-base-300);
+    padding: 24px 0 32px;
+  }
+  .sso__num {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .sso__item-title {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--color-base-content);
+  }
+  .sso__item-body {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    margin: 0;
+  }
+
+  .sso__figure {
+    border-top: 1px solid var(--color-base-300);
+    padding-top: 32px;
+    margin-bottom: 32px;
+  }
+  .sso__flow {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+  }
+  .sso__step {
+    background: var(--color-base-200);
+    color: var(--color-primary);
+    padding: 16px 24px;
+    font-weight: 700;
+    text-align: center;
+    font-size: 15px;
+  }
+  .sso__arrow {
+    color: var(--color-secondary);
+    font-weight: 700;
+    text-align: center;
+    font-size: 18px;
+  }
+  .sso__figure-caption {
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-base-content);
+    opacity: 0.65;
+    margin: 0;
+  }
+
+  .sso__link-row {
+    text-align: right;
+  }
+  .sso__detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-size: 15px;
+  }
+  .sso__detail-link:hover {
+    color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .sso__flow {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .sso__step { flex: 1; }
+    .sso__arrow { flex: 0 0 auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sso__detail-link, .sso__step { transition: none; }
+  }
+</style>

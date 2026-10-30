@@ -1,0 +1,5 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro'; import { site } from '../../_site'; import AogamiEditorialPage from '../../../../../../components/sections/AogamiEditorialPage.astro';
+import ScrollReveal from '../../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="冊子の情報設計" description="表紙から本文までの読む順序を、紙面と余白の関係から整える蒼紙舎の制作例をご紹介します。" path="/projects/editorial/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'制作実績・制作例',href:'/projects/'},{label:'冊子の情報設計'}]}><ScrollReveal animation="fade-up" duration={1000}><AogamiEditorialPage site={site} title="冊子の情報設計" intro="担当領域：印刷物・グラフィック。冊子は、表紙を見て、ページを開き、見出しを追いながら読み進める媒体です。実在の刊行物ではなく、紙面設計を説明するための制作例です。" sections={[{label:'読む速さを整える',heading:'入口と構造をつくる',text:'表紙では情報を絞り、冊子が何を伝えるものかを示します。目次や見出しの位置を揃えることで、読みたい情報へ戻りやすくします。紙の厚み、綴じる位置、実際の大きさを踏まえ、読む体験を確かめます。'}]} related={[{title:'展示の体験設計',text:'紙面と展示空間の関係を見る。',href:'/projects/exhibition/'},{title:'制作相談を申し込む',text:'印刷物について相談する。',href:'/contact/'}]} /></ScrollReveal></SiteLayout>

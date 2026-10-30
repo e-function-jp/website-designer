@@ -1,0 +1,202 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../../components/ui/SectionTitle.astro';
+import Table from '../../../../../components/data-display/Table.astro';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import FieldWindow from '../../../../../components/sections/FieldWindow.astro';
+import NextPageLinks from '../../../../../components/site/NextPageLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260916-0500';
+
+const aboutWorkImage = {
+  src: `${SHARED}/img-b-02.jpg`,
+  alt: '資料を広げた仕事場での検討風景',
+};
+
+const profile: [string, string][] = [
+  ['商号', '軌道セールス設計株式会社'],
+  ['よみ', 'きどうせーるすせっけい'],
+  ['設立', '2016年'],
+  ['従業員数', '48名'],
+  ['所在地', '東京都港区'],
+  ['業種', 'BtoB営業支援・営業組織コンサルティング'],
+  ['事業内容', '中堅製造業とSaaS企業向けに、商談設計・パイプライン可視化・現場定着までを一体で支援する営業変革プログラムを提供する。伴走型の組織診断とプレイブック整備を軸に、再現性のある受注プロセスを構築する。'],
+];
+---
+
+<SiteLayout
+  site={site}
+  title="会社概要"
+  description="軌道セールス設計株式会社の会社概要。2016年設立、48名、東京都港区。BtoB営業支援・営業組織コンサルティングの軌道セールス設計です。"
+  path="/company/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: '会社概要' }]}
+>
+  <!-- 01 会社の輪郭（共通PageIntro） -->
+  <PageIntro
+    title="会社概要"
+    description="軌道セールス設計株式会社は、東京都港区に所在するBtoB営業支援・営業組織コンサルティング会社です。設立は2016年、従業員数は48名。中堅製造業とSaaS企業に向けて、再現性のある受注プロセスの構築を支援しています。"
+  />
+
+  <!-- 02 法人情報 -->
+  <section class="profile bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="profile__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-3">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <p class="profile__num" aria-hidden="true">02</p>
+            <SectionTitle title="基本情報。" align="left" class="profile__title" />
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-9">
+          <div class="profile__table-wrap">
+            <Table class="profile__table">
+              <tbody>
+                {profile.map(([k, v]) => (
+                  <tr>
+                    <th scope="row" class="profile__th">{k}</th>
+                    <td class="profile__td">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 事業と支援対象（白背景・左写真・右本文） -->
+  <section class="business bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="business__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <figure class="business__photo lg:col-span-6">
+          <img
+            src={aboutWorkImage.src}
+            alt={aboutWorkImage.alt}
+            loading="lazy"
+            width="1600"
+            height="1067"
+            class="business__img aspect-[3/2]"
+          />
+          <figcaption class="business__caption">支援場面のイメージ。画像は所在地や実際のオフィスを示すものではない。</figcaption>
+        </figure>
+        <div class="business__body lg:col-span-6">
+          <p class="business__num" aria-hidden="true">03</p>
+          <h2 class="business__heading">受注の型を、現場に残す。</h2>
+          <div class="business__text">
+            <p>私たちの事業は、営業組織の変革を支援することです。中堅製造業とSaaS企業を対象に、商談設計・パイプライン可視化・現場定着をつなぎます。</p>
+            <p>営業責任者・経営企画・事業責任者の皆さまが、営業組織の現状と今後の進め方を考える際に、組織診断とプレイブック整備を軸とする支援を提供します。</p>
+            <p>法人の基本情報を確認された後は、営業変革プログラムで支援内容を、私たちの営業設計で考え方をご覧いただけます。</p>
+          </div>
+          <p class="business__link-row">
+            <a href={url(site, '/service/')} class="business__link">
+              支援内容を見る
+              <span aria-hidden="true">→</span>
+            </a>
+            <a href={url(site, '/about/')} class="business__link">
+              支援の考え方を見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <NextPageLinks site={site} currentPath="/company/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .profile__num,
+  .business__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+  }
+  .profile__title { margin: 0; }
+  .profile__table {
+    width: 100%;
+    border-top: 1px solid var(--color-base-300);
+    border-bottom: 1px solid var(--color-base-300);
+  }
+  .profile__th {
+    width: 200px;
+    background: var(--color-base-200);
+    font-weight: 700;
+    color: var(--color-primary);
+    vertical-align: top;
+    white-space: nowrap;
+    padding: 16px 20px;
+  }
+  .profile__td {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--color-base-content);
+    vertical-align: top;
+    padding: 16px 20px;
+  }
+  @media (max-width: 767px) {
+    .profile__th { width: 120px; }
+  }
+
+  .business__photo { margin: 0; }
+  .business__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background: var(--color-base-300);
+    display: block;
+  }
+  .business__caption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-base-content);
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+  .business__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 24px;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .business__text p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 24px;
+    color: var(--color-base-content);
+  }
+  .business__text p:last-child { margin-bottom: 0; }
+  .business__link-row {
+    margin: 24px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .business__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 4px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .business__link:hover { color: var(--color-secondary); border-color: var(--color-secondary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .business__link { transition: none; }
+  }
+</style>

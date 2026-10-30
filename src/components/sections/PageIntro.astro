@@ -1,0 +1,85 @@
+---
+/**
+ * PageIntro — 下層ページ共通タイトル帯。
+ *
+ * ディレクション指示 (direction-b):
+ *   - 白背景、PC は上144pxからパンくず、h1、説明文の順で、帯全体約360px
+ *   - モバイルは上108pxから開始、約280〜360px
+ *   - 左寄せ。タイトル右端に章番号と短い縦線
+ *   - 写真背景は使わない
+ *   - h1 + 説明 + （任意で補足スロット）
+ */
+interface Props {
+  title: string;
+  /** 説明文 */
+  description: string;
+  /** 章番号（タイトル右端に縦線で表示） */
+  sectionNumber?: string;
+  /** 補足スロット（Badgeや説明など） */
+}
+
+  const { title, description, sectionNumber } = Astro.props;
+---
+
+<section class="pi bg-base-100">
+  <div class="max-w-[1140px] mx-auto px-5 lg:px-10 pt-[108px] lg:pt-[144px] pb-12 lg:pb-16 min-h-[280px] lg:min-h-[360px] flex flex-col justify-center">
+    <div class="pi__row flex items-start gap-6">
+      <h1 class="pi__title flex-1">
+        {title}
+      </h1>
+      {sectionNumber && (
+        <div class="pi__num-col" aria-hidden="true">
+          <span class="pi__num-bar"></span>
+          <span class="pi__num">{sectionNumber}</span>
+        </div>
+      )}
+    </div>
+    <p class="pi__desc">{description}</p>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .pi__title {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    margin: 0;
+  }
+  .pi__desc {
+    margin: 24px 0 0;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--color-base-content);
+    max-width: 760px;
+  }
+  .pi__num-col {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    padding-top: 12px;
+  }
+  .pi__num-bar {
+    display: block;
+    width: 1px;
+    height: 28px;
+    background: var(--color-primary);
+  }
+  .pi__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+  }
+
+  @media (min-width: 768px) {
+    .pi__title { font-size: 64px; }
+    .pi__num-bar { height: 36px; }
+  }
+  @media (max-width: 380px) {
+    .pi__title { font-size: 32px; }
+  }
+</style>

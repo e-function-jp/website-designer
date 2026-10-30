@@ -1,0 +1,848 @@
+{
+  "url": "https://contenna.net/about/",
+  "slug": "about",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260920-1616/motion/about-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260920-1616/motion/about-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://contenna.net/",
+      "label": "トップページ"
+    },
+    {
+      "href": "https://contenna.net/about/",
+      "label": "私たちについて"
+    },
+    {
+      "href": "https://contenna.net/service/",
+      "label": "サービス"
+    },
+    {
+      "href": "https://contenna.net/works/",
+      "label": "実績紹介"
+    },
+    {
+      "href": "https://marketing.contenna.jp/",
+      "label": "コラム"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineVertical-module-scss-module__xwo0Bq__lineVertical",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 0, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "VALUE"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h3",
+      "baseClass": "Value-module-scss-module__J2GqWa__itemHeading",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "創造性CREATIVE"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Value-module-scss-module__J2GqWa__itemText",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "「デザイン性」と「機能性」を兼ね備え、伝えるべき価値を引き出すクリエイティブを実"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "img",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "h3",
+      "baseClass": "Value-module-scss-module__J2GqWa__itemHeading",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "新しい基準NEW STANDARD"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "LineHorizontal-module-scss-module__hzhntG__lineHorizontal",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(0, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "transform",
+        "duration": "2.4s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "Value-module-scss-module__J2GqWa__itemText",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "受託制作から自社プロダクト開発へ。常に時代の一歩先を見据え、未来の「あたりまえ」"
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": null,
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "私たちについて | 株式会社コンテナ：CONTENNA.co.ltd",
+    "h1": "ABOUT USABOUT USABOUT US",
+    "totalHeight": 7695,
+    "viewportsTall": 8.6,
+    "sectionCount": 8,
+    "imgCount": 7,
+    "videoCount": 1,
+    "canvasCount": 1
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 6795,
+  "css": {
+    "keyframes": 8,
+    "transitionRules": 34,
+    "animationRules": 8,
+    "keyframeNames": [
+      "splide-loading",
+      "Advantage-module-scss-module__RCRFrW__infiniteScroll",
+      "WorksContent-module-scss-module__WzkYKa__worksResultsFadeIn",
+      "WorksContent-module-scss-module__WzkYKa__worksSpinnerRotate",
+      "Header-module-scss-module__t7BEda__dialogFadeIn",
+      "Header-module-scss-module__t7BEda__dialogBackdropFadeIn",
+      "Header-module-scss-module__t7BEda__dialogFadeOut",
+      "Header-module-scss-module__t7BEda__dialogBackdropFadeOut"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 100,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "Header-module-scss-module__t7BEda__header"
+    },
+    "scrolled": {
+      "height": 70,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "Header-module-scss-module__t7BEda__header"
+    },
+    "shrinks": true,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 571,
+  "revealSummary": {
+    "total": 110,
+    "scrollLinkedCount": 0,
+    "kinds": {
+      "fade": 9,
+      "fade-up": 9,
+      "fade-side": 2,
+      "zoom": 59,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 31
+    },
+    "dominantKind": "zoom",
+    "designedRevealCount": 110,
+    "durationMs": {
+      "min": 820,
+      "median": 2400,
+      "max": 2400
+    },
+    "easings": [
+      "ease",
+      "cubic-bezier(0.22, 1, 0.36, 1)"
+    ]
+  }
+}

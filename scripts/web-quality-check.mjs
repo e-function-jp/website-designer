@@ -18,7 +18,7 @@
  *   node scripts/web-quality-check.mjs --strict   # スコアが前回より低下したら exit 1
  */
 import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync, existsSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, dirname } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const DIST = join(ROOT, 'dist');
@@ -353,10 +353,17 @@ const PAGE_RULES = [
       const imported = [...p.srcCode.matchAll(/^\s*import\s+(\w+)\s+from\s+['"]([^'"]+)['"]/gm)]
         .filter(([, name, spec]) => ANIM_COMPONENT_RE.test(name) || ANIM_COMPONENT_RE.test(spec))
         .map(([, name]) => name);
+      // 演出を共有部品の中に持たせ、ページはその部品を呼ぶだけ、という形もある
+      // （実測 2026-09-19: KabukidoContentPage 等が内部で ScrollReveal を使い、
+      // 9ページが「演出なし」と誤判定された。実際には各ページ 11〜14 箇所出ている）。
+      // ページ直下の import だけを見ると、束ねるほど検出できなくなるので、
+      // 到達できる部品までたどって判定する。
+      const delegatedReveal = [...collectComponentsDeep(p.srcCode)]
+        .some((rel) => ANIM_COMPONENT_RE.test(rel) || ANIM_COMPONENT_RE.test(readComponent(rel) ?? ''));
       const handRolled = /<style[^>]*>[\s\S]*?(@keyframes|animation\s*:|transition\s*:)/.test(p.srcCode);
 
-      if (!imported.length && !handRolled) {
-        return [`direction に animation 指示が ${directives.length} 件あるが、アニメーションコンポーネントの import も自前 CSS も無い`];
+      if (!imported.length && !delegatedReveal && !handRolled) {
+        return [`direction に animation 指示が ${directives.length} 件あるが、アニメーションコンポーネントの import も、部品経由の演出も、自前 CSS も無い`];
       }
       // import しただけで使っていないもの（lp-designer で実際に起きた）
       const unused = imported.filter((name) => !new RegExp(`<${name}[\\s/>]`).test(p.srcCode));
@@ -364,6 +371,62 @@ const PAGE_RULES = [
         return [`import しているが一度も使われていないアニメーションコンポーネント: ${unused.join(', ')}（direction の指示は ${directives.length} 件）`];
       }
       return [];
+    },
+  },
+  {
+    // 見出しや本文が空のまま出荷される事故を拾う。
+    // .astro のテンプレートはビルド時に型検査されないので、部品へ渡す値の形が
+    // 違っても素通りする。実測 2026-09-18: NumberedPrinciples が
+    // items: {title,text}[] を期待しているのに [title,text][] を渡しており、
+    // item.title / item.text が undefined になって番号と罫線だけが並んだ。
+    // 静的チェックは 100点、ビルドも通り、独立judge だけが「主要コンテンツが
+    // 欠落して見える」と減点していた。
+    id: 'impl-empty-text-node', category: 'Impl', severity: 'high',
+    desc: '見出しや本文が空のまま出力されている（渡す値の形が違う疑い）',
+    check: (p) => {
+      // カタログは部品を props 無しで並べる面なので、空で正しい。
+      if (p.isCatalog) return [];
+      const out = [];
+      const re = /<(h1|h2|h3|h4|p|dd|li)(\s[^>]*)?>\s*<\/\1>/g;
+      // JS が後から入れる枠は空で正しい。見分けは「JS 用のフックを持つか」。
+      //   - aria-live / role=status|alert … 更新を読み上げる領域
+      //   - hidden … 条件表示の枠
+      //   - data-* フック（data-astro-cid はビルド由来なので除く）
+      //     … data-field-error, data-form-message, data-confirm など
+      const filled = /aria-live|role=["'](status|alert)["']|\bhidden\b|data-(?!astro-cid)[a-z-]+/;
+      const counts = new Map();
+      let m;
+      while ((m = re.exec(p.html)) !== null) {
+        if (filled.test(m[2] ?? '')) continue;
+        counts.set(m[1], (counts.get(m[1]) ?? 0) + 1);
+      }
+      for (const [tag, n] of counts) {
+        out.push(`空の <${tag}> が ${n} 件。部品へ渡す値の形（プロパティ名）が合っているか確認してください`);
+      }
+      return out.slice(0, 4);
+    },
+  },
+  {
+    // 分割数だけのグリッド（grid-cols-12 等）は、子の col-span が前提。
+    // 付け忘れると子が1カラム幅（1140px の12分割で約55px）に潰れ、
+    // 日本語本文が1文字ずつ縦に折り返される。ビルドは通り、クラスとしても
+    // 正しいので、静的解析でしか捕まえられない。
+    // 実測 2026-09-16: BusinessPhotoText の1箇所でトップと /service/ が
+    // 読めなくなり、独立judge が 38点（visual 6 / quality 4）を付けた。
+    id: 'arch-grid-span-missing', category: 'Arch', severity: 'high',
+    desc: '分割数の多いグリッドで子に col-span が無い（1カラム幅に潰れる）',
+    check: (p) => {
+      const out = [];
+      const re = /class="([^"]*\bgrid-cols-(\d+)\b[^"]*)"/g;
+      let m;
+      while ((m = re.exec(p.html)) !== null) {
+        const cols = Number(m[2]);
+        if (cols < 5) continue; // 3列カードのような「1要素1カラム」は正常
+        const window = p.html.slice(m.index, m.index + 2500);
+        if (/col-span-|grid-column/.test(window)) continue;
+        out.push(`grid-cols-${cols} を切っているのに子に col-span がありません（${m[1].slice(0, 60)}）— 子が1カラム幅に潰れます`);
+      }
+      return [...new Set(out)].slice(0, 5);
     },
   },
   {
@@ -603,12 +666,16 @@ const SITE_RULES = [
       let siteTotal = new Set();
       for (const p of s.pages) {
         if (!p.srcCode) continue;
-        const comps = [...p.srcCode.matchAll(/^import\s+(\w+)\s+from\s+['"](?:[./]*)components\/[^'"]+['"]/gm)]
-          .map((m) => m[1]);
-        const all = [...p.srcCode.matchAll(/from\s+['"][^'"]*\/components\/([^'"]+)['"]/g)].map((m) => m[1]);
-        for (const c of all) siteTotal.add(c);
-        const n = Math.max(comps.length, all.length);
-        if (n < MIN_COMPONENTS_PER_PAGE) out.push(`${p.relPath}: コンポーネント利用 ${n} 件（下限 ${MIN_COMPONENTS_PER_PAGE}）`);
+        const direct = componentImportsOf(p.srcCode);
+        const reachable = collectComponentsDeep(p.srcCode);
+        for (const c of reachable) siteTotal.add(c);
+        // 直下で1つも使っていない = ベタ書き。入れ子をたどった数が下限に届かない
+        // = 束ねた先も含めて部品が薄い。どちらも指摘する。
+        const n = reachable.size;
+        if (direct.length === 0 || n < MIN_COMPONENTS_PER_PAGE) {
+          const detail = direct.length === n ? `${n} 件` : `${n} 件（直下 ${direct.length} 件 + 入れ子）`;
+          out.push(`${p.relPath}: コンポーネント利用 ${detail}（下限 ${MIN_COMPONENTS_PER_PAGE}）`);
+        }
       }
       if (siteTotal.size < MIN_COMPONENTS_PER_SITE) {
         out.push(`サイト全体で ${siteTotal.size} 種類（下限 ${MIN_COMPONENTS_PER_SITE}）。学習成果が src/components/ に還元されていない`);
@@ -617,6 +684,68 @@ const SITE_RULES = [
     },
   },
 ];
+
+/**
+ * ページから到達できるコンポーネントを、入れ子をたどって集める。
+ *
+ * 直下の import だけ数えると、束ねるほど数が減る。実測 2026-09-18:
+ * ページ雛形 AogamiEditorialPage（内部で EditorialLead / LabeledSection /
+ * RelatedPagePair を使う）1つで組んだ11ページが「利用1件」と判定され、
+ * ベタ書きが0件なのに arch-component-reuse が出続けた。
+ * 部品に切り出して束ねる行為を減点しないよう、到達できる範囲で数える。
+ */
+const componentSrcCache = new Map();
+/** src/components/<rel> を読む。無ければ null。 */
+function readComponent(rel) {
+  if (!componentSrcCache.has(rel)) {
+    const f = join(ROOT, 'src', 'components', rel);
+    componentSrcCache.set(rel, existsSync(f) ? readFileSync(f, 'utf8') : null);
+  }
+  return componentSrcCache.get(rel);
+}
+
+/**
+ * コード中の .astro import を、src/components/ からの相対パスに正規化して返す。
+ * `fromRel` はそのコード自身の位置（ページなら null）。
+ * 部品どうしは `./EditorialLead.astro` のような兄弟パスで参照し合うので、
+ * `/components/` を含むかどうかだけでは拾えない。
+ */
+function componentImportsOf(code, fromRel = null) {
+  const out = [];
+  for (const m of code.matchAll(/from\s+['"]([^'"]+\.astro)['"]/g)) {
+    const spec = m[1];
+    const viaComponents = spec.match(/\/components\/(.+)$/);
+    if (viaComponents) { out.push(viaComponents[1]); continue; }
+    if (fromRel && (spec.startsWith('./') || spec.startsWith('../'))) {
+      const resolved = relative(
+        join(ROOT, 'src', 'components'),
+        join(ROOT, 'src', 'components', dirname(fromRel), spec),
+      );
+      if (!resolved.startsWith('..')) out.push(resolved);
+    }
+  }
+  return out;
+}
+
+/**
+ * ページから到達できるコンポーネントを、入れ子をたどって集める。
+ *
+ * 直下の import だけ数えると、束ねるほど数が減る。実測 2026-09-18:
+ * ページ雛形 AogamiEditorialPage（内部で EditorialLead / LabeledSection /
+ * RelatedPagePair を使う）1つで組んだ11ページが「利用1件」と判定され、
+ * ベタ書きが0件なのに arch-component-reuse が出続けた。
+ * 部品に切り出して束ねる行為を減点しないよう、到達できる範囲で数える。
+ */
+function collectComponentsDeep(code, fromRel = null, seen = new Set(), depth = 0) {
+  if (depth > 4) return seen;
+  for (const rel of componentImportsOf(code, fromRel)) {
+    if (seen.has(rel)) continue;
+    seen.add(rel);
+    const dep = readComponent(rel);
+    if (dep) collectComponentsDeep(dep, rel, seen, depth + 1);
+  }
+  return seen;
+}
 
 // ---- 収集 -------------------------------------------------------------------
 
@@ -647,7 +776,10 @@ function resolveDirection(path) {
   if (!m) return { directionHtml: null };
   const [, type, model, stamp] = m;
   const dir = join(ROOT, 'docs', 'quality', 'runs', `${type}-${stamp}`);
-  for (const f of [`direction-${model}.html`, 'direction.html']) {
+  // 提出版は b だが、ディレクションはラン1本で direction-a.html に置く（2026-09-18〜）。
+  // ここを直さないと提出版のディレクションが見つからず、
+  // arch-animation-missing が「指示なし」として素通りする。
+  for (const f of [`direction-${model}.html`, 'direction-a.html', 'direction.html']) {
     const cand = join(dir, f);
     if (existsSync(cand)) return { directionHtml: readFileSync(cand, 'utf8') };
   }
@@ -670,6 +802,13 @@ if (!existsSync(DIST)) {
 
 const htmlFiles = collectFiles(DIST, '.html').filter((f) => !isRedirectStub(readFileSync(f, 'utf8')));
 const allRoutes = new Set(htmlFiles.map((f) => '/' + relative(DIST, f).replace(/index\.html$/, '')));
+
+// dist/handmaid/ は Astro とは別フローで作った単体 HTML（scripts/handmaid-export.mjs が
+// postbuild で書き出す）。website のルールで採点する対象ではないので pages から外す。
+// ただし allRoutes には残す — 索引トップから /handmaid/ へ張ったリンクを
+// base-broken-internal-link が「リンク切れ」と誤判定しないため。
+const HANDMAID_DIR = join(DIST, 'handmaid');
+const scoredHtmlFiles = htmlFiles.filter((f) => !f.startsWith(HANDMAID_DIR + '/'));
 const allAssets = new Set(
   collectFiles(DIST, null).map((f) => '/' + relative(DIST, f)).filter((p) => !p.endsWith('.html')),
 );
@@ -677,7 +816,7 @@ const allAssets = new Set(
 // サイトのルート: /sites/{type}/{model}-{stamp}/
 const SITE_RE = /^\/sites\/([^/]+)\/([^/]+)\//;
 
-const pages = htmlFiles.map((file) => {
+const pages = scoredHtmlFiles.map((file) => {
   const path = '/' + relative(DIST, file).replace(/index\.html$/, '');
   const html = readFileSync(file, 'utf8');
   const m = path.match(SITE_RE);

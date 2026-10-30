@@ -1,0 +1,807 @@
+{
+  "url": "https://eightdesign.co.jp/about/smvv",
+  "slug": "about-smvv",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260917-0500/motion/about-smvv-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260917-0500/motion/about-smvv-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://eightdesign.co.jp/about",
+      "label": "About Top"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/smvv",
+      "label": "Statement & MVV"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/company-history",
+      "label": "Company & History"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/group-companies",
+      "label": "Group Companies"
+    },
+    {
+      "href": "https://eightdesign.co.jp/about/csr",
+      "label": "CSR"
+    },
+    {
+      "href": "https://eightdesign.co.jp/service",
+      "label": "Our Service Top"
+    },
+    {
+      "href": "https://eightdesign.jp/",
+      "label": "Service Site"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers",
+      "label": "Careers Top"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/interviews",
+      "label": "All Career Stories"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/events",
+      "label": "All Events"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/newgrads",
+      "label": "For New-Grads"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/midcareer",
+      "label": "For Mid-Career"
+    },
+    {
+      "href": "https://eightdesign.co.jp/careers/part-time",
+      "label": "For Part-Time Job"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal",
+      "label": "All Articles"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/news",
+      "label": "News"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/release",
+      "label": "Release"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/media",
+      "label": "Media"
+    },
+    {
+      "href": "https://eightdesign.co.jp/eight-journal/category/others",
+      "label": "Others"
+    },
+    {
+      "href": "https://eightdesign.co.jp/contact/for-all",
+      "label": "For All User"
+    },
+    {
+      "href": "https://eightdesign.co.jp/contact/for-partnerships",
+      "label": "For Partnerships"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__NiwIcq__layoutWrapper lenis",
+      "addedClass": [
+        "lenis-scrolling",
+        "lenis-smooth"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "TopAboutStatement & MVVSSSSttttaaaatttte"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__-hSAzW__titleEye",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -14.475)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 14.0439)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "PPPPhhhhiiiilllloooossssoooopppphhhhyyyy"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "PPPP"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "hhhh"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "iiii"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "llll"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "oooo"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ssss"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "oooo"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "pppp"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "hhhh"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "yyyy"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__NXPQla__illust",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__NXPQla__text",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "楽しむをデザインすることを通して人と社会に徳を与え貢献する人が主体的に人生を味わ"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "MMMMiiiissssssssiiiioooonnnn"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "MMMM"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "iiii"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ssss"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "ssss"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -96)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "iiii"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -95.9997)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "oooo"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "js_split_items",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, -95.9989)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "nnnn"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__Xf7IgW__body",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0.0965359, 0.763925, -0.763925, 0.0965359, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__Xf7IgW__body",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0.0965359, 0.763925, -0.763925, 0.0965359, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "style-module-scss-module__Xf7IgW__body",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(0.0965359, 0.763925, -0.763925, 0.0965359, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "社是・MVV｜EIGHT DESIGN INC.（エイトデザイン株式会社）",
+    "h1": null,
+    "totalHeight": 900,
+    "viewportsTall": 1,
+    "sectionCount": 3,
+    "imgCount": 68,
+    "videoCount": 0,
+    "canvasCount": 8
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 0,
+  "css": {
+    "keyframes": 9,
+    "transitionRules": 72,
+    "animationRules": 4,
+    "keyframeNames": [
+      "style-module-scss-module__b3Qu3G__linkBarOnHover",
+      "style-module-scss-module__47-L1q__linkBarOnHover",
+      "style-module-scss-module__PZL1xq__catchLineItemSwitch",
+      "style-module-scss-module__-HSp9a__loaderEightkunBridge",
+      "style-module-scss-module__-HSp9a__loaderGoodPop",
+      "style-module-scss-module__RAu54q__rotate",
+      "style-module-scss-module__MUVd5G__linkBarOnHover",
+      "style-module-scss-module__OHs4fW__linkBarOnHover",
+      "style-module-scss-module__aXiL3W__linkBarOnHover"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 44,
+      "top": 37,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "header-module-scss-module__-5J3bq__wrapper"
+    },
+    "scrolled": {
+      "height": 44,
+      "top": 37,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "header-module-scss-module__-5J3bq__wrapper"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 1121,
+  "revealSummary": {
+    "total": 24,
+    "scrollLinkedCount": 2,
+    "kinds": {
+      "fade": 4,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 20
+    },
+    "dominantKind": "other",
+    "designedRevealCount": 24,
+    "durationMs": null,
+    "easings": [
+      "ease"
+    ]
+  }
+}

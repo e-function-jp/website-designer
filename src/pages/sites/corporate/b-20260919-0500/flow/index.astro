@@ -1,0 +1,6 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro'; import { site } from '../_site'; import { images } from '../content'; import KabukidoInfoPage from '../../../../../components/sections/KabukidoInfoPage.astro';
+const names=['相談のきっかけを伝える','希望と優先順位を整理する','敷地・建物の条件を確かめる','計画の方向を考える','提案と費用の考え方を確認する','契約条件を確認する','間取りと仕様を具体化する','木と左官の使い方を決める','必要な手続きを整理する','着工前の段取りを確認する','工事を始める','下地や構造に関わる部分を確認する','木工事と設備工事を進める','左官と仕上げを整える','完成した住まいを確認する','住み始めた後のことを確認する'];
+const phases=names.map((title,index)=>({number:String(index+1).padStart(2,'0'),title,body:'希望と条件を照らし合わせ、分かっている情報とこれから確認することを分けます。不明点をそのままにせず、計画に応じた次の段階へ進みます。'}));
+---
+<SiteLayout site={site} title="家づくりの流れ" description="相談から計画、工事、引き渡しへ。一つずつ確認を重ねる家づくりの16工程と、新築・リノベーションの検討の目安をご案内します。" path="/flow/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'家づくりの流れ'}]}><KabukidoInfoPage site={site} title="家づくりの流れ" lead="相談から計画、工事、引き渡しへ。家づくりでは、希望と条件を確かめながら、いくつもの判断を重ねます。ここでは検討の目安となる16の工程を紹介します。新築と全面リノベーションでは確認する内容が異なり、進める順序も計画によって変わります。" image={images.craft} imageAlt="木工の設計イメージ" first="一つずつ確かめて、住まいにする。" second="相談から、計画の輪郭へ" third="つくる過程を確かめ、暮らしへつなぐ" linkLabel="住まいの写真を見る" linkHref="/works/" phases={phases} sectionAnimations={{0:{target:'image'},1:{target:'image'},2:{target:'image'}}} phaseHeadingAnimation={true} /></SiteLayout>

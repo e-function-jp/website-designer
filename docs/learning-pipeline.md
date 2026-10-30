@@ -1,11 +1,12 @@
-# 学習パイプライン（参照学習 + 2案検証）
+# 学習パイプライン（参照学習 + たたき台改善）
 
-最終更新: 2026-09-03
+最終更新: 2026-09-18
 
 ## 目的
 
 静的 `check:web` だけでは拾えない **「参照サイトらしさ」「AIテンプレ感」** を、
-実サイトの vision 解析 → 2案生成 → ルーブリック採点で回し、品質を単調改善する。
+実サイトの vision 解析 → たたき台生成 → ルーブリック採点 → 提出版で回し、品質を単調改善する。
+**1ランの成果物は1サイト**（提出版）。
 
 ## ディレクトリ規約（必須）
 
@@ -122,22 +123,36 @@ Look を codex にしているのは分担上の制約による。`hermes -z` �
        5. 使う src/components/ の選定と、足りない部品の洗い出し
        6. **モーション指示**（全セクションに data-role="animation"。無い場合も none と明記）
        7. 画像プロンプト（<figure data-placement data-tags data-aspect><figcaption data-prompt>）
-       ★ a案（堅実: 参照の構造を素直に踏襲）と b案（冒険: 世界観を保ちつつ構図で踏み込む）を
-         **設計段階で分ける**。同一ディレクションを2案で実装しても差分が出ないことは
-         lp-designer で実測済み（716行中36行=5%しか違わなかった）
+       ★ ディレクションは**ラン1本**。たたき台と提出版はこれを共有する。
+         2案（堅実 a / 冒険 b）を設計段階で分ける方式は 2026-09-18 にやめた。
+         3ランとも冒険側が勝った（59/61・61/69・38/63）が、差の大半は
+         「後から走る側が先行案の部品と画像を引き継げる」順番の利得と、
+         採点が3ページの静止画しか見ないことによるもので、案の優劣ではなかった。
+         代わりに、両案の講評で繰り返し出た指摘（堅実側=参照の余白と写真サイズの
+         *変化* を均してしまう / 冒険側=整うが参照から離れる）をこの1本の指示に畳んだ。
     ↓
-[E. Fix×2] direction.html を実装。_site.ts を先に書き、全ページ SiteLayout を使う
-       → src/pages/sites/{site_type}/{a,b}-{stamp}/
+[E. Draft] direction.html を実装（たたき台）。_site.ts を先に書き、全ページ SiteLayout を使う
+       → src/pages/sites/{site_type}/a-{stamp}/
        ※ ベタ書き禁止。既存 src/components/ を各ページ最低2件、サイト全体で6種類使う
     ↓
-[F. Measure]
+[F. Judge draft] たたき台を独立judgeにかけ、**直す材料**を出す
+       WEB_DESIGNER_SCORE_STAGE=draft bash scripts/web-design-score.sh {run_dir} {site_type} {stamp} a
+       → design-score-draft.json（履歴には積まない。提出版と混ぜると単調改善の判定が壊れる）
+    ↓
+[G. Submit] 同じ direction.html + 上の指摘で提出版を実装
+       bash scripts/web-implement-minimax.sh {run_dir} b {run_dir}/design-score-draft.json
+       → src/pages/sites/{site_type}/b-{stamp}/
+       → 指摘を1件ずつ潰す。直せないものは報告に理由を書く（黙って落とさない）
+       → 済んだらたたき台を破棄（web-run.sh が自動で消す）
+    ↓
+[H. Measure]
     1) npm run check:web
-    2) bash scripts/web-design-score.sh {run_dir} {site_type} {stamp} a b
+    2) bash scripts/web-design-score.sh {run_dir} {site_type} {stamp} b
        → トップ+下層2ページを撮り、参照キャプチャと並べて独立judgeに採点させる
     3) meta/{model}.json に tokens / images を記録
     ↓
-[G. Extract] ★必須ゲート
-       両案それぞれから他業種でも使えるブロックを src/components/ に切り出す
+[I. Extract] ★必須ゲート
+       提出版から他業種でも使えるブロックを src/components/ に切り出す
        → check:web の arch-component-reuse が消えるまで完了扱いにしない
     ↓
 [H. 出荷] check:web:strict → check:catalog → main 直コミット → push

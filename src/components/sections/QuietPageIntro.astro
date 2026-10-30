@@ -1,0 +1,16 @@
+---
+interface Props { title: string; lead: string; class?: string; }
+const { title, lead, class: className = '' } = Astro.props;
+---
+<section class={`quiet-page-intro ${className}`}>
+  <div class="quiet-page-intro__inner">
+    <h1>{title}</h1>
+    <p>{lead}</p>
+  </div>
+</section>
+<style>
+  .quiet-page-intro { padding:clamp(80px,12vw,176px) 24px clamp(64px,9vw,128px); }
+  .quiet-page-intro__inner { width:min(680px,100%); margin:auto; }
+  h1 { margin:0 0 40px; font-size:clamp(30px,3.2vw,40px); font-weight:500; line-height:1.55; letter-spacing:.08em; }
+  p { margin:0; font-size:clamp(16px,1.3vw,18px); line-height:2; }
+</style>

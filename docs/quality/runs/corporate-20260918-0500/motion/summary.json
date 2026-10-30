@@ -1,0 +1,219 @@
+{
+  "reference_url": "https://nssg.jp/",
+  "analyzed_at": "2026-09-17T20:01:27.446Z",
+  "pages": [
+    {
+      "url": "https://nssg.jp/",
+      "slug": "top",
+      "title": "NSSG – Branding, Art Direction",
+      "viewportsTall": 5.6,
+      "revealCount": 38,
+      "dominantKind": "fade-up",
+      "durationMs": {
+        "min": 700,
+        "median": 1000,
+        "max": 1500
+      },
+      "easings": [
+        "ease",
+        "ease-in-out"
+      ],
+      "scrollLinkedCount": 9,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 2,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 191,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header js-header"
+        },
+        "scrolled": {
+          "height": 191,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header js-header is-hidden"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": true
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    },
+    {
+      "url": "https://nssg.jp/projects/",
+      "slug": "projects",
+      "title": "Projects / NSSG – Branding, Art Direction",
+      "viewportsTall": 6.4,
+      "revealCount": 11,
+      "dominantKind": "fade-up",
+      "durationMs": {
+        "min": 700,
+        "median": 1500,
+        "max": 1500
+      },
+      "easings": [
+        "ease-in-out",
+        "ease"
+      ],
+      "scrollLinkedCount": 3,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 26,
+      "keyframes": 2,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 191,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header js-header"
+        },
+        "scrolled": {
+          "height": 191,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header js-header is-hidden"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": true
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    },
+    {
+      "url": "https://nssg.jp/about/",
+      "slug": "about",
+      "title": "About / NSSG – Branding, Art Direction",
+      "viewportsTall": 6.4,
+      "revealCount": 11,
+      "dominantKind": "fade",
+      "durationMs": {
+        "min": 1000,
+        "median": 1000,
+        "max": 1000
+      },
+      "easings": [
+        "ease-in-out"
+      ],
+      "scrollLinkedCount": 3,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 2,
+      "header": {
+        "position": "fixed",
+        "atTop": {
+          "height": 191,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header js-header"
+        },
+        "scrolled": {
+          "height": 191,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "l-header js-header is-hidden"
+        },
+        "shrinks": false,
+        "hides": false,
+        "changesBackground": false,
+        "togglesClass": true
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 38,
+      "projects": 11,
+      "about": 11
+    },
+    "reveal_count_spread": 27,
+    "motion_consistent": false,
+    "libs_union": [
+      "lenis",
+      "viewTransitions"
+    ],
+    "header_behavior": {
+      "position": "fixed",
+      "atTop": {
+        "height": 191,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "l-header js-header"
+      },
+      "scrolled": {
+        "height": 191,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "l-header js-header is-hidden"
+      },
+      "shrinks": false,
+      "hides": false,
+      "changesBackground": false,
+      "togglesClass": true
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 38,
+    "reveal_count_reduced": 38,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {
+      "viewTransitions": "in-use"
+    },
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade-up",
+    "scroll_linked_count": 9,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": {
+      "min": 700,
+      "median": 1000,
+      "max": 1500
+    },
+    "easings": [
+      "ease",
+      "ease-in-out"
+    ],
+    "reveal_kinds": {
+      "fade": 6,
+      "fade-up": 24,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 8,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "page_length_viewports": [
+      5.6,
+      6.4,
+      6.4
+    ]
+  }
+}

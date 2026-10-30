@@ -1,0 +1,13 @@
+---
+import EditorialLead from './EditorialLead.astro';
+import LabeledSection from './LabeledSection.astro';
+import RelatedPagePair from './RelatedPagePair.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import type { SiteConfig } from '../../lib/site';
+interface Props { site: SiteConfig; title: string; intro: string; sections: { label: string; heading: string; text: string }[]; related: { title: string; text: string; href: string }[]; animation?: 'fade' | 'fade-up' }
+const { site, title, intro, sections, related, animation = 'fade-up' } = Astro.props;
+---
+<EditorialLead title={title} />
+<LabeledSection label={title}><ScrollReveal animation={animation} duration={1000}><p>{intro}</p></ScrollReveal></LabeledSection>
+{sections.map((section) => <LabeledSection label={section.label}><ScrollReveal animation={animation} duration={1000}><h2 class="text-xl">{section.heading}</h2><p class="mt-6">{section.text}</p></ScrollReveal></LabeledSection>)}
+<ScrollReveal animation="fade-up" duration={700}><RelatedPagePair site={site} items={related} /></ScrollReveal>

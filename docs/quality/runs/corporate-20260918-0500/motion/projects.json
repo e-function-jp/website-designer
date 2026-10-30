@@ -1,0 +1,956 @@
+{
+  "url": "https://nssg.jp/projects/",
+  "slug": "projects",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260918-0500/motion/projects-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260918-0500/motion/projects-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://nssg.jp/projects/",
+      "label": "All"
+    },
+    {
+      "href": "https://nssg.jp/projects/category/branding/",
+      "label": "Branding"
+    },
+    {
+      "href": "https://nssg.jp/projects/category/typeface/",
+      "label": "Typeface"
+    },
+    {
+      "href": "https://nssg.jp/projects/category/visual-identity/",
+      "label": "Visual Identity"
+    },
+    {
+      "href": "https://nssg.jp/projects/category/product-design/",
+      "label": "Product Design"
+    },
+    {
+      "href": "https://nssg.jp/projects/category/interactive/",
+      "label": "Interactive"
+    },
+    {
+      "href": "https://nssg.jp/projects/category/graphic/",
+      "label": "Graphic"
+    },
+    {
+      "href": "https://nssg.jp/projects/category/event/",
+      "label": "Event"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "l-header js-header",
+      "addedClass": [
+        "is-hidden"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "1s, 1s",
+        "delay": "0s, 0s",
+        "timing": "ease-out, ease"
+      },
+      "textSnippet": "NSSG\n              \n            \n       "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "g-logo",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.5s",
+        "delay": "0s",
+        "timing": "ease-out"
+      },
+      "textSnippet": "NSSG\n              \n            \n       "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "nav",
+      "baseClass": "g-header-navigation",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.5s",
+        "delay": "0s",
+        "timing": "ease-out"
+      },
+      "textSnippet": "Projects\n            About\n            S"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "m-loader-ellips_dot",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0.11256",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "projects-item js-infinite-item"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "projects-item js-infinite-item"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "DIV",
+        "className": "projects-item js-infinite-item"
+      },
+      "timing": {
+        "duration": 1500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    },
+    {
+      "playState": "running",
+      "type": "CSSTransition",
+      "target": {
+        "tag": "PICTURE",
+        "className": "projects-item-picture"
+      },
+      "timing": {
+        "duration": 2500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "ease"
+      },
+      "cssProps": [
+        "opacity",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [
+    {
+      "tag": "div",
+      "className": "m-loader-ellips infinite-scroll-request",
+      "displayNow": "none",
+      "opacityNow": "1"
+    },
+    {
+      "tag": "span",
+      "className": "m-loader-ellips_dot",
+      "displayNow": "block",
+      "opacityNow": "1"
+    }
+  ],
+  "meta": {
+    "title": "Projects / NSSG – Branding, Art Direction",
+    "h1": "Projects",
+    "totalHeight": 5727,
+    "viewportsTall": 6.4,
+    "sectionCount": 0,
+    "imgCount": 55,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 3880,
+  "css": {
+    "keyframes": 2,
+    "transitionRules": 124,
+    "animationRules": 6,
+    "keyframeNames": [
+      "swiper-preloader-spin",
+      "opacity-anime"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 191,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "l-header js-header"
+    },
+    "scrolled": {
+      "height": 191,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "l-header js-header is-hidden"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": true
+  },
+  "probedBefore": 254,
+  "revealSummary": {
+    "total": 11,
+    "scrollLinkedCount": 3,
+    "kinds": {
+      "fade": 1,
+      "fade-up": 10,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 11,
+    "durationMs": {
+      "min": 700,
+      "median": 1500,
+      "max": 1500
+    },
+    "easings": [
+      "ease-in-out",
+      "ease"
+    ]
+  }
+}

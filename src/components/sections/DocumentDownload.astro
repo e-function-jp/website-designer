@@ -1,0 +1,6 @@
+---
+interface Props { href: string; content: string }
+const { href, content } = Astro.props;
+---
+<div class="document"><h2>蒼紙舎株式会社 会社案内</h2><p>形式：テキスト（UTF-8）</p><a href={href} download>会社案内を保存する（TXT）</a><p class="content">収録内容：{content}</p></div>
+<style>.document{max-width:42em;padding:2rem 0;border-top:1px solid #cbd1ce;border-bottom:1px solid #cbd1ce}.document h2{font:400 1.125rem/1.8 "Yu Mincho",serif;margin:0}.document p{line-height:1.9}.document a{color:inherit;text-underline-offset:5px}.content{margin:2rem 0 0}</style>

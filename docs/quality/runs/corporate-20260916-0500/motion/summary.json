@@ -1,0 +1,78 @@
+{
+  "reference_url": "https://sales-dex.jp/",
+  "analyzed_at": "2026-09-15T20:00:46.944Z",
+  "pages": [
+    {
+      "url": "https://sales-dex.jp/",
+      "slug": "top",
+      "title": "株式会社BeyondX",
+      "viewportsTall": 12.1,
+      "revealCount": 256,
+      "dominantKind": "fade-up",
+      "durationMs": null,
+      "easings": [
+        "ease"
+      ],
+      "scrollLinkedCount": 2,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 0,
+      "header": null,
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 256
+    },
+    "reveal_count_spread": 0,
+    "motion_consistent": true,
+    "libs_union": [
+      "lenis",
+      "viewTransitions"
+    ],
+    "header_behavior": null
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 256,
+    "reveal_count_reduced": 255,
+    "respected": false
+  },
+  "page_transition": {
+    "libs": {
+      "viewTransitions": "in-use"
+    },
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade-up",
+    "scroll_linked_count": 2,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": null,
+    "easings": [
+      "ease"
+    ],
+    "reveal_kinds": {
+      "fade": 2,
+      "fade-up": 250,
+      "fade-side": 1,
+      "zoom": 1,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 2
+    },
+    "page_length_viewports": [
+      12.1
+    ]
+  }
+}

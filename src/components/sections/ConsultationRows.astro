@@ -1,0 +1,35 @@
+---
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+import AxisRule from './AxisRule.astro';
+interface Props { site: SiteConfig; downloadHref?: string; contactHref?: string; }
+const { site, downloadHref = '/download/', contactHref = '/contact/' } = Astro.props;
+const rows = [
+  ['資料・検討ガイド', '対応範囲と進め方を、社内での比較・検討に。会社資料と、Web刷新・採用強化の確認項目をご覧いただけます。', '資料を見る', downloadHref],
+  ['無料相談・見積もり', 'Web刷新、採用強化、キャンペーン施策。まだ整理できていない課題も、現在の状況からお聞かせください。', '相談内容を入力する', contactHref],
+];
+---
+
+<aside class="consultation-rows" aria-label="資料と相談のご案内">
+  {rows.map(([title, copy, label, href]) => (
+    <a href={url(site, href)} class="consultation-rows__row">
+      <AxisRule />
+      <div><h2>{title}</h2></div>
+      <div><p>{copy}</p><span>{label} <b aria-hidden="true">→</b></span></div>
+    </a>
+  ))}
+</aside>
+
+<style>
+  .consultation-rows { background: var(--color-neutral); color: var(--color-neutral-content); }
+  .consultation-rows__row { display: grid; grid-template-columns: 1fr; gap: 1.25rem; min-height: 240px; padding: 3.5rem 1.25rem; color: inherit; text-decoration: none; position: relative; }
+  .consultation-rows__row :global(.axis-rule) { position: absolute; top: 0; left: 1.25rem; right: 1.25rem; width: auto; }
+  .consultation-rows h2 { font-size: 1.75rem; margin: 0; }
+  .consultation-rows p { margin: 0 0 1rem; max-width: 38rem; line-height: 1.9; }
+  .consultation-rows span { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
+  @media (min-width: 768px) {
+    .consultation-rows__row { grid-template-columns: 45% 55%; align-items: center; min-height: 320px; padding: 4rem max(32px, calc((100vw - 1200px) / 2)); }
+    .consultation-rows h2 { font-size: 2.5rem; }
+    .consultation-rows__row :global(.axis-rule) { left: max(32px, calc((100vw - 1200px) / 2)); right: max(32px, calc((100vw - 1200px) / 2)); }
+  }
+</style>

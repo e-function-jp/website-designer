@@ -1,0 +1,488 @@
+---
+/**
+ * OrganizationDiagnosisForm — 無料組織診断のお申し込みフォーム。
+ *
+ * ディレクションの指示:
+ *   - 最大 760px、常に1列
+ *   - ラベルは入力欄の上、項目間 28px
+ *   - TextInput 高 52px、Textarea 最低 180px
+ *   - 必須表示はラベル右
+ *   - 入力→同ページ内の確認の2段階
+ *   - 確認画面は Table と「入力内容を修正する」「確認を終了する」
+ *   - 送信処理・送信成功画面は作らない
+ *   - 確認チェックはラベル付きネイティブ checkbox を内部使用
+ *   - フォーム入力を URL、ログ、localStorage、sessionStorage、分析イベントへ流さない
+ *   - 入力内容は DOM テキストとして表示し、HTML として解釈しない
+ *   - 確認終了時に値を消去する
+ *   - エラーは各項目に aria-describedby で関連付け、最初の不正項目へフォーカス
+ *   - 確認表示時は確認見出しにフォーカス
+ *
+ * JS はクライアント側で完結。送信はせず、確認 → 終了で値を破棄する。
+ */
+import SectionTitle from '../ui/SectionTitle.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import Table from '../data-display/Table.astro';
+import Alert from '../data-display/Alert.astro';
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+
+interface Props {
+  site: SiteConfig;
+}
+const { site } = Astro.props;
+---
+
+<section class="odf bg-base-100">
+  <div class="max-w-[760px] mx-auto px-5 lg:px-0 py-16 lg:py-24">
+    <ScrollReveal animation="fade-up" duration={site.motion?.durationMs ?? 600}>
+      <SectionTitle title="お申し込み情報" align="left" class="odf__title" />
+    </ScrollReveal>
+
+    <div class="odf__stage" data-odf-stage="input">
+      <form class="odf__form" novalidate aria-describedby="odf-input-help">
+        <div class="odf__field">
+          <label class="odf__label" for="odf-company">
+            会社名
+            <span class="odf__required">必須</span>
+          </label>
+          <input
+            id="odf-company"
+            name="company"
+            type="text"
+            required
+            data-odf-field="company"
+            class="odf__input"
+            aria-describedby="odf-company-err"
+          />
+          <p id="odf-company-err" class="odf__error" data-odf-error="company" hidden>この項目を入力してください。</p>
+        </div>
+
+        <div class="odf__field">
+          <label class="odf__label" for="odf-dept">
+            部署・役職
+            <span class="odf__optional">任意</span>
+          </label>
+          <input
+            id="odf-dept"
+            name="department"
+            type="text"
+            data-odf-field="department"
+            class="odf__input"
+          />
+        </div>
+
+        <div class="odf__field">
+          <label class="odf__label" for="odf-name">
+            ご担当者名
+            <span class="odf__required">必須</span>
+          </label>
+          <input
+            id="odf-name"
+            name="name"
+            type="text"
+            required
+            data-odf-field="name"
+            class="odf__input"
+            aria-describedby="odf-name-err"
+          />
+          <p id="odf-name-err" class="odf__error" data-odf-error="name" hidden>この項目を入力してください。</p>
+        </div>
+
+        <div class="odf__field">
+          <label class="odf__label" for="odf-email">
+            メールアドレス
+            <span class="odf__required">必須</span>
+          </label>
+          <input
+            id="odf-email"
+            name="email"
+            type="email"
+            required
+            data-odf-field="email"
+            class="odf__input"
+            aria-describedby="odf-email-err"
+          />
+          <p id="odf-email-err" class="odf__error" data-odf-error="email" hidden>メールアドレスの形式を確認してください。</p>
+        </div>
+
+        <div class="odf__field">
+          <label class="odf__label" for="odf-body">
+            現在の課題・ご相談内容
+            <span class="odf__required">必須</span>
+          </label>
+          <p id="odf-body-help" class="odf__help">商談設計、案件の可視化、現場への定着など、現在の状況をお書きください。</p>
+          <textarea
+            id="odf-body"
+            name="body"
+            required
+            data-odf-field="body"
+            class="odf__textarea"
+            rows="8"
+            aria-describedby="odf-body-help odf-body-err"
+          ></textarea>
+          <p id="odf-body-err" class="odf__error" data-odf-error="body" hidden>この項目を入力してください。</p>
+        </div>
+
+        <div class="odf__field odf__field--check">
+          <label class="odf__check-label">
+            <input type="checkbox" name="confirm" data-odf-field="confirm" class="odf__check" aria-describedby="odf-confirm-err" />
+            <span>サンプルサイトであり、入力内容が送信・保存されないことを確認しました。</span>
+          </label>
+          <p id="odf-confirm-err" class="odf__error" data-odf-error="confirm" hidden>確認チェックをオンにしてください。</p>
+        </div>
+
+        <p id="odf-input-help" class="odf__privacy">
+          <a href={url(site, '/privacy/')} class="odf__privacy-link">個人情報の取り扱いを読む</a>
+        </p>
+
+        <div class="odf__actions">
+          <button type="button" class="odf__submit" data-odf-action="confirm">入力内容を確認する</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="odf__stage" data-odf-stage="confirm" hidden>
+      <h3 class="odf__confirm-title" tabindex="-1" data-odf-confirm-title>入力内容の確認</h3>
+      <p class="odf__confirm-note">以下は入力内容の確認表示です。お申し込みは送信されません。</p>
+      <Table class="odf__confirm-table">
+        <tbody>
+          <tr>
+            <th class="odf__th">会社名</th>
+            <td data-odf-confirm="company"></td>
+          </tr>
+          <tr>
+            <th class="odf__th">部署・役職</th>
+            <td data-odf-confirm="department"></td>
+          </tr>
+          <tr>
+            <th class="odf__th">ご担当者名</th>
+            <td data-odf-confirm="name"></td>
+          </tr>
+          <tr>
+            <th class="odf__th">メールアドレス</th>
+            <td data-odf-confirm="email"></td>
+          </tr>
+          <tr>
+            <th class="odf__th">現在の課題・ご相談内容</th>
+            <td data-odf-confirm="body" class="odf__confirm-body"></td>
+          </tr>
+        </tbody>
+      </Table>
+      <div class="odf__actions">
+        <button type="button" class="odf__btn-secondary" data-odf-action="edit">入力内容を修正する</button>
+        <button type="button" class="odf__submit" data-odf-action="finish">確認を終了する</button>
+      </div>
+    </div>
+
+    <div class="odf__stage" data-odf-stage="finish" hidden>
+      <Alert variant="info">
+        <p>確認を終了しました。入力内容は送信されていません。</p>
+      </Alert>
+    </div>
+  </div>
+</section>
+
+<style>
+  .odf__title { margin-bottom: 32px; }
+  .odf__form { display: flex; flex-direction: column; gap: 28px; }
+
+  .odf__field { display: flex; flex-direction: column; gap: 8px; }
+  .odf__label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .odf__required {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-error);
+  }
+  .odf__optional {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    opacity: 0.6;
+  }
+
+  .odf__input,
+  .odf__textarea {
+    width: 100%;
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+    border-radius: 4px;
+    padding: 12px 16px;
+    color: var(--color-base-content);
+    font-size: 15px;
+    line-height: 1.5;
+    font-family: inherit;
+  }
+  .odf__input { height: 52px; }
+  .odf__textarea { min-height: 180px; resize: vertical; }
+  .odf__input:focus,
+  .odf__textarea:focus {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+    border-color: var(--color-primary);
+  }
+
+  .odf__help {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-base-content);
+    opacity: 0.75;
+  }
+  .odf__error {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-error);
+    font-weight: 700;
+  }
+
+  .odf__field--check { flex-direction: column; }
+  .odf__check-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-base-content);
+    line-height: 1.7;
+    cursor: pointer;
+  }
+  .odf__check {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+  }
+
+  .odf__privacy { font-size: 13px; margin: 0; }
+  .odf__privacy-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .odf__privacy-link:hover { color: var(--color-secondary); }
+
+  .odf__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .odf__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 28px;
+    background: var(--color-secondary);
+    color: var(--color-secondary-content);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .odf__submit:hover { opacity: 0.92; }
+  .odf__submit:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+
+  .odf__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 28px;
+    background: var(--color-base-100);
+    color: var(--color-primary);
+    border: 1px solid var(--color-base-300);
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+  .odf__btn-secondary:hover { border-color: var(--color-primary); }
+
+  .odf__confirm-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-base-content);
+    margin: 0 0 8px;
+  }
+  .odf__confirm-title:focus { outline: none; }
+  .odf__confirm-note {
+    font-size: 14px;
+    color: var(--color-base-content);
+    opacity: 0.75;
+    margin: 0 0 24px;
+  }
+  .odf__confirm-table { margin-bottom: 24px; }
+  .odf__th {
+    width: 30%;
+    background: var(--color-base-200);
+    font-weight: 700;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+  .odf__confirm-body { white-space: pre-wrap; }
+
+  @media (min-width: 640px) {
+    .odf__actions { flex-direction: row; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .odf__submit, .odf__btn-secondary, .odf__privacy-link { transition: none; }
+  }
+</style>
+
+<script>
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const init = () => {
+    const roots = document.querySelectorAll<HTMLElement>('.odf');
+    if (!roots.length) return;
+
+    roots.forEach((root) => {
+      if (root.dataset.odfReady) return;
+      root.dataset.odfReady = '1';
+
+      const stages = {
+        input: root.querySelector<HTMLElement>('[data-odf-stage="input"]'),
+        confirm: root.querySelector<HTMLElement>('[data-odf-stage="confirm"]'),
+        finish: root.querySelector<HTMLElement>('[data-odf-stage="finish"]'),
+      } as const;
+
+      const fields = root.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-odf-field]');
+      const errors = root.querySelectorAll<HTMLElement>('[data-odf-error]');
+
+      const validateField = (field: HTMLInputElement | HTMLTextAreaElement): string => {
+        const name = (field as HTMLInputElement).name;
+        const value = (field.value ?? '').trim();
+        if (field.required && !value) return `${name}-required`;
+        if (field.type === 'email' && value && !EMAIL_RE.test(value)) return `${name}-format`;
+        if ((field as HTMLInputElement).type === 'checkbox' && !(field as HTMLInputElement).checked) return `${name}-required`;
+        return '';
+      };
+
+      const showError = (key: string, show: boolean) => {
+        errors.forEach((el) => {
+          if (el.dataset.odfError === key) {
+            el.hidden = !show;
+            if (show) {
+              const field = root.querySelector<HTMLElement>(`[data-odf-field="${key}"]`);
+              if (field) field.setAttribute('aria-invalid', 'true');
+            } else {
+              const field = root.querySelector<HTMLElement>(`[data-odf-field="${key}"]`);
+              if (field) field.removeAttribute('aria-invalid');
+            }
+          }
+        });
+      };
+
+      const focusFirstInvalid = () => {
+        for (const f of Array.from(fields)) {
+          if (validateField(f as HTMLInputElement)) {
+            (f as HTMLInputElement).focus();
+            return;
+          }
+        }
+      };
+
+      const showStage = (which: 'input' | 'confirm' | 'finish') => {
+        Object.entries(stages).forEach(([k, el]) => {
+          if (!el) return;
+          if (k === which) el.hidden = false;
+          else el.hidden = true;
+        });
+        if (which === 'confirm') {
+          const t = root.querySelector<HTMLElement>('[data-odf-confirm-title]');
+          if (t) t.focus();
+        }
+      };
+
+      const fillConfirm = () => {
+        const map: Record<string, string> = {};
+        fields.forEach((f) => {
+          const name = (f as HTMLInputElement).name;
+          map[name] = (f as HTMLInputElement).type === 'checkbox'
+            ? ((f as HTMLInputElement).checked ? 'はい' : 'いいえ')
+            : f.value;
+        });
+        root.querySelectorAll<HTMLElement>('[data-odf-confirm]').forEach((cell) => {
+          const k = cell.dataset.odfConfirm!;
+          cell.textContent = map[k] ?? '';
+        });
+      };
+
+      // 入力クリア（確認終了時）
+      const clearForm = () => {
+        fields.forEach((f) => {
+          if ((f as HTMLInputElement).type === 'checkbox') (f as HTMLInputElement).checked = false;
+          else (f as HTMLInputElement).value = '';
+        });
+        errors.forEach((el) => { el.hidden = true; });
+        fields.forEach((f) => f.removeAttribute('aria-invalid'));
+      };
+
+      // 入力中はその項目のエラーを消す
+      fields.forEach((f) => {
+        f.addEventListener('input', () => {
+          const name = (f as HTMLInputElement).name;
+          showError(name, false);
+        });
+        f.addEventListener('change', () => {
+          const name = (f as HTMLInputElement).name;
+          showError(name, false);
+        });
+      });
+
+      root.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const action = target.dataset.odfAction;
+        if (!action) return;
+
+        if (action === 'confirm') {
+          let firstInvalid: HTMLElement | null = null;
+          let hasError = false;
+          fields.forEach((f) => {
+            const err = validateField(f as HTMLInputElement);
+            const name = (f as HTMLInputElement).name;
+            if (err) {
+              hasError = true;
+              showError(name, true);
+              if (!firstInvalid) firstInvalid = f as HTMLElement;
+            } else {
+              showError(name, false);
+            }
+          });
+          if (hasError) {
+            firstInvalid?.focus();
+            return;
+          }
+          fillConfirm();
+          showStage('confirm');
+        }
+
+        if (action === 'edit') {
+          showStage('input');
+        }
+
+        if (action === 'finish') {
+          clearForm();
+          showStage('finish');
+        }
+      });
+    });
+  };
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

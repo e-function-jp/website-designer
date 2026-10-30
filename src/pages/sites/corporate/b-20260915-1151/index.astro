@@ -1,0 +1,395 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { site } from './_site';
+import { url } from '../../../../lib/site';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+import SectionTitle from '../../../../components/ui/SectionTitle.astro';
+import Alert from '../../../../components/data-display/Alert.astro';
+import Stat from '../../../../components/data-display/Stat.astro';
+import AobaConsultationBand from "../../../../components/sections/AobaConsultationBand.astro";
+import AobaClinicInfo from "../../../../components/sections/AobaClinicInfo.astro";
+import ClinicRelatedLinks from '../../../../components/sections/ClinicRelatedLinks.astro';
+import PageTopButton from '../../../../components/ui/PageTopButton.astro';
+import FloatingCta from '../../../../components/site/FloatingCta.astro';
+
+const SHARED = '/sites/corporate/_shared/20260915-1151';
+
+const heroImage = { src: `${SHARED}/img-b-01.jpg`, alt: '相談者とスタッフがテーブルを挟んで話すイメージ' };
+const receptionImage = { src: `${SHARED}/img-b-02.jpg`, alt: '院内イメージ' };
+
+const stats = [
+  { title: '矯正相談 累計', value: '4,800件' },
+  { title: '小児矯正 年間', value: '320症例' },
+  { title: '通院継続率', value: '92%' },
+];
+
+const treatmentLinks = [
+  {
+    number: '01',
+    title: '子どもの歯並びが気になる方へ',
+    body: '成長に伴う歯並びや噛み合わせの気がかりを、保護者の方と一緒に整理します。',
+    href: '/service/#children',
+  },
+  {
+    number: '02',
+    title: '大人の矯正を考えている方へ',
+    body: '見た目と噛み合わせ、治療方法への疑問をまとめて確認できます。',
+    href: '/service/#adults',
+  },
+];
+
+const facilityImages = [
+  { src: `${SHARED}/img-b-03.jpg`, alt: '診療椅子と周囲の空間を見渡す院内イメージ', caption: '院内イメージ' },
+  { src: `${SHARED}/img-b-05.jpg`, alt: '椅子と小さな本棚がある待合のイメージ', caption: '院内イメージ' },
+];
+
+const relatedLinks = [
+  { label: '当院について', href: '/about/', description: '診療姿勢と医院の概要をご確認いただけます。' },
+  { label: '矯正治療について', href: '/service/', description: '子どもと大人の矯正、治療方法、保定管理をご案内します。' },
+];
+---
+<SiteLayout
+  site={site}
+  title="噛み合わせから整える矯正"
+  description="あおば矯正歯科クリニックは静岡県藤枝市の矯正専門医院です。子どもから大人まで、歯並びと噛み合わせの相談をお受けしています。初診相談から治療計画、経過のフォローまで一貫して対応します。"
+  path="/"
+  isHome
+>
+  <!-- 01 大きな言葉と、対話の写真 (animation: none) -->
+  <section class="aoba-hero bg-base-100">
+    <div class="aoba-hero__inner max-w-[1400px] mx-auto px-5 lg:px-18 py-12 lg:pt-[120px] lg:pb-0">
+      <div class="aoba-hero__grid grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div class="aoba-hero__copy lg:col-span-7 order-2 lg:order-1 pt-10 lg:pt-0">
+          <h1 class="aoba-hero__title text-[2rem] leading-[1.45] sm:text-[2.5rem] sm:leading-[1.4] lg:text-[5rem] lg:leading-[1.24] lg:tracking-[0.02em] font-medium">
+            噛み合わせから<br />整える矯正
+          </h1>
+          <div class="aoba-hero__body mt-10 lg:mt-10 max-w-[38em] text-base lg:text-lg leading-[1.9] text-base-content/85">
+            <p>あおば矯正歯科クリニックは、静岡県藤枝市の矯正専門医院です。子どもから大人まで、歯並びと噛み合わせの相談をお受けしています。</p>
+          </div>
+          <div class="aoba-hero__actions mt-10 lg:mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+            <a href={url(site, '/contact/#consultation')} class="aoba-cta">
+              初診相談を予約する
+            </a>
+            <a href={url(site, '/service/')} class="aoba-hero__sublink inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content self-start sm:self-auto">
+              矯正治療について知る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <p class="aoba-hero__note mt-6 text-xs lg:text-sm text-base-content/60">
+            架空医院のサンプルです。実際の予約は受け付けていません。
+          </p>
+        </div>
+        <figure class="aoba-hero__photo lg:col-span-5 order-1 lg:order-2">
+          <img
+            src={heroImage.src}
+            alt={heroImage.alt}
+            width="1000"
+            height="1250"
+            fetchpriority="high"
+            loading="eager"
+            class="w-full aspect-[4/5] object-cover"
+            style="object-position: 55% 45%;"
+          />
+          <figcaption class="aoba-hero__caption mt-3 text-xs lg:text-sm text-base-content/65">
+            相談風景のイメージ
+          </figcaption>
+        </figure>
+      </div>
+      <figure class="aoba-hero__reception mt-10 lg:mt-[-64px] lg:ml-[calc(100%/12*4)] lg:w-[calc(100%/12*8)] lg:h-[340px] overflow-hidden">
+        <img
+          src={receptionImage.src}
+          alt={receptionImage.alt}
+          width="1500"
+          height="625"
+          loading="eager"
+          class="w-full h-full aspect-[864/340] lg:aspect-auto object-cover"
+          style="object-position: 50% 55%;"
+        />
+        <figcaption class="aoba-hero__caption mt-3 text-xs lg:text-sm text-base-content/65">
+          院内イメージ
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02 お知らせの現在地 -->
+  <section class="aoba-news bg-base-100 border-t border-base-300">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-14 lg:py-18">
+      <div class="grid lg:grid-cols-12 gap-6 lg:gap-12">
+        <div class="lg:col-span-3">
+          <SectionTitle title="お知らせ" align="left" />
+        </div>
+        <div class="lg:col-span-9">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <Alert variant="info">
+              <p>現在、掲載しているお知らせはありません。</p>
+            </Alert>
+            <div class="mt-6 text-right">
+              <a href={url(site, '/news/')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content">
+                お知らせ一覧を見る
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 相談の入口 (写真のみ fade-up) -->
+  <section class="aoba-consult bg-base-100">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        <figure class="lg:col-span-5">
+          <img
+            src={receptionImage.src}
+            alt={receptionImage.alt}
+            width="1200"
+            height="1500"
+            loading="lazy"
+            class="w-full aspect-[4/5] object-cover"
+            style="object-position: 50% 55%;"
+          />
+        </figure>
+        <div class="lg:col-span-5 lg:col-start-7 lg:pt-24">
+          <h2 class="text-2xl lg:text-[2.375rem] font-medium leading-snug tracking-[0.02em] mb-6 lg:mb-8">
+            何から聞けばよいか、迷っていても。
+          </h2>
+          <div class="space-y-5 text-sm lg:text-base leading-[1.9] text-base-content/85 max-w-[36em]">
+            <p>子どもの歯並びが気になる。自分の見た目や噛み合わせを見直したい。相談のきっかけは、一人ひとり異なります。</p>
+            <p>初診相談では、気になっていることをお聞かせください。治療計画から経過のフォローまで、一貫して対応します。</p>
+          </div>
+          <div class="mt-8">
+            <a href={url(site, '/service/#flow')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content">
+              相談から治療までを見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 青い面で診療姿勢と実績を伝える -->
+  <section class="aoba-approach bg-primary text-primary-content">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-28">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div class="lg:col-span-7">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <h2 class="text-2xl lg:text-[2.375rem] font-medium leading-snug tracking-[0.02em] mb-6 lg:mb-8">
+              相談から、その先の通院まで。
+            </h2>
+            <div class="text-sm lg:text-base leading-[1.9] max-w-[36em] text-primary-content/90">
+              <p>初診相談、治療計画、経過のフォロー。あおば矯正歯科クリニックは、小児から成人までの歯列矯正と噛み合わせ治療に一貫して取り組みます。</p>
+            </div>
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-5">
+          <dl class="grid grid-cols-1 lg:grid-cols-1 gap-0 border-t border-primary-content/30">
+            {stats.map((s) => (
+              <div class="border-b border-primary-content/30">
+                <Stat title={s.title} value={s.value} desc="" class="text-primary-content py-6 lg:py-8 [&_.stat-title]:text-primary-content/80 [&_.stat-value]:text-primary-content [&_.stat-title]:text-sm lg:[&_.stat-title]:text-base [&_.stat-value]:text-3xl lg:[&_.stat-value]:text-5xl [&_.stat-value]:font-medium [&_.stat-value]:tracking-tight" />
+              </div>
+            ))}
+          </dl>
+          <p class="mt-6 text-xs lg:text-sm leading-relaxed text-primary-content/75">
+            架空の企業設定に基づく数値です。集計期間・算出条件は設定されていません。
+          </p>
+          <div class="mt-8">
+            <a href={url(site, '/about/')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-primary-content/40 pb-1 hover:border-primary-content text-primary-content">
+              当院の診療姿勢を見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 年齢と相談内容から選ぶ -->
+  <section class="aoba-treatments bg-base-100">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        <figure class="lg:col-span-4">
+          <img
+            src={`${SHARED}/img-b-04.jpg`}
+            alt="歯列模型のイメージ"
+            width="1000"
+            height="1000"
+            loading="lazy"
+            class="w-full aspect-square object-cover"
+          />
+          <figcaption class="mt-3 text-xs lg:text-sm text-base-content/65">
+            歯列模型のイメージ
+          </figcaption>
+        </figure>
+        <div class="lg:col-span-8">
+          <h2 class="text-2xl lg:text-[2.375rem] font-medium leading-snug tracking-[0.02em] mb-6 lg:mb-10">
+            自分に近い入口から。
+          </h2>
+          <ul class="border-t border-base-300">
+            {treatmentLinks.map((t) => (
+              <li class="border-b border-base-300">
+                <a href={url(site, t.href)} class="group flex items-start gap-4 lg:gap-6 py-6 lg:py-7 hover:text-primary transition-colors">
+                  <span class="text-base-content/50 font-medium tabular-nums shrink-0 w-10 lg:w-12 text-lg lg:text-xl" aria-hidden="true">{t.number}</span>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-base lg:text-lg font-bold mb-2 group-hover:text-primary">{t.title}</p>
+                    <p class="text-sm lg:text-base leading-relaxed text-base-content/80">{t.body}</p>
+                  </div>
+                  <span aria-hidden="true" class="text-base-content/50 group-hover:text-primary transition-colors shrink-0 self-center">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6 text-xs lg:text-sm text-base-content/65 leading-relaxed">
+            マウスピース矯正・ワイヤー矯正・保定管理についてもご案内しています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 通院する場所を知る (animation: none) -->
+  <section class="aoba-clinic bg-base-100">
+    <div class="max-w-[1400px] mx-auto px-5 lg:px-18 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12">
+        <div class="lg:col-span-8">
+          <figure class="overflow-hidden">
+            <img
+              src={facilityImages[0].src}
+              alt={facilityImages[0].alt}
+              width="1500"
+              height="844"
+              loading="lazy"
+              class="w-full aspect-[16/9] object-cover"
+            />
+            <figcaption class="mt-3 text-xs lg:text-sm text-base-content/65">
+              {facilityImages[0].caption}
+            </figcaption>
+          </figure>
+        </div>
+        <figure class="lg:col-span-4 lg:pt-24">
+          <img
+            src={facilityImages[1].src}
+            alt={facilityImages[1].alt}
+            width="800"
+            height="1000"
+            loading="lazy"
+            class="w-full aspect-[4/5] object-cover"
+          />
+          <figcaption class="mt-3 text-xs lg:text-sm text-base-content/65">
+            {facilityImages[1].caption}
+          </figcaption>
+        </figure>
+        <div class="lg:col-span-12 mt-8 lg:mt-12 max-w-[760px]">
+          <h2 class="text-2xl lg:text-[2.375rem] font-medium leading-snug tracking-[0.02em] mb-5">
+            通う場所のことも、相談の前に。
+          </h2>
+          <p class="text-sm lg:text-base leading-[1.9] text-base-content/85">
+            相談から治療、その後の経過確認まで。通院の場面を思い描きながら、当院の診療のつながりをご覧ください。
+          </p>
+          <p class="mt-4 text-xs lg:text-sm text-base-content/65">
+            掲載写真は院内のイメージです。
+          </p>
+          <div class="mt-6">
+            <a href={url(site, '/about/')} class="inline-flex items-center gap-2 text-sm lg:text-base font-medium border-b border-base-content/40 pb-1 hover:border-base-content">
+              当院について詳しく見る
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 共通末尾 -->
+  <PageTopButton />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .aoba-hero {
+    /* ヒーローセクション。写真外側一角だけ大きい角丸 */
+  }
+  .aoba-hero__photo img {
+    border-radius: 6px 6px 6px 112px;
+  }
+  .aoba-hero__reception img {
+    border-radius: 6px;
+  }
+  .aoba-hero__title {
+    color: var(--color-primary);
+  }
+  .aoba-hero__caption {
+    /* 写真外に表示されるキャプション */
+  }
+  .aoba-hero__note {
+    /* 予約非受付の注意文 */
+  }
+
+  .aoba-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 24px;
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+  }
+  .aoba-cta:hover {
+    opacity: 0.92;
+  }
+  .aoba-cta:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .aoba-hero__sublink:focus-visible,
+  [class*="text-base-content"] a:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  /* 青い面の左上角丸 112px。/about/ の継続セクションは右下 */
+  .aoba-approach {
+    border-top-left-radius: 112px;
+  }
+  @media (max-width: 767px) {
+    .aoba-approach {
+      border-top-left-radius: 56px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aoba-hero__inner {
+      padding-left: 72px;
+      padding-right: 72px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .aoba-hero__reception {
+      margin-left: 0;
+      margin-right: auto;
+    }
+  }
+  @media (max-width: 1023px) {
+    .aoba-hero__reception {
+      margin-top: 24px;
+    }
+  }
+  @media (max-width: 380px) {
+    .aoba-hero__title {
+      font-size: 32px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aoba-cta { transition: none !important; }
+    .aoba-hero__sublink { transition: none !important; }
+  }
+</style>

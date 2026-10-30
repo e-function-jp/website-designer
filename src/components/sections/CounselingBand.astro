@@ -1,0 +1,8 @@
+---
+interface Props { contact?: boolean; }
+const { contact = false } = Astro.props;
+---
+<section class="counseling-band"><div><h2>{contact ? '必要な項目を、上のフォームへ。' : '肌と体調の話から、始めましょう。'}</h2><a href={contact ? '#form' : '/sites/corporate/a-20260926-0500/contact/'}>{contact ? '入力内容の確認へ' : 'カウンセリング予約'} ↗</a></div></section>
+<style>
+  .counseling-band { padding:clamp(72px,10vw,132px) 24px; background:#3d2a22; color:#fff; } div { width:min(1120px,100%); margin:auto; display:flex; align-items:center; justify-content:space-between; gap:32px; } h2 { margin:0; max-width:17em; font-size:clamp(31px,4vw,48px); font-weight:500; line-height:1.35; } a { display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 22px; border:1px solid #fff; border-radius:999px; color:#fff; text-decoration:none; white-space:nowrap; } @media(max-width:640px) { div { align-items:flex-start; flex-direction:column; } }
+</style>

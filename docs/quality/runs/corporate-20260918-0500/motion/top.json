@@ -1,0 +1,848 @@
+{
+  "url": "https://nssg.jp/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260918-0500/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260918-0500/motion/top-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://nssg.jp/projects/",
+      "label": "Projects"
+    },
+    {
+      "href": "https://nssg.jp/about/",
+      "label": "About"
+    },
+    {
+      "href": "https://nssg.jp/service/",
+      "label": "Service"
+    },
+    {
+      "href": "https://nssg.jp/news/",
+      "label": "News"
+    },
+    {
+      "href": "https://nssg.jp/contact/",
+      "label": "Contact"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "header",
+      "baseClass": "l-header js-header",
+      "addedClass": [
+        "is-hidden"
+      ],
+      "changedProps": [],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-out"
+      },
+      "textSnippet": "NSSG\n              \n            \n       "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "p",
+      "baseClass": "g-logo",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.5s",
+        "delay": "0s",
+        "timing": "ease-out"
+      },
+      "textSnippet": "NSSG\n              \n            \n       "
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "nav",
+      "baseClass": "g-header-navigation",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "0.5s",
+        "delay": "0s",
+        "timing": "ease-out"
+      },
+      "textSnippet": "Projects\n            About\n            S"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "canvas",
+      "baseClass": "top-introduction-visual-canvas js-top-introduction-visual-canvas js-parallax-element",
+      "addedClass": [],
+      "changedProps": [
+        "transform"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 2089)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "h2",
+      "baseClass": "top-about-heading m-heading2",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Philosophy"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "心に触れ"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "心に触れ"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "記憶に残る"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "記憶に残る"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "美しさをつくる"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "美しさをつくる"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "We create beautiful thing"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "We create beautiful thing"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "that touch your heart"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "that touch your heart"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0.2",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "and remain in your memory."
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "span",
+      "baseClass": "",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "and remain in your memory."
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "p",
+      "baseClass": "top-about-more",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "opacity",
+        "duration": "1s",
+        "delay": "0s",
+        "timing": "ease-in-out"
+      },
+      "textSnippet": "Read More"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "projects-item js-infinite-item",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "opacity, transform",
+        "duration": "0.7s, 1.5s",
+        "delay": "0s, 0s",
+        "timing": "ease-in-out, cubic-bezier(0.215, 0.61, 0.355, 1)"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "NSSG – Branding, Art Direction",
+    "h1": null,
+    "totalHeight": 5078,
+    "viewportsTall": 5.6,
+    "sectionCount": 4,
+    "imgCount": 28,
+    "videoCount": 0,
+    "canvasCount": 1
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 4178,
+  "css": {
+    "keyframes": 2,
+    "transitionRules": 124,
+    "animationRules": 6,
+    "keyframeNames": [
+      "swiper-preloader-spin",
+      "opacity-anime"
+    ]
+  },
+  "header": {
+    "position": "fixed",
+    "atTop": {
+      "height": 191,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "l-header js-header"
+    },
+    "scrolled": {
+      "height": 191,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "l-header js-header is-hidden"
+    },
+    "shrinks": false,
+    "hides": false,
+    "changesBackground": false,
+    "togglesClass": true
+  },
+  "probedBefore": 316,
+  "revealSummary": {
+    "total": 38,
+    "scrollLinkedCount": 9,
+    "kinds": {
+      "fade": 6,
+      "fade-up": 24,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 8,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 38,
+    "durationMs": {
+      "min": 700,
+      "median": 1000,
+      "max": 1500
+    },
+    "easings": [
+      "ease",
+      "ease-in-out"
+    ]
+  }
+}

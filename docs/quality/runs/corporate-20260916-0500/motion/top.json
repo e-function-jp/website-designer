@@ -1,0 +1,838 @@
+{
+  "url": "https://sales-dex.jp/",
+  "slug": "top",
+  "error": null,
+  "shots": {
+    "top": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260916-0500/motion/top-top.jpg",
+    "full": "/Users/estaff-agent/Workspace/website-designer/docs/quality/runs/corporate-20260916-0500/motion/top-full.jpg"
+  },
+  "navLinks": [],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "framer-q48Us framer-1y3xg9i framer-v-1y3xg9i",
+      "addedClass": [
+        "framer-v-lchbws"
+      ],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "0%0%"
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "framer-w3h8di-container",
+      "addedClass": [],
+      "changedProps": [
+        "opacity"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "0%0%"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "限"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "界"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "の"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "先"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "に"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "あ"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "る"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "成"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "長"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "を"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "。"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "共"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "に"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 89.5938)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "。"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "企"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "業"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "に"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "は"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "本"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "来"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "も"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "っ"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "と"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "成"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "長"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "で"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "き"
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "chars",
+      "addedClass": [],
+      "changedProps": [
+        "opacity",
+        "transform"
+      ],
+      "from": {
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 38.4062)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": "る"
+    }
+  ],
+  "animations": [
+    {
+      "playState": "paused",
+      "type": "Animation",
+      "target": {
+        "tag": "UL",
+        "className": ""
+      },
+      "timing": {
+        "duration": 68540,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear"
+      },
+      "cssProps": [
+        "transform",
+        "computedOffset"
+      ]
+    }
+  ],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "株式会社BeyondX",
+    "h1": null,
+    "totalHeight": 10893,
+    "viewportsTall": 12.1,
+    "sectionCount": 2,
+    "imgCount": 27,
+    "videoCount": 1,
+    "canvasCount": 1
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 9993,
+  "css": {
+    "keyframes": 0,
+    "transitionRules": 2,
+    "animationRules": 1,
+    "keyframeNames": []
+  },
+  "header": null,
+  "probedBefore": 1853,
+  "revealSummary": {
+    "total": 256,
+    "scrollLinkedCount": 2,
+    "kinds": {
+      "fade": 2,
+      "fade-up": 250,
+      "fade-side": 1,
+      "zoom": 1,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 2
+    },
+    "dominantKind": "fade-up",
+    "designedRevealCount": 256,
+    "durationMs": null,
+    "easings": [
+      "ease"
+    ]
+  }
+}

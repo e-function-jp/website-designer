@@ -1,0 +1,197 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { url } from '../../../../../lib/site';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+import Alert from '../../../../../components/data-display/Alert.astro';
+import PageIntro from '../../../../../components/sections/PageIntro.astro';
+import NextPageLinks from '../../../../../components/site/NextPageLinks.astro';
+import FloatingCta from '../../../../../components/site/FloatingCta.astro';
+
+const guideLinks = [
+  {
+    title: '営業変革プログラム',
+    body: '商談設計、パイプライン可視化、現場定着の支援範囲と、診断から始まる流れをご紹介します。',
+    href: '/service/',
+    linkLabel: '支援内容を見る',
+  },
+  {
+    title: '私たちの営業設計',
+    body: '再現性のある受注プロセスを構築するための考え方をご紹介します。',
+    href: '/about/',
+    linkLabel: '支援の考え方を見る',
+  },
+  {
+    title: '会社概要',
+    body: '商号、設立年、所在地、従業員数と事業内容を掲載しています。',
+    href: '/company/',
+    linkLabel: '会社情報を見る',
+  },
+];
+---
+
+<SiteLayout
+  site={site}
+  title="お知らせ"
+  description="軌道セールス設計株式会社からのお知らせを掲載するページです。現在掲載中のお知らせはありません。"
+  path="/news/"
+  breadcrumbs={[{ label: 'ホーム', href: '/' }, { label: 'お知らせ' }]}
+>
+  <!-- 01 更新情報の入口 -->
+  <PageIntro
+    title="お知らせ"
+    description="軌道セールス設計株式会社からのお知らせを掲載するページです。営業変革プログラムの支援内容は「営業変革プログラム」、組織診断から現場定着までをつなぐ考え方は「私たちの営業設計」でご紹介しています。会社の基本情報は「会社概要」でご確認いただけます。"
+  />
+
+  <!-- 02 掲載状況（紙色背景・空状態） -->
+  <section class="empty-state bg-base-200">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <div class="empty-state__grid grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-3">
+          <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+            <p class="empty-state__num" aria-hidden="true">02</p>
+            <h2 class="empty-state__heading">掲載状況</h2>
+          </ScrollReveal>
+        </div>
+        <div class="lg:col-span-9">
+          <div class="empty-state__body">
+            <p class="empty-state__lead">現在、掲載中のお知らせはありません。</p>
+            <p>このページに掲載している更新情報はありません。支援内容や会社情報をお探しの方は、以下の各ページをご利用ください。お知らせの掲載状況にかかわらず、営業変プログラムの内容と組織診断の申し込みページはご確認いただけます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 目的から探す（白背景・3行のリンク） -->
+  <section class="guide bg-base-100">
+    <div class="max-w-[1140px] mx-auto px-5 lg:px-10 py-16 lg:py-24">
+      <ScrollReveal animation="fade-up" duration={site.motion!.durationMs}>
+        <p class="guide__num" aria-hidden="true">03</p>
+        <h2 class="guide__heading">お探しの情報へ。</h2>
+        <ul class="guide__list">
+          {guideLinks.map((g) => (
+            <li class="guide__row">
+              <a href={url(site, g.href)} class="guide__link">
+                <div class="guide__copy">
+                  <p class="guide__title">{g.title}</p>
+                  <p class="guide__body">{g.body}</p>
+                  <p class="guide__cta">
+                    <span class="guide__cta-label">{g.linkLabel}</span>
+                    <span aria-hidden="true">→</span>
+                  </p>
+                </div>
+                <span class="guide__arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <NextPageLinks site={site} currentPath="/news/" />
+  <FloatingCta site={site} />
+</SiteLayout>
+
+<style>
+  .empty-state__num,
+  .guide__num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+  }
+  .empty-state__heading,
+  .guide__heading {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+    letter-spacing: 0.02em;
+    color: var(--color-base-content);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'YuMincho', 'Noto Serif JP', serif;
+  }
+  .empty-state__body {
+    border-top: 1px solid var(--color-base-300);
+    border-bottom: 1px solid var(--color-base-300);
+    padding: 24px 0;
+  }
+  .empty-state__body p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 16px;
+    color: var(--color-base-content);
+  }
+  .empty-state__lead {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .empty-state__body p:last-child { margin-bottom: 0; }
+
+  .guide__heading { margin-bottom: 32px; }
+  .guide__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .guide__row {
+    border-top: 1px solid var(--color-base-300);
+  }
+  .guide__row:last-child {
+    border-bottom: 1px solid var(--color-base-300);
+  }
+  .guide__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 8px;
+    text-decoration: none;
+    color: var(--color-base-content);
+  }
+  .guide__link:hover { color: var(--color-secondary); }
+  .guide__title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .guide__body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-base-content);
+    opacity: 0.85;
+    margin: 0 0 8px;
+  }
+  .guide__cta {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .guide__arrow {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-primary);
+    flex: 0 0 auto;
+  }
+  .guide__link:hover .guide__arrow { color: var(--color-secondary); }
+
+  @media (min-width: 768px) {
+    .guide__link {
+      padding: 28px 16px;
+    }
+    .guide__title { font-size: 19px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .guide__link, .guide__arrow { transition: none; }
+  }
+</style>
