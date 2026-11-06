@@ -52,7 +52,7 @@ const server = createServer((req, res) => {
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
 const port = server.address().port;
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({ executablePath: process.env.WEB_DESIGNER_CHROMIUM_PATH || undefined });
 try {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   await page.goto(`http://127.0.0.1:${port}${route}`, { waitUntil: 'networkidle', timeout: 60000 });

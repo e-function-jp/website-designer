@@ -299,6 +299,10 @@ def main() -> int:
         ref = pick_reference(stype["id"], archive, used_refs, industry_id,
                              industry_fallback=True)
 
+    if not ref.get("qualification", {}).get("ok") and not args.dry_run:
+        print("適格な参照サイトを取得できないため、ランと選定状態を更新しません。", file=sys.stderr)
+        return 1
+
     import os
     models = [m.strip() for m in
               (args.models or os.environ.get("WEB_DESIGNER_MODELS", "a,b")).split(",") if m.strip()]

@@ -144,7 +144,7 @@ const server = createServer((req, res) => {
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
 const port = server.address().port;
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({ executablePath: process.env.WEB_DESIGNER_CHROMIUM_PATH || undefined });
 let made = 0, failed = 0;
 const madeList = [];
 

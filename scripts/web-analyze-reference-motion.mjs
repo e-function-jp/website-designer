@@ -411,7 +411,7 @@ const main = async () => {
   const outDir = join(isAbsolute(OUT_DIR) ? OUT_DIR : join(ROOT, OUT_DIR), 'motion');
   mkdirSync(outDir, { recursive: true });
 
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ executablePath: process.env.WEB_DESIGNER_CHROMIUM_PATH || undefined });
   // 例外時もブラウザを閉じる。閉じ忘れると Chromium が積み上がり、
   // ランを重ねたところで OOM に至る（実測 2026-09-09）。
   const closeBrowser = async () => { try { await browser.close(); } catch {} };

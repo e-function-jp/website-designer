@@ -85,7 +85,7 @@ const CATALOG_ROUTES = new Set(['/components/']);
 const routes = (ONLY_ROUTE ? [ONLY_ROUTE] : collectRoutes(DIST))
   .filter((r) => ONLY_ROUTE || !CATALOG_ROUTES.has(r))
   .sort();
-const browser = await chromium.launch();
+const browser = await chromium.launch({ executablePath: process.env.WEB_DESIGNER_CHROMIUM_PATH || undefined });
 // 例外や強制終了でブラウザが残ると、ランを重ねるたびに Chromium が積み上がって
 // OOM でタスクごと落ちる（実測 2026-09-09: 20 プロセス残留してメモリ枯渇）。
 // 異常終了経路でも必ず閉じる。
@@ -645,3 +645,6 @@ if (AS_JSON) {
     process.exit(1);
   }
 }
+
+// JSON output must preserve the same publication gate as human-readable output.
+if (results.some(r => r.findings.some(f => f.severity === "high"))) process.exitCode = 1;
