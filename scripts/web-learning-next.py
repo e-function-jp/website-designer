@@ -301,6 +301,7 @@ def main() -> int:
 
     if not ref.get("qualification", {}).get("ok") and not args.dry_run:
         print("適格な参照サイトを取得できないため、ランと選定状態を更新しません。", file=sys.stderr)
+        print(json.dumps({"reference": ref, "site_type": stype["id"], "industry": industry_id}, ensure_ascii=False, indent=2), file=sys.stderr)
         return 1
 
     import os

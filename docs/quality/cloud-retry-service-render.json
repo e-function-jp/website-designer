@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-11-06T08:17:51.169Z",
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "results": [
+    {
+      "route": "/sites/corporate/a-20260926-0500/service/",
+      "pageHeight": 5154,
+      "imageCount": 5,
+      "findings": [
+        {
+          "id": "render-card-misaligned",
+          "severity": "medium",
+          "detail": "横並びのカードで中身の開始位置が揃っていません 2 箇所: 2枚でずれ 182px / 2枚でずれ 673px"
+        }
+      ],
+      "contrastSamples": []
+    }
+  ]
+}

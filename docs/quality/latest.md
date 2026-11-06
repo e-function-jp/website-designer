@@ -1,8 +1,8 @@
 # website 品質レポート
 
-- 計測日時: 2026/9/20 16:53:03
+- 計測日時: 2026/11/6 8:11:16
 - **総合スコア: 100 / 100**（前回 100、+0）
-- サイト数: 7 / ページ数: 80
+- サイト数: 8 / ページ数: 89
 
 | ページ | スコア | 指摘数 |
 |---|---|---|
@@ -20,11 +20,20 @@
 | /sites/corporate/a-20260920-1616/ | 93 | 2 |
 | /sites/corporate/a-20260920-1616/news/ | 100 | 0 |
 | /sites/corporate/a-20260920-1616/privacy/ | 100 | 0 |
-| /sites/corporate/a-20260920-1616/service/ | 98 | 1 |
+| /sites/corporate/a-20260920-1616/service/ | 100 | 0 |
 | /sites/corporate/a-20260920-1616/works/brand/ | 100 | 0 |
 | /sites/corporate/a-20260920-1616/works/campaign/ | 100 | 0 |
 | /sites/corporate/a-20260920-1616/works/ | 100 | 0 |
 | /sites/corporate/a-20260920-1616/works/recruitment/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/about/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/company/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/contact/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/ | 95 | 1 |
+| /sites/corporate/a-20260926-0500/news/first-visit/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/news/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/privacy/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/recruit/ | 100 | 0 |
+| /sites/corporate/a-20260926-0500/service/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/about/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/company/ | 100 | 0 |
 | /sites/corporate/b-20260903-1448/contact/ | 100 | 0 |
@@ -111,7 +120,7 @@
 
 | 重要度 | ルール | 内容 |
 |---|---|---|
-| 🟡 medium | perf-img-lazy: ファーストビュー以降の img に loading="lazy" が無い | lazy 未指定 2件 / 全10件 |
+| 🟡 medium | perf-img-lazy: ファーストビュー以降の img に loading="lazy" が無い | lazy 未指定 2件 / 全12件 |
 
 ## / — 100点
 
@@ -148,11 +157,9 @@
 
 指摘なし 🎉
 
-## /sites/corporate/a-20260920-1616/service/ — 98点
+## /sites/corporate/a-20260920-1616/service/ — 100点
 
-| 重要度 | ルール | 内容 |
-|---|---|---|
-| 🔵 low | a11y-nav-label: 複数の <nav> に aria-label が無い | <nav> が 6 個あるが 1 個に aria-label が無い |
+指摘なし 🎉
 
 ## /sites/corporate/a-20260920-1616/works/brand/ — 100点
 
@@ -167,6 +174,44 @@
 指摘なし 🎉
 
 ## /sites/corporate/a-20260920-1616/works/recruitment/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/about/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/company/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/contact/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/ — 95点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | motion-consistency-drift: ページ間でモーションの有無が揃っていない | 演出のあるページ（/company/:3, /:5）と、演出ゼロのページ（/contact/, /news/）が混在している |
+
+## /sites/corporate/a-20260926-0500/news/first-visit/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/news/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/privacy/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/recruit/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/a-20260926-0500/service/ — 100点
 
 指摘なし 🎉
 

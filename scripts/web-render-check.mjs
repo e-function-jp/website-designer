@@ -617,7 +617,7 @@ for (const route of routes) {
     findings.push({ id: 'render-request-failed', severity: 'high', detail: [...new Set(failedRequests)].slice(0, 5).join(', ') });
   }
 
-  results.push({ route, pageHeight: data.pageHeight, imageCount: data.imageCount, findings });
+  results.push({ route, pageHeight: data.pageHeight, imageCount: data.imageCount, findings, contrastSamples: data.lowContrast });
   await ctx.close();
 }
 
