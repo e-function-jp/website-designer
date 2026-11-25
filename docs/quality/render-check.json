@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-17T08:26:26.180Z",
+  "checked_at": "2026-11-25T03:15:48.845Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -73,12 +73,12 @@
     {
       "route": "/sites/corporate/",
       "pageHeight": 1563,
-      "imageCount": 8,
+      "imageCount": 9,
       "findings": [
         {
           "id": "render-heading-too-small",
           "severity": "medium",
-          "detail": "見出しが本文(16px)とほぼ同寸です 8 件: H2 16px「白澄メディウェル株式会社」 / H2 16px「株式会社ノクスレイ」 / H2 16px「株木堂建築株式会社」 / H2 16px「蒼紙舎株式会社」 / H2 16px「軌道セールス設計株式会社」 / H2 16px「あおば矯正歯科クリニック」"
+          "detail": "見出しが本文(16px)とほぼ同寸です 9 件: H2 16px「巡路知能株式会社」 / H2 16px「白澄メディウェル株式会社」 / H2 16px「株式会社ノクスレイ」 / H2 16px「株木堂建築株式会社」 / H2 16px「蒼紙舎株式会社」 / H2 16px「軌道セールス設計株式会社」"
         }
       ],
       "contrastSamples": []
@@ -766,6 +766,512 @@
       "imageCount": 4,
       "findings": [],
       "contrastSamples": []
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/",
+      "pageHeight": 6989,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 22 件: span\"✳\"(比1.95, 要4.5) / span\"✳\"(比1.95, 要4.5) / span\"✳\"(比1.95, 要4.5) / span\"✳\"(比1.95, 要4.5)"
+        },
+        {
+          "id": "render-blank-region",
+          "severity": "medium",
+          "detail": "1175px〜2560px に 1386px の空白帯（可視要素なし）"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 12
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 12
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 12
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 12
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 12
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "お知らせ",
+          "ratio": 2.49,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-target",
+          "text": "自治体・上水道担当向け",
+          "ratio": 2.49,
+          "need": 4.5,
+          "size": 11
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/business/",
+      "pageHeight": 3940,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-heading-too-small",
+          "severity": "medium",
+          "detail": "見出しが本文(16px)とほぼ同寸です 5 件: H2 18px「上水道点検」 / H2 18px「下水道点検」 / H2 18px「公共施設点検」 / H2 18px「設備管理」 / H2 18px「記録分析」"
+        },
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 11 件: span\"✳\"(比1.8, 要4.5) / span\"✳\"(比1.8, 要4.5) / span\"✳\"(比1.8, 要4.5) / span\"✳\"(比1.8, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.8,
+          "need": 4.5,
+          "size": 13
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.8,
+          "need": 4.5,
+          "size": 13
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.8,
+          "need": 4.5,
+          "size": 13
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.8,
+          "need": 4.5,
+          "size": 13
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.8,
+          "need": 4.5,
+          "size": 13
+        },
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        },
+        {
+          "tag": "span",
+          "cls": "junro-target",
+          "text": "自治体・上水道担当向け",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-target",
+          "text": "自治体・下水道担当向け",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/company/",
+      "pageHeight": 2620,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-heading-too-small",
+          "severity": "medium",
+          "detail": "見出しが本文(16px)とほぼ同寸です 3 件: H2 18px「代表メッセージ」 / H2 18px「私たちの使命」 / H2 18px「会社概要・組織」"
+        },
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: span\"✳\"(比1.95, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/company/message/",
+      "pageHeight": 3221,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: span\"✳\"(比1.95, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/company/mission/",
+      "pageHeight": 3022,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: span\"✳\"(比1.95, 要4.5)"
+        },
+        {
+          "id": "render-blank-region",
+          "severity": "medium",
+          "detail": "1632px〜2463px に 831px の空白帯（可視要素なし）"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/company/outline/",
+      "pageHeight": 3557,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: span\"✳\"(比1.95, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/contact/",
+      "pageHeight": 2427,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-heading-too-small",
+          "severity": "medium",
+          "detail": "見出しが本文(16px)とほぼ同寸です 1 件: H2 16px「導入について相談する」"
+        },
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: span\"✳\"(比1.95, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/press/",
+      "pageHeight": 2610,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-heading-too-small",
+          "severity": "medium",
+          "detail": "見出しが本文(16px)とほぼ同寸です 3 件: H2 16px「ニュース」 / H2 18px「プレスキット」 / H2 18px「公開データ」"
+        },
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 11 件: span\"✳\"(比1.95, 要4.5) / span\"お知らせ\"(比2.69, 要4.5) / span\"記事\"(比2.69, 要4.5) / span\"記事\"(比2.69, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "お知らせ",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "記事",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "記事",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "お知らせ",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "記事",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "time",
+          "cls": "",
+          "text": "2026.11.24",
+          "ratio": 4.48,
+          "need": 4.5,
+          "size": 12
+        },
+        {
+          "tag": "time",
+          "cls": "",
+          "text": "2026.11.19",
+          "ratio": 4.48,
+          "need": 4.5,
+          "size": 12
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/press/news/",
+      "pageHeight": 2672,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 21 件: span\"✳\"(比1.95, 要4.5) / span\"お知らせ\"(比2.69, 要4.5) / span\"記事\"(比2.69, 要4.5) / span\"記事\"(比2.69, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "お知らせ",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "記事",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "記事",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "お知らせ",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "記事",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "記事",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        },
+        {
+          "tag": "span",
+          "cls": "junro-news-category",
+          "text": "お知らせ",
+          "ratio": 2.69,
+          "need": 4.5,
+          "size": 11
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/press/opendata/",
+      "pageHeight": 3005,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-heading-too-small",
+          "severity": "medium",
+          "detail": "見出しが本文(16px)とほぼ同寸です 3 件: H2 18px「ニュース」 / H2 18px「プレスキット」 / H2 18px「公開データ」"
+        },
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: span\"✳\"(比1.95, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        }
+      ]
+    },
+    {
+      "route": "/sites/corporate/b-20261124-1613/press/presskit/",
+      "pageHeight": 2436,
+      "imageCount": 0,
+      "findings": [
+        {
+          "id": "render-heading-too-small",
+          "severity": "medium",
+          "detail": "見出しが本文(16px)とほぼ同寸です 3 件: H2 16px「活動写真」 / H2 16px「ロゴ・アイコン」 / H2 16px「利用条件」"
+        },
+        {
+          "id": "render-low-contrast",
+          "severity": "medium",
+          "detail": "コントラスト不足 1 件: span\"✳\"(比1.95, 要4.5)"
+        }
+      ],
+      "contrastSamples": [
+        {
+          "tag": "span",
+          "cls": "",
+          "text": "✳",
+          "ratio": 1.95,
+          "need": 4.5,
+          "size": 15
+        }
+      ]
     },
     {
       "route": "/sites/corporate/base-20260903-1400/",
