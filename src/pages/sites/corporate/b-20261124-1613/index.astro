@@ -1,0 +1,45 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { url } from '../../../../lib/site';
+import { site } from './_site';
+import { business, news } from './_content';
+import JunroHeader from '../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../components/site/JunroFooter.astro';
+import JunroArrowLink from '../../../../components/ui/JunroArrowLink.astro';
+import JunroBusinessFeatureB from '../../../../components/sections/JunroBusinessFeatureB.astro';
+import JunroNewsRow from '../../../../components/sections/JunroNewsRow.astro';
+import ScrollReveal from '../../../../components/ui/ScrollReveal.astro';
+const scenes = [
+  '現場で点検記録を確かめる人の情景', '野に咲く草花の情景', '緑の木立の情景',
+  '移動中の車窓の情景', '光を受ける水面の情景', '街に暮らす生き物の情景',
+];
+---
+<SiteLayout site={site} title="トップ" description="巡路知能株式会社は、上下水道や公共施設の設備点検を記録・分析するクラウドサービスを通じて、まちの設備を止めないための判断を支えます。" path="/" isHome>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/" /></Fragment>
+  <div class="junro junro-b">
+    <section class="junro-hero" aria-label="まちの設備を、止めない。"><div class="junro-hero-inner">
+      <ScrollReveal animation="fade" duration={2600}><h1 class="junro-hero-copy">まちの設備を、<br />止めない。</h1></ScrollReveal>
+      <ScrollReveal animation="fade" duration={2600}><div class="junro-hero-media" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-01.jpg);--photo2:url(/sites/corporate/_shared/20261124-1613/img-a-08.jpg)" role="img" aria-label="公共施設の通路を歩く点検担当者と、新緑の街路"></div></ScrollReveal>
+      <div class="junro-hero-news"><time datetime="2026-11-24">2026.11.24</time><span class="junro-news-category">お知らせ</span><a href={url(site, '/press/news/')}>点検記録と設備管理に関するお知らせ ↗</a></div>
+    </div></section>
+    <section class="junro-mission-preview"><ScrollReveal animation="fade" duration={2600}>
+      <div class="junro-section-title"><h2>Mission</h2><span>私たちの使命</span></div>
+      <p>まちの設備を見つめ、<br />止めないための判断を支える。</p>
+      <JunroArrowLink href={url(site, '/company/mission/')} label="私たちの使命を見る" />
+    </ScrollReveal></section>
+    <ScrollReveal animation="fade" duration={2600}><div class="junro-photo-sequence" aria-label="まちと点検の情景">{scenes.map((scene, i) => <div class="junro-photo-placeholder" data-photo style={`--photo:url(/sites/corporate/_shared/20261124-1613/img-a-0${i + 2}.jpg)`} role="img" aria-label={scene}></div>)}</div></ScrollReveal>
+    <section class="junro-business-preview"><ScrollReveal animation="fade" duration={2600}>
+      <div class="junro-section-title"><h2>Business</h2><span>事業紹介</span></div>
+      <div class="junro-business-preview-list">{business.map(item => <JunroBusinessFeatureB {...item} href={url(site, `/business/#${item.id}`)} />)}</div>
+    </ScrollReveal></section>
+    <section class="junro-company-preview">
+      <ScrollReveal animation="fade" duration={2600}><div class="junro-photo-placeholder junro-photo-placeholder--portrait" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-08.jpg);" role="img" aria-label="街角の緑と人々の情景"></div></ScrollReveal>
+      <ScrollReveal animation="fade" duration={2600}><div class="junro-company-preview-copy"><div class="junro-section-title"><h2>Company</h2><span>企業情報</span></div><p>まちの設備を支える事業の考え方と、<br />巡路知能株式会社の基本情報を紹介します。</p><JunroArrowLink href={url(site, '/company/')} label="企業情報を見る" /></div></ScrollReveal>
+      <ScrollReveal animation="fade" duration={2600}><div class="junro-photo-placeholder junro-photo-placeholder--portrait" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-09.jpg);" role="img" aria-label="点検記録を手渡す二人の手元"></div></ScrollReveal>
+    </section>
+    <section class="junro-news-section"><div><div class="junro-section-title"><h2>News</h2><span>ニュース</span></div><div class="junro-b-news-link"><JunroArrowLink href={url(site, '/press/news/')} label="ニュース一覧を見る" /></div></div><ScrollReveal animation="fade" duration={2600}><div class="junro-news-list">{news.slice(0,5).map(item => <JunroNewsRow {...item} href={url(site, '/press/news/')} />)}</div></ScrollReveal></section>
+    <section class="junro-careers"><ScrollReveal animation="fade" duration={2600}><div class="junro-section-title"><h2>Careers</h2><span>採用情報</span></div><p>巡路知能では、まちの設備を止めないために、点検の記録と分析に向き合う仲間を募集しています。自治体やインフラ運営会社が使う仕組みを、ともに育てていく仕事です。</p><JunroArrowLink href={site.nav[4].href} label="採用情報を見る" external /></ScrollReveal><ScrollReveal animation="fade" duration={2600}><div class="junro-photo-placeholder" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-11.jpg);" role="img" aria-label="打ち合わせをする人々の情景"></div></ScrollReveal><ScrollReveal animation="fade" duration={2600}><div class="junro-photo-placeholder" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-12.jpg);" role="img" aria-label="夕暮れの窓辺に灯るペンダントライト"></div></ScrollReveal></section>
+  </div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/" /></Fragment>
+</SiteLayout>

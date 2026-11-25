@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# ディレクション生成。既定のディレクターは grok-4.5（hermes / xai-oauth）。
+# ディレクション生成。既定のディレクターは claude（参照キャプチャを自分で見る）。
+# WEB_DESIGNER_DIRECTOR=grok|codex で旧経路に戻せる。
 #
 # 使い方:
 #   bash scripts/web-direction.sh <run_dir> <variant> [<brand_hint>]
@@ -15,16 +16,25 @@ RUN_DIR="${1:?run_dir required}"
 VARIANT="${2:?variant required (a|b)}"
 BRAND_HINT="${3:-}"
 
-DIRECTOR="${WEB_DESIGNER_DIRECTOR:-grok}"
-DIRECTOR_MODEL="${WEB_DESIGNER_DIRECTOR_MODEL:-grok-4.5}"
-DIRECTOR_PROVIDER="${WEB_DESIGNER_DIRECTOR_PROVIDER:-xai-oauth}"
-
 JOB="$RUN_DIR/job.json"
 [[ -f "$JOB" ]] || { echo "job.json がありません: $JOB" >&2; exit 1; }
+
+# reproduce（参照の高再現。2026-11-24〜の既定）/ adapt（旧方式）。
+# mode の無い既存ランは adapt として扱い、挙動を変えない。
+MODE="$(python3 -c "import json;print(json.load(open('$JOB')).get('mode') or 'adapt')")"
+
+# ディレクターの既定は claude（2026-11-24〜）。
+# grok は hermes 経由で画像を受け取れず、参照を見ないまま文章だけで設計していた。
+# Look→Direction→実装が全段テキストの伝言になり、余白・写真の枚数・ナビの形が
+# 段ごとに落ちていたのが再現度が上がらない主因だった。
+DIRECTOR="${WEB_DESIGNER_DIRECTOR:-claude}"
+DIRECTOR_MODEL="${WEB_DESIGNER_DIRECTOR_MODEL:-$([[ "$DIRECTOR" == grok ]] && echo grok-4.5 || echo opus)}"
+DIRECTOR_PROVIDER="${WEB_DESIGNER_DIRECTOR_PROVIDER:-xai-oauth}"
 
 OUT="$RUN_DIR/direction-${VARIANT}.html"
 RAW_LOG="$RUN_DIR/direction-${VARIANT}.raw.log"
 TEMPLATE="scripts/web-direction-prompt-template.txt"
+[[ "$MODE" == "reproduce" ]] && TEMPLATE="scripts/web-direction-prompt-template-reproduce.txt"
 
 # job.json から値を取り出す。tone_hint に空白が入るので1項目ずつ読む。
 SITE_TYPE="$(python3 -c "import json;print(json.load(open('$JOB'))['site_type'])")"
@@ -41,6 +51,16 @@ SITE_BASE="/sites/${SITE_TYPE}/${VARIANT}-${STAMP}/"
 # *変化* を写さず、均等な一覧に均してしまう」であり、冒険側の弱点は
 # 「整っているが参照から離れ、一般的な会社サイトに寄る」だった。
 # どちらか一方を選ぶのではなく、両方の講評をこの1本の指示に畳んである。
+REFERENCE_URL="$(python3 -c "import json;print(json.load(open('$JOB'))['reference'].get('url',''))")"
+REFERENCE_PAGES="$(python3 -c "import json;print(', '.join(json.load(open('$JOB')).get('reference_pages',[])))")"
+# 参照キャプチャ一覧（motion 段が保存。トップを先頭に）。claude はパスを渡せば自分で開いて見る。
+REFERENCE_CAPTURES="$(find "$RUN_DIR/motion" -maxdepth 1 -name '*.jpg' 2>/dev/null | sort | awk '/top-/{print "- " $0; next} {rest = rest "- " $0 "\n"} END {printf "%s", rest}')"
+[[ -n "$REFERENCE_CAPTURES" ]] || REFERENCE_CAPTURES="(キャプチャなし。motion 段を先に実行すること)"
+
+if [[ "$MODE" == "reproduce" ]]; then
+  VARIANT_HINT="このランのディレクションは**1本**。この指示どおりのたたき台を作り、参照と並べて採点し、その指摘を直したものを提出版にする。
+だから**参照と見比べて検証できる粒度で**書くこと（列数・比率・px・枚数・文字数・ms）。"
+else
 case "$VARIANT" in
   a|b) VARIANT_HINT="このランのディレクションは**1本**。後でこの指示どおりのたたき台を作り、独立の審査員に採点させ、その指摘を直したものを提出版にする。だから**実装できる粒度で具体的に**書くこと。
 方針:
@@ -51,6 +71,7 @@ case "$VARIANT" in
 - モーションは参照の実測値どおり。必須ページ・a11y・reduced-motion 対応は崩さない。" ;;
   *) echo "variant は a か b" >&2; exit 2 ;;
 esac
+fi
 
 # ブランドはラン単位で1つに固定する。2案が別会社になると設計の比較にならない
 # （ラン1回目で a=商社 / b=酒蔵 になった）。
@@ -110,9 +131,22 @@ PROMPT="${PROMPT//\{\{TONE_HINT\}\}/$TONE_HINT}"
 PROMPT="${PROMPT//\{\{REQUIRED_PAGES\}\}/$REQUIRED}"
 PROMPT="${PROMPT//\{\{RECOMMENDED_PAGES\}\}/$RECOMMENDED}"
 PROMPT="${PROMPT//\{\{SITE_BASE\}\}/$SITE_BASE}"
+PROMPT="${PROMPT//\{\{REFERENCE_URL\}\}/$REFERENCE_URL}"
+PROMPT="${PROMPT//\{\{REFERENCE_PAGES\}\}/$REFERENCE_PAGES}"
+PROMPT="${PROMPT//\{\{REFERENCE_CAPTURES\}\}/$REFERENCE_CAPTURES}"
 PROMPT="${PROMPT//\{\{LOOK_ANALYSIS\}\}/$LOOK_ANALYSIS}"
 PROMPT="${PROMPT//\{\{PATTERN_CATALOG\}\}/$PATTERN_CATALOG}"
 PROMPT="${PROMPT//\{\{MOTION_SUMMARY\}\}/$MOTION_SUMMARY}"
+if [[ -f "$RUN_DIR/reference-fidelity.json" ]]; then
+  python3 scripts/web-reference-fidelity.py "$RUN_DIR" contract
+  PROMPT="$PROMPT
+
+## 参照再現契約（一般的なトーン、定型CTA、文章量の目安より優先）
+各項目を該当ページの配置・文章量、画像の役割、動作、許可された差分として具体化する。
+HTMLに data-fidelity-id と data-fidelity-decision を持つ要素を項目ごとに一度だけ書く。
+adapt / omit の理由を維持し、安全・アクセシビリティと矛盾したら記録して止める。
+$(cat "$RUN_DIR/reference-fidelity.json")"
+fi
 
 REF_IMG=""
 [[ -f "$RUN_DIR/motion/top-full.jpg" ]] && REF_IMG="$RUN_DIR/motion/top-full.jpg"
@@ -157,11 +191,37 @@ HTML 本文をチャットに再掲しない（長すぎて途中で切れるた
       echo "  (codex で再生成しました)" >&2
     fi
     ;;
-  codex)
-    IMG_ARGS=(); [[ -n "$REF_IMG" ]] && IMG_ARGS+=(-i "$REF_IMG")
-    echo "$PROMPT" | codex exec --skip-git-repo-check "${IMG_ARGS[@]}" > "$RAW_LOG" 2>&1 || true
+  claude)
+    # claude -p はファイルを自分で読める（画像も Read で見られる）。直接書き出させる。
+    CLAUDE_PROMPT="$PROMPT
+
+## 出力方法（重要）
+
+チャットに HTML を貼り付けず、Write ツールで**次のファイルに直接書き出すこと**:
+  ${ROOT}/${OUT}
+
+書き出す前に、上の「参照キャプチャ」をすべて Read で開いて見ること。
+書き終えたら、ページ数・セクション数・各 data-role の件数だけを短く報告する。"
+    echo "$CLAUDE_PROMPT" | claude -p --model "$DIRECTOR_MODEL" \
+      --permission-mode acceptEdits \
+      --allowedTools "Read,Write,Edit,Glob,Grep" \
+      --add-dir "$ROOT" > "$RAW_LOG" 2>&1 || true
+    # claude の CLI 認証が切れていたら codex（画像を添付できる）で作る。
+    if grep -qi "Failed to authenticate\|access_token\|Re-authenticate\|Not logged in" "$RAW_LOG" 2>/dev/null; then
+      echo "  claude の認証が切れているため codex で生成します" >&2
+      DIRECTOR=codex
+      IMG_ARGS=()
+      while IFS= read -r f; do IMG_ARGS+=(-i "$f"); done < <(find "$RUN_DIR/motion" -maxdepth 1 -name '*-full.jpg' | sort)
+      echo "$PROMPT" | codex exec --skip-git-repo-check ${IMG_ARGS[@]+"${IMG_ARGS[@]}"} > "$RAW_LOG" 2>&1 || true
+    fi
     ;;
-  *) echo "未知のディレクター: $DIRECTOR (grok|codex)" >&2; exit 2 ;;
+  codex)
+    # 参照キャプチャは全ページ分を添付する（トップだけでは下層の意匠が落ちる）。
+    IMG_ARGS=()
+    while IFS= read -r f; do IMG_ARGS+=(-i "$f"); done < <(find "$RUN_DIR/motion" -maxdepth 1 -name '*-full.jpg' | sort)
+    echo "$PROMPT" | codex exec --skip-git-repo-check ${IMG_ARGS[@]+"${IMG_ARGS[@]}"} > "$RAW_LOG" 2>&1 || true
+    ;;
+  *) echo "未知のディレクター: $DIRECTOR (claude|grok|codex)" >&2; exit 2 ;;
 esac
 
 # hermes は primary(grok/xai-oauth) が失敗するとフォールバック
@@ -173,6 +233,14 @@ if grep -q "x-opencode-session\|Error from provider (Console Go)" "$RAW_LOG" 2>/
   echo "  ✗ プロバイダのフォールバックが失敗しています（primary が落ちて opencode-go へ落ちた）" >&2
   echo "    生ログ: $RAW_LOG" >&2
   exit 3
+fi
+
+# CLI の認証切れは、エラー文が「ディレクション本文」として書き出され、
+# 充足チェックで「ページ0件」とだけ出て原因が分からなくなる（実測 2026-11-24）。
+if grep -qi "Failed to authenticate\|access_token\|Re-authenticate\|Not logged in" "$RAW_LOG" 2>/dev/null; then
+  echo "  x ${DIRECTOR} の認証が切れています: $(head -c 200 "$RAW_LOG")" >&2
+  rm -f "$OUT"
+  exit 4
 fi
 
 python3 - "$RAW_LOG" "$OUT" <<'PYEOF'
@@ -263,4 +331,5 @@ if problems:
 print("  ✓ ディレクション充足")
 PYEOF
 
+python3 scripts/web-reference-fidelity.py "$RUN_DIR" direction
 echo "==> 出力: $OUT"

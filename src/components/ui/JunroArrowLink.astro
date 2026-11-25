@@ -1,0 +1,5 @@
+---
+interface Props { href?: string; label: string; external?: boolean }
+const { href, label, external = false } = Astro.props;
+---
+{href ? <a class="junro-arrow-link" href={href} aria-label={label} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>↗</a> : <span class="junro-arrow-link junro-arrow-link--disabled" aria-label={label}>↗</span>}

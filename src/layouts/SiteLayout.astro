@@ -90,11 +90,11 @@ const jsonLdBlocks = [...autoSchemas, ...extra].map((b) =>
       class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:btn focus:btn-primary"
       >本文へスキップ</a
     >
-    <SiteHeader site={site} path={path} />
-    {crumbs.length > 0 && <Breadcrumbs site={site} crumbs={crumbs} />}
+    {Astro.slots.has('header') ? <slot name="header" /> : <SiteHeader site={site} path={path} />}
+    {crumbs.length > 0 && site.shell?.breadcrumbs !== 'hidden' && <Breadcrumbs site={site} crumbs={crumbs} />}
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <SiteFooter site={site} />
+    {Astro.slots.has('footer') ? <slot name="footer" /> : <SiteFooter site={site} />}
   </body>
 </html>

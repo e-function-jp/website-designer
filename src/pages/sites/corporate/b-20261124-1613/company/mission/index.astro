@@ -1,0 +1,18 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { site } from '../../_site';
+import JunroHeader from '../../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../../components/sections/JunroPageHeading.astro';
+import ScrollReveal from '../../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="私たちの使命" description="巡路知能は、まちの設備を止めないために、設備を見て記録を残し、点検結果を次の管理判断へつなぐ仕組みを育てています。" path="/company/mission/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'企業情報',href:'/company/'},{label:'私たちの使命'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/company/mission/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Mission" japanese="私たちの使命" /><div class="junro-content">
+    <section class="junro-split"><h2>Mission</h2><div><p class="junro-statement">まちの設備を、<br />止めない。</p><ScrollReveal animation="clip-up" duration={250}><div class="junro-photo-placeholder junro-clip-photo" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-05.jpg);width:min(100%,540px);height:390px" role="img" aria-label="移動中の車窓から見た郊外の水路"></div></ScrollReveal></div></section>
+    <section class="junro-split"><h2>Statement</h2><div class="junro-longform"><p>設備を見て、記録を残し、次の点検につなぐ。</p><p>日々の管理を支えるこの営みには、現場で確かめたことを失わない仕組みが必要です。</p><p>巡路知能は、上下水道や公共施設の点検を記録・分析するクラウドサービスを通じて、自治体とインフラ運営会社の判断を支えます。</p><p>一件の記録から、まちの設備を止めないための次の判断へ。私たちは、そのつながりをつくります。</p></div></section>
+    <div class="junro-two-column"><div class="junro-photo-placeholder" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-03.jpg);" role="img" aria-label="施設の脇に咲く黄色い草花"></div><div class="junro-photo-placeholder" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-06.jpg);" role="img" aria-label="光の帯が走る水面"></div></div>
+  </div></div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/company/mission/" label="私たちの使命" /></Fragment>
+</SiteLayout>

@@ -51,11 +51,27 @@ ${LOOK}
   \"cta\": \"主要CTAの文言\"
 }"
 
-DIRECTOR_MODEL="${WEB_DESIGNER_DIRECTOR_MODEL:-grok-4.5}"
+# ディレクターと同じ CLI で決める（既定 claude。2026-11-24〜）。
+DIRECTOR="${WEB_DESIGNER_DIRECTOR:-claude}"
+DIRECTOR_MODEL="${WEB_DESIGNER_DIRECTOR_MODEL:-$([[ "$DIRECTOR" == grok ]] && echo grok-4.5 || echo opus)}"
 DIRECTOR_PROVIDER="${WEB_DESIGNER_DIRECTOR_PROVIDER:-xai-oauth}"
 
-echo "==> ブランド設定を確定中 (${DIRECTOR_MODEL})"
-hermes -z "$PROMPT" -m "$DIRECTOR_MODEL" --provider "$DIRECTOR_PROVIDER" > "$RAW_LOG" 2>&1 || true
+echo "==> ブランド設定を確定中 (${DIRECTOR}/${DIRECTOR_MODEL})"
+case "$DIRECTOR" in
+  claude)
+    echo "$PROMPT" | claude -p --model "$DIRECTOR_MODEL" > "$RAW_LOG" 2>&1 || true
+    if grep -qi "Failed to authenticate\|access_token\|Re-authenticate\|Not logged in" "$RAW_LOG"; then
+      echo "  claude の認証が切れているため codex で決めます" >&2
+      DIRECTOR=codex
+      echo "$PROMPT" | codex exec --skip-git-repo-check > "$RAW_LOG" 2>&1 || true
+    fi ;;
+  codex)  echo "$PROMPT" | codex exec --skip-git-repo-check > "$RAW_LOG" 2>&1 || true ;;
+  *)      hermes -z "$PROMPT" -m "$DIRECTOR_MODEL" --provider "$DIRECTOR_PROVIDER" > "$RAW_LOG" 2>&1 || true ;;
+esac
+if grep -qi "Failed to authenticate\|access_token\|Re-authenticate\|Not logged in" "$RAW_LOG"; then
+  echo "  x ${DIRECTOR} の認証が切れています: $(head -c 200 "$RAW_LOG")" >&2
+  exit 4
+fi
 
 python3 - "$RAW_LOG" "$OUT" <<'PYEOF'
 import json, re, sys

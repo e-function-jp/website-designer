@@ -66,6 +66,18 @@ export interface SiteConfig {
     pageTransition?: boolean;
   };
   /**
+   * サイト共通シェルの出し分け（参照再現ラン用。2026-11-24〜）。
+   * 参照のヘッダー/フッターが汎用形と違うときは、ページ側から SiteLayout の
+   * `header` / `footer` スロットへサイト専用部品を差し込む（ここでの宣言は記録用）。
+   * 参照がパンくずを画面に出していなければ breadcrumbs: 'hidden'
+   * （BreadcrumbList の構造化データは残す）。
+   */
+  shell?: {
+    header?: 'default' | 'custom';
+    footer?: 'default' | 'custom';
+    breadcrumbs?: 'visible' | 'hidden';
+  };
+  /**
    * 参照サイトの業種（`scripts/site_categories.py` の `INDUSTRIES` の id）。
    * ローテの従軸と、トップ・/sites/[type]/ のカード表示で使う。
    * 既存サイト（2026-09-09 以前）にも後付けで記録する。

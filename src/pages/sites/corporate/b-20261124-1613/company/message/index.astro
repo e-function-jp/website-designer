@@ -1,0 +1,25 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { site } from '../../_site';
+import JunroHeader from '../../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../../components/sections/JunroPageHeading.astro';
+import ScrollReveal from '../../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="代表メッセージ" description="巡路知能株式会社の事業の原点と現在地、設備点検の記録を次の判断につなぐ考え方、これからの展望をお伝えします。" path="/company/message/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'企業情報',href:'/company/'},{label:'代表メッセージ'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/company/message/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Message" japanese="代表メッセージ" /><div class="junro-content">
+    <h2 class="junro-statement">点検の記録を、<br />次の判断へつなぎ、<br />まちの設備を止めない仕組みをつくる。</h2>
+    <div class="junro-longform">
+      <p>設備の点検は、終わった瞬間に役割を終えるものではありません。現場で見たこと、確かめたこと、気になったこと。その一つひとつが、次に設備を見る人の手がかりになります。巡路知能は、その手がかりを失わず、必要なときに確かめられるようにするため、設備点検の記録と分析に取り組んでいます。</p>
+      <p>上下水道や公共施設は、毎日の暮らしを静かに支えています。利用する人の目に触れない場所にも、多くの設備があり、点検を担う人がいます。私たちは、現場で生まれる記録をクラウドに残し、設備ごとの情報として見返せる状態にすることで、管理を担う人の判断を支えます。</p>
+      <p>自治体の施設管理担当者とインフラ運営会社の設備管理責任者では、見ている範囲も判断する場面も異なります。それでも、確かな記録が必要であることは共通しています。現場の点検と管理の判断が離れないよう、情報を整理し、分析に使える形へつなぐことが私たちの仕事です。</p>
+      <ScrollReveal animation="clip-up" duration={250}><div class="junro-photo-placeholder junro-clip-photo" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-08.jpg);" role="img" aria-label="新緑の街路と行き交う人々"></div></ScrollReveal>
+      <p>記録が積み重なるほど、設備の状態を確かめるための視点も増えていきます。過去の点検を振り返り、現在の状況を見つめ、次に何を確かめるかを考える。その往復を支える仕組みを、使う人の仕事に沿って育て続けたいと考えています。</p>
+      <p>私たちの言葉は「まちの設備を、止めない。」です。大きな言葉に見えるかもしれません。しかし、その出発点は、現場で残された一件の記録を大切に扱うことです。福岡県福岡市から、点検を担う人と管理を担う人の間に、判断に使える情報が届くよう取り組みます。</p>
+    </div>
+    <div class="junro-signature"><div class="junro-photo-placeholder junro-photo-placeholder--portrait" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-01.jpg);" role="img" aria-label="施設の通路を歩く点検担当者"></div><p>巡路知能株式会社。<br />まちの設備を、止めない。</p></div>
+  </div></div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/company/message/" label="代表メッセージ" /></Fragment>
+</SiteLayout>

@@ -1,0 +1,436 @@
+{
+  "url": "https://giftee.co.jp/company/",
+  "slug": "company",
+  "error": null,
+  "shots": {
+    "top": "/home/yokosuka/workspace/website-designer/docs/quality/runs/corporate-20261124-1613/motion/company-top.jpg",
+    "full": "/home/yokosuka/workspace/website-designer/docs/quality/runs/corporate-20261124-1613/motion/company-full.jpg"
+  },
+  "navLinks": [
+    {
+      "href": "https://giftee.co.jp/company/",
+      "label": "企業情報"
+    },
+    {
+      "href": "https://giftee.co.jp/business/",
+      "label": "事業紹介"
+    },
+    {
+      "href": "https://giftee.co.jp/press/",
+      "label": "プレスルーム"
+    },
+    {
+      "href": "https://giftee.co.jp/contact/",
+      "label": "お問い合わせ"
+    },
+    {
+      "href": "https://careers.giftee.co.jp/",
+      "label": "採用情報"
+    }
+  ],
+  "reveals": [
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "hamburger-wrapper",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "mask-position, visibility",
+        "duration": "0.8s, 0.8s",
+        "delay": "0s, 0s",
+        "timing": "cubic-bezier(0.5, 1, 0.89, 1), ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "button",
+      "baseClass": "hamburger",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-inner",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-icon",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-line",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "translate, rotate",
+        "duration": "0.2s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-line",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "translate, rotate",
+        "duration": "0.2s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "div",
+      "baseClass": "hamburger-wrapper",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "mask-position, visibility",
+        "duration": "0.8s, 0.8s",
+        "delay": "0s, 0s",
+        "timing": "cubic-bezier(0.5, 1, 0.89, 1), ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "button",
+      "baseClass": "hamburger -close",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-inner",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "background-color",
+        "duration": "0.3s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-icon",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "all",
+        "duration": "0s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-line",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "translate, rotate",
+        "duration": "0.2s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": false,
+      "tag": "span",
+      "baseClass": "hamburger-line",
+      "addedClass": [],
+      "changedProps": [
+        "visibility"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "none"
+      },
+      "transition": {
+        "property": "translate, rotate",
+        "duration": "0.2s",
+        "delay": "0s",
+        "timing": "ease"
+      },
+      "textSnippet": ""
+    },
+    {
+      "wasOffscreen": true,
+      "tag": "div",
+      "baseClass": "image-original",
+      "addedClass": [],
+      "changedProps": [
+        "clip-path"
+      ],
+      "from": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      "transition": {
+        "property": "clip-path",
+        "duration": "0.25s",
+        "delay": "0s",
+        "timing": "cubic-bezier(0.16, 0.64, 0.32, 1)"
+      },
+      "textSnippet": ""
+    }
+  ],
+  "animations": [],
+  "libs": {
+    "gsap": null,
+    "ScrollTrigger": null,
+    "lenis": "present",
+    "locomotiveScroll": null,
+    "aos": null,
+    "swiper": null,
+    "lottie": null,
+    "threejs": null,
+    "animejs": null,
+    "barba": null,
+    "swup": null,
+    "viewTransitions": "in-use",
+    "astroTransitions": null
+  },
+  "loaders": [],
+  "meta": {
+    "title": "企業情報 | 株式会社ギフティ",
+    "h1": "企業情報企業情報",
+    "totalHeight": 2746,
+    "viewportsTall": 3.1,
+    "sectionCount": 9,
+    "imgCount": 6,
+    "videoCount": 0,
+    "canvasCount": 0
+  },
+  "scrollTriggers": null,
+  "scrollYAfter": 1846,
+  "css": {
+    "keyframes": 11,
+    "transitionRules": 15,
+    "animationRules": 1,
+    "keyframeNames": [
+      "swup-mask-reveal",
+      "swup-fade-in",
+      "page-fill-reveal-in",
+      "show-block-before",
+      "show-block-before-sp",
+      "show-head-foot",
+      "show-body",
+      "hide-menu",
+      "hide-menu-sp",
+      "fade-in",
+      "text-reveal-color"
+    ]
+  },
+  "header": {
+    "position": "relative",
+    "atTop": {
+      "height": 240,
+      "top": 0,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "section header"
+    },
+    "scrolled": {
+      "height": 240,
+      "top": -1800,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cls": "section header"
+    },
+    "shrinks": false,
+    "hides": true,
+    "changesBackground": false,
+    "togglesClass": false
+  },
+  "probedBefore": 385,
+  "revealSummary": {
+    "total": 1,
+    "scrollLinkedCount": 12,
+    "kinds": {
+      "fade": 0,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 1,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 0
+    },
+    "dominantKind": "clip-wipe",
+    "designedRevealCount": 1,
+    "durationMs": {
+      "min": 250,
+      "median": 250,
+      "max": 250
+    },
+    "easings": [
+      "cubic-bezier(0.16, 0.64, 0.32, 1)"
+    ]
+  }
+}

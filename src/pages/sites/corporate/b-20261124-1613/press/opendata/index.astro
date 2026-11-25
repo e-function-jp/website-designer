@@ -1,0 +1,17 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { url } from '../../../../../../lib/site';
+import { site } from '../../_site';
+import JunroHeader from '../../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../../components/sections/JunroPageHeading.astro';
+import JunroIndexRow from '../../../../../../components/sections/JunroIndexRow.astro';
+import JunroDataFigure from '../../../../../../components/sections/JunroDataFigure.astro';
+const figures = [{label:'導入自治体',value:'42団体'},{label:'管理設備累計',value:'18万点'},{label:'年間点検記録',value:'340万件'},{label:'従業員数',value:'86名'},{label:'設立',value:'2018年'},{label:'所在地',value:'福岡県福岡市'}];
+---
+<SiteLayout site={site} title="公開データ" description="巡路知能株式会社の導入自治体、管理設備累計、年間点検記録、従業員数、設立年、所在地の公開情報をご覧いただけます。" path="/press/opendata/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'プレスルーム',href:'/press/'},{label:'公開データ'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/press/opendata/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Open Data" japanese="公開データ" /><div class="junro-content"><div class="junro-data-grid">{figures.map(item => <JunroDataFigure {...item} />)}</div></div><section style="padding-bottom:140px"><JunroIndexRow english="News" japanese="ニュース" description="巡路知能からのお知らせをご覧いただけます。" href={url(site, '/press/news/')} /><JunroIndexRow english="Press Kit" japanese="プレスキット" description="写真とロゴの素材をご案内します。" href={url(site, '/press/presskit/')} /><JunroIndexRow english="Open Data" japanese="公開データ" description="巡路知能に関する公開数値をご覧いただけます。" href={url(site, '/press/opendata/')} current /></section></div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/press/opendata/" label="公開データ" /></Fragment>
+</SiteLayout>

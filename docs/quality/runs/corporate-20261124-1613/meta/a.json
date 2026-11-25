@@ -1,0 +1,26 @@
+{
+  "site_type": "corporate",
+  "variant": "a",
+  "stamp": "20261124-1613",
+  "route": "/sites/corporate/a-20261124-1613/",
+  "model": "",
+  "provider": "codex-cli",
+  "pages_created": [
+    "business/index.astro",
+    "company/index.astro",
+    "company/message/index.astro",
+    "company/mission/index.astro",
+    "company/outline/index.astro",
+    "contact/index.astro",
+    "index.astro",
+    "press/index.astro",
+    "press/news/index.astro",
+    "press/opendata/index.astro",
+    "press/presskit/index.astro"
+  ],
+  "has_site_config": true,
+  "tokens": {
+    "note": "codex-cli; per-session token rows not captured"
+  },
+  "implemented_at": "2026-11-24T22:56:20+09:00"
+}

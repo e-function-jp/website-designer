@@ -1,0 +1,43 @@
+{
+  "models": {
+    "a": {
+      "total": 19,
+      "layers": {
+        "information_architecture": 3,
+        "visual": 5,
+        "nielsen": 4,
+        "reference_fit": 5,
+        "quality": 2
+      },
+      "issues": [
+        "/about/ と /service/ が「not found」になっている。両ルートに SiteLayout を使った実ページを作り、見出し、本文、パンくず、トップへの戻り導線を設ける。",
+        "/ のヒーローと各写真枠が空白または単色グラデーションになっている。参照の人物・贈答・日常風景に対応する実画像を配置し、画像ごとに適切な代替テキストを付ける。",
+        "/ のヘッダー、事業紹介、フッターで文字が四角い欠字のように表示されている。日本語フォントの読み込みと文字エンコーディングを修正し、全テキストが読める状態にする。",
+        "/ の Mission と画像群の間に大きな空白がある。セクションの固定高さまたは過大な余白を取り除き、見出し・説明・画像が連続して読める間隔にする。",
+        "/ の事業紹介はカードの名称と説明が判読しにくい。各カードに事業名、短い説明、対応する下層ページへのリンクを明確に表示する。",
+        "/ のヘッダーナビは項目を判読できず、下層ページも開けない。事業内容が分かる日本語ラベルを表示し、各リンク先の実在を確認する。"
+      ],
+      "strengths": [
+        "Mission、Business、Company、News、Careers の並びと淡い背景の切り替えには、参照サイトの大まかな構成が反映されている。"
+      ],
+      "page_notes": {
+        "/": "参照の写真主体の構成がプレースホルダーに置き換わり、文字も欠字状で内容を読めない。まず画像と日本語表示を完成させる。",
+        "/about/": "「not found」のみ。会社情報の本文とパンくずを持つページを実装する。",
+        "/service/": "「not found」のみ。トップの事業紹介から到達できる事業内容ページを実装する。"
+      }
+    }
+  },
+  "winner": "a",
+  "verdict": "aは下層2ページが未実装で、トップも画像と文字表示が未完成のため提出水準に達していない。bの採点画像がないため、winnerは採点可能なaを形式上記載したもので、比較結果ではない。",
+  "run_id": "corporate-20261124-1613",
+  "site_type": "corporate",
+  "scored_at": "2026-11-24T22:57:07+09:00",
+  "method": "independent judge on rendered multi-page screenshots vs reference capture",
+  "stage": "draft",
+  "measurement_setup": {
+    "judge": "codex",
+    "judge_model": "(codex default)",
+    "reference_attached": true,
+    "score_pages": "/ /about/ /service/"
+  }
+}

@@ -1,0 +1,18 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { site } from '../_site';
+import { business } from '../_content';
+import JunroHeader from '../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../components/sections/JunroPageHeading.astro';
+import JunroContactChoice from '../../../../../components/sections/JunroContactChoice.astro';
+import JunroArrowLink from '../../../../../components/ui/JunroArrowLink.astro';
+const descriptions = ['上水道の設備点検と記録について。','下水道の設備点検と記録について。','公共施設の設備点検について。','インフラ運営会社での設備管理について。','蓄積した点検記録の分析について。'];
+const urls = [import.meta.env.PUBLIC_JUNRO_CONTACT_WATER_URL,import.meta.env.PUBLIC_JUNRO_CONTACT_SEWER_URL,import.meta.env.PUBLIC_JUNRO_CONTACT_FACILITY_URL,import.meta.env.PUBLIC_JUNRO_CONTACT_OPERATIONS_URL,import.meta.env.PUBLIC_JUNRO_CONTACT_ANALYSIS_URL];
+---
+<SiteLayout site={site} title="お問い合わせ" description="巡路知能の上水道点検、下水道点検、公共施設点検、設備管理、記録分析に関するご相談と、その他のお問い合わせ先をご案内します。" path="/contact/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'お問い合わせ'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/contact/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Contact" japanese="お問い合わせ" /><div class="junro-content"><h2>導入について相談する</h2><div style="max-width:880px;margin:80px 0 0 auto">{business.map((item,i) => <JunroContactChoice id={item.id} name={item.name} description={descriptions[i]} href={urls[i]} />)}</div><section class="junro-split" style="margin-top:180px"><h2>その他のお問い合わせ</h2><div><p>取材のご相談や事業に関する一般的なお問い合わせは、こちらからご連絡ください。</p><p>その他のお問い合わせ。</p><JunroArrowLink href={import.meta.env.PUBLIC_JUNRO_CONTACT_OTHER_URL} label="その他のお問い合わせ" external /></div></section></div></div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/contact/" label="お問い合わせ" /></Fragment>
+</SiteLayout>

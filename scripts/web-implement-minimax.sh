@@ -35,8 +35,21 @@ DRAFT_SCORE="${3:-}"
 #（docs/quality/runs/corporate-20260916-0500/compare/ と /compare/20260916-0500/）で、
 # gpt-5.6-terra は minimax-m3 と並んでディレクションの記述どおりに実装できていた。
 # opencode が復活したら WEB_DESIGNER_IMPL_DRIVER=opencode で戻す。
-IMPL_DRIVER="${WEB_DESIGNER_IMPL_DRIVER:-copilot}"
+#
+# 2026-11-24〜 既定は claude。copilot / opencode のモデルは参照キャプチャも
+# 自分の描画結果も見ずにテキストだけで実装しており、余白・写真の枚数・
+# ナビの形がディレクションの文章から落ちていた。claude は Read で画像を開け、
+# 撮影スクリプトで自分の描画を見て直せる。
+IMPL_DRIVER="${WEB_DESIGNER_IMPL_DRIVER:-claude}"
 case "$IMPL_DRIVER" in
+  claude)
+    MODEL="${WEB_DESIGNER_IMPL_MODEL:-opus}"
+    IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-claude}"
+    ;;
+  codex)
+    MODEL="${WEB_DESIGNER_IMPL_MODEL:-}"
+    IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-codex}"
+    ;;
   copilot)
     MODEL="${WEB_DESIGNER_IMPL_MODEL:-gpt-5.6-terra}"
     IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-copilot}"
@@ -46,13 +59,14 @@ case "$IMPL_DRIVER" in
     MODEL="${WEB_DESIGNER_IMPL_MODEL:-opencode-go/minimax-m3}"
     IMPL_CMD="${WEB_DESIGNER_IMPL_CMD:-opencode}"
     ;;
-  *) echo "WEB_DESIGNER_IMPL_DRIVER は copilot か opencode" >&2; exit 2 ;;
+  *) echo "WEB_DESIGNER_IMPL_DRIVER は claude / codex / copilot / opencode" >&2; exit 2 ;;
 esac
 
 JOB="$RUN_DIR/job.json"
 [[ -f "$JOB" ]] || { echo "job.json がありません: $JOB" >&2; exit 1; }
 SITE_TYPE="$(python3 -c "import json;print(json.load(open('$JOB'))['site_type'])")"
 STAMP="$(python3 -c "import json;print(json.load(open('$JOB'))['stamp'])")"
+MODE="$(python3 -c "import json;print(json.load(open('$JOB')).get('mode') or 'adapt')")"
 
 # ディレクションはラン1本。提出版は、たたき台と同じディレクションを
 # 採点の指摘で直したものであって、別案ではない。
@@ -116,16 +130,61 @@ ${DRAFT_ISSUES}
 "
 fi
 
+python3 scripts/web-reference-fidelity.py "$RUN_DIR" direction
+FIDELITY_BLOCK=""
+if [[ -f "$RUN_DIR/reference-fidelity.json" ]]; then
+  FIDELITY_BLOCK="参照再現契約: $RUN_DIR/reference-fidelity.json を読む。観察・条件・採否を ID ごとに照合する。契約にない説明、画像、装飾カードを汎用ルールだけで足さず、矛盾・未実装は ID ごとに報告する。"
+fi
+
+# --- 参照再現モードの指示 ----------------------------------------------
+# 汎用ルール（既存部品の最低数・定型 CTA・均一な演出量）が参照の意匠を
+# 一般的な会社サイトへ均していた。reproduce では参照を正とする。
+REPRODUCE_BLOCK=""
+COMPONENT_RULE="\`src/components/\` の既存コンポーネントを使う。**各ページ最低2件、サイト全体で6種類以上。**
+   ベタ書きHTMLで済ませない。既存にない構造はコンポーネントとして
+   \`src/components/sections/\` に切り出してから使う（これが本プロジェクトの目的）。"
+if [[ "$MODE" == "reproduce" ]]; then
+  REF_CAPS="$(find "$RUN_DIR/motion" -maxdepth 1 -name '*.jpg' 2>/dev/null | sort | sed 's/^/  - /')"
+  REPRODUCE_BLOCK="
+## このランは「参照の意匠の高再現」である（最重要）
+
+- 参照サイト: $(python3 -c "import json;print(json.load(open('$JOB'))['reference'].get('url',''))")
+- 参照キャプチャ（**実装前に必ず全部 Read で開いて見る**）:
+${REF_CAPS:-  (なし)}
+- ディレクションの \`data-role=\"reference\"\` が、そのセクションが写す参照の箇所。迷ったら参照キャプチャを正とする。
+- **足さない**: ディレクションと参照のどちらにも無いセクション・説明文・実績数値・CTA帯・装飾カードを、
+  一般的なサイトに必要だからという理由で足さない。
+- **均さない**: 写真のサイズ差・余白の広狭・ページごとに違う演出量・英語の短いラベルを、整える目的で揃えない。
+- ヘッダー/ナビが既定の \`SiteHeader\` と違う形・挙動なら（ディレクションの #shell が custom）、
+  サイト専用ヘッダーを \`src/components/site/\` に新規部品として作り、各ページで
+  \`<Fragment slot=\"header\">\` として \`SiteLayout\` に差し込む（フッターも \`slot=\"footer\"\`）。
+  状態（PC初期/PCスクロール後/PCメニュー展開/SP初期/SP展開）ごとの見た目と遷移を #shell どおりに実装する。
+  ナビ項目は \`_site.ts\` の \`nav\` から描画し（全ページで同じ集合）、現在地に \`aria-current=\"page\"\` を付ける。
+  キーボード操作・aria-expanded・Esc で閉じる・reduced-motion を崩さない。
+- パンくずを画面に出さない指定なら \`_site.ts\` に \`shell: { breadcrumbs: 'hidden' }\`。
+- 実装後に \`npm run build\` → \`npx astro preview\` を起動し、
+  \`node scripts/web-shoot-sample.mjs <route> <outfile> --width 1280\`（SP は 390）で自分のページを撮って Read で開き、
+  参照キャプチャと**同じ幅で見比べて**差を直す（最低1往復）。
+"
+  COMPONENT_RULE="部品は「見た目が参照と一致するときだけ」既存の \`src/components/\` を使う。
+   一致しない構造は、参照の見た目どおりの新規コンポーネントとして \`src/components/sections/\`
+   （ヘッダー等は \`src/components/site/\`）に切り出してから使う。既存部品の既定の見た目に
+   引きずられて参照から離れるのは不可。サイト全体で到達できる部品が6種類以上・各ページ2件以上になること
+   （新規に切り出した部品も数える）。"
+fi
+
 PROMPT=$(cat <<EOF
 あなたは website-designer リポジトリ (${ROOT}) で Astro の website を実装するエンジニア。
 ファイル作成・ビルド・品質チェックまで自分で行ってよい。ただし
 **main ブランチのまま作業し、git add / commit / push は一切しない**。
 
 ${REVISION_BLOCK}
+${REPRODUCE_BLOCK}
 ## 実装対象
 
 - 出力ディレクトリ: ${OUT_DIR}/
 - ディレクション: ${DIRECTION}
+${FIDELITY_BLOCK}
   → #site-config / #sitemap / #pages の指示を **そのまま実装する。考え直さない。**
   → 各 <section data-section> の data-role="copy" の日本語をそのまま使う
   → data-role="animation" の指示を必ず実装する（none なら何もしない）
@@ -149,9 +208,7 @@ ${REVISION_BLOCK}
    JSON-LD・title は SiteLayout が自動で作るので、手書きしない。
 3. SiteLayout に渡す props: \`site\` / \`title\` / \`description\`（40文字以上・ページ固有）/
    \`path\` / トップは \`isHome\` / 下層は \`breadcrumbs\`。
-4. \`src/components/\` の既存コンポーネントを使う。**各ページ最低2件、サイト全体で6種類以上。**
-   ベタ書きHTMLで済ませない。既存にない構造はコンポーネントとして
-   \`src/components/sections/\` に切り出してから使う（これが本プロジェクトの目的）。
+4. ${COMPONENT_RULE}
 5. **独自テーマは \`src/styles/global.css\` に DaisyUI v5 の書式で追加する。**
    既定テーマ（light / dark / cupcake）のままにしない。書式は次のとおり:
 
@@ -224,7 +281,31 @@ EOF
 )
 
 echo "==> ${IMPL_CMD} (${MODEL}) で実装中（時間がかかります）"
-if [[ "$IMPL_DRIVER" == "copilot" ]]; then
+run_codex_impl() {
+  # 参照キャプチャを画像として添付する（codex は -i で画像を見られる）。
+  local img_args=() m_args=()
+  while IFS= read -r f; do img_args+=(-i "$f"); done < <(find "$RUN_DIR/motion" -maxdepth 1 -name '*-full.jpg' 2>/dev/null | sort)
+  [[ -n "$MODEL" && "$IMPL_DRIVER" == "codex" ]] && m_args+=(-m "$MODEL")
+  echo "$PROMPT" | codex exec --skip-git-repo-check -s workspace-write -C "$ROOT" \
+    ${m_args[@]+"${m_args[@]}"} ${img_args[@]+"${img_args[@]}"} > "$LOG" 2>&1 || true
+}
+
+if [[ "$IMPL_DRIVER" == "claude" ]]; then
+  # 非対話実行。編集・ビルド・撮影まで自分で回せるよう Bash を許可する。
+  # git 操作はプロンプトで禁止している。
+  echo "$PROMPT" | "$IMPL_CMD" -p --model "$MODEL" \
+    --permission-mode acceptEdits \
+    --allowedTools "Read,Write,Edit,Glob,Grep,Bash" \
+    --add-dir "$ROOT" > "$LOG" 2>&1 || true
+  # claude の CLI 認証が切れていたら codex で実装する（画像を見られる実装者を優先）。
+  if grep -qi "Failed to authenticate\|access_token\|Re-authenticate\|Not logged in" "$LOG" 2>/dev/null; then
+    echo "  claude の認証が切れているため codex で実装します" >&2
+    IMPL_DRIVER=codex; MODEL=""
+    run_codex_impl
+  fi
+elif [[ "$IMPL_DRIVER" == "codex" ]]; then
+  run_codex_impl
+elif [[ "$IMPL_DRIVER" == "copilot" ]]; then
   # --allow-all-tools は非対話実行に必須。-s で応答本文だけを拾う。
   # -C でリポジトリを作業ディレクトリに固定する。
   "$IMPL_CMD" -p "$PROMPT" --model "$MODEL" --allow-all-tools -s -C "$ROOT" > "$LOG" 2>&1 || true
@@ -253,6 +334,11 @@ pathlib.Path(meta_out).write_text(json.dumps({
 print(f"  作成ページ: {len(pages)} 件 {pages}")
 print(f"  _site.ts: {'あり' if (d / '_site.ts').exists() else '**なし（要修正）**'}")
 PYEOF
+
+if grep -qi "Failed to authenticate\|Re-authenticate\|Not logged in" "$LOG" 2>/dev/null; then
+  echo "  x ${IMPL_CMD} の認証が切れています: $(head -c 200 "$LOG")" >&2
+  exit 4
+fi
 
 # 成果物の検証。ここを飛ばすと、ページが 1 枚も出来ていないのに採点段へ進み、
 # 存在しないURLを撮影した "not found" 画像を judge に渡して 0 点が返る。

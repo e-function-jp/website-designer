@@ -117,6 +117,16 @@
       "weight": 0.0,
       "industry_weight": 0.0625,
       "at": "2026-09-21T05:07:39+09:00"
+    },
+    {
+      "run_id": "corporate-20261124-1613",
+      "site_type": "corporate",
+      "industry": "technology",
+      "reference_id": "muuuuu-24591",
+      "reference_title": "株式会社ギフティ",
+      "weight": 0.0,
+      "industry_weight": 0.1667,
+      "at": "2026-11-24T16:13:28+09:00"
     }
   ]
 }

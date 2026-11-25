@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-06T08:16:25.517Z",
+  "checked_at": "2026-11-17T08:26:26.180Z",
   "viewport": {
     "width": 1280,
     "height": 900
@@ -7,7 +7,7 @@
   "results": [
     {
       "route": "/",
-      "pageHeight": 1399,
+      "pageHeight": 1373,
       "imageCount": 1,
       "findings": [
         {
@@ -27,14 +27,9 @@
     },
     {
       "route": "/compare/20260916-0500/gemini38flash/",
-      "pageHeight": 3896,
+      "pageHeight": 3750,
       "imageCount": 2,
       "findings": [
-        {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「型は、使われてこそ力になる。」42px/2行"
-        },
         {
           "id": "render-card-misaligned",
           "severity": "medium",
@@ -45,27 +40,21 @@
     },
     {
       "route": "/compare/20260916-0500/gpt56terra/",
-      "pageHeight": 4388,
+      "pageHeight": 4210,
       "imageCount": 2,
-      "findings": [
-        {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 2 件: 「型は、使われてこそ力になる。」42px/2行（末行が1〜2文字） / 「営業の現場に向き合う会社です。」42px/2行"
-        }
-      ],
+      "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/compare/20260916-0500/maicode/",
-      "pageHeight": 4736,
+      "pageHeight": 4573,
       "imageCount": 2,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/compare/20260916-0500/sonnet5/",
-      "pageHeight": 4203,
+      "pageHeight": 4117,
       "imageCount": 2,
       "findings": [
         {
@@ -76,7 +65,7 @@
         {
           "id": "render-text-overlap",
           "severity": "high",
-          "detail": "文章どうしが重なっています 1 箇所: 「成果と、続く仕組み。」と「無料で組織診断を申し込む」(58%)"
+          "detail": "文章どうしが重なっています 1 箇所: 「成果と、続く仕組み。」と「無料で組織診断を申し込む」(97%)"
         }
       ],
       "contrastSamples": []
@@ -96,28 +85,28 @@
     },
     {
       "route": "/sites/corporate/a-20260920-1616/",
-      "pageHeight": 8525,
+      "pageHeight": 8495,
       "imageCount": 7,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/about/",
-      "pageHeight": 4461,
+      "pageHeight": 4285,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/contact/",
-      "pageHeight": 3912,
+      "pageHeight": 3851,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/download/",
-      "pageHeight": 4133,
+      "pageHeight": 3893,
       "imageCount": 0,
       "findings": [
         {
@@ -155,49 +144,49 @@
     },
     {
       "route": "/sites/corporate/a-20260920-1616/news/",
-      "pageHeight": 2303,
+      "pageHeight": 2273,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/privacy/",
-      "pageHeight": 3079,
+      "pageHeight": 2927,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/service/",
-      "pageHeight": 8085,
+      "pageHeight": 7845,
       "imageCount": 4,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/works/",
-      "pageHeight": 4199,
+      "pageHeight": 4169,
       "imageCount": 3,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/works/brand/",
-      "pageHeight": 5086,
+      "pageHeight": 4934,
       "imageCount": 2,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/works/campaign/",
-      "pageHeight": 4833,
+      "pageHeight": 4712,
       "imageCount": 2,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260920-1616/works/recruitment/",
-      "pageHeight": 4763,
+      "pageHeight": 4642,
       "imageCount": 1,
       "findings": [],
       "contrastSamples": []
@@ -208,11 +197,6 @@
       "imageCount": 7,
       "findings": [
         {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 2 件: 「医学と余白で、肌を整える。」55px/2行 / 「白澄という整え方。」55px/2行"
-        },
-        {
           "id": "render-card-misaligned",
           "severity": "medium",
           "detail": "横並びのカードで中身の開始位置が揃っていません 1 箇所: 2枚でずれ 575px"
@@ -222,21 +206,21 @@
     },
     {
       "route": "/sites/corporate/a-20260926-0500/about/",
-      "pageHeight": 4009,
+      "pageHeight": 3948,
       "imageCount": 5,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260926-0500/company/",
-      "pageHeight": 3086,
+      "pageHeight": 3057,
       "imageCount": 1,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260926-0500/contact/",
-      "pageHeight": 3669,
+      "pageHeight": 3643,
       "imageCount": 1,
       "findings": [],
       "contrastSamples": []
@@ -245,26 +229,14 @@
       "route": "/sites/corporate/a-20260926-0500/news/",
       "pageHeight": 2939,
       "imageCount": 2,
-      "findings": [
-        {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「はじめてのカウンセリングの前に」50px/2行"
-        }
-      ],
+      "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260926-0500/news/first-visit/",
       "pageHeight": 3333,
       "imageCount": 2,
-      "findings": [
-        {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「はじめてのカウンセリングの前に」55px/2行"
-        }
-      ],
+      "findings": [],
       "contrastSamples": []
     },
     {
@@ -276,135 +248,81 @@
     },
     {
       "route": "/sites/corporate/a-20260926-0500/recruit/",
-      "pageHeight": 3219,
+      "pageHeight": 3193,
       "imageCount": 2,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/a-20260926-0500/service/",
-      "pageHeight": 5154,
+      "pageHeight": 5137,
       "imageCount": 5,
       "findings": [
         {
           "id": "render-card-misaligned",
           "severity": "medium",
-          "detail": "横並びのカードで中身の開始位置が揃っていません 2 箇所: 2枚でずれ 182px / 2枚でずれ 673px"
-        },
-        {
-          "id": "render-low-contrast",
-          "severity": "high",
-          "detail": "コントラスト不足 4 件（うち 4 件は同色で完全に不可視）: b\"肌と体調の統合コース\"(比1.13, 要3) / small\"皮膚再生とホルモン・点滴を同一計画に載せる12週の目安。\"(比1.13, 要4.5) / b\"働く女性の定期フォロー\"(比1.13, 要3) / small\"再来の間隔とホームケアを固定し、変化を短く記録する。\"(比1.13, 要4.5)"
+          "detail": "横並びのカードで中身の開始位置が揃っていません 1 箇所: 2枚でずれ 673px"
         }
       ],
-      "contrastSamples": [
-        {
-          "tag": "b",
-          "cls": "",
-          "text": "肌と体調の統合コース",
-          "ratio": 1.13,
-          "need": 3,
-          "size": 26
-        },
-        {
-          "tag": "small",
-          "cls": "",
-          "text": "皮膚再生とホルモン・点滴を同一計画に載せる12週の目安。",
-          "ratio": 1.13,
-          "need": 4.5,
-          "size": 13
-        },
-        {
-          "tag": "b",
-          "cls": "",
-          "text": "働く女性の定期フォロー",
-          "ratio": 1.13,
-          "need": 3,
-          "size": 26
-        },
-        {
-          "tag": "small",
-          "cls": "",
-          "text": "再来の間隔とホームケアを固定し、変化を短く記録する。",
-          "ratio": 1.13,
-          "need": 4.5,
-          "size": 13
-        }
-      ]
+      "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260903-1448/",
-      "pageHeight": 4726,
+      "pageHeight": 4695,
       "imageCount": 4,
       "findings": [
         {
           "id": "render-big-text-wrapped",
           "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「動く体に、確かな補給を。」88px/4行"
+          "detail": "大きな文字が成り行きで折り返されています 1 件: 「動く体に、確かな補給を。」88px/2行"
         }
       ],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260903-1448/about/",
-      "pageHeight": 5438,
+      "pageHeight": 5403,
       "imageCount": 1,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260903-1448/company/",
-      "pageHeight": 3234,
+      "pageHeight": 3238,
       "imageCount": 1,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260903-1448/contact/",
-      "pageHeight": 3176,
+      "pageHeight": 3109,
       "imageCount": 0,
-      "findings": [
-        {
-          "id": "render-card-misaligned",
-          "severity": "medium",
-          "detail": "横並びのカードで中身の開始位置が揃っていません 1 箇所: 4枚でずれ 32px"
-        }
-      ],
+      "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260903-1448/news/",
-      "pageHeight": 2557,
+      "pageHeight": 2532,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260903-1448/privacy/",
-      "pageHeight": 2222,
+      "pageHeight": 2103,
       "imageCount": 0,
       "findings": [
         {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「プライバシーポリシー」76px/2行"
-        },
-        {
           "id": "render-text-clipped",
           "severity": "high",
-          "detail": "枠からはみ出して切れている文字が 8 件: 「本ポリシーにおいて「個人情報」とは、氏名、住所、」(2%だけ見えている) / 「当社は、商品のご購入、お問い合わせ、採用応募その」(2%だけ見えている) / 「当社は、収集した個人情報を、商品の発送、お問い合」(2%だけ見えている) / 「当社は、法令に基づく場合を除き、お客様の同意なく」(2%だけ見えている) / 「当社は、業務の一部を外部に委託する場合、委託先に」(3%だけ見えている) / 「当社は、個人情報の漏えい、滅失、き損の防止その他」(2%だけ見えている)"
-        },
-        {
-          "id": "render-text-overlap",
-          "severity": "high",
-          "detail": "文章どうしが重なっています 4 箇所: 「本ポリシーにおいて「個人情報」とは、氏名、住所、」と「収集する情報」(76%) / 「当社は、商品のご購入、お問い合わせ、採用応募その」と「利用目的」(76%) / 「当社は、収集した個人情報を、商品の発送、お問い合」と「第三者提供」(76%) / 「当社は、個人情報の漏えい、滅失、き損の防止その他」と「開示・訂正・削除」(76%)"
+          "detail": "枠からはみ出して切れている文字が 8 件: 「本ポリシーにおいて「個人情報」とは、氏名、住所、」(3%だけ見えている) / 「当社は、商品のご購入、お問い合わせ、採用応募その」(3%だけ見えている) / 「当社は、収集した個人情報を、商品の発送、お問い合」(3%だけ見えている) / 「当社は、法令に基づく場合を除き、お客様の同意なく」(3%だけ見えている) / 「当社は、業務の一部を外部に委託する場合、委託先に」(3%だけ見えている) / 「当社は、個人情報の漏えい、滅失、き損の防止その他」(3%だけ見えている)"
         }
       ],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260903-1448/recruit/",
-      "pageHeight": 3423,
+      "pageHeight": 3250,
       "imageCount": 0,
       "findings": [
         {
@@ -417,93 +335,71 @@
     },
     {
       "route": "/sites/corporate/b-20260903-1448/service/",
-      "pageHeight": 4742,
+      "pageHeight": 4706,
       "imageCount": 6,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260915-1151/",
-      "pageHeight": 4737,
+      "pageHeight": 4683,
       "imageCount": 6,
-      "findings": [
-        {
-          "id": "render-text-overlap",
-          "severity": "high",
-          "detail": "文章どうしが重なっています 1 箇所: 「何から聞けばよいか、迷っていても。」と「初診相談を予約する」(54%)"
-        }
-      ],
-      "contrastSamples": []
-    },
-    {
-      "route": "/sites/corporate/b-20260915-1151/about/",
-      "pageHeight": 5151,
-      "imageCount": 4,
       "findings": [],
       "contrastSamples": []
     },
     {
-      "route": "/sites/corporate/b-20260915-1151/contact/",
-      "pageHeight": 4830,
-      "imageCount": 2,
+      "route": "/sites/corporate/b-20260915-1151/about/",
+      "pageHeight": 5038,
+      "imageCount": 4,
       "findings": [
         {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「初診相談・来院案内」42px/2行（末行が1〜2文字）"
+          "id": "render-text-overlap",
+          "severity": "high",
+          "detail": "文章どうしが重なっています 1 箇所: 「あおば矯正歯科クリニックが中心に据えるのは、歯列」と「初診相談を予約する」(41%)"
         }
       ],
       "contrastSamples": []
     },
     {
+      "route": "/sites/corporate/b-20260915-1151/contact/",
+      "pageHeight": 4652,
+      "imageCount": 2,
+      "findings": [],
+      "contrastSamples": []
+    },
+    {
       "route": "/sites/corporate/b-20260915-1151/news/",
-      "pageHeight": 2360,
+      "pageHeight": 2309,
       "imageCount": 2,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260915-1151/privacy/",
-      "pageHeight": 2579,
+      "pageHeight": 2418,
       "imageCount": 1,
-      "findings": [
-        {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「個人情報の取り扱い」42px/2行（末行が1〜2文字）"
-        },
-        {
-          "id": "render-text-overlap",
-          "severity": "high",
-          "detail": "文章どうしが重なっています 1 箇所: 「詳しく見る」と「初診相談を予約する」(36%)"
-        }
-      ],
+      "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260915-1151/service/",
-      "pageHeight": 4581,
+      "pageHeight": 4470,
       "imageCount": 4,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260916-0500/",
-      "pageHeight": 4639,
+      "pageHeight": 4581,
       "imageCount": 2,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260916-0500/about/",
-      "pageHeight": 3325,
+      "pageHeight": 3217,
       "imageCount": 1,
       "findings": [
-        {
-          "id": "render-text-overlap",
-          "severity": "high",
-          "detail": "文章どうしが重なっています 1 箇所: 「商談設計とパイプライン可視化を通じて、受注に向け」と「無料で組織診断を申し込む」(88%)"
-        },
         {
           "id": "render-low-contrast",
           "severity": "medium",
@@ -539,59 +435,53 @@
     },
     {
       "route": "/sites/corporate/b-20260916-0500/company/",
-      "pageHeight": 2472,
+      "pageHeight": 2372,
       "imageCount": 1,
-      "findings": [
-        {
-          "id": "render-text-overlap",
-          "severity": "high",
-          "detail": "文章どうしが重なっています 1 箇所: 「法人の基本情報を確認された後は、営業変革プログラ」と「無料で組織診断を申し込む」(88%)"
-        }
-      ],
+      "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260916-0500/contact/",
-      "pageHeight": 3676,
+      "pageHeight": 3549,
       "imageCount": 1,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260916-0500/news/",
-      "pageHeight": 2478,
+      "pageHeight": 2419,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260916-0500/privacy/",
-      "pageHeight": 2393,
+      "pageHeight": 2334,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260916-0500/service/",
-      "pageHeight": 3960,
+      "pageHeight": 3674,
       "imageCount": 1,
       "findings": [
         {
           "id": "render-text-clipped",
           "severity": "high",
-          "detail": "枠からはみ出して切れている文字が 3 件: 「A. 中堅製造業とSaaS企業を対象にしています」(5%だけ見えている) / 「A. 商談設計に加え、パイプライン可視化と現場定」(3%だけ見えている) / 「A. 「無料で組織診断を申し込む」から、相談内容」(3%だけ見えている)"
+          "detail": "枠からはみ出して切れている文字が 3 件: 「A. 中堅製造業とSaaS企業を対象にしています」(5%だけ見えている) / 「A. 商談設計に加え、パイプライン可視化と現場定」(5%だけ見えている) / 「A. 「無料で組織診断を申し込む」から、相談内容」(5%だけ見えている)"
         },
         {
           "id": "render-text-overlap",
           "severity": "high",
-          "detail": "文章どうしが重なっています 1 箇所: 「商談設計とパイプライン可視化を進め、プレイブック」と「無料で組織診断を申し込む」(88%)"
+          "detail": "文章どうしが重なっています 1 箇所: 「受注と定着、二つの視点から。」と「無料で組織診断を申し込む」(83%)"
         }
       ],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/",
-      "pageHeight": 8603,
+      "pageHeight": 8513,
       "imageCount": 10,
       "findings": [
         {
@@ -614,7 +504,7 @@
     },
     {
       "route": "/sites/corporate/b-20260918-0500/about/",
-      "pageHeight": 6590,
+      "pageHeight": 5944,
       "imageCount": 2,
       "findings": [
         {
@@ -627,42 +517,42 @@
     },
     {
       "route": "/sites/corporate/b-20260918-0500/company/",
-      "pageHeight": 2104,
+      "pageHeight": 1953,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/contact/",
-      "pageHeight": 2653,
+      "pageHeight": 2505,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/download/",
-      "pageHeight": 1829,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/faq/",
-      "pageHeight": 1860,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/inspirations/",
-      "pageHeight": 2073,
+      "pageHeight": 1953,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/news/",
-      "pageHeight": 2226,
+      "pageHeight": 2076,
       "imageCount": 0,
       "findings": [
         {
@@ -675,84 +565,90 @@
     },
     {
       "route": "/sites/corporate/b-20260918-0500/news/consultation-guide/",
-      "pageHeight": 1799,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/news/site-guide/",
-      "pageHeight": 2104,
+      "pageHeight": 1923,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/news/work-guide/",
-      "pageHeight": 1829,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/privacy/",
-      "pageHeight": 1829,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/projects/",
-      "pageHeight": 6915,
-      "imageCount": 10,
-      "findings": [],
+      "pageHeight": 1656,
+      "imageCount": 5,
+      "findings": [
+        {
+          "id": "render-heading-too-small",
+          "severity": "medium",
+          "detail": "見出しが本文(16px)とほぼ同寸です 1 件: H2 14px「制作例一覧」"
+        }
+      ],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/projects/editorial/",
-      "pageHeight": 1799,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/projects/exhibition/",
-      "pageHeight": 1799,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/projects/identity/",
-      "pageHeight": 1829,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/projects/mark/",
-      "pageHeight": 1829,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/projects/sign/",
-      "pageHeight": 1799,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/recruit/",
-      "pageHeight": 1829,
+      "pageHeight": 1648,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260918-0500/service/",
-      "pageHeight": 4769,
+      "pageHeight": 4527,
       "imageCount": 1,
       "findings": [
         {
@@ -765,7 +661,7 @@
     },
     {
       "route": "/sites/corporate/b-20260919-0500/",
-      "pageHeight": 7005,
+      "pageHeight": 6879,
       "imageCount": 9,
       "findings": [
         {
@@ -783,83 +679,77 @@
     },
     {
       "route": "/sites/corporate/b-20260919-0500/about/",
-      "pageHeight": 6108,
+      "pageHeight": 5934,
       "imageCount": 6,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/company/",
-      "pageHeight": 5647,
+      "pageHeight": 5564,
       "imageCount": 7,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/contact/",
-      "pageHeight": 3497,
+      "pageHeight": 3437,
       "imageCount": 1,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/flow/",
-      "pageHeight": 8177,
+      "pageHeight": 8144,
       "imageCount": 7,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/model-house/",
-      "pageHeight": 5598,
+      "pageHeight": 5564,
       "imageCount": 7,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/news/",
-      "pageHeight": 4088,
+      "pageHeight": 4055,
       "imageCount": 3,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/news/first-consultation/",
-      "pageHeight": 4300,
+      "pageHeight": 4174,
       "imageCount": 2,
-      "findings": [
-        {
-          "id": "render-big-text-wrapped",
-          "severity": "medium",
-          "detail": "大きな文字が成り行きで折り返されています 1 件: 「家づくり相談の前に、整理しておきたいこと」40px/2行"
-        }
-      ],
+      "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/privacy/",
-      "pageHeight": 3304,
+      "pageHeight": 3149,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/recruit/",
-      "pageHeight": 5631,
+      "pageHeight": 5564,
       "imageCount": 7,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/service/",
-      "pageHeight": 4437,
+      "pageHeight": 4394,
       "imageCount": 4,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/b-20260919-0500/works/",
-      "pageHeight": 3114,
+      "pageHeight": 3051,
       "imageCount": 4,
       "findings": [
         {
@@ -872,14 +762,14 @@
     },
     {
       "route": "/sites/corporate/b-20260919-0500/works/wood-and-plaster/",
-      "pageHeight": 5016,
+      "pageHeight": 4983,
       "imageCount": 4,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/base-20260903-1400/",
-      "pageHeight": 2281,
+      "pageHeight": 2206,
       "imageCount": 0,
       "findings": [
         {
@@ -892,14 +782,14 @@
     },
     {
       "route": "/sites/corporate/base-20260903-1400/about/",
-      "pageHeight": 2237,
+      "pageHeight": 2046,
       "imageCount": 0,
       "findings": [],
       "contrastSamples": []
     },
     {
       "route": "/sites/corporate/base-20260903-1400/contact/",
-      "pageHeight": 1702,
+      "pageHeight": 1653,
       "imageCount": 0,
       "findings": [
         {
@@ -912,7 +802,7 @@
     },
     {
       "route": "/sites/corporate/base-20260903-1400/news/",
-      "pageHeight": 1662,
+      "pageHeight": 1589,
       "imageCount": 0,
       "findings": [
         {
@@ -925,13 +815,13 @@
     },
     {
       "route": "/sites/corporate/base-20260903-1400/privacy/",
-      "pageHeight": 1406,
+      "pageHeight": 1380,
       "imageCount": 0,
       "findings": [
         {
           "id": "render-text-overlap",
           "severity": "high",
-          "detail": "文章どうしが重なっています 5 箇所: 「お問い合わせフォーム、電子メール、電話、名刺交換」と「2. 利用目的」(85%) / 「お問い合わせへの回答、お見積りの作成と提出、受注」と「3. 第三者提供」(52%) / 「法令に基づく場合を除き、ご本人の同意なく第三者へ」と「4. 安全管理措置」(52%) / 「個人情報を扱う端末をアクセス制限下に置き、担当者」と「5. 開示・訂正・削除のご請求」(52%) / 「ご本人からの開示、訂正、利用停止、削除のご請求に」と「お問い合わせ窓口」(97%)"
+          "detail": "文章どうしが重なっています 4 箇所: 「お問い合わせフォーム、電子メール、電話、名刺交換」と「2. 利用目的」(52%) / 「お問い合わせへの回答、お見積りの作成と提出、受注」と「3. 第三者提供」(52%) / 「法令に基づく場合を除き、ご本人の同意なく第三者へ」と「4. 安全管理措置」(52%) / 「ご本人からの開示、訂正、利用停止、削除のご請求に」と「お問い合わせ窓口」(96%)"
         },
         {
           "id": "render-heading-too-small",
@@ -943,7 +833,7 @@
     },
     {
       "route": "/sites/corporate/base-20260903-1400/service/",
-      "pageHeight": 2028,
+      "pageHeight": 1918,
       "imageCount": 0,
       "findings": [
         {

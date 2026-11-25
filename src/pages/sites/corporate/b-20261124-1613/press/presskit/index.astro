@@ -1,0 +1,17 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { site } from '../../_site';
+import JunroHeader from '../../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../../components/sections/JunroPageHeading.astro';
+---
+<SiteLayout site={site} title="プレスキット" description="巡路知能株式会社を紹介する記事や資料向けに、活動写真の枠とロゴ・アイコンの素材、利用条件をご案内します。" path="/press/presskit/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'プレスルーム',href:'/press/'},{label:'プレスキット'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/press/presskit/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Press Kit" japanese="プレスキット" /><div class="junro-content">
+    <section class="junro-press-asset"><div class="junro-photo-placeholder" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-11.jpg);" role="img" aria-label="打ち合わせをするチームの活動写真"></div><div><h2>活動写真</h2><p>巡路知能の仕事を紹介するための写真素材です。</p><span>ダウンロード</span></div></section>
+    <section class="junro-press-asset"><div class="junro-photo-placeholder" style="background:#f9f5f4;display:grid;place-items:center;font-size:42px;font-weight:800" role="img" aria-label="巡路知能のロゴ枠">巡路✳</div><div><h2>ロゴ・アイコン</h2><p>巡路知能のロゴとアイコンの素材です。利用条件を確認のうえご使用ください。</p><a href="/junro-logo.svg" download>ダウンロード ↗</a></div></section>
+    <section style="max-width:650px;margin:150px 0 0 auto"><h2>利用条件</h2><p>写真とロゴは、巡路知能株式会社を紹介する記事や資料でご利用ください。形や色を変更せず、掲載前に配布素材の利用案内をご確認ください。</p><a href="/junro-assets-guide.txt" download>素材利用案内 ↗</a></section>
+  </div></div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/press/presskit/" label="プレスキット" /></Fragment>
+</SiteLayout>

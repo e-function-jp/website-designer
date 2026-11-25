@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-11-25T03:06:15.894Z",
+  "images": [
+    {
+      "placement": "top:hero",
+      "tags": "設備点検,人物,中央縦長",
+      "prompt": "福岡の公共施設の通路を歩く点検担当者を背後から撮る。画面中央に人物2人、周囲に設備の配管や窓、自然光。縦2:3、低彩度、緑と青、角丸なし。参照の中央縦映像と同じ視線の高さ・人物の大きさで、被写体と場所は独自に。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-01.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:scene-1",
+      "tags": "人の手,点検記録,大きな横写真",
+      "prompt": "作業机で点検記録の紙を確認する手元の近景。温かい室内光と暗い背景、被写界深度を浅く。横長で画面左に手元の重みを置く。参照のケーキ写真と同じ温度感・大きさの枠に使うが、贈答品を写さない。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-02.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:scene-2",
+      "tags": "植物,小さな縦写真",
+      "prompt": "公共施設の敷地脇に咲く小さな黄色い草花。明るい空と緑を背景に、花を下半分へ寄せる。縦2:3、柔らかな自然光。参照の花の小写真と同じ余白比率。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-03.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:scene-3",
+      "tags": "緑,木立,横長",
+      "prompt": "都市の公園にある木立を見上げる。枝葉が画面を覆い、濃淡の緑と透過光が重なる。人物なし、横長、端を切っても成立する構図。参照の緑の大きな写真と同じ密度。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-04.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:scene-4",
+      "tags": "移動,窓,点検へ向かう風景",
+      "prompt": "移動中の車窓から見た福岡の郊外と水路。車内を暗く、窓外を淡い緑に。画面左に室内の影、右に流れる風景。横長、自然なブレ。参照の車窓写真と同じ役割。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-05.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:scene-5",
+      "tags": "水面,青,最大写真",
+      "prompt": "浄水施設の水面を斜め上から撮る。青い水に光の帯と細かな波紋。人や文字は写さず、横長の広い青い面を左側に残す。参照の波の写真と同じ大きさ・斜め方向の流れ。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-06.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:scene-6",
+      "tags": "動物,端で切れる小写真",
+      "prompt": "公共施設近くの歩道で休む茶色い小鳥を、低い視線から撮る。背景は明るい建物の壁と植栽、浅い被写界深度。縦長、右端で一部が切れても成立する。参照の動物写真の役割と小ささを保つ。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-07.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:company-street",
+      "tags": "街,人々,企業情報左写真",
+      "prompt": "福岡の街路沿いの公共施設前。手前にぼけた新緑、奥に歩く人々と建物。縦2:3、人物は小さく、明るい日中の自然光。参照の企業情報第1行と同じ前景の緑・奥の街・余白の比率。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-08.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:company-hands",
+      "tags": "手,協働,企業情報右写真",
+      "prompt": "設備点検の現場で、二人の担当者が紙の記録を受け渡す手元。顔は写さない。手を画面の中央下に、背景は青灰色の柔らかいぼけ。縦2:3、自然光。参照の握手写真と同じ人間関係を示す役割。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-09.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:company-records",
+      "tags": "記録,紙,企業情報第3写真",
+      "prompt": "机の上に置かれた無地の設備点検記録の束と鉛筆。淡い桃色の布、柔らかい昼光、斜め上から。縦2:3、中央に小さな白い紙の塊。参照の小箱写真と同じ構図と淡い色量。",
+      "aspect": "portrait",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-10.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:careers-meeting",
+      "tags": "打ち合わせ,人物,採用大写真",
+      "prompt": "明るいオフィスで設備点検の記録画面について話す3人のチーム。机とノートPC、画面は判読できない抽象表示。人物を下半分に、窓からの光を上半分に。横長、淡い青緑。参照の採用大写真と同じ人数・構図・サイズ感。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-11.jpg",
+      "reused": false
+    },
+    {
+      "placement": "top:careers-sign",
+      "tags": "室内サイン,小写真,採用",
+      "prompt": "オフィスの窓際にある抽象的な小さな発光サイン。文字や企業ロゴを含めない。暖色の光を淡い壁に映し、横長で右側に光を寄せる。参照の採用右下の小写真と同じ発光点・サイズ比。",
+      "aspect": "landscape",
+      "path": "public/sites/corporate/_shared/20261124-1613/img-a-12.jpg",
+      "reused": false
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+---
+interface Props { date: string; category: string; title: string; href?: string; filter?: boolean }
+const { date, category, title, href, filter = false } = Astro.props;
+---
+<article class="junro-news-row" data-news-category={category} data-news-year={date.slice(0,4)} data-filterable={filter ? 'true' : undefined}>
+  <div><time>{date}</time><span class="junro-news-category">{category}</span></div>
+  {href ? <a href={href}>{title}<span aria-hidden="true">↗</span></a> : <p>{title}</p>}
+</article>

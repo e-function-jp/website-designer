@@ -1,0 +1,49 @@
+---
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+interface Props { site: SiteConfig; path: string }
+const { site, path } = Astro.props;
+---
+<header class="junro-header" data-junro-header>
+  <a class="junro-logo" href={url(site, '/')} aria-label="巡路知能 ホーム" aria-current={path === '/' ? 'page' : undefined}>巡路<span>✳</span></a>
+  <button class="junro-menu-toggle" type="button" aria-controls="junro-menu" aria-expanded="false" aria-label="メニューを開く"><i></i><i></i></button>
+  <nav id="junro-menu" class="junro-nav" aria-label="グローバルナビゲーション">
+    {site.nav.map((item, i) => {
+      const current = path === item.href;
+      const active = current || (item.children && path.startsWith(item.href));
+      return item.href ? <a href={url(site, item.href)} aria-current={current ? 'page' : undefined}>{i === 4 && <span class="junro-external">↗</span>}{item.label}{active && <span class="junro-active-dot" aria-hidden="true"></span>}</a> : <span>{item.label}</span>;
+    })}
+  </nav>
+  <button class="junro-motion-toggle" type="button" aria-pressed="false">動きを停止 <span aria-hidden="true">Ⅱ</span></button>
+</header>
+<script>
+  const initJunroHeader = () => {
+    const header = document.querySelector<HTMLElement>('[data-junro-header]');
+    if (!header || header.dataset.ready) return;
+    header.dataset.ready = '1';
+    const menu = header.querySelector<HTMLElement>('#junro-menu')!;
+    const toggle = header.querySelector<HTMLButtonElement>('.junro-menu-toggle')!;
+    const motion = header.querySelector<HTMLButtonElement>('.junro-motion-toggle')!;
+    const close = () => { header.classList.remove('is-open'); toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('aria-label','メニューを開く'); toggle.focus(); };
+    toggle.addEventListener('click', () => {
+      const open = !header.classList.contains('is-open');
+      header.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      if (open) menu.querySelector<HTMLElement>('a')?.focus();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && header.classList.contains('is-open')) close(); });
+    document.addEventListener('pointerdown', e => { if (header.classList.contains('is-open') && !header.contains(e.target as Node)) close(); });
+    menu.addEventListener('pointerdown', e => { if (e.target === menu && header.classList.contains('is-open')) close(); });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (header.classList.contains('is-open')) close(); }));
+    motion.addEventListener('click', () => {
+      const stopped = !document.documentElement.classList.contains('junro-motion-paused');
+      document.documentElement.classList.toggle('junro-motion-paused', stopped);
+      motion.setAttribute('aria-pressed', String(stopped));
+      motion.innerHTML = stopped ? '動きを再開 <span aria-hidden="true">▶</span>' : '動きを停止 <span aria-hidden="true">Ⅱ</span>';
+      if (stopped) document.querySelectorAll('.junro .scroll-reveal').forEach(el => el.classList.add('is-visible'));
+    });
+  };
+  initJunroHeader();
+  document.addEventListener('astro:page-load', initJunroHeader);
+</script>

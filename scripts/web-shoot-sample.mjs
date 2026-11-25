@@ -66,9 +66,27 @@ try {
     }
     window.scrollTo(0, 0);
   });
-  await page.waitForTimeout(600);
+  // 出現演出が終わるまで待つ。固定 600ms だと参照どおりの 2600ms フェードが
+  // 途中で写り、ヒーローが「ほぼ空白」と採点された（実測 2026-11-24）。
+  // 有限回の CSS transition / animation / WAAPI がすべて止まるまで待つ。
+  // 無限ループ（マーキー等）は対象外。上限 SETTLE_MAX_MS。
+  const settleMax = Number(process.env.WEB_DESIGNER_SETTLE_MAX_MS) || 8000;
+  const settled = await page.evaluate(async (max) => {
+    const t0 = performance.now();
+    const busy = () => document.getAnimations().filter((a) => {
+      if (a.playState !== 'running' && a.playState !== 'pending') return false;
+      const it = a.effect?.getTiming?.().iterations;
+      return it !== Infinity;
+    }).length;
+    await new Promise((r) => setTimeout(r, 200));
+    while (busy() > 0 && performance.now() - t0 < max) {
+      await new Promise((r) => setTimeout(r, 150));
+    }
+    return { waitedMs: Math.round(performance.now() - t0), stillRunning: busy() };
+  }, settleMax);
+  await page.waitForTimeout(300);
   await page.screenshot({ path: outfile, fullPage: true, type: 'jpeg', quality: 82 });
-  console.log(JSON.stringify({ route, outfile, width }));
+  console.log(JSON.stringify({ route, outfile, width, settled }));
 } finally {
   await browser.close();
   server.close();

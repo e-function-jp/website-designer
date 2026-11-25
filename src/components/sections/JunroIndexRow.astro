@@ -1,0 +1,10 @@
+---
+import JunroArrowLink from '../ui/JunroArrowLink.astro';
+interface Props { english: string; japanese: string; description: string; href: string; photo?: boolean; image?: string; imageAlt?: string; clip?: boolean; current?: boolean }
+const { english, japanese, description, href, photo = false, image, imageAlt, clip = false, current = false } = Astro.props;
+---
+<article class:list={['junro-index-row', photo && 'junro-index-row--photo']}>
+  {photo && <div class:list={['junro-photo-placeholder', 'junro-photo-placeholder--portrait', clip && 'junro-clip-photo']} data-photo={image ? '' : undefined} style={image ? `--photo:url(${image})` : undefined} role="img" aria-label={imageAlt ?? `${japanese}を表す写真枠`}></div>}
+  <span class="junro-index-english">{english}</span>
+  <div class="junro-index-copy"><h2>{japanese}</h2><p>{description}</p>{current ? <span class="junro-current" aria-current="page">現在のページ</span> : <JunroArrowLink href={href} label={`${japanese}を見る`} />}</div>
+</article>

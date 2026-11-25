@@ -1,0 +1,2 @@
+{"attempt": 1, "scored_at": "2026-11-24T23:07:33+09:00", "totals": {"b": 36}, "winner": "b", "setup": {"judge": "codex", "judge_model": "(codex default)", "reference_attached": true, "score_pages": "/ /about/ /service/"}}
+{"attempt": 2, "scored_at": "2026-11-25T09:54:39+09:00", "totals": {"b": 68}, "winner": "b", "setup": {"judge": "codex", "judge_model": "(codex default)", "reference_attached": true, "score_pages": "/ /business/ /company/", "rubric": "reproduce"}}

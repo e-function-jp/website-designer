@@ -1,0 +1,20 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { url } from '../../../../../lib/site';
+import { site } from '../_site';
+import { business } from '../_content';
+import JunroHeader from '../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../components/sections/JunroPageHeading.astro';
+import JunroBusinessRow from '../../../../../components/sections/JunroBusinessRow.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="事業紹介" description="巡路知能のクラウドサービスが支える上水道、下水道、公共施設の設備点検、設備管理、記録分析という五つの利用場面をご紹介します。" path="/business/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'事業紹介'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/business/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Business" japanese="事業紹介" />
+    <section class="junro-business-intro"><p>巡路知能は、上下水道や公共施設の設備点検を<br />記録・分析するクラウドサービスを提供しています。</p><ScrollReveal animation="clip-up" duration={250}><div class="junro-photo-placeholder junro-clip-photo" data-photo style="--photo:url(/sites/corporate/_shared/20261124-1613/img-a-06.jpg);" role="img" aria-label="光の帯が走る浄水施設の水面"></div></ScrollReveal></section>
+    <section aria-label="五つの利用場面">{business.map(item => <JunroBusinessRow {...item} href={url(site, `/contact/?topic=${item.id}`)} />)}</section>
+  </div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/business/" label="事業紹介" /></Fragment>
+</SiteLayout>

@@ -1,0 +1,5 @@
+---
+interface Props { name: string; description: string; href?: string; id: string }
+const { name, description, href, id } = Astro.props;
+---
+<div id={id} class="junro-contact-choice"><h3>{name}</h3><p>{description}</p>{href && <a href={href} aria-label={`${name}について問い合わせる`}>お問い合わせ ↗</a>}</div>

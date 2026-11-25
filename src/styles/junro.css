@@ -1,0 +1,218 @@
+[data-theme="junro-ivory"] { font-family: Arial, "Noto Sans JP", "Yu Gothic", sans-serif; color:#361003; background:#fff; }
+[data-theme="junro-ivory"] :is(h1,h2,h3,h4) { font-family: Arial, "Noto Sans JP", "Yu Gothic", sans-serif; font-weight:700; }
+[data-theme="junro-ivory"] :is(a,button,select):focus-visible { outline:2px solid #eca9a0; outline-offset:4px; }
+.junro { overflow:hidden; }
+.junro-header { position:absolute; z-index:30; top:0; left:0; right:0; height:240px; padding:54px 60px; pointer-events:none; }
+.junro-header > * { pointer-events:auto; }
+.junro-logo { display:inline-block; font-size:25px; line-height:1; font-weight:800; letter-spacing:-.055em; color:inherit; text-decoration:none; }
+.junro-logo span { color:#eca9a0; font-size:15px; vertical-align:top; padding-left:1px; }
+.junro-nav { position:absolute; top:58px; right:60px; display:flex; flex-direction:column; align-items:flex-end; gap:17px; font-size:14px; font-weight:700; }
+.junro-nav a, .junro-nav span { text-decoration:none; color:inherit; line-height:1.4; }
+.junro-nav a { display:flex; align-items:center; gap:8px; }
+.junro-active-dot { width:4px; height:4px; border-radius:50%; background:#eca9a0; }
+.junro-external { color:#d8897e; font-weight:400; }
+.junro-motion-toggle { position:absolute; top:270px; right:58px; display:flex; gap:7px; align-items:center; padding:3px 9px; border:1px solid #e8dede; border-radius:30px; background:#f9f5f4; font-size:10px; font-weight:700; }
+.junro-motion-toggle span { border-radius:50%; color:#fff; background:#361003; width:15px; height:15px; display:grid; place-items:center; font-size:8px; }
+.junro-menu-toggle { display:none; }
+.junro-hero, .junro-page-heading { margin:30px 30px 0; background:#f9f5f4; position:relative; }
+.junro-hero { min-height:840px; }
+.junro-hero-inner { position:relative; min-height:840px; }
+.junro-hero-copy { position:absolute; top:46%; left:7.6%; font-size:20px; letter-spacing:.18em; line-height:1.9; font-weight:700; }
+.junro-hero-media { position:absolute; top:180px; left:38.4%; width:320px; height:480px; overflow:hidden; background:#aab6aa; }
+.junro-hero-media::before,.junro-hero-media::after { content:""; position:absolute; inset:0; background:linear-gradient(145deg,#dbe7df 0 19%,#769d9b 20% 34%,#5b706b 35% 46%,#b8c3ad 47% 64%,#394c45 65% 100%); animation:junro-hero-cycle 8000ms ease-in-out infinite alternate; }
+.junro-hero-media::after { background:linear-gradient(150deg,#abcbd0,#d7e8df 22%,#90a9a1 23% 38%,#677d74 39% 68%,#cdd7c5 69%); animation-direction:alternate-reverse; }
+@keyframes junro-hero-cycle { 0%,38% { opacity:1; transform:scale(1); } 62%,100% { opacity:0; transform:scale(1.1); } }
+.junro-hero-news { position:absolute; right:30px; bottom:30px; width:340px; border-top:1px solid #ddd7d6; padding-top:28px; font-size:12px; line-height:1.8; }
+.junro-hero-news time { color:#666; margin-right:12px; }
+.junro-hero-news .junro-news-category { color:#d8897e; border:1px solid #eee2df; border-radius:20px; padding:3px 10px; }
+.junro-hero-news a { display:block; margin-top:12px; text-decoration:none; }
+.junro-page-heading { height:330px; display:flex; align-items:flex-end; gap:20px; padding:0 30px 34px; }
+.junro-page-heading h1 { font-size:40px; line-height:1; letter-spacing:-.035em; margin:0; }
+.junro-page-heading span { font-size:12px; font-weight:700; line-height:1.2; padding-bottom:3px; }
+.junro-section-title { display:flex; align-items:baseline; gap:18px; }
+.junro-section-title h2 { font-size:40px; letter-spacing:-.04em; line-height:1.1; margin:0; }
+.junro-section-title span { font-size:12px; font-weight:700; }
+.junro-arrow-link { width:40px; height:40px; display:grid; place-items:center; border-radius:9px; background:#361003; color:white; text-decoration:none; font-size:17px; line-height:1; flex:none; }
+.junro-arrow-link--disabled { opacity:.45; }
+.junro-mission-preview { min-height:850px; padding:145px 30px 0; }
+.junro-mission-preview p { width:270px; margin:35px 0 28px; font-size:15px; line-height:1.75; }
+.junro-photo-sequence { height:1380px; position:relative; }
+.junro-photo-placeholder { background:linear-gradient(135deg,#cfdedb,#96ad9f 52%,#436b6e); border-radius:0; }
+.junro-photo-placeholder--portrait { aspect-ratio:2/3; }
+.junro-photo-sequence .junro-photo-placeholder { position:absolute; }
+.junro-photo-sequence .junro-photo-placeholder:nth-child(1){left:0;top:0;width:33%;height:450px;background:linear-gradient(135deg,#795b47,#dbb79b 45%,#403426);}
+.junro-photo-sequence .junro-photo-placeholder:nth-child(2){left:41%;top:115px;width:18%;height:360px;background:linear-gradient(135deg,#e1eaca,#f2d969 55%,#82a882);}
+.junro-photo-sequence .junro-photo-placeholder:nth-child(3){left:67%;top:100px;width:33%;height:350px;background:linear-gradient(135deg,#2e7056,#9dcc98 52%,#19513e);}
+.junro-photo-sequence .junro-photo-placeholder:nth-child(4){left:0;top:630px;width:33%;height:380px;background:linear-gradient(135deg,#293c43,#9ab3b6 55%,#3b6d70);}
+.junro-photo-sequence .junro-photo-placeholder:nth-child(5){left:41%;top:620px;width:38%;height:440px;background:linear-gradient(145deg,#b8d8e2,#4b9fc0 46%,#d4edf0 52%,#22739c);}
+.junro-photo-sequence .junro-photo-placeholder:nth-child(6){left:87%;top:690px;width:22%;height:310px;background:linear-gradient(145deg,#d8dfd8,#7a8d88 60%,#435b5c);}
+.junro-business-preview { margin:0 30px; background:#f9f5f4; padding:150px 30px 140px; }
+.junro-business-preview-list { display:grid; grid-template-columns:1fr 1fr; column-gap:90px; row-gap:80px; margin-top:70px; }
+.junro-business-preview-list .junro-business-row:nth-child(2) { margin-top:170px; }
+.junro-business-preview-list .junro-business-row:nth-child(3) { grid-column:2; margin-top:-60px; }
+.junro-business-preview-list .junro-business-row:nth-child(4) { grid-column:1; margin-top:-160px; }
+.junro-business-preview-list .junro-business-row:nth-child(5) { grid-column:2; margin-top:-100px; }
+.junro-business-row { display:grid; grid-template-columns:260px minmax(0,540px); justify-content:space-between; align-items:center; gap:30px; min-height:470px; padding:25px 30px; border-top:1px solid #eee; }
+.junro-business-row--home { display:grid; grid-template-columns:minmax(155px,330px) minmax(180px,290px); gap:25px; min-height:0; padding:0; border:0; }
+.junro-business-mark { width:260px; height:390px; background:#f9f5f4; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.junro-business-row--home .junro-business-mark { width:100%; height:330px; background:#fff; }
+.junro-business-preview-list .junro-business-row:first-child .junro-business-mark { height:520px; }
+.junro-business-mark strong { font-size:27px; letter-spacing:-.06em; }
+.junro-business-mark strong span { font-size:13px; color:#eca9a0; vertical-align:top; }
+.junro-business-mark small { display:block; font-size:11px; font-weight:700; letter-spacing:.1em; margin-top:3px; }
+.junro-target { color:#d8897e; border:1px solid #f2e8e6; border-radius:20px; padding:4px 9px; font-size:11px; font-weight:700; }
+.junro-business-copy h2,.junro-business-copy h3 { margin:22px 0 10px; font-size:18px; }
+.junro-business-copy p { margin:0 0 26px; font-size:15px; line-height:1.75; }
+.junro-business-row--home .junro-business-copy h3 { font-size:17px; }
+.junro-business-row--home .junro-business-copy p { font-size:13px; }
+.junro-company-preview { min-height:800px; display:grid; grid-template-columns:260px minmax(280px,1fr) 260px; align-items:center; gap:60px; padding:100px 30px; }
+.junro-company-preview .junro-photo-placeholder { width:260px; height:390px; }
+.junro-company-preview > .scroll-reveal:last-child { margin-top:160px; }
+.junro-company-preview > .scroll-reveal:last-child .junro-photo-placeholder { background:linear-gradient(135deg,#92aeb7,#d6dbce 55%,#66858c); }
+.junro-company-preview-copy { max-width:560px; margin:auto; }
+.junro-company-preview-copy p { font-size:15px; line-height:1.8; margin:30px 0; }
+.junro-news-section { display:grid; grid-template-columns:35% 1fr; gap:30px; padding:80px 30px 120px; min-height:820px; }
+.junro-news-list { width:100%; }
+.junro-news-row { border-top:1px solid #eae5e4; min-height:118px; padding:22px 0; font-size:14px; }
+.junro-news-row > div { display:flex; align-items:center; gap:16px; font-size:12px; margin-bottom:12px; }
+.junro-news-row time { color:#777; }
+.junro-news-category { color:#d8897e; font-size:11px; }
+.junro-news-row a { color:inherit; text-decoration:none; display:flex; justify-content:space-between; gap:15px; }
+.junro-news-row p { margin:0; }
+.junro-careers { min-height:880px; margin:0 30px; padding:150px 30px; background:#f9f5f4; display:grid; grid-template-columns:28% 1fr 220px; gap:45px; align-items:start; }
+.junro-careers p { margin:30px 0; font-size:15px; line-height:1.8; max-width:280px; }
+.junro-careers > .scroll-reveal:nth-child(2) .junro-photo-placeholder {height:390px;background:linear-gradient(135deg,#e4ece7,#98bac0 48%,#547f87);}
+.junro-careers > .scroll-reveal:nth-child(3) .junro-photo-placeholder {height:180px;margin-top:240px;background:linear-gradient(135deg,#e8ded2,#dbad83 50%,#92775f);}
+.junro-index-row { min-height:300px; padding:45px 30px; border-top:1px solid #eaeaea; display:grid; grid-template-columns:260px minmax(90px,1fr) minmax(280px,540px); gap:20px; align-items:center; }
+.junro-index-row--photo { min-height:500px; }
+.junro-company-first { margin-top:160px; }
+.junro-index-row--photo .junro-photo-placeholder { width:260px; height:390px; }
+.junro-index-english { align-self:start; font-size:12px; font-weight:700; letter-spacing:.08em; }
+.junro-index-copy { align-self:end; padding-bottom:25px; }
+.junro-index-copy h2 { font-size:18px; margin:0 0 15px; }
+.junro-index-copy p { margin:0 0 30px; font-size:15px; line-height:1.75; }
+.junro-current { font-size:12px; color:#8d6b64; }
+.junro-business-intro { min-height:600px; display:grid; grid-template-columns:minmax(0,550px) minmax(0,540px); justify-content:space-between; gap:50px; padding:160px 30px 80px; }
+.junro-business-intro p { margin:0; font-size:16px; line-height:2; }
+.junro-business-intro .junro-photo-placeholder { height:390px; background:linear-gradient(140deg,#c5e5ed,#56a8ca 55%,#e7f3f3 58%,#367fa1); }
+.junro-clip-photo { clip-path:inset(0); animation:junro-clip 250ms cubic-bezier(.16,.64,.32,1) both; }
+@keyframes junro-clip { from { clip-path:inset(0 100% 0 0); } to {clip-path:inset(0);} }
+.junro-content { padding:150px 30px 180px; }
+.junro-longform { max-width:650px; margin:0 auto; font-size:15px; line-height:1.9; }
+.junro-longform p { margin:0 0 32px; }
+.junro-statement { font-size:38px; line-height:1.6; letter-spacing:.04em; margin:0 0 100px; }
+.junro-longform .junro-photo-placeholder { width:540px; max-width:100%; height:390px; margin:75px 0; }
+.junro-signature { max-width:260px; margin:100px 0 0 auto; font-size:14px; }
+.junro-signature .junro-photo-placeholder { width:260px; height:390px; margin-bottom:25px; }
+.junro-profile-table { width:100%; border-collapse:collapse; font-size:15px; }
+.junro-profile-table tr { border-top:1px solid #e9e4e3; }
+.junro-profile-table th,.junro-profile-table td { padding:25px 0; text-align:left; vertical-align:top; }
+.junro-profile-table th { width:30%; font-weight:700; }
+.junro-two-column { display:grid; grid-template-columns:1fr 1fr; gap:100px; margin:100px 0; }
+.junro-two-column .junro-photo-placeholder { width:100%; max-width:540px; height:390px; }
+.junro-split { display:grid; grid-template-columns:30% 1fr; gap:60px; margin:120px 0; }
+.junro-split h2 { font-size:24px; }
+.junro-split > div { max-width:700px; }
+.junro-contact-choice { display:block; padding:30px 0; border-top:1px solid #e7e2e1; color:inherit; text-decoration:none; }
+.junro-contact-choice h3 { font-size:18px; margin:10px 0; }
+.junro-contact-choice p { font-size:14px; margin:0; }
+.junro-filter { display:flex; flex-wrap:wrap; gap:15px; align-items:center; justify-content:space-between; margin-bottom:60px; }
+.junro-filter button { border:1px solid #ddd; padding:10px 18px; border-radius:50px; }
+.junro-filter button[aria-pressed="true"] { background:#361003; color:#fff; }
+.junro-filter select { border:1px solid #ddd; padding:10px; background:#fff; }
+.junro-data-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; }
+.junro-data-grid figure { border-top:1px solid #e9e4e3; padding:20px 0; margin:0; }
+.junro-data-grid figcaption { font-size:14px; }
+.junro-data-grid strong { display:block; font-size:52px; font-weight:700; margin-top:25px; }
+.junro-press-asset { display:grid; grid-template-columns:minmax(0,540px) 1fr; gap:80px; margin-bottom:120px; }
+.junro-press-asset .junro-photo-placeholder { width:100%; height:390px; }
+.junro-footer { background:#232323; color:#fff; min-height:600px; padding:0 30px; font-size:13px; }
+.junro-footer-crumb { display:flex; gap:28px; align-items:center; height:100px; border-bottom:1px solid #3b3b3b; font-size:11px; }
+.junro-footer-crumb a { color:inherit; text-decoration:none; }
+.junro-footer-main { position:relative; min-height:510px; padding-top:80px; }
+.junro-footer-crumb + .junro-footer-main { min-height:410px; padding-top:50px; }
+.junro-footer .junro-logo { color:#fff; }
+.junro-footer-links { display:flex; gap:150px; margin-top:55px; }
+.junro-footer nav { display:flex; flex-direction:column; align-items:flex-start; gap:20px; }
+.junro-footer nav a,.junro-footer nav span { color:#fff; text-decoration:none; }
+.junro-legal { position:absolute; right:0; bottom:35px; align-items:flex-end!important; gap:12px!important; font-size:11px; }
+.junro-footer-bottom { border-top:1px solid #3b3b3b; min-height:75px; display:flex; align-items:center; justify-content:space-between; }
+.junro-social { display:flex; gap:12px; font-size:20px; }
+.junro-footer-bottom small { font-size:11px; }
+.junro .scroll-reveal__inner { transition-timing-function:cubic-bezier(.5,1,.89,1); }
+.junro-motion-paused .junro-hero-media::before,.junro-motion-paused .junro-hero-media::after { animation-play-state:paused; }
+.junro-motion-paused .junro .scroll-reveal__inner { transition-duration:0ms!important; }
+@media (prefers-reduced-motion:reduce) { .junro-hero-media::before,.junro-hero-media::after { animation:none!important; } .junro-hero-media::after { display:none; } .junro-clip-photo { animation:none; } .junro-nav,.junro-menu-toggle i { transition:none!important; } }
+@media (max-width:700px) {
+ .junro-header { height:90px; padding:40px 40px; }
+ .junro-logo { font-size:22px; }
+ .junro-menu-toggle { display:block; position:absolute; top:39px; right:40px; width:44px; height:44px; z-index:3; }
+ .junro-header.is-open .junro-logo { position:relative; z-index:3; }
+ .junro-menu-toggle i { display:block; width:25px; height:2px; background:#361003; margin:7px auto; transition:transform 250ms cubic-bezier(.16,.64,.32,1); }
+ .junro-header.is-open .junro-menu-toggle i:first-child { transform:translateY(4.5px) rotate(45deg); }
+ .junro-header.is-open .junro-menu-toggle i:last-child { transform:translateY(-4.5px) rotate(-45deg); }
+ .junro-nav { position:fixed; z-index:2; top:0; right:0; left:0; height:100dvh; padding:150px 35px 50px; background:#f9f5f4; opacity:0; visibility:hidden; transition:opacity 250ms cubic-bezier(.16,.64,.32,1),visibility 250ms; align-items:flex-start; gap:38px; font-size:16px; }
+ .junro-header.is-open .junro-nav { opacity:1; visibility:visible; }
+ .junro-motion-toggle { top:86px; right:40px; }
+ .junro-hero,.junro-page-heading { margin:16px 16px 0; }
+ .junro-hero,.junro-hero-inner { min-height:760px; }
+ .junro-hero-copy { top:145px; left:24px; font-size:18px; }
+ .junro-hero-media { top:265px; left:calc(50% - 110px); width:220px; height:330px; }
+ .junro-hero-news { width:auto; left:24px; right:24px; bottom:20px; padding-top:15px; }
+ .junro-page-heading { height:240px; padding:0 24px 30px; }
+ .junro-page-heading h1 { font-size:30px; }
+ .junro-page-heading span { font-size:11px; }
+ .junro-section-title h2 { font-size:30px; }
+ .junro-section-title span { font-size:11px; }
+ .junro-mission-preview { min-height:560px; padding:95px 16px 0; }
+ .junro-photo-sequence { height:900px; }
+ .junro-photo-sequence .junro-photo-placeholder:nth-child(1) { width:52%;height:230px;top:0; }
+ .junro-photo-sequence .junro-photo-placeholder:nth-child(2) { width:34%;height:210px;top:90px;left:60%; }
+ .junro-photo-sequence .junro-photo-placeholder:nth-child(3) { width:52%;height:200px;top:290px;left:0; }
+ .junro-photo-sequence .junro-photo-placeholder:nth-child(4) { width:34%;height:200px;top:370px;left:60%; }
+ .junro-photo-sequence .junro-photo-placeholder:nth-child(5) { width:52%;height:230px;top:610px;left:0; }
+ .junro-photo-sequence .junro-photo-placeholder:nth-child(6) { width:34%;height:190px;top:680px;left:60%; }
+ .junro-business-preview { margin:0 16px; padding:75px 16px; }
+ .junro-business-preview-list { display:block; margin-top:55px; }
+ .junro-business-preview-list .junro-business-row { margin:0 0 75px!important; }
+ .junro-business-row,.junro-business-row--home { display:block; min-height:0; padding:35px 16px; }
+ .junro-business-row--home { padding:0; }
+ .junro-business-mark,.junro-business-row--home .junro-business-mark,.junro-business-preview-list .junro-business-row:first-child .junro-business-mark { width:60%; height:260px; }
+ .junro-business-row--home:nth-child(2n) .junro-business-mark { width:70%; }
+ .junro-business-copy { margin-top:32px; }
+ .junro-company-preview { display:block; min-height:0; padding:80px 16px; }
+ .junro-company-preview .junro-photo-placeholder { width:50%; height:280px; }
+ .junro-company-preview-copy { margin:65px 0; }
+ .junro-company-preview > .scroll-reveal:last-child { margin:0 0 0 auto; }
+ .junro-news-section { display:block; padding:70px 16px; min-height:0; }
+ .junro-news-list { margin-top:55px; }
+ .junro-careers { display:block; min-height:0; margin:0 16px; padding:70px 16px; }
+ .junro-careers > .scroll-reveal:nth-child(2) .junro-photo-placeholder { height:260px; margin-top:60px; }
+ .junro-careers > .scroll-reveal:nth-child(3) .junro-photo-placeholder { width:45%;height:130px;margin:40px 0 0 auto; }
+ .junro-index-row,.junro-index-row--photo { display:block; min-height:0; padding:70px 16px; }
+ .junro-company-first { margin-top:70px; }
+ .junro-index-row--photo .junro-photo-placeholder { width:55%; height:310px; margin-bottom:22px; }
+ .junro-index-copy { padding:55px 0 0; }
+ .junro-business-intro { display:block; padding:90px 16px 50px; min-height:0; }
+ .junro-business-intro .junro-photo-placeholder { height:260px; margin-top:65px; }
+ .junro-content { padding:90px 16px 120px; }
+ .junro-statement { font-size:25px; }
+ .junro-longform { font-size:14px; }
+ .junro-two-column,.junro-split,.junro-press-asset { display:block; }
+ .junro-two-column .junro-photo-placeholder { margin:35px 0; height:260px; }
+ .junro-data-grid { display:block; }
+ .junro-data-grid figure { margin-bottom:40px; }
+ .junro-data-grid strong { font-size:42px; }
+ .junro-press-asset .junro-photo-placeholder { height:260px; margin-bottom:40px; }
+ .junro-footer { padding:0 16px; }
+ .junro-footer-main,.junro-footer-crumb + .junro-footer-main { min-height:0; padding:50px 0; }
+ .junro-footer-links { display:block; margin-top:45px; }
+ .junro-footer-links nav + nav { margin-top:40px; }
+ .junro-legal { position:static; align-items:flex-start!important; margin-top:45px; }
+ .junro-footer-bottom { padding:25px 0; }
+}
+
+/* 生成写真の差し込み。data-photo のある写真枠は --photo を全面に敷く（仮置きグラデーションより優先） */
+.junro [data-photo] { background:var(--photo) center/cover no-repeat !important; }
+.junro .junro-hero-media[data-photo]::before { background:var(--photo) center/cover no-repeat !important; }
+.junro .junro-hero-media[data-photo]::after { background:var(--photo2, var(--photo)) center/cover no-repeat !important; }

@@ -1,0 +1,216 @@
+{
+  "reference_url": "https://giftee.co.jp/",
+  "analyzed_at": "2026-11-24T07:14:31.232Z",
+  "pages": [
+    {
+      "url": "https://giftee.co.jp/",
+      "slug": "top",
+      "title": "株式会社ギフティ",
+      "viewportsTall": 9.1,
+      "revealCount": 8,
+      "dominantKind": "fade",
+      "durationMs": {
+        "min": 1500,
+        "median": 2600,
+        "max": 2600
+      },
+      "easings": [
+        "cubic-bezier(0.5, 1, 0.89, 1)"
+      ],
+      "scrollLinkedCount": 28,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 2,
+      "keyframes": 16,
+      "header": {
+        "position": "absolute",
+        "atTop": {
+          "height": 240,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "section header"
+        },
+        "scrolled": {
+          "height": 240,
+          "top": -1800,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "section header"
+        },
+        "shrinks": false,
+        "hides": true,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    },
+    {
+      "url": "https://giftee.co.jp/company/",
+      "slug": "company",
+      "title": "企業情報 | 株式会社ギフティ",
+      "viewportsTall": 3.1,
+      "revealCount": 1,
+      "dominantKind": "clip-wipe",
+      "durationMs": {
+        "min": 250,
+        "median": 250,
+        "max": 250
+      },
+      "easings": [
+        "cubic-bezier(0.16, 0.64, 0.32, 1)"
+      ],
+      "scrollLinkedCount": 12,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 11,
+      "header": {
+        "position": "relative",
+        "atTop": {
+          "height": 240,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "section header"
+        },
+        "scrolled": {
+          "height": 240,
+          "top": -1800,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "section header"
+        },
+        "shrinks": false,
+        "hides": true,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    },
+    {
+      "url": "https://giftee.co.jp/business/",
+      "slug": "business",
+      "title": "事業紹介 | 株式会社ギフティ",
+      "viewportsTall": 4.7,
+      "revealCount": 1,
+      "dominantKind": "clip-wipe",
+      "durationMs": {
+        "min": 250,
+        "median": 250,
+        "max": 250
+      },
+      "easings": [
+        "cubic-bezier(0.16, 0.64, 0.32, 1)"
+      ],
+      "scrollLinkedCount": 12,
+      "scrollTriggerCount": null,
+      "pinnedCount": null,
+      "scrubbedCount": null,
+      "runningAnimations": 0,
+      "keyframes": 11,
+      "header": {
+        "position": "relative",
+        "atTop": {
+          "height": 240,
+          "top": 0,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "section header"
+        },
+        "scrolled": {
+          "height": 240,
+          "top": -1800,
+          "bg": "rgba(0, 0, 0, 0)",
+          "cls": "section header"
+        },
+        "shrinks": false,
+        "hides": true,
+        "changesBackground": false,
+        "togglesClass": false
+      },
+      "libs": {
+        "lenis": "present",
+        "viewTransitions": "in-use"
+      }
+    }
+  ],
+  "cross_page": {
+    "reveal_count_by_page": {
+      "top": 8,
+      "company": 1,
+      "business": 1
+    },
+    "reveal_count_spread": 7,
+    "motion_consistent": true,
+    "libs_union": [
+      "lenis",
+      "viewTransitions"
+    ],
+    "header_behavior": {
+      "position": "absolute",
+      "atTop": {
+        "height": 240,
+        "top": 0,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "section header"
+      },
+      "scrolled": {
+        "height": 240,
+        "top": -1800,
+        "bg": "rgba(0, 0, 0, 0)",
+        "cls": "section header"
+      },
+      "shrinks": false,
+      "hides": true,
+      "changesBackground": false,
+      "togglesClass": false
+    }
+  },
+  "reduced_motion": {
+    "reveal_count_normal": 8,
+    "reveal_count_reduced": 0,
+    "respected": true
+  },
+  "page_transition": {
+    "libs": {
+      "viewTransitions": "in-use"
+    },
+    "loader_candidates": []
+  },
+  "direction_hints": {
+    "dominant_reveal": "fade",
+    "scroll_linked_count": 28,
+    "scroll_trigger_summary": {
+      "total": null,
+      "pinned": null,
+      "scrubbed": null
+    },
+    "duration_ms": {
+      "min": 1500,
+      "median": 2600,
+      "max": 2600
+    },
+    "easings": [
+      "cubic-bezier(0.5, 1, 0.89, 1)"
+    ],
+    "reveal_kinds": {
+      "fade": 4,
+      "fade-up": 0,
+      "fade-side": 0,
+      "zoom": 0,
+      "clip-wipe": 0,
+      "blur": 0,
+      "lazy-blur-up": 0,
+      "other": 4
+    },
+    "page_length_viewports": [
+      9.1,
+      3.1,
+      4.7
+    ]
+  }
+}

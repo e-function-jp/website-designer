@@ -1,0 +1,20 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { url } from '../../../../../lib/site';
+import { site } from '../_site';
+import JunroHeader from '../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../components/sections/JunroPageHeading.astro';
+import JunroIndexRow from '../../../../../components/sections/JunroIndexRow.astro';
+import ScrollReveal from '../../../../../components/ui/ScrollReveal.astro';
+---
+<SiteLayout site={site} title="企業情報" description="巡路知能株式会社の代表メッセージ、まちの設備を止めないための使命、会社概要と組織の情報をご覧いただけます。" path="/company/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'企業情報'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/company/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Company" japanese="企業情報" />
+    <ScrollReveal class="junro-company-first" animation="clip-up" duration={250}><JunroIndexRow photo clip image="/sites/corporate/_shared/20261124-1613/img-a-08.jpg" imageAlt="新緑の街路と行き交う人々" english="Message" japanese="代表メッセージ" description="事業を始めた理由と、これからの設備管理への考えをお伝えします。" href={url(site, '/company/message/')} /></ScrollReveal>
+    <JunroIndexRow photo image="/sites/corporate/_shared/20261124-1613/img-a-03.jpg" imageAlt="施設の脇に咲く黄色い草花" english="Mission" japanese="私たちの使命" description="点検の記録から、まちの設備を守る判断へつなげます。" href={url(site, '/company/mission/')} />
+    <JunroIndexRow photo image="/sites/corporate/_shared/20261124-1613/img-a-10.jpg" imageAlt="机に置かれた点検記録と鉛筆" english="Profile & Team" japanese="会社概要・組織" description="巡路知能株式会社の基本情報と事業の提供先を紹介します。" href={url(site, '/company/outline/')} />
+  </div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/company/" label="企業情報" /></Fragment>
+</SiteLayout>

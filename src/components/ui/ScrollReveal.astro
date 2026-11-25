@@ -80,9 +80,13 @@ const {
     opacity: 1;
     transform: none;
     filter: none;
-    clip-path: inset(0 0 0 0);
+    /* clip-path は clip-up のときだけ残す。inset(0) を全種に掛けると、中身が
+       position:absolute で外枠の高さが 0 のとき、中身ごと切り取られて
+       「出現後も見えない」状態になる（実測 2026-11-25, ヒーローが空白に写った） */
+    clip-path: none;
     will-change: auto;
   }
+  .scroll-reveal.is-visible .scroll-reveal__inner--clip-up { clip-path: inset(0 0 0 0); }
 
   /* stagger 時は孫要素（差し込まれた各要素）を動かす */
   .scroll-reveal__inner--stagger { opacity: 1; transform: none; filter: none; clip-path: none; }

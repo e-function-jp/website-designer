@@ -1,0 +1,13 @@
+---
+interface Props { id: string; target: string; name: string; code: string; description: string; href: string }
+const { id, target, name, code, description, href } = Astro.props;
+---
+<article class="junro-b-feature" aria-labelledby={`feature-${id}`}>
+  <div class="junro-b-feature-mark" aria-hidden="true"><strong>巡路<span>✳</span></strong><small>{code}</small></div>
+  <div class="junro-b-feature-copy">
+    <span class="junro-target">{target}</span>
+    <h3 id={`feature-${id}`}>{name}</h3>
+    <p>{description}</p>
+    <a href={href} class="junro-b-feature-link">{name}を見る <span aria-hidden="true">↗</span></a>
+  </div>
+</article>

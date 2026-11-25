@@ -39,51 +39,88 @@ export WEB_DESIGNER_SCORE_STAGE="$STAGE"
 SHOTS="$RUN_DIR/shots"
 mkdir -p "$SHOTS"
 
-# 採点にかけるページ。トップに加えて下層を2枚撮る。
-# ナビの一貫性・パンくず・現在地表示はトップだけでは判定できない。
-SCORE_PAGES="${WEB_DESIGNER_SCORE_PAGES:-/ /about/ /service/}"
+MODE="$(python3 -c "import json,sys;print(json.load(open(sys.argv[1])).get('mode','adapt'))" "$RUN_DIR/job.json" 2>/dev/null || echo adapt)"
+export WEB_DESIGNER_SCORE_MODE="$MODE"
 
 IMG_ARGS=()
+IMAGE_ORDER=""
+OUR_SHOTS=0
+n=0
 
-# --- 1. 参照サイトのキャプチャ（あれば先頭に置く） ---
-#
-# 保存しているのは web-analyze-reference-motion.mjs で、置き先は
-# {run_dir}/motion/{slug}-full.jpg。当初この探索先が ref-*.jpg のままで、
-# **judge が参照サイトを一度も見ないまま reference_fit を採点していた**。
-REF_IMG=""
-for cand in "$RUN_DIR/motion/top-full.jpg" "$RUN_DIR/motion/top-top.jpg" \
-            "$RUN_DIR/ref-top.jpg" "$RUN_DIR/ref-full.jpg" "$RUN_DIR/ref-pc-full.jpg"; do
-  [[ -f "$cand" ]] && { REF_IMG="$cand"; break; }
-done
-if [[ -n "$REF_IMG" ]]; then
-  IMG_ARGS+=(-i "$REF_IMG")
+shoot() {  # shoot <model> <page> <slug> <width>
+  local m="$1" page="$2" slug="$3" width="$4"
+  local route="/sites/$SITE_TYPE/$m-$STAMP${page}"
+  local out="$SHOTS/$m-$slug.jpg"
+  echo "==> shoot $route (${width}px)"
+  if node scripts/web-shoot-sample.mjs "$route" "$out" --width "$width" </dev/null >/dev/null 2>&1; then
+    IMG_ARGS+=(-i "$out"); n=$((n+1)); OUR_SHOTS=$((OUR_SHOTS+1))
+    IMAGE_ORDER+="${n}枚目 = 採点対象 ${m} の ${page}（${width}px）
+"
+  else
+    echo "    (skip: $route はビルド結果に無い)" >&2
+  fi
+}
+
+# 前回の撮影が残っていると、今回撮れていないページを古い画像で採点してしまう。
+for m in "${MODELS[@]}"; do rm -f "$SHOTS/$m-"*.jpg; done
+
+if [[ "$MODE" == "reproduce" && -z "${WEB_DESIGNER_SCORE_PAGES:-}" ]]; then
+  # 参照再現ラン: 参照キャプチャと自サイトの対応ページを交互に並べる。
+  # 固定の /about/ /service/ を撮ると参照に無いページを 404 として減点し、
+  # 実装がそれを消すために参照に無いページを足してしまった（実測 2026-11-24）。
+  PAIRS="$(python3 scripts/web-score-pages.py "$RUN_DIR" || true)"
+  [[ -n "$PAIRS" ]] || { echo "  x 参照キャプチャ（motion/*-full.jpg）がありません。" >&2; exit 4; }
+  SCORE_PAGES=""
+  while IFS=$'\t' read -r ref_img our_page ref_path; do
+    SCORE_PAGES+="$our_page "
+    IMG_ARGS+=(-i "$ref_img"); n=$((n+1))
+    IMAGE_ORDER+="${n}枚目 = 参照サイト（実物）の ${ref_path}（PC）
+"
+    slug="$(echo "$our_page" | tr '/' '-' | sed 's/^-//; s/-$//')"; slug="${slug:-top}"
+    for m in "${MODELS[@]}"; do shoot "$m" "$our_page" "$slug" 1280; done
+  done <<< "$PAIRS"
+  # SP はトップだけ撮る（崩れ・メニューの形を見る。参照側の SP キャプチャは無い）
+  for m in "${MODELS[@]}"; do shoot "$m" "/" "top-sp" 390; done
   export WEB_DESIGNER_REF_ATTACHED=1
-  echo "==> 参照キャプチャ: $REF_IMG"
+  SCORE_PAGES="${SCORE_PAGES% }"
 else
-  echo "==> 参照キャプチャが見つからない。reference_fit は文字情報だけの採点になる" >&2
-fi
+  # 採点にかけるページ。トップに加えて下層を2枚撮る。
+  # ナビの一貫性・パンくず・現在地表示はトップだけでは判定できない。
+  SCORE_PAGES="${WEB_DESIGNER_SCORE_PAGES:-/ /about/ /service/}"
 
-# --- 2. 生成サイトを実描画で撮影 ---
-for m in "${MODELS[@]}"; do
-  for page in $SCORE_PAGES; do
-    route="/sites/$SITE_TYPE/$m-$STAMP${page}"
-    slug="$(echo "$page" | tr -d '/' )"; slug="${slug:-top}"
-    out="$SHOTS/$m-$slug.jpg"
-    echo "==> shoot $route"
-    if node scripts/web-shoot-sample.mjs "$route" "$out" >/dev/null 2>&1; then
-      IMG_ARGS+=(-i "$out")
-    else
-      echo "    (skip: $route はビルド結果に無い)" >&2
-    fi
+  # --- 1. 参照サイトのキャプチャ（あれば先頭に置く） ---
+  # 置き先は {run_dir}/motion/{slug}-full.jpg。当初この探索先が ref-*.jpg のままで、
+  # **judge が参照サイトを一度も見ないまま reference_fit を採点していた**。
+  REF_IMG=""
+  for cand in "$RUN_DIR/motion/top-full.jpg" "$RUN_DIR/motion/top-top.jpg" \
+              "$RUN_DIR/ref-top.jpg" "$RUN_DIR/ref-full.jpg" "$RUN_DIR/ref-pc-full.jpg"; do
+    [[ -f "$cand" ]] && { REF_IMG="$cand"; break; }
   done
-done
+  if [[ -n "$REF_IMG" ]]; then
+    IMG_ARGS+=(-i "$REF_IMG"); n=$((n+1))
+    IMAGE_ORDER+="${n}枚目 = 参照サイト（実物）のトップ
+"
+    export WEB_DESIGNER_REF_ATTACHED=1
+    echo "==> 参照キャプチャ: $REF_IMG"
+  else
+    echo "==> 参照キャプチャが見つからない。reference_fit は文字情報だけの採点になる" >&2
+  fi
+
+  # --- 2. 生成サイトを実描画で撮影 ---
+  for m in "${MODELS[@]}"; do
+    for page in $SCORE_PAGES; do
+      slug="$(echo "$page" | tr -d '/' )"; slug="${slug:-top}"
+      shoot "$m" "$page" "$slug" 1280
+    done
+  done
+fi
+export WEB_DESIGNER_SCORE_PAGES_USED="$SCORE_PAGES"
 
 # 撮影が1枚も成立していないなら採点しない。
 # 存在しないURLを撮ると "not found" の白紙画像になり、judge はそれに
 # 0点を付ける。その講評が SKILL の自動更新ログへ流れ込み、学習を汚す
 # （実測 2026-09-14: 実装0件のまま採点まで進み、無意味な指摘を5件蓄積した）。
-SHOT_COUNT="$(find "$SHOTS" -name '*.jpg' 2>/dev/null | wc -l | tr -d ' ')"
-if [ "${SHOT_COUNT:-0}" -eq 0 ]; then
+if [ "$OUR_SHOTS" -eq 0 ]; then
   echo "  x 採点対象の撮影が0枚です。実装が出来ていない可能性があります。" >&2
   echo "    採点をスキップします（不正な0点で SKILL を汚さないため）。" >&2
   exit 4
@@ -105,18 +142,41 @@ else
   STAGE_NOTE=""
 fi
 
-PROMPT=$(cat <<EOF
-あなたは website（多ページサイト）デザインの審査員。**あなたはこれらを生成していない。**
-忖度せず、減点理由を具体的に挙げること。甘い点をつけない。
-${STAGE_NOTE}
+if [[ "$MODE" == "reproduce" ]]; then
+RUBRIC=$(cat <<'EOF'
+このランは **参照再現ラン** である。目的は「参照サイトと同じ設計の、別会社のサイト」。
+社名・ロゴ・文章・写真の被写体だけが独自で、それ以外は参照に寄せるのが正解。
+**参照どおりの選択を、一般論（分かりやすさ・CV・ラベルの説明性・パンくずの有無など）で減点しない。**
+参照に無い要素を足しているのは減点。参照にある要素を均している・落としているのも減点。
+参照画像と採点対象は同じページどうしが続けて並んでいる。必ず対で見比べること。
 
-添付画像の順番:
-1枚目 = 参照サイト（実物）のキャプチャ ※無い場合あり
-以降 = 採点対象。モデルごとに ${SCORE_PAGES} の順で並ぶ。モデル順: ${MODEL_LIST}
+## 採点ルーブリック（合計100点）
 
-ラン情報（サイト種別・必須ページ・参照サイト・トーン方針）:
-${REF_CONTEXT}
+1. **layout_fidelity**（25）— 各ページのセクションの順番と数 / カラム数とレイアウト比率 /
+   余白の広狭 / 写真枠の数・大きさの差・配置（ずらし、断ち落とし等）/ ページ全長の比率
+2. **navigation_shell**（20）— ヘッダーの形（縦・横・ハンバーガー）と位置 / ナビの項目数・並び・ラベルの言語と長さ /
+   フッターの形と量 / パンくずの有無が参照と同じか / 全ページで同じシェルか
+3. **typography_color**（20）— 書体系統（明朝・ゴシック・欧文）/ 見出しと本文の px 階層 / 和欧の比率 /
+   配色（背景・文字・アクセント）/ 罫線・矢印などの細部
+4. **content_fidelity**（15）— 見出し・本文の文字量が参照と同程度か / 写真の役割・構図・トリミング比 /
+   参照の固有名詞・原文コピー・ロゴを流用していないか（流用は大幅減点）/ ブランドとして筋が通っているか
+5. **quality**（20）— 崩れ・重なり・見切れ・コントラスト不足が無いか / SP（390px）で崩れないか /
+   ページ間の作り込みムラ / 写真枠がグラデーション等の仮置きのまま残っていないか
 
+## 必ず減点する項目（発見したら明示）
+
+- 参照に無いセクション・帯・ページを足している（実績数値、CTA帯、説明文、カード、アイコン付き特徴など）
+- 参照にある要素（写真枠、余白だけの面、英語ラベル、縦並びナビ等）を減らす・均す
+- 参照と違う形のヘッダー/ナビ/フッター
+- 写真枠が参照より明らかに少ない、または写真の代わりに単色・グラデーションが入っている
+- テキストの重なり・見切れ・コントラスト不足
+
+静止画なのでモーション（出現・ホバー・メニュー開閉）は採点しない。採点できない項目を推測で加減点しない。
+EOF
+)
+LAYER_SCHEMA='{"layout_fidelity":<0-25>,"navigation_shell":<0-20>,"typography_color":<0-20>,"content_fidelity":<0-15>,"quality":<0-20>}'
+else
+RUBRIC=$(cat <<'EOF'
 ## 採点ルーブリック（各20点・合計100点）
 
 1. **information_architecture** — サイトマップの妥当性 / グローバルナビの分節 /
@@ -136,6 +196,22 @@ ${REF_CONTEXT}
 - 事業と無関係なストック写真、emoji を主ビジュアルにしている
 - 英語小見出しの連発（ABOUT / SERVICE / CONTACT を飾りで量産）
 - テキストの重なり・見切れ・コントラスト不足
+EOF
+)
+LAYER_SCHEMA='{"information_architecture":<0-20>,"visual":<0-20>,"nielsen":<0-20>,"reference_fit":<0-20>,"quality":<0-20>}'
+fi
+
+PROMPT=$(cat <<EOF
+あなたは website（多ページサイト）デザインの審査員。**あなたはこれらを生成していない。**
+忖度せず、減点理由を具体的に挙げること。甘い点をつけない。
+${STAGE_NOTE}
+
+添付画像の順番（モデル順: ${MODEL_LIST}）:
+${IMAGE_ORDER}
+ラン情報（サイト種別・参照サイト・方針）:
+${REF_CONTEXT}
+
+${RUBRIC}
 
 ## 出力（JSONのみ。前後に文章を書かない）
 
@@ -143,7 +219,7 @@ ${REF_CONTEXT}
   "models": {
     "<model名>": {
       "total": <0-100>,
-      "layers": {"information_architecture":<0-20>,"visual":<0-20>,"nielsen":<0-20>,"reference_fit":<0-20>,"quality":<0-20>},
+      "layers": ${LAYER_SCHEMA},
       "issues": ["具体的な指摘", "..."],
       "strengths": ["..."],
       "page_notes": {"<ページパス>": "そのページ固有の指摘"}
@@ -246,7 +322,8 @@ if stage == "draft":
         "judge": os.environ.get("WEB_DESIGNER_JUDGE_CMD", "codex"),
         "judge_model": os.environ.get("WEB_DESIGNER_JUDGE_MODEL", "(codex default)"),
         "reference_attached": bool(os.environ.get("WEB_DESIGNER_REF_ATTACHED")),
-        "score_pages": os.environ.get("WEB_DESIGNER_SCORE_PAGES", "/ /about/ /service/"),
+        "score_pages": os.environ.get("WEB_DESIGNER_SCORE_PAGES_USED", ""),
+        "rubric": os.environ.get("WEB_DESIGNER_SCORE_MODE", "adapt"),
     }
     (run_dir_p / out_name).write_text(
         json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -271,7 +348,8 @@ setup = {
     "judge": os.environ.get("WEB_DESIGNER_JUDGE_CMD", "codex"),
     "judge_model": os.environ.get("WEB_DESIGNER_JUDGE_MODEL", "(codex default)"),
     "reference_attached": bool(os.environ.get("WEB_DESIGNER_REF_ATTACHED")),
-    "score_pages": os.environ.get("WEB_DESIGNER_SCORE_PAGES", "/ /about/ /service/"),
+    "score_pages": os.environ.get("WEB_DESIGNER_SCORE_PAGES_USED", ""),
+        "rubric": os.environ.get("WEB_DESIGNER_SCORE_MODE", "adapt"),
 }
 data["measurement_setup"] = setup
 

@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>巡路知能株式会社｜参照再現ディレクション</title>
+  <style>
+    body{max-width:1100px;margin:0 auto;padding:32px 24px 80px;color:#361003;background:#fff;font-family:"Noto Sans JP",sans-serif;line-height:1.75}
+    h1,h2,h3{line-height:1.35}h2{margin-top:72px;border-bottom:1px solid #ddd;padding-bottom:12px}
+    article{margin:48px 0 72px}article>section{padding:20px 0;border-bottom:1px solid #ddd}
+    dt{font-weight:700;margin-top:16px}dd{margin-left:0}table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left;vertical-align:top}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f9f5f4;padding:16px}
+    figure{margin:20px 0;padding:12px 0;border-bottom:1px solid #ddd}
+    [data-role]{margin:6px 0}[data-role]::before{content:attr(data-role) "：";font-weight:700}
+  </style>
+</head>
+<body>
+<h1>巡路知能株式会社｜corporate-20261124-1613 提出版ディレクション</h1>
+<p>基準画面はPC 1440px。寸法は指定の6枚のキャプチャから読み取った概数。SP、ホバー、詳細ページ固有の寸法は未撮影のため、この文書で定める実装仕様として扱う。サイト全体の出力先は <code>/sites/corporate/a-20261124-1613/</code>。</p>
+
+<section id="site-config">
+  <h2>サイト定義</h2>
+  <p>ページより先に <code>_site.ts</code> を作り、全ページで同じ定義を読み込む。以下のパスは <code>base</code> 相対。採用サイトとフッターの外部媒体・法務文書の実URLは企業設定にないため、実装時に環境変数で供給する。未設定のURLを <code>#</code> に置き換えない。</p>
+  <dl>
+    <dt>name</dt><dd>巡路知能株式会社</dd>
+    <dt>tagline</dt><dd>まちの設備を、止めない。</dd>
+    <dt>base</dt><dd>/sites/corporate/a-20261124-1613/</dd>
+    <dt>theme</dt><dd>junro-ivory</dd>
+    <dt>nav</dt>
+    <dd><pre>[
+  { label: '企業情報', href: '/company/', children: [
+    { label: '代表メッセージ', href: '/company/message/' },
+    { label: '私たちの使命', href: '/company/mission/' },
+    { label: '会社概要・組織', href: '/company/outline/' }
+  ] },
+  { label: '事業紹介', href: '/business/' },
+  { label: 'プレスルーム', href: '/press/', children: [
+    { label: 'ニュース', href: '/press/news/' },
+    { label: 'プレスキット', href: '/press/presskit/' },
+    { label: '公開データ', href: '/press/opendata/' }
+  ] },
+  { label: 'お問い合わせ', href: '/contact/' },
+  { label: '採用情報', href: import.meta.env.PUBLIC_JUNRO_CAREERS_URL }
+]</pre></dd>
+    <dt>footerNav</dt>
+    <dd><pre>[
+  { heading: 'サイト', items: nav.map(({label, href}) =&gt; ({label, href})) },
+  { heading: '外部媒体', items: [
+    { label: '巡路ジャーナル', href: import.meta.env.PUBLIC_JUNRO_JOURNAL_URL },
+    { label: '巡路 採用広報', href: import.meta.env.PUBLIC_JUNRO_RECRUIT_NOTE_URL },
+    { label: '巡路 Tech Blog', href: import.meta.env.PUBLIC_JUNRO_TECH_BLOG_URL }
+  ] }
+]</pre></dd>
+    <dt>organization</dt>
+    <dd><pre>{ legalName: '巡路知能株式会社', address: '福岡県福岡市', founded: '2018' }</pre></dd>
+    <dt>legalNav</dt>
+    <dd><pre>[
+  { label: 'プライバシーポリシー', href: import.meta.env.PUBLIC_JUNRO_PRIVACY_URL },
+  { label: '情報セキュリティポリシー', href: import.meta.env.PUBLIC_JUNRO_INFO_SECURITY_URL },
+  { label: 'セキュリティについて', href: import.meta.env.PUBLIC_JUNRO_SECURITY_URL },
+  { label: '利用者情報の外部送信について', href: import.meta.env.PUBLIC_JUNRO_EXTERNAL_TRANSMISSION_URL },
+  { label: '電子公告', href: import.meta.env.PUBLIC_JUNRO_NOTICE_URL }
+]</pre></dd>
+    <dt>motion</dt>
+    <dd><pre>{ reveal: 'fade', durationMs: 2600, staggerMs: 0, header: 'hide', pageTransition: true }</pre></dd>
+    <dt>shell</dt>
+    <dd><pre>{ header: 'custom', footer: 'custom', breadcrumbs: 'hidden' }</pre></dd>
+  </dl>
+  <p><code>primaryCta</code> は設定しない。指定された「導入について相談する」はお問い合わせページの事業相談リンクにのみ使う。企業設定の実績3値は公開データページに配置し、トップや事業紹介に実績帯を増設しない。</p>
+</section>
+
+<section id="shell">
+  <h2>共通シェル</h2>
+  <h3>専用ヘッダー</h3>
+  <p><code>SiteLayout</code> の <code>header</code> スロットに <code>JunroHeader</code> を差し込む。PC初期表示は高さ240pxのabsolute配置。外側30pxの白枠内、ロゴは左上約(60,60)、ナビは右端60pxに5件を上から順に縦積み、各行約38px。ロゴは濃茶の文字組と珊瑚色の小点。5件目のみ斜め矢印。現在地はラベル脇に直径4pxの珊瑚色点。右側ナビの下に小さな「動きを停止」ボタンを置く。営業CTAを置かない。</p>
+  <p>PCスクロール後はabsoluteのまま文書とともに上へ抜ける。高さ240px、透明背景、ナビ、ロゴの寸法を変えない。スクロールに伴う追加トランジションは0ms。PCメニュー展開状態は存在せず、5件を常時表示する。子ページは各親リンク先の索引から移動でき、PCヘッダー上に未観測のメガメニューを足さない。</p>
+  <p>SP仕様は参照キャプチャ未取得のため暫定。幅390px時は左右16pxの淡色面内にロゴを左上24px、右上に44×44pxのメニューボタンを置く。初期状態でナビ5件は非表示。展開時は同じ淡色の幕を画面幅いっぱい、上端から100dvhまで出し、5件を縦に38px間隔で表示する。幕のopacityは0→1を250ms・<code>cubic-bezier(0.16, 0.64, 0.32, 1)</code>、項目は全件同時にopacity 0→1を250ms、stagger 0ms。ハンバーガー2線は同じ250msでそれぞれ45度・−45度に回して×を作る。閉じると逆再生。Esc、幕外クリック、リンク選択で閉じ、フォーカスをボタンに戻す。reduced-motionではすべて0msにする。</p>
+  <p>PC・SPとも「動きを停止」はヒーローの8000ms画像切替と長いリビールを停止し、状態を <code>aria-pressed</code> で示す。ホバーの見た目は未観測のため色反転・画像拡大・矢印移動を指定しない。キーボードフォーカスのみ2pxの珊瑚色アウトラインを表示する。</p>
+  <h3>専用フッターとパンくず</h3>
+  <p><code>SiteLayout</code> の <code>footer</code> スロットに <code>JunroFooter</code> を差し込む。下層ページでは濃色フッターの先頭に「ホーム › 現在地」を置き、その下に1px罫線。トップにはパンくずを表示しない。<code>shell.breadcrumbs: 'hidden'</code> にして標準の本文前パンくずを抑えるが、<code>SiteLayout</code> のBreadcrumbList構造化データは残す。</p>
+  <p>PCフッターは高さ約600px、背景#232323。左上に白いロゴ、下に主要ナビ5件。隣列に外部媒体3件、右下に法務5件。本文リンク計13件の量と並びを維持する。下端罫線の下にSNSの小アイコン3点と著作権表示。住所・電話・導入CTAは追加しない。SPは左右16px、ロゴ→主要5件→外部3件→法務5件→SNSと著作権の順で縦に積み、各群24px以上離す。</p>
+  <h3>下層の見出し帯と動き</h3>
+  <p>全下層ページは共通の <code>JunroPageHeading</code> を使用。PCでは外側30pxの白枠を残す幅1380px・高さ約330pxの#F9F5F4矩形。英語見出しを左下約(60,280)に40px、その右に日本語12px。背景画像なし。SP幅390pxでは外枠16px、帯358×240px、英語30px、日本語11px、左下24px。ページ名以外の導入文を帯に追加しない。</p>
+  <p>トップの検出リビール8件は見出し・写真のまとまり単位。fadeを1500～2600ms、標準2600ms、<code>cubic-bezier(0.5, 1, 0.89, 1)</code>。企業情報と事業紹介は各1件、画像のclip-pathを250ms、<code>cubic-bezier(0.16, 0.64, 0.32, 1)</code>。28というスクロール変化数からpinや視差を作らない。内部遷移にはView Transitionsを有効にするが、参照の遷移時間は未実測のため独自の覆い幕やローダーを追加しない。<code>prefers-reduced-motion</code> 時はリビール0件、画像切替停止、遷移アニメーション0ms。</p>
+</section>
+
+<section id="sitemap">
+  <h2>サイトマップ</h2>
+  <p>作成対象は参照で確認できる内部11ページ。採用情報は参照と同じく外部サイトへのリンクであり、この出力先に採用ページを増設しない。分類上のcorporate標準パスを機械的に使わず、このランの <code>required_pages</code> は以下の11パスで照合する。</p>
+  <table>
+    <thead><tr><th>URL</th><th>ページ名</th><th>参照の対応ページ</th><th>役割</th><th>本文量・参照観測</th></tr></thead>
+    <tbody>
+      <tr><td>/</td><td>トップ</td><td><a href="https://giftee.co.jp/">公式トップ</a></td><td>使命→情景→事業→会社→更新→採用</td><td>全長8151px、7本文ブロック＋フッター、写真枠11点以上</td></tr>
+      <tr><td>/company/</td><td>企業情報</td><td><a href="https://giftee.co.jp/company/">企業情報</a></td><td>詳細3ページへの索引</td><td>全長2746px、3行、各見出し約8～10字・説明約35～45字</td></tr>
+      <tr><td>/business/</td><td>事業紹介</td><td><a href="https://giftee.co.jp/business/">事業紹介</a></td><td>単一クラウドの用途5枠を比較</td><td>全長4238px、導入約55字＋5行の説明各約70～110字</td></tr>
+      <tr><td>/company/message/</td><td>代表メッセージ</td><td><a href="https://giftee.co.jp/company/message/">代表メッセージ</a></td><td>事業の原点と展望</td><td>3行見出し、長文約900字、画像2枠</td></tr>
+      <tr><td>/company/mission/</td><td>私たちの使命</td><td><a href="https://giftee.co.jp/company/mission/">私たちの使命</a></td><td>使命とステートメント</td><td>2行の使命文、説明約160字、画像3枠</td></tr>
+      <tr><td>/company/outline/</td><td>会社概要・組織</td><td><a href="https://giftee.co.jp/company/outline/">会社概要・役員</a></td><td>既知の法人情報と提供先</td><td>会社情報表、人物枠2点、下部の反復情報</td></tr>
+      <tr><td>/contact/</td><td>お問い合わせ</td><td><a href="https://giftee.co.jp/contact/">お問い合わせ</a></td><td>用途別の連絡先を選ぶ</td><td>5項目＋その他1項目、本文約90字</td></tr>
+      <tr><td>/press/</td><td>プレスルーム</td><td><a href="https://giftee.co.jp/press/">プレスルーム</a></td><td>新着5件と資料2種への入口</td><td>ニュース5行＋2索引行</td></tr>
+      <tr><td>/press/news/</td><td>ニュース</td><td><a href="https://giftee.co.jp/press/news/">ニュース</a></td><td>発表の一覧と絞り込み</td><td>種別3ボタン、年選択、10行、ページ送り</td></tr>
+      <tr><td>/press/presskit/</td><td>プレスキット</td><td><a href="https://giftee.co.jp/press/presskit/">プレスキット</a></td><td>写真・ロゴ・利用条件</td><td>画像2枠、ダウンロード2件、利用条件約80字</td></tr>
+      <tr><td>/press/opendata/</td><td>公開データ</td><td><a href="https://giftee.co.jp/press/opendata/">公開データ</a></td><td>定義済み実績と法人情報</td><td>数値6枠、下部索引3件</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="visual">
+  <h2>ビジュアル</h2>
+  <dl>
+    <dt>配色</dt><dd>見出し・ロゴ・矢印ボタン #361003、珊瑚色の点・分類ラベル #ECA9A0、淡色面 #F9F5F4、白面 #FFFFFF、フッター #232323。参照JPEGの平坦部からの実測近似値。</dd>
+    <dt>見出し書体</dt><dd>和欧とも角の立ったゴシック系。候補は欧文 Arial系、和文 Noto Sans JP。英語を主見出しにし、日本語は隣の小ラベルにする。明朝、丸ゴシック、Interを使わない。</dd>
+    <dt>本文書体</dt><dd>Noto Sans JP、PC 15px・行高1.75、SP 14px・行高1.75。ナビはPC 14px、SP 16px。</dd>
+    <dt>見出しpx</dt><dd>下層帯とトップ各セクションの英語はPC 40px／SP 30px。隣接する日本語はPC 12px／SP 11px。企業情報の行タイトルはPC 18px／SP 17px。ヒーローの日本語コピーはPC 20px／SP 18px、字間約0.18em。小さな英語行ラベルはPC 12px／SP 11px。</dd>
+    <dt>写真の方向性</dt><dd>点検業務を直接説明する写真だけで埋めず、人・植物・移動・水面・動物の情景を残す。中央ヒーローは人物の縦長映像。写真は角丸0px、色調は自然光、低彩度、緑と青を多めにし、事業の実景に置き換える。</dd>
+    <dt>余白の単位</dt><dd>PC外枠30px、基本横余白30px、段間90～160px。Mission本文から写真群までは数百pxの空白。企業情報の左写真260pxと右本文の間は約550px。SP外枠16px、段間56～88px。余白を説明文や装飾で埋めない。</dd>
+    <dt>部品</dt><dd><code>JunroHeader</code>、<code>JunroFooter</code>、<code>JunroPageHeading</code>、<code>JunroArrowLink</code>、<code>JunroBusinessRow</code>、<code>JunroIndexRow</code>、<code>JunroNewsRow</code> を新規に切り出す。既存部品は寸法と見た目が一致する場合だけ使う。</dd>
+  </dl>
+</section>
+
+<section id="pages">
+  <h2>ページ別指示</h2>
+
+  <article data-page="/">
+    <h2>トップ</h2>
+    <section data-section="hero">
+      <h3>ファーストビュー</h3>
+      <p data-role="reference">top-top.jpg。淡色面の外枠約30px。左の2行コピー、中央約320×480pxの縦長映像1点、右下の最新ニュース1件。5件の縦ナビは右上。</p>
+      <p data-role="purpose">会社の使命を最初に示し、中央映像と最新情報を同時に見せる。</p>
+      <p data-role="layout">PC 1380×約840pxの淡色面。コピーはx約135・y約430、映像はx約560・y約210、ニュースは右下幅約340px。SPは358×約760px、ロゴ・メニュー→コピー→幅約220×330pxの映像→ニュースの順。</p>
+      <p data-role="copy">まちの設備を、／止めない。ニュース1件の見出しは「点検記録と設備管理に関するお知らせ」、日付・種別・見出しの3要素で約35字。</p>
+      <p data-role="components">JunroHeader、HeroMedia、JunroNewsRow。ニュースは/press/news/へ。</p>
+      <p data-role="animation">中央映像の静止フレームを約8000ms周期でopacity切替、画像倍率1.00→1.10。ページ最初の見出しと映像をまとまり単位でfade、1500～2600ms、cubic-bezier(0.5, 1, 0.89, 1)。reduced-motionでは静止。</p>
+      <p data-role="image">縦長映像1枠。生成画像top:heroを基礎フレームにし、独自素材の短い映像に置換可能。原寸比2:3、角丸0。</p>
+    </section>
+    <section data-section="mission">
+      <h3>Mission</h3>
+      <p data-role="reference">top-full.jpgのヒーロー直後。左上の英語主見出し、日本語小ラベル、短い2行文、40×40px矢印。その下を広く空ける。</p>
+      <p data-role="purpose">情景写真より前に使命への入口を置く。</p>
+      <p data-role="layout">PC白面、高さ約850px。左端30px、見出し約40px、本文幅約260px。写真群まで数百pxの空白。SP高さ約560px、左右16px、本文幅230px。</p>
+      <p data-role="copy">Mission　私たちの使命。まちの設備を見つめ、／止めないための判断を支える。</p>
+      <p data-role="components">JunroArrowLink。矢印は/company/mission/へ。</p>
+      <p data-role="animation">見出しと本文を1まとまりでfade、2600ms、cubic-bezier(0.5, 1, 0.89, 1)。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="photo-sequence">
+      <h3>情景の写真群</h3>
+      <p data-role="reference">top-full.jpg。2段に6点。上段は大きい横長・小さい縦長・大きい横長、下段は横長・最大の水面・端で切れる動物写真。上端を揃えない。</p>
+      <p data-role="purpose">点検に関わる人とまちの空気を、説明文なしで見せる。</p>
+      <p data-role="layout">PC高さ約1380px。幅は概ね470／260／470px、下段は470／540／約260px。列間110～120px、段間約120px。端の写真はビューポートで一部切る。SPは2列の段違い配置を保ち、幅約52%と34%、列間8%、全6枠、段間64px。</p>
+      <p data-role="copy">none。写真の上に説明見出しやキャプションを足さない。</p>
+      <p data-role="components">PhotoSequence。画像単位でaltを付け、装飾写真なら空alt。</p>
+      <p data-role="animation">写真のまとまりをfade、1500～2600ms、cubic-bezier(0.5, 1, 0.89, 1)。pin・縦視差は指定しない。</p>
+      <p data-role="image">6枠すべて維持。imagesのtop:scene-1～6を各1枠へ。top:scene-5は事業紹介の導入写真にも別トリミングで再使用。</p>
+    </section>
+    <section data-section="business">
+      <h3>Business</h3>
+      <p data-role="reference">top-full.jpg。淡色面に5用途。白いロゴ面と対象ラベル・名称・数行説明・斜め矢印を、左右交互の2列で段違い配置。</p>
+      <p data-role="purpose">単一クラウドを5つの利用場面から選べるようにする。5つの独立商品とは称しない。</p>
+      <p data-role="layout">PC高さ約1920px、外側30px、見出し40px。ロゴ面は約330×520pxを先頭に、残り約330×330～390px。説明列幅約290px。5組を左・右・右・左・右にずらす。SPは1列でロゴ面→対象ラベル→名称→説明→矢印を5回、面は幅約45～70%で大小差を保つ。</p>
+      <p data-role="copy">Business　事業紹介。5組の名称は「上水道点検」「下水道点検」「公共施設点検」「設備管理」「記録分析」。対象ラベルは各約8～13字、説明は各約70～110字。事業紹介ページと同じ文章を使用。</p>
+      <p data-role="components">JunroBusinessRowを5回。各矢印は/business/の対応行アンカーへ。</p>
+      <p data-role="animation">見出しと5組を過度に文字分割せず、セクションのまとまりでfade、2600ms、cubic-bezier(0.5, 1, 0.89, 1)。</p>
+      <p data-role="image">写真なし。5つのロゴ面は文字組を独自に作り、白矩形内に配置。画像生成は不要。</p>
+    </section>
+    <section data-section="company">
+      <h3>Company</h3>
+      <p data-role="reference">top-full.jpg。左の緑の縦写真、中央の見出し・約2行説明・矢印、右の人物写真1点。白面で広い横余白。</p>
+      <p data-role="purpose">事業の後に会社情報の入口を置く。</p>
+      <p data-role="layout">PC高さ約800px。左写真約260×390px、中央幅約560px、右写真約260×390px。左右の写真は上下位置を約100pxずらす。SPは左写真→見出しと本文→右写真の順、写真幅約40～55%。</p>
+      <p data-role="copy">Company　企業情報。まちの設備を支える事業の考え方と、／巡路知能株式会社の基本情報を紹介します。</p>
+      <p data-role="components">JunroArrowLink。/company/へ。</p>
+      <p data-role="animation">見出しと写真2点をまとまり単位でfade、2600ms、cubic-bezier(0.5, 1, 0.89, 1)。</p>
+      <p data-role="image">2枠。左はtop:scene-3の緑を縦トリミング、右はtop:company-hands。</p>
+    </section>
+    <section data-section="news">
+      <h3>News</h3>
+      <p data-role="reference">top-full.jpg。左に見出しと矢印、右に日付・種別・見出しの5行。各行を1px線で区切る。写真なし。</p>
+      <p data-role="purpose">更新の入口を示す。</p>
+      <p data-role="layout">PC高さ約820px。左見出し列約35%、右一覧列約58%。1行約125px。SPは見出し→5行で各行約110px。</p>
+      <p data-role="copy">News　ニュース。5件は「点検記録の整理に関するお知らせ」「上水道設備の記録方法を紹介」「公共施設の設備管理に関する記事を公開」「下水道点検の記録項目について」「設備情報の分析方法を紹介」。各行に日付と「お知らせ」または「記事」を添える。</p>
+      <p data-role="components">JunroNewsRow×5、JunroArrowLink。見出し横の矢印は/press/news/へ。</p>
+      <p data-role="animation">一覧全体をfade、2600ms、cubic-bezier(0.5, 1, 0.89, 1)。各行staggerなし。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="careers">
+      <h3>Careers</h3>
+      <p data-role="reference">top-full.jpg。淡色面。左に見出し・約5行本文・矢印、中央に打ち合わせの大きな写真、右下に小さな発光サイン写真。</p>
+      <p data-role="purpose">採用の入口を最後に置く。</p>
+      <p data-role="layout">PC高さ約880px。左列約28%、中央写真約540×390px、右写真約260×180px。右写真は中央写真より約200px下げる。SPは見出しと本文→大写真→右寄せの小写真。</p>
+      <p data-role="copy">Careers　採用情報。巡路知能では、まちの設備を止めないために、点検の記録と分析に向き合う仲間を募集しています。自治体やインフラ運営会社が使う仕組みを、ともに育てていく仕事です。</p>
+      <p data-role="components">JunroArrowLink。外部採用URLへ斜め矢印で移動。</p>
+      <p data-role="animation">見出しと2枚の写真をfade、2600ms、cubic-bezier(0.5, 1, 0.89, 1)。</p>
+      <p data-role="image">2枠。top:careers-meeting、top:careers-sign。</p>
+    </section>
+  </article>
+
+  <article data-page="/company/">
+    <h2>企業情報</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">company-top.jpg。淡色帯、左下「Company」と小さな日本語名。画像・導入文なし。</p>
+      <p data-role="purpose">下層の現在地を示す。</p>
+      <p data-role="layout">共通帯1380×約330px。SP 358×240px。</p>
+      <p data-role="copy">Company　企業情報。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="message-row">
+      <h3>代表メッセージへの行</h3>
+      <p data-role="reference">company-full.jpgの第1行。左写真約260×390px、直後の小英語ラベル、右寄せのタイトル・1文・矢印。</p>
+      <p data-role="purpose">代表メッセージを選ばせる。</p>
+      <p data-role="layout">PC行高約590px、写真左30px、ラベルx約310、本文x約870。SPは写真→ラベル→本文、行高は内容に従う。</p>
+      <p data-role="copy">Message。代表メッセージ。事業を始めた理由と、これからの設備管理への考えをお伝えします。</p>
+      <p data-role="components">JunroIndexRow、JunroArrowLink。/company/message/へ。</p>
+      <p data-role="animation">写真1まとまりのclip-path変化250ms、cubic-bezier(0.16, 0.64, 0.32, 1)。</p>
+      <p data-role="image">top:company-streetを2:3で使用。</p>
+    </section>
+    <section data-section="mission-row">
+      <h3>使命への行</h3>
+      <p data-role="reference">company-full.jpgの第2行。第1行と同じ列で左写真を替え、1px水平線で区切る。</p>
+      <p data-role="purpose">使命ページを選ばせる。</p>
+      <p data-role="layout">PC行高約460px、写真260×390px、本文開始x約870。SPは第1行と同じ。</p>
+      <p data-role="copy">Mission。私たちの使命。点検の記録から、まちの設備を守る判断へつなげます。</p>
+      <p data-role="components">JunroIndexRow、JunroArrowLink。/company/mission/へ。</p>
+      <p data-role="animation">追加リビールなし。参照の下層ページ全体で検出1件を増やさない。</p>
+      <p data-role="image">top:company-handsを2:3で再使用。</p>
+    </section>
+    <section data-section="outline-row">
+      <h3>会社概要への行</h3>
+      <p data-role="reference">company-full.jpgの第3行。左の縦写真と右本文、上部の小英語ラベル、下に広い余白。</p>
+      <p data-role="purpose">法人情報のページへ送る。</p>
+      <p data-role="layout">PC行高約560px、写真260×390px、右本文x約870。SPは同じ順に積む。</p>
+      <p data-role="copy">Profile &amp; Team。会社概要・組織。巡路知能株式会社の基本情報と事業の提供先を紹介します。</p>
+      <p data-role="components">JunroIndexRow、JunroArrowLink。/company/outline/へ。</p>
+      <p data-role="animation">追加リビールなし。</p>
+      <p data-role="image">top:company-recordsを2:3で使用。</p>
+    </section>
+  </article>
+
+  <article data-page="/business/">
+    <h2>事業紹介</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">business-top.jpg。企業情報と同形の淡色帯。</p>
+      <p data-role="purpose">事業紹介の現在地を示す。</p>
+      <p data-role="layout">PC 1380×約330px、SP 358×240px。</p>
+      <p data-role="copy">Business　事業紹介。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="introduction">
+      <h3>導入</h3>
+      <p data-role="reference">business-top.jpg。帯の後に白い余白を取り、左に約2行の導入、右に横長写真1点。写真上端は帯の下約160px。</p>
+      <p data-role="purpose">単一クラウドの対象と働きを短く示す。</p>
+      <p data-role="layout">PC高さ約600px。左幅約550px、右写真約540×390px、左右端30px。SPは文章→幅100%・約260px高の写真。</p>
+      <p data-role="copy">巡路知能は、上下水道や公共施設の設備点検を／記録・分析するクラウドサービスを提供しています。</p>
+      <p data-role="components">BusinessIntro。</p>
+      <p data-role="animation">導入写真1まとまりのみclip-path変化250ms、cubic-bezier(0.16, 0.64, 0.32, 1)。</p>
+      <p data-role="image">top:scene-5の水面写真を横長に別トリミング。写真枠は1点。</p>
+    </section>
+    <section data-section="water-row" id="water">
+      <h3>用途1：上水道点検</h3>
+      <p data-role="reference">business-full.jpgの第1行。左の淡色ロゴ面260×390px、右x約870に小対象ラベル・名称・4～5行説明・40px矢印。</p>
+      <p data-role="purpose">上水道の施設管理担当者に対応する用途を示す。</p>
+      <p data-role="layout">PC行高約520px、左右30px、間に大きな空白。SPはロゴ面→テキスト、面幅約45%。</p>
+      <p data-role="copy">自治体・上水道担当向け。上水道点検。設備ごとの点検内容を記録し、過去の履歴とあわせて確認するための入口です。現場で残した情報を後から追える形に整え、施設管理の判断に使えるようにします。</p>
+      <p data-role="components">JunroBusinessRow、JunroArrowLink。相談リンクは/contact/?topic=water。</p>
+      <p data-role="animation">追加リビールなし。</p>
+      <p data-role="image">写真なし。淡色の縦矩形に「巡路／WATER」を中央配置する独自の文字組。</p>
+    </section>
+    <section data-section="sewer-row" id="sewer">
+      <h3>用途2：下水道点検</h3>
+      <p data-role="reference">business-full.jpgの第2行。第1行と同じ左右配置、1px区切り線。</p>
+      <p data-role="purpose">下水道の担当者が用途を選べるようにする。</p>
+      <p data-role="layout">PC行高約470px、ロゴ面260×390px、本文幅約540px。SPは用途1と同じ。</p>
+      <p data-role="copy">自治体・下水道担当向け。下水道点検。点検で確認した設備の状態を記録し、施設ごとの履歴を見返すための入口です。現場で生まれる記録を同じ形式で蓄積し、次に確認すべき情報を整理します。</p>
+      <p data-role="components">JunroBusinessRow、JunroArrowLink。/contact/?topic=sewerへ。</p>
+      <p data-role="animation">追加リビールなし。</p>
+      <p data-role="image">写真なし。「巡路／SEWER」の独自文字組を淡色ロゴ面中央に置く。</p>
+    </section>
+    <section data-section="facility-row" id="facility">
+      <h3>用途3：公共施設点検</h3>
+      <p data-role="reference">business-full.jpgの第3行。同じ反復行で、ロゴ面と右本文の位置を固定。</p>
+      <p data-role="purpose">公共施設の管理担当者に対象を示す。</p>
+      <p data-role="layout">PC行高約470px、ロゴ面260×390px。SPは同順で積む。</p>
+      <p data-role="copy">自治体・施設管理向け。公共施設点検。公共施設の設備を点検した結果を、施設と設備の単位で記録する入口です。担当者が変わっても履歴をたどれるよう、確認した内容をクラウド上で整理します。</p>
+      <p data-role="components">JunroBusinessRow、JunroArrowLink。/contact/?topic=facilityへ。</p>
+      <p data-role="animation">追加リビールなし。</p>
+      <p data-role="image">写真なし。「巡路／FACILITY」の文字組。5行のうちロゴ面の寸法は揃える。</p>
+    </section>
+    <section data-section="operations-row" id="operations">
+      <h3>用途4：設備管理</h3>
+      <p data-role="reference">business-full.jpgの第4行。前の行と同一構成・罫線。</p>
+      <p data-role="purpose">インフラ運営会社の責任者に向けた入口を作る。</p>
+      <p data-role="layout">PC行高約470px、本文の開始位置を他行と揃える。SPも他行と同じ。</p>
+      <p data-role="copy">インフラ運営会社向け。設備管理。複数の設備に残された点検記録を、管理対象ごとに見渡すための入口です。日々の記録を後の確認に使えるようまとめ、設備管理責任者の判断を支えます。</p>
+      <p data-role="components">JunroBusinessRow、JunroArrowLink。/contact/?topic=operationsへ。</p>
+      <p data-role="animation">追加リビールなし。</p>
+      <p data-role="image">写真なし。「巡路／OPERATIONS」の文字組。</p>
+    </section>
+    <section data-section="analysis-row" id="analysis">
+      <h3>用途5：記録分析</h3>
+      <p data-role="reference">business-full.jpgの第5行。5行目の後にフッターまで白い余白が残る。</p>
+      <p data-role="purpose">記録から分析までの用途を示す。</p>
+      <p data-role="layout">PC行高約520px、下端に約130pxの余白。ロゴ面260×390px。SPも最終行の下に余白を残す。</p>
+      <p data-role="copy">自治体・運営会社向け。記録分析。蓄積された点検記録を見返し、設備ごとの状態や変化を確かめるための入口です。日々の点検から得られた情報を分析に使い、次の管理判断につなげます。</p>
+      <p data-role="components">JunroBusinessRow、JunroArrowLink。/contact/?topic=analysisへ。</p>
+      <p data-role="animation">追加リビールなし。</p>
+      <p data-role="image">写真なし。「巡路／ANALYSIS」の文字組。</p>
+    </section>
+  </article>
+
+  <article data-page="/company/message/">
+    <h2>代表メッセージ</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">参照の詳細ページ本文ではMessageの英語名と日本語名を確認。寸法は撮影済みの下層共通帯を適用。</p>
+      <p data-role="purpose">企業情報の詳細であることを示す。</p>
+      <p data-role="layout">PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">Message　代表メッセージ。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="statement">
+      <h3>3行の主張</h3>
+      <p data-role="reference">参照詳細ページには3行の大見出しが本文の前にある。撮影されていない寸法は共通余白から指定。</p>
+      <p data-role="purpose">代表メッセージの核を先に置く。</p>
+      <p data-role="layout">PC幅約700px、左端30pxから約160px下げて配置。3行、各行約18～22字。SP左右16px、各行約12～15字。</p>
+      <p data-role="copy">点検の記録を、／次の判断へつなぎ、／まちの設備を止めない仕組みをつくる。</p>
+      <p data-role="components">MessageStatement。</p>
+      <p data-role="animation">none。下層の未実測リビールを増やさない。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="body">
+      <h3>本文</h3>
+      <p data-role="reference">参照詳細ページは複数段落の長文と途中の画像1点を持つ。本文は約900字の密度。</p>
+      <p data-role="purpose">与えられた事業内容から、原点・現在・展望を語る。</p>
+      <p data-role="layout">PC本文幅約650px、行高1.9、段落間32px。途中に幅約540pxの横長写真。SPは全文幅、写真は幅100%。</p>
+      <p data-role="copy">設備の点検は、終わった瞬間に役割を終えるものではありません。現場で見たこと、確かめたこと、気になったこと。その一つひとつが、次に設備を見る人の手がかりになります。巡路知能は、その手がかりを失わず、必要なときに確かめられるようにするため、設備点検の記録と分析に取り組んでいます。／上下水道や公共施設は、毎日の暮らしを静かに支えています。利用する人の目に触れない場所にも、多くの設備があり、点検を担う人がいます。私たちは、現場で生まれる記録をクラウドに残し、設備ごとの情報として見返せる状態にすることで、管理を担う人の判断を支えます。／自治体の施設管理担当者とインフラ運営会社の設備管理責任者では、見ている範囲も判断する場面も異なります。それでも、確かな記録が必要であることは共通しています。現場の点検と管理の判断が離れないよう、情報を整理し、分析に使える形へつなぐことが私たちの仕事です。／記録が積み重なるほど、設備の状態を確かめるための視点も増えていきます。過去の点検を振り返り、現在の状況を見つめ、次に何を確かめるかを考える。その往復を支える仕組みを、使う人の仕事に沿って育て続けたいと考えています。／私たちの言葉は「まちの設備を、止めない。」です。大きな言葉に見えるかもしれません。しかし、その出発点は、現場で残された一件の記録を大切に扱うことです。福岡県福岡市から、点検を担う人と管理を担う人の間に、判断に使える情報が届くよう取り組みます。</p>
+      <p data-role="components">LongformBody。見出し下に定型CTA帯を置かない。</p>
+      <p data-role="animation">本文はnone。画像だけ250msのclip-path変化を1件に限定。</p>
+      <p data-role="image">途中の1枠はtop:company-streetを横トリミング。</p>
+    </section>
+    <section data-section="signature">
+      <h3>結び</h3>
+      <p data-role="reference">参照詳細ページは末尾に人物画像、氏名、経歴を置く。</p>
+      <p data-role="purpose">文章の発信主体を示す。ただし企業設定にない役員名・経歴は創作しない。</p>
+      <p data-role="layout">PC右寄せの写真約260×390px、下に短い組織名。SPは写真幅約55%。</p>
+      <p data-role="copy">巡路知能株式会社。まちの設備を、止めない。</p>
+      <p data-role="components">MessageSignature。個人名や経歴の欄をダミー文で埋めない。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">top:careers-meetingを人物中心に縦トリミングし、実在の役員写真として扱わない。</p>
+    </section>
+  </article>
+
+  <article data-page="/company/mission/">
+    <h2>私たちの使命</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">公式の詳細ページはMissionと日本語名を表示。帯の形は撮影済み下層から継承。</p>
+      <p data-role="purpose">使命ページの現在地を示す。</p>
+      <p data-role="layout">PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">Mission　私たちの使命。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="mission-text">
+      <h3>使命文</h3>
+      <p data-role="reference">参照は英語のMission小見出し、2行の和文使命文、写真1点。</p>
+      <p data-role="purpose">設定済みのキャッチを主文として掲げる。</p>
+      <p data-role="layout">PC白面、左30pxから広い余白を取り、本文最大幅750px。写真は約540×390px。SPは文章→写真。</p>
+      <p data-role="copy">Mission。まちの設備を、／止めない。</p>
+      <p data-role="components">MissionText。</p>
+      <p data-role="animation">写真1件のclip-path変化250ms、cubic-bezier(0.16, 0.64, 0.32, 1)。</p>
+      <p data-role="image">top:scene-4を横長トリミング。</p>
+    </section>
+    <section data-section="statement">
+      <h3>ステートメント</h3>
+      <p data-role="reference">参照はStatementの英語ラベル、短い複数段落、後続写真2点。</p>
+      <p data-role="purpose">点検記録と分析が使命につながる理由を説明する。</p>
+      <p data-role="layout">PC本文幅約650px、行高1.9。写真2点を左右に間隔約110pxで配置。SPは本文→2写真を段違いに積む。</p>
+      <p data-role="copy">Statement。設備を見て、記録を残し、次の点検につなぐ。／日々の管理を支えるこの営みには、現場で確かめたことを失わない仕組みが必要です。／巡路知能は、上下水道や公共施設の点検を記録・分析するクラウドサービスを通じて、自治体とインフラ運営会社の判断を支えます。／一件の記録から、まちの設備を止めないための次の判断へ。私たちは、そのつながりをつくります。</p>
+      <p data-role="components">MissionStatement、PhotoPair。</p>
+      <p data-role="animation">追加リビールなし。</p>
+      <p data-role="image">top:scene-2とtop:scene-5を別トリミングで2枠に使用。</p>
+    </section>
+  </article>
+
+  <article data-page="/company/outline/">
+    <h2>会社概要・組織</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">公式詳細ページはProfile &amp; Teamの英語名。帯寸法は下層共通規則。</p>
+      <p data-role="purpose">法人情報の現在地を示す。</p>
+      <p data-role="layout">PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">Profile &amp; Team　会社概要・組織。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="profile">
+      <h3>会社概要</h3>
+      <p data-role="reference">参照は会社情報の表と画像1枠。ラベルと値を縦に反復する。</p>
+      <p data-role="purpose">与えられた企業設定だけを明示する。</p>
+      <p data-role="layout">PC見出しを左、表を右の約650px幅に置き、各行を1px線で区切る。SPは1列。画像は表の前後に約260×390pxの縦枠。</p>
+      <p data-role="copy">会社名｜巡路知能株式会社。よみ｜じゅんろちのう。所在地｜福岡県福岡市。設立｜2018年。従業員数｜86名。事業内容｜上下水道や公共施設の設備点検を記録・分析するクラウドサービスの開発・提供。提供先｜自治体、インフラ運営会社。</p>
+      <p data-role="components">ProfileTable。資本金、役員氏名、住所詳細、取引先を創作しない。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">top:company-recordsを縦枠に再使用。</p>
+    </section>
+    <section data-section="team">
+      <h3>事業を支える組織</h3>
+      <p data-role="reference">参照は役員見出しと人物画像2枠、肩書・氏名・経歴を反復する。</p>
+      <p data-role="purpose">人の存在を残しつつ、設定にない個人情報を作らない。</p>
+      <p data-role="layout">PC人物2枠を約260×390pxで並べ、余白を広く取る。SPは1列。見出しと短い説明を各画像の横に置く。</p>
+      <p data-role="copy">自治体の施設管理担当者に向き合う仕事。／インフラ運営会社の設備管理責任者に向き合う仕事。／いずれも、点検の記録と分析を使える情報にするための仕事です。</p>
+      <p data-role="components">TeamRow×2。人物画像を役員の肖像として表示しない。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">top:careers-meetingから人物の異なる2つの縦トリミング。写真枠2点は維持。</p>
+    </section>
+    <section data-section="scope">
+      <h3>提供領域</h3>
+      <p data-role="reference">参照後半は国内・海外のグループ会社情報を反復する。企業設定にグループ会社はないため、同じ表形式と余白で既知の提供領域を並べる。</p>
+      <p data-role="purpose">未設定の子会社や拠点を作らず、ページ後半の情報密度を保つ。</p>
+      <p data-role="layout">PCは横罫線付き2組の表を縦に配置。SPはラベルと説明を縦積み。</p>
+      <p data-role="copy">対象設備｜上下水道、公共施設。提供するもの｜設備点検を記録・分析するクラウドサービス。主な利用者｜自治体の施設管理担当者、インフラ運営会社の設備管理責任者。</p>
+      <p data-role="components">ProfileTableを再使用。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+  </article>
+
+  <article data-page="/contact/">
+    <h2>お問い合わせ</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">公式ページはContactと日本語名を表示。</p>
+      <p data-role="purpose">連絡窓口の現在地を示す。</p>
+      <p data-role="layout">共通帯PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">Contact　お問い合わせ。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="service-contacts">
+      <h3>事業に関するお問い合わせ</h3>
+      <p data-role="reference">参照は5用途のリンクを縦に並べ、各行に対象ラベル・名称・短文を置く。</p>
+      <p data-role="purpose">相談対象を選ばせる。</p>
+      <p data-role="layout">PC幅約880pxの5行、各行約130～160px、1px罫線。SPは全幅、各行約150px。</p>
+      <p data-role="copy">導入について相談する。上水道点検｜上水道の設備点検と記録について。下水道点検｜下水道の設備点検と記録について。公共施設点検｜公共施設の設備点検について。設備管理｜インフラ運営会社での設備管理について。記録分析｜蓄積した点検記録の分析について。</p>
+      <p data-role="components">ContactChoice×5。各行を対応する問い合わせ先へつなぐ。フォームURLやメールアドレスは企業設定にないため環境変数で指定し、架空の連絡先を公開しない。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="other-contact">
+      <h3>その他のお問い合わせ</h3>
+      <p data-role="reference">参照は5用途の後に短い説明と「その他のお問い合わせ」1リンク。</p>
+      <p data-role="purpose">事業相談以外の連絡先を残す。</p>
+      <p data-role="layout">PC本文幅約650px、上部に大きな余白。SP左右16px。</p>
+      <p data-role="copy">取材のご相談や事業に関する一般的なお問い合わせは、こちらからご連絡ください。その他のお問い合わせ。</p>
+      <p data-role="components">JunroArrowLink。宛先は環境変数で設定。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+  </article>
+
+  <article data-page="/press/">
+    <h2>プレスルーム</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">公式ページはPress Roomと日本語名を表示。</p>
+      <p data-role="purpose">対外情報の入口を示す。</p>
+      <p data-role="layout">共通帯PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">Press Room　プレスルーム。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="recent-news">
+      <h3>ニュース5件</h3>
+      <p data-role="reference">参照は日付・種別・見出しを5行並べ、ニュース一覧へ送る。</p>
+      <p data-role="purpose">最新情報を見せる。</p>
+      <p data-role="layout">PC見出し左、一覧右の2列。右列は1px罫線で5行。SPは1列。</p>
+      <p data-role="copy">ニュース。「点検記録の整理に関するお知らせ」「上水道設備の記録方法を紹介」「公共施設の設備管理に関する記事を公開」「下水道点検の記録項目について」「設備情報の分析方法を紹介」。ニュース一覧。</p>
+      <p data-role="components">JunroNewsRow×5、JunroArrowLink。/press/news/へ。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="press-links">
+      <h3>資料2種への索引</h3>
+      <p data-role="reference">参照はニュース一覧の後にPress KitとOpen Dataの2行索引を置く。</p>
+      <p data-role="purpose">報道素材とデータへ分岐させる。</p>
+      <p data-role="layout">PC2行、各行約300～400px、1px区切り。SPは同順の全幅行。</p>
+      <p data-role="copy">Press Kit　プレスキット。取材や掲載に利用できる写真とロゴの素材をご案内します。Open Data　公開データ。巡路知能に関する公開数値をご覧いただけます。</p>
+      <p data-role="components">JunroIndexRow×2。/press/presskit/、/press/opendata/へ。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+  </article>
+
+  <article data-page="/press/news/">
+    <h2>ニュース</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">公式ページはNewsと日本語名を表示。</p>
+      <p data-role="purpose">ニュース一覧の現在地を示す。</p>
+      <p data-role="layout">共通帯PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">News　ニュース。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="filters">
+      <h3>種別と年の絞り込み</h3>
+      <p data-role="reference">参照は「すべて／プレスリリース／お知らせ」の3ボタンと、2018～2026年の年選択。</p>
+      <p data-role="purpose">記事一覧の選択肢を提供する。</p>
+      <p data-role="layout">PCは3ボタンを横並び、年選択を右側。SPは3ボタンを折り返し、年選択を下段。</p>
+      <p data-role="copy">すべて／プレスリリース／お知らせ。年で絞り込む。すべての年／2026年／2025年／2024年／2023年／2022年／2021年／2020年／2019年／2018年。</p>
+      <p data-role="components">NewsFilter。選択はbutton、年はselect。記事がない年は空状態を表示する。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="news-list">
+      <h3>一覧10件</h3>
+      <p data-role="reference">参照は1ページ10件、各行に日付・種別・見出しを置き、末尾にページ送り。</p>
+      <p data-role="purpose">記事を同じ情報単位で走査できるようにする。</p>
+      <p data-role="layout">PC一覧幅約1000px、10行を1px線で区切る。SPは各行を縦に配置し、長い見出しは2～3行にする。</p>
+      <p data-role="copy">2026.11.24 お知らせ｜点検記録の整理に関するお知らせ。2026.11.19 記事｜上水道設備の記録方法を紹介。2026.11.17 記事｜公共施設の設備管理に関する記事を公開。2026.11.12 お知らせ｜下水道点検の記録項目について。2026.11.11 記事｜設備情報の分析方法を紹介。2026.11.10 記事｜現場の点検記録を見返すための視点。2026.11.06 お知らせ｜クラウドサービスの利用案内。2026.11.04 記事｜施設ごとの点検履歴を確かめる。2026.10.27 記事｜設備管理責任者が確認する情報。2026.10.26 お知らせ｜お問い合わせ窓口のご案内。1／2／3／4／5／…。</p>
+      <p data-role="components">JunroNewsRow×10、Pagination。記事本文ページはこのランの対象に増設せず、一覧内で見出しを読めるようにする。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+  </article>
+
+  <article data-page="/press/presskit/">
+    <h2>プレスキット</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">公式ページはPress Kitと日本語名を表示。</p>
+      <p data-role="purpose">報道素材の現在地を示す。</p>
+      <p data-role="layout">共通帯PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">Press Kit　プレスキット。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="people-assets">
+      <h3>人物写真</h3>
+      <p data-role="reference">参照は写真1枠、短い説明、ダウンロードリンクを持つ。</p>
+      <p data-role="purpose">掲載用の人物素材の位置を確保する。</p>
+      <p data-role="layout">PC写真と文章の2列、写真約540×390px。SPは写真→本文。</p>
+      <p data-role="copy">活動写真。巡路知能の仕事を紹介するための写真素材です。ダウンロード。</p>
+      <p data-role="components">PressAssetRow。ダウンロードURLは実際に用意した素材のパスを使う。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">top:careers-meetingを別トリミングで1枠に使用。役員写真とは称しない。</p>
+    </section>
+    <section data-section="logo-assets">
+      <h3>ロゴ・アイコン</h3>
+      <p data-role="reference">参照はロゴ画像1枠、短い説明、ダウンロードリンクを持つ。</p>
+      <p data-role="purpose">ブランド素材の利用先を示す。</p>
+      <p data-role="layout">PCは前行と同じ2列、SPは縦積み。</p>
+      <p data-role="copy">ロゴ・アイコン。巡路知能のロゴとアイコンの素材です。利用条件を確認のうえご使用ください。ダウンロード。</p>
+      <p data-role="components">PressAssetRow。ロゴはサイト用に作った独自SVGを表示・配布する。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">生成写真なし。独自SVGのロゴ面1枠。</p>
+    </section>
+    <section data-section="usage">
+      <h3>利用条件</h3>
+      <p data-role="reference">参照は最後に利用条件の見出し・約80字本文・ガイドラインリンクを置く。</p>
+      <p data-role="purpose">素材の用途を説明する。</p>
+      <p data-role="layout">PC幅約650pxの文章、上部に広い余白。SPは全幅。</p>
+      <p data-role="copy">利用条件。写真とロゴは、巡路知能株式会社を紹介する記事や資料でご利用ください。形や色を変更せず、掲載前に配布素材の利用案内をご確認ください。素材利用案内。</p>
+      <p data-role="components">TextLink。案内ファイルの実パスへリンクする。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+  </article>
+
+  <article data-page="/press/opendata/">
+    <h2>公開データ</h2>
+    <section data-section="heading">
+      <h3>ページ見出し帯</h3>
+      <p data-role="reference">公式ページはOpen Dataと日本語名を表示。</p>
+      <p data-role="purpose">公開データの現在地を示す。</p>
+      <p data-role="layout">共通帯PC 1380×330px、SP 358×240px。</p>
+      <p data-role="copy">Open Data　公開データ。</p>
+      <p data-role="components">JunroPageHeading。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="facts">
+      <h3>数値6枠</h3>
+      <p data-role="reference">参照は英語または日本語の小ラベル、強調数値、時点表記を6枠反復する。</p>
+      <p data-role="purpose">企業設定で与えられた数値だけを公開する。</p>
+      <p data-role="layout">PC 2列×3段、数字を大きく、枠間を約90px空ける。SPは1列×6段。装飾カードやアイコンは足さない。</p>
+      <p data-role="copy">導入自治体｜42団体。管理設備累計｜18万点。年間点検記録｜340万件。従業員数｜86名。設立｜2018年。所在地｜福岡県福岡市。実績3値の集計時点は企業設定にないため日付を創作しない。</p>
+      <p data-role="components">OpenDataFigure×6。</p>
+      <p data-role="animation">none。数値カウントアップを追加しない。</p>
+      <p data-role="image">none。</p>
+    </section>
+    <section data-section="press-navigation">
+      <h3>プレス内の3件索引</h3>
+      <p data-role="reference">参照の末尾にはNews、Press Kit、Open Dataの3件索引がある。</p>
+      <p data-role="purpose">同階層のページへ移動する。</p>
+      <p data-role="layout">PC 3行の横長索引、SPは縦積み。</p>
+      <p data-role="copy">News　ニュース。巡路知能からのお知らせをご覧いただけます。Press Kit　プレスキット。写真とロゴの素材をご案内します。Open Data　公開データ。巡路知能に関する公開数値をご覧いただけます。</p>
+      <p data-role="components">JunroIndexRow×3。現在ページはaria-currentで示す。</p>
+      <p data-role="animation">none。</p>
+      <p data-role="image">none。</p>
+    </section>
+  </article>
+</section>
+
+<section id="images">
+  <h2>画像生成指示</h2>
+  <p>生成は最大12枚。以下は12枚で、写真枠を減らさず再トリミングする。既存の企業写真やロゴを模写しない。すべて自然光、実写、文字・透かし・企業ロゴなし。</p>
+  <figure data-placement="top:hero" data-tags="設備点検,人物,中央縦長" data-aspect="portrait"><figcaption data-prompt="福岡の公共施設の通路を歩く点検担当者を背後から撮る。画面中央に人物2人、周囲に設備の配管や窓、自然光。縦2:3、低彩度、緑と青、角丸なし。参照の中央縦映像と同じ視線の高さ・人物の大きさで、被写体と場所は独自に。">ヒーロー1枠。</figcaption></figure>
+  <figure data-placement="top:scene-1" data-tags="人の手,点検記録,大きな横写真" data-aspect="landscape"><figcaption data-prompt="作業机で点検記録の紙を確認する手元の近景。温かい室内光と暗い背景、被写界深度を浅く。横長で画面左に手元の重みを置く。参照のケーキ写真と同じ温度感・大きさの枠に使うが、贈答品を写さない。">写真群の左上。</figcaption></figure>
+  <figure data-placement="top:scene-2" data-tags="植物,小さな縦写真" data-aspect="portrait"><figcaption data-prompt="公共施設の敷地脇に咲く小さな黄色い草花。明るい空と緑を背景に、花を下半分へ寄せる。縦2:3、柔らかな自然光。参照の花の小写真と同じ余白比率。">写真群の中央上。</figcaption></figure>
+  <figure data-placement="top:scene-3" data-tags="緑,木立,横長" data-aspect="landscape"><figcaption data-prompt="都市の公園にある木立を見上げる。枝葉が画面を覆い、濃淡の緑と透過光が重なる。人物なし、横長、端を切っても成立する構図。参照の緑の大きな写真と同じ密度。">写真群の右上。トップのCompany左写真にも縦トリミング。</figcaption></figure>
+  <figure data-placement="top:scene-4" data-tags="移動,窓,点検へ向かう風景" data-aspect="landscape"><figcaption data-prompt="移動中の車窓から見た福岡の郊外と水路。車内を暗く、窓外を淡い緑に。画面左に室内の影、右に流れる風景。横長、自然なブレ。参照の車窓写真と同じ役割。">写真群の左下。使命詳細の写真にも使用。</figcaption></figure>
+  <figure data-placement="top:scene-5" data-tags="水面,青,最大写真" data-aspect="landscape"><figcaption data-prompt="浄水施設の水面を斜め上から撮る。青い水に光の帯と細かな波紋。人や文字は写さず、横長の広い青い面を左側に残す。参照の波の写真と同じ大きさ・斜め方向の流れ。">写真群の中央下。事業紹介の導入にも横長の別トリミング。</figcaption></figure>
+  <figure data-placement="top:scene-6" data-tags="動物,端で切れる小写真" data-aspect="portrait"><figcaption data-prompt="公共施設近くの歩道で休む茶色い小鳥を、低い視線から撮る。背景は明るい建物の壁と植栽、浅い被写界深度。縦長、右端で一部が切れても成立する。参照の動物写真の役割と小ささを保つ。">写真群の右下。</figcaption></figure>
+  <figure data-placement="top:company-street" data-tags="街,人々,企業情報左写真" data-aspect="portrait"><figcaption data-prompt="福岡の街路沿いの公共施設前。手前にぼけた新緑、奥に歩く人々と建物。縦2:3、人物は小さく、明るい日中の自然光。参照の企業情報第1行と同じ前景の緑・奥の街・余白の比率。">企業情報の第1行。代表メッセージ本文にも横トリミング。</figcaption></figure>
+  <figure data-placement="top:company-hands" data-tags="手,協働,企業情報右写真" data-aspect="portrait"><figcaption data-prompt="設備点検の現場で、二人の担当者が紙の記録を受け渡す手元。顔は写さない。手を画面の中央下に、背景は青灰色の柔らかいぼけ。縦2:3、自然光。参照の握手写真と同じ人間関係を示す役割。">トップCompany右、企業情報第2行。</figcaption></figure>
+  <figure data-placement="top:company-records" data-tags="記録,紙,企業情報第3写真" data-aspect="portrait"><figcaption data-prompt="机の上に置かれた無地の設備点検記録の束と鉛筆。淡い桃色の布、柔らかい昼光、斜め上から。縦2:3、中央に小さな白い紙の塊。参照の小箱写真と同じ構図と淡い色量。">企業情報第3行、会社概要の写真。</figcaption></figure>
+  <figure data-placement="top:careers-meeting" data-tags="打ち合わせ,人物,採用大写真" data-aspect="landscape"><figcaption data-prompt="明るいオフィスで設備点検の記録画面について話す3人のチーム。机とノートPC、画面は判読できない抽象表示。人物を下半分に、窓からの光を上半分に。横長、淡い青緑。参照の採用大写真と同じ人数・構図・サイズ感。">採用の大写真。メッセージ末尾、会社概要の2枠、プレスキットにも別トリミング。</figcaption></figure>
+  <figure data-placement="top:careers-sign" data-tags="室内サイン,小写真,採用" data-aspect="landscape"><figcaption data-prompt="オフィスの窓際にある抽象的な小さな発光サイン。文字や企業ロゴを含めない。暖色の光を淡い壁に映し、横長で右側に光を寄せる。参照の採用右下の小写真と同じ発光点・サイズ比。">採用の小写真。</figcaption></figure>
+</section>
+
+<section id="comparison">
+  <h2>提出前の参照照合</h2>
+  <table>
+    <thead><tr><th>照合項目</th><th>参照</th><th>提出指定</th><th>評価</th></tr></thead>
+    <tbody>
+      <tr><td>シェル</td><td>縦ナビ5件、absolute、下層帯、フッター先頭パンくず</td><td>同じ配置と順序。標準パンくずを抑え専用フッターへ移動</td><td>20/20</td></tr>
+      <tr><td>トップ構成</td><td>使命→6写真→5事業→会社→5ニュース→採用</td><td>順序・件数・面の切替を一致</td><td>20/20</td></tr>
+      <tr><td>下層2ページ</td><td>企業情報3行、事業紹介の導入＋5行</td><td>各行の写真／ロゴ面、罫線、空白を指定</td><td>20/20</td></tr>
+      <tr><td>写真</td><td>トップの段違い6点と各下層の枠</td><td>12枚生成、再トリミングで全枠を維持</td><td>18/20</td></tr>
+      <tr><td>配色・動き</td><td>実測4色、トップ8件・下層各1件</td><td>色と実測msを指定。未実測のSPとホバーは区別</td><td>17/20</td></tr>
+    </tbody>
+  </table>
+  <p>方向指定の照合点は95/100。初稿で生じた「事業を5つの別商品として扱う」「パンくずを本文前に置く」「写真の再利用で枠を減らす」というずれは、単一クラウドの用途5枠、専用フッター、12枚の再トリミング指定に修正済み。詳細ページの固有寸法とSPの挙動は参照キャプチャがないため、実測値としては採点していない。</p>
+</section>
+</body>
+</html>

@@ -11,14 +11,58 @@
 @import "./themes/aoba-corporate-b.css";
 @import "./themes/kido-corporate.css";
 @import "./themes/kido-corporate-b.css";
+@import "./junro.css";
+@import "./junro-b.css";
 
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, corporate, cupcake, luxury,
           business, emerald, retro, nord, autumn, winter, lofi,
           corporate-hokuline, corporate-hokuline-bold, corporate-minamoto,
           aoba-corporate, aoba-corporate-b, kido-corporate, kido-corporate-b,
-          aogami-corporate, kabukido-sumi, noxray-corporate, shirosumi-calm;
+          aogami-corporate, kabukido-sumi, noxray-corporate, shirosumi-calm,
+          junro-ivory, junro-ivory-b;
 }
+
+@plugin "daisyui/theme" {
+  name: "junro-ivory-b";
+  default: false;
+  color-scheme: light;
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97.6% 0.005 28);
+  --color-base-300: oklch(92% 0.008 28);
+  --color-base-content: oklch(23% 0.071 34);
+  --color-primary: oklch(23% 0.071 34);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(77% 0.078 28);
+  --color-secondary-content: oklch(23% 0.071 34);
+  --color-accent: oklch(77% 0.078 28);
+  --color-accent-content: oklch(23% 0.071 34);
+  --color-neutral: oklch(26% 0 0);
+  --color-neutral-content: oklch(100% 0 0);
+  --radius-box: 0;
+  --radius-field: 0.25rem;
+}
+
+@plugin "daisyui/theme" {
+  name: "junro-ivory";
+  default: false;
+  color-scheme: light;
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97.6% 0.005 28);
+  --color-base-300: oklch(92% 0.008 28);
+  --color-base-content: oklch(23% 0.071 34);
+  --color-primary: oklch(23% 0.071 34);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(77% 0.078 28);
+  --color-secondary-content: oklch(23% 0.071 34);
+  --color-accent: oklch(77% 0.078 28);
+  --color-accent-content: oklch(23% 0.071 34);
+  --color-neutral: oklch(26% 0 0);
+  --color-neutral-content: oklch(100% 0 0);
+  --radius-box: 0;
+  --radius-field: 0.25rem;
+}
+
 
 @plugin "daisyui/theme" {
   name: "shirosumi-calm";
@@ -206,7 +250,7 @@
 [data-theme="aogami-corporate"] .site-header {
   position: fixed;
   inset: 0 0 auto;
-  height: 191px;
+  height: 88px;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -214,7 +258,7 @@
 [data-theme="aogami-corporate"] .site-header > div {
   max-width: none;
   height: 100%;
-  padding: 32px 80px;
+  padding: 24px 80px;
   align-items: flex-start;
 }
 [data-theme="aogami-corporate"] .site-header a,
@@ -225,25 +269,24 @@
   font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
   font-size: 22px;
   font-weight: 400;
-  background: #f7f7f2;
-  padding: 8px;
+  background: transparent;
+  padding: 0;
 }
 [data-theme="aogami-corporate"] .site-header nav {
   flex-direction: column;
   align-items: stretch;
   gap: 0;
   margin-left: auto;
-  margin-right: 64px;
+  margin-right: 0;
 }
 [data-theme="aogami-corporate"] .site-header nav a {
-  min-height: 44px;
-  padding: 10px 0;
+  min-height: 32px;
+  padding: 5px 0;
   font-size: 14px;
   border-radius: 0;
   background: transparent;
-  text-decoration: underline;
+  text-decoration: none;
 }
-[data-theme="aogami-corporate"] .site-header .btn-primary,
 [data-theme="aogami-corporate"] footer .btn-primary {
   background: transparent;
   color: inherit;
@@ -264,7 +307,7 @@
   color: #253d45;
 }
 [data-theme="aogami-corporate"] body nav[aria-label="パンくずリスト"] {
-  padding-top: 224px;
+  padding-top: 104px;
   background: transparent;
 }
 @media (max-width: 1199px) {
@@ -275,6 +318,7 @@
   [data-theme="aogami-corporate"] footer { margin-top: 96px; }
 }
 
+[data-theme="aogami-corporate"] .site-header .btn-primary { display: none; }
 /* 中央固定カプセルヘッダーを使うテーマでは、パンくずの上に余白を確保して
    カプセル（top:16px・高さ64px ≒ 80px）と重ならないようにする。
    SiteBreadcrumbs に padding-top を足す。 */

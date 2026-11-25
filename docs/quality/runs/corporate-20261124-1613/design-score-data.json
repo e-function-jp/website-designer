@@ -1,0 +1,48 @@
+{
+  "models": {
+    "b": {
+      "total": 68,
+      "layers": {
+        "layout_fidelity": 20,
+        "navigation_shell": 18,
+        "typography_color": 16,
+        "content_fidelity": 6,
+        "quality": 8
+      },
+      "issues": [
+        "トップ、事業紹介、企業情報の写真枠がほぼすべて単色やグラデーションの仮置きになっている。参照の人物・街・自然・製品写真が作る場面の変化を再現できていない。",
+        "トップのMissionから写真群までの大きな余白が参照より狭く、ページ全体の緩急が弱い。",
+        "トップのBusinessは参照のカードごとの位置と余白の差が縮まり、整列した印象が強い。",
+        "企業情報の3行は同じ色調の画像枠が続き、参照にある各行の写真の役割と構図の違いが失われている。"
+      ],
+      "strengths": [
+        "3ページともセクション順、縦並びのナビ、下層ページのパンくず、フッターの基本形は参照に近い。",
+        "390pxのトップでは、確認できる範囲で文字の重なりや見切れはない。"
+      ],
+      "page_notes": {
+        "/": "ヒーローと各セクションの配置は近いが、6枚の写真群、Company、Careersの画像がグラデーションに置き換わり、参照の視覚的な核を欠く。SPでも同じ問題が残る。",
+        "/business/": "導入と5事業の行構成は近い。導入の海の写真がグラデーションになり、各事業の画像枠も同質のロゴ面に寄っている。",
+        "/company/": "3行の構成と余白はおおむね近いが、参照で異なる被写体を示す3枚の写真が同じようなグラデーションになっている。"
+      }
+    }
+  },
+  "winner": "b",
+  "verdict": "骨格と共通シェルの再現度は高い。一方、全ページで写真を仮置きのまま残したことが、参照再現として最大の減点要因。",
+  "run_id": "corporate-20261124-1613",
+  "site_type": "corporate",
+  "scored_at": "2026-11-25T09:54:39+09:00",
+  "method": "independent judge on rendered multi-page screenshots vs reference capture",
+  "stage": "final",
+  "attempt": 2,
+  "measurement_setup": {
+    "judge": "codex",
+    "judge_model": "(codex default)",
+    "reference_attached": true,
+    "score_pages": "/ /business/ /company/",
+    "rubric": "reproduce"
+  },
+  "setup_changed_since_last": true,
+  "best_so_far": {
+    "b": 68
+  }
+}

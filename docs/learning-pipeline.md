@@ -55,7 +55,39 @@ docs/quality/
 | stamp | `YYYYMMDD-HHMM`（JST） | `20260903-1400` |
 | run_id | `{site_type}-{stamp}` | `corporate-20260903-1400` |
 
-## 実行体制（2026-09-03 時点）
+## 参照再現モード（2026-11-24〜 既定）
+
+`job.json` の `"mode": "reproduce"`（`npm run next:run` の既定。`--mode adapt` で旧方式）。
+目的を「参照を咀嚼した一般的な会社サイト」から **「参照の意匠の高再現」** に切り替えた。
+寄せるのは IA・ナビの形と挙動・レイアウト比率・文字量・画像の数と役割・タイポ・配色・動き。
+差し替えるのは社名・文章・写真の被写体だけ。
+
+### なぜ変えたか（AOGAMI / NSSG で本人評価 30/100、静的チェック 100/100）
+
+| 原因 | 対処 |
+|---|---|
+| job がサイト種別の定石（「数値による実績提示」、必須 `/service/ /news/ /contact/`）を持ち込み、参照から離れた | reproduce では `tone_hint` を参照従属に、`required_pages` を `["/"]` に。定石は `site_type_defaults` に記録だけ残す |
+| Direction テンプレートに一般化ルール（「トップだけ盛っていても真似しない」「英語小見出しを指示しない」「事業内容が読めるラベル」「画像4〜8枚」） | 再現専用テンプレート `scripts/web-direction-prompt-template-reproduce.txt`。足し算・引き算の禁止を明記 |
+| ディレクター（grok/hermes）と実装（copilot/minimax）が画像を見られず、全段テキストの伝言だった | ディレクター・実装とも既定を **claude** に。参照キャプチャを Read で開かせ、実装は自分の描画を撮って見比べる |
+| ヘッダーが汎用 `SiteHeader` 固定で、縦ナビ・メニュー開閉などの形を表現できなかった | `SiteLayout` に `header` / `footer` スロット、`_site.ts` に `shell.breadcrumbs: 'hidden'` |
+| 静的チェックが定石を強制（必須・推奨ページ、ページ間の演出量の均一化） | reproduce ランでは job の必須ページだけを見て、`ia-recommended-page-missing` / `motion-consistency-drift` を当てない |
+
+`adapt` / mode 無しの既存ランは従来どおり動く。
+
+### 採点の作り直し（2026-11-25）
+
+ベンチマーク corporate-20261124-1613（参照 giftee.co.jp）で、レイアウトは参照にかなり近いのに 36/100 だった。原因は採点側:
+
+| 原因 | 対処 |
+|---|---|
+| 撮るページが `/ /about/ /service/` 固定。参照に無いページを 404 として減点し、提出版がそれを消すために参照に無いページを足した | `scripts/web-score-pages.py` が `motion/{slug}.json` の url と Direction の sitemap 表から「参照ページ ↔ 自ページ」の対を作る。judge には参照→自サイトの順で対にして渡す。SP はトップを 390px で1枚 |
+| `ScrollReveal` が出現後に `clip-path: inset(0)` を掛け、中身が absolute（外枠の高さ0）のとき中身ごと消えていた。**撮影だけでなく実際の閲覧でもヒーローが空白だった** | 出現後の `clip-path` は clip-up のときだけ残す |
+| 撮影が固定 600ms 待ちで、2600ms のフェードを途中で撮っていた | `web-shoot-sample.mjs` が有限の transition / animation が全部止まるまで待つ（上限 `WEB_DESIGNER_SETTLE_MAX_MS`, 既定 8000ms） |
+| ルーブリックが汎用（IA / nielsen / ラベルの説明性）で、参照どおりの選択を減点した。参照との近さは 20 点だけ | reproduce ランは専用ルーブリック: layout_fidelity 25 / navigation_shell 20 / typography_color 20 / content_fidelity 15 / quality 20。参照どおりの選択を一般論で減点しない、足し算・引き算を減点、静止画でモーションは採点しない |
+
+`WEB_DESIGNER_SCORE_PAGES` を指定すれば従来どおり固定ページを撮る。計測条件（`score_pages` / `rubric`）は履歴に残り、条件が変わった回どうしは後退判定しない。
+
+## 実行体制（2026-09-03 時点。Direction / 実装は上記で claude に変更）
 
 | 段 | 実行体 | 呼び出し |
 |---|---|---|
@@ -233,3 +265,8 @@ website では **トップだけ見ても何も分からない**。必ず次を�
 - 移行整理: [migration-from-lp-designer.md](./migration-from-lp-designer.md)
 - IA定義: [information-architecture.md](./information-architecture.md)
 - モーション設計: [motion-design.md](./motion-design.md)
+
+
+## 参照の意匠を再現するラン
+
+配置・文量・素材・操作を参照に寄せる場合は、[参照再現レビュー](./reference-fidelity-review.md) を Look 後に契約化する。静的ゲートや総合採点とは別に、ページごとの対応と描画・操作の比較、独立レビューを記録する。

@@ -4,9 +4,9 @@
 #   1. 参照サイトのモーション実測 + キャプチャ
 #   2. Look（codex / 画像を見る）
 #   3. ブランド確定
-#   4. Direction（grok-4.5。ラン1本ぶん）
+#   4. Direction（claude。参照キャプチャを見る。ラン1本ぶん）
 #   5. 画像生成（grok-imagine）
-#   6. たたき台の実装（minimax-m3）
+#   6. たたき台の実装（claude。自分の描画を撮って参照と見比べる）
 #   7. たたき台を独立judgeで採点 → 直す材料を出す
 #   8. 提出版の実装（同じディレクション + 7 の指摘）
 #   9. たたき台を破棄し、提出版だけを残す
@@ -46,6 +46,8 @@ REF_URL="$(python3 -c "import json;print(json.load(open('$JOB'))['reference'].ge
 # ラン内での役割はこの2つに固定する。
 DRAFT="a"
 SUBMIT="b"
+
+python3 scripts/web-reference-fidelity.py "$RUN_DIR" contract
 
 order=(motion look brand direction images draft judge-draft submit measure)
 started=0
@@ -112,6 +114,7 @@ if should direction; then
 fi
 
 if should images && [[ $SKIP_IMAGES -eq 0 ]]; then
+  python3 scripts/web-reference-fidelity.py "$RUN_DIR" direction
   for v in $DRAFT; do
     echo "### 5/10 画像生成（提出版もこの写真を使う）"
     node scripts/web-generate-images-from-direction.mjs \
@@ -170,6 +173,7 @@ if should measure; then
   npm run check:web
   bash scripts/web-design-score.sh "$RUN_DIR" "$SITE_TYPE" "$STAMP" "$SUBMIT" || \
     echo "  (採点をスキップしました。撮影は $RUN_DIR/shots/ にあります)"
+  python3 scripts/web-reference-fidelity.py "$RUN_DIR" review
   # 採点の指摘を実装 SKILL へ書き戻す。これが無いと同じ指摘が毎回繰り返される。
   python3 scripts/web-update-skill-from-score.py "$RUN_DIR" || \
     echo "  (SKILL 更新に失敗。採点結果は $RUN_DIR/design-score-data.json にあります)" >&2

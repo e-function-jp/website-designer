@@ -1,0 +1,9 @@
+---
+import JunroArrowLink from '../ui/JunroArrowLink.astro';
+interface Props { id?: string; target: string; name: string; description: string; code: string; href: string; home?: boolean }
+const { id, target, name, description, code, href, home = false } = Astro.props;
+---
+<article id={id} class:list={['junro-business-row', home && 'junro-business-row--home']}>
+  <div class="junro-business-mark"><strong>巡路<span>✳</span></strong><small>{code}</small></div>
+  <div class="junro-business-copy"><span class="junro-target">{target}</span>{home ? <h3>{name}</h3> : <h2>{name}</h2>}<p>{description}</p><JunroArrowLink href={href} label={`${name}について`} /></div>
+</article>

@@ -1,0 +1,18 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { url } from '../../../../../lib/site';
+import { site } from '../_site';
+import { news } from '../_content';
+import JunroHeader from '../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../components/sections/JunroPageHeading.astro';
+import JunroIndexRow from '../../../../../components/sections/JunroIndexRow.astro';
+import JunroNewsRow from '../../../../../components/sections/JunroNewsRow.astro';
+import JunroArrowLink from '../../../../../components/ui/JunroArrowLink.astro';
+---
+<SiteLayout site={site} title="プレスルーム" description="巡路知能株式会社の最新ニュースと、取材・掲載に利用できるプレスキット、会社の公開データへの入口をご案内します。" path="/press/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'プレスルーム'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/press/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="Press Room" japanese="プレスルーム" /><section class="junro-news-section" style="margin-top:100px"><div><h2>ニュース</h2><JunroArrowLink href={url(site, '/press/news/')} label="ニュース一覧を見る" /></div><div class="junro-news-list">{news.slice(0,5).map(item => <JunroNewsRow {...item} href={url(site, '/press/news/')} />)}</div></section><section style="padding:0 0 130px"><JunroIndexRow english="Press Kit" japanese="プレスキット" description="取材や掲載に利用できる写真とロゴの素材をご案内します。" href={url(site, '/press/presskit/')} /><JunroIndexRow english="Open Data" japanese="公開データ" description="巡路知能に関する公開数値をご覧いただけます。" href={url(site, '/press/opendata/')} /></section></div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/press/" label="プレスルーム" /></Fragment>
+</SiteLayout>

@@ -212,6 +212,13 @@ def pick_industry(archive: list[dict], type_id: str, recent: list[str],
     return ranked[0], weights, skipped
 
 
+# reproduce モードのトーン指示。業種の定石ではなく参照そのものに従わせる。
+REPRODUCE_TONE = (
+    "参照サイトの意匠に従う。業種・サイト種別の定石（実績数値、信頼訴求の説明文、"
+    "定型CTA帯、事業内容を説明するナビラベル等）は、参照に無ければ足さない。"
+)
+
+
 def pick_reference(type_id: str, archive: list[dict], used: set[str],
                    industry: str | None,
                    industry_fallback: bool = False,
@@ -265,6 +272,8 @@ def main() -> int:
                     help="選定結果の表示のみ。ディレクトリも state も作らない")
     ap.add_argument("--type", help="サイト種別を明示指定（ローテを使わない）")
     ap.add_argument("--industry", help="業種を明示指定（ローテを使わない）")
+    ap.add_argument("--mode", choices=("reproduce", "adapt"), default=None,
+                    help="reproduce=参照の意匠を高再現（既定） / adapt=サイト種別の定石に寄せて咀嚼する（旧方式）")
     ap.add_argument("--models", default=None,
                     help="実装案の識別子 CSV（既定 .env の WEB_DESIGNER_MODELS / 'a,b'）")
     args = ap.parse_args()
@@ -305,6 +314,7 @@ def main() -> int:
         return 1
 
     import os
+    mode = args.mode or os.environ.get("WEB_DESIGNER_MODE", "reproduce")
     models = [m.strip() for m in
               (args.models or os.environ.get("WEB_DESIGNER_MODELS", "a,b")).split(",") if m.strip()]
 
@@ -337,9 +347,25 @@ def main() -> int:
         "industry_label": (INDUSTRY_BY_ID.get(industry_id, {}).get("label")
                             if industry_id else ""),
         "stamp": stamp,
-        "tone_hint": stype["tone"],
-        "required_pages": stype["required_pages"],
-        "recommended_pages": stype["recommended_pages"],
+        # reproduce（既定, 2026-11-24〜）: 参照の意匠・IA・動きを高再現する。
+        #   サイト種別の定石（トーン・必須ページ）を持ち込むと、参照から離れて
+        #   「一般的な会社サイト」に寄る（AOGAMI/NSSG で実績数値・説明文・
+        #   /service/ /news/ が足され、本人評価 30/100 になった）。
+        #   種別の定石は記録だけ残し、Direction には渡さない。
+        # adapt: 旧方式。サイト種別の定石に寄せて咀嚼する。
+        "mode": mode,
+        "tone_hint": (REPRODUCE_TONE if mode == "reproduce" else stype["tone"]),
+        "required_pages": (["/"] if mode == "reproduce" else stype["required_pages"]),
+        "recommended_pages": ([] if mode == "reproduce" else stype["recommended_pages"]),
+        "site_type_defaults": {
+            "tone": stype["tone"],
+            "required_pages": stype["required_pages"],
+            "recommended_pages": stype["recommended_pages"],
+        },
+        "reference_pages": ["/"] + [
+            (x if x.endswith("/") else x + "/")
+            for x in (ref.get("qualification", {}).get("paths") or [])
+        ],
         "selection": {
             "method": selection_method,
             "weights": weights,

@@ -1,8 +1,8 @@
 # website 品質レポート
 
-- 計測日時: 2026/11/6 8:11:16
+- 計測日時: 2026/11/25 12:07:53
 - **総合スコア: 100 / 100**（前回 100、+0）
-- サイト数: 8 / ページ数: 89
+- サイト数: 9 / ページ数: 100
 
 | ページ | スコア | 指摘数 |
 |---|---|---|
@@ -88,6 +88,17 @@
 | /sites/corporate/b-20260919-0500/service/ | 100 | 0 |
 | /sites/corporate/b-20260919-0500/works/ | 100 | 0 |
 | /sites/corporate/b-20260919-0500/works/wood-and-plaster/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/business/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/company/ | 95 | 1 |
+| /sites/corporate/b-20261124-1613/company/message/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/company/mission/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/company/outline/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/contact/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/press/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/press/news/ | 100 | 0 |
+| /sites/corporate/b-20261124-1613/press/opendata/ | 95 | 1 |
+| /sites/corporate/b-20261124-1613/press/presskit/ | 95 | 1 |
 | /sites/corporate/base-20260903-1400/about/ | 100 | 0 |
 | /sites/corporate/base-20260903-1400/contact/ | 100 | 0 |
 | /sites/corporate/base-20260903-1400/ | 98 | 1 |
@@ -436,6 +447,56 @@
 ## /sites/corporate/b-20260919-0500/works/wood-and-plaster/ — 100点
 
 指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/business/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/company/ — 95点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | content-thin-page: 本文が薄すぎる（ページの体をなしていない） | 本文 353 文字（下限 400）。ナビとフッターだけの空ページになっていないか |
+
+## /sites/corporate/b-20261124-1613/company/message/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/company/mission/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/company/outline/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/contact/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/press/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/press/news/ — 100点
+
+指摘なし 🎉
+
+## /sites/corporate/b-20261124-1613/press/opendata/ — 95点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | content-thin-page: 本文が薄すぎる（ページの体をなしていない） | 本文 394 文字（下限 400）。ナビとフッターだけの空ページになっていないか |
+
+## /sites/corporate/b-20261124-1613/press/presskit/ — 95点
+
+| 重要度 | ルール | 内容 |
+|---|---|---|
+| 🟡 medium | content-thin-page: 本文が薄すぎる（ページの体をなしていない） | 本文 388 文字（下限 400）。ナビとフッターだけの空ページになっていないか |
 
 ## /sites/corporate/base-20260903-1400/about/ — 100点
 

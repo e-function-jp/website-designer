@@ -344,10 +344,13 @@ const PAGE_RULES = [
     desc: 'ディレクションのアニメーション指示が実装されていない',
     check: (p) => {
       if (!p.isSitePage || !p.srcCode || !p.directionHtml) return [];
-      // direction 側: data-role="animation" のうち "none" 以外を数える
-      const directives = [...p.directionHtml.matchAll(/data-role="animation"[^>]*>([\s\S]*?)<\/(?:p|td|li)>/g)]
+      // ページごとの指示だけを見る。参照再現ランでは下層に演出なしのページもある。
+      const pageArticle = [...p.directionHtml.matchAll(/<article\s+data-page="([^"]+)"[\s\S]*?<\/article>/g)]
+        .find((m) => m[1] === p.relPath)?.[0];
+      const directionForPage = pageArticle ?? (p.directionHtml.includes('data-page=') ? '' : p.directionHtml);
+      const directives = [...directionForPage.matchAll(/data-role="animation"[^>]*>([\s\S]*?)<\/(?:p|td|li)>/g)]
         .map((m) => m[1].replace(/<[^>]+>/g, '').trim())
-        .filter((t) => t && !/^none[。.\s]*$/i.test(t));
+        .filter((t) => t && !/^none(?:[。.\s]|$)/i.test(t) && !/^追加リビールなし/.test(t));
       if (!directives.length) return [];
 
       const imported = [...p.srcCode.matchAll(/^\s*import\s+(\w+)\s+from\s+['"]([^'"]+)['"]/gm)]
@@ -488,7 +491,10 @@ const SITE_RULES = [
     id: 'ia-required-page-missing', category: 'IA', severity: 'high',
     desc: 'サイト種別の必須ページが欠けている',
     check: (s) => {
-      const t = SITE_TYPE_BY_ID[s.type];
+      // 参照再現ランは、ランが決めた必須ページ（参照の IA 由来）だけを見る。
+      const t = s.reproduce
+        ? { label: '参照再現ラン', required_pages: s.job.required_pages ?? ['/'] }
+        : SITE_TYPE_BY_ID[s.type];
       if (!t?.required_pages?.length) return [];
       const have = new Set(s.pages.map((p) => p.relPath));
       const miss = t.required_pages.filter((r) => !have.has(r));
@@ -499,6 +505,7 @@ const SITE_RULES = [
     id: 'ia-recommended-page-missing', category: 'IA', severity: 'low',
     desc: 'サイト種別の推奨ページが欠けている',
     check: (s) => {
+      if (s.reproduce) return [];
       const t = SITE_TYPE_BY_ID[s.type];
       if (!t?.recommended_pages?.length) return [];
       const have = new Set(s.pages.map((p) => p.relPath));
@@ -630,6 +637,8 @@ const SITE_RULES = [
     id: 'motion-consistency-drift', category: 'Consistency', severity: 'medium',
     desc: 'ページ間でモーションの有無が揃っていない',
     check: (s) => {
+      // 参照再現ランでは、ページごとの演出量の差も参照の意匠として写す。
+      if (s.reproduce) return [];
       const counts = [];
       for (const p of s.pages) {
         if (!p.srcCode) continue;
@@ -786,6 +795,25 @@ function resolveDirection(path) {
   return { directionHtml: null };
 }
 
+/**
+ * そのサンプルサイトを生んだランの job.json を読む。
+ * mode === 'reproduce'（参照の高再現。2026-11-24〜の既定）のランでは、
+ * サイト種別の定石（必須・推奨ページ、ページ間の演出量の均一化）を当てない。
+ * 参照に無い /service/ /news/ を作らせたり、トップだけ盛った参照の演出を
+ * 均させたりして、参照から離す方向に働いていたため。
+ */
+const jobCache = new Map();
+function resolveJob(type, stamp) {
+  const key = `${type}-${stamp}`;
+  if (!jobCache.has(key)) {
+    const f = join(ROOT, 'docs', 'quality', 'runs', key, 'job.json');
+    let job = null;
+    try { if (existsSync(f)) job = JSON.parse(readFileSync(f, 'utf8')); } catch { job = null; }
+    jobCache.set(key, job);
+  }
+  return jobCache.get(key);
+}
+
 /** dist のルートに対応する Astro ソースを探す。 */
 function resolveSource(path) {
   const rel = path.replace(/^\//, '').replace(/\/$/, '');
@@ -841,9 +869,13 @@ for (const p of pages) {
   if (!p.siteKey) continue;
   if (!sitesMap.has(p.siteKey)) {
     const srcDir = join('src', 'pages', p.siteKey.replace(/^\//, '').replace(/\/$/, ''));
+    const stamp = p.siteKey.match(/-(\d{8}-\d{4})\/$/)?.[1];
+    const job = stamp ? resolveJob(p.siteType, stamp) : null;
     sitesMap.set(p.siteKey, {
       key: p.siteKey,
       type: p.siteType,
+      job,
+      reproduce: job?.mode === 'reproduce',
       srcDir,
       hasSiteConfig: existsSync(join(ROOT, srcDir, '_site.ts')),
       pages: [],

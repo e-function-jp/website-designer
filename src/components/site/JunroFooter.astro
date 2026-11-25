@@ -1,0 +1,19 @@
+---
+import type { SiteConfig } from '../../lib/site';
+import { url } from '../../lib/site';
+interface Props { site: SiteConfig; path: string; label?: string }
+const { site, path, label } = Astro.props;
+const link = (href: string) => href ? url(site, href) : undefined;
+---
+<footer class="junro-footer">
+  {path !== '/' && <div class="junro-footer-crumb"><a href={url(site, '/')}>ホーム</a><span aria-hidden="true">›</span><span aria-current="page">{label}</span></div>}
+  <div class="junro-footer-main">
+    <a class="junro-logo" href={url(site, '/')}>巡路<span>✳</span></a>
+    <div class="junro-footer-links">
+      <nav aria-label="フッターナビゲーション">{site.footerNav?.[0].items.map(item => link(item.href) ? <a href={link(item.href)}>{item.label}</a> : <span>{item.label}</span>)}</nav>
+      <nav aria-label="外部媒体">{site.footerNav?.[1].items.map(item => link(item.href) ? <a href={link(item.href)}>{item.label} ↗</a> : <span>{item.label}</span>)}</nav>
+    </div>
+    <nav class="junro-legal" aria-label="法務情報">{site.legalNav?.map(item => link(item.href) ? <a href={link(item.href)}>{item.label}</a> : <span>{item.label}</span>)}</nav>
+  </div>
+  <div class="junro-footer-bottom"><div class="junro-social" aria-label="ソーシャルメディア"><span>𝕏</span><span>◎</span><span>●</span></div><small>© 巡路知能株式会社</small></div>
+</footer>

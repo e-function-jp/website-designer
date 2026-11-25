@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { site } from '../../_site';
+import { news } from '../../_content';
+import JunroHeader from '../../../../../../components/site/JunroHeader.astro';
+import JunroFooter from '../../../../../../components/site/JunroFooter.astro';
+import JunroPageHeading from '../../../../../../components/sections/JunroPageHeading.astro';
+import JunroNewsRow from '../../../../../../components/sections/JunroNewsRow.astro';
+---
+<SiteLayout site={site} title="ニュース" description="巡路知能株式会社の設備点検、記録、分析、クラウドサービスに関するお知らせと記事を、種別と年で探せるニュース一覧です。" path="/press/news/" breadcrumbs={[{label:'ホーム',href:'/'},{label:'プレスルーム',href:'/press/'},{label:'ニュース'}]}>
+  <Fragment slot="head"><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" /></Fragment>
+  <Fragment slot="header"><JunroHeader site={site} path="/press/news/" /></Fragment>
+  <div class="junro"><JunroPageHeading english="News" japanese="ニュース" /><div class="junro-content"><div class="junro-filter"><div><button type="button" aria-pressed="true" data-news-filter="all">すべて</button><button type="button" aria-pressed="false" data-news-filter="記事">プレスリリース</button><button type="button" aria-pressed="false" data-news-filter="お知らせ">お知らせ</button></div><label>年で絞り込む <select id="junro-news-year"><option value="all">すべての年</option>{Array.from({length:9},(_,i)=>2026-i).map(year => <option value={year}>{year}年</option>)}</select></label></div><div style="max-width:1000px;margin-left:auto" id="junro-filter-results">{news.map(item => <JunroNewsRow {...item} filter />)}</div><p id="junro-news-empty" hidden>該当する記事はありません。</p><nav aria-label="ニュースのページ送り" style="display:flex;gap:20px;margin:70px 0 0 auto;max-width:1000px"><span aria-current="page">1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>…</span></nav></div></div>
+  <Fragment slot="footer"><JunroFooter site={site} path="/press/news/" label="ニュース" /></Fragment>
+</SiteLayout>
+<script>
+  const initNewsFilter = () => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-news-filter]');
+    const year = document.querySelector<HTMLSelectElement>('#junro-news-year');
+    const rows = document.querySelectorAll<HTMLElement>('[data-filterable="true"]');
+    const empty = document.querySelector<HTMLElement>('#junro-news-empty');
+    if (!year || !rows.length) return;
+    let selected = 'all';
+    const update = () => { let shown = 0; rows.forEach(row => { const visible = (selected === 'all' || row.dataset.newsCategory === selected) && (year.value === 'all' || row.dataset.newsYear === year.value); row.hidden = !visible; if (visible) shown++; }); if (empty) empty.hidden = shown > 0; };
+    buttons.forEach(button => button.addEventListener('click', () => { selected = button.dataset.newsFilter || 'all'; buttons.forEach(b => b.setAttribute('aria-pressed', String(b === button))); update(); }));
+    year.addEventListener('change', update);
+  };
+  initNewsFilter(); document.addEventListener('astro:page-load', initNewsFilter);
+</script>
